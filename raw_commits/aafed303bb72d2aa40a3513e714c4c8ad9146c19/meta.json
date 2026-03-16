@@ -1,0 +1,8 @@
+{
+  "commit_id": "aafed303bb72d2aa40a3513e714c4c8ad9146c19",
+  "parent_id": "34266b6e0fee3bb481f5549c91a3c8e0a0f8d69f",
+  "message": "Added an extra tag test",
+  "changed_files": [
+    "projects/SelfTest/TestMain.cpp"
+  ]
+}

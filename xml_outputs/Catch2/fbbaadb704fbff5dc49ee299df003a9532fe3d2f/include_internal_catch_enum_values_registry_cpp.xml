@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" xmlns:diff="http://www.srcML.org/srcDiff" revision="1.0.0" language="C++" filename="C:\Users\saile\AppData\Local\Temp\catch2_100_z8gzpiwf\fbbaadb704fbff5dc49ee299df003a9532fe3d2f\include_internal_catch_enum_values_registry_cpp\include_internal_catch_enum_values_registry_cpp.old|C:\Users\saile\AppData\Local\Temp\catch2_100_z8gzpiwf\fbbaadb704fbff5dc49ee299df003a9532fe3d2f\include_internal_catch_enum_values_registry_cpp\include_internal_catch_enum_values_registry_cpp.new"><comment type="block">/*
+ *  Created by Phil on 4/4/2019.
+ *  Copyright 2019 Two Blue Cubes Ltd. All rights reserved.
+ *
+ *  Distributed under the Boost Software License, Version 1.0. (See accompanying
+ *  file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
+ */</comment>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">"catch_enum_values_registry.h"</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">"catch_string_manip.h"</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">"catch_stream.h"</cpp:file></cpp:include>
+
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;map&gt;</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;cassert&gt;</cpp:file></cpp:include>
+
+<namespace>namespace <name>Catch</name> <block>{
+
+    <destructor><name><name>IMutableEnumValuesRegistry</name><operator>::</operator><name>~IMutableEnumValuesRegistry</name></name><parameter_list>()</parameter_list> <block>{<block_content/>}</block></destructor>
+
+    <namespace>namespace <name>Detail</name> <block>{
+
+        <function><type><name><name>std</name><operator>::</operator><name>vector</name><argument_list type="generic">&lt;<argument><expr><name><name>std</name><operator>::</operator><name>string</name></name></expr></argument>&gt;</argument_list></name></type> <name>parseEnums</name><parameter_list>( <parameter><decl><type><name>StringRef</name></type> <name>enums</name></decl></parameter> )</parameter_list> <block>{<block_content>
+            <decl_stmt><decl><type><name>auto</name></type> <name>enumValues</name> <init>= <expr><call><name>splitStringRef</name><argument_list>( <argument><expr><name>enums</name></expr></argument>, <argument><expr><literal type="char">','</literal></expr></argument> )</argument_list></call></expr></init></decl>;</decl_stmt>
+            <decl_stmt><decl><type><name><name>std</name><operator>::</operator><name>vector</name><argument_list type="generic">&lt;<argument><expr><name><name>std</name><operator>::</operator><name>string</name></name></expr></argument>&gt;</argument_list></name></type> <name>parsed</name></decl>;</decl_stmt>
+            <expr_stmt><expr><call><name><name>parsed</name><operator>.</operator><name>reserve</name></name><argument_list>( <argument><expr><call><name><name>enumValues</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+            <for>for<control>( <init><decl><type><specifier>auto</specifier> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>enumValue</name> <range>: <expr><name>enumValues</name></expr></range></decl></init> )</control> <block>{<block_content>
+                <decl_stmt><decl><type><name>auto</name></type> <name>identifiers</name> <init>= <expr><call><name>splitStringRef</name><argument_list>( <argument><expr><name>enumValue</name></expr></argument>, <argument><expr><literal type="char">':'</literal></expr></argument> )</argument_list></call></expr></init></decl>;</decl_stmt>
+                <expr_stmt><expr><call><name><name>parsed</name><operator>.</operator><name>push_back</name></name><argument_list>( <argument><expr><call><name><name>Catch</name><operator>::</operator><name>trim</name></name><argument_list>( <argument><expr><call><name><name>identifiers</name><operator>.</operator><name>back</name></name><argument_list>()</argument_list></call></expr></argument> )</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+            </block_content>}</block></for>
+            <return>return <expr><name>parsed</name></expr>;</return>
+        </block_content>}</block></function>
+
+        <destructor><name><name>EnumInfo</name><operator>::</operator><name>~EnumInfo</name></name><parameter_list>()</parameter_list> <block>{<block_content/>}</block></destructor>
+
+        <function><type><name>StringRef</name></type> <name><name>EnumInfo</name><operator>::</operator><name>lookup</name></name><parameter_list>( <parameter><decl><type><name>int</name></type> <name>value</name></decl></parameter> )</parameter_list> <specifier>const</specifier> <block>{<block_content>
+            <for>for<control>( <init><decl><type><specifier>auto</specifier> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>valueToName</name> <range>: <expr><name>m_values</name></expr></range></decl></init> )</control> <block>{<block_content>
+                <if_stmt><if>if<condition>( <expr><name><name>valueToName</name><operator>.</operator><name>first</name></name> <operator>==</operator> <name>value</name></expr> )</condition><block type="pseudo"><block_content>
+                    <return>return <expr><name><name>valueToName</name><operator>.</operator><name>second</name></name></expr>;</return></block_content></block></if></if_stmt>
+            </block_content>}</block></for>
+            <return>return <expr><literal type="string">"{** unexpected enum value **}"</literal><diff:insert xmlns:diff="http://www.srcML.org/srcDiff"><name>_sr</name></diff:insert></expr>;</return>
+        </block_content>}</block></function>
+
+        <function><type><name><name>std</name><operator>::</operator><name>unique_ptr</name><argument_list type="generic">&lt;<argument><expr><name>EnumInfo</name></expr></argument>&gt;</argument_list></name></type> <name>makeEnumInfo</name><parameter_list>( <parameter><decl><type><name>StringRef</name></type> <name>enumName</name></decl></parameter>, <parameter><decl><type><name>StringRef</name></type> <name>allValueNames</name></decl></parameter>, <parameter><decl><type><name><name>std</name><operator>::</operator><name>vector</name><argument_list type="generic">&lt;<argument><expr><name>int</name></expr></argument>&gt;</argument_list></name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>values</name></decl></parameter> )</parameter_list> <block>{<block_content>
+            <decl_stmt><decl><type><name><name>std</name><operator>::</operator><name>unique_ptr</name><argument_list type="generic">&lt;<argument><expr><name>EnumInfo</name></expr></argument>&gt;</argument_list></name></type> <name>enumInfo</name><argument_list>( <argument><expr><operator>new</operator> <name>EnumInfo</name></expr></argument> )</argument_list></decl>;</decl_stmt>
+            <expr_stmt><expr><name><name>enumInfo</name><operator>-&gt;</operator><name>m_name</name></name> <operator>=</operator> <name>enumName</name></expr>;</expr_stmt>
+            <expr_stmt><expr><call><name><name>enumInfo</name><operator>-&gt;</operator><name>m_values</name><operator>.</operator><name>reserve</name></name><argument_list>( <argument><expr><call><name><name>values</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+
+            <decl_stmt><decl><type><specifier>const</specifier> <specifier>auto</specifier></type> <name>valueNames</name> <init>= <expr><call><name><name>Catch</name><operator>::</operator><name>Detail</name><operator>::</operator><name>parseEnums</name></name><argument_list>( <argument><expr><name>allValueNames</name></expr></argument> )</argument_list></call></expr></init></decl>;</decl_stmt>
+            <expr_stmt><expr><call><name>assert</name><argument_list>( <argument><expr><call><name><name>valueNames</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call> <operator>==</operator> <call><name><name>values</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+            <decl_stmt><decl><type><name><name>std</name><operator>::</operator><name>size_t</name></name></type> <name>i</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</decl_stmt>
+            <for>for<control>( <init><decl><type><name>auto</name></type> <name>value</name> <range>: <expr><name>values</name></expr></range></decl></init> )</control><block type="pseudo"><block_content>
+                <expr_stmt><expr><call><name><name>enumInfo</name><operator>-&gt;</operator><name>m_values</name><operator>.</operator><name>push_back</name></name><argument_list>(<argument><expr><block>{ <expr><name>value</name></expr>, <expr><name><name>valueNames</name><index>[<expr><name>i</name><operator>++</operator></expr>]</index></name></expr> }</block></expr></argument>)</argument_list></call></expr>;</expr_stmt></block_content></block></for>
+
+            <return>return <expr><name>enumInfo</name></expr>;</return>
+        </block_content>}</block></function>
+
+        <function><type><name>EnumInfo</name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name><name>EnumValuesRegistry</name><operator>::</operator><name>registerEnum</name></name><parameter_list>( <parameter><decl><type><name>StringRef</name></type> <name>enumName</name></decl></parameter>, <parameter><decl><type><name>StringRef</name></type> <name>allValueNames</name></decl></parameter>, <parameter><decl><type><name><name>std</name><operator>::</operator><name>vector</name><argument_list type="generic">&lt;<argument><expr><name>int</name></expr></argument>&gt;</argument_list></name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>values</name></decl></parameter> )</parameter_list> <block>{<block_content>
+            <decl_stmt><decl><type><name>auto</name></type> <name>enumInfo</name> <init>= <expr><call><name>makeEnumInfo</name><argument_list>( <argument><expr><name>enumName</name></expr></argument>, <argument><expr><name>allValueNames</name></expr></argument>, <argument><expr><name>values</name></expr></argument> )</argument_list></call></expr></init></decl>;</decl_stmt>
+            <decl_stmt><decl><type><name>EnumInfo</name><modifier>*</modifier></type> <name>raw</name> <init>= <expr><call><name><name>enumInfo</name><operator>.</operator><name>get</name></name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+            <expr_stmt><expr><call><name><name>m_enumInfos</name><operator>.</operator><name>push_back</name></name><argument_list>( <argument><expr><call><name><name>std</name><operator>::</operator><name>move</name></name><argument_list>( <argument><expr><name>enumInfo</name></expr></argument> )</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+            <return>return <expr><operator>*</operator><name>raw</name></expr>;</return>
+        </block_content>}</block></function>
+
+    }</block></namespace> <comment type="line">// Detail</comment>
+}</block></namespace> <comment type="line">// Catch</comment>
+
+</unit>

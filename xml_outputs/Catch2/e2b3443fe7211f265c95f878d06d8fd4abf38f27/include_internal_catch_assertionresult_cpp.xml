@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" xmlns:diff="http://www.srcML.org/srcDiff" revision="1.0.0" language="C++" filename="C:\Users\saile\AppData\Local\Temp\catch2_100_z8gzpiwf\e2b3443fe7211f265c95f878d06d8fd4abf38f27\include_internal_catch_assertionresult_cpp\include_internal_catch_assertionresult_cpp.old|C:\Users\saile\AppData\Local\Temp\catch2_100_z8gzpiwf\e2b3443fe7211f265c95f878d06d8fd4abf38f27\include_internal_catch_assertionresult_cpp\include_internal_catch_assertionresult_cpp.new"><comment type="block">/*
+ *  Created by Phil on 8/8/12
+ *  Copyright 2012 Two Blue Cubes Ltd. All rights reserved.
+ *
+ *  Distributed under the Boost Software License, Version 1.0. (See accompanying
+ *  file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
+ */</comment>
+
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">"catch_assertionresult.h"</cpp:file></cpp:include>
+
+<namespace>namespace <name>Catch</name> <block>{
+    <constructor><name><name>AssertionResultData</name><operator>::</operator><name>AssertionResultData</name></name><parameter_list>(<parameter><decl><type><name><name>ResultWas</name><operator>::</operator><name>OfType</name></name></type> <name>_resultType</name></decl></parameter>, <parameter><decl><type><name>LazyExpression</name> <specifier>const</specifier> <modifier>&amp;</modifier></type> <name>_lazyExpression</name></decl></parameter>)</parameter_list><member_init_list>:
+        <call><name>lazyExpression</name><argument_list>(<argument><expr><name>_lazyExpression</name></expr></argument>)</argument_list></call>,
+        <call><name>resultType</name><argument_list>(<argument><expr><name>_resultType</name></expr></argument>)</argument_list></call> </member_init_list><block>{<block_content/>}</block></constructor>
+
+    <function><type><name><name>std</name><operator>::</operator><name>string</name></name></type> <name><name>AssertionResultData</name><operator>::</operator><name>reconstructExpression</name></name><parameter_list>()</parameter_list> <specifier>const</specifier> <block>{<block_content>
+
+        <if_stmt><if>if<condition>( <expr><call><name><name>reconstructedExpression</name><operator>.</operator><name>empty</name></name><argument_list>()</argument_list></call></expr> )</condition> <block>{<block_content>
+            <if_stmt><if>if<condition>( <expr><name>lazyExpression</name></expr> )</condition> <block>{<block_content>
+                <decl_stmt><decl><type><name>ReusableStringStream</name></type> <name>rss</name></decl>;</decl_stmt>
+                <expr_stmt><expr><name>rss</name> <operator>&lt;&lt;</operator> <name>lazyExpression</name></expr>;</expr_stmt>
+                <expr_stmt><expr><name>reconstructedExpression</name> <operator>=</operator> <call><name><name>rss</name><operator>.</operator><name>str</name></name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+            </block_content>}</block></if></if_stmt>
+        </block_content>}</block></if></if_stmt>
+        <return>return <expr><name>reconstructedExpression</name></expr>;</return>
+    </block_content>}</block></function>
+
+    <constructor><name><name>AssertionResult</name><operator>::</operator><name>AssertionResult</name></name><parameter_list>( <parameter><decl><type><name>AssertionInfo</name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>info</name></decl></parameter>, <parameter><decl><type><name>AssertionResultData</name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>data</name></decl></parameter> )</parameter_list>
+    <member_init_list>:   <call><name>m_info</name><argument_list>( <argument><expr><name>info</name></expr></argument> )</argument_list></call>,
+        <call><name>m_resultData</name><argument_list>( <argument><expr><name>data</name></expr></argument> )</argument_list></call>
+    </member_init_list><block>{<block_content/>}</block></constructor>
+
+    <comment type="line">// Result was a success</comment>
+    <function><type><name>bool</name></type> <name><name>AssertionResult</name><operator>::</operator><name>succeeded</name></name><parameter_list>()</parameter_list> <specifier>const</specifier> <block>{<block_content>
+        <return>return <expr><call><name><name>Catch</name><operator>::</operator><name>isOk</name></name><argument_list>( <argument><expr><name><name>m_resultData</name><operator>.</operator><name>resultType</name></name></expr></argument> )</argument_list></call></expr>;</return>
+    </block_content>}</block></function>
+
+    <comment type="line">// Result was a success, or failure is suppressed</comment>
+    <function><type><name>bool</name></type> <name><name>AssertionResult</name><operator>::</operator><name>isOk</name></name><parameter_list>()</parameter_list> <specifier>const</specifier> <block>{<block_content>
+        <return>return <expr><call><name><name>Catch</name><operator>::</operator><name>isOk</name></name><argument_list>( <argument><expr><name><name>m_resultData</name><operator>.</operator><name>resultType</name></name></expr></argument> )</argument_list></call> <operator>||</operator> <call><name>shouldSuppressFailure</name><argument_list>( <argument><expr><name><name>m_info</name><operator>.</operator><name>resultDisposition</name></name></expr></argument> )</argument_list></call></expr>;</return>
+    </block_content>}</block></function>
+
+    <function><type><name><name>ResultWas</name><operator>::</operator><name>OfType</name></name></type> <name><name>AssertionResult</name><operator>::</operator><name>getResultType</name></name><parameter_list>()</parameter_list> <specifier>const</specifier> <block>{<block_content>
+        <return>return <expr><name><name>m_resultData</name><operator>.</operator><name>resultType</name></name></expr>;</return>
+    </block_content>}</block></function>
+
+    <function><type><name>bool</name></type> <name><name>AssertionResult</name><operator>::</operator><name>hasExpression</name></name><parameter_list>()</parameter_list> <specifier>const</specifier> <block>{<block_content>
+        <return>return <expr><operator>!</operator><call><name><name>m_info</name><operator>.</operator><name>capturedExpression</name><operator>.</operator><name>empty</name></name><argument_list>()</argument_list></call></expr>;</return>
+    </block_content>}</block></function>
+
+    <function><type><name>bool</name></type> <name><name>AssertionResult</name><operator>::</operator><name>hasMessage</name></name><parameter_list>()</parameter_list> <specifier>const</specifier> <block>{<block_content>
+        <return>return <expr><operator>!</operator><call><name><name>m_resultData</name><operator>.</operator><name>message</name><operator>.</operator><name>empty</name></name><argument_list>()</argument_list></call></expr>;</return>
+    </block_content>}</block></function>
+
+    <function><type><name><name>std</name><operator>::</operator><name>string</name></name></type> <name><name>AssertionResult</name><operator>::</operator><name>getExpression</name></name><parameter_list>()</parameter_list> <specifier>const</specifier> <block>{<block_content>
+        <if_stmt><if>if<condition>( <expr><call><name>isFalseTest</name><argument_list>( <argument><expr><name><name>m_info</name><operator>.</operator><name>resultDisposition</name></name></expr></argument> )</argument_list></call></expr> )</condition><block type="pseudo"><block_content>
+            <return>return <expr><literal type="string">"!("</literal> <operator>+</operator> <name><name>m_info</name><operator>.</operator><name>capturedExpression</name></name> <operator>+</operator> <literal type="string">")"</literal></expr>;</return></block_content></block></if>
+        <else>else<block type="pseudo"><block_content>
+            <return>return <expr><cast type="static">static_cast<argument_list type="generic">&lt;<argument><expr><name><name>std</name><operator>::</operator><name>string</name></name></expr></argument>&gt;</argument_list><argument_list>(<argument><expr><name><name>m_info</name><operator>.</operator><name>capturedExpression</name></name></expr></argument>)</argument_list></cast></expr>;</return></block_content></block></else></if_stmt>
+    </block_content>}</block></function>
+
+    <function><type><name><name>std</name><operator>::</operator><name>string</name></name></type> <name><name>AssertionResult</name><operator>::</operator><name>getExpressionInMacro</name></name><parameter_list>()</parameter_list> <specifier>const</specifier> <block>{<block_content>
+        <decl_stmt><decl><type><name><name>std</name><operator>::</operator><name>string</name></name></type> <name>expr</name></decl>;</decl_stmt>
+        <if_stmt><if>if<condition>( <expr><diff:delete type="replace" xmlns:diff="http://www.srcML.org/srcDiff"><name><name>m_info</name><operator>.</operator><name>macroName</name><index>[<expr><literal type="number">0</literal></expr>]</index></name><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><operator>==</operator><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><literal type="number">0</literal></diff:delete><diff:insert type="replace" xmlns:diff="http://www.srcML.org/srcDiff"><call><name><name>m_info</name><operator>.</operator><name>macroName</name><operator>.</operator><name>empty</name></name><argument_list>()</argument_list></call></diff:insert></expr> )</condition><block type="pseudo"><block_content>
+            <expr_stmt><expr><name>expr</name> <operator>=</operator> <cast type="static">static_cast<argument_list type="generic">&lt;<argument><expr><name><name>std</name><operator>::</operator><name>string</name></name></expr></argument>&gt;</argument_list><argument_list>(<argument><expr><name><name>m_info</name><operator>.</operator><name>capturedExpression</name></name></expr></argument>)</argument_list></cast></expr>;</expr_stmt></block_content></block></if>
+        <else>else <block>{<block_content>
+            <expr_stmt><expr><call><name><name>expr</name><operator>.</operator><name>reserve</name></name><argument_list>( <argument><expr><call><name><name>m_info</name><operator>.</operator><name>macroName</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call> <operator>+</operator> <call><name><name>m_info</name><operator>.</operator><name>capturedExpression</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call> <operator>+</operator> <literal type="number">4</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+            <expr_stmt><expr><name>expr</name> <operator>+=</operator> <name><name>m_info</name><operator>.</operator><name>macroName</name></name></expr>;</expr_stmt>
+            <expr_stmt><expr><name>expr</name> <operator>+=</operator> <literal type="string">"( "</literal></expr>;</expr_stmt>
+            <expr_stmt><expr><name>expr</name> <operator>+=</operator> <name><name>m_info</name><operator>.</operator><name>capturedExpression</name></name></expr>;</expr_stmt>
+            <expr_stmt><expr><name>expr</name> <operator>+=</operator> <literal type="string">" )"</literal></expr>;</expr_stmt>
+        </block_content>}</block></else></if_stmt>
+        <return>return <expr><name>expr</name></expr>;</return>
+    </block_content>}</block></function>
+
+    <function><type><name>bool</name></type> <name><name>AssertionResult</name><operator>::</operator><name>hasExpandedExpression</name></name><parameter_list>()</parameter_list> <specifier>const</specifier> <block>{<block_content>
+        <return>return <expr><call><name>hasExpression</name><argument_list>()</argument_list></call> <operator>&amp;&amp;</operator> <call><name>getExpandedExpression</name><argument_list>()</argument_list></call> <operator>!=</operator> <call><name>getExpression</name><argument_list>()</argument_list></call></expr>;</return>
+    </block_content>}</block></function>
+
+    <function><type><name><name>std</name><operator>::</operator><name>string</name></name></type> <name><name>AssertionResult</name><operator>::</operator><name>getExpandedExpression</name></name><parameter_list>()</parameter_list> <specifier>const</specifier> <block>{<block_content>
+        <decl_stmt><decl><type><name><name>std</name><operator>::</operator><name>string</name></name></type> <name>expr</name> <init>= <expr><call><name><name>m_resultData</name><operator>.</operator><name>reconstructExpression</name></name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+        <return>return <expr><ternary><condition><expr><call><name><name>expr</name><operator>.</operator><name>empty</name></name><argument_list>()</argument_list></call></expr>
+                ?</condition><then> <expr><call><name>getExpression</name><argument_list>()</argument_list></call></expr>
+                </then><else>: <expr><name>expr</name></expr></else></ternary></expr>;</return>
+    </block_content>}</block></function>
+
+    <function><type><name><name>std</name><operator>::</operator><name>string</name></name></type> <name><name>AssertionResult</name><operator>::</operator><name>getMessage</name></name><parameter_list>()</parameter_list> <specifier>const</specifier> <block>{<block_content>
+        <return>return <expr><name><name>m_resultData</name><operator>.</operator><name>message</name></name></expr>;</return>
+    </block_content>}</block></function>
+    <function><type><name>SourceLineInfo</name></type> <name><name>AssertionResult</name><operator>::</operator><name>getSourceInfo</name></name><parameter_list>()</parameter_list> <specifier>const</specifier> <block>{<block_content>
+        <return>return <expr><name><name>m_info</name><operator>.</operator><name>lineInfo</name></name></expr>;</return>
+    </block_content>}</block></function>
+
+    <function><type><name>StringRef</name></type> <name><name>AssertionResult</name><operator>::</operator><name>getTestMacroName</name></name><parameter_list>()</parameter_list> <specifier>const</specifier> <block>{<block_content>
+        <return>return <expr><name><name>m_info</name><operator>.</operator><name>macroName</name></name></expr>;</return>
+    </block_content>}</block></function>
+
+}</block></namespace> <comment type="line">// end namespace Catch</comment>
+</unit>

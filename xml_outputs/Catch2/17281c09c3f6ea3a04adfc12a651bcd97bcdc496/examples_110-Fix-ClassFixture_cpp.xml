@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" xmlns:diff="http://www.srcML.org/srcDiff" revision="1.0.0" language="C++" filename="C:\Users\saile\AppData\Local\Temp\catch2_100_z8gzpiwf\17281c09c3f6ea3a04adfc12a651bcd97bcdc496\examples_110-Fix-ClassFixture_cpp\examples_110-Fix-ClassFixture_cpp.old|C:\Users\saile\AppData\Local\Temp\catch2_100_z8gzpiwf\17281c09c3f6ea3a04adfc12a651bcd97bcdc496\examples_110-Fix-ClassFixture_cpp\examples_110-Fix-ClassFixture_cpp.new"><comment type="line">// 110-Fix-ClassFixture.cpp</comment>
+
+<comment type="line">// Catch has two ways to express fixtures:</comment>
+<comment type="line">// - Sections</comment>
+<comment type="line">// - Traditional class-based fixtures (this file)</comment>
+
+<comment type="line">// main() provided in 000-CatchMain.cpp</comment>
+
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;<diff:delete type="replace" xmlns:diff="http://www.srcML.org/srcDiff">catch2/catch.hpp</diff:delete><diff:insert type="replace" xmlns:diff="http://www.srcML.org/srcDiff">catch2/catch_test_macros.hpp</diff:insert>&gt;</cpp:file></cpp:include>
+
+<class>class <name>DBConnection</name>
+<block>{<private type="default">
+</private><public>public:
+    <function><type><specifier>static</specifier> <name>DBConnection</name></type> <name>createConnection</name><parameter_list>( <parameter><decl><type><name><name>std</name><operator>::</operator><name>string</name></name> <specifier>const</specifier> <modifier>&amp;</modifier></type></decl></parameter> <comment type="block">/*dbName*/</comment> )</parameter_list> <block>{<block_content>
+        <return>return <expr><call><name>DBConnection</name><argument_list>()</argument_list></call></expr>;</return>
+    </block_content>}</block></function>
+
+    <function><type><name>bool</name></type> <name>executeSQL</name><parameter_list>( <parameter><decl><type><name><name>std</name><operator>::</operator><name>string</name></name> <specifier>const</specifier> <modifier>&amp;</modifier></type></decl></parameter> <comment type="block">/*query*/</comment>, <parameter><decl><type><name>int</name> <specifier>const</specifier></type></decl></parameter> <comment type="block">/*id*/</comment>, <parameter><decl><type><name><name>std</name><operator>::</operator><name>string</name></name> <specifier>const</specifier> <modifier>&amp;</modifier></type> <name>arg</name></decl></parameter> )</parameter_list> <block>{<block_content>
+        <if_stmt><if>if <condition>( <expr><call><name><name>arg</name><operator>.</operator><name>length</name></name><argument_list>()</argument_list></call> <operator>==</operator> <literal type="number">0</literal></expr> )</condition> <block>{<block_content>
+            <throw>throw <expr><call><name><name>std</name><operator>::</operator><name>logic_error</name></name><argument_list>(<argument><expr><literal type="string">"empty SQL query argument"</literal></expr></argument>)</argument_list></call></expr>;</throw>
+        </block_content>}</block></if></if_stmt>
+        <return>return <expr><literal type="boolean">true</literal></expr>;</return> <comment type="line">// ok</comment>
+    </block_content>}</block></function>
+</public>}</block>;</class>
+
+<class>class <name>UniqueTestsFixture</name>
+<block>{<private type="default">
+</private><protected>protected:
+    <constructor><name>UniqueTestsFixture</name><parameter_list>()</parameter_list>
+    <member_init_list>: <call><name>conn</name><argument_list>( <argument><expr><call><name><name>DBConnection</name><operator>::</operator><name>createConnection</name></name><argument_list>( <argument><expr><literal type="string">"myDB"</literal></expr></argument> )</argument_list></call></expr></argument> )</argument_list></call>
+    </member_init_list><block>{<block_content/>}</block></constructor>
+
+    <function><type><name>int</name></type> <name>getID</name><parameter_list>()</parameter_list> <block>{<block_content>
+        <return>return <expr><operator>++</operator><name>uniqueID</name></expr>;</return>
+    </block_content>}</block></function>
+
+</protected><protected>protected:
+    <decl_stmt><decl><type><name>DBConnection</name></type> <name>conn</name></decl>;</decl_stmt>
+
+</protected><private>private:
+    <decl_stmt><decl><type><specifier>static</specifier> <name>int</name></type> <name>uniqueID</name></decl>;</decl_stmt>
+</private>}</block>;</class>
+
+<decl_stmt><decl><type><name>int</name></type> <name><name>UniqueTestsFixture</name><operator>::</operator><name>uniqueID</name></name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</decl_stmt>
+
+<macro><name>TEST_CASE_METHOD</name><argument_list>( <argument>UniqueTestsFixture</argument>, <argument><literal type="string">"Create Employee/No Name"</literal></argument>, <argument><literal type="string">"[create]"</literal></argument> )</argument_list></macro> <block>{<block_content>
+    <expr_stmt><expr><call><name>REQUIRE_THROWS</name><argument_list>( <argument><expr><call><name><name>conn</name><operator>.</operator><name>executeSQL</name></name><argument_list>( <argument><expr><literal type="string">"INSERT INTO employee (id, name) VALUES (?, ?)"</literal></expr></argument>, <argument><expr><call><name>getID</name><argument_list>()</argument_list></call></expr></argument>, <argument><expr><literal type="string">""</literal></expr></argument>)</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+</block_content>}</block>
+
+<macro><name>TEST_CASE_METHOD</name><argument_list>( <argument>UniqueTestsFixture</argument>, <argument><literal type="string">"Create Employee/Normal"</literal></argument>, <argument><literal type="string">"[create]"</literal></argument> )</argument_list></macro> <block>{<block_content>
+    <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name><name>conn</name><operator>.</operator><name>executeSQL</name></name><argument_list>( <argument><expr><literal type="string">"INSERT INTO employee (id, name) VALUES (?, ?)"</literal></expr></argument>, <argument><expr><call><name>getID</name><argument_list>()</argument_list></call></expr></argument>, <argument><expr><literal type="string">"Joe Bloggs"</literal></expr></argument> )</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+</block_content>}</block>
+
+<comment type="line">// Compile &amp; run:</comment>
+<comment type="line">// - g++ -std=c++11 -Wall -I$(CATCH_SINGLE_INCLUDE) -o 110-Fix-ClassFixture 110-Fix-ClassFixture.cpp 000-CatchMain.o &amp;&amp; 110-Fix-ClassFixture --success</comment>
+<comment type="line">// - cl -EHsc -I%CATCH_SINGLE_INCLUDE% 110-Fix-ClassFixture.cpp 000-CatchMain.obj &amp;&amp; 110-Fix-ClassFixture --success</comment>
+
+<comment type="line">// Expected compact output (all assertions):</comment>
+<comment type="line">//</comment>
+<comment type="line">// prompt&gt; 110-Fix-ClassFixture.exe --reporter compact --success</comment>
+<comment type="line">// 110-Fix-ClassFixture.cpp:47: passed: conn.executeSQL( "INSERT INTO employee (id, name) VALUES (?, ?)", getID(), "")</comment>
+<comment type="line">// 110-Fix-ClassFixture.cpp:51: passed: conn.executeSQL( "INSERT INTO employee (id, name) VALUES (?, ?)", getID(), "Joe Bloggs" ) for: true</comment>
+<comment type="line">// Passed both 2 test cases with 2 assertions.</comment>
+</unit>

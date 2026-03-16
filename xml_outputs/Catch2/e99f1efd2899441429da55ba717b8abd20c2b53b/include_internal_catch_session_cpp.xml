@@ -1,0 +1,290 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" xmlns:diff="http://www.srcML.org/srcDiff" revision="1.0.0" language="C++" filename="C:\Users\saile\AppData\Local\Temp\catch2_100_z8gzpiwf\e99f1efd2899441429da55ba717b8abd20c2b53b\include_internal_catch_session_cpp\include_internal_catch_session_cpp.old|C:\Users\saile\AppData\Local\Temp\catch2_100_z8gzpiwf\e99f1efd2899441429da55ba717b8abd20c2b53b\include_internal_catch_session_cpp\include_internal_catch_session_cpp.new"><comment type="block">/*
+ *  Created by Martin on 31/08/2017.
+ *
+ *  Distributed under the Boost Software License, Version 1.0. (See accompanying
+ *  file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
+ */</comment>
+
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">"catch_session.h"</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">"catch_commandline.h"</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">"catch_console_colour.h"</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">"catch_enforce.h"</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">"catch_list.h"</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">"catch_context.h"</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">"catch_run_context.h"</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">"catch_stream.h"</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">"catch_test_spec.h"</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">"catch_version.h"</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">"catch_interfaces_reporter.h"</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">"catch_random_number_generator.h"</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">"catch_startup_exception_registry.h"</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">"catch_text.h"</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">"catch_stream.h"</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">"catch_windows_h_proxy.h"</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">"../reporters/catch_reporter_listening.h"</cpp:file></cpp:include>
+
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;cstdlib&gt;</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;iomanip&gt;</cpp:file></cpp:include>
+
+<namespace>namespace <name>Catch</name> <block>{
+
+    <namespace>namespace <block>{
+        <decl_stmt><decl><type><specifier>const</specifier> <name>int</name></type> <name>MaxExitCode</name> <init>= <expr><literal type="number">255</literal></expr></init></decl>;</decl_stmt>
+
+        <function><type><name>IStreamingReporterPtr</name></type> <name>createReporter</name><parameter_list>(<parameter><decl><type><name><name>std</name><operator>::</operator><name>string</name></name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>reporterName</name></decl></parameter>, <parameter><decl><type><name>IConfigPtr</name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>config</name></decl></parameter>)</parameter_list> <block>{<block_content>
+            <decl_stmt><decl><type><name>auto</name></type> <name>reporter</name> <init>= <expr><call><name><name>Catch</name><operator>::</operator><name>getRegistryHub</name></name><argument_list>()</argument_list></call><operator>.</operator><call><name>getReporterRegistry</name><argument_list>()</argument_list></call><operator>.</operator><call><name>create</name><argument_list>(<argument><expr><name>reporterName</name></expr></argument>, <argument><expr><name>config</name></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+            <expr_stmt><expr><call><name>CATCH_ENFORCE</name><argument_list>(<argument><expr><name>reporter</name></expr></argument>, <argument><expr><literal type="string">"No reporter registered with name: '"</literal> <operator>&lt;&lt;</operator> <name>reporterName</name> <operator>&lt;&lt;</operator> <literal type="string">"'"</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+
+            <return>return <expr><name>reporter</name></expr>;</return>
+        </block_content>}</block></function>
+
+        <function><type><name>IStreamingReporterPtr</name></type> <name>makeReporter</name><parameter_list>(<parameter><decl><type><name><name>std</name><operator>::</operator><name>shared_ptr</name><argument_list type="generic">&lt;<argument><expr><name>Config</name></expr></argument>&gt;</argument_list></name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>config</name></decl></parameter>)</parameter_list> <block>{<block_content>
+            <if_stmt><if>if <condition>(<expr><call><name><name>Catch</name><operator>::</operator><name>getRegistryHub</name></name><argument_list>()</argument_list></call><operator>.</operator><call><name>getReporterRegistry</name><argument_list>()</argument_list></call><operator>.</operator><call><name>getListeners</name><argument_list>()</argument_list></call><operator>.</operator><call><name>empty</name><argument_list>()</argument_list></call></expr>)</condition> <block>{<block_content>
+                <return>return <expr><call><name>createReporter</name><argument_list>(<argument><expr><call><name><name>config</name><operator>-&gt;</operator><name>getReporterName</name></name><argument_list>()</argument_list></call></expr></argument>, <argument><expr><name>config</name></expr></argument>)</argument_list></call></expr>;</return>
+            </block_content>}</block></if></if_stmt>
+
+            <comment type="line">// On older platforms, returning std::unique_ptr&lt;ListeningReporter&gt;</comment>
+            <comment type="line">// when the return type is std::unique_ptr&lt;IStreamingReporter&gt;</comment>
+            <comment type="line">// doesn't compile without a std::move call. However, this causes</comment>
+            <comment type="line">// a warning on newer platforms. Thus, we have to work around</comment>
+            <comment type="line">// it a bit and downcast the pointer manually.</comment>
+            <decl_stmt><decl><type><name>auto</name></type> <name>ret</name> <init>= <expr><call><name><name>std</name><operator>::</operator><name>unique_ptr</name><argument_list type="generic">&lt;<argument><expr><name>IStreamingReporter</name></expr></argument>&gt;</argument_list></name><argument_list>(<argument><expr><operator>new</operator> <name>ListeningReporter</name></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+            <expr_stmt><expr><name>auto</name><operator>&amp;</operator> <name>multi</name> <operator>=</operator> <cast type="static">static_cast<argument_list type="generic">&lt;<argument><expr><name>ListeningReporter</name><operator>&amp;</operator></expr></argument>&gt;</argument_list><argument_list>(<argument><expr><operator>*</operator><name>ret</name></expr></argument>)</argument_list></cast></expr>;</expr_stmt>
+            <decl_stmt><decl><type><specifier>auto</specifier> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>listeners</name> <init>= <expr><call><name><name>Catch</name><operator>::</operator><name>getRegistryHub</name></name><argument_list>()</argument_list></call><operator>.</operator><call><name>getReporterRegistry</name><argument_list>()</argument_list></call><operator>.</operator><call><name>getListeners</name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+            <for>for <control>(<init><decl><type><specifier>auto</specifier> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>listener</name> <range>: <expr><name>listeners</name></expr></range></decl></init>)</control> <block>{<block_content>
+                <expr_stmt><expr><call><name><name>multi</name><operator>.</operator><name>addListener</name></name><argument_list>(<argument><expr><call><name><name>listener</name><operator>-&gt;</operator><name>create</name></name><argument_list>(<argument><expr><call><name><name>Catch</name><operator>::</operator><name>ReporterConfig</name></name><argument_list>(<argument><expr><name>config</name></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+            </block_content>}</block></for>
+            <expr_stmt><expr><call><name><name>multi</name><operator>.</operator><name>addReporter</name></name><argument_list>(<argument><expr><call><name>createReporter</name><argument_list>(<argument><expr><call><name><name>config</name><operator>-&gt;</operator><name>getReporterName</name></name><argument_list>()</argument_list></call></expr></argument>, <argument><expr><name>config</name></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+            <return>return <expr><name>ret</name></expr>;</return>
+        </block_content>}</block></function>
+
+
+        <function><type><name><name>Catch</name><operator>::</operator><name>Totals</name></name></type> <name>runTests</name><parameter_list>(<parameter><decl><type><name><name>std</name><operator>::</operator><name>shared_ptr</name><argument_list type="generic">&lt;<argument><expr><name>Config</name></expr></argument>&gt;</argument_list></name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>config</name></decl></parameter>)</parameter_list> <block>{<block_content>
+            <decl_stmt><decl><type><name>auto</name></type> <name>reporter</name> <init>= <expr><call><name>makeReporter</name><argument_list>(<argument><expr><name>config</name></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+
+            <decl_stmt><decl><type><name>RunContext</name></type> <name>context</name><argument_list>(<argument><expr><name>config</name></expr></argument>, <argument><expr><call><name><name>std</name><operator>::</operator><name>move</name></name><argument_list>(<argument><expr><name>reporter</name></expr></argument>)</argument_list></call></expr></argument>)</argument_list></decl>;</decl_stmt>
+
+            <decl_stmt><decl><type><name>Totals</name></type> <name>totals</name></decl>;</decl_stmt>
+
+            <expr_stmt><expr><call><name><name>context</name><operator>.</operator><name>testGroupStarting</name></name><argument_list>(<argument><expr><call><name><name>config</name><operator>-&gt;</operator><name>name</name></name><argument_list>()</argument_list></call></expr></argument>, <argument><expr><literal type="number">1</literal></expr></argument>, <argument><expr><literal type="number">1</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+
+            <decl_stmt><decl><type><name>TestSpec</name></type> <name>testSpec</name> <init>= <expr><call><name><name>config</name><operator>-&gt;</operator><name>testSpec</name></name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+
+            <decl_stmt><decl><type><specifier>auto</specifier> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>allTestCases</name> <init>= <expr><call><name>getAllTestCasesSorted</name><argument_list>(<argument><expr><operator>*</operator><name>config</name></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+            <for>for <control>(<init><decl><type><specifier>auto</specifier> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>testCase</name> <range>: <expr><name>allTestCases</name></expr></range></decl></init>)</control> <block>{<block_content>
+<diff:insert xmlns:diff="http://www.srcML.org/srcDiff"><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">                </diff:ws><decl_stmt><decl><type><name>bool</name></type><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><name>matching</name><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><init>=<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><expr><operator>(</operator><operator>!</operator><call><name><name>testSpec</name><operator>.</operator><name>hasFilters</name></name><argument_list>()</argument_list></call><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><operator>&amp;&amp;</operator><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><operator>!</operator><call><name><name>testCase</name><operator>.</operator><name>isHidden</name></name><argument_list>()</argument_list></call><operator>)</operator><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><operator>||</operator><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+                                 </diff:ws><operator>(</operator><call><name><name>testSpec</name><operator>.</operator><name>hasFilters</name></name><argument_list>()</argument_list></call><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><operator>&amp;&amp;</operator><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><call><name>matchTest</name><argument_list>(<argument><expr><name>testCase</name></expr></argument>,<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><argument><expr><name>testSpec</name></expr></argument>,<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><argument><expr><operator>*</operator><name>config</name></expr></argument>)</argument_list></call><operator>)</operator></expr></init></decl>;</decl_stmt><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+
+</diff:ws></diff:insert>                <if_stmt><if>if <condition>(<expr><operator>!</operator><call><name><name>context</name><operator>.</operator><name>aborting</name></name><argument_list>()</argument_list></call> <operator>&amp;&amp;</operator> <diff:delete type="replace" xmlns:diff="http://www.srcML.org/srcDiff"><call><name>matchTest</name><argument_list>(<argument><expr><name>testCase</name></expr></argument>,<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><argument><expr><name>testSpec</name></expr></argument>,<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><argument><expr><operator>*</operator><name>config</name></expr></argument>)</argument_list></call></diff:delete><diff:insert type="replace" xmlns:diff="http://www.srcML.org/srcDiff"><name>matching</name></diff:insert></expr>)</condition><block type="pseudo"><block_content>
+                    <expr_stmt><expr><name>totals</name> <operator>+=</operator> <call><name><name>context</name><operator>.</operator><name>runTest</name></name><argument_list>(<argument><expr><name>testCase</name></expr></argument>)</argument_list></call></expr>;</expr_stmt></block_content></block></if>
+                <else>else<block type="pseudo"><block_content>
+                    <expr_stmt><expr><call><name><name>context</name><operator>.</operator><name>reporter</name></name><argument_list>()</argument_list></call><operator>.</operator><call><name>skipTest</name><argument_list>(<argument><expr><name>testCase</name></expr></argument>)</argument_list></call></expr>;</expr_stmt></block_content></block></else></if_stmt>
+            </block_content>}</block></for>
+
+            <if_stmt><if>if <condition>(<expr><call><name><name>config</name><operator>-&gt;</operator><name>warnAboutNoTests</name></name><argument_list>()</argument_list></call> <operator>&amp;&amp;</operator> <call><name><name>totals</name><operator>.</operator><name>testCases</name><operator>.</operator><name>total</name></name><argument_list>()</argument_list></call> <operator>==</operator> <literal type="number">0</literal></expr>)</condition> <block>{<block_content>
+                <decl_stmt><decl><type><name>ReusableStringStream</name></type> <name>testConfig</name></decl>;</decl_stmt>
+
+                <decl_stmt><decl><type><name>bool</name></type> <name>first</name> <init>= <expr><literal type="boolean">true</literal></expr></init></decl>;</decl_stmt>
+                <for>for <control>(<init><decl><type><specifier>const</specifier> <specifier>auto</specifier><modifier>&amp;</modifier></type> <name>input</name> <range>: <expr><call><name><name>config</name><operator>-&gt;</operator><name>getTestsOrTags</name></name><argument_list>()</argument_list></call></expr></range></decl></init>)</control> <block>{<block_content>
+                    <if_stmt><if>if <condition>(<expr><operator>!</operator><name>first</name></expr>)</condition> <block>{<block_content> <expr_stmt><expr><name>testConfig</name> <operator>&lt;&lt;</operator> <literal type="char">' '</literal></expr>;</expr_stmt> </block_content>}</block></if></if_stmt>
+                    <expr_stmt><expr><name>first</name> <operator>=</operator> <literal type="boolean">false</literal></expr>;</expr_stmt>
+                    <expr_stmt><expr><name>testConfig</name> <operator>&lt;&lt;</operator> <name>input</name></expr>;</expr_stmt>
+                </block_content>}</block></for>
+
+                <expr_stmt><expr><call><name><name>context</name><operator>.</operator><name>reporter</name></name><argument_list>()</argument_list></call><operator>.</operator><call><name>noMatchingTestCases</name><argument_list>(<argument><expr><call><name><name>testConfig</name><operator>.</operator><name>str</name></name><argument_list>()</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+                <expr_stmt><expr><name><name>totals</name><operator>.</operator><name>error</name></name> <operator>=</operator> <operator>-</operator><literal type="number">1</literal></expr>;</expr_stmt>
+            </block_content>}</block></if></if_stmt>
+
+            <expr_stmt><expr><call><name><name>context</name><operator>.</operator><name>testGroupEnded</name></name><argument_list>(<argument><expr><call><name><name>config</name><operator>-&gt;</operator><name>name</name></name><argument_list>()</argument_list></call></expr></argument>, <argument><expr><name>totals</name></expr></argument>, <argument><expr><literal type="number">1</literal></expr></argument>, <argument><expr><literal type="number">1</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+            <return>return <expr><name>totals</name></expr>;</return>
+        </block_content>}</block></function>
+
+        <function><type><name>void</name></type> <name>applyFilenamesAsTags</name><parameter_list>(<parameter><decl><type><name><name>Catch</name><operator>::</operator><name>IConfig</name></name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>config</name></decl></parameter>)</parameter_list> <block>{<block_content>
+            <expr_stmt><expr><name>auto</name><operator>&amp;</operator> <name>tests</name> <operator>=</operator> <cast type="const">const_cast<argument_list type="generic">&lt;<argument><expr><name><name>std</name><operator>::</operator><name>vector</name><argument_list type="generic">&lt;<argument><expr><name>TestCase</name></expr></argument>&gt;</argument_list></name><operator>&amp;</operator></expr></argument>&gt;</argument_list><argument_list>(<argument><expr><call><name>getAllTestCasesSorted</name><argument_list>(<argument><expr><name>config</name></expr></argument>)</argument_list></call></expr></argument>)</argument_list></cast></expr>;</expr_stmt>
+            <for>for <control>(<init><expr><name>auto</name><operator>&amp;</operator> <name>testCase</name> <operator>:</operator> <name>tests</name></expr></init>)</control> <block>{<block_content>
+                <decl_stmt><decl><type><name>auto</name></type> <name>tags</name> <init>= <expr><name><name>testCase</name><operator>.</operator><name>tags</name></name></expr></init></decl>;</decl_stmt>
+
+                <decl_stmt><decl><type><name><name>std</name><operator>::</operator><name>string</name></name></type> <name>filename</name> <init>= <expr><name><name>testCase</name><operator>.</operator><name>lineInfo</name><operator>.</operator><name>file</name></name></expr></init></decl>;</decl_stmt>
+                <decl_stmt><decl><type><name>auto</name></type> <name>lastSlash</name> <init>= <expr><call><name><name>filename</name><operator>.</operator><name>find_last_of</name></name><argument_list>(<argument><expr><literal type="string">"\\/"</literal></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+                <if_stmt><if>if <condition>(<expr><name>lastSlash</name> <operator>!=</operator> <name><name>std</name><operator>::</operator><name>string</name><operator>::</operator><name>npos</name></name></expr>)</condition> <block>{<block_content>
+                    <expr_stmt><expr><call><name><name>filename</name><operator>.</operator><name>erase</name></name><argument_list>(<argument><expr><literal type="number">0</literal></expr></argument>, <argument><expr><name>lastSlash</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+                    <expr_stmt><expr><name><name>filename</name><index>[<expr><literal type="number">0</literal></expr>]</index></name> <operator>=</operator> <literal type="char">'#'</literal></expr>;</expr_stmt>
+                </block_content>}</block></if></if_stmt>
+
+                <decl_stmt><decl><type><name>auto</name></type> <name>lastDot</name> <init>= <expr><call><name><name>filename</name><operator>.</operator><name>find_last_of</name></name><argument_list>(<argument><expr><literal type="char">'.'</literal></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+                <if_stmt><if>if <condition>(<expr><name>lastDot</name> <operator>!=</operator> <name><name>std</name><operator>::</operator><name>string</name><operator>::</operator><name>npos</name></name></expr>)</condition> <block>{<block_content>
+                    <expr_stmt><expr><call><name><name>filename</name><operator>.</operator><name>erase</name></name><argument_list>(<argument><expr><name>lastDot</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+                </block_content>}</block></if></if_stmt>
+
+                <expr_stmt><expr><call><name><name>tags</name><operator>.</operator><name>push_back</name></name><argument_list>(<argument><expr><call><name><name>std</name><operator>::</operator><name>move</name></name><argument_list>(<argument><expr><name>filename</name></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+                <expr_stmt><expr><call><name>setTags</name><argument_list>(<argument><expr><name>testCase</name></expr></argument>, <argument><expr><name>tags</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+            </block_content>}</block></for>
+        </block_content>}</block></function>
+
+    }</block></namespace> <comment type="line">// anon namespace</comment>
+
+    <constructor><name><name>Session</name><operator>::</operator><name>Session</name></name><parameter_list>()</parameter_list> <block>{<block_content>
+        <decl_stmt><decl><type><specifier>static</specifier> <name>bool</name></type> <name>alreadyInstantiated</name> <init>= <expr><literal type="boolean">false</literal></expr></init></decl>;</decl_stmt>
+        <if_stmt><if>if<condition>( <expr><name>alreadyInstantiated</name></expr> )</condition> <block>{<block_content>
+            <macro><name>CATCH_TRY</name></macro> <block>{<block_content> <expr_stmt><expr><call><name>CATCH_INTERNAL_ERROR</name><argument_list>( <argument><expr><literal type="string">"Only one instance of Catch::Session can ever be used"</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt> </block_content>}</block>
+            <macro><name>CATCH_CATCH_ALL</name></macro> <block>{<block_content> <expr_stmt><expr><call><name>getMutableRegistryHub</name><argument_list>()</argument_list></call><operator>.</operator><call><name>registerStartupException</name><argument_list>()</argument_list></call></expr>;</expr_stmt> </block_content>}</block>
+        </block_content>}</block></if></if_stmt>
+
+        <comment type="line">// There cannot be exceptions at startup in no-exception mode.</comment>
+<cpp:if xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">if</cpp:directive> <expr><operator>!</operator><call><name>defined</name><argument_list>(<argument><expr><name>CATCH_CONFIG_DISABLE_EXCEPTIONS</name></expr></argument>)</argument_list></call></expr></cpp:if>
+        <decl_stmt><decl><type><specifier>const</specifier> <specifier>auto</specifier><modifier>&amp;</modifier></type> <name>exceptions</name> <init>= <expr><call><name>getRegistryHub</name><argument_list>()</argument_list></call><operator>.</operator><call><name>getStartupExceptionRegistry</name><argument_list>()</argument_list></call><operator>.</operator><call><name>getExceptions</name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+        <if_stmt><if>if <condition>( <expr><operator>!</operator><call><name><name>exceptions</name><operator>.</operator><name>empty</name></name><argument_list>()</argument_list></call></expr> )</condition> <block>{<block_content>
+            <expr_stmt><expr><name>m_startupExceptions</name> <operator>=</operator> <literal type="boolean">true</literal></expr>;</expr_stmt>
+            <decl_stmt><decl><type><name>Colour</name></type> <name>colourGuard</name><argument_list>( <argument><expr><name><name>Colour</name><operator>::</operator><name>Red</name></name></expr></argument> )</argument_list></decl>;</decl_stmt>
+            <expr_stmt><expr><call><name><name>Catch</name><operator>::</operator><name>cerr</name></name><argument_list>()</argument_list></call> <operator>&lt;&lt;</operator> <literal type="string">"Errors occurred during startup!"</literal> <operator>&lt;&lt;</operator> <literal type="char">'\n'</literal></expr>;</expr_stmt>
+            <comment type="line">// iterate over all exceptions and notify user</comment>
+            <for>for <control>( <init><decl><type><specifier>const</specifier> <specifier>auto</specifier><modifier>&amp;</modifier></type> <name>ex_ptr</name> <range>: <expr><name>exceptions</name></expr></range></decl></init> )</control> <block>{<block_content>
+                <try>try <block>{<block_content>
+                    <expr_stmt><expr><call><name><name>std</name><operator>::</operator><name>rethrow_exception</name></name><argument_list>(<argument><expr><name>ex_ptr</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+                </block_content>}</block> <catch>catch <parameter_list>( <parameter><decl><type><name><name>std</name><operator>::</operator><name>exception</name></name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>ex</name></decl></parameter> )</parameter_list> <block>{<block_content>
+                    <expr_stmt><expr><call><name><name>Catch</name><operator>::</operator><name>cerr</name></name><argument_list>()</argument_list></call> <operator>&lt;&lt;</operator> <call><name>Column</name><argument_list>( <argument><expr><call><name><name>ex</name><operator>.</operator><name>what</name></name><argument_list>()</argument_list></call></expr></argument> )</argument_list></call><operator>.</operator><call><name>indent</name><argument_list>(<argument><expr><literal type="number">2</literal></expr></argument>)</argument_list></call> <operator>&lt;&lt;</operator> <literal type="char">'\n'</literal></expr>;</expr_stmt>
+                </block_content>}</block></catch></try>
+            </block_content>}</block></for>
+        </block_content>}</block></if></if_stmt>
+<cpp:endif xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">endif</cpp:directive></cpp:endif>
+
+        <expr_stmt><expr><name>alreadyInstantiated</name> <operator>=</operator> <literal type="boolean">true</literal></expr>;</expr_stmt>
+        <expr_stmt><expr><name>m_cli</name> <operator>=</operator> <call><name>makeCommandLineParser</name><argument_list>( <argument><expr><name>m_configData</name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block></constructor>
+    <destructor><name><name>Session</name><operator>::</operator><name>~Session</name></name><parameter_list>()</parameter_list> <block>{<block_content>
+        <expr_stmt><expr><call><name><name>Catch</name><operator>::</operator><name>cleanUp</name></name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block></destructor>
+
+    <function><type><name>void</name></type> <name><name>Session</name><operator>::</operator><name>showHelp</name></name><parameter_list>()</parameter_list> <specifier>const</specifier> <block>{<block_content>
+        <expr_stmt><expr><call><name><name>Catch</name><operator>::</operator><name>cout</name></name><argument_list>()</argument_list></call>
+                <operator>&lt;&lt;</operator> <literal type="string">"\nCatch v"</literal> <operator>&lt;&lt;</operator> <call><name>libraryVersion</name><argument_list>()</argument_list></call> <operator>&lt;&lt;</operator> <literal type="string">"\n"</literal>
+                <operator>&lt;&lt;</operator> <name>m_cli</name> <operator>&lt;&lt;</operator> <name><name>std</name><operator>::</operator><name>endl</name></name>
+                <operator>&lt;&lt;</operator> <literal type="string">"For more detailed usage please see the project docs\n"</literal> <operator>&lt;&lt;</operator> <name><name>std</name><operator>::</operator><name>endl</name></name></expr>;</expr_stmt>
+    </block_content>}</block></function>
+    <function><type><name>void</name></type> <name><name>Session</name><operator>::</operator><name>libIdentify</name></name><parameter_list>()</parameter_list> <block>{<block_content>
+        <expr_stmt><expr><call><name><name>Catch</name><operator>::</operator><name>cout</name></name><argument_list>()</argument_list></call>
+                <operator>&lt;&lt;</operator> <name><name>std</name><operator>::</operator><name>left</name></name> <operator>&lt;&lt;</operator> <call><name><name>std</name><operator>::</operator><name>setw</name></name><argument_list>(<argument><expr><literal type="number">16</literal></expr></argument>)</argument_list></call> <operator>&lt;&lt;</operator> <literal type="string">"description: "</literal> <operator>&lt;&lt;</operator> <literal type="string">"A Catch test executable\n"</literal>
+                <operator>&lt;&lt;</operator> <name><name>std</name><operator>::</operator><name>left</name></name> <operator>&lt;&lt;</operator> <call><name><name>std</name><operator>::</operator><name>setw</name></name><argument_list>(<argument><expr><literal type="number">16</literal></expr></argument>)</argument_list></call> <operator>&lt;&lt;</operator> <literal type="string">"category: "</literal> <operator>&lt;&lt;</operator> <literal type="string">"testframework\n"</literal>
+                <operator>&lt;&lt;</operator> <name><name>std</name><operator>::</operator><name>left</name></name> <operator>&lt;&lt;</operator> <call><name><name>std</name><operator>::</operator><name>setw</name></name><argument_list>(<argument><expr><literal type="number">16</literal></expr></argument>)</argument_list></call> <operator>&lt;&lt;</operator> <literal type="string">"framework: "</literal> <operator>&lt;&lt;</operator> <literal type="string">"Catch Test\n"</literal>
+                <operator>&lt;&lt;</operator> <name><name>std</name><operator>::</operator><name>left</name></name> <operator>&lt;&lt;</operator> <call><name><name>std</name><operator>::</operator><name>setw</name></name><argument_list>(<argument><expr><literal type="number">16</literal></expr></argument>)</argument_list></call> <operator>&lt;&lt;</operator> <literal type="string">"version: "</literal> <operator>&lt;&lt;</operator> <call><name>libraryVersion</name><argument_list>()</argument_list></call> <operator>&lt;&lt;</operator> <name><name>std</name><operator>::</operator><name>endl</name></name></expr>;</expr_stmt>
+    </block_content>}</block></function>
+
+    <function><type><name>int</name></type> <name><name>Session</name><operator>::</operator><name>applyCommandLine</name></name><parameter_list>( <parameter><decl><type><name>int</name></type> <name>argc</name></decl></parameter>, <parameter><decl><type><name>char</name> <specifier>const</specifier> <modifier>*</modifier> <specifier>const</specifier> <modifier>*</modifier></type> <name>argv</name></decl></parameter> )</parameter_list> <block>{<block_content>
+        <if_stmt><if>if<condition>( <expr><name>m_startupExceptions</name></expr> )</condition><block type="pseudo"><block_content>
+            <return>return <expr><literal type="number">1</literal></expr>;</return></block_content></block></if></if_stmt>
+
+        <decl_stmt><decl><type><name>auto</name></type> <name>result</name> <init>= <expr><call><name><name>m_cli</name><operator>.</operator><name>parse</name></name><argument_list>( <argument><expr><call><name><name>clara</name><operator>::</operator><name>Args</name></name><argument_list>( <argument><expr><name>argc</name></expr></argument>, <argument><expr><name>argv</name></expr></argument> )</argument_list></call></expr></argument> )</argument_list></call></expr></init></decl>;</decl_stmt>
+        <if_stmt><if>if<condition>( <expr><operator>!</operator><name>result</name></expr> )</condition> <block>{<block_content>
+            <expr_stmt><expr><call><name>config</name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+            <expr_stmt><expr><call><name>getCurrentMutableContext</name><argument_list>()</argument_list></call><operator>.</operator><call><name>setConfig</name><argument_list>(<argument><expr><name>m_config</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+            <expr_stmt><expr><call><name><name>Catch</name><operator>::</operator><name>cerr</name></name><argument_list>()</argument_list></call>
+                <operator>&lt;&lt;</operator> <call><name>Colour</name><argument_list>( <argument><expr><name><name>Colour</name><operator>::</operator><name>Red</name></name></expr></argument> )</argument_list></call>
+                <operator>&lt;&lt;</operator> <literal type="string">"\nError(s) in input:\n"</literal>
+                <operator>&lt;&lt;</operator> <call><name>Column</name><argument_list>( <argument><expr><call><name><name>result</name><operator>.</operator><name>errorMessage</name></name><argument_list>()</argument_list></call></expr></argument> )</argument_list></call><operator>.</operator><call><name>indent</name><argument_list>( <argument><expr><literal type="number">2</literal></expr></argument> )</argument_list></call>
+                <operator>&lt;&lt;</operator> <literal type="string">"\n\n"</literal></expr>;</expr_stmt>
+            <expr_stmt><expr><call><name><name>Catch</name><operator>::</operator><name>cerr</name></name><argument_list>()</argument_list></call> <operator>&lt;&lt;</operator> <literal type="string">"Run with -? for usage\n"</literal> <operator>&lt;&lt;</operator> <name><name>std</name><operator>::</operator><name>endl</name></name></expr>;</expr_stmt>
+            <return>return <expr><name>MaxExitCode</name></expr>;</return>
+        </block_content>}</block></if></if_stmt>
+
+        <if_stmt><if>if<condition>( <expr><name><name>m_configData</name><operator>.</operator><name>showHelp</name></name></expr> )</condition><block type="pseudo"><block_content>
+            <expr_stmt><expr><call><name>showHelp</name><argument_list>()</argument_list></call></expr>;</expr_stmt></block_content></block></if></if_stmt>
+        <if_stmt><if>if<condition>( <expr><name><name>m_configData</name><operator>.</operator><name>libIdentify</name></name></expr> )</condition><block type="pseudo"><block_content>
+            <expr_stmt><expr><call><name>libIdentify</name><argument_list>()</argument_list></call></expr>;</expr_stmt></block_content></block></if></if_stmt>
+        <expr_stmt><expr><call><name><name>m_config</name><operator>.</operator><name>reset</name></name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+        <return>return <expr><literal type="number">0</literal></expr>;</return>
+    </block_content>}</block></function>
+
+<cpp:if xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">if</cpp:directive> <expr><call><name>defined</name><argument_list>(<argument><expr><name>CATCH_CONFIG_WCHAR</name></expr></argument>)</argument_list></call> <operator>&amp;&amp;</operator> <call><name>defined</name><argument_list>(<argument><expr><name>WIN32</name></expr></argument>)</argument_list></call> <operator>&amp;&amp;</operator> <call><name>defined</name><argument_list>(<argument><expr><name>UNICODE</name></expr></argument>)</argument_list></call></expr></cpp:if>
+    <function><type><name>int</name></type> <name><name>Session</name><operator>::</operator><name>applyCommandLine</name></name><parameter_list>( <parameter><decl><type><name>int</name></type> <name>argc</name></decl></parameter>, <parameter><decl><type><name>wchar_t</name> <specifier>const</specifier> <modifier>*</modifier> <specifier>const</specifier> <modifier>*</modifier></type> <name>argv</name></decl></parameter> )</parameter_list> <block>{<block_content>
+
+        <decl_stmt><decl><type><name>char</name> <modifier>*</modifier><modifier>*</modifier></type><name>utf8Argv</name> <init>= <expr><operator>new</operator> <name>char</name> <operator>*</operator><index>[ <expr><name>argc</name></expr> ]</index></expr></init></decl>;</decl_stmt>
+
+        <for>for <control>( <init><decl><type><name>int</name></type> <name>i</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>i</name> <operator>&lt;</operator> <name>argc</name></expr>;</condition> <incr><expr><operator>++</operator><name>i</name></expr></incr> )</control> <block>{<block_content>
+            <decl_stmt><decl><type><name>int</name></type> <name>bufSize</name> <init>= <expr><call><name>WideCharToMultiByte</name><argument_list>( <argument><expr><name>CP_UTF8</name></expr></argument>, <argument><expr><literal type="number">0</literal></expr></argument>, <argument><expr><name><name>argv</name><index>[<expr><name>i</name></expr>]</index></name></expr></argument>, <argument><expr><operator>-</operator><literal type="number">1</literal></expr></argument>, <argument><expr><name>NULL</name></expr></argument>, <argument><expr><literal type="number">0</literal></expr></argument>, <argument><expr><name>NULL</name></expr></argument>, <argument><expr><name>NULL</name></expr></argument> )</argument_list></call></expr></init></decl>;</decl_stmt>
+
+            <expr_stmt><expr><name><name>utf8Argv</name><index>[ <expr><name>i</name></expr> ]</index></name> <operator>=</operator> <operator>new</operator> <name><name>char</name><index>[ <expr><name>bufSize</name></expr> ]</index></name></expr>;</expr_stmt>
+
+            <expr_stmt><expr><call><name>WideCharToMultiByte</name><argument_list>( <argument><expr><name>CP_UTF8</name></expr></argument>, <argument><expr><literal type="number">0</literal></expr></argument>, <argument><expr><name><name>argv</name><index>[<expr><name>i</name></expr>]</index></name></expr></argument>, <argument><expr><operator>-</operator><literal type="number">1</literal></expr></argument>, <argument><expr><name><name>utf8Argv</name><index>[<expr><name>i</name></expr>]</index></name></expr></argument>, <argument><expr><name>bufSize</name></expr></argument>, <argument><expr><name>NULL</name></expr></argument>, <argument><expr><name>NULL</name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        </block_content>}</block></for>
+
+        <decl_stmt><decl><type><name>int</name></type> <name>returnCode</name> <init>= <expr><call><name>applyCommandLine</name><argument_list>( <argument><expr><name>argc</name></expr></argument>, <argument><expr><name>utf8Argv</name></expr></argument> )</argument_list></call></expr></init></decl>;</decl_stmt>
+
+        <for>for <control>( <init><decl><type><name>int</name></type> <name>i</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>i</name> <operator>&lt;</operator> <name>argc</name></expr>;</condition> <incr><expr><operator>++</operator><name>i</name></expr></incr> )</control><block type="pseudo"><block_content>
+            <expr_stmt><expr><operator>delete</operator> <index>[]</index> <name><name>utf8Argv</name><index>[ <expr><name>i</name></expr> ]</index></name></expr>;</expr_stmt></block_content></block></for>
+
+        <expr_stmt><expr><operator>delete</operator> <index>[]</index> <name>utf8Argv</name></expr>;</expr_stmt>
+
+        <return>return <expr><name>returnCode</name></expr>;</return>
+    </block_content>}</block></function>
+<cpp:endif xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">endif</cpp:directive></cpp:endif>
+
+    <function><type><name>void</name></type> <name><name>Session</name><operator>::</operator><name>useConfigData</name></name><parameter_list>( <parameter><decl><type><name>ConfigData</name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>configData</name></decl></parameter> )</parameter_list> <block>{<block_content>
+        <expr_stmt><expr><name>m_configData</name> <operator>=</operator> <name>configData</name></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name><name>m_config</name><operator>.</operator><name>reset</name></name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block></function>
+
+    <function><type><name>int</name></type> <name><name>Session</name><operator>::</operator><name>run</name></name><parameter_list>()</parameter_list> <block>{<block_content>
+        <if_stmt><if>if<condition>( <expr><operator>(</operator> <name><name>m_configData</name><operator>.</operator><name>waitForKeypress</name></name> <operator>&amp;</operator> <name><name>WaitForKeypress</name><operator>::</operator><name>BeforeStart</name></name> <operator>)</operator> <operator>!=</operator> <literal type="number">0</literal></expr> )</condition> <block>{<block_content>
+            <expr_stmt><expr><call><name><name>Catch</name><operator>::</operator><name>cout</name></name><argument_list>()</argument_list></call> <operator>&lt;&lt;</operator> <literal type="string">"...waiting for enter/ return before starting"</literal> <operator>&lt;&lt;</operator> <name><name>std</name><operator>::</operator><name>endl</name></name></expr>;</expr_stmt>
+            <expr_stmt><expr><cast type="static">static_cast<argument_list type="generic">&lt;<argument><expr><name>void</name></expr></argument>&gt;</argument_list><argument_list>(<argument><expr><call><name><name>std</name><operator>::</operator><name>getchar</name></name><argument_list>()</argument_list></call></expr></argument>)</argument_list></cast></expr>;</expr_stmt>
+        </block_content>}</block></if></if_stmt>
+        <decl_stmt><decl><type><name>int</name></type> <name>exitCode</name> <init>= <expr><call><name>runInternal</name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+        <if_stmt><if>if<condition>( <expr><operator>(</operator> <name><name>m_configData</name><operator>.</operator><name>waitForKeypress</name></name> <operator>&amp;</operator> <name><name>WaitForKeypress</name><operator>::</operator><name>BeforeExit</name></name> <operator>)</operator> <operator>!=</operator> <literal type="number">0</literal></expr> )</condition> <block>{<block_content>
+            <expr_stmt><expr><call><name><name>Catch</name><operator>::</operator><name>cout</name></name><argument_list>()</argument_list></call> <operator>&lt;&lt;</operator> <literal type="string">"...waiting for enter/ return before exiting, with code: "</literal> <operator>&lt;&lt;</operator> <name>exitCode</name> <operator>&lt;&lt;</operator> <name><name>std</name><operator>::</operator><name>endl</name></name></expr>;</expr_stmt>
+            <expr_stmt><expr><cast type="static">static_cast<argument_list type="generic">&lt;<argument><expr><name>void</name></expr></argument>&gt;</argument_list><argument_list>(<argument><expr><call><name><name>std</name><operator>::</operator><name>getchar</name></name><argument_list>()</argument_list></call></expr></argument>)</argument_list></cast></expr>;</expr_stmt>
+        </block_content>}</block></if></if_stmt>
+        <return>return <expr><name>exitCode</name></expr>;</return>
+    </block_content>}</block></function>
+
+    <function><type><name><name>clara</name><operator>::</operator><name>Parser</name></name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name><name>Session</name><operator>::</operator><name>cli</name></name><parameter_list>()</parameter_list> <specifier>const</specifier> <block>{<block_content>
+        <return>return <expr><name>m_cli</name></expr>;</return>
+    </block_content>}</block></function>
+    <function><type><name>void</name></type> <name><name>Session</name><operator>::</operator><name>cli</name></name><parameter_list>( <parameter><decl><type><name><name>clara</name><operator>::</operator><name>Parser</name></name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>newParser</name></decl></parameter> )</parameter_list> <block>{<block_content>
+        <expr_stmt><expr><name>m_cli</name> <operator>=</operator> <name>newParser</name></expr>;</expr_stmt>
+    </block_content>}</block></function>
+    <function><type><name>ConfigData</name><modifier>&amp;</modifier></type> <name><name>Session</name><operator>::</operator><name>configData</name></name><parameter_list>()</parameter_list> <block>{<block_content>
+        <return>return <expr><name>m_configData</name></expr>;</return>
+    </block_content>}</block></function>
+    <function><type><name>Config</name><modifier>&amp;</modifier></type> <name><name>Session</name><operator>::</operator><name>config</name></name><parameter_list>()</parameter_list> <block>{<block_content>
+        <if_stmt><if>if<condition>( <expr><operator>!</operator><name>m_config</name></expr> )</condition><block type="pseudo"><block_content>
+            <expr_stmt><expr><name>m_config</name> <operator>=</operator> <call><name><name>std</name><operator>::</operator><name>make_shared</name><argument_list type="generic">&lt;<argument><expr><name>Config</name></expr></argument>&gt;</argument_list></name><argument_list>( <argument><expr><name>m_configData</name></expr></argument> )</argument_list></call></expr>;</expr_stmt></block_content></block></if></if_stmt>
+        <return>return <expr><operator>*</operator><name>m_config</name></expr>;</return>
+    </block_content>}</block></function>
+
+    <function><type><name>int</name></type> <name><name>Session</name><operator>::</operator><name>runInternal</name></name><parameter_list>()</parameter_list> <block>{<block_content>
+        <if_stmt><if>if<condition>( <expr><name>m_startupExceptions</name></expr> )</condition><block type="pseudo"><block_content>
+            <return>return <expr><literal type="number">1</literal></expr>;</return></block_content></block></if></if_stmt>
+
+        <if_stmt><if>if <condition>(<expr><name><name>m_configData</name><operator>.</operator><name>showHelp</name></name> <operator>||</operator> <name><name>m_configData</name><operator>.</operator><name>libIdentify</name></name></expr>)</condition> <block>{<block_content>
+            <return>return <expr><literal type="number">0</literal></expr>;</return>
+        </block_content>}</block></if></if_stmt>
+
+        <macro><name>CATCH_TRY</name></macro> <block>{<block_content>
+            <expr_stmt><expr><call><name>config</name><argument_list>()</argument_list></call></expr>;</expr_stmt> <comment type="line">// Force config to be constructed</comment>
+
+            <expr_stmt><expr><call><name>seedRng</name><argument_list>( <argument><expr><operator>*</operator><name>m_config</name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+
+            <if_stmt><if>if<condition>( <expr><name><name>m_configData</name><operator>.</operator><name>filenamesAsTags</name></name></expr> )</condition><block type="pseudo"><block_content>
+                <expr_stmt><expr><call><name>applyFilenamesAsTags</name><argument_list>( <argument><expr><operator>*</operator><name>m_config</name></expr></argument> )</argument_list></call></expr>;</expr_stmt></block_content></block></if></if_stmt>
+
+            <comment type="line">// Handle list request</comment>
+            <if_stmt><if>if<condition>( <decl><type><name><name>Option</name><argument_list type="generic">&lt;<argument><expr><name><name>std</name><operator>::</operator><name>size_t</name></name></expr></argument>&gt;</argument_list></name></type> <name>listed</name> <init>= <expr><call><name>list</name><argument_list>( <argument><expr><name>m_config</name></expr></argument> )</argument_list></call></expr></init></decl> )</condition><block type="pseudo"><block_content>
+                <return>return <expr><cast type="static">static_cast<argument_list type="generic">&lt;<argument><expr><name>int</name></expr></argument>&gt;</argument_list><argument_list>( <argument><expr><operator>*</operator><name>listed</name></expr></argument> )</argument_list></cast></expr>;</return></block_content></block></if></if_stmt>
+
+            <decl_stmt><decl><type><name>auto</name></type> <name>totals</name> <init>= <expr><call><name>runTests</name><argument_list>( <argument><expr><name>m_config</name></expr></argument> )</argument_list></call></expr></init></decl>;</decl_stmt>
+            <comment type="line">// Note that on unices only the lower 8 bits are usually used, clamping</comment>
+            <comment type="line">// the return value to 255 prevents false negative when some multiple</comment>
+            <comment type="line">// of 256 tests has failed</comment>
+            <return>return <expr><operator>(</operator><name><name>std</name><operator>::</operator><name>min</name></name><operator>)</operator> <operator>(</operator><name>MaxExitCode</name><operator>,</operator> <operator>(</operator><name><name>std</name><operator>::</operator><name>max</name></name><operator>)</operator> <operator>(</operator><name><name>totals</name><operator>.</operator><name>error</name></name><operator>,</operator> <cast type="static">static_cast<argument_list type="generic">&lt;<argument><expr><name>int</name></expr></argument>&gt;</argument_list><argument_list>(<argument><expr><name><name>totals</name><operator>.</operator><name>assertions</name><operator>.</operator><name>failed</name></name></expr></argument>)</argument_list></cast><operator>)</operator><operator>)</operator></expr>;</return>
+        </block_content>}</block>
+<cpp:if xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">if</cpp:directive> <expr><operator>!</operator><call><name>defined</name><argument_list>(<argument><expr><name>CATCH_CONFIG_DISABLE_EXCEPTIONS</name></expr></argument>)</argument_list></call></expr></cpp:if>
+        <catch>catch<parameter_list>( <parameter><decl><type><name><name>std</name><operator>::</operator><name>exception</name></name><modifier>&amp;</modifier></type> <name>ex</name></decl></parameter> )</parameter_list> <block>{<block_content>
+            <expr_stmt><expr><call><name><name>Catch</name><operator>::</operator><name>cerr</name></name><argument_list>()</argument_list></call> <operator>&lt;&lt;</operator> <call><name><name>ex</name><operator>.</operator><name>what</name></name><argument_list>()</argument_list></call> <operator>&lt;&lt;</operator> <name><name>std</name><operator>::</operator><name>endl</name></name></expr>;</expr_stmt>
+            <return>return <expr><name>MaxExitCode</name></expr>;</return>
+        </block_content>}</block></catch>
+<cpp:endif xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">endif</cpp:directive></cpp:endif>
+    </block_content>}</block></function>
+
+}</block></namespace> <comment type="line">// end namespace Catch</comment>
+</unit>

@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" xmlns:diff="http://www.srcML.org/srcDiff" revision="1.0.0" language="C++" filename="C:\Users\saile\AppData\Local\Temp\catch2_100_z8gzpiwf\6c23a6582b444f7be0ac65835dda8c6247609b4a\projects_SelfTest_ExceptionTests_cpp\projects_SelfTest_ExceptionTests_cpp.old|C:\Users\saile\AppData\Local\Temp\catch2_100_z8gzpiwf\6c23a6582b444f7be0ac65835dda8c6247609b4a\projects_SelfTest_ExceptionTests_cpp\projects_SelfTest_ExceptionTests_cpp.new"><comment type="block">/*
+ *  Created by Phil on 09/11/2010.
+ *  Copyright 2010 Two Blue Cubes Ltd. All rights reserved.
+ *
+ *  Distributed under the Boost Software License, Version 1.0. (See accompanying
+ *  file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
+ */</comment>
+
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">"catch.hpp"</cpp:file></cpp:include>
+
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;string&gt;</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;stdexcept&gt;</cpp:file></cpp:include>
+
+<namespace>namespace
+<block>{
+    <function><type><specifier>inline</specifier> <name>int</name></type> <name>thisThrows</name><parameter_list>()</parameter_list>
+    <block>{<block_content>
+		<if_stmt><if>if<condition>( <expr><call><name><name>Catch</name><operator>::</operator><name>alwaysTrue</name></name><argument_list>()</argument_list></call></expr> )</condition><block type="pseudo"><block_content>
+		    <throw>throw <expr><call><name><name>std</name><operator>::</operator><name>domain_error</name></name><argument_list>( <argument><expr><literal type="string">"expected exception"</literal></expr></argument> )</argument_list></call></expr>;</throw></block_content></block></if></if_stmt>
+		<return>return <expr><literal type="number">1</literal></expr>;</return>
+    </block_content>}</block></function>
+
+    <function><type><name>int</name></type> <name>thisDoesntThrow</name><parameter_list>()</parameter_list>
+    <block>{<block_content>
+        <return>return <expr><literal type="number">0</literal></expr>;</return>
+    </block_content>}</block></function>
+}</block></namespace>
+
+<macro><name>TEST_CASE</name><argument_list>( <argument><literal type="string">"When checked exceptions are thrown they can be expected or unexpected"</literal></argument>, <argument><literal type="string">"[!throws]"</literal></argument> )</argument_list></macro>
+<block>{<block_content>
+    <expr_stmt><expr><call><name>REQUIRE_THROWS_AS</name><argument_list>( <argument><expr><call><name>thisThrows</name><argument_list>()</argument_list></call></expr></argument>, <argument><expr><name><name>std</name><operator>::</operator><name>domain_error</name></name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>REQUIRE_NOTHROW</name><argument_list>( <argument><expr><call><name>thisDoesntThrow</name><argument_list>()</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>REQUIRE_THROWS</name><argument_list>( <argument><expr><call><name>thisThrows</name><argument_list>()</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+</block_content>}</block>
+
+<macro><name>TEST_CASE</name><argument_list>( <argument><literal type="string">"Expected exceptions that don't throw or unexpected exceptions fail the test"</literal></argument>, <argument><literal type="string">"[.][failing][!throws]"</literal></argument> )</argument_list></macro>
+<block>{<block_content>
+    <expr_stmt><expr><call><name>CHECK_THROWS_AS</name><argument_list>( <argument><expr><call><name>thisThrows</name><argument_list>()</argument_list></call></expr></argument>, <argument><expr><name><name>std</name><operator>::</operator><name>string</name></name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>CHECK_THROWS_AS</name><argument_list>( <argument><expr><call><name>thisDoesntThrow</name><argument_list>()</argument_list></call></expr></argument>, <argument><expr><name><name>std</name><operator>::</operator><name>domain_error</name></name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>CHECK_NOTHROW</name><argument_list>( <argument><expr><call><name>thisThrows</name><argument_list>()</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+</block_content>}</block>
+
+<macro><name>TEST_CASE</name><argument_list>( <argument><literal type="string">"When unchecked exceptions are thrown directly they are always failures"</literal></argument>, <argument><literal type="string">"[.][failing][!throws]"</literal></argument> )</argument_list></macro>
+<block>{<block_content>
+	<if_stmt><if>if<condition>( <expr><call><name><name>Catch</name><operator>::</operator><name>alwaysTrue</name></name><argument_list>()</argument_list></call></expr> )</condition><block type="pseudo"><block_content>
+	    <throw>throw <expr><call><name><name>std</name><operator>::</operator><name>domain_error</name></name><argument_list>( <argument><expr><literal type="string">"unexpected exception"</literal></expr></argument> )</argument_list></call></expr>;</throw></block_content></block></if></if_stmt>
+</block_content>}</block>
+
+<macro><name>TEST_CASE</name><argument_list>( <argument><literal type="string">"An unchecked exception reports the line of the last assertion"</literal></argument>, <argument><literal type="string">"[.][failing][!throws]"</literal></argument> )</argument_list></macro>
+<block>{<block_content>
+    <expr_stmt><expr><call><name>CHECK</name><argument_list>( <argument><expr><literal type="number">1</literal> <operator>==</operator> <literal type="number">1</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+	<if_stmt><if>if<condition>( <expr><call><name><name>Catch</name><operator>::</operator><name>alwaysTrue</name></name><argument_list>()</argument_list></call></expr> )</condition><block type="pseudo"><block_content>
+	    <throw>throw <expr><call><name><name>std</name><operator>::</operator><name>domain_error</name></name><argument_list>( <argument><expr><literal type="string">"unexpected exception"</literal></expr></argument> )</argument_list></call></expr>;</throw></block_content></block></if></if_stmt>
+</block_content>}</block>
+
+<macro><name>TEST_CASE</name><argument_list>( <argument><literal type="string">"When unchecked exceptions are thrown from sections they are always failures"</literal></argument>, <argument><literal type="string">"[.][failing][!throws]"</literal></argument> )</argument_list></macro>
+<block>{<block_content>
+    <macro><name>SECTION</name><argument_list>( <argument><literal type="string">"section name"</literal></argument>, <argument><literal type="string">""</literal></argument> )</argument_list></macro>
+    <block>{<block_content>
+		<if_stmt><if>if<condition>( <expr><call><name><name>Catch</name><operator>::</operator><name>alwaysTrue</name></name><argument_list>()</argument_list></call></expr> )</condition><block type="pseudo"><block_content>
+			<throw>throw <expr><call><name><name>std</name><operator>::</operator><name>domain_error</name></name><argument_list>( <argument><expr><literal type="string">"unexpected exception"</literal></expr></argument> )</argument_list></call></expr>;</throw></block_content></block></if></if_stmt>
+    </block_content>}</block>
+</block_content>}</block>
+
+<macro><name>TEST_CASE</name><argument_list>( <argument><literal type="string">"When unchecked exceptions are thrown from functions they are always failures"</literal></argument>, <argument><literal type="string">"[.][failing][!throws]"</literal></argument> )</argument_list></macro>
+<block>{<block_content>
+    <expr_stmt><expr><call><name>CHECK</name><argument_list>( <argument><expr><call><name>thisThrows</name><argument_list>()</argument_list></call> <operator>==</operator> <literal type="number">0</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+</block_content>}</block>
+
+<macro><name>TEST_CASE</name><argument_list>( <argument><literal type="string">"When unchecked exceptions are thrown during a REQUIRE the test should abort fail"</literal></argument>, <argument><literal type="string">"[.][failing][!throws]"</literal></argument> )</argument_list></macro>
+<block>{<block_content>
+    <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name>thisThrows</name><argument_list>()</argument_list></call> <operator>==</operator> <literal type="number">0</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>FAIL</name><argument_list>( <argument><expr><literal type="string">"This should never happen"</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+</block_content>}</block>
+
+<macro><name>TEST_CASE</name><argument_list>( <argument><literal type="string">"When unchecked exceptions are thrown during a CHECK the test should continue"</literal></argument>, <argument><literal type="string">"[<diff:insert xmlns:diff="http://www.srcML.org/srcDiff">.][failing][</diff:insert>!throws]"</literal></argument> )</argument_list></macro>
+<block>{<block_content>
+    <try>try <block>{<block_content>
+        <expr_stmt><expr><call><name>CHECK</name><argument_list>(<argument><expr><call><name>thisThrows</name><argument_list>()</argument_list></call> <operator>==</operator> <literal type="number">0</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block>
+    <catch>catch<parameter_list>(<parameter><decl><type><modifier>...</modifier></type></decl></parameter>)</parameter_list> <block>{<block_content>
+        <expr_stmt><expr><call><name>FAIL</name><argument_list>( <argument><expr><literal type="string">"This should never happen"</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block></catch></try>
+</block_content>}</block>
+
+<macro><name>TEST_CASE</name><argument_list>( <argument><literal type="string">"When unchecked exceptions are thrown, but caught, they do not affect the test"</literal></argument>, <argument><literal type="string">"[!throws]"</literal></argument> )</argument_list></macro>
+<block>{<block_content>
+    <try>try
+    <block>{<block_content>
+        <throw>throw <expr><call><name><name>std</name><operator>::</operator><name>domain_error</name></name><argument_list>( <argument><expr><literal type="string">"unexpected exception"</literal></expr></argument> )</argument_list></call></expr>;</throw>
+    </block_content>}</block>
+    <catch>catch<parameter_list>(<parameter><decl><type><modifier>...</modifier></type></decl></parameter>)</parameter_list>
+    <block>{<block_content>
+    </block_content>}</block></catch></try>
+</block_content>}</block>
+
+<class>class <name>CustomException</name>
+<block>{<private type="default">
+</private><public>public:
+    <constructor><name>CustomException</name><parameter_list>( <parameter><decl><type><specifier>const</specifier> <name><name>std</name><operator>::</operator><name>string</name></name><modifier>&amp;</modifier></type> <name>msg</name></decl></parameter> )</parameter_list>
+    <member_init_list>: <call><name>m_msg</name><argument_list>( <argument><expr><name>msg</name></expr></argument> )</argument_list></call>
+    </member_init_list><block>{<block_content/>}</block></constructor>
+
+    <function><type><name><name>std</name><operator>::</operator><name>string</name></name></type> <name>getMessage</name><parameter_list>()</parameter_list> <specifier>const</specifier>
+    <block>{<block_content>
+        <return>return <expr><name>m_msg</name></expr>;</return>
+    </block_content>}</block></function>
+
+</public><private>private:
+    <decl_stmt><decl><type><name><name>std</name><operator>::</operator><name>string</name></name></type> <name>m_msg</name></decl>;</decl_stmt>
+</private>}</block>;</class>
+
+<class>class <name>CustomStdException</name> <super_list>: <super><specifier>public</specifier> <name><name>std</name><operator>::</operator><name>exception</name></name></super></super_list>
+<block>{<private type="default">
+</private><public>public:
+    <constructor><name>CustomStdException</name><parameter_list>( <parameter><decl><type><specifier>const</specifier> <name><name>std</name><operator>::</operator><name>string</name></name><modifier>&amp;</modifier></type> <name>msg</name></decl></parameter> )</parameter_list>
+    <member_init_list>: <call><name>m_msg</name><argument_list>( <argument><expr><name>msg</name></expr></argument> )</argument_list></call>
+    </member_init_list><block>{<block_content/>}</block></constructor>
+    <destructor><name>~CustomStdException</name><parameter_list>()</parameter_list> <name>CATCH_NOEXCEPT</name> <block>{<block_content/>}</block></destructor>
+
+    <function><type><name><name>std</name><operator>::</operator><name>string</name></name></type> <name>getMessage</name><parameter_list>()</parameter_list> <specifier>const</specifier>
+    <block>{<block_content>
+        <return>return <expr><name>m_msg</name></expr>;</return>
+    </block_content>}</block></function>
+
+</public><private>private:
+    <decl_stmt><decl><type><name><name>std</name><operator>::</operator><name>string</name></name></type> <name>m_msg</name></decl>;</decl_stmt>
+</private>}</block>;</class>
+
+
+<macro><name>CATCH_TRANSLATE_EXCEPTION</name><argument_list>( <argument>CustomException&amp; ex</argument> )</argument_list></macro>
+<block>{<block_content>
+    <return>return <expr><call><name><name>ex</name><operator>.</operator><name>getMessage</name></name><argument_list>()</argument_list></call></expr>;</return>
+</block_content>}</block>
+
+<macro><name>CATCH_TRANSLATE_EXCEPTION</name><argument_list>( <argument>CustomStdException&amp; ex</argument> )</argument_list></macro>
+<block>{<block_content>
+    <return>return <expr><call><name><name>ex</name><operator>.</operator><name>getMessage</name></name><argument_list>()</argument_list></call></expr>;</return>
+</block_content>}</block>
+
+<macro><name>CATCH_TRANSLATE_EXCEPTION</name><argument_list>( <argument>double&amp; ex</argument> )</argument_list></macro>
+<block>{<block_content>
+    <return>return <expr><call><name><name>Catch</name><operator>::</operator><name>toString</name></name><argument_list>( <argument><expr><name>ex</name></expr></argument> )</argument_list></call></expr>;</return>
+</block_content>}</block>
+
+<macro><name>TEST_CASE</name><argument_list>(<argument><literal type="string">"Non-std exceptions can be translated"</literal></argument>, <argument><literal type="string">"[.][failing][!throws]"</literal></argument> )</argument_list></macro>
+<block>{<block_content>
+	<if_stmt><if>if<condition>( <expr><call><name><name>Catch</name><operator>::</operator><name>alwaysTrue</name></name><argument_list>()</argument_list></call></expr> )</condition><block type="pseudo"><block_content>
+	    <throw>throw <expr><call><name>CustomException</name><argument_list>( <argument><expr><literal type="string">"custom exception"</literal></expr></argument> )</argument_list></call></expr>;</throw></block_content></block></if></if_stmt>
+</block_content>}</block>
+
+<macro><name>TEST_CASE</name><argument_list>(<argument><literal type="string">"Custom std-exceptions can be custom translated"</literal></argument>, <argument><literal type="string">"[.][failing][!throws]"</literal></argument> )</argument_list></macro>
+<block>{<block_content>
+    <if_stmt><if>if<condition>( <expr><call><name><name>Catch</name><operator>::</operator><name>alwaysTrue</name></name><argument_list>()</argument_list></call></expr> )</condition><block type="pseudo"><block_content>
+        <throw>throw <expr><call><name>CustomException</name><argument_list>( <argument><expr><literal type="string">"custom std exception"</literal></expr></argument> )</argument_list></call></expr>;</throw></block_content></block></if></if_stmt>
+</block_content>}</block>
+
+<function><type><specifier>inline</specifier> <name>void</name></type> <name>throwCustom</name><parameter_list>()</parameter_list> <block>{<block_content>
+	<if_stmt><if>if<condition>( <expr><call><name><name>Catch</name><operator>::</operator><name>alwaysTrue</name></name><argument_list>()</argument_list></call></expr> )</condition><block type="pseudo"><block_content>
+		<throw>throw <expr><call><name>CustomException</name><argument_list>( <argument><expr><literal type="string">"custom exception - not std"</literal></expr></argument> )</argument_list></call></expr>;</throw></block_content></block></if></if_stmt>
+</block_content>}</block></function>
+
+<macro><name>TEST_CASE</name><argument_list>( <argument><literal type="string">"Custom exceptions can be translated when testing for nothrow"</literal></argument>, <argument><literal type="string">"[.][failing][!throws]"</literal></argument> )</argument_list></macro>
+<block>{<block_content>
+    <expr_stmt><expr><call><name>REQUIRE_NOTHROW</name><argument_list>( <argument><expr><call><name>throwCustom</name><argument_list>()</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+</block_content>}</block>
+
+<macro><name>TEST_CASE</name><argument_list>( <argument><literal type="string">"Custom exceptions can be translated when testing for throwing as something else"</literal></argument>, <argument><literal type="string">"[.][failing][!throws]"</literal></argument> )</argument_list></macro>
+<block>{<block_content>
+    <expr_stmt><expr><call><name>REQUIRE_THROWS_AS</name><argument_list>( <argument><expr><call><name>throwCustom</name><argument_list>()</argument_list></call></expr></argument>, <argument><expr><name><name>std</name><operator>::</operator><name>exception</name></name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+</block_content>}</block>
+
+
+<macro><name>TEST_CASE</name><argument_list>( <argument><literal type="string">"Unexpected exceptions can be translated"</literal></argument>, <argument><literal type="string">"[.][failing][!throws]"</literal></argument>  )</argument_list></macro>
+<block>{<block_content>
+	<if_stmt><if>if<condition>( <expr><call><name><name>Catch</name><operator>::</operator><name>alwaysTrue</name></name><argument_list>()</argument_list></call></expr> )</condition><block type="pseudo"><block_content>
+	    <throw>throw <expr><call><name>double</name><argument_list>( <argument><expr><literal type="number">3.14</literal></expr></argument> )</argument_list></call></expr>;</throw></block_content></block></if></if_stmt>
+</block_content>}</block>
+
+<function><type><specifier>inline</specifier> <name>int</name></type> <name>thisFunctionNotImplemented</name><parameter_list>( <parameter><decl><type><name>int</name></type></decl></parameter> )</parameter_list> <block>{<block_content>
+    <expr_stmt><expr><name>CATCH_NOT_IMPLEMENTED</name></expr>;</expr_stmt>
+</block_content>}</block></function>
+
+<macro><name>TEST_CASE</name><argument_list>( <argument><literal type="string">"NotImplemented exception"</literal></argument>, <argument><literal type="string">"[!throws]"</literal></argument> )</argument_list></macro>
+<block>{<block_content>
+    <expr_stmt><expr><call><name>REQUIRE_THROWS</name><argument_list>( <argument><expr><call><name>thisFunctionNotImplemented</name><argument_list>( <argument><expr><literal type="number">7</literal></expr></argument> )</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+</block_content>}</block>
+
+<macro><name>TEST_CASE</name><argument_list>( <argument><literal type="string">"Exception messages can be tested for"</literal></argument>, <argument><literal type="string">"[!throws]"</literal></argument> )</argument_list></macro> <block>{<block_content>
+    <using>using <namespace>namespace <name><name>Catch</name><operator>::</operator><name>Matchers</name></name>;</namespace></using>
+    <macro><name>SECTION</name><argument_list>( <argument><literal type="string">"exact match"</literal></argument> )</argument_list></macro>
+        <expr_stmt><expr><call><name>REQUIRE_THROWS_WITH</name><argument_list>( <argument><expr><call><name>thisThrows</name><argument_list>()</argument_list></call></expr></argument>, <argument><expr><literal type="string">"expected exception"</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    <macro><name>SECTION</name><argument_list>( <argument><literal type="string">"different case"</literal></argument> )</argument_list></macro>
+    <expr_stmt><expr><call><name>REQUIRE_THROWS_WITH</name><argument_list>( <argument><expr><call><name>thisThrows</name><argument_list>()</argument_list></call></expr></argument>, <argument><expr><call><name>Equals</name><argument_list>( <argument><expr><literal type="string">"expecteD Exception"</literal></expr></argument>, <argument><expr><name><name>Catch</name><operator>::</operator><name>CaseSensitive</name><operator>::</operator><name>No</name></name></expr></argument> )</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    <macro><name>SECTION</name><argument_list>( <argument><literal type="string">"wildcarded"</literal></argument> )</argument_list></macro> <block>{<block_content>
+        <expr_stmt><expr><call><name>REQUIRE_THROWS_WITH</name><argument_list>( <argument><expr><call><name>thisThrows</name><argument_list>()</argument_list></call></expr></argument>, <argument><expr><call><name>StartsWith</name><argument_list>( <argument><expr><literal type="string">"expected"</literal></expr></argument> )</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name>REQUIRE_THROWS_WITH</name><argument_list>( <argument><expr><call><name>thisThrows</name><argument_list>()</argument_list></call></expr></argument>, <argument><expr><call><name>EndsWith</name><argument_list>( <argument><expr><literal type="string">"exception"</literal></expr></argument> )</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name>REQUIRE_THROWS_WITH</name><argument_list>( <argument><expr><call><name>thisThrows</name><argument_list>()</argument_list></call></expr></argument>, <argument><expr><call><name>Contains</name><argument_list>( <argument><expr><literal type="string">"except"</literal></expr></argument> )</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name>REQUIRE_THROWS_WITH</name><argument_list>( <argument><expr><call><name>thisThrows</name><argument_list>()</argument_list></call></expr></argument>, <argument><expr><call><name>Contains</name><argument_list>( <argument><expr><literal type="string">"exCept"</literal></expr></argument>, <argument><expr><name><name>Catch</name><operator>::</operator><name>CaseSensitive</name><operator>::</operator><name>No</name></name></expr></argument> )</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block>
+</block_content>}</block>
+
+<macro><name>TEST_CASE</name><argument_list>( <argument><literal type="string">"Mismatching exception messages failing the test"</literal></argument>, <argument><literal type="string">"[.][failing][!throws]"</literal></argument> )</argument_list></macro> <block>{<block_content>
+    <expr_stmt><expr><call><name>REQUIRE_THROWS_WITH</name><argument_list>( <argument><expr><call><name>thisThrows</name><argument_list>()</argument_list></call></expr></argument>, <argument><expr><literal type="string">"expected exception"</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>REQUIRE_THROWS_WITH</name><argument_list>( <argument><expr><call><name>thisThrows</name><argument_list>()</argument_list></call></expr></argument>, <argument><expr><literal type="string">"should fail"</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>REQUIRE_THROWS_WITH</name><argument_list>( <argument><expr><call><name>thisThrows</name><argument_list>()</argument_list></call></expr></argument>, <argument><expr><literal type="string">"expected exception"</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+</block_content>}</block>
+</unit>

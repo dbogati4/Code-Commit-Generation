@@ -1,0 +1,13 @@
+diff --git a/projects/SelfTest/TrickyTests.cpp b/projects/SelfTest/TrickyTests.cpp
+index f0311158..26625b03 100644
+--- a/projects/SelfTest/TrickyTests.cpp
++++ b/projects/SelfTest/TrickyTests.cpp
+@@ -10,6 +10,8 @@
+ #pragma clang diagnostic ignored "-Wpadded"
+ #endif
+ 
++#include <stdio.h>
++
+ #include "catch.hpp"
+ 
+ #ifdef __clang__

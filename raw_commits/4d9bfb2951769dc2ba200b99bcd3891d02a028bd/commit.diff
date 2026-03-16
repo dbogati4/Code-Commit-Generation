@@ -1,0 +1,13 @@
+diff --git a/src/catch2/catch_approx.cpp b/src/catch2/catch_approx.cpp
+index 3dfebf46..50cb75c3 100644
+--- a/src/catch2/catch_approx.cpp
++++ b/src/catch2/catch_approx.cpp
+@@ -24,7 +24,7 @@ bool marginComparison(double lhs, double rhs, double margin) {
+ namespace Catch {
+ 
+     Approx::Approx ( double value )
+-    :   m_epsilon( std::numeric_limits<float>::epsilon()*100 ),
++    :   m_epsilon( std::numeric_limits<float>::epsilon()*100. ),
+         m_margin( 0.0 ),
+         m_scale( 0.0 ),
+         m_value( value )

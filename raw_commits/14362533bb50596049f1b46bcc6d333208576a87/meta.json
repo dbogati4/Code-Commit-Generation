@@ -1,0 +1,8 @@
+{
+  "commit_id": "14362533bb50596049f1b46bcc6d333208576a87",
+  "parent_id": "a5bb3e3d911e5c43feb359f47848b7630d623338",
+  "message": "Check for empty expression properly",
+  "changed_files": [
+    "include/internal/catch_assertionresult.cpp"
+  ]
+}

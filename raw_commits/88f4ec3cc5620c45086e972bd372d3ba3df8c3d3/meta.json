@@ -1,0 +1,9 @@
+{
+  "commit_id": "88f4ec3cc5620c45086e972bd372d3ba3df8c3d3",
+  "parent_id": "792c3b7549e67371e4ebc18c9c6b79dbc3c9fa07",
+  "message": "Ignore C++98 related compiler warnings",
+  "changed_files": [
+    "tests/SelfTest/TestRegistrations.cpp",
+    "tests/SelfTest/UsageTests/Misc.tests.cpp"
+  ]
+}

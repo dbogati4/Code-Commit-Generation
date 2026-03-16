@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" xmlns:diff="http://www.srcML.org/srcDiff" revision="1.0.0" language="C++" filename="C:\Users\saile\AppData\Local\Temp\catch2_100_z8gzpiwf\635db2785fc081e576e92e3f166504ccd7e6efd8\tests_ExtraTests_X04-DisabledExceptions-CustomHandler_cpp\tests_ExtraTests_X04-DisabledExceptions-CustomHandler_cpp.old|C:\Users\saile\AppData\Local\Temp\catch2_100_z8gzpiwf\635db2785fc081e576e92e3f166504ccd7e6efd8\tests_ExtraTests_X04-DisabledExceptions-CustomHandler_cpp\tests_ExtraTests_X04-DisabledExceptions-CustomHandler_cpp.new"><diff:insert xmlns:diff="http://www.srcML.org/srcDiff"><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+</diff:ws><comment type="line">//<diff:ws xmlns:diff="http://www.srcML.org/srcDiff">              </diff:ws>Copyright<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>Catch2<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>Authors</comment><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+</diff:ws><comment type="line">//<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>Distributed<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>under<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>the<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>Boost<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>Software<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>License,<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>Version<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>1.0.</comment><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+</diff:ws><comment type="line">//<diff:ws xmlns:diff="http://www.srcML.org/srcDiff">   </diff:ws>(See<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>accompanying<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>file<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>LICENSE_1_0.txt<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>or<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>copy<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>at</comment><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+</diff:ws><comment type="line">//<diff:ws xmlns:diff="http://www.srcML.org/srcDiff">        </diff:ws>https://www.boost.org/LICENSE_1_0.txt)</comment><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+
+</diff:ws><comment type="line">//<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>SPDX-License-Identifier:<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>BSL-1.0</comment><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+
+</diff:ws></diff:insert><cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;catch2/catch_test_macros.hpp&gt;</cpp:file></cpp:include>
+
+<namespace>namespace <name>Catch</name> <block>{
+    <function><attribute>[[<expr><name>noreturn</name></expr>]]</attribute>
+    <type><name>void</name></type> <name>throw_exception</name><parameter_list>(<parameter><decl><type><name><name>std</name><operator>::</operator><name>exception</name></name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>e</name></decl></parameter>)</parameter_list> <block>{<block_content>
+        <expr_stmt><expr><call><name><name>Catch</name><operator>::</operator><name>cerr</name></name><argument_list>()</argument_list></call> <operator>&lt;&lt;</operator> <literal type="string">"====== CUSTOM HANDLER ====== run terminates because an exception was thrown.\n"</literal>
+                      <operator>&lt;&lt;</operator> <literal type="string">"The message was: "</literal> <operator>&lt;&lt;</operator> <call><name><name>e</name><operator>.</operator><name>what</name></name><argument_list>()</argument_list></call> <operator>&lt;&lt;</operator> <literal type="char">'\n'</literal></expr>;</expr_stmt>
+        <comment type="line">// Avoid abort and other exceptional exits -- there is no way</comment>
+        <comment type="line">// to tell CMake that abort is the desired outcome of a test.</comment>
+        <expr_stmt><expr><call><name>exit</name><argument_list>(<argument><expr><literal type="number">1</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block></function>
+}</block></namespace>
+
+<macro><name>TEST_CASE</name><argument_list>(<argument><literal type="string">"Tests that run"</literal></argument>)</argument_list></macro> <block>{<block_content>
+    <comment type="line">// All of these should be run and be reported</comment>
+    <expr_stmt><expr><call><name>CHECK</name><argument_list>(<argument><expr><literal type="number">1</literal> <operator>==</operator> <literal type="number">2</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>CHECK</name><argument_list>(<argument><expr><literal type="number">1</literal> <operator>==</operator> <literal type="number">1</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>CHECK</name><argument_list>(<argument><expr><literal type="number">1</literal> <operator>!=</operator> <literal type="number">3</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>CHECK</name><argument_list>(<argument><expr><literal type="number">1</literal> <operator>==</operator> <literal type="number">4</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+</block_content>}</block>
+
+
+
+<macro><name>TEST_CASE</name><argument_list>(<argument><literal type="string">"Tests that abort"</literal></argument>)</argument_list></macro> <block>{<block_content>
+    <expr_stmt><expr><call><name>REQUIRE</name><argument_list>(<argument><expr><literal type="number">1</literal> <operator>==</operator> <literal type="number">1</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>REQUIRE</name><argument_list>(<argument><expr><literal type="number">1</literal> <operator>!=</operator> <literal type="number">2</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>REQUIRE</name><argument_list>(<argument><expr><literal type="number">1</literal> <operator>==</operator> <literal type="number">3</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    <comment type="line">// We should not get here, because the test above aborts</comment>
+    <expr_stmt><expr><call><name>REQUIRE</name><argument_list>(<argument><expr><literal type="number">1</literal> <operator>!=</operator> <literal type="number">4</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+</block_content>}</block>
+</unit>

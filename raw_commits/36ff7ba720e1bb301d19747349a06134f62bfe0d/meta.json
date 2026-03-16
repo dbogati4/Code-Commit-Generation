@@ -1,0 +1,11 @@
+{
+  "commit_id": "36ff7ba720e1bb301d19747349a06134f62bfe0d",
+  "parent_id": "1b96cec8f270de5e3d0aee1a77c93b0e790bda1d",
+  "message": "Fixes to the self test",
+  "changed_files": [
+    "Test/ClassTests.cpp",
+    "Test/MessageTests.cpp",
+    "Test/MiscTests.cpp",
+    "Test/TestMain.cpp"
+  ]
+}

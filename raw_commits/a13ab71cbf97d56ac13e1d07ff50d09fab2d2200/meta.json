@@ -1,0 +1,8 @@
+{
+  "commit_id": "a13ab71cbf97d56ac13e1d07ff50d09fab2d2200",
+  "parent_id": "ed45ceb78665d56eee38549ae31e86b90e9b4438",
+  "message": "Clara: Some renames and changed the addOption interface",
+  "changed_files": [
+    "projects/SelfTest/CmdLineTests.cpp"
+  ]
+}

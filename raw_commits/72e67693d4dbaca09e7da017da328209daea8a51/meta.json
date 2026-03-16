@@ -1,0 +1,8 @@
+{
+  "commit_id": "72e67693d4dbaca09e7da017da328209daea8a51",
+  "parent_id": "f8cff10ff6cd70bc7fffb469643fe5ee999f3c69",
+  "message": "Small test spec parser refactoring",
+  "changed_files": [
+    "projects/SelfTest/CmdLineTests.cpp"
+  ]
+}

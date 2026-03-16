@@ -1,0 +1,9 @@
+{
+  "commit_id": "a00d6544375e92ccedec786aaee47ac392ea4900",
+  "parent_id": "756ae05d307168eaa27bd904dbd8e591a6406889",
+  "message": "Speed up processing mostly visible strings in convertIntoString",
+  "changed_files": [
+    "src/catch2/catch_tostring.cpp",
+    "tests/SelfTest/IntrospectiveTests/ToString.tests.cpp"
+  ]
+}

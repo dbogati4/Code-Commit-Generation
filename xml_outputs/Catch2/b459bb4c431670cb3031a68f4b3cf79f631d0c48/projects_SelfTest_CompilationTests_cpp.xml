@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" xmlns:diff="http://www.srcML.org/srcDiff" revision="1.0.0" language="C++" filename="C:\Users\saile\AppData\Local\Temp\catch2_100_z8gzpiwf\b459bb4c431670cb3031a68f4b3cf79f631d0c48\projects_SelfTest_CompilationTests_cpp\projects_SelfTest_CompilationTests_cpp.old|C:\Users\saile\AppData\Local\Temp\catch2_100_z8gzpiwf\b459bb4c431670cb3031a68f4b3cf79f631d0c48\projects_SelfTest_CompilationTests_cpp\projects_SelfTest_CompilationTests_cpp.new"><comment type="block">/*
+ *  Created by Martin on 17/02/2017.
+ *
+ *  Distributed under the Boost Software License, Version 1.0. (See accompanying
+ *  file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
+ */</comment>
+
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">"catch.hpp"</cpp:file></cpp:include>
+
+
+<comment type="line">// This is a minimal example for an issue we have found in 1.7.0</comment>
+<struct>struct <name>foo</name> <block>{<public type="default">
+    <decl_stmt><decl><type><name>int</name></type> <name>i</name></decl>;</decl_stmt>
+</public>}</block>;</struct>
+
+<function type="operator"><template>template <parameter_list>&lt;<parameter><type><name>typename</name></type> <name>T</name></parameter>&gt;</parameter_list></template>
+<type><name>bool</name></type> <name>operator<name>==</name></name><parameter_list>(<parameter><decl><type><specifier>const</specifier> <name>T</name><modifier>&amp;</modifier></type> <name>val</name></decl></parameter>, <parameter><decl><type><name>foo</name></type> <name>f</name></decl></parameter>)</parameter_list><block>{<block_content>
+    <return>return <expr><name>val</name> <operator>==</operator> <name><name>f</name><operator>.</operator><name>i</name></name></expr>;</return>
+</block_content>}</block></function>
+
+<macro><name>TEST_CASE</name><argument_list>(<argument><literal type="string">"#809"</literal></argument>)</argument_list></macro> <block>{<block_content>
+    <decl_stmt><decl><type><name>foo</name></type> <name>f</name></decl>;</decl_stmt> <expr_stmt><expr><name><name>f</name><operator>.</operator><name>i</name></name> <operator>=</operator> <literal type="number">42</literal></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>REQUIRE</name><argument_list>(<argument><expr><literal type="number">42</literal> <operator>==</operator> <name>f</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+</block_content>}</block>
+
+
+<comment type="line">// ------------------------------------------------------------------</comment>
+<comment type="line">// Changes to REQUIRE_THROWS_AS made it stop working in a template in</comment>
+<comment type="line">// an unfixable way (as long as C++03 compatibility is being kept).</comment>
+<comment type="line">// To prevent these from happening in the future, this needs to compile</comment>
+
+<function><type><name>void</name></type> <name>throws_int</name><parameter_list>(<parameter><decl><type><name>bool</name></type> <name>b</name></decl></parameter>)</parameter_list> <block>{<block_content>
+    <if_stmt><if>if <condition>(<expr><name>b</name></expr>)</condition> <block>{<block_content>
+        <throw>throw <expr><literal type="number">1</literal></expr>;</throw>
+    </block_content>}</block></if></if_stmt>
+</block_content>}</block></function>
+
+<function><template>template <parameter_list>&lt;<parameter><type><name>typename</name></type> <name>T</name></parameter>&gt;</parameter_list></template>
+<type><name>bool</name></type> <name>templated_tests</name><parameter_list>(<parameter><decl><type><name>T</name></type> <name>t</name></decl></parameter>)</parameter_list> <block>{<block_content>
+    <decl_stmt><decl><type><name>int</name></type> <name>a</name> <init>= <expr><literal type="number">3</literal></expr></init></decl>;</decl_stmt>
+    <expr_stmt><expr><call><name>REQUIRE</name><argument_list>(<argument><expr><name>a</name> <operator>==</operator> <name>t</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>CHECK</name><argument_list>(<argument><expr><name>a</name> <operator>==</operator> <name>t</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>REQUIRE_THROWS</name><argument_list>(<argument><expr><call><name>throws_int</name><argument_list>(<argument><expr><literal type="boolean">true</literal></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>CHECK_THROWS_AS</name><argument_list>(<argument><expr><call><name>throws_int</name><argument_list>(<argument><expr><literal type="boolean">true</literal></expr></argument>)</argument_list></call></expr></argument>, <argument><expr><specifier>const</specifier> <name>int</name><operator>&amp;</operator></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>REQUIRE_NOTHROW</name><argument_list>(<argument><expr><call><name>throws_int</name><argument_list>(<argument><expr><literal type="boolean">false</literal></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>REQUIRE_THAT</name><argument_list>(<argument><expr><literal type="string">"aaa"</literal></expr></argument>, <argument><expr><call><name><name>Catch</name><operator>::</operator><name>EndsWith</name></name><argument_list>(<argument><expr><literal type="string">"aaa"</literal></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    <return>return <expr><literal type="boolean">true</literal></expr>;</return>
+</block_content>}</block></function>
+
+<macro><name>TEST_CASE</name><argument_list>(<argument><literal type="string">"#833"</literal></argument>)</argument_list></macro> <block>{<block_content>
+    <expr_stmt><expr><call><name>REQUIRE</name><argument_list>(<argument><expr><call><name><name>templated_tests</name><argument_list type="generic">&lt;<argument><expr><name>int</name></expr></argument>&gt;</argument_list></name><argument_list>(<argument><expr><literal type="number">3</literal></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+</block_content>}</block>
+
+<cpp:ifdef xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">ifdef</cpp:directive> <name>__clang__</name></cpp:ifdef>
+<cpp:pragma xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">pragma</cpp:directive> <name>clang</name> <name>diagnostic</name> <name>push</name></cpp:pragma>
+<cpp:pragma xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">pragma</cpp:directive> <name>clang</name> <name>diagnostic</name> <name>ignored</name> <cpp:literal xmlns:cpp="http://www.srcML.org/srcML/cpp">"-Wunused-function"</cpp:literal></cpp:pragma>
+<cpp:endif xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">endif</cpp:directive></cpp:endif>
+<diff:insert xmlns:diff="http://www.srcML.org/srcDiff"><cpp:ifdef xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">ifdef</cpp:directive><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><name>__GNUC__</name></cpp:ifdef><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+</diff:ws><comment type="line">//<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>Note<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>that<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>because<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>-~GCC~-,<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>this<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>warning<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>cannot<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>be<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>silenced<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>temporarily,<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>by<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>pushing<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>diagnostic<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>stack...</comment><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+</diff:ws><comment type="line">//<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>Luckily<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>it<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>is<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>firing<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>in<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>test<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>files<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>and<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>thus<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>can<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>be<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>silenced<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>for<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>the<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>whole<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>file,<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>without<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>losing<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>much.</comment><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+</diff:ws><cpp:pragma xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">pragma</cpp:directive><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><name>GCC</name><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><name>diagnostic</name><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><name>ignored</name><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><cpp:literal xmlns:cpp="http://www.srcML.org/srcML/cpp">"-Wunused-function"</cpp:literal></cpp:pragma><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+</diff:ws><cpp:endif xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">endif</cpp:directive></cpp:endif></diff:insert>
+<diff:insert xmlns:diff="http://www.srcML.org/srcDiff"><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+</diff:ws></diff:insert><comment type="line">// Test containing example where original stream insertable check breaks compilation</comment>
+<namespace>namespace <block>{
+    <struct>struct <name>A</name> <block>{<public type="default"/>}</block>;</struct>
+    <function type="operator"><type><name><name>std</name><operator>::</operator><name>ostream</name></name><modifier>&amp;</modifier></type> <name>operator<name>&lt;&lt;</name></name> <parameter_list>(<parameter><decl><type><name><name>std</name><operator>::</operator><name>ostream</name></name> <modifier>&amp;</modifier></type><name>o</name></decl></parameter>, <parameter><decl><type><specifier>const</specifier> <name>A</name> <modifier>&amp;</modifier></type></decl></parameter>)</parameter_list> <block>{<block_content> <return>return <expr><name>o</name> <operator>&lt;&lt;</operator> <literal type="number">0</literal></expr>;</return> </block_content>}</block></function>
+
+    <struct>struct <name>B</name> <super_list>: <super><specifier>private</specifier> <name>A</name></super></super_list> <block>{<public type="default">
+        <function type="operator"><type><name>bool</name></type> <name>operator<name>==</name></name> <parameter_list>(<parameter><decl><type><name>int</name></type></decl></parameter>)</parameter_list> <specifier>const</specifier> <block>{<block_content> <return>return <expr><literal type="boolean">true</literal></expr>;</return> </block_content>}</block></function>
+    </public>}</block>;</struct>
+
+    <function_decl><type><name>B</name></type> <name>f</name> <parameter_list>()</parameter_list>;</function_decl>
+    <function_decl><type><name><name>std</name><operator>::</operator><name>ostream</name></name></type> <name>g</name> <parameter_list>()</parameter_list>;</function_decl>
+}</block></namespace>
+<cpp:ifdef xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">ifdef</cpp:directive> <name>__clang__</name></cpp:ifdef>
+<cpp:pragma xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">pragma</cpp:directive> <name>clang</name> <name>diagnostic</name> <name>pop</name></cpp:pragma>
+<cpp:endif xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">endif</cpp:directive></cpp:endif>
+
+<macro><name>TEST_CASE</name><argument_list>( <argument><literal type="string">"#872"</literal></argument> )</argument_list></macro> <block>{<block_content>
+    <decl_stmt><decl><type><name>A</name></type> <name>dummy</name></decl>;</decl_stmt>
+    <expr_stmt><expr><call><name>CAPTURE</name><argument_list>( <argument><expr><name>dummy</name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    <decl_stmt><decl><type><name>B</name></type> <name>x</name></decl>;</decl_stmt>
+    <expr_stmt><expr><call><name>REQUIRE</name> <argument_list>(<argument><expr><name>x</name> <operator>==</operator> <literal type="number">4</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+</block_content>}</block>
+</unit>

@@ -1,0 +1,13 @@
+diff --git a/src/catch2/reporters/catch_reporter_console.cpp b/src/catch2/reporters/catch_reporter_console.cpp
+index 04d6f128..bbde5ec9 100644
+--- a/src/catch2/reporters/catch_reporter_console.cpp
++++ b/src/catch2/reporters/catch_reporter_console.cpp
+@@ -395,7 +395,7 @@ ConsoleReporter::ConsoleReporter(ReporterConfig&& config):
+                 { "benchmark name", CATCH_CONFIG_CONSOLE_WIDTH - 43, Justification::Left },
+                 { "samples      mean       std dev", 14, Justification::Right },
+                 { "iterations   low mean   low std dev", 14, Justification::Right },
+-                { "estimated    high mean  high std dev", 14, Justification::Right }
++                { "est run time high mean  high std dev", 14, Justification::Right }
+             };
+         }
+     }())) {}

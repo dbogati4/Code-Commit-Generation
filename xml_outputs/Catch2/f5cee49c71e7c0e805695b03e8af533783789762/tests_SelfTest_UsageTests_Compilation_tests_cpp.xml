@@ -1,0 +1,527 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" xmlns:diff="http://www.srcML.org/srcDiff" revision="1.0.0" language="C++" filename="C:\Users\saile\AppData\Local\Temp\catch2_100_z8gzpiwf\f5cee49c71e7c0e805695b03e8af533783789762\tests_SelfTest_UsageTests_Compilation_tests_cpp\tests_SelfTest_UsageTests_Compilation_tests_cpp.old|C:\Users\saile\AppData\Local\Temp\catch2_100_z8gzpiwf\f5cee49c71e7c0e805695b03e8af533783789762\tests_SelfTest_UsageTests_Compilation_tests_cpp\tests_SelfTest_UsageTests_Compilation_tests_cpp.new">
+<comment type="line">//              Copyright Catch2 Authors</comment>
+<comment type="line">// Distributed under the Boost Software License, Version 1.0.</comment>
+<comment type="line">//   (See accompanying file LICENSE.txt or copy at</comment>
+<comment type="line">//        https://www.boost.org/LICENSE_1_0.txt)</comment>
+
+<comment type="line">// SPDX-License-Identifier: BSL-1.0</comment>
+
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;helpers/type_with_lit_0_comparisons.hpp&gt;</cpp:file></cpp:include>
+
+<diff:insert xmlns:diff="http://www.srcML.org/srcDiff"><cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;array&gt;</cpp:file></cpp:include><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+</diff:ws></diff:insert><cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;type_traits&gt;</cpp:file></cpp:include>
+
+<comment type="line">// Setup for #1403 -- look for global overloads of operator &lt;&lt; for classes</comment>
+<comment type="line">// in a different namespace.</comment>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;ostream&gt;</cpp:file></cpp:include>
+
+<namespace>namespace <name>foo</name> <block>{
+    <struct>struct <name>helper_1403</name> <block>{<public type="default">
+        <function type="operator"><type><name>bool</name></type> <name>operator<name>==</name></name><parameter_list>(<parameter><decl><type><name>helper_1403</name></type></decl></parameter>)</parameter_list> <specifier>const</specifier> <block>{<block_content> <return>return <expr><literal type="boolean">true</literal></expr>;</return> </block_content>}</block></function>
+    </public>}</block>;</struct>
+}</block></namespace>
+
+<namespace>namespace <name>bar</name> <block>{
+    <struct><template>template <parameter_list>&lt;<parameter><type><name>typename</name><modifier>...</modifier></type> <name>Ts</name></parameter>&gt;</parameter_list></template>
+    struct <name>TypeList</name> <block>{<public type="default"/>}</block>;</struct>
+}</block></namespace>
+
+<cpp:ifdef xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">ifdef</cpp:directive> <name>__GNUC__</name></cpp:ifdef>
+<cpp:pragma xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">pragma</cpp:directive> <name>GCC</name> <name>diagnostic</name> <name>ignored</name> <cpp:literal xmlns:cpp="http://www.srcML.org/srcML/cpp">"-Wmissing-declarations"</cpp:literal></cpp:pragma>
+<cpp:endif xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">endif</cpp:directive></cpp:endif>
+<function type="operator"><type><specifier>static</specifier> <name><name>std</name><operator>::</operator><name>ostream</name></name><modifier>&amp;</modifier></type> <name>operator<name>&lt;&lt;</name></name><parameter_list>(<parameter><decl><type><name><name>std</name><operator>::</operator><name>ostream</name></name><modifier>&amp;</modifier></type> <name>out</name></decl></parameter>, <parameter><decl><type><name><name>foo</name><operator>::</operator><name>helper_1403</name></name> <specifier>const</specifier><modifier>&amp;</modifier></type></decl></parameter>)</parameter_list> <block>{<block_content>
+    <return>return <expr><name>out</name> <operator>&lt;&lt;</operator> <literal type="string">"[1403 helper]"</literal></expr>;</return>
+</block_content>}</block></function>
+<comment type="line" format="doxygen">///////////////////////////////</comment>
+
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;catch2/catch_test_macros.hpp&gt;</cpp:file></cpp:include>
+<diff:insert xmlns:diff="http://www.srcML.org/srcDiff"><cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;catch2/generators/catch_generators_range.hpp&gt;</cpp:file></cpp:include><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+</diff:ws></diff:insert><cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;catch2/matchers/catch_matchers_string.hpp&gt;</cpp:file></cpp:include>
+
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;cstring&gt;</cpp:file></cpp:include>
+
+<comment type="line">// Comparison operators can return non-booleans.</comment>
+<comment type="line">// This is unusual, but should be supported.</comment>
+<struct>struct <name>logic_t</name> <block>{<public type="default">
+    <function type="operator"><type><name>logic_t</name></type> <name>operator<name>&lt;</name></name> <parameter_list>(<parameter><decl><type><name>logic_t</name></type></decl></parameter>)</parameter_list> <specifier>const</specifier> <block>{<block_content> <return>return <expr><block>{}</block></expr>;</return> </block_content>}</block></function>
+    <function type="operator"><type><name>logic_t</name></type> <name>operator<name>&lt;=</name></name><parameter_list>(<parameter><decl><type><name>logic_t</name></type></decl></parameter>)</parameter_list> <specifier>const</specifier> <block>{<block_content> <return>return <expr><block>{}</block></expr>;</return> </block_content>}</block></function>
+    <function type="operator"><type><name>logic_t</name></type> <name>operator<name>&gt;</name></name> <parameter_list>(<parameter><decl><type><name>logic_t</name></type></decl></parameter>)</parameter_list> <specifier>const</specifier> <block>{<block_content> <return>return <expr><block>{}</block></expr>;</return> </block_content>}</block></function>
+    <function type="operator"><type><name>logic_t</name></type> <name>operator<name>&gt;=</name></name><parameter_list>(<parameter><decl><type><name>logic_t</name></type></decl></parameter>)</parameter_list> <specifier>const</specifier> <block>{<block_content> <return>return <expr><block>{}</block></expr>;</return> </block_content>}</block></function>
+    <function type="operator"><type><name>logic_t</name></type> <name>operator<name>==</name></name><parameter_list>(<parameter><decl><type><name>logic_t</name></type></decl></parameter>)</parameter_list> <specifier>const</specifier> <block>{<block_content> <return>return <expr><block>{}</block></expr>;</return> </block_content>}</block></function>
+    <function type="operator"><type><name>logic_t</name></type> <name>operator<name>!=</name></name><parameter_list>(<parameter><decl><type><name>logic_t</name></type></decl></parameter>)</parameter_list> <specifier>const</specifier> <block>{<block_content> <return>return <expr><block>{}</block></expr>;</return> </block_content>}</block></function>
+    <function type="operator"><type><specifier>explicit</specifier></type> <name>operator <name>bool</name></name><parameter_list>()</parameter_list> <specifier>const</specifier> <block>{<block_content> <return>return <expr><literal type="boolean">true</literal></expr>;</return> </block_content>}</block></function>
+</public>}</block>;</struct>
+
+
+<function><type><specifier>static</specifier> <name>void</name></type> <name>throws_int</name><parameter_list>(<parameter><decl><type><name>bool</name></type> <name>b</name></decl></parameter>)</parameter_list> <block>{<block_content>
+    <if_stmt><if>if <condition>(<expr><name>b</name></expr>)</condition> <block>{<block_content>
+        <throw>throw <expr><literal type="number">1</literal></expr>;</throw>
+    </block_content>}</block></if></if_stmt>
+</block_content>}</block></function>
+
+<function><template>template<parameter_list>&lt;<parameter><type><name>typename</name></type> <name>T</name></parameter>&gt;</parameter_list></template>
+<type><name>bool</name></type> <name>templated_tests</name><parameter_list>(<parameter><decl><type><name>T</name></type> <name>t</name></decl></parameter>)</parameter_list> <block>{<block_content>
+    <decl_stmt><decl><type><name>int</name></type> <name>a</name> <init>= <expr><literal type="number">3</literal></expr></init></decl>;</decl_stmt>
+    <expr_stmt><expr><call><name>REQUIRE</name><argument_list>(<argument><expr><name>a</name> <operator>==</operator> <name>t</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>CHECK</name><argument_list>(<argument><expr><name>a</name> <operator>==</operator> <name>t</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>REQUIRE_THROWS</name><argument_list>(<argument><expr><call><name>throws_int</name><argument_list>(<argument><expr><literal type="boolean">true</literal></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>CHECK_THROWS_AS</name><argument_list>(<argument><expr><call><name>throws_int</name><argument_list>(<argument><expr><literal type="boolean">true</literal></expr></argument>)</argument_list></call></expr></argument>, <argument><expr><name>int</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>REQUIRE_NOTHROW</name><argument_list>(<argument><expr><call><name>throws_int</name><argument_list>(<argument><expr><literal type="boolean">false</literal></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>REQUIRE_THAT</name><argument_list>(<argument><expr><literal type="string">"aaa"</literal></expr></argument>, <argument><expr><call><name><name>Catch</name><operator>::</operator><name>Matchers</name><operator>::</operator><name>EndsWith</name></name><argument_list>(<argument><expr><literal type="string">"aaa"</literal></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    <return>return <expr><literal type="boolean">true</literal></expr>;</return>
+</block_content>}</block></function>
+
+<struct>struct <name>A</name> <block>{<public type="default"/>}</block>;</struct>
+
+<function type="operator"><type><specifier>static</specifier> <name><name>std</name><operator>::</operator><name>ostream</name></name> <modifier>&amp;</modifier></type><name>operator<name>&lt;&lt;</name></name><parameter_list>(<parameter><decl><type><name><name>std</name><operator>::</operator><name>ostream</name></name> <modifier>&amp;</modifier></type><name>o</name></decl></parameter>, <parameter><decl><type><specifier>const</specifier> <name>A</name> <modifier>&amp;</modifier></type></decl></parameter>)</parameter_list> <block>{<block_content> <return>return <expr><name>o</name> <operator>&lt;&lt;</operator> <literal type="number">0</literal></expr>;</return> </block_content>}</block></function>
+
+<struct>struct <name>B</name> <super_list>: <super><specifier>private</specifier> <name>A</name></super></super_list> <block>{<public type="default">
+    <function type="operator"><type><name>bool</name></type> <name>operator<name>==</name></name><parameter_list>(<parameter><decl><type><name>int</name></type></decl></parameter>)</parameter_list> <specifier>const</specifier> <block>{<block_content> <return>return <expr><literal type="boolean">true</literal></expr>;</return> </block_content>}</block></function>
+</public>}</block>;</struct>
+
+<cpp:ifdef xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">ifdef</cpp:directive> <name>__clang__</name></cpp:ifdef>
+<cpp:pragma xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">pragma</cpp:directive> <name>clang</name> <name>diagnostic</name> <name>push</name></cpp:pragma>
+<cpp:pragma xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">pragma</cpp:directive> <name>clang</name> <name>diagnostic</name> <name>ignored</name> <cpp:literal xmlns:cpp="http://www.srcML.org/srcML/cpp">"-Wunused-function"</cpp:literal></cpp:pragma>
+<cpp:endif xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">endif</cpp:directive></cpp:endif>
+<cpp:ifdef xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">ifdef</cpp:directive> <name>__GNUC__</name></cpp:ifdef>
+<comment type="line">// Note that because -~GCC~-, this warning cannot be silenced temporarily, by pushing diagnostic stack...</comment>
+<comment type="line">// Luckily it is firing in test files and thus can be silenced for the whole file, without losing much.</comment>
+<cpp:pragma xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">pragma</cpp:directive> <name>GCC</name> <name>diagnostic</name> <name>ignored</name> <cpp:literal xmlns:cpp="http://www.srcML.org/srcML/cpp">"-Wunused-function"</cpp:literal></cpp:pragma>
+<cpp:endif xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">endif</cpp:directive></cpp:endif>
+
+<function_decl><type><name>B</name></type> <name>f</name><parameter_list>()</parameter_list>;</function_decl>
+
+<function_decl><type><name><name>std</name><operator>::</operator><name>ostream</name></name></type> <name>g</name><parameter_list>()</parameter_list>;</function_decl>
+
+<cpp:ifdef xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">ifdef</cpp:directive> <name>__clang__</name></cpp:ifdef>
+<cpp:pragma xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">pragma</cpp:directive> <name>clang</name> <name>diagnostic</name> <name>pop</name></cpp:pragma>
+<cpp:endif xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">endif</cpp:directive></cpp:endif>
+
+<struct><template>template <parameter_list>&lt;<parameter><type><name>typename</name></type></parameter>, <parameter><type><name>typename</name></type></parameter>&gt;</parameter_list></template>
+struct <name>Fixture_1245</name> <block>{<public type="default"/>}</block>;</struct>
+
+<comment type="line">// This is a minimal example for an issue we have found in 1.7.0</comment>
+<struct>struct <name>dummy_809</name> <block>{<public type="default">
+    <decl_stmt><decl><type><name>int</name></type> <name>i</name></decl>;</decl_stmt>
+</public>}</block>;</struct>
+
+<function type="operator"><template>template<parameter_list>&lt;<parameter><type><name>typename</name></type> <name>T</name></parameter>&gt;</parameter_list></template>
+<type><name>bool</name></type> <name>operator<name>==</name></name><parameter_list>(<parameter><decl><type><specifier>const</specifier> <name>T</name><modifier>&amp;</modifier></type> <name>val</name></decl></parameter>, <parameter><decl><type><name>dummy_809</name></type> <name>f</name></decl></parameter>)</parameter_list> <block>{<block_content>
+    <return>return <expr><name>val</name> <operator>==</operator> <name><name>f</name><operator>.</operator><name>i</name></name></expr>;</return>
+</block_content>}</block></function>
+
+<macro><name>TEST_CASE</name><argument_list>(<argument><literal type="string">"#809"</literal></argument>)</argument_list></macro> <block>{<block_content>
+    <decl_stmt><decl><type><name>dummy_809</name></type> <name>f</name></decl>;</decl_stmt>
+    <expr_stmt><expr><name><name>f</name><operator>.</operator><name>i</name></name> <operator>=</operator> <literal type="number">42</literal></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>REQUIRE</name><argument_list>(<argument><expr><literal type="number">42</literal> <operator>==</operator> <name>f</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+</block_content>}</block>
+
+
+<comment type="line">// ------------------------------------------------------------------</comment>
+<comment type="line">// Changes to REQUIRE_THROWS_AS made it stop working in a template in</comment>
+<comment type="line">// an unfixable way (as long as C++03 compatibility is being kept).</comment>
+<comment type="line">// To prevent these from happening in the future, this needs to compile</comment>
+
+    <macro><name>TEST_CASE</name><argument_list>(<argument><literal type="string">"#833"</literal></argument>)</argument_list></macro> <block>{<block_content>
+        <expr_stmt><expr><call><name>REQUIRE</name><argument_list>(<argument><expr><call><name><name>templated_tests</name><argument_list type="generic">&lt;<argument><expr><name>int</name></expr></argument>&gt;</argument_list></name><argument_list>(<argument><expr><literal type="number">3</literal></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block>
+
+
+<comment type="line">// Test containing example where original stream insertable check breaks compilation</comment>
+<macro><name>TEST_CASE</name><argument_list>(<argument><literal type="string">"#872"</literal></argument>)</argument_list></macro> <block>{<block_content>
+    <decl_stmt><decl><type><name>A</name></type> <name>dummy</name></decl>;</decl_stmt>
+    <expr_stmt><expr><call><name>CAPTURE</name><argument_list>(<argument><expr><name>dummy</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    <decl_stmt><decl><type><name>B</name></type> <name>x</name></decl>;</decl_stmt>
+    <expr_stmt><expr><call><name>REQUIRE</name> <argument_list>(<argument><expr><name>x</name> <operator>==</operator> <literal type="number">4</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+</block_content>}</block>
+
+<macro><name>TEST_CASE</name><argument_list>(<argument><literal type="string">"#1027: Bitfields can be captured"</literal></argument>)</argument_list></macro> <block>{<block_content>
+    <struct>struct <name>Y</name> <block>{<public type="default">
+        <decl_stmt><decl><type><name>uint32_t</name></type> <name>v</name> <range>: <expr><literal type="number">1</literal></expr></range></decl>;</decl_stmt>
+    </public>}</block>;</struct>
+    <decl_stmt><decl><type><name>Y</name></type> <name>y</name><argument_list>{ <argument><expr><literal type="number">0</literal></expr></argument> }</argument_list></decl>;</decl_stmt>
+    <expr_stmt><expr><call><name>REQUIRE</name><argument_list>(<argument><expr><name><name>y</name><operator>.</operator><name>v</name></name> <operator>==</operator> <literal type="number">0</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>REQUIRE</name><argument_list>(<argument><expr><literal type="number">0</literal> <operator>==</operator> <name><name>y</name><operator>.</operator><name>v</name></name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+</block_content>}</block>
+
+<comment type="line">// Comparison operators can return non-booleans.</comment>
+<comment type="line">// This is unusual, but should be supported.</comment>
+<macro><name>TEST_CASE</name><argument_list>(<argument><literal type="string">"#1147"</literal></argument>)</argument_list></macro> <block>{<block_content>
+    <decl_stmt><decl><type><name>logic_t</name></type> <name>t1</name></decl>, <decl><type ref="prev"/><name>t2</name></decl>;</decl_stmt>
+    <expr_stmt><expr><call><name>REQUIRE</name><argument_list>(<argument><expr><name>t1</name> <operator>==</operator> <name>t2</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>REQUIRE</name><argument_list>(<argument><expr><name>t1</name> <operator>!=</operator> <name>t2</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>REQUIRE</name><argument_list>(<argument><expr><name>t1</name> <operator>&lt;</operator>  <name>t2</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>REQUIRE</name><argument_list>(<argument><expr><name>t1</name> <operator>&gt;</operator>  <name>t2</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>REQUIRE</name><argument_list>(<argument><expr><name>t1</name> <operator>&lt;=</operator> <name>t2</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>REQUIRE</name><argument_list>(<argument><expr><name>t1</name> <operator>&gt;=</operator> <name>t2</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+</block_content>}</block>
+
+<comment type="line">// unsigned array</comment>
+<macro><name>TEST_CASE</name><argument_list>(<argument><literal type="string">"#1238"</literal></argument>)</argument_list></macro> <block>{<block_content>
+    <decl_stmt><decl><type><name>unsigned</name> <name>char</name></type> <name><name>uarr</name><index>[]</index></name> <init>= <expr><literal type="string">"123"</literal></expr></init></decl>;</decl_stmt>
+    <expr_stmt><expr><call><name>CAPTURE</name><argument_list>(<argument><expr><name>uarr</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    <decl_stmt><decl><type><name>signed</name> <name>char</name></type> <name><name>sarr</name><index>[]</index></name> <init>= <expr><literal type="string">"456"</literal></expr></init></decl>;</decl_stmt>
+    <expr_stmt><expr><call><name>CAPTURE</name><argument_list>(<argument><expr><name>sarr</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+
+    <expr_stmt><expr><call><name>REQUIRE</name><argument_list>(<argument><expr><call><name><name>std</name><operator>::</operator><name>memcmp</name></name><argument_list>(<argument><expr><name>uarr</name></expr></argument>, <argument><expr><literal type="string">"123"</literal></expr></argument>, <argument><expr><sizeof>sizeof<argument_list>(<argument><expr><name>uarr</name></expr></argument>)</argument_list></sizeof></expr></argument>)</argument_list></call> <operator>==</operator> <literal type="number">0</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>REQUIRE</name><argument_list>(<argument><expr><call><name><name>std</name><operator>::</operator><name>memcmp</name></name><argument_list>(<argument><expr><name>sarr</name></expr></argument>, <argument><expr><literal type="string">"456"</literal></expr></argument>, <argument><expr><sizeof>sizeof<argument_list>(<argument><expr><name>sarr</name></expr></argument>)</argument_list></sizeof></expr></argument>)</argument_list></call> <operator>==</operator> <literal type="number">0</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+</block_content>}</block>
+
+<macro><name>TEST_CASE_METHOD</name><argument_list>(<argument>(Fixture_1245&lt;int, int&gt;)</argument>, <argument><literal type="string">"#1245"</literal></argument>, <argument><literal type="string">"[compilation]"</literal></argument>)</argument_list></macro> <block>{<block_content>
+    <expr_stmt><expr><call><name>SUCCEED</name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+</block_content>}</block>
+
+<macro><name>TEST_CASE</name><argument_list>(<argument><literal type="string">"#1403"</literal></argument>, <argument><literal type="string">"[compilation]"</literal></argument>)</argument_list></macro> <block>{<block_content>
+    <decl_stmt><decl><type><name><operator>::</operator><name>foo</name><operator>::</operator><name>helper_1403</name></name></type> <name>h1</name></decl>, <decl><type ref="prev"/><name>h2</name></decl>;</decl_stmt>
+    <expr_stmt><expr><call><name>REQUIRE</name><argument_list>(<argument><expr><name>h1</name> <operator>==</operator> <name>h2</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+</block_content>}</block>
+
+<macro><name>TEST_CASE</name><argument_list>(<argument><literal type="string">"Optionally static assertions"</literal></argument>, <argument><literal type="string">"[compilation]"</literal></argument>)</argument_list></macro> <block>{<block_content>
+    <expr_stmt><expr><call><name>STATIC_REQUIRE</name><argument_list>( <argument><expr><name><name>std</name><operator>::</operator><name>is_void</name><argument_list type="generic">&lt;<argument><expr><name>void</name></expr></argument>&gt;</argument_list><operator>::</operator><name>value</name></name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>STATIC_REQUIRE_FALSE</name><argument_list>( <argument><expr><name><name>std</name><operator>::</operator><name>is_void</name><argument_list type="generic">&lt;<argument><expr><name>int</name></expr></argument>&gt;</argument_list><operator>::</operator><name>value</name></name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>STATIC_CHECK</name><argument_list>( <argument><expr><name><name>std</name><operator>::</operator><name>is_void</name><argument_list type="generic">&lt;<argument><expr><name>void</name></expr></argument>&gt;</argument_list><operator>::</operator><name>value</name></name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>STATIC_CHECK_FALSE</name><argument_list>( <argument><expr><name><name>std</name><operator>::</operator><name>is_void</name><argument_list type="generic">&lt;<argument><expr><name>int</name></expr></argument>&gt;</argument_list><operator>::</operator><name>value</name></name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+</block_content>}</block>
+
+<macro><name>TEST_CASE</name><argument_list>(<argument><literal type="string">"#1548"</literal></argument>, <argument><literal type="string">"[compilation]"</literal></argument>)</argument_list></macro> <block>{<block_content>
+    <using>using <namespace>namespace <name>bar</name>;</namespace></using>
+    <expr_stmt><expr><call><name>REQUIRE</name><argument_list>(<argument><expr><name><name>std</name><operator>::</operator><name>is_same</name><argument_list type="generic">&lt;<argument><expr><name><name>TypeList</name><argument_list type="generic">&lt;<argument><expr><name>int</name></expr></argument>&gt;</argument_list></name></expr></argument>, <argument><expr><name><name>TypeList</name><argument_list type="generic">&lt;<argument><expr><name>int</name></expr></argument>&gt;</argument_list></name></expr></argument>&gt;</argument_list><operator>::</operator><name>value</name></name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+</block_content>}</block>
+
+    <comment type="line">// #925</comment>
+    <using>using <name>signal_t</name> <init>= <type><function_decl><type><name>void</name></type> (<modifier>*</modifier>) <parameter_list>(<parameter><decl><type><name>void</name><modifier>*</modifier></type></decl></parameter>)</parameter_list>;</function_decl></type></init></using>
+
+    <struct>struct <name>TestClass</name> <block>{<public type="default">
+        <decl_stmt><decl><type><name>signal_t</name></type> <name>testMethod_uponComplete_arg</name> <init>= <expr><literal type="null">nullptr</literal></expr></init></decl>;</decl_stmt>
+    </public>}</block>;</struct>
+
+    <namespace>namespace <name>utility</name> <block>{
+        <function><type><specifier>inline</specifier> <specifier>static</specifier> <name>void</name></type> <name>synchronizing_callback</name><parameter_list>( <parameter><decl><type><name>void</name> <modifier>*</modifier></type></decl></parameter> )</parameter_list> <block>{<block_content> </block_content>}</block></function>
+    }</block></namespace>
+
+<cpp:if xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">if</cpp:directive> <expr><call><name>defined</name> <argument_list>(<argument><expr><name>_MSC_VER</name></expr></argument>)</argument_list></call></expr></cpp:if>
+<cpp:pragma xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">pragma</cpp:directive> <name>warning</name><name>(</name><name>push</name><name>)</name></cpp:pragma>
+<comment type="line">// The function pointer comparison below triggers warning because of</comment>
+<comment type="line">// calling conventions</comment>
+<cpp:pragma xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">pragma</cpp:directive> <name>warning</name><name>(</name><name>disable</name><name>:</name><name>4244</name><name>)</name></cpp:pragma>
+<cpp:endif xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">endif</cpp:directive></cpp:endif>
+    <macro><name>TEST_CASE</name><argument_list>(<argument><literal type="string">"#925: comparing function pointer to function address failed to compile"</literal></argument>, <argument><literal type="string">"[!nonportable]"</literal></argument> )</argument_list></macro> <block>{<block_content>
+        <decl_stmt><decl><type><name>TestClass</name></type> <name>test</name></decl>;</decl_stmt>
+        <expr_stmt><expr><call><name>REQUIRE</name><argument_list>(<argument><expr><name><name>utility</name><operator>::</operator><name>synchronizing_callback</name></name> <operator>!=</operator> <name><name>test</name><operator>.</operator><name>testMethod_uponComplete_arg</name></name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block>
+<cpp:if xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">if</cpp:directive> <expr><call><name>defined</name> <argument_list>(<argument><expr><name>_MSC_VER</name></expr></argument>)</argument_list></call></expr></cpp:if>
+<cpp:pragma xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">pragma</cpp:directive> <name>warning</name><name>(</name><name>pop</name><name>)</name></cpp:pragma>
+<cpp:endif xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">endif</cpp:directive></cpp:endif>
+
+<macro><name>TEST_CASE</name><argument_list>( <argument><literal type="string">"#1319: Sections can have description (even if it is not saved"</literal></argument>,
+               <argument><literal type="string">"[compilation]"</literal></argument> )</argument_list></macro> <block>{<block_content>
+    <macro><name>SECTION</name><argument_list>( <argument><literal type="string">"SectionName"</literal></argument>, <argument><literal type="string">"This is a long form section description"</literal></argument> )</argument_list></macro> <block>{<block_content>
+        <expr_stmt><expr><call><name>SUCCEED</name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block>
+</block_content>}</block>
+
+<macro><name>TEST_CASE</name><argument_list>(<argument><literal type="string">"Lambdas in assertions"</literal></argument>)</argument_list></macro> <block>{<block_content>
+    <expr_stmt><expr><call><name>REQUIRE</name><argument_list>(<argument><expr><call><lambda><capture>[]</capture><parameter_list>()</parameter_list> <block>{<block_content> <return>return <expr><literal type="boolean">true</literal></expr>;</return> </block_content>}</block></lambda><argument_list>()</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+</block_content>}</block>
+
+<namespace>namespace <block>{
+    <struct>struct <name>HasBitOperators</name> <block>{<public type="default">
+        <decl_stmt><decl><type><name>int</name></type> <name>value</name></decl>;</decl_stmt>
+
+        <friend>friend <function type="operator"><type><name>HasBitOperators</name></type> <name>operator<name>|</name></name> <parameter_list>(<parameter><decl><type><name>HasBitOperators</name></type> <name>lhs</name></decl></parameter>, <parameter><decl><type><name>HasBitOperators</name></type> <name>rhs</name></decl></parameter>)</parameter_list> <block>{<block_content>
+            <return>return <expr><block>{ <expr><name><name>lhs</name><operator>.</operator><name>value</name></name> <operator>|</operator> <name><name>rhs</name><operator>.</operator><name>value</name></name></expr> }</block></expr>;</return>
+        </block_content>}</block></function></friend>
+        <friend>friend <function type="operator"><type><name>HasBitOperators</name></type> <name>operator<name>&amp;</name></name> <parameter_list>(<parameter><decl><type><name>HasBitOperators</name></type> <name>lhs</name></decl></parameter>, <parameter><decl><type><name>HasBitOperators</name></type> <name>rhs</name></decl></parameter>)</parameter_list> <block>{<block_content>
+            <return>return <expr><block>{ <expr><name><name>lhs</name><operator>.</operator><name>value</name></name> <operator>&amp;</operator> <name><name>rhs</name><operator>.</operator><name>value</name></name></expr> }</block></expr>;</return>
+        </block_content>}</block></function></friend>
+        <friend>friend <function type="operator"><type><name>HasBitOperators</name></type> <name>operator<name>^</name></name> <parameter_list>(<parameter><decl><type><name>HasBitOperators</name></type> <name>lhs</name></decl></parameter>, <parameter><decl><type><name>HasBitOperators</name></type> <name>rhs</name></decl></parameter>)</parameter_list> <block>{<block_content>
+            <return>return <expr><block>{ <expr><name><name>lhs</name><operator>.</operator><name>value</name></name> <operator>^</operator> <name><name>rhs</name><operator>.</operator><name>value</name></name></expr> }</block></expr>;</return>
+        </block_content>}</block></function></friend>
+        <function type="operator"><type><specifier>explicit</specifier></type> <name>operator <name>bool</name></name><parameter_list>()</parameter_list> <specifier>const</specifier> <block>{<block_content>
+            <return>return <expr><operator>!</operator><operator>!</operator><name>value</name></expr>;</return>
+        </block_content>}</block></function>
+
+        <friend>friend <function type="operator"><type><name><name>std</name><operator>::</operator><name>ostream</name></name><modifier>&amp;</modifier></type> <name>operator<name>&lt;&lt;</name></name><parameter_list>(<parameter><decl><type><name><name>std</name><operator>::</operator><name>ostream</name></name><modifier>&amp;</modifier></type> <name>out</name></decl></parameter>, <parameter><decl><type><name>HasBitOperators</name></type> <name>val</name></decl></parameter>)</parameter_list> <block>{<block_content>
+            <name>out</name> <expr_stmt><expr><operator>&lt;&lt;</operator> <literal type="string">"Val: "</literal> <operator>&lt;&lt;</operator> <name><name>val</name><operator>.</operator><name>value</name></name></expr>;</expr_stmt>
+            <return>return <expr><name>out</name></expr>;</return>
+        </block_content>}</block></function></friend>
+    </public>}</block>;</struct>
+}</block></namespace>
+
+<macro><name>TEST_CASE</name><argument_list>(<argument><literal type="string">"Assertion macros support bit operators and bool conversions"</literal></argument>, <argument><literal type="string">"[compilation][bitops]"</literal></argument>)</argument_list></macro> <block>{<block_content>
+    <decl_stmt><decl><type><name>HasBitOperators</name></type> <name>lhs</name><argument_list>{ <argument><expr><literal type="number">1</literal></expr></argument> }</argument_list></decl>, <decl><type ref="prev"/><name>rhs</name><argument_list>{ <argument><expr><literal type="number">2</literal></expr></argument> }</argument_list></decl>;</decl_stmt>
+    <expr_stmt><expr><call><name>REQUIRE</name><argument_list>(<argument><expr><name>lhs</name> <operator>|</operator> <name>rhs</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>REQUIRE_FALSE</name><argument_list>(<argument><expr><name>lhs</name> <operator>&amp;</operator> <name>rhs</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>REQUIRE</name><argument_list>(<argument><expr><call><name>HasBitOperators</name><argument_list>{ <argument><expr><literal type="number">1</literal></expr></argument> }</argument_list></call> <operator>&amp;</operator> <call><name>HasBitOperators</name><argument_list>{ <argument><expr><literal type="number">1</literal></expr></argument> }</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>REQUIRE</name><argument_list>(<argument><expr><name>lhs</name> <operator>^</operator> <name>rhs</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>REQUIRE_FALSE</name><argument_list>(<argument><expr><name>lhs</name> <operator>^</operator> <name>lhs</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+</block_content>}</block>
+
+<namespace>namespace <block>{
+    <struct>struct <name>ImmovableType</name> <block>{<public type="default">
+        <constructor_decl><name>ImmovableType</name><parameter_list>()</parameter_list> = <specifier>default</specifier>;</constructor_decl>
+
+        <constructor_decl><name>ImmovableType</name><parameter_list>(<parameter><decl><type><name>ImmovableType</name> <specifier>const</specifier><modifier>&amp;</modifier></type></decl></parameter>)</parameter_list> = <specifier>delete</specifier>;</constructor_decl>
+        <function_decl type="operator"><type><name>ImmovableType</name><modifier>&amp;</modifier></type> <name>operator<name>=</name></name><parameter_list>(<parameter><decl><type><name>ImmovableType</name> <specifier>const</specifier><modifier>&amp;</modifier></type></decl></parameter>)</parameter_list> = <specifier>delete</specifier>;</function_decl>
+        <constructor_decl><name>ImmovableType</name><parameter_list>(<parameter><decl><type><name>ImmovableType</name><modifier>&amp;&amp;</modifier></type></decl></parameter>)</parameter_list> = <specifier>delete</specifier>;</constructor_decl>
+        <function_decl type="operator"><type><name>ImmovableType</name><modifier>&amp;</modifier></type> <name>operator<name>=</name></name><parameter_list>(<parameter><decl><type><name>ImmovableType</name><modifier>&amp;&amp;</modifier></type></decl></parameter>)</parameter_list> = <specifier>delete</specifier>;</function_decl>
+
+        <friend>friend <function type="operator"><type><name>bool</name></type> <name>operator<name>==</name></name><parameter_list>(<parameter><decl><type><name>ImmovableType</name> <specifier>const</specifier><modifier>&amp;</modifier></type></decl></parameter>, <parameter><decl><type><name>ImmovableType</name> <specifier>const</specifier><modifier>&amp;</modifier></type></decl></parameter>)</parameter_list> <block>{<block_content>
+            <return>return <expr><literal type="boolean">true</literal></expr>;</return>
+        </block_content>}</block></function></friend>
+    </public>}</block>;</struct>
+}</block></namespace>
+
+<macro><name>TEST_CASE</name><argument_list>(<argument><literal type="string">"Immovable types are supported in basic assertions"</literal></argument>, <argument><literal type="string">"[compilation][.approvals]"</literal></argument>)</argument_list></macro> <block>{<block_content>
+    <expr_stmt><expr><call><name>REQUIRE</name><argument_list>(<argument><expr><call><name>ImmovableType</name><argument_list>{}</argument_list></call> <operator>==</operator> <call><name>ImmovableType</name><argument_list>{}</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+</block_content>}</block>
+
+<namespace>namespace <name>adl</name> <block>{
+
+<struct>struct <name>always_true</name> <block>{<public type="default">
+    <function type="operator"><type><specifier>explicit</specifier></type> <name>operator <name>bool</name></name><parameter_list>()</parameter_list> <specifier>const</specifier> <block>{<block_content> <return>return <expr><literal type="boolean">true</literal></expr>;</return> </block_content>}</block></function>
+</public>}</block>;</struct>
+
+<cpp:define xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">define</cpp:directive> <cpp:macro xmlns:cpp="http://www.srcML.org/srcML/cpp"><name>COMPILATION_TEST_DEFINE_UNIVERSAL_OPERATOR</name><parameter_list>(<parameter><type><name>op</name></type></parameter>)</parameter_list></cpp:macro> \
+<cpp:value xmlns:cpp="http://www.srcML.org/srcML/cpp">template &lt;class T, class U&gt; \
+auto operator op (T&amp;&amp;, U&amp;&amp;) { \
+    return always_true{}; \
+}</cpp:value></cpp:define>
+
+<macro><name>COMPILATION_TEST_DEFINE_UNIVERSAL_OPERATOR</name><argument_list>(<argument>==</argument>)</argument_list></macro>
+<macro><name>COMPILATION_TEST_DEFINE_UNIVERSAL_OPERATOR</name><argument_list>(<argument>!=</argument>)</argument_list></macro>
+<macro><name>COMPILATION_TEST_DEFINE_UNIVERSAL_OPERATOR</name><argument_list>(<argument>&lt;</argument>)</argument_list></macro>
+<macro><name>COMPILATION_TEST_DEFINE_UNIVERSAL_OPERATOR</name><argument_list>(<argument>&gt;</argument>)</argument_list></macro>
+<macro><name>COMPILATION_TEST_DEFINE_UNIVERSAL_OPERATOR</name><argument_list>(<argument>&lt;=</argument>)</argument_list></macro>
+<macro><name>COMPILATION_TEST_DEFINE_UNIVERSAL_OPERATOR</name><argument_list>(<argument>&gt;=</argument>)</argument_list></macro>
+<macro><name>COMPILATION_TEST_DEFINE_UNIVERSAL_OPERATOR</name><argument_list>(<argument>|</argument>)</argument_list></macro>
+<macro><name>COMPILATION_TEST_DEFINE_UNIVERSAL_OPERATOR</name><argument_list>(<argument>&amp;</argument>)</argument_list></macro>
+<macro><name>COMPILATION_TEST_DEFINE_UNIVERSAL_OPERATOR</name><argument_list>(<argument>^</argument>)</argument_list></macro>
+
+<cpp:undef xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">undef</cpp:directive> <name>COMPILATION_TEST_DEFINE_UNIVERSAL_OPERATOR</name></cpp:undef>
+
+}</block></namespace>
+
+<macro><name>TEST_CASE</name><argument_list>(<argument><literal type="string">"ADL universal operators don't hijack expression deconstruction"</literal></argument>, <argument><literal type="string">"[compilation][.approvals]"</literal></argument>)</argument_list></macro> <block>{<block_content>
+    <expr_stmt><expr><call><name>REQUIRE</name><argument_list>(<argument><expr><call><name><name>adl</name><operator>::</operator><name>always_true</name></name><argument_list>{}</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>REQUIRE</name><argument_list>(<argument><expr><literal type="number">0</literal> <operator>==</operator> <call><name><name>adl</name><operator>::</operator><name>always_true</name></name><argument_list>{}</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>REQUIRE</name><argument_list>(<argument><expr><literal type="number">0</literal> <operator>!=</operator> <call><name><name>adl</name><operator>::</operator><name>always_true</name></name><argument_list>{}</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>REQUIRE</name><argument_list>(<argument><expr><literal type="number">0</literal> <operator>&lt;</operator> <call><name><name>adl</name><operator>::</operator><name>always_true</name></name><argument_list>{}</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>REQUIRE</name><argument_list>(<argument><expr><literal type="number">0</literal> <operator>&gt;</operator> <call><name><name>adl</name><operator>::</operator><name>always_true</name></name><argument_list>{}</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>REQUIRE</name><argument_list>(<argument><expr><literal type="number">0</literal> <operator>&lt;=</operator> <call><name><name>adl</name><operator>::</operator><name>always_true</name></name><argument_list>{}</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>REQUIRE</name><argument_list>(<argument><expr><literal type="number">0</literal> <operator>&gt;=</operator> <call><name><name>adl</name><operator>::</operator><name>always_true</name></name><argument_list>{}</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>REQUIRE</name><argument_list>(<argument><expr><literal type="number">0</literal> <operator>|</operator> <call><name><name>adl</name><operator>::</operator><name>always_true</name></name><argument_list>{}</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>REQUIRE</name><argument_list>(<argument><expr><literal type="number">0</literal> <operator>&amp;</operator> <call><name><name>adl</name><operator>::</operator><name>always_true</name></name><argument_list>{}</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>REQUIRE</name><argument_list>(<argument><expr><literal type="number">0</literal> <lambda>^ <name><name>adl</name><operator>::</operator><name>always_true</name></name><block>{<block_content/>}</block></lambda></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+</block_content>}</block>
+
+<macro><name>TEST_CASE</name><argument_list>( <argument><literal type="string">"#2555 - types that can only be compared with 0 literal implemented as pointer conversion are supported"</literal></argument>,
+           <argument><literal type="string">"[compilation][approvals]"</literal></argument> )</argument_list></macro> <block>{<block_content>
+    <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name>TypeWithLit0Comparisons</name><argument_list>{}</argument_list></call> <operator>&lt;</operator> <literal type="number">0</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>REQUIRE_FALSE</name><argument_list>( <argument><expr><literal type="number">0</literal> <operator>&lt;</operator> <call><name>TypeWithLit0Comparisons</name><argument_list>{}</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name>TypeWithLit0Comparisons</name><argument_list>{}</argument_list></call> <operator>&lt;=</operator> <literal type="number">0</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>REQUIRE_FALSE</name><argument_list>( <argument><expr><literal type="number">0</literal> <operator>&lt;=</operator> <call><name>TypeWithLit0Comparisons</name><argument_list>{}</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+
+    <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name>TypeWithLit0Comparisons</name><argument_list>{}</argument_list></call> <operator>&gt;</operator> <literal type="number">0</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>REQUIRE_FALSE</name><argument_list>( <argument><expr><literal type="number">0</literal> <operator>&gt;</operator> <call><name>TypeWithLit0Comparisons</name><argument_list>{}</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name>TypeWithLit0Comparisons</name><argument_list>{}</argument_list></call> <operator>&gt;=</operator> <literal type="number">0</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>REQUIRE_FALSE</name><argument_list>( <argument><expr><literal type="number">0</literal> <operator>&gt;=</operator> <call><name>TypeWithLit0Comparisons</name><argument_list>{}</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+
+    <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name>TypeWithLit0Comparisons</name><argument_list>{}</argument_list></call> <operator>==</operator> <literal type="number">0</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>REQUIRE_FALSE</name><argument_list>( <argument><expr><literal type="number">0</literal> <operator>==</operator> <call><name>TypeWithLit0Comparisons</name><argument_list>{}</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name>TypeWithLit0Comparisons</name><argument_list>{}</argument_list></call> <operator>!=</operator> <literal type="number">0</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>REQUIRE_FALSE</name><argument_list>( <argument><expr><literal type="number">0</literal> <operator>!=</operator> <call><name>TypeWithLit0Comparisons</name><argument_list>{}</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+</block_content>}</block>
+
+<comment type="line">// These tests require `consteval` to propagate through `constexpr` calls</comment>
+<comment type="line">// which is a late DR against C++20.</comment>
+<cpp:if xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">if</cpp:directive> <expr><call><name>defined</name><argument_list>( <argument><expr><name>CATCH_CPP20_OR_GREATER</name></expr></argument> )</argument_list></call> <operator>&amp;&amp;</operator> <call><name>defined</name><argument_list>( <argument><expr><name>__cpp_consteval</name></expr></argument> )</argument_list></call> <operator>&amp;&amp;</operator> \
+    <name>__cpp_consteval</name> <operator>&gt;=</operator> <literal type="number">202211L</literal></expr></cpp:if>
+<comment type="line">// Can't have internal linkage to avoid warnings</comment>
+<function_decl><type><name>void</name></type> <name>ZeroLiteralErrorFunc</name><parameter_list>()</parameter_list>;</function_decl>
+<namespace>namespace <block>{
+    <struct>struct <name>ZeroLiteralConsteval</name> <block>{<public type="default">
+        <function><template>template <parameter_list>&lt;<parameter><type><name>class</name></type> <name>T</name></parameter>, <parameter><type><name><name>std</name><operator>::</operator><name>enable_if_t</name><argument_list type="generic">&lt;<argument><expr><name><name>std</name><operator>::</operator><name>is_same_v</name><argument_list type="generic">&lt;<argument><expr><name>T</name></expr></argument>, <argument><expr><name>int</name></expr></argument>&gt;</argument_list></name></expr></argument>, <argument><expr><name>int</name></expr></argument>&gt;</argument_list></name></type> <init>= <expr><literal type="number">0</literal></expr></init></parameter>&gt;</parameter_list></template>
+        <type><name>consteval</name></type> <name>ZeroLiteralConsteval</name><parameter_list>( <parameter><decl><type><name>T</name></type> <name>zero</name></decl></parameter> )</parameter_list> <noexcept>noexcept</noexcept> <block>{<block_content>
+            <if_stmt><if>if <condition>( <expr><name>zero</name> <operator>!=</operator> <literal type="number">0</literal></expr> )</condition> <block>{<block_content> <expr_stmt><expr><call><name>ZeroLiteralErrorFunc</name><argument_list>()</argument_list></call></expr>;</expr_stmt> </block_content>}</block></if></if_stmt>
+        </block_content>}</block></function>
+    </public>}</block>;</struct>
+
+    <comment type="line">// Should only be constructible from literal 0. Uses the propagating</comment>
+    <comment type="line">// consteval constructor trick (currently used by MSVC, might be used</comment>
+    <comment type="line">// by libc++ in the future as well).</comment>
+    <struct>struct <name>TypeWithConstevalLit0Comparison</name> <block>{<public type="default">
+<cpp:define xmlns:cpp="http://www.srcML.org/srcML/cpp">#    <cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">define</cpp:directive> <cpp:macro xmlns:cpp="http://www.srcML.org/srcML/cpp"><name>DEFINE_COMP_OP</name><parameter_list>( <parameter><type><name>op</name></type></parameter> )</parameter_list></cpp:macro>                                               \
+        <cpp:value xmlns:cpp="http://www.srcML.org/srcML/cpp">constexpr friend bool operator op( TypeWithConstevalLit0Comparison,    \
+                                           ZeroLiteralConsteval ) {            \
+            return true;                                                       \
+        }                                                                      \
+        constexpr friend bool operator op( ZeroLiteralConsteval,               \
+                                           TypeWithConstevalLit0Comparison ) { \
+            return false;                                                      \
+        }                                                                      \
+        <comment type="block">/* std::orderings only have these for ==, but we add them for all      \
+           operators so we can test all overloads for decomposer */</comment>            \
+        constexpr friend bool operator op( TypeWithConstevalLit0Comparison,    \
+                                           TypeWithConstevalLit0Comparison ) { \
+            return true;                                                       \
+        }</cpp:value></cpp:define>
+
+        <macro><name>DEFINE_COMP_OP</name><argument_list>( <argument>&lt;</argument> )</argument_list></macro>
+        <macro><name>DEFINE_COMP_OP</name><argument_list>( <argument>&lt;=</argument> )</argument_list></macro>
+        <macro><name>DEFINE_COMP_OP</name><argument_list>( <argument>&gt;</argument> )</argument_list></macro>
+        <macro><name>DEFINE_COMP_OP</name><argument_list>( <argument>&gt;=</argument> )</argument_list></macro>
+        <macro><name>DEFINE_COMP_OP</name><argument_list>( <argument>==</argument> )</argument_list></macro>
+        <macro><name>DEFINE_COMP_OP</name><argument_list>( <argument>!=</argument> )</argument_list></macro>
+
+<cpp:undef xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">undef</cpp:directive> <name>DEFINE_COMP_OP</name></cpp:undef>
+    </public>}</block>;</struct>
+
+}</block></namespace> <comment type="line">// namespace</comment>
+
+<namespace>namespace <name>Catch</name> <block>{
+    <struct><template>template <parameter_list>&lt;&gt;</parameter_list></template>
+    struct <name><name>capture_by_value</name><argument_list type="generic">&lt;<argument><expr><name>TypeWithConstevalLit0Comparison</name></expr></argument>&gt;</argument_list></name> <super_list>: <super><name><name>std</name><operator>::</operator><name>true_type</name></name></super></super_list> <block>{<public type="default"/>}</block>;</struct>
+}</block></namespace>
+
+<macro><name>TEST_CASE</name><argument_list>( <argument><literal type="string">"#2555 - types that can only be compared with 0 literal implemented as consteval check are supported"</literal></argument>,
+           <argument><literal type="string">"[compilation][approvals]"</literal></argument> )</argument_list></macro> <block>{<block_content>
+    <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name>TypeWithConstevalLit0Comparison</name><argument_list>{}</argument_list></call> <operator>&lt;</operator> <literal type="number">0</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>REQUIRE_FALSE</name><argument_list>( <argument><expr><literal type="number">0</literal> <operator>&lt;</operator> <call><name>TypeWithConstevalLit0Comparison</name><argument_list>{}</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name>TypeWithConstevalLit0Comparison</name><argument_list>{}</argument_list></call> <operator>&lt;=</operator> <literal type="number">0</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>REQUIRE_FALSE</name><argument_list>( <argument><expr><literal type="number">0</literal> <operator>&lt;=</operator> <call><name>TypeWithConstevalLit0Comparison</name><argument_list>{}</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+
+    <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name>TypeWithConstevalLit0Comparison</name><argument_list>{}</argument_list></call> <operator>&gt;</operator> <literal type="number">0</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>REQUIRE_FALSE</name><argument_list>( <argument><expr><literal type="number">0</literal> <operator>&gt;</operator> <call><name>TypeWithConstevalLit0Comparison</name><argument_list>{}</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name>TypeWithConstevalLit0Comparison</name><argument_list>{}</argument_list></call> <operator>&gt;=</operator> <literal type="number">0</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>REQUIRE_FALSE</name><argument_list>( <argument><expr><literal type="number">0</literal> <operator>&gt;=</operator> <call><name>TypeWithConstevalLit0Comparison</name><argument_list>{}</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+
+    <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name>TypeWithConstevalLit0Comparison</name><argument_list>{}</argument_list></call> <operator>==</operator> <literal type="number">0</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>REQUIRE_FALSE</name><argument_list>( <argument><expr><literal type="number">0</literal> <operator>==</operator> <call><name>TypeWithConstevalLit0Comparison</name><argument_list>{}</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name>TypeWithConstevalLit0Comparison</name><argument_list>{}</argument_list></call> <operator>!=</operator> <literal type="number">0</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>REQUIRE_FALSE</name><argument_list>( <argument><expr><literal type="number">0</literal> <operator>!=</operator> <call><name>TypeWithConstevalLit0Comparison</name><argument_list>{}</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+</block_content>}</block>
+
+<comment type="line">// We check all comparison ops to test, even though orderings, the primary</comment>
+<comment type="line">// motivation for this functionality, only have self-comparison (and thus</comment>
+<comment type="line">// have the ambiguity issue) for `==` and `!=`.</comment>
+<macro><name>TEST_CASE</name><argument_list>( <argument><literal type="string">"Comparing const instances of type registered with capture_by_value"</literal></argument>,
+           <argument><literal type="string">"[regression][approvals][compilation]"</literal></argument> )</argument_list></macro> <block>{<block_content>
+    <macro><name>SECTION</name><argument_list>(<argument><literal type="string">"Type with consteval-int constructor"</literal></argument>)</argument_list></macro> <block>{<block_content>
+        <decl_stmt><decl><type><specifier>auto</specifier> <specifier>const</specifier></type> <name>const_Lit0Type_1</name> <init>= <expr><call><name>TypeWithConstevalLit0Comparison</name><argument_list>{}</argument_list></call></expr></init></decl>;</decl_stmt>
+        <decl_stmt><decl><type><specifier>auto</specifier> <specifier>const</specifier></type> <name>const_Lit0Type_2</name> <init>= <expr><call><name>TypeWithConstevalLit0Comparison</name><argument_list>{}</argument_list></call></expr></init></decl>;</decl_stmt>
+        <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><name>const_Lit0Type_1</name> <operator>==</operator> <name>const_Lit0Type_2</name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><name>const_Lit0Type_1</name> <operator>&lt;=</operator> <name>const_Lit0Type_2</name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><name>const_Lit0Type_1</name> <operator>&lt;</operator> <name>const_Lit0Type_2</name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><name>const_Lit0Type_1</name> <operator>&gt;=</operator> <name>const_Lit0Type_2</name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><name>const_Lit0Type_1</name> <operator>&gt;</operator> <name>const_Lit0Type_2</name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><name>const_Lit0Type_1</name> <operator>!=</operator> <name>const_Lit0Type_2</name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block>
+    <macro><name>SECTION</name><argument_list>(<argument><literal type="string">"Type with constexpr-int constructor"</literal></argument>)</argument_list></macro> <block>{<block_content>
+        <decl_stmt><decl><type><specifier>auto</specifier> <specifier>const</specifier></type> <name>const_Lit0Type_1</name> <init>= <expr><call><name>TypeWithLit0Comparisons</name><argument_list>{}</argument_list></call></expr></init></decl>;</decl_stmt>
+        <decl_stmt><decl><type><specifier>auto</specifier> <specifier>const</specifier></type> <name>const_Lit0Type_2</name> <init>= <expr><call><name>TypeWithLit0Comparisons</name><argument_list>{}</argument_list></call></expr></init></decl>;</decl_stmt>
+        <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><name>const_Lit0Type_1</name> <operator>==</operator> <name>const_Lit0Type_2</name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><name>const_Lit0Type_1</name> <operator>&lt;=</operator> <name>const_Lit0Type_2</name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><name>const_Lit0Type_1</name> <operator>&lt;</operator> <name>const_Lit0Type_2</name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><name>const_Lit0Type_1</name> <operator>&gt;=</operator> <name>const_Lit0Type_2</name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><name>const_Lit0Type_1</name> <operator>&gt;</operator> <name>const_Lit0Type_2</name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><name>const_Lit0Type_1</name> <operator>!=</operator> <name>const_Lit0Type_2</name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block>
+</block_content>}</block>
+
+<cpp:endif xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">endif</cpp:directive></cpp:endif> <comment type="line">// C++20 consteval</comment>
+
+
+<namespace>namespace <block>{
+    <struct>struct <name>MultipleImplicitConstructors</name> <block>{<public type="default">
+        <constructor><name>MultipleImplicitConstructors</name><parameter_list>( <parameter><decl><type><name>double</name></type></decl></parameter> )</parameter_list> <block>{<block_content/>}</block></constructor>
+        <constructor><name>MultipleImplicitConstructors</name><parameter_list>( <parameter><decl><type><name>int64_t</name></type></decl></parameter> )</parameter_list> <block>{<block_content/>}</block></constructor>
+        <function type="operator"><type><name>bool</name></type> <name>operator<name>==</name></name><parameter_list>( <parameter><decl><type><name>MultipleImplicitConstructors</name></type></decl></parameter> )</parameter_list> <specifier>const</specifier> <block>{<block_content> <return>return <expr><literal type="boolean">true</literal></expr>;</return> </block_content>}</block></function>
+        <function type="operator"><type><name>bool</name></type> <name>operator<name>!=</name></name><parameter_list>( <parameter><decl><type><name>MultipleImplicitConstructors</name></type></decl></parameter> )</parameter_list> <specifier>const</specifier> <block>{<block_content> <return>return <expr><literal type="boolean">true</literal></expr>;</return> </block_content>}</block></function>
+        <function type="operator"><type><name>bool</name></type> <name>operator<name>&lt;</name></name><parameter_list>( <parameter><decl><type><name>MultipleImplicitConstructors</name></type></decl></parameter> )</parameter_list> <specifier>const</specifier> <block>{<block_content> <return>return <expr><literal type="boolean">true</literal></expr>;</return> </block_content>}</block></function>
+        <function type="operator"><type><name>bool</name></type> <name>operator<name>&lt;=</name></name><parameter_list>( <parameter><decl><type><name>MultipleImplicitConstructors</name></type></decl></parameter> )</parameter_list> <specifier>const</specifier> <block>{<block_content> <return>return <expr><literal type="boolean">true</literal></expr>;</return> </block_content>}</block></function>
+        <function type="operator"><type><name>bool</name></type> <name>operator<name>&gt;</name></name><parameter_list>( <parameter><decl><type><name>MultipleImplicitConstructors</name></type></decl></parameter> )</parameter_list> <specifier>const</specifier> <block>{<block_content> <return>return <expr><literal type="boolean">true</literal></expr>;</return> </block_content>}</block></function>
+        <function type="operator"><type><name>bool</name></type> <name>operator<name>&gt;=</name></name><parameter_list>( <parameter><decl><type><name>MultipleImplicitConstructors</name></type></decl></parameter> )</parameter_list> <specifier>const</specifier> <block>{<block_content> <return>return <expr><literal type="boolean">true</literal></expr>;</return> </block_content>}</block></function>
+    </public>}</block>;</struct>
+}</block></namespace>
+<macro><name>TEST_CASE</name><argument_list>(<argument><literal type="string">"#2571 - tests compile types that have multiple implicit constructors from lit 0"</literal></argument>,
+          <argument><literal type="string">"[compilation][approvals]"</literal></argument>)</argument_list></macro> <block>{<block_content>
+    <decl_stmt><decl><type><name>MultipleImplicitConstructors</name></type> <name>mic1</name><argument_list>( <argument><expr><literal type="number">0.0</literal></expr></argument> )</argument_list></decl>;</decl_stmt>
+    <decl_stmt><decl><type><name>MultipleImplicitConstructors</name></type> <name>mic2</name><argument_list>( <argument><expr><literal type="number">0.0</literal></expr></argument> )</argument_list></decl>;</decl_stmt>
+    <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><name>mic1</name> <operator>==</operator> <name>mic2</name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><name>mic1</name> <operator>!=</operator> <name>mic2</name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><name>mic1</name> <operator>&lt;</operator> <name>mic2</name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><name>mic1</name> <operator>&lt;=</operator> <name>mic2</name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><name>mic1</name> <operator>&gt;</operator> <name>mic2</name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><name>mic1</name> <operator>&gt;=</operator> <name>mic2</name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+</block_content>}</block>
+
+<cpp:if xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">if</cpp:directive> <expr><call><name>defined</name><argument_list>( <argument><expr><name>CATCH_CONFIG_CPP20_COMPARE_OVERLOADS</name></expr></argument> )</argument_list></call></expr></cpp:if>
+<comment type="line">// This test does not test all the related codepaths, but it is the original</comment>
+<comment type="line">// reproducer</comment>
+<macro><name>TEST_CASE</name><argument_list>( <argument><literal type="string">"Comparing const std::weak_ordering instances must compile"</literal></argument>,
+           <argument><literal type="string">"[compilation][approvals][regression]"</literal></argument> )</argument_list></macro> <block>{<block_content>
+    <decl_stmt><decl><type><specifier>auto</specifier> <specifier>const</specifier></type> <name>const_ordering_1</name> <init>= <expr><name><name>std</name><operator>::</operator><name>weak_ordering</name><operator>::</operator><name>less</name></name></expr></init></decl>;</decl_stmt>
+    <decl_stmt><decl><type><specifier>auto</specifier> <specifier>const</specifier></type> <name>const_ordering_2</name> <init>= <expr><name><name>std</name><operator>::</operator><name>weak_ordering</name><operator>::</operator><name>less</name></name></expr></init></decl>;</decl_stmt>
+    <decl_stmt><decl><type><name>auto</name></type> <name>plain_ordering_1</name> <init>= <expr><name><name>std</name><operator>::</operator><name>weak_ordering</name><operator>::</operator><name>less</name></name></expr></init></decl>;</decl_stmt>
+    <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><name>const_ordering_1</name> <operator>==</operator> <name>plain_ordering_1</name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><name>const_ordering_1</name> <operator>==</operator> <name>const_ordering_2</name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><name>plain_ordering_1</name> <operator>==</operator> <name>const_ordering_1</name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+</block_content>}</block>
+<cpp:endif xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">endif</cpp:directive></cpp:endif>
+<diff:insert xmlns:diff="http://www.srcML.org/srcDiff"><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+</diff:ws><comment type="line">//<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>Reproduce<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>issue<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>with<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>yaml-cpp<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>iterators,<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>where<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>the<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>`const_iterator`</comment><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+</diff:ws><comment type="line">//<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>for<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>Node<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>type<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>has<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>`const<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>T`<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>as<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>the<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>value_type.<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>This<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>is<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>wrong<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>for</comment><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+</diff:ws><comment type="line">//<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>multitude<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>of<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>reasons,<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>but<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>there<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>might<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>be<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>other<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>libraries<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>in<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>the<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>wild</comment><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+</diff:ws><comment type="line">//<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>that<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>share<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>this<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>issue,<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>and<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>the<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>workaround<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>needed<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>to<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>support</comment><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+</diff:ws><comment type="line">//<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>`from_range(iter,<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>iter)`<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>helper<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>with<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>those<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>libraries<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>is<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>easy<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>enough.</comment><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+</diff:ws><class>class<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><name>HasBadIterator</name><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><block>{<private type="default"><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+    </diff:ws><decl_stmt><decl><type><name><name>std</name><operator>::</operator><name>array</name><argument_list type="generic">&lt;<argument><expr><name>int</name></expr></argument>,<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><argument><expr><literal type="number">10</literal></expr></argument>&gt;</argument_list></name></type><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><name>m_arr</name><argument_list>{}</argument_list></decl>;</decl_stmt><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+
+</diff:ws></private><public>public:<diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+    </diff:ws><class>class<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><name>iterator</name><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><block>{<private type="default"><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+        </diff:ws><decl_stmt><decl><type><specifier>const</specifier><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><name>int</name><modifier>*</modifier></type><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><name>m_ptr</name><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><init>=<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><expr><literal type="null">nullptr</literal></expr></init></decl>;</decl_stmt><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+
+    </diff:ws></private><public>public:<diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+        </diff:ws><constructor><name>iterator</name><parameter_list>(<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><parameter><decl><type><specifier>const</specifier><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><name>int</name><modifier>*</modifier></type><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><name>ptr</name></decl></parameter><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>)</parameter_list><member_init_list>:<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><call><name>m_ptr</name><argument_list>(<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><argument><expr><name>ptr</name></expr></argument><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>)</argument_list></call><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws></member_init_list><block>{<block_content/>}</block></constructor><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+
+        </diff:ws><using>using<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><name>difference_type</name><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><init>=<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><type><name><name>std</name><operator>::</operator><name>ptrdiff_t</name></name></type></init>;</using><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+        </diff:ws><using>using<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><name>value_type</name><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><init>=<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><type><specifier>const</specifier><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><name>int</name></type></init>;</using><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+        </diff:ws><using>using<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><name>pointer</name><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><init>=<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><type><specifier>const</specifier><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><name>int</name><modifier>*</modifier></type></init>;</using><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+        </diff:ws><using>using<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><name>reference</name><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><init>=<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><type><specifier>const</specifier><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><name>int</name><modifier>&amp;</modifier></type></init>;</using><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+        </diff:ws><using>using<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><name>iterator_category</name><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><init>=<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><type><name><name>std</name><operator>::</operator><name>input_iterator_tag</name></name></type></init>;</using><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+
+        </diff:ws><function type="operator"><type><name>iterator</name><modifier>&amp;</modifier></type><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><name>operator<name>++</name></name><parameter_list>()</parameter_list><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><block>{<block_content><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+            </diff:ws><expr_stmt><expr><operator>++</operator><name>m_ptr</name></expr>;</expr_stmt><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+            </diff:ws><return>return<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><expr><operator>*</operator><name>this</name></expr>;</return><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+        </diff:ws></block_content>}</block></function><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+
+        </diff:ws><function type="operator"><type><name>iterator</name></type><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><name>operator<name>++</name></name><parameter_list>(<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><parameter><decl><type><name>int</name></type></decl></parameter><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>)</parameter_list><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><block>{<block_content><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+            </diff:ws><decl_stmt><decl><type><name>auto</name></type><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><name>ret</name><argument_list>(<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><argument><expr><operator>*</operator><name>this</name></expr></argument><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>)</argument_list></decl>;</decl_stmt><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+            </diff:ws><expr_stmt><expr><operator>++</operator><operator>(</operator><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><operator>*</operator><name>this</name><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><operator>)</operator></expr>;</expr_stmt><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+            </diff:ws><return>return<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><expr><name>ret</name></expr>;</return><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+        </diff:ws></block_content>}</block></function><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+
+        </diff:ws><friend>friend<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><function type="operator"><type><name>bool</name></type><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><name>operator<name>==</name></name><parameter_list>(<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><parameter><decl><type><name>iterator</name></type><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><name>lhs</name></decl></parameter>,<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><parameter><decl><type><name>iterator</name></type><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><name>rhs</name></decl></parameter><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>)</parameter_list><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><block>{<block_content><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+            </diff:ws><return>return<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><expr><name><name>lhs</name><operator>.</operator><name>m_ptr</name></name><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><operator>==</operator><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><name><name>rhs</name><operator>.</operator><name>m_ptr</name></name></expr>;</return><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+        </diff:ws></block_content>}</block></function></friend><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+        </diff:ws><friend>friend<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><function type="operator"><type><name>bool</name></type><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><name>operator<name>!=</name></name><parameter_list>(<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><parameter><decl><type><name>iterator</name></type><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><name>lhs</name></decl></parameter>,<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><parameter><decl><type><name>iterator</name></type><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><name>rhs</name></decl></parameter><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>)</parameter_list><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><block>{<block_content><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+            </diff:ws><return>return<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><expr><operator>!</operator><operator>(</operator><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><name>lhs</name><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><operator>==</operator><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><name>rhs</name><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><operator>)</operator></expr>;</return><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+        </diff:ws></block_content>}</block></function></friend><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+
+        </diff:ws><function type="operator"><type><name>int</name></type><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><name>operator<name>*</name></name><parameter_list>()</parameter_list><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><specifier>const</specifier><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><block>{<block_content><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><return>return<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><expr><operator>*</operator><name>m_ptr</name></expr>;</return><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws></block_content>}</block></function><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+    </diff:ws></public>}</block>;</class><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+
+    </diff:ws><function><type><name>iterator</name></type><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><name>cbegin</name><parameter_list>()</parameter_list><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><specifier>const</specifier><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><block>{<block_content><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><return>return<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><expr><block>{<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><macro><name>m_arr</name></macro><expr><operator>.</operator><macro><name>data</name><argument_list>()</argument_list></macro></expr><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>}</block></expr>;</return><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws></block_content>}</block></function><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+    </diff:ws><function><type><name>iterator</name></type><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><name>cend</name><parameter_list>()</parameter_list><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><specifier>const</specifier><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><block>{<block_content><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><return>return<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><expr><block>{<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><expr><call><name><name>m_arr</name><operator>.</operator><name>data</name></name><argument_list>()</argument_list></call><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><operator>+</operator><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><macro><name>m_arr</name></macro><operator>.</operator><macro><name>size</name><argument_list>()</argument_list></macro></expr><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>}</block></expr>;</return><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws></block_content>}</block></function><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+</diff:ws></public>}</block>;</class><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+
+</diff:ws><macro><name>TEST_CASE</name><argument_list>(<argument><literal type="string">"from_range(iter,<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>iter)<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>supports<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>const_iterators"</literal></argument>,<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><argument><literal type="string">"[generators][from-range][approvals]"</literal></argument>)</argument_list></macro><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><block>{<block_content><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+    </diff:ws><using>using<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><namespace>namespace<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><name><name>Catch</name><operator>::</operator><name>Generators</name></name>;</namespace></using><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+
+    </diff:ws><decl_stmt><decl><type><name>HasBadIterator</name></type><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><name>data</name></decl>;</decl_stmt><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+    </diff:ws><decl_stmt><decl><type><name>auto</name></type><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><name>gen</name><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><init>=<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><expr><call><name>from_range</name><argument_list>(<argument><expr><call><name><name>data</name><operator>.</operator><name>cbegin</name></name><argument_list>()</argument_list></call></expr></argument>,<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><argument><expr><call><name><name>data</name><operator>.</operator><name>cend</name></name><argument_list>()</argument_list></call></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+    </diff:ws><expr_stmt><expr><operator>(</operator><name>void</name><operator>)</operator><name>gen</name></expr>;</expr_stmt><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+</diff:ws></block_content>}</block><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+</diff:ws></diff:insert></unit>

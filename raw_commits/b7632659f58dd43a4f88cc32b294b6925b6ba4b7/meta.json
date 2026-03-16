@@ -1,0 +1,8 @@
+{
+  "commit_id": "b7632659f58dd43a4f88cc32b294b6925b6ba4b7",
+  "parent_id": "ed79d726be3b5066aa9b620da0eb10d9fcdc08f7",
+  "message": "Clara: Usage strings for args",
+  "changed_files": [
+    "projects/SelfTest/CmdLineTests.cpp"
+  ]
+}

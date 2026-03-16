@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" xmlns:diff="http://www.srcML.org/srcDiff" revision="1.0.0" language="C++" filename="C:\Users\saile\AppData\Local\Temp\catch2_100_z8gzpiwf\56a02eede506eb3a01315123686749b97c1097e2\projects_SelfTest_MiscTests_cpp\projects_SelfTest_MiscTests_cpp.old|C:\Users\saile\AppData\Local\Temp\catch2_100_z8gzpiwf\56a02eede506eb3a01315123686749b97c1097e2\projects_SelfTest_MiscTests_cpp\projects_SelfTest_MiscTests_cpp.new"><comment type="block">/*
+ *  MiscTests.cpp
+ *  Catch - Test
+ *
+ *  Created by Phil on 29/11/2010.
+ *  Copyright 2010 Two Blue Cubes Ltd. All rights reserved.
+ *
+ *  Distributed under the Boost Software License, Version 1.0. (See accompanying
+ *  file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
+ *
+ */</comment>
+
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">"catch.hpp"</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;iostream&gt;</cpp:file></cpp:include>
+
+<macro><name>TEST_CASE</name><argument_list>( <argument><literal type="string">"./succeeding/Misc/Sections"</literal></argument>, <argument><literal type="string">"random SECTION tests"</literal></argument> )</argument_list></macro>
+<block>{<block_content>
+    <decl_stmt><decl><type><name>int</name></type> <name>a</name> <init>= <expr><literal type="number">1</literal></expr></init></decl>;</decl_stmt>
+    <decl_stmt><decl><type><name>int</name></type> <name>b</name> <init>= <expr><literal type="number">2</literal></expr></init></decl>;</decl_stmt>
+    
+    <macro><name>SECTION</name><argument_list>( <argument><literal type="string">"s1"</literal></argument>, <argument><literal type="string">"doesn't equal"</literal></argument> )</argument_list></macro>
+    <block>{<block_content>
+        <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><name>a</name> <operator>!=</operator> <name>b</name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><name>b</name> <operator>!=</operator> <name>a</name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block>
+
+    <macro><name>SECTION</name><argument_list>( <argument><literal type="string">"s2"</literal></argument>, <argument><literal type="string">"not equal"</literal></argument> )</argument_list></macro>
+    <block>{<block_content>
+        <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><name>a</name> <operator>!=</operator> <name>b</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block>
+</block_content>}</block>
+
+<macro><name>TEST_CASE</name><argument_list>( <argument><literal type="string">"./succeeding/Misc/Sections/nested"</literal></argument>, <argument><literal type="string">"nested SECTION tests"</literal></argument> )</argument_list></macro>
+<block>{<block_content>
+    <decl_stmt><decl><type><name>int</name></type> <name>a</name> <init>= <expr><literal type="number">1</literal></expr></init></decl>;</decl_stmt>
+    <decl_stmt><decl><type><name>int</name></type> <name>b</name> <init>= <expr><literal type="number">2</literal></expr></init></decl>;</decl_stmt>
+    
+    <macro><name>SECTION</name><argument_list>( <argument><literal type="string">"s1"</literal></argument>, <argument><literal type="string">"doesn't equal"</literal></argument> )</argument_list></macro>
+    <block>{<block_content>
+        <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><name>a</name> <operator>!=</operator> <name>b</name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><name>b</name> <operator>!=</operator> <name>a</name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+
+        <macro><name>SECTION</name><argument_list>( <argument><literal type="string">"s2"</literal></argument>, <argument><literal type="string">"not equal"</literal></argument> )</argument_list></macro>
+        <block>{<block_content>
+            <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><name>a</name> <operator>!=</operator> <name>b</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        </block_content>}</block>
+    </block_content>}</block>
+</block_content>}</block>
+
+<macro><name>TEST_CASE</name><argument_list>( <argument><literal type="string">"./mixed/Misc/Sections/nested2"</literal></argument>, <argument><literal type="string">"nested SECTION tests"</literal></argument> )</argument_list></macro>
+<block>{<block_content>
+    <decl_stmt><decl><type><name>int</name></type> <name>a</name> <init>= <expr><literal type="number">1</literal></expr></init></decl>;</decl_stmt>
+    <decl_stmt><decl><type><name>int</name></type> <name>b</name> <init>= <expr><literal type="number">2</literal></expr></init></decl>;</decl_stmt>
+    
+    <macro><name>SECTION</name><argument_list>( <argument><literal type="string">"s1"</literal></argument>, <argument><literal type="string">"doesn't equal"</literal></argument> )</argument_list></macro>
+    <block>{<block_content>
+        <macro><name>SECTION</name><argument_list>( <argument><literal type="string">"s2"</literal></argument>, <argument><literal type="string">"equal"</literal></argument> )</argument_list></macro>
+        <block>{<block_content>
+            <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><name>a</name> <operator>==</operator> <name>b</name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        </block_content>}</block>
+
+        <macro><name>SECTION</name><argument_list>( <argument><literal type="string">"s3"</literal></argument>, <argument><literal type="string">"not equal"</literal></argument> )</argument_list></macro>
+        <block>{<block_content>
+            <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><name>a</name> <operator>!=</operator> <name>b</name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        </block_content>}</block>
+        <macro><name>SECTION</name><argument_list>( <argument><literal type="string">"s4"</literal></argument>, <argument><literal type="string">"less than"</literal></argument> )</argument_list></macro>
+        <block>{<block_content>
+            <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><name>a</name> <operator>&lt;</operator> <name>b</name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        </block_content>}</block>
+    </block_content>}</block>
+</block_content>}</block>
+
+<macro><name>TEST_CASE</name><argument_list>( <argument><literal type="string">"./mixed/Misc/Sections/loops"</literal></argument>, <argument><literal type="string">"looped SECTION tests"</literal></argument> )</argument_list></macro>
+<block>{<block_content>
+    <decl_stmt><decl><type><name>int</name></type> <name>a</name> <init>= <expr><literal type="number">1</literal></expr></init></decl>;</decl_stmt>
+    
+    <for>for<control>( <init><decl><type><name>int</name></type> <name>b</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>b</name> <operator>&lt;</operator> <literal type="number">10</literal></expr>;</condition> <incr><expr><operator>++</operator><name>b</name></expr></incr> )</control>
+    <block>{<block_content>
+        <decl_stmt><decl><type><name><name>std</name><operator>::</operator><name>ostringstream</name></name></type> <name>oss</name></decl>;</decl_stmt>
+        <expr_stmt><expr><name>oss</name> <operator>&lt;&lt;</operator> <literal type="string">"b is currently: "</literal> <operator>&lt;&lt;</operator> <name>b</name></expr>;</expr_stmt>
+        <macro><name>SECTION</name><argument_list>( <argument><literal type="string">"s1"</literal></argument>, <argument>oss.str()</argument> )</argument_list></macro>
+        <block>{<block_content>
+            <expr_stmt><expr><call><name>CHECK</name><argument_list>( <argument><expr><name>b</name> <operator>&gt;</operator> <name>a</name></expr></argument> )</argument_list></call></expr>;</expr_stmt>            
+        </block_content>}</block>
+    </block_content>}</block></for>
+</block_content>}</block>
+
+<macro><name>TEST_CASE</name><argument_list>( <argument><literal type="string">"./mixed/Misc/loops"</literal></argument>, <argument><literal type="string">"looped tests"</literal></argument> )</argument_list></macro>
+<block>{<block_content>
+    <decl_stmt><decl><type><specifier>static</specifier> <specifier>const</specifier> <name>int</name></type> <name><name>fib</name><index>[]</index></name>  <init>= <expr><block>{ <expr><literal type="number">1</literal></expr>, <expr><literal type="number">1</literal></expr>, <expr><literal type="number">2</literal></expr>, <expr><literal type="number">3</literal></expr>, <expr><literal type="number">5</literal></expr>, <expr><literal type="number">8</literal></expr>, <expr><literal type="number">13</literal></expr>, <expr><literal type="number">21</literal></expr> }</block></expr></init></decl>;</decl_stmt>
+    
+    <for>for<control>( <init><decl><type><name>size_t</name></type> <name>i</name><init>=<expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>i</name> <operator>&lt;</operator> <sizeof>sizeof<argument_list>(<argument><expr><name>fib</name></expr></argument>)</argument_list></sizeof><operator>/</operator><sizeof>sizeof<argument_list>(<argument><expr><name>int</name></expr></argument>)</argument_list></sizeof></expr>;</condition> <incr><expr><operator>++</operator><name>i</name></expr></incr> )</control>
+    <block>{<block_content>
+        <expr_stmt><expr><call><name>INFO</name><argument_list>( <argument><expr><literal type="string">"Testing if fib["</literal> <operator>&lt;&lt;</operator> <name>i</name> <operator>&lt;&lt;</operator> <literal type="string">"] ("</literal> <operator>&lt;&lt;</operator> <name><name>fib</name><index>[<expr><name>i</name></expr>]</index></name> <operator>&lt;&lt;</operator> <literal type="string">") is even"</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name>CHECK</name><argument_list>( <argument><expr><operator>(</operator> <name><name>fib</name><index>[<expr><name>i</name></expr>]</index></name> <operator>%</operator> <literal type="number">2</literal> <operator>)</operator> <operator>==</operator> <literal type="number">0</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>                
+    </block_content>}</block></for>
+</block_content>}</block>
+
+<macro><name>TEST_CASE</name><argument_list>( <argument><literal type="string">"./succeeding/Misc/stdout,stderr"</literal></argument>, <argument><literal type="string">"Sends stuff to stdout and stderr"</literal></argument> )</argument_list></macro>
+<block>{<block_content>
+    <expr_stmt><expr><name><name>std</name><operator>::</operator><name>cout</name></name> <operator>&lt;&lt;</operator> <literal type="string">"Some information"</literal> <operator>&lt;&lt;</operator> <name><name>std</name><operator>::</operator><name>endl</name></name></expr>;</expr_stmt>
+    
+    <expr_stmt><expr><name><name>std</name><operator>::</operator><name>cerr</name></name> <operator>&lt;&lt;</operator> <literal type="string">"An error"</literal> <operator>&lt;&lt;</operator> <name><name>std</name><operator>::</operator><name>endl</name></name></expr>;</expr_stmt>
+</block_content>}</block>
+
+<function><type><specifier>inline</specifier> <specifier>const</specifier> <name>char</name><modifier>*</modifier></type> <name>makeString</name><parameter_list>( <parameter><decl><type><name>bool</name></type> <name>makeNull</name></decl></parameter> )</parameter_list>
+<block>{<block_content>
+    <return>return <expr><ternary><condition><expr><name>makeNull</name></expr> ?</condition><then> <expr><name>NULL</name></expr> </then><else>: <expr><literal type="string">"valid string"</literal></expr></else></ternary></expr>;</return>
+</block_content>}</block></function>
+
+<macro><name>TEST_CASE</name><argument_list>( <argument><literal type="string">"./succeeding/Misc/null strings"</literal></argument>, <argument><literal type="string">""</literal></argument> )</argument_list></macro>
+<block>{<block_content>
+    <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name>makeString</name><argument_list>( <argument><expr><literal type="boolean">false</literal></expr></argument> )</argument_list></call> <operator>!=</operator> <cast type="static">static_cast<argument_list type="generic">&lt;<argument><expr><name>char</name><operator>*</operator></expr></argument>&gt;</argument_list><argument_list>(<argument><expr><name>NULL</name></expr></argument>)</argument_list></cast></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name>makeString</name><argument_list>( <argument><expr><literal type="boolean">true</literal></expr></argument> )</argument_list></call> <operator>==</operator> <cast type="static">static_cast<argument_list type="generic">&lt;<argument><expr><name>char</name><operator>*</operator></expr></argument>&gt;</argument_list><argument_list>(<argument><expr><name>NULL</name></expr></argument>)</argument_list></cast></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+</block_content>}</block>
+
+<macro><name>TEST_CASE</name><argument_list>( <argument><literal type="string">"./failing/info"</literal></argument>, <argument><literal type="string">"sends information to INFO"</literal></argument> )</argument_list></macro>
+<block>{<block_content>
+    <expr_stmt><expr><call><name>INFO</name><argument_list>( <argument><expr><literal type="string">"hi"</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    <decl_stmt><decl><type><name>int</name></type> <name>i</name> <init>= <expr><literal type="number">7</literal></expr></init></decl>;</decl_stmt>
+    <expr_stmt><expr><call><name>CAPTURE</name><argument_list>( <argument><expr><name>i</name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><literal type="boolean">false</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+</block_content>}</block>
+
+<function><type><specifier>inline</specifier> <name>bool</name></type> <name>testCheckedIf</name><parameter_list>( <parameter><decl><type><name>bool</name></type> <name>flag</name></decl></parameter> )</parameter_list>
+<block>{<block_content>
+    <macro><name>CHECKED_IF</name><argument_list>( <argument>flag</argument> )</argument_list></macro>
+        <return>return <expr><literal type="boolean">true</literal></expr>;</return>
+    <if_stmt><else>else<block type="pseudo"><block_content>
+        <return>return <expr><literal type="boolean">false</literal></expr>;</return></block_content></block></else></if_stmt>
+</block_content>}</block></function>
+
+<macro><name>TEST_CASE</name><argument_list>( <argument><literal type="string">"./succeeding/checkedif"</literal></argument>, <argument><literal type="string">""</literal></argument> )</argument_list></macro>
+<block>{<block_content>
+    <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name>testCheckedIf</name><argument_list>( <argument><expr><literal type="boolean">true</literal></expr></argument> )</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+</block_content>}</block>
+
+<macro><name>TEST_CASE</name><argument_list>( <argument><literal type="string">"./failing/checkedif"</literal></argument>, <argument><literal type="string">""</literal></argument> )</argument_list></macro>
+<block>{<block_content>
+    <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name>testCheckedIf</name><argument_list>( <argument><expr><literal type="boolean">false</literal></expr></argument> )</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+</block_content>}</block>
+
+<function><type><specifier>inline</specifier> <name>bool</name></type> <name>testCheckedElse</name><parameter_list>( <parameter><decl><type><name>bool</name></type> <name>flag</name></decl></parameter> )</parameter_list>
+<block>{<block_content>
+    <macro><name>CHECKED_ELSE</name><argument_list>( <argument>flag</argument> )</argument_list></macro>
+        <return>return <expr><literal type="boolean">false</literal></expr>;</return>
+    
+    <return>return <expr><literal type="boolean">true</literal></expr>;</return>
+</block_content>}</block></function>
+
+<macro><name>TEST_CASE</name><argument_list>( <argument><literal type="string">"./succeeding/checkedelse"</literal></argument>, <argument><literal type="string">""</literal></argument> )</argument_list></macro>
+<block>{<block_content>
+    <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name>testCheckedElse</name><argument_list>( <argument><expr><literal type="boolean">true</literal></expr></argument> )</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+</block_content>}</block>
+
+<macro><name>TEST_CASE</name><argument_list>( <argument><literal type="string">"./failing/checkedelse"</literal></argument>, <argument><literal type="string">""</literal></argument> )</argument_list></macro>
+<block>{<block_content>
+    <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name>testCheckedElse</name><argument_list>( <argument><expr><literal type="boolean">false</literal></expr></argument> )</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+</block_content>}</block>
+
+<macro><name>TEST_CASE</name><argument_list>( <argument><literal type="string">"./misc/xmlentitycheck"</literal></argument>, <argument><literal type="string">""</literal></argument> )</argument_list></macro>
+<block>{<block_content>
+    <macro><name>SECTION</name><argument_list>( <argument><literal type="string">"embedded xml"</literal></argument>, <argument><literal type="string">"&lt;test&gt;it should be possible to embed xml characters, such as &lt;, \" or &amp;, or even whole &lt;xml&gt;documents&lt;/xml&gt; within an attribute&lt;/test&gt;"</literal></argument> )</argument_list></macro>
+    <block>{<block_content>
+        <comment type="line">// No test</comment>
+    </block_content>}</block>
+    <macro><name>SECTION</name><argument_list>( <argument><literal type="string">"encoded chars"</literal></argument>, <argument><literal type="string">"these should all be encoded: &amp;&amp;&amp;\"\"\"&lt;&lt;&lt;&amp;\"&lt;&lt;&amp;\""</literal></argument> )</argument_list></macro>
+    <block>{<block_content>
+        <comment type="line">// No test</comment>
+    </block_content>}</block>
+</block_content>}</block>
+
+<macro><name>TEST_CASE</name><argument_list>( <argument><literal type="string">"./manual/onechar"</literal></argument>, <argument><literal type="string">"send a single char to INFO"</literal></argument> )</argument_list></macro>
+<block>{<block_content>
+    <expr_stmt><expr><call><name>INFO</name><argument_list>(<argument><expr><literal type="number">3</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>REQUIRE</name><argument_list>(<argument><expr><literal type="boolean">false</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>    
+</block_content>}</block>
+<diff:insert xmlns:diff="http://www.srcML.org/srcDiff"><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+</diff:ws><macro><name>TEST_CASE</name><argument_list>(<argument><literal type="string">"./succeeding/atomic<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>if"</literal></argument>,<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><argument><literal type="string">""</literal></argument>)</argument_list></macro><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+</diff:ws><block>{<block_content><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+    </diff:ws><decl_stmt><decl><type><name>size_t</name></type><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><name>x</name><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><init>=<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><expr><literal type="number">0</literal></expr></init></decl>;</decl_stmt><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+    
+    </diff:ws><if_stmt><if>if<condition>(<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><expr><name>x</name></expr><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>)</condition><block type="pseudo"><block_content><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+        </diff:ws><expr_stmt><expr><call><name>REQUIRE</name><argument_list>(<argument><expr><name>x</name><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><operator>&gt;</operator><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><literal type="number">0</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt></block_content></block></if><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+    </diff:ws><else>else<block type="pseudo"><block_content><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+        </diff:ws><expr_stmt><expr><call><name>REQUIRE</name><argument_list>(<argument><expr><name>x</name><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><operator>==</operator><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><literal type="number">0</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt></block_content></block></else></if_stmt><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+</diff:ws></block_content>}</block><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+</diff:ws></diff:insert></unit>

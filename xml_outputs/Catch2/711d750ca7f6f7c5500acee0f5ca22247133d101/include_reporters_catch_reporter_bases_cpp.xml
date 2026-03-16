@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" xmlns:diff="http://www.srcML.org/srcDiff" revision="1.0.0" language="C++" filename="C:\Users\saile\AppData\Local\Temp\catch2_100_z8gzpiwf\711d750ca7f6f7c5500acee0f5ca22247133d101\include_reporters_catch_reporter_bases_cpp\include_reporters_catch_reporter_bases_cpp.old|C:\Users\saile\AppData\Local\Temp\catch2_100_z8gzpiwf\711d750ca7f6f7c5500acee0f5ca22247133d101\include_reporters_catch_reporter_bases_cpp\include_reporters_catch_reporter_bases_cpp.new"><comment type="block">/*
+ *  Created by Phil on 27/11/2013.
+ *  Copyright 2013 Two Blue Cubes Ltd. All rights reserved.
+ *
+ *  Distributed under the Boost Software License, Version 1.0. (See accompanying
+ *  file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
+ */</comment>
+
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">"../internal/catch_interfaces_reporter.h"</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">"../internal/catch_errno_guard.h"</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">"catch_reporter_bases.hpp"</cpp:file></cpp:include>
+
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;cstring&gt;</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;cfloat&gt;</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;cstdio&gt;</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;cassert&gt;</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;memory&gt;</cpp:file></cpp:include>
+
+<namespace>namespace <name>Catch</name> <block>{
+    <function><type><name>void</name></type> <name>prepareExpandedExpression</name><parameter_list>(<parameter><decl><type><name>AssertionResult</name><modifier>&amp;</modifier></type> <name>result</name></decl></parameter>)</parameter_list> <block>{<block_content>
+        <expr_stmt><expr><call><name><name>result</name><operator>.</operator><name>getExpandedExpression</name></name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block></function>
+
+    <comment type="line">// Because formatting using c++ streams is stateful, drop down to C is required</comment>
+    <comment type="line">// Alternatively we could use stringstream, but its performance is... not good.</comment>
+    <function><type><name><name>std</name><operator>::</operator><name>string</name></name></type> <name>getFormattedDuration</name><parameter_list>( <parameter><decl><type><name>double</name></type> <name>duration</name></decl></parameter> )</parameter_list> <block>{<block_content>
+        <comment type="line">// Max exponent + 1 is required to represent the whole part</comment>
+        <comment type="line">// + 1 for decimal point</comment>
+        <comment type="line">// + 3 for the 3 decimal places</comment>
+        <comment type="line">// + 1 for null terminator</comment>
+        <decl_stmt><decl><type><specifier>const</specifier> <name><name>std</name><operator>::</operator><name>size_t</name></name></type> <name>maxDoubleSize</name> <init>= <expr><name>DBL_MAX_10_EXP</name> <operator>+</operator> <literal type="number">1</literal> <operator>+</operator> <literal type="number">1</literal> <operator>+</operator> <literal type="number">3</literal> <operator>+</operator> <literal type="number">1</literal></expr></init></decl>;</decl_stmt>
+        <decl_stmt><decl><type><name>char</name></type> <name><name>buffer</name><index>[<expr><name>maxDoubleSize</name></expr>]</index></name></decl>;</decl_stmt>
+
+        <comment type="line">// Save previous errno, to prevent sprintf from overwriting it</comment>
+        <decl_stmt><decl><type><name>ErrnoGuard</name></type> <name>guard</name></decl>;</decl_stmt>
+<cpp:ifdef xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">ifdef</cpp:directive> <name>_MSC_VER</name></cpp:ifdef>
+        <expr_stmt><expr><call><name>sprintf_s</name><argument_list>(<argument><expr><name>buffer</name></expr></argument>, <argument><expr><literal type="string">"%.3f"</literal></expr></argument>, <argument><expr><name>duration</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+<cpp:else xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">else</cpp:directive></cpp:else>
+        <expr_stmt><expr><call><diff:insert xmlns:diff="http://www.srcML.org/srcDiff"><name><name>std</name><operator>::</operator><diff:common xmlns:diff="http://www.srcML.org/srcDiff"><name>sprintf</name></diff:common></name></diff:insert><argument_list>(<argument><expr><name>buffer</name></expr></argument>, <argument><expr><literal type="string">"%.3f"</literal></expr></argument>, <argument><expr><name>duration</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+<cpp:endif xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">endif</cpp:directive></cpp:endif>
+        <return>return <expr><call><name><name>std</name><operator>::</operator><name>string</name></name><argument_list>(<argument><expr><name>buffer</name></expr></argument>)</argument_list></call></expr>;</return>
+    </block_content>}</block></function>
+
+
+    <constructor><name><name>TestEventListenerBase</name><operator>::</operator><name>TestEventListenerBase</name></name><parameter_list>(<parameter><decl><type><name>ReporterConfig</name> <specifier>const</specifier> <modifier>&amp;</modifier></type> <name>_config</name></decl></parameter>)</parameter_list>
+        <member_init_list>:<call><name>StreamingReporterBase</name><argument_list>(<argument><expr><name>_config</name></expr></argument>)</argument_list></call> </member_init_list><block>{<block_content/>}</block></constructor>
+
+    <function><type><name><name>std</name><operator>::</operator><name>set</name><argument_list type="generic">&lt;<argument><expr><name>Verbosity</name></expr></argument>&gt;</argument_list></name></type> <name><name>TestEventListenerBase</name><operator>::</operator><name>getSupportedVerbosities</name></name><parameter_list>()</parameter_list> <block>{<block_content>
+        <return>return <expr><block>{ <expr><name><name>Verbosity</name><operator>::</operator><name>Quiet</name></name></expr>, <expr><name><name>Verbosity</name><operator>::</operator><name>Normal</name></name></expr>, <expr><name><name>Verbosity</name><operator>::</operator><name>High</name></name></expr> }</block></expr>;</return>
+    </block_content>}</block></function>
+
+    <function><type><name>void</name></type> <name><name>TestEventListenerBase</name><operator>::</operator><name>assertionStarting</name></name><parameter_list>(<parameter><decl><type><name>AssertionInfo</name> <specifier>const</specifier> <modifier>&amp;</modifier></type></decl></parameter>)</parameter_list> <block>{<block_content/>}</block></function>
+
+    <function><type><name>bool</name></type> <name><name>TestEventListenerBase</name><operator>::</operator><name>assertionEnded</name></name><parameter_list>(<parameter><decl><type><name>AssertionStats</name> <specifier>const</specifier> <modifier>&amp;</modifier></type></decl></parameter>)</parameter_list> <block>{<block_content>
+        <return>return <expr><literal type="boolean">false</literal></expr>;</return>
+    </block_content>}</block></function>
+
+
+}</block></namespace> <comment type="line">// end namespace Catch</comment>
+</unit>

@@ -1,0 +1,284 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" xmlns:diff="http://www.srcML.org/srcDiff" revision="1.0.0" language="C++" filename="C:\Users\saile\AppData\Local\Temp\catch2_100_z8gzpiwf\a6ee7e20cd4011129816df7992c1a9db2ef4b58f\src_catch2_internal_catch_console_colour_cpp\src_catch2_internal_catch_console_colour_cpp.old|C:\Users\saile\AppData\Local\Temp\catch2_100_z8gzpiwf\a6ee7e20cd4011129816df7992c1a9db2ef4b58f\src_catch2_internal_catch_console_colour_cpp\src_catch2_internal_catch_console_colour_cpp.new">
+<comment type="line">//              Copyright Catch2 Authors</comment>
+<comment type="line">// Distributed under the Boost Software License, Version 1.0.</comment>
+<comment type="line">//   (See accompanying file LICENSE.txt or copy at</comment>
+<comment type="line">//        https://www.boost.org/LICENSE_1_0.txt)</comment>
+
+<comment type="line">// SPDX-License-Identifier: BSL-1.0</comment>
+<cpp:if xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">if</cpp:directive> <expr><call><name>defined</name><argument_list>(<argument><expr><name>__clang__</name></expr></argument>)</argument_list></call></expr></cpp:if>
+<cpp:pragma xmlns:cpp="http://www.srcML.org/srcML/cpp">#    <cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">pragma</cpp:directive> <name>clang</name> <name>diagnostic</name> <name>push</name></cpp:pragma>
+<cpp:pragma xmlns:cpp="http://www.srcML.org/srcML/cpp">#    <cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">pragma</cpp:directive> <name>clang</name> <name>diagnostic</name> <name>ignored</name> <cpp:literal xmlns:cpp="http://www.srcML.org/srcML/cpp">"-Wexit-time-destructors"</cpp:literal></cpp:pragma>
+<cpp:endif xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">endif</cpp:directive></cpp:endif>
+
+
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;catch2/internal/catch_console_colour.hpp&gt;</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;catch2/internal/catch_enforce.hpp&gt;</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;catch2/internal/catch_errno_guard.hpp&gt;</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;catch2/interfaces/catch_interfaces_config.hpp&gt;</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;catch2/internal/catch_istream.hpp&gt;</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;catch2/internal/catch_move_and_forward.hpp&gt;</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;catch2/internal/catch_context.hpp&gt;</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;catch2/internal/catch_platform.hpp&gt;</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;catch2/internal/catch_debugger.hpp&gt;</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;catch2/internal/catch_windows_h_proxy.hpp&gt;</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;catch2/internal/catch_compiler_capabilities.hpp&gt;</cpp:file></cpp:include>
+
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;cassert&gt;</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;ostream&gt;</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;utility&gt;</cpp:file></cpp:include>
+
+<namespace>namespace <name>Catch</name> <block>{
+
+    <expr_stmt><expr><call><name><name>ColourImpl</name><operator>::</operator><name>~ColourImpl</name></name><argument_list>()</argument_list></call> <operator>=</operator> default</expr>;</expr_stmt>
+
+    <function><type><name><name>ColourImpl</name><operator>::</operator><name>ColourGuard</name></name></type> <name><name>ColourImpl</name><operator>::</operator><name>guardColour</name></name><parameter_list>( <parameter><decl><type><name><name>Colour</name><operator>::</operator><name>Code</name></name></type> <name>colourCode</name></decl></parameter> )</parameter_list> <block>{<block_content>
+        <return>return <expr><call><name>ColourGuard</name><argument_list>(<argument><expr><name>colourCode</name></expr></argument>, <argument><expr><name>this</name></expr></argument> )</argument_list></call></expr>;</return>
+    </block_content>}</block></function>
+
+    <function><type><name>void</name></type> <name><name>ColourImpl</name><operator>::</operator><name>ColourGuard</name><operator>::</operator><name>engageImpl</name></name><parameter_list>( <parameter><decl><type><name><name>std</name><operator>::</operator><name>ostream</name></name><modifier>&amp;</modifier></type> <name>stream</name></decl></parameter> )</parameter_list> <block>{<block_content>
+        <expr_stmt><expr><call><name>assert</name><argument_list>( <argument><expr><operator>&amp;</operator><name>stream</name> <operator>==</operator> <operator>&amp;</operator><call><name><name>m_colourImpl</name><operator>-&gt;</operator><name>m_stream</name><operator>-&gt;</operator><name>stream</name></name><argument_list>()</argument_list></call> <operator>&amp;&amp;</operator>
+                <literal type="string">"Engaging colour guard for different stream than used by the "</literal>
+                <literal type="string">"parent colour implementation"</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><cast type="static">static_cast<argument_list type="generic">&lt;<argument><expr><name>void</name></expr></argument>&gt;</argument_list><argument_list>( <argument><expr><name>stream</name></expr></argument> )</argument_list></cast></expr>;</expr_stmt>
+
+        <expr_stmt><expr><name>m_engaged</name> <operator>=</operator> <literal type="boolean">true</literal></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name><name>m_colourImpl</name><operator>-&gt;</operator><name>use</name></name><argument_list>( <argument><expr><name>m_code</name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block></function>
+
+    <constructor><name><name>ColourImpl</name><operator>::</operator><name>ColourGuard</name><operator>::</operator><name>ColourGuard</name></name><parameter_list>( <parameter><decl><type><name><name>Colour</name><operator>::</operator><name>Code</name></name></type> <name>code</name></decl></parameter>,
+                                          <parameter><decl><type><name>ColourImpl</name> <specifier>const</specifier><modifier>*</modifier></type> <name>colour</name></decl></parameter> )</parameter_list><member_init_list>:
+        <call><name>m_colourImpl</name><argument_list>( <argument><expr><name>colour</name></expr></argument> )</argument_list></call>, <call><name>m_code</name><argument_list>( <argument><expr><name>code</name></expr></argument> )</argument_list></call> </member_init_list><block>{<block_content>
+    </block_content>}</block></constructor>
+    <constructor><name><name>ColourImpl</name><operator>::</operator><name>ColourGuard</name><operator>::</operator><name>ColourGuard</name></name><parameter_list>( <parameter><decl><type><name>ColourGuard</name><modifier>&amp;&amp;</modifier></type> <name>rhs</name></decl></parameter> )</parameter_list> <noexcept>noexcept</noexcept>:
+        <name>m_colourImpl</name>( <name>rhs</name>.<name>m_colourImpl</name></constructor> )</block><operator>,</operator>
+        <name>m_code</name>( <name><name>rhs</name><operator>.</operator><name>m_code</name></name></namespace> )<operator>,</operator>
+        <macro><name>m_engaged</name><argument_list>( <argument>rhs.m_engaged</argument> )</argument_list></macro> <block>{<block_content>
+        <expr_stmt><expr><name><name>rhs</name><operator>.</operator><name>m_engaged</name></name> <operator>=</operator> <literal type="boolean">false</literal></expr>;</expr_stmt>
+    </block_content>}</block>
+    <function type="operator"><type><name><name>ColourImpl</name><operator>::</operator><name>ColourGuard</name></name><modifier>&amp;</modifier></type>
+    <name><name>ColourImpl</name><operator>::</operator><name>ColourGuard</name><operator>::</operator><name>operator<name>=</name></name></name><parameter_list>( <parameter><decl><type><name>ColourGuard</name><modifier>&amp;&amp;</modifier></type> <name>rhs</name></decl></parameter> )</parameter_list> <noexcept>noexcept</noexcept> <block>{<block_content>
+        <using>using <name><name>std</name><operator>::</operator><name>swap</name></name>;</using>
+        <expr_stmt><expr><call><name>swap</name><argument_list>( <argument><expr><name>m_colourImpl</name></expr></argument>, <argument><expr><name><name>rhs</name><operator>.</operator><name>m_colourImpl</name></name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name>swap</name><argument_list>( <argument><expr><name>m_code</name></expr></argument>, <argument><expr><name><name>rhs</name><operator>.</operator><name>m_code</name></name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name>swap</name><argument_list>( <argument><expr><name>m_engaged</name></expr></argument>, <argument><expr><name><name>rhs</name><operator>.</operator><name>m_engaged</name></name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+
+        <return>return <expr><operator>*</operator><name>this</name></expr>;</return>
+    </block_content>}</block></function>
+    <destructor><name><name>ColourImpl</name><operator>::</operator><name>ColourGuard</name><operator>::</operator><name>~ColourGuard</name></name><parameter_list>()</parameter_list> <block>{<block_content>
+        <if_stmt><if>if <condition>( <expr><name>m_engaged</name></expr> )</condition> <block>{<block_content>
+            <expr_stmt><expr><call><name><name>m_colourImpl</name><operator>-&gt;</operator><name>use</name></name><argument_list>( <argument><expr><name><name>Colour</name><operator>::</operator><name>None</name></name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        </block_content>}</block></if></if_stmt>
+    </block_content>}</block></destructor>
+
+    <function><type><name><name>ColourImpl</name><operator>::</operator><name>ColourGuard</name></name><modifier>&amp;</modifier></type>
+    <name><name>ColourImpl</name><operator>::</operator><name>ColourGuard</name><operator>::</operator><name>engage</name></name><parameter_list>( <parameter><decl><type><name><name>std</name><operator>::</operator><name>ostream</name></name><modifier>&amp;</modifier></type> <name>stream</name></decl></parameter> )</parameter_list> <ref_qualifier>&amp;</ref_qualifier> <block>{<block_content>
+        <expr_stmt><expr><call><name>engageImpl</name><argument_list>( <argument><expr><name>stream</name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        <return>return <expr><operator>*</operator><name>this</name></expr>;</return>
+    </block_content>}</block></function>
+
+    <function><type><name><name>ColourImpl</name><operator>::</operator><name>ColourGuard</name></name><modifier>&amp;&amp;</modifier></type>
+    <name><name>ColourImpl</name><operator>::</operator><name>ColourGuard</name><operator>::</operator><name>engage</name></name><parameter_list>( <parameter><decl><type><name><name>std</name><operator>::</operator><name>ostream</name></name><modifier>&amp;</modifier></type> <name>stream</name></decl></parameter> )</parameter_list> <ref_qualifier>&amp;&amp;</ref_qualifier> <block>{<block_content>
+        <expr_stmt><expr><call><name>engageImpl</name><argument_list>( <argument><expr><name>stream</name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        <return>return <expr><call><name>CATCH_MOVE</name><argument_list>(<argument><expr><operator>*</operator><name>this</name></expr></argument>)</argument_list></call></expr>;</return>
+    </block_content>}</block></function>
+
+    <namespace>namespace <block>{
+        <comment type="line" format="doxygen">//! A do-nothing implementation of colour, used as fallback for unknown</comment>
+        <comment type="line" format="doxygen">//! platforms, and when the user asks to deactivate all colours.</comment>
+        <class>class <name>NoColourImpl</name> <specifier>final</specifier> <super_list>: <super><specifier>public</specifier> <name>ColourImpl</name></super></super_list> <block>{<private type="default">
+        </private><public>public:
+            <constructor><name>NoColourImpl</name><parameter_list>( <parameter><decl><type><name>IStream</name><modifier>*</modifier></type> <name>stream</name></decl></parameter> )</parameter_list><member_init_list>: <call><name>ColourImpl</name><argument_list>( <argument><expr><name>stream</name></expr></argument> )</argument_list></call> </member_init_list><block>{<block_content/>}</block></constructor>
+
+        </public><private>private:
+            <function><type><name>void</name></type> <name>use</name><parameter_list>( <parameter><decl><type><name><name>Colour</name><operator>::</operator><name>Code</name></name></type></decl></parameter> )</parameter_list> <specifier>const</specifier> <specifier>override</specifier> <block>{<block_content/>}</block></function>
+        </private>}</block>;</class>
+    }</block></namespace> <comment type="line">// namespace</comment>
+
+
+} <comment type="line">// namespace Catch</comment>
+
+
+<cpp:if xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">if</cpp:directive> <expr><call><name>defined</name> <argument_list>( <argument><expr><name>CATCH_CONFIG_COLOUR_WIN32</name></expr></argument> )</argument_list></call></expr></cpp:if> <comment type="line" format="doxygen">/////////////////////////////////////////</comment>
+
+namespace <macro><name>Catch</name></macro> <block>{<block_content>
+<namespace>namespace <block>{
+
+    <class>class <name>Win32ColourImpl</name> <specifier>final</specifier> <super_list>: <super><specifier>public</specifier> <name>ColourImpl</name></super></super_list> <block>{<private type="default">
+    </private><public>public:
+        <constructor><name>Win32ColourImpl</name><parameter_list>(<parameter><decl><type><name>IStream</name><modifier>*</modifier></type> <name>stream</name></decl></parameter>)</parameter_list><member_init_list>:
+            <call><name>ColourImpl</name><argument_list>(<argument><expr><name>stream</name></expr></argument>)</argument_list></call> </member_init_list><block>{<block_content>
+            <decl_stmt><decl><type><name>CONSOLE_SCREEN_BUFFER_INFO</name></type> <name>csbiInfo</name></decl>;</decl_stmt>
+            <expr_stmt><expr><call><name>GetConsoleScreenBufferInfo</name><argument_list>( <argument><expr><call><name>GetStdHandle</name><argument_list>( <argument><expr><name>STD_OUTPUT_HANDLE</name></expr></argument> )</argument_list></call></expr></argument>,
+                                        <argument><expr><operator>&amp;</operator><name>csbiInfo</name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+            <expr_stmt><expr><name>originalForegroundAttributes</name> <operator>=</operator> <name><name>csbiInfo</name><operator>.</operator><name>wAttributes</name></name> <operator>&amp;</operator> <operator>~</operator><operator>(</operator> <name>BACKGROUND_GREEN</name> <operator>|</operator> <name>BACKGROUND_RED</name> <operator>|</operator> <name>BACKGROUND_BLUE</name> <operator>|</operator> <name>BACKGROUND_INTENSITY</name> <operator>)</operator></expr>;</expr_stmt>
+            <expr_stmt><expr><name>originalBackgroundAttributes</name> <operator>=</operator> <name><name>csbiInfo</name><operator>.</operator><name>wAttributes</name></name> <operator>&amp;</operator> <operator>~</operator><operator>(</operator> <name>FOREGROUND_GREEN</name> <operator>|</operator> <name>FOREGROUND_RED</name> <operator>|</operator> <name>FOREGROUND_BLUE</name> <operator>|</operator> <name>FOREGROUND_INTENSITY</name> <operator>)</operator></expr>;</expr_stmt>
+        </block_content>}</block></constructor>
+
+        <function><type><specifier>static</specifier> <name>bool</name></type> <name>useImplementationForStream</name><parameter_list>(<parameter><decl><type><name>IStream</name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>stream</name></decl></parameter>)</parameter_list> <block>{<block_content>
+            <comment type="line">// Win32 text colour APIs can only be used on console streams</comment>
+            <comment type="line">// We cannot check that the output hasn't been redirected,</comment>
+            <comment type="line">// so we just check that the original stream is console stream.</comment>
+            <return>return <expr><call><name><name>stream</name><operator>.</operator><name>isConsole</name></name><argument_list>()</argument_list></call></expr>;</return>
+        </block_content>}</block></function>
+
+    </public><private>private:
+        <function><type><name>void</name></type> <name>use</name><parameter_list>( <parameter><decl><type><name><name>Colour</name><operator>::</operator><name>Code</name></name></type> <name>_colourCode</name></decl></parameter> )</parameter_list> <specifier>const</specifier> <specifier>override</specifier> <block>{<block_content>
+            <switch>switch<condition>( <expr><name>_colourCode</name></expr> )</condition> <block>{<block_content>
+                <case>case <expr><name><name>Colour</name><operator>::</operator><name>None</name></name></expr>:</case>      <return>return <expr><call><name>setTextAttribute</name><argument_list>( <argument><expr><name>originalForegroundAttributes</name></expr></argument> )</argument_list></call></expr>;</return>
+                <case>case <expr><name><name>Colour</name><operator>::</operator><name>White</name></name></expr>:</case>     <return>return <expr><call><name>setTextAttribute</name><argument_list>( <argument><expr><name>FOREGROUND_GREEN</name> <operator>|</operator> <name>FOREGROUND_RED</name> <operator>|</operator> <name>FOREGROUND_BLUE</name></expr></argument> )</argument_list></call></expr>;</return>
+                <case>case <expr><name><name>Colour</name><operator>::</operator><name>Red</name></name></expr>:</case>       <return>return <expr><call><name>setTextAttribute</name><argument_list>( <argument><expr><name>FOREGROUND_RED</name></expr></argument> )</argument_list></call></expr>;</return>
+                <case>case <expr><name><name>Colour</name><operator>::</operator><name>Green</name></name></expr>:</case>     <return>return <expr><call><name>setTextAttribute</name><argument_list>( <argument><expr><name>FOREGROUND_GREEN</name></expr></argument> )</argument_list></call></expr>;</return>
+                <case>case <expr><name><name>Colour</name><operator>::</operator><name>Blue</name></name></expr>:</case>      <return>return <expr><call><name>setTextAttribute</name><argument_list>( <argument><expr><name>FOREGROUND_BLUE</name></expr></argument> )</argument_list></call></expr>;</return>
+                <case>case <expr><name><name>Colour</name><operator>::</operator><name>Cyan</name></name></expr>:</case>      <return>return <expr><call><name>setTextAttribute</name><argument_list>( <argument><expr><name>FOREGROUND_BLUE</name> <operator>|</operator> <name>FOREGROUND_GREEN</name></expr></argument> )</argument_list></call></expr>;</return>
+                <case>case <expr><name><name>Colour</name><operator>::</operator><name>Yellow</name></name></expr>:</case>    <return>return <expr><call><name>setTextAttribute</name><argument_list>( <argument><expr><name>FOREGROUND_RED</name> <operator>|</operator> <name>FOREGROUND_GREEN</name></expr></argument> )</argument_list></call></expr>;</return>
+                <case>case <expr><name><name>Colour</name><operator>::</operator><name>Grey</name></name></expr>:</case>      <return>return <expr><call><name>setTextAttribute</name><argument_list>( <argument><expr><literal type="number">0</literal></expr></argument> )</argument_list></call></expr>;</return>
+
+                <case>case <expr><name><name>Colour</name><operator>::</operator><name>LightGrey</name></name></expr>:</case>     <return>return <expr><call><name>setTextAttribute</name><argument_list>( <argument><expr><name>FOREGROUND_INTENSITY</name></expr></argument> )</argument_list></call></expr>;</return>
+                <case>case <expr><name><name>Colour</name><operator>::</operator><name>BrightRed</name></name></expr>:</case>     <return>return <expr><call><name>setTextAttribute</name><argument_list>( <argument><expr><name>FOREGROUND_INTENSITY</name> <operator>|</operator> <name>FOREGROUND_RED</name></expr></argument> )</argument_list></call></expr>;</return>
+                <case>case <expr><name><name>Colour</name><operator>::</operator><name>BrightGreen</name></name></expr>:</case>   <return>return <expr><call><name>setTextAttribute</name><argument_list>( <argument><expr><name>FOREGROUND_INTENSITY</name> <operator>|</operator> <name>FOREGROUND_GREEN</name></expr></argument> )</argument_list></call></expr>;</return>
+                <case>case <expr><name><name>Colour</name><operator>::</operator><name>BrightWhite</name></name></expr>:</case>   <return>return <expr><call><name>setTextAttribute</name><argument_list>( <argument><expr><name>FOREGROUND_INTENSITY</name> <operator>|</operator> <name>FOREGROUND_GREEN</name> <operator>|</operator> <name>FOREGROUND_RED</name> <operator>|</operator> <name>FOREGROUND_BLUE</name></expr></argument> )</argument_list></call></expr>;</return>
+                <case>case <expr><name><name>Colour</name><operator>::</operator><name>BrightYellow</name></name></expr>:</case>  <return>return <expr><call><name>setTextAttribute</name><argument_list>( <argument><expr><name>FOREGROUND_INTENSITY</name> <operator>|</operator> <name>FOREGROUND_RED</name> <operator>|</operator> <name>FOREGROUND_GREEN</name></expr></argument> )</argument_list></call></expr>;</return>
+
+                <case>case <expr><name><name>Colour</name><operator>::</operator><name>Bright</name></name></expr>:</case> <expr_stmt><expr><call><name>CATCH_INTERNAL_ERROR</name><argument_list>( <argument><expr><literal type="string">"not a colour"</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+
+                <default>default:</default>
+                    <expr_stmt><expr><call><name>CATCH_ERROR</name><argument_list>( <argument><expr><literal type="string">"Unknown colour requested"</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+            </block_content>}</block></switch>
+        </block_content>}</block></function>
+
+        <function><type><name>void</name></type> <name>setTextAttribute</name><parameter_list>( <parameter><decl><type><name>WORD</name></type> <name>_textAttribute</name></decl></parameter> )</parameter_list> <specifier>const</specifier> <block>{<block_content>
+            <expr_stmt><expr><call><name>SetConsoleTextAttribute</name><argument_list>( <argument><expr><call><name>GetStdHandle</name><argument_list>( <argument><expr><name>STD_OUTPUT_HANDLE</name></expr></argument> )</argument_list></call></expr></argument>,
+                                     <argument><expr><name>_textAttribute</name> <operator>|</operator>
+                                         <name>originalBackgroundAttributes</name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        </block_content>}</block></function>
+        <decl_stmt><decl><type><name>WORD</name></type> <name>originalForegroundAttributes</name></decl>;</decl_stmt>
+        <decl_stmt><decl><type><name>WORD</name></type> <name>originalBackgroundAttributes</name></decl>;</decl_stmt>
+    </private>}</block>;</class>
+
+}</block></namespace> <comment type="line">// end anon namespace</comment>
+</block_content>}</block> <comment type="line">// end namespace Catch</comment>
+
+<cpp:endif xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">endif</cpp:directive></cpp:endif> <comment type="line">// Windows/ ANSI/ None</comment>
+
+
+<cpp:if xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">if</cpp:directive> <expr><call><name>defined</name><argument_list>( <argument><expr><name>CATCH_PLATFORM_LINUX</name></expr></argument> )</argument_list></call> <operator>||</operator> <call><name>defined</name><argument_list>( <argument><expr><name>CATCH_PLATFORM_MAC</name></expr></argument> )</argument_list></call><diff:insert xmlns:diff="http://www.srcML.org/srcDiff"><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><operator>||</operator><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><call><name>defined</name><argument_list>(<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><argument><expr><name>__GLIBC__</name></expr></argument><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>)</argument_list></call></diff:insert></expr></cpp:if>
+<cpp:define xmlns:cpp="http://www.srcML.org/srcML/cpp">#    <cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">define</cpp:directive> <cpp:macro xmlns:cpp="http://www.srcML.org/srcML/cpp"><name>CATCH_INTERNAL_HAS_ISATTY</name></cpp:macro></cpp:define>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#    <cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;unistd.h&gt;</cpp:file></cpp:include>
+<cpp:endif xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">endif</cpp:directive></cpp:endif>
+
+<namespace>namespace <name>Catch</name> <block>{
+<namespace>namespace <block>{
+
+    <class>class <name>ANSIColourImpl</name> <specifier>final</specifier> <super_list>: <super><specifier>public</specifier> <name>ColourImpl</name></super></super_list> <block>{<private type="default">
+    </private><public>public:
+        <constructor><name>ANSIColourImpl</name><parameter_list>( <parameter><decl><type><name>IStream</name><modifier>*</modifier></type> <name>stream</name></decl></parameter> )</parameter_list><member_init_list>: <call><name>ColourImpl</name><argument_list>( <argument><expr><name>stream</name></expr></argument> )</argument_list></call> </member_init_list><block>{<block_content/>}</block></constructor>
+
+        <function><type><specifier>static</specifier> <name>bool</name></type> <name>useImplementationForStream</name><parameter_list>(<parameter><decl><type><name>IStream</name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>stream</name></decl></parameter>)</parameter_list> <block>{<block_content>
+            <comment type="line">// This is kinda messy due to trying to support a bunch of</comment>
+            <comment type="line">// different platforms at once.</comment>
+            <comment type="line">// The basic idea is that if we are asked to do autodetection (as</comment>
+            <comment type="line">// opposed to being told to use posixy colours outright), then we</comment>
+            <comment type="line">// only want to use the colours if we are writing to console.</comment>
+            <comment type="line">// However, console might be redirected, so we make an attempt at</comment>
+            <comment type="line">// checking for that on platforms where we know how to do that.</comment>
+            <decl_stmt><decl><type><name>bool</name></type> <name>useColour</name> <init>= <expr><call><name><name>stream</name><operator>.</operator><name>isConsole</name></name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+<cpp:if xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">if</cpp:directive> <expr><call><name>defined</name><argument_list>( <argument><expr><name>CATCH_INTERNAL_HAS_ISATTY</name></expr></argument> )</argument_list></call> <operator>&amp;&amp;</operator> \
+    <operator>!</operator><operator>(</operator> <call><name>defined</name><argument_list>( <argument><expr><name>__DJGPP__</name></expr></argument> )</argument_list></call> <operator>&amp;&amp;</operator> <call><name>defined</name><argument_list>( <argument><expr><name>__STRICT_ANSI__</name></expr></argument> )</argument_list></call> <operator>)</operator></expr></cpp:if>
+            <decl_stmt><decl><type><name>ErrnoGuard</name></type> <name>_</name></decl>;</decl_stmt> <comment type="line">// for isatty</comment>
+            <expr_stmt><expr><name>useColour</name> <operator>=</operator> <name>useColour</name> <operator>&amp;&amp;</operator> <call><name>isatty</name><argument_list>( <argument><expr><name>STDOUT_FILENO</name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+<cpp:endif xmlns:cpp="http://www.srcML.org/srcML/cpp">#    <cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">endif</cpp:directive></cpp:endif>
+<cpp:if xmlns:cpp="http://www.srcML.org/srcML/cpp">#    <cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">if</cpp:directive> <expr><call><name>defined</name><argument_list>( <argument><expr><name>CATCH_PLATFORM_MAC</name></expr></argument> )</argument_list></call> <operator>||</operator> <call><name>defined</name><argument_list>( <argument><expr><name>CATCH_PLATFORM_IPHONE</name></expr></argument> )</argument_list></call></expr></cpp:if>
+            <expr_stmt><expr><name>useColour</name> <operator>=</operator> <name>useColour</name> <operator>&amp;&amp;</operator> <operator>!</operator><call><name>isDebuggerActive</name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+<cpp:endif xmlns:cpp="http://www.srcML.org/srcML/cpp">#    <cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">endif</cpp:directive></cpp:endif>
+
+            <return>return <expr><name>useColour</name></expr>;</return>
+        </block_content>}</block></function>
+
+    </public><private>private:
+        <function><type><name>void</name></type> <name>use</name><parameter_list>( <parameter><decl><type><name><name>Colour</name><operator>::</operator><name>Code</name></name></type> <name>_colourCode</name></decl></parameter> )</parameter_list> <specifier>const</specifier> <specifier>override</specifier> <block>{<block_content>
+            <decl_stmt><decl><type><name>auto</name></type> <name>setColour</name> <init>= <expr><lambda><capture>[<argument><modifier>&amp;</modifier><name>out</name> <init>=
+                                  <expr><call><name><name>m_stream</name><operator>-&gt;</operator><name>stream</name></name><argument_list>()</argument_list></call></expr></init></argument>]</capture><parameter_list>( <parameter><decl><type><name>char</name> <specifier>const</specifier><modifier>*</modifier></type> <name>escapeCode</name></decl></parameter> )</parameter_list> <block>{<block_content>
+                <comment type="line">// The escape sequence must be flushed to console, otherwise</comment>
+                <comment type="line">// if stdin and stderr are intermixed, we'd get accidentally</comment>
+                <comment type="line">// coloured output.</comment>
+                <expr_stmt><expr><name>out</name> <operator>&lt;&lt;</operator> <literal type="char">'\033'</literal> <operator>&lt;&lt;</operator> <name>escapeCode</name> <operator>&lt;&lt;</operator> <name><name>std</name><operator>::</operator><name>flush</name></name></expr>;</expr_stmt>
+            </block_content>}</block></lambda></expr></init></decl>;</decl_stmt>
+            <switch>switch<condition>( <expr><name>_colourCode</name></expr> )</condition> <block>{<block_content>
+                <case>case <expr><name><name>Colour</name><operator>::</operator><name>None</name></name></expr>:</case>
+                <case>case <expr><name><name>Colour</name><operator>::</operator><name>White</name></name></expr>:</case>     <return>return <expr><call><name>setColour</name><argument_list>( <argument><expr><literal type="string">"[0m"</literal></expr></argument> )</argument_list></call></expr>;</return>
+                <case>case <expr><name><name>Colour</name><operator>::</operator><name>Red</name></name></expr>:</case>       <return>return <expr><call><name>setColour</name><argument_list>( <argument><expr><literal type="string">"[0;31m"</literal></expr></argument> )</argument_list></call></expr>;</return>
+                <case>case <expr><name><name>Colour</name><operator>::</operator><name>Green</name></name></expr>:</case>     <return>return <expr><call><name>setColour</name><argument_list>( <argument><expr><literal type="string">"[0;32m"</literal></expr></argument> )</argument_list></call></expr>;</return>
+                <case>case <expr><name><name>Colour</name><operator>::</operator><name>Blue</name></name></expr>:</case>      <return>return <expr><call><name>setColour</name><argument_list>( <argument><expr><literal type="string">"[0;34m"</literal></expr></argument> )</argument_list></call></expr>;</return>
+                <case>case <expr><name><name>Colour</name><operator>::</operator><name>Cyan</name></name></expr>:</case>      <return>return <expr><call><name>setColour</name><argument_list>( <argument><expr><literal type="string">"[0;36m"</literal></expr></argument> )</argument_list></call></expr>;</return>
+                <case>case <expr><name><name>Colour</name><operator>::</operator><name>Yellow</name></name></expr>:</case>    <return>return <expr><call><name>setColour</name><argument_list>( <argument><expr><literal type="string">"[0;33m"</literal></expr></argument> )</argument_list></call></expr>;</return>
+                <case>case <expr><name><name>Colour</name><operator>::</operator><name>Grey</name></name></expr>:</case>      <return>return <expr><call><name>setColour</name><argument_list>( <argument><expr><literal type="string">"[1;30m"</literal></expr></argument> )</argument_list></call></expr>;</return>
+
+                <case>case <expr><name><name>Colour</name><operator>::</operator><name>LightGrey</name></name></expr>:</case>     <return>return <expr><call><name>setColour</name><argument_list>( <argument><expr><literal type="string">"[0;37m"</literal></expr></argument> )</argument_list></call></expr>;</return>
+                <case>case <expr><name><name>Colour</name><operator>::</operator><name>BrightRed</name></name></expr>:</case>     <return>return <expr><call><name>setColour</name><argument_list>( <argument><expr><literal type="string">"[1;31m"</literal></expr></argument> )</argument_list></call></expr>;</return>
+                <case>case <expr><name><name>Colour</name><operator>::</operator><name>BrightGreen</name></name></expr>:</case>   <return>return <expr><call><name>setColour</name><argument_list>( <argument><expr><literal type="string">"[1;32m"</literal></expr></argument> )</argument_list></call></expr>;</return>
+                <case>case <expr><name><name>Colour</name><operator>::</operator><name>BrightWhite</name></name></expr>:</case>   <return>return <expr><call><name>setColour</name><argument_list>( <argument><expr><literal type="string">"[1;37m"</literal></expr></argument> )</argument_list></call></expr>;</return>
+                <case>case <expr><name><name>Colour</name><operator>::</operator><name>BrightYellow</name></name></expr>:</case>  <return>return <expr><call><name>setColour</name><argument_list>( <argument><expr><literal type="string">"[1;33m"</literal></expr></argument> )</argument_list></call></expr>;</return>
+
+                <case>case <expr><name><name>Colour</name><operator>::</operator><name>Bright</name></name></expr>:</case> <expr_stmt><expr><call><name>CATCH_INTERNAL_ERROR</name><argument_list>( <argument><expr><literal type="string">"not a colour"</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+                <default>default:</default> <expr_stmt><expr><call><name>CATCH_INTERNAL_ERROR</name><argument_list>( <argument><expr><literal type="string">"Unknown colour requested"</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+            </block_content>}</block></switch>
+        </block_content>}</block></function>
+    </private>}</block>;</class>
+
+}</block></namespace> <comment type="line">// end anon namespace</comment>
+}</block></namespace> <comment type="line">// end namespace Catch</comment>
+
+<namespace>namespace <name>Catch</name> <block>{
+
+    <function><type><name><name>Detail</name><operator>::</operator><name>unique_ptr</name><argument_list type="generic">&lt;<argument><expr><name>ColourImpl</name></expr></argument>&gt;</argument_list></name></type> <name>makeColourImpl</name><parameter_list>( <parameter><decl><type><name>ColourMode</name></type> <name>colourSelection</name></decl></parameter>,
+                                                   <parameter><decl><type><name>IStream</name><modifier>*</modifier></type> <name>stream</name></decl></parameter> )</parameter_list> <block>{<block_content>
+<cpp:if xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">if</cpp:directive> <expr><call><name>defined</name><argument_list>( <argument><expr><name>CATCH_CONFIG_COLOUR_WIN32</name></expr></argument> )</argument_list></call></expr></cpp:if>
+        <if_stmt><if>if <condition>( <expr><name>colourSelection</name> <operator>==</operator> <name><name>ColourMode</name><operator>::</operator><name>Win32</name></name></expr> )</condition> <block>{<block_content>
+            <return>return <expr><call><name><name>Detail</name><operator>::</operator><name>make_unique</name><argument_list type="generic">&lt;<argument><expr><name>Win32ColourImpl</name></expr></argument>&gt;</argument_list></name><argument_list>( <argument><expr><name>stream</name></expr></argument> )</argument_list></call></expr>;</return>
+        </block_content>}</block></if></if_stmt>
+<cpp:endif xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">endif</cpp:directive></cpp:endif>
+        <if_stmt><if>if <condition>( <expr><name>colourSelection</name> <operator>==</operator> <name><name>ColourMode</name><operator>::</operator><name>ANSI</name></name></expr> )</condition> <block>{<block_content>
+            <return>return <expr><call><name><name>Detail</name><operator>::</operator><name>make_unique</name><argument_list type="generic">&lt;<argument><expr><name>ANSIColourImpl</name></expr></argument>&gt;</argument_list></name><argument_list>( <argument><expr><name>stream</name></expr></argument> )</argument_list></call></expr>;</return>
+        </block_content>}</block></if></if_stmt>
+        <if_stmt><if>if <condition>( <expr><name>colourSelection</name> <operator>==</operator> <name><name>ColourMode</name><operator>::</operator><name>None</name></name></expr> )</condition> <block>{<block_content>
+            <return>return <expr><call><name><name>Detail</name><operator>::</operator><name>make_unique</name><argument_list type="generic">&lt;<argument><expr><name>NoColourImpl</name></expr></argument>&gt;</argument_list></name><argument_list>( <argument><expr><name>stream</name></expr></argument> )</argument_list></call></expr>;</return>
+        </block_content>}</block></if></if_stmt>
+
+        <if_stmt><if>if <condition>( <expr><name>colourSelection</name> <operator>==</operator> <name><name>ColourMode</name><operator>::</operator><name>PlatformDefault</name></name></expr>)</condition> <block>{<block_content>
+<cpp:if xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">if</cpp:directive> <expr><call><name>defined</name><argument_list>( <argument><expr><name>CATCH_CONFIG_COLOUR_WIN32</name></expr></argument> )</argument_list></call></expr></cpp:if>
+            <if_stmt><if>if <condition>( <expr><call><name><name>Win32ColourImpl</name><operator>::</operator><name>useImplementationForStream</name></name><argument_list>( <argument><expr><operator>*</operator><name>stream</name></expr></argument> )</argument_list></call></expr> )</condition> <block>{<block_content>
+                <return>return <expr><call><name><name>Detail</name><operator>::</operator><name>make_unique</name><argument_list type="generic">&lt;<argument><expr><name>Win32ColourImpl</name></expr></argument>&gt;</argument_list></name><argument_list>( <argument><expr><name>stream</name></expr></argument> )</argument_list></call></expr>;</return>
+            </block_content>}</block></if></if_stmt>
+<cpp:endif xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">endif</cpp:directive></cpp:endif>
+            <if_stmt><if>if <condition>( <expr><call><name><name>ANSIColourImpl</name><operator>::</operator><name>useImplementationForStream</name></name><argument_list>( <argument><expr><operator>*</operator><name>stream</name></expr></argument> )</argument_list></call></expr> )</condition> <block>{<block_content>
+                <return>return <expr><call><name><name>Detail</name><operator>::</operator><name>make_unique</name><argument_list type="generic">&lt;<argument><expr><name>ANSIColourImpl</name></expr></argument>&gt;</argument_list></name><argument_list>( <argument><expr><name>stream</name></expr></argument> )</argument_list></call></expr>;</return>
+            </block_content>}</block></if></if_stmt>
+            <return>return <expr><call><name><name>Detail</name><operator>::</operator><name>make_unique</name><argument_list type="generic">&lt;<argument><expr><name>NoColourImpl</name></expr></argument>&gt;</argument_list></name><argument_list>( <argument><expr><name>stream</name></expr></argument> )</argument_list></call></expr>;</return>
+        </block_content>}</block></if></if_stmt>
+
+        <expr_stmt><expr><call><name>CATCH_ERROR</name><argument_list>( <argument><expr><literal type="string">"Could not create colour impl for selection "</literal> <operator>&lt;&lt;</operator> <cast type="static">static_cast<argument_list type="generic">&lt;<argument><expr><name>int</name></expr></argument>&gt;</argument_list><argument_list>(<argument><expr><name>colourSelection</name></expr></argument>)</argument_list></cast></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block></function>
+
+    <function><type><name>bool</name></type> <name>isColourImplAvailable</name><parameter_list>( <parameter><decl><type><name>ColourMode</name></type> <name>colourSelection</name></decl></parameter> )</parameter_list> <block>{<block_content>
+        <switch>switch <condition>( <expr><name>colourSelection</name></expr> )</condition> <block>{<block_content>
+<cpp:if xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">if</cpp:directive> <expr><call><name>defined</name><argument_list>( <argument><expr><name>CATCH_CONFIG_COLOUR_WIN32</name></expr></argument> )</argument_list></call></expr></cpp:if>
+        <case>case <expr><name><name>ColourMode</name><operator>::</operator><name>Win32</name></name></expr>:</case>
+<cpp:endif xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">endif</cpp:directive></cpp:endif>
+        <case>case <expr><name><name>ColourMode</name><operator>::</operator><name>ANSI</name></name></expr>:</case>
+        <case>case <expr><name><name>ColourMode</name><operator>::</operator><name>None</name></name></expr>:</case>
+        <case>case <expr><name><name>ColourMode</name><operator>::</operator><name>PlatformDefault</name></name></expr>:</case>
+            <return>return <expr><literal type="boolean">true</literal></expr>;</return>
+        <default>default:</default>
+            <return>return <expr><literal type="boolean">false</literal></expr>;</return>
+        </block_content>}</block></switch>
+    </block_content>}</block></function>
+
+
+}</block></namespace> <comment type="line">// end namespace Catch</comment>
+
+<cpp:if xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">if</cpp:directive> <expr><call><name>defined</name><argument_list>(<argument><expr><name>__clang__</name></expr></argument>)</argument_list></call></expr></cpp:if>
+<cpp:pragma xmlns:cpp="http://www.srcML.org/srcML/cpp">#    <cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">pragma</cpp:directive> <name>clang</name> <name>diagnostic</name> <name>pop</name></cpp:pragma>
+<cpp:endif xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">endif</cpp:directive></cpp:endif>
+
+</unit>

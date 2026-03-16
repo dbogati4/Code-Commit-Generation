@@ -1,0 +1,8 @@
+{
+  "commit_id": "5cf94a80434ef1df9c5d6f52ca9385bee017a8ba",
+  "parent_id": "c435f4c42bc2e404523998d3a43133371954d2a8",
+  "message": "Allow -s to be used to show successful results in test harness",
+  "changed_files": [
+    "Test/main.cpp"
+  ]
+}

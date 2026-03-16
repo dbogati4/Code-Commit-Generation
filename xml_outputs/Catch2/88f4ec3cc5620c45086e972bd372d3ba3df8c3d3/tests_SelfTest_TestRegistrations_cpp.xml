@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" xmlns:diff="http://www.srcML.org/srcDiff" revision="1.0.0" language="C++" filename="C:\Users\saile\AppData\Local\Temp\catch2_100_z8gzpiwf\88f4ec3cc5620c45086e972bd372d3ba3df8c3d3\tests_SelfTest_TestRegistrations_cpp\tests_SelfTest_TestRegistrations_cpp.old|C:\Users\saile\AppData\Local\Temp\catch2_100_z8gzpiwf\88f4ec3cc5620c45086e972bd372d3ba3df8c3d3\tests_SelfTest_TestRegistrations_cpp\tests_SelfTest_TestRegistrations_cpp.new">
+<comment type="line">//              Copyright Catch2 Authors</comment>
+<comment type="line">// Distributed under the Boost Software License, Version 1.0.</comment>
+<comment type="line">//   (See accompanying file LICENSE.txt or copy at</comment>
+<comment type="line">//        https://www.boost.org/LICENSE_1_0.txt)</comment>
+
+<comment type="line">// SPDX-License-Identifier: BSL-1.0</comment>
+
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;catch2/catch_tag_alias_autoregistrar.hpp&gt;</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;catch2/reporters/catch_reporter_event_listener.hpp&gt;</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;catch2/internal/catch_enforce.hpp&gt;</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;catch2/catch_test_case_info.hpp&gt;</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;catch2/reporters/catch_reporter_registrars.hpp&gt;</cpp:file></cpp:include>
+
+
+<comment type="line">// Some example tag aliases</comment>
+<macro><name>CATCH_REGISTER_TAG_ALIAS</name><argument_list>(<argument><literal type="string">"[@nhf]"</literal></argument>, <argument><literal type="string">"[failing]~[.]"</literal></argument>)</argument_list></macro>
+<macro><name>CATCH_REGISTER_TAG_ALIAS</name><argument_list>(<argument><literal type="string">"[@tricky]"</literal></argument>, <argument><literal type="string">"[tricky]~[.]"</literal></argument>)</argument_list></macro>
+
+<cpp:ifdef xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">ifdef</cpp:directive> <name>__clang__</name></cpp:ifdef>
+<cpp:pragma xmlns:cpp="http://www.srcML.org/srcML/cpp">#   <cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">pragma</cpp:directive> <name>clang</name> <name>diagnostic</name> <name>ignored</name> <cpp:literal xmlns:cpp="http://www.srcML.org/srcML/cpp">"-Wpadded"</cpp:literal></cpp:pragma>
+<cpp:pragma xmlns:cpp="http://www.srcML.org/srcML/cpp">#   <cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">pragma</cpp:directive> <name>clang</name> <name>diagnostic</name> <name>ignored</name> <cpp:literal xmlns:cpp="http://www.srcML.org/srcML/cpp">"-Wweak-vtables"</cpp:literal></cpp:pragma>
+<diff:delete xmlns:diff="http://www.srcML.org/srcDiff"><cpp:pragma xmlns:cpp="http://www.srcML.org/srcML/cpp">#<diff:ws xmlns:diff="http://www.srcML.org/srcDiff">   </diff:ws><cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">pragma</cpp:directive><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><name>clang</name><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><name>diagnostic</name><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><name>ignored</name><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><cpp:literal xmlns:cpp="http://www.srcML.org/srcML/cpp">"-Wc++98-compat"</cpp:literal></cpp:pragma><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+</diff:ws></diff:delete><cpp:endif xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">endif</cpp:directive></cpp:endif>
+
+<comment type="block" format="doxygen">/**
+ * Event listener that internally counts and validates received events.
+ *
+ * Currently only performs validation by counting received events, rather
+ * than performing full matching. This means that it won't fail if the *Ended
+ * events are provided in wrong order, as long as they come in the right amount
+ * and with the right nesting.
+ */</comment>
+<class>class <name>ValidatingTestListener</name> <super_list>: <super><specifier>public</specifier> <name><name>Catch</name><operator>::</operator><name>EventListenerBase</name></name></super></super_list> <block>{<private type="default">
+    <struct>struct <name>EventCounter</name> <block>{<public type="default">
+        <decl_stmt><decl><type><name>int</name></type> <name>starting</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</decl_stmt>
+        <decl_stmt><decl><type><name>int</name></type> <name>ended</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</decl_stmt>
+
+        <function><type><name>bool</name></type> <name>hasActiveEvent</name><parameter_list>()</parameter_list> <specifier>const</specifier> <block>{<block_content>
+            <return>return <expr><name>starting</name> <operator>&gt;</operator> <name>ended</name></expr>;</return>
+        </block_content>}</block></function>
+        <function><type><name>bool</name></type> <name>hasSingleActiveEvent</name><parameter_list>()</parameter_list> <specifier>const</specifier> <block>{<block_content>
+            <return>return <expr><name>starting</name> <operator>-</operator> <literal type="number">1</literal> <operator>==</operator> <name>ended</name></expr>;</return>
+        </block_content>}</block></function>
+        <function><type><name>bool</name></type> <name>allEventsEnded</name><parameter_list>()</parameter_list> <specifier>const</specifier> <block>{<block_content>
+            <return>return <expr><name>starting</name> <operator>==</operator> <name>ended</name></expr>;</return>
+        </block_content>}</block></function>
+    </public>}</block>;</struct>
+
+</private><public>public:
+    <function><type><specifier>static</specifier> <name><name>std</name><operator>::</operator><name>string</name></name></type> <name>getDescription</name><parameter_list>()</parameter_list> <block>{<block_content>
+        <return>return <expr><literal type="string">"Validates ordering of Catch2's listener events"</literal></expr>;</return>
+    </block_content>}</block></function>
+
+    <macro><name>ValidatingTestListener</name><argument_list>(<argument>Catch::IConfig const* config</argument>)</argument_list></macro> :
+        <macro><name>EventListenerBase</name><argument_list>(<argument>config</argument>)</argument_list></macro> <block>{<block_content>
+        <expr_stmt><expr><name><name>m_preferences</name><operator>.</operator><name>shouldReportAllAssertions</name></name> <operator>=</operator> <literal type="boolean">true</literal></expr>;</expr_stmt>
+    </block_content>}</block>
+
+    <function><type><name>void</name></type> <name>testRunStarting</name><parameter_list>( <parameter><decl><type><name><name>Catch</name><operator>::</operator><name>TestRunInfo</name></name> <specifier>const</specifier><modifier>&amp;</modifier></type></decl></parameter> )</parameter_list> <specifier>override</specifier> <block>{<block_content>
+        <expr_stmt><expr><call><name>CATCH_ENFORCE</name><argument_list>( <argument><expr><name><name>m_testRunCounter</name><operator>.</operator><name>starting</name></name> <operator>==</operator> <literal type="number">0</literal></expr></argument>,
+                       <argument><expr><literal type="string">"Test run can only start once"</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><operator>++</operator><name><name>m_testRunCounter</name><operator>.</operator><name>starting</name></name></expr>;</expr_stmt>
+    </block_content>}</block></function>
+    <function><type><name>void</name></type> <name>testCaseStarting</name><parameter_list>(<parameter><decl><type><name><name>Catch</name><operator>::</operator><name>TestCaseInfo</name></name> <specifier>const</specifier><modifier>&amp;</modifier></type></decl></parameter>)</parameter_list> <specifier>override</specifier> <block>{<block_content>
+        <expr_stmt><expr><call><name>CATCH_ENFORCE</name><argument_list>( <argument><expr><call><name><name>m_testRunCounter</name><operator>.</operator><name>hasActiveEvent</name></name><argument_list>()</argument_list></call></expr></argument>,
+                       <argument><expr><literal type="string">"Test case can only be started if the test run has already started"</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name>CATCH_ENFORCE</name><argument_list>( <argument><expr><call><name><name>m_testCaseCounter</name><operator>.</operator><name>allEventsEnded</name></name><argument_list>()</argument_list></call></expr></argument>,
+                       <argument><expr><literal type="string">"Test case cannot start if there is an unfinished one"</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+
+        <expr_stmt><expr><operator>++</operator><name><name>m_testCaseCounter</name><operator>.</operator><name>starting</name></name></expr>;</expr_stmt>
+
+        <comment type="line">// Reset the part tracking for partial test case events</comment>
+        <expr_stmt><expr><name>m_lastSeenPartNumber</name> <operator>=</operator> <call><name>uint64_t</name><argument_list>(<argument><expr><operator>-</operator><literal type="number">1</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block></function>
+
+    <function><type><name>void</name></type> <name>testCasePartialStarting</name><parameter_list>(<parameter><decl><type><name><name>Catch</name><operator>::</operator><name>TestCaseInfo</name></name> <specifier>const</specifier><modifier>&amp;</modifier></type></decl></parameter>,
+                                 <parameter><decl><type><name>uint64_t</name></type> <name>partNumber</name></decl></parameter>)</parameter_list> <specifier>override</specifier> <block>{<block_content>
+        <expr_stmt><expr><call><name>CATCH_ENFORCE</name><argument_list>( <argument><expr><call><name><name>m_testCaseCounter</name><operator>.</operator><name>hasSingleActiveEvent</name></name><argument_list>()</argument_list></call></expr></argument>,
+                       <argument><expr><literal type="string">"Test case can only be partially started if the test case has fully started already"</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name>CATCH_ENFORCE</name><argument_list>( <argument><expr><name>m_lastSeenPartNumber</name> <operator>+</operator> <literal type="number">1</literal> <operator>==</operator> <name>partNumber</name></expr></argument>,
+                       <argument><expr><literal type="string">"Partial test case started out of order"</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+
+        <expr_stmt><expr><operator>++</operator><name><name>m_testCasePartialCounter</name><operator>.</operator><name>starting</name></name></expr>;</expr_stmt>
+        <expr_stmt><expr><name>m_lastSeenPartNumber</name> <operator>=</operator> <name>partNumber</name></expr>;</expr_stmt>
+    </block_content>}</block></function>
+
+    <function><type><name>void</name></type> <name>sectionStarting</name><parameter_list>(<parameter><decl><type><name><name>Catch</name><operator>::</operator><name>SectionInfo</name></name> <specifier>const</specifier><modifier>&amp;</modifier></type></decl></parameter>)</parameter_list> <specifier>override</specifier> <block>{<block_content>
+        <expr_stmt><expr><call><name>CATCH_ENFORCE</name><argument_list>( <argument><expr><call><name><name>m_testCaseCounter</name><operator>.</operator><name>hasSingleActiveEvent</name></name><argument_list>()</argument_list></call></expr></argument>,
+                       <argument><expr><literal type="string">"Section can only start in a test case"</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name>CATCH_ENFORCE</name><argument_list>( <argument><expr><call><name><name>m_testCasePartialCounter</name><operator>.</operator><name>hasSingleActiveEvent</name></name><argument_list>()</argument_list></call></expr></argument>,
+                       <argument><expr><literal type="string">"Section can only start in a test case"</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+
+        <expr_stmt><expr><operator>++</operator><name><name>m_sectionCounter</name><operator>.</operator><name>starting</name></name></expr>;</expr_stmt>
+    </block_content>}</block></function>
+
+    <function><type><name>void</name></type> <name>assertionStarting</name><parameter_list>(<parameter><decl><type><name><name>Catch</name><operator>::</operator><name>AssertionInfo</name></name> <specifier>const</specifier><modifier>&amp;</modifier></type></decl></parameter>)</parameter_list> <specifier>override</specifier> <block>{<block_content>
+        <expr_stmt><expr><call><name>CATCH_ENFORCE</name><argument_list>( <argument><expr><call><name><name>m_testCaseCounter</name><operator>.</operator><name>hasSingleActiveEvent</name></name><argument_list>()</argument_list></call></expr></argument>,
+                       <argument><expr><literal type="string">"Assertion can only start if test case is started"</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+
+        <expr_stmt><expr><operator>++</operator><name><name>m_assertionCounter</name><operator>.</operator><name>starting</name></name></expr>;</expr_stmt>
+    </block_content>}</block></function>
+    <function><type><name>void</name></type> <name>assertionEnded</name><parameter_list>(<parameter><decl><type><name><name>Catch</name><operator>::</operator><name>AssertionStats</name></name> <specifier>const</specifier><modifier>&amp;</modifier></type></decl></parameter>)</parameter_list> <specifier>override</specifier> <block>{<block_content>
+        <comment type="line">// todo:</comment>
+        <comment type="line">//  * Check that assertions are balanced</comment>
+        <comment type="line">//  * Check that assertions has started</comment>
+        <expr_stmt><expr><operator>++</operator><name><name>m_assertionCounter</name><operator>.</operator><name>ended</name></name></expr>;</expr_stmt>
+    </block_content>}</block></function>
+
+    <function><type><name>void</name></type> <name>sectionEnded</name><parameter_list>(<parameter><decl><type><name><name>Catch</name><operator>::</operator><name>SectionStats</name></name> <specifier>const</specifier><modifier>&amp;</modifier></type></decl></parameter>)</parameter_list> <specifier>override</specifier> <block>{<block_content>
+        <expr_stmt><expr><call><name>CATCH_ENFORCE</name><argument_list>( <argument><expr><call><name><name>m_sectionCounter</name><operator>.</operator><name>hasActiveEvent</name></name><argument_list>()</argument_list></call></expr></argument>,
+                       <argument><expr><literal type="string">"Section ended without corresponding start"</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        <comment type="line">// TODO: Check that all assertions ended</comment>
+
+        <expr_stmt><expr><operator>++</operator><name><name>m_sectionCounter</name><operator>.</operator><name>ended</name></name></expr>;</expr_stmt>
+    </block_content>}</block></function>
+
+
+    <function><type><name>void</name></type> <name>testCasePartialEnded</name><parameter_list>(<parameter><decl><type><name><name>Catch</name><operator>::</operator><name>TestCaseStats</name></name> <specifier>const</specifier><modifier>&amp;</modifier></type></decl></parameter>,
+                              <parameter><decl><type><name>uint64_t</name></type> <name>partNumber</name></decl></parameter>)</parameter_list> <specifier>override</specifier> <block>{<block_content>
+        <expr_stmt><expr><call><name>CATCH_ENFORCE</name><argument_list>( <argument><expr><name>m_lastSeenPartNumber</name> <operator>==</operator> <name>partNumber</name></expr></argument>,
+                       <argument><expr><literal type="string">"Partial test case ended out of order"</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name>CATCH_ENFORCE</name><argument_list>( <argument><expr><call><name><name>m_testCasePartialCounter</name><operator>.</operator><name>hasSingleActiveEvent</name></name><argument_list>()</argument_list></call></expr></argument>,
+                       <argument><expr><literal type="string">"Partial test case ended without corresponding start"</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name>CATCH_ENFORCE</name><argument_list>( <argument><expr><call><name><name>m_sectionCounter</name><operator>.</operator><name>allEventsEnded</name></name><argument_list>()</argument_list></call></expr></argument>,
+                       <argument><expr><literal type="string">"Partial test case ended with unbalanced sections"</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        <comment type="line">// TODO: Check that all assertions ended</comment>
+
+        <expr_stmt><expr><operator>++</operator><name><name>m_testCasePartialCounter</name><operator>.</operator><name>ended</name></name></expr>;</expr_stmt>
+    </block_content>}</block></function>
+
+
+    <function><type><name>void</name></type> <name>testCaseEnded</name><parameter_list>(<parameter><decl><type><name><name>Catch</name><operator>::</operator><name>TestCaseStats</name></name> <specifier>const</specifier><modifier>&amp;</modifier></type></decl></parameter>)</parameter_list> <specifier>override</specifier> <block>{<block_content>
+        <expr_stmt><expr><call><name>CATCH_ENFORCE</name><argument_list>( <argument><expr><call><name><name>m_testCaseCounter</name><operator>.</operator><name>hasSingleActiveEvent</name></name><argument_list>()</argument_list></call></expr></argument>,
+                       <argument><expr><literal type="string">"Test case end is not matched with test case start"</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name>CATCH_ENFORCE</name><argument_list>( <argument><expr><call><name><name>m_testCasePartialCounter</name><operator>.</operator><name>allEventsEnded</name></name><argument_list>()</argument_list></call></expr></argument>,
+                       <argument><expr><literal type="string">"A partial test case has not ended"</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name>CATCH_ENFORCE</name><argument_list>( <argument><expr><call><name><name>m_sectionCounter</name><operator>.</operator><name>allEventsEnded</name></name><argument_list>()</argument_list></call></expr></argument>,
+                       <argument><expr><literal type="string">"Test case ended with unbalanced sections"</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+
+        <comment type="line">// TODO: Check that all assertions ended</comment>
+
+        <expr_stmt><expr><operator>++</operator><name><name>m_testCaseCounter</name><operator>.</operator><name>ended</name></name></expr>;</expr_stmt>
+    </block_content>}</block></function>
+    <function><type><name>void</name></type> <name>testRunEnded</name><parameter_list>( <parameter><decl><type><name><name>Catch</name><operator>::</operator><name>TestRunStats</name></name> <specifier>const</specifier><modifier>&amp;</modifier></type></decl></parameter> )</parameter_list> <specifier>override</specifier> <block>{<block_content>
+        <expr_stmt><expr><call><name>CATCH_ENFORCE</name><argument_list>( <argument><expr><call><name><name>m_testRunCounter</name><operator>.</operator><name>hasSingleActiveEvent</name></name><argument_list>()</argument_list></call></expr></argument>,
+                       <argument><expr><literal type="string">"Test run end is not matched with test run start"</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name>CATCH_ENFORCE</name><argument_list>( <argument><expr><name><name>m_testRunCounter</name><operator>.</operator><name>ended</name></name> <operator>==</operator> <literal type="number">0</literal></expr></argument>,
+                       <argument><expr><literal type="string">"Test run can only end once"</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+
+        <expr_stmt><expr><operator>++</operator><name><name>m_testRunCounter</name><operator>.</operator><name>ended</name></name></expr>;</expr_stmt>
+    </block_content>}</block></function>
+
+    <destructor_decl><name>~ValidatingTestListener</name><parameter_list>()</parameter_list> <specifier>override</specifier>;</destructor_decl>
+
+</public><private>private:
+    <decl_stmt><decl><type><name>EventCounter</name></type> <name>m_testRunCounter</name></decl>;</decl_stmt>
+    <decl_stmt><decl><type><name>EventCounter</name></type> <name>m_testCaseCounter</name></decl>;</decl_stmt>
+    <decl_stmt><decl><type><name>EventCounter</name></type> <name>m_testCasePartialCounter</name></decl>;</decl_stmt>
+    <decl_stmt><decl><type><name>uint64_t</name></type> <name>m_lastSeenPartNumber</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</decl_stmt>
+    <decl_stmt><decl><type><name>EventCounter</name></type> <name>m_sectionCounter</name></decl>;</decl_stmt>
+    <decl_stmt><decl><type><name>EventCounter</name></type> <name>m_assertionCounter</name></decl>;</decl_stmt>
+</private>}</block>;</class>
+
+
+<destructor><name><name>ValidatingTestListener</name><operator>::</operator><name>~ValidatingTestListener</name></name><parameter_list>()</parameter_list> <block>{<block_content>
+    <comment type="line">// Throwing from noexcept destructor terminates, but we don't mind</comment>
+    <comment type="line">// because this is test-only check and we don't need to try and recover</comment>
+    <comment type="line">// from assumption violation here.</comment>
+
+    <expr_stmt><expr><call><name>CATCH_ENFORCE</name><argument_list>( <argument><expr><name><name>m_testRunCounter</name><operator>.</operator><name>ended</name></name> <operator>&lt;</operator> <literal type="number">2</literal></expr></argument>,
+                   <argument><expr><literal type="string">"Test run should be started at most once"</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>CATCH_ENFORCE</name><argument_list>( <argument><expr><call><name><name>m_testRunCounter</name><operator>.</operator><name>allEventsEnded</name></name><argument_list>()</argument_list></call></expr></argument>,
+                   <argument><expr><literal type="string">"The test run has not finished"</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>CATCH_ENFORCE</name><argument_list>( <argument><expr><call><name><name>m_testCaseCounter</name><operator>.</operator><name>allEventsEnded</name></name><argument_list>()</argument_list></call></expr></argument>,
+                   <argument><expr><literal type="string">"A test case did not finish"</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+
+    <comment type="line">// TODO: other counters being balanced?</comment>
+</block_content>}</block></destructor>
+
+<macro><name>CATCH_REGISTER_LISTENER</name><argument_list>( <argument>ValidatingTestListener</argument> )</argument_list></macro>
+</unit>

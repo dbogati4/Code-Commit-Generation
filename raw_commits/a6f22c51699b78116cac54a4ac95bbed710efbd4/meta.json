@@ -1,0 +1,8 @@
+{
+  "commit_id": "a6f22c51699b78116cac54a4ac95bbed710efbd4",
+  "parent_id": "1887d42e3d880414a8e9c6746810a42521b0ee90",
+  "message": "Remove static instance of std::random_device in Benchmark::analyse_samples",
+  "changed_files": [
+    "src/catch2/benchmark/detail/catch_stats.cpp"
+  ]
+}

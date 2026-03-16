@@ -1,0 +1,8 @@
+{
+  "commit_id": "ff5b311898d5e19819b6cc067261dd7a5be2cb4b",
+  "parent_id": "4a2eb90302bb39d368cebf65a5bd7254d576bc6c",
+  "message": "Remove superfluous warning suppression in tests",
+  "changed_files": [
+    "tests/SelfTest/IntrospectiveTests/CmdLine.tests.cpp"
+  ]
+}

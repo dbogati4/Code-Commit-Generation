@@ -1,0 +1,8 @@
+{
+  "commit_id": "0f24a8c06f57cf878b99a3004defe808d1cad4fa",
+  "parent_id": "b0260c615d5c0fbf14567a9178bdf02fa23ee3ee",
+  "message": "Added Automake and TAP reporters to SelfTest's main",
+  "changed_files": [
+    "projects/SelfTest/TestMain.cpp"
+  ]
+}

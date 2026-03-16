@@ -1,0 +1,182 @@
+[
+  {
+    "commit_id": "f7e7fa0983e83b922cb6336ff3a55d33b2873943",
+    "file_name": null,
+    "commit_message": "Fix ReusableStringStream to access the container under the lock (#3031)",
+    "prompt_type": "variant1",
+    "responses": {
+      "llama3_8b": "Fix tuple-to-string conversion in ReusableStringStream",
+      "mistral_7b_instruct": "\"Remove type deduction for tuple in tests\"",
+      "codeqwen_7b_chat": "\"Fix double-to-float conversion warning in tests\"",
+      "llama3_70b_instruct": "Change ReusableStringStream to return index and stream pointer on add operation."
+    }
+  },
+  {
+    "commit_id": "d134b0cae3033c4ddc027fae6f76c66e8b0a6a73",
+    "file_name": null,
+    "commit_message": "clang: do not issue bogus warnings about integer manipulation in hash functions with fsanitize=undefined/integer (#2965)",
+    "prompt_type": "variant1",
+    "responses": {
+      "llama3_8b": "Fix clang warning for unsigned integer overflow",
+      "mistral_7b_instruct": "Fix clang integer overflow warnings in random number generator",
+      "codeqwen_7b_chat": "\"Fix double-to-float conversion warning in tests\"",
+      "llama3_70b_instruct": "Add no_sanitize attribute for unsigned-integer-overflow on Clang compilers."
+    }
+  },
+  {
+    "commit_id": "0b2af562710d1bac7fd32ca3f05bf1d713bb97e4",
+    "file_name": null,
+    "commit_message": "Explicitly cast values of different types",
+    "prompt_type": "variant1",
+    "responses": {
+      "llama3_8b": "Fixed warnings for double-to-float conversion in benchmark code.",
+      "mistral_7b_instruct": "Fix double-to-float conversion in Catch benchmark and timer functions",
+      "codeqwen_7b_chat": "\"Fix double-to-float conversion warning in tests\"",
+      "llama3_70b_instruct": "Fix implicit conversions and casting issues in Catch2 benchmark and utility code."
+    }
+  },
+  {
+    "commit_id": "7a89b7573749846654575fec0580e105a27c54cf",
+    "file_name": null,
+    "commit_message": "Use steady_clock in the timer",
+    "prompt_type": "variant1",
+    "responses": {
+      "llama3_8b": "Update timing function to use steady clock.",
+      "mistral_7b_instruct": "Fix use of float in tuple test",
+      "codeqwen_7b_chat": "Fix double-to-float conversion warning in tests",
+      "llama3_70b_instruct": "Change high_resolution_clock to steady_clock for timer in Catch2"
+    }
+  },
+  {
+    "commit_id": "fb51116d5b20ea3fef6c5a89267e7d91856a60cf",
+    "file_name": null,
+    "commit_message": "Avoid useless FDuration cast in benchmark analysis (#2823)",
+    "prompt_type": "variant1",
+    "responses": {
+      "llama3_8b": "Fixed warning in tests",
+      "mistral_7b_instruct": "\"Fix double-to-float conversion in test tuple creation\"",
+      "codeqwen_7b_chat": "Fix double-to-float conversion warning in tests",
+      "llama3_70b_instruct": "Remove unnecessary FDuration constructor calls in catch_analyse.cpp."
+    }
+  },
+  {
+    "commit_id": "f476bcb633b24870b7c0414b0caeb9e192f485e4",
+    "file_name": null,
+    "commit_message": "fix double promotion in catch_approx.cpp",
+    "prompt_type": "variant1",
+    "responses": {
+      "llama3_8b": "Fix typo in Catch::toString to avoid conversion warning.",
+      "mistral_7b_instruct": "Fix float-to-double conversion in tests",
+      "codeqwen_7b_chat": "\"Update Approx constructor to use double epsilon\"",
+      "llama3_70b_instruct": "Fix implicit float-to-double conversions in Catch's Approx constructor."
+    }
+  },
+  {
+    "commit_id": "b7d70ddcd609a798048f055cf8f5b6803ac06e52",
+    "file_name": null,
+    "commit_message": "Ensure we always read 32 bit seed from std::random_device",
+    "prompt_type": "variant1",
+    "responses": {
+      "llama3_8b": "Fix Catch2 statistics and random seed generation.",
+      "mistral_7b_instruct": "\"Remove C++ integral type warning in catch2\"",
+      "codeqwen_7b_chat": "\"Fix double-to-float conversion warning in tests\"",
+      "llama3_70b_instruct": "Refactor catch_stats.cpp and catch_random_seed_generation.cpp to fix warnings and improve code quality."
+    }
+  },
+  {
+    "commit_id": "6ebc013b8cfe438a3a397817ad662db34a978238",
+    "file_name": null,
+    "commit_message": "Fix UDL definitions for C++23",
+    "prompt_type": "variant1",
+    "responses": {
+      "llama3_8b": "Update literal operator syntax for C++11 compatibility.",
+      "mistral_7b_instruct": "Remove float conversion warning in literals for Approx operator",
+      "codeqwen_7b_chat": "Fix double-to-float conversion warning in tests",
+      "llama3_70b_instruct": "Fix user-defined literals by removing whitespace in operator names."
+    }
+  },
+  {
+    "commit_id": "ed4acded380ac5408acf9fa518984cbe1bbe25bd",
+    "file_name": null,
+    "commit_message": "Don't define tryTranslators function if exception are disabled",
+    "prompt_type": "variant1",
+    "responses": {
+      "llama3_8b": "Enable exception translator registry configuration.",
+      "mistral_7b_instruct": "Fix exception handling for Catch2",
+      "codeqwen_7b_chat": "Fix double-to-float conversion warning in tests",
+      "llama3_70b_instruct": "Add guard to disable exceptions when CATCH_CONFIG_DISABLE_EXCEPTIONS is defined"
+    }
+  },
+  {
+    "commit_id": "683c85772f65a8779e3baf45d3402098db58bb8d",
+    "file_name": null,
+    "commit_message": "Clean up explanation in tests",
+    "prompt_type": "variant1",
+    "responses": {
+      "llama3_8b": "\"Improve event listener and assertion counter\"",
+      "mistral_7b_instruct": "Refactor assertion event listener to support custom matchers",
+      "codeqwen_7b_chat": "Fix double-to-float conversion warning in tests",
+      "llama3_70b_instruct": "Refactor AssertionStartingEventGoesBeforeAssertionIsEvaluated test to use event listener."
+    }
+  },
+  {
+    "commit_id": "1b049bdba40582d7c9c8f6e650496f701841b26d",
+    "file_name": null,
+    "commit_message": "2 more TEST_CASEs to DiscoverTests/register-tests.cpp",
+    "prompt_type": "variant1",
+    "responses": {
+      "llama3_8b": "Add test cases for long test names and tags",
+      "mistral_7b_instruct": "Fix long test case names and weird tags in DiscoverTests",
+      "codeqwen_7b_chat": "\"Fix double-to-float conversion warning in tests.\"",
+      "llama3_70b_instruct": "Add test cases for script regressions and weird tags in register-tests.cpp"
+    }
+  },
+  {
+    "commit_id": "0477326ad908d1c96dd3118b54fccc95e5628ef8",
+    "file_name": null,
+    "commit_message": "Directly construct empty string for invalid SectionInfo",
+    "prompt_type": "variant1",
+    "responses": {
+      "llama3_8b": "Fixed Section initialization to remove double-to-float conversion warning.",
+      "mistral_7b_instruct": "\"Fix float conversion in ToStringTuple tests\"",
+      "codeqwen_7b_chat": "\"Fix double-to-float conversion warning in tests\"",
+      "llama3_70b_instruct": "Fix initialization of m_info member with default-constructed std::string."
+    }
+  },
+  {
+    "commit_id": "d58491c85a534a9348634ac3e4eb384df22f4d71",
+    "file_name": null,
+    "commit_message": "Move sectionInfo into sectionEndInfo when SECTION ends",
+    "prompt_type": "variant1",
+    "responses": {
+      "llama3_8b": "Fixed SectionEndInfo constructor optimization.",
+      "mistral_7b_instruct": "\"Fix float conversion in ToStringTuple tests\"",
+      "codeqwen_7b_chat": "\"Fix double-to-float conversion warning in tests\"",
+      "llama3_70b_instruct": "Fix potential object slicing in Section destructor by using move semantics"
+    }
+  },
+  {
+    "commit_id": "e3fc97dffbad63f49a90e5ae688b0ce0c282e8c2",
+    "file_name": null,
+    "commit_message": "fix compiler warning in parseUint and catch only relevant exceptions (#2572)",
+    "prompt_type": "variant1",
+    "responses": {
+      "llama3_8b": "Fixed parsing for numbers with error handling",
+      "mistral_7b_instruct": "\"Fix float conversion warning in ToStringTuple test\"",
+      "codeqwen_7b_chat": "\"Fix double-to-float conversion warning in tests\"",
+      "llama3_70b_instruct": "Handle std::invalid_argument and std::out_of_range exceptions in catch_parse_numbers.cpp."
+    }
+  },
+  {
+    "commit_id": "b3dbd83da2f793a8630647e0053b6613ba5fb874",
+    "file_name": null,
+    "commit_message": "Add test for comparing pointers to NULL with !=",
+    "prompt_type": "variant1",
+    "responses": {
+      "llama3_8b": "Fix pointer comparison and cast consistency in tests.",
+      "mistral_7b_instruct": "Fix pointer comparison in Decomposition tests",
+      "codeqwen_7b_chat": "Fix double-to-float conversion warning in tests",
+      "llama3_70b_instruct": "Fix pointer comparison warnings and fix float conversion in tests"
+    }
+  }
+]

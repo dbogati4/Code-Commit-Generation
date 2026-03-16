@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" xmlns:diff="http://www.srcML.org/srcDiff" revision="1.0.0" language="C++" filename="C:\Users\saile\AppData\Local\Temp\catch2_100_z8gzpiwf\f83332d89b4cad0e6e1583caf6cd3d6b34c41136\tests_SelfTest_UsageTests_ToStringWhich_tests_cpp\tests_SelfTest_UsageTests_ToStringWhich_tests_cpp.old|C:\Users\saile\AppData\Local\Temp\catch2_100_z8gzpiwf\f83332d89b4cad0e6e1583caf6cd3d6b34c41136\tests_SelfTest_UsageTests_ToStringWhich_tests_cpp\tests_SelfTest_UsageTests_ToStringWhich_tests_cpp.new"><diff:delete type="replace" xmlns:diff="http://www.srcML.org/srcDiff"><comment type="block">/*<diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+ </diff:ws>*<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>Demonstrate<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>which<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>version<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>of<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>toString/StringMaker<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>is<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>being<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>used<diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+ </diff:ws>*<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>for<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>various<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>types<diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+ </diff:ws>*/</comment></diff:delete><diff:insert type="replace" xmlns:diff="http://www.srcML.org/srcDiff"><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+</diff:ws><comment type="line">//<diff:ws xmlns:diff="http://www.srcML.org/srcDiff">              </diff:ws>Copyright<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>Catch2<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>Authors</comment><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+</diff:ws><comment type="line">//<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>Distributed<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>under<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>the<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>Boost<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>Software<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>License,<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>Version<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>1.0.</comment><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+</diff:ws><comment type="line">//<diff:ws xmlns:diff="http://www.srcML.org/srcDiff">   </diff:ws>(See<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>accompanying<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>file<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>LICENSE_1_0.txt<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>or<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>copy<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>at</comment><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+</diff:ws><comment type="line">//<diff:ws xmlns:diff="http://www.srcML.org/srcDiff">        </diff:ws>https://www.boost.org/LICENSE_1_0.txt)</comment><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+
+</diff:ws><comment type="line">//<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>SPDX-License-Identifier:<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>BSL-1.0</comment></diff:insert>
+
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;catch2/catch_test_macros.hpp&gt;</cpp:file></cpp:include>
+
+
+
+<cpp:if xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">if</cpp:directive> <expr><call><name>defined</name><argument_list>(<argument><expr><name>__GNUC__</name></expr></argument>)</argument_list></call></expr></cpp:if>
+<comment type="line">// This has to be left enabled until end of the TU, because the GCC</comment>
+<comment type="line">// frontend reports operator&lt;&lt;(std::ostream&amp; os, const has_maker_and_operator&amp;)</comment>
+<comment type="line">// as unused anyway</comment>
+<cpp:pragma xmlns:cpp="http://www.srcML.org/srcML/cpp">#    <cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">pragma</cpp:directive> <name>GCC</name> <name>diagnostic</name> <name>ignored</name> <cpp:literal xmlns:cpp="http://www.srcML.org/srcML/cpp">"-Wunused-function"</cpp:literal></cpp:pragma>
+<cpp:endif xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">endif</cpp:directive></cpp:endif>
+
+<namespace>namespace <block>{
+
+<struct>struct <name>has_operator</name> <block>{<public type="default"> </public>}</block>;</struct>
+<struct>struct <name>has_maker</name> <block>{<public type="default"/>}</block>;</struct>
+<struct>struct <name>has_maker_and_operator</name> <block>{<public type="default"/>}</block>;</struct>
+<struct>struct <name>has_neither</name> <block>{<public type="default"/>}</block>;</struct>
+<struct>struct <name>has_template_operator</name> <block>{<public type="default"/>}</block>;</struct>
+
+<function type="operator"><type><name><name>std</name><operator>::</operator><name>ostream</name></name><modifier>&amp;</modifier></type> <name>operator<name>&lt;&lt;</name></name><parameter_list>(<parameter><decl><type><name><name>std</name><operator>::</operator><name>ostream</name></name><modifier>&amp;</modifier></type> <name>os</name></decl></parameter>, <parameter><decl><type><specifier>const</specifier> <name>has_operator</name><modifier>&amp;</modifier></type></decl></parameter>)</parameter_list> <block>{<block_content>
+    <expr_stmt><expr><name>os</name> <operator>&lt;&lt;</operator> <literal type="string">"operator&lt;&lt;( has_operator )"</literal></expr>;</expr_stmt>
+    <return>return <expr><name>os</name></expr>;</return>
+</block_content>}</block></function>
+
+<function type="operator"><type><name><name>std</name><operator>::</operator><name>ostream</name></name><modifier>&amp;</modifier></type> <name>operator<name>&lt;&lt;</name></name><parameter_list>(<parameter><decl><type><name><name>std</name><operator>::</operator><name>ostream</name></name><modifier>&amp;</modifier></type> <name>os</name></decl></parameter>, <parameter><decl><type><specifier>const</specifier> <name>has_maker_and_operator</name><modifier>&amp;</modifier></type></decl></parameter>)</parameter_list> <block>{<block_content>
+    <expr_stmt><expr><name>os</name> <operator>&lt;&lt;</operator> <literal type="string">"operator&lt;&lt;( has_maker_and_operator )"</literal></expr>;</expr_stmt>
+    <return>return <expr><name>os</name></expr>;</return>
+</block_content>}</block></function>
+
+<function type="operator"><template>template <parameter_list>&lt;<parameter><type><name>typename</name></type> <name>StreamT</name></parameter>&gt;</parameter_list></template>
+<type><name>StreamT</name><modifier>&amp;</modifier></type> <name>operator<name>&lt;&lt;</name></name><parameter_list>(<parameter><decl><type><name>StreamT</name><modifier>&amp;</modifier></type> <name>os</name></decl></parameter>, <parameter><decl><type><specifier>const</specifier> <name>has_template_operator</name><modifier>&amp;</modifier></type></decl></parameter>)</parameter_list> <block>{<block_content>
+    <expr_stmt><expr><name>os</name> <operator>&lt;&lt;</operator> <literal type="string">"operator&lt;&lt;( has_template_operator )"</literal></expr>;</expr_stmt>
+    <return>return <expr><name>os</name></expr>;</return>
+</block_content>}</block></function>
+
+}</block></namespace> <comment type="line">// end anonymous namespace</comment>
+
+<namespace>namespace <name>Catch</name> <block>{
+    <struct><template>template<parameter_list>&lt;&gt;</parameter_list></template>
+    struct <name><name>StringMaker</name><argument_list type="generic">&lt;<argument><expr><name>has_maker</name></expr></argument>&gt;</argument_list></name> <block>{<public type="default">
+        <function><type><specifier>static</specifier> <name><name>std</name><operator>::</operator><name>string</name></name></type> <name>convert</name><parameter_list>( <parameter><decl><type><specifier>const</specifier> <name>has_maker</name><modifier>&amp;</modifier></type></decl></parameter> )</parameter_list> <block>{<block_content>
+            <return>return <expr><literal type="string">"StringMaker&lt;has_maker&gt;"</literal></expr>;</return>
+        </block_content>}</block></function>
+    </public>}</block>;</struct>
+    <struct><template>template<parameter_list>&lt;&gt;</parameter_list></template>
+    struct <name><name>StringMaker</name><argument_list type="generic">&lt;<argument><expr><name>has_maker_and_operator</name></expr></argument>&gt;</argument_list></name> <block>{<public type="default">
+        <function><type><specifier>static</specifier> <name><name>std</name><operator>::</operator><name>string</name></name></type> <name>convert</name><parameter_list>( <parameter><decl><type><specifier>const</specifier> <name>has_maker_and_operator</name><modifier>&amp;</modifier></type></decl></parameter> )</parameter_list> <block>{<block_content>
+            <return>return <expr><literal type="string">"StringMaker&lt;has_maker_and_operator&gt;"</literal></expr>;</return>
+        </block_content>}</block></function>
+    </public>}</block>;</struct>
+}</block></namespace>
+
+<comment type="line">// Call the operator</comment>
+<macro><name>TEST_CASE</name><argument_list>( <argument><literal type="string">"stringify( has_operator )"</literal></argument>, <argument><literal type="string">"[toString]"</literal></argument> )</argument_list></macro> <block>{<block_content>
+    <decl_stmt><decl><type><name>has_operator</name></type> <name>item</name></decl>;</decl_stmt>
+    <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name><operator>::</operator><name>Catch</name><operator>::</operator><name>Detail</name><operator>::</operator><name>stringify</name></name><argument_list>( <argument><expr><name>item</name></expr></argument> )</argument_list></call> <operator>==</operator> <literal type="string">"operator&lt;&lt;( has_operator )"</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+</block_content>}</block>
+
+<comment type="line">// Call the stringmaker</comment>
+<macro><name>TEST_CASE</name><argument_list>( <argument><literal type="string">"stringify( has_maker )"</literal></argument>, <argument><literal type="string">"[toString]"</literal></argument> )</argument_list></macro> <block>{<block_content>
+    <decl_stmt><decl><type><name>has_maker</name></type> <name>item</name></decl>;</decl_stmt>
+    <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name><operator>::</operator><name>Catch</name><operator>::</operator><name>Detail</name><operator>::</operator><name>stringify</name></name><argument_list>( <argument><expr><name>item</name></expr></argument> )</argument_list></call> <operator>==</operator> <literal type="string">"StringMaker&lt;has_maker&gt;"</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+</block_content>}</block>
+
+<comment type="line">// Call the stringmaker</comment>
+<macro><name>TEST_CASE</name><argument_list>( <argument><literal type="string">"stringify( has_maker_and_operator )"</literal></argument>, <argument><literal type="string">"[toString]"</literal></argument> )</argument_list></macro> <block>{<block_content>
+    <decl_stmt><decl><type><name>has_maker_and_operator</name></type> <name>item</name></decl>;</decl_stmt>
+    <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name><operator>::</operator><name>Catch</name><operator>::</operator><name>Detail</name><operator>::</operator><name>stringify</name></name><argument_list>( <argument><expr><name>item</name></expr></argument> )</argument_list></call> <operator>==</operator> <literal type="string">"StringMaker&lt;has_maker_and_operator&gt;"</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+</block_content>}</block>
+
+<macro><name>TEST_CASE</name><argument_list>(<argument><literal type="string">"stringify( has_neither )"</literal></argument>, <argument><literal type="string">"[toString]"</literal></argument>)</argument_list></macro> <block>{<block_content>
+    <decl_stmt><decl><type><name>has_neither</name></type> <name>item</name></decl>;</decl_stmt>
+    <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name><operator>::</operator><name>Catch</name><operator>::</operator><name>Detail</name><operator>::</operator><name>stringify</name></name><argument_list>(<argument><expr><name>item</name></expr></argument>)</argument_list></call> <operator>==</operator> <literal type="string">"{?}"</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+</block_content>}</block>
+
+<comment type="line">// Call the templated operator</comment>
+<macro><name>TEST_CASE</name><argument_list>( <argument><literal type="string">"stringify( has_template_operator )"</literal></argument>, <argument><literal type="string">"[toString]"</literal></argument> )</argument_list></macro> <block>{<block_content>
+    <decl_stmt><decl><type><name>has_template_operator</name></type> <name>item</name></decl>;</decl_stmt>
+    <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name><operator>::</operator><name>Catch</name><operator>::</operator><name>Detail</name><operator>::</operator><name>stringify</name></name><argument_list>( <argument><expr><name>item</name></expr></argument> )</argument_list></call> <operator>==</operator> <literal type="string">"operator&lt;&lt;( has_template_operator )"</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+</block_content>}</block>
+
+
+<comment type="line">// Vectors...</comment>
+
+<macro><name>TEST_CASE</name><argument_list>( <argument><literal type="string">"stringify( vectors&lt;has_operator&gt; )"</literal></argument>, <argument><literal type="string">"[toString]"</literal></argument> )</argument_list></macro> <block>{<block_content>
+    <decl_stmt><decl><type><name><name>std</name><operator>::</operator><name>vector</name><argument_list type="generic">&lt;<argument><expr><name>has_operator</name></expr></argument>&gt;</argument_list></name></type> <name>v</name><argument_list>(<argument><expr><literal type="number">1</literal></expr></argument>)</argument_list></decl>;</decl_stmt>
+    <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name><operator>::</operator><name>Catch</name><operator>::</operator><name>Detail</name><operator>::</operator><name>stringify</name></name><argument_list>( <argument><expr><name>v</name></expr></argument> )</argument_list></call> <operator>==</operator> <literal type="string">"{ operator&lt;&lt;( has_operator ) }"</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+</block_content>}</block>
+
+<macro><name>TEST_CASE</name><argument_list>( <argument><literal type="string">"stringify( vectors&lt;has_maker&gt; )"</literal></argument>, <argument><literal type="string">"[toString]"</literal></argument> )</argument_list></macro> <block>{<block_content>
+    <decl_stmt><decl><type><name><name>std</name><operator>::</operator><name>vector</name><argument_list type="generic">&lt;<argument><expr><name>has_maker</name></expr></argument>&gt;</argument_list></name></type> <name>v</name><argument_list>(<argument><expr><literal type="number">1</literal></expr></argument>)</argument_list></decl>;</decl_stmt>
+    <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name><operator>::</operator><name>Catch</name><operator>::</operator><name>Detail</name><operator>::</operator><name>stringify</name></name><argument_list>( <argument><expr><name>v</name></expr></argument> )</argument_list></call> <operator>==</operator> <literal type="string">"{ StringMaker&lt;has_maker&gt; }"</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+</block_content>}</block>
+
+<macro><name>TEST_CASE</name><argument_list>( <argument><literal type="string">"stringify( vectors&lt;has_maker_and_operator&gt; )"</literal></argument>, <argument><literal type="string">"[toString]"</literal></argument> )</argument_list></macro> <block>{<block_content>
+    <decl_stmt><decl><type><name><name>std</name><operator>::</operator><name>vector</name><argument_list type="generic">&lt;<argument><expr><name>has_maker_and_operator</name></expr></argument>&gt;</argument_list></name></type> <name>v</name><argument_list>(<argument><expr><literal type="number">1</literal></expr></argument>)</argument_list></decl>;</decl_stmt>
+    <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name><operator>::</operator><name>Catch</name><operator>::</operator><name>Detail</name><operator>::</operator><name>stringify</name></name><argument_list>( <argument><expr><name>v</name></expr></argument> )</argument_list></call> <operator>==</operator> <literal type="string">"{ StringMaker&lt;has_maker_and_operator&gt; }"</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+</block_content>}</block>
+
+<namespace>namespace <block>{
+
+<comment type="line">// Range-based conversion should only be used if other possibilities fail</comment>
+<struct>struct <name>int_iterator</name> <block>{<public type="default">
+    <using>using <name>iterator_category</name> <init>= <type><name><name>std</name><operator>::</operator><name>input_iterator_tag</name></name></type></init>;</using>
+    <using>using <name>difference_type</name> <init>= <type><name><name>std</name><operator>::</operator><name>ptrdiff_t</name></name></type></init>;</using>
+    <using>using <name>value_type</name> <init>= <type><name>int</name></type></init>;</using>
+    <using>using <name>reference</name> <init>= <type><name>int</name><modifier>&amp;</modifier></type></init>;</using>
+    <using>using <name>pointer</name> <init>= <type><name>int</name><modifier>*</modifier></type></init>;</using>
+
+    <constructor_decl><name>int_iterator</name><parameter_list>()</parameter_list> = <specifier>default</specifier>;</constructor_decl>
+    <constructor><name>int_iterator</name><parameter_list>(<parameter><decl><type><name>int</name></type> <name>i</name></decl></parameter>)</parameter_list> <member_init_list>:<call><name>val</name><argument_list>(<argument><expr><name>i</name></expr></argument>)</argument_list></call> </member_init_list><block>{<block_content/>}</block></constructor>
+
+    <function type="operator"><type><name>value_type</name></type> <name>operator<name>*</name></name><parameter_list>()</parameter_list> <specifier>const</specifier> <block>{<block_content> <return>return <expr><name>val</name></expr>;</return> </block_content>}</block></function>
+    <function type="operator"><type><name>bool</name></type> <name>operator<name>==</name></name><parameter_list>(<parameter><decl><type><name>int_iterator</name></type> <name>rhs</name></decl></parameter>)</parameter_list> <specifier>const</specifier> <block>{<block_content> <return>return <expr><name>val</name> <operator>==</operator> <name><name>rhs</name><operator>.</operator><name>val</name></name></expr>;</return> </block_content>}</block></function>
+    <function type="operator"><type><name>bool</name></type> <name>operator<name>!=</name></name><parameter_list>(<parameter><decl><type><name>int_iterator</name></type> <name>rhs</name></decl></parameter>)</parameter_list> <specifier>const</specifier> <block>{<block_content> <return>return <expr><name>val</name> <operator>!=</operator> <name><name>rhs</name><operator>.</operator><name>val</name></name></expr>;</return> </block_content>}</block></function>
+    <function type="operator"><type><name>int_iterator</name></type> <name>operator<name>++</name></name><parameter_list>()</parameter_list> <block>{<block_content> <expr_stmt><expr><operator>++</operator><name>val</name></expr>;</expr_stmt> <return>return <expr><operator>*</operator><name>this</name></expr>;</return> </block_content>}</block></function>
+    <function type="operator"><type><name>int_iterator</name></type> <name>operator<name>++</name></name><parameter_list>(<parameter><decl><type><name>int</name></type></decl></parameter>)</parameter_list> <block>{<block_content>
+        <decl_stmt><decl><type><name>auto</name></type> <name>temp</name><argument_list>(<argument><expr><operator>*</operator><name>this</name></expr></argument>)</argument_list></decl>;</decl_stmt>
+        <expr_stmt><expr><operator>++</operator><name>val</name></expr>;</expr_stmt>
+        <return>return <expr><name>temp</name></expr>;</return>
+    </block_content>}</block></function>
+</public><private>private:
+    <decl_stmt><decl><type><name>int</name></type> <name>val</name> <init>= <expr><literal type="number">5</literal></expr></init></decl>;</decl_stmt>
+</private>}</block>;</struct>
+
+<struct>struct <name>streamable_range</name> <block>{<public type="default">
+    <function><type><name>int_iterator</name></type> <name>begin</name><parameter_list>()</parameter_list> <specifier>const</specifier> <block>{<block_content> <return>return <expr><call><name>int_iterator</name><argument_list>{ <argument><expr><literal type="number">1</literal></expr></argument> }</argument_list></call></expr>;</return> </block_content>}</block></function>
+    <function><type><name>int_iterator</name></type> <name>end</name><parameter_list>()</parameter_list> <specifier>const</specifier> <block>{<block_content> <return>return <expr><block>{}</block></expr>;</return> </block_content>}</block></function>
+</public>}</block>;</struct>
+
+<function type="operator"><type><name><name>std</name><operator>::</operator><name>ostream</name></name><modifier>&amp;</modifier></type> <name>operator<name>&lt;&lt;</name></name><parameter_list>(<parameter><decl><type><name><name>std</name><operator>::</operator><name>ostream</name></name><modifier>&amp;</modifier></type> <name>os</name></decl></parameter>, <parameter><decl><type><specifier>const</specifier> <name>streamable_range</name><modifier>&amp;</modifier></type></decl></parameter>)</parameter_list> <block>{<block_content>
+    <expr_stmt><expr><name>os</name> <operator>&lt;&lt;</operator> <literal type="string">"op&lt;&lt;(streamable_range)"</literal></expr>;</expr_stmt>
+    <return>return <expr><name>os</name></expr>;</return>
+</block_content>}</block></function>
+
+<struct>struct <name>stringmaker_range</name> <block>{<public type="default">
+    <function><type><name>int_iterator</name></type> <name>begin</name><parameter_list>()</parameter_list> <specifier>const</specifier> <block>{<block_content> <return>return <expr><call><name>int_iterator</name><argument_list>{ <argument><expr><literal type="number">1</literal></expr></argument> }</argument_list></call></expr>;</return> </block_content>}</block></function>
+    <function><type><name>int_iterator</name></type> <name>end</name><parameter_list>()</parameter_list> <specifier>const</specifier> <block>{<block_content> <return>return <expr><block>{}</block></expr>;</return> </block_content>}</block></function>
+</public>}</block>;</struct>
+
+}</block></namespace> <comment type="line">// end anonymous namespace</comment>
+
+<namespace>namespace <name>Catch</name> <block>{
+<struct><template>template <parameter_list>&lt;&gt;</parameter_list></template>
+struct <name><name>StringMaker</name><argument_list type="generic">&lt;<argument><expr><name>stringmaker_range</name></expr></argument>&gt;</argument_list></name> <block>{<public type="default">
+    <function><type><specifier>static</specifier> <name><name>std</name><operator>::</operator><name>string</name></name></type> <name>convert</name><parameter_list>(<parameter><decl><type><name>stringmaker_range</name> <specifier>const</specifier><modifier>&amp;</modifier></type></decl></parameter>)</parameter_list> <block>{<block_content>
+        <return>return <expr><literal type="string">"stringmaker(streamable_range)"</literal></expr>;</return>
+    </block_content>}</block></function>
+</public>}</block>;</struct>
+}</block></namespace>
+
+<namespace>namespace <block>{
+
+<struct>struct <name>just_range</name> <block>{<public type="default">
+    <function><type><name>int_iterator</name></type> <name>begin</name><parameter_list>()</parameter_list> <specifier>const</specifier> <block>{<block_content> <return>return <expr><call><name>int_iterator</name><argument_list>{ <argument><expr><literal type="number">1</literal></expr></argument> }</argument_list></call></expr>;</return> </block_content>}</block></function>
+    <function><type><name>int_iterator</name></type> <name>end</name><parameter_list>()</parameter_list> <specifier>const</specifier> <block>{<block_content> <return>return <expr><block>{}</block></expr>;</return> </block_content>}</block></function>
+</public>}</block>;</struct>
+
+<struct>struct <name>disabled_range</name> <block>{<public type="default">
+    <function><type><name>int_iterator</name></type> <name>begin</name><parameter_list>()</parameter_list> <specifier>const</specifier> <block>{<block_content> <return>return <expr><call><name>int_iterator</name><argument_list>{ <argument><expr><literal type="number">1</literal></expr></argument> }</argument_list></call></expr>;</return> </block_content>}</block></function>
+    <function><type><name>int_iterator</name></type> <name>end</name><parameter_list>()</parameter_list> <specifier>const</specifier> <block>{<block_content> <return>return <expr><block>{}</block></expr>;</return> </block_content>}</block></function>
+</public>}</block>;</struct>
+
+}</block></namespace> <comment type="line">// end anonymous namespace</comment>
+
+<namespace>namespace <name>Catch</name> <block>{
+<struct><template>template <parameter_list>&lt;&gt;</parameter_list></template>
+struct <name><name>is_range</name><argument_list type="generic">&lt;<argument><expr><name>disabled_range</name></expr></argument>&gt;</argument_list></name> <block>{<public type="default">
+    <decl_stmt><decl><type><specifier>static</specifier> <specifier>const</specifier> <name>bool</name></type> <name>value</name> <init>= <expr><literal type="boolean">false</literal></expr></init></decl>;</decl_stmt>
+</public>}</block>;</struct>
+}</block></namespace>
+
+<macro><name>TEST_CASE</name><argument_list>(<argument><literal type="string">"stringify ranges"</literal></argument>, <argument><literal type="string">"[toString]"</literal></argument>)</argument_list></macro> <block>{<block_content>
+    <expr_stmt><expr><call><name>REQUIRE</name><argument_list>(<argument><expr><call><name><operator>::</operator><name>Catch</name><operator>::</operator><name>Detail</name><operator>::</operator><name>stringify</name></name><argument_list>(<argument><expr><call><name>streamable_range</name><argument_list>{}</argument_list></call></expr></argument>)</argument_list></call> <operator>==</operator> <literal type="string">"op&lt;&lt;(streamable_range)"</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>REQUIRE</name><argument_list>(<argument><expr><call><name><operator>::</operator><name>Catch</name><operator>::</operator><name>Detail</name><operator>::</operator><name>stringify</name></name><argument_list>(<argument><expr><call><name>stringmaker_range</name><argument_list>{}</argument_list></call></expr></argument>)</argument_list></call> <operator>==</operator> <literal type="string">"stringmaker(streamable_range)"</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>REQUIRE</name><argument_list>(<argument><expr><call><name><operator>::</operator><name>Catch</name><operator>::</operator><name>Detail</name><operator>::</operator><name>stringify</name></name><argument_list>(<argument><expr><call><name>just_range</name><argument_list>{}</argument_list></call></expr></argument>)</argument_list></call> <operator>==</operator> <literal type="string">"{ 1, 2, 3, 4 }"</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>REQUIRE</name><argument_list>(<argument><expr><call><name><operator>::</operator><name>Catch</name><operator>::</operator><name>Detail</name><operator>::</operator><name>stringify</name></name><argument_list>(<argument><expr><call><name>disabled_range</name><argument_list>{}</argument_list></call></expr></argument>)</argument_list></call> <operator>==</operator> <literal type="string">"{?}"</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+</block_content>}</block>
+</unit>

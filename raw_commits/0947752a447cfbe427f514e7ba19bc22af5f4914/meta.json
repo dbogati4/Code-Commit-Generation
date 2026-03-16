@@ -1,0 +1,8 @@
+{
+  "commit_id": "0947752a447cfbe427f514e7ba19bc22af5f4914",
+  "parent_id": "0646e0283c09d7b989a8520d8d52cda463ed5e8a",
+  "message": "Avoid running C++17 tests as part of approvals on VS 2017",
+  "changed_files": [
+    "projects/SelfTest/UsageTests/Generators.tests.cpp"
+  ]
+}

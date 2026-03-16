@@ -1,0 +1,13 @@
+{
+  "commit_id": "c9027375a3e57b59ecdeba696d3031163e473108",
+  "parent_id": "2ae28fc8525813023f8ec0f5318670cfaf86ec83",
+  "message": "Replace std::endl with \\n and flush",
+  "changed_files": [
+    "src/catch2/catch_session.cpp",
+    "src/catch2/internal/catch_debugger.cpp",
+    "src/catch2/internal/catch_xmlwriter.cpp",
+    "src/catch2/reporters/catch_reporter_combined_tu.cpp",
+    "src/catch2/reporters/catch_reporter_compact.cpp",
+    "src/catch2/reporters/catch_reporter_console.cpp"
+  ]
+}

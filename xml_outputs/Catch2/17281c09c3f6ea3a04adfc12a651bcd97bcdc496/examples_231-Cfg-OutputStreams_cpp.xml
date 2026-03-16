@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" xmlns:diff="http://www.srcML.org/srcDiff" revision="1.0.0" language="C++" filename="C:\Users\saile\AppData\Local\Temp\catch2_100_z8gzpiwf\17281c09c3f6ea3a04adfc12a651bcd97bcdc496\examples_231-Cfg-OutputStreams_cpp\examples_231-Cfg-OutputStreams_cpp.old|C:\Users\saile\AppData\Local\Temp\catch2_100_z8gzpiwf\17281c09c3f6ea3a04adfc12a651bcd97bcdc496\examples_231-Cfg-OutputStreams_cpp\examples_231-Cfg-OutputStreams_cpp.new"><comment type="line">// 231-Cfg-OutputStreams.cpp</comment>
+<comment type="line">// Show how to replace the streams with a simple custom made streambuf.</comment>
+
+<comment type="line">// Note that this reimplementation _does not_ follow `std::cerr`</comment>
+<comment type="line">// semantic, because it buffers the output. For most uses however,</comment>
+<comment type="line">// there is no important difference between having `std::cerr` buffered</comment>
+<comment type="line">// or unbuffered.</comment>
+
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;catch2/catch_default_main.hpp&gt;</cpp:file></cpp:include>
+
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;<diff:delete type="replace" xmlns:diff="http://www.srcML.org/srcDiff">catch2/catch.hpp</diff:delete><diff:insert type="replace" xmlns:diff="http://www.srcML.org/srcDiff">catch2/catch_test_macros.hpp</diff:insert>&gt;</cpp:file></cpp:include>
+
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;sstream&gt;</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;cstdio&gt;</cpp:file></cpp:include>
+
+<class>class <name>out_buff</name> <super_list>: <super><specifier>public</specifier> <name><name>std</name><operator>::</operator><name>stringbuf</name></name></super></super_list> <block>{<private type="default">
+    <decl_stmt><decl><type><name><name>std</name><operator>::</operator><name>FILE</name></name><modifier>*</modifier></type> <name>m_stream</name></decl>;</decl_stmt>
+</private><public>public:
+    <constructor><name>out_buff</name><parameter_list>(<parameter><decl><type><name><name>std</name><operator>::</operator><name>FILE</name></name><modifier>*</modifier></type> <name>stream</name></decl></parameter>)</parameter_list><member_init_list>:<call><name>m_stream</name><argument_list>(<argument><expr><name>stream</name></expr></argument>)</argument_list></call> </member_init_list><block>{<block_content/>}</block></constructor>
+    <destructor_decl><name>~out_buff</name><parameter_list>()</parameter_list>;</destructor_decl>
+    <function><type><name>int</name></type> <name>sync</name><parameter_list>()</parameter_list> <block>{<block_content>
+        <decl_stmt><decl><type><name>int</name></type> <name>ret</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</decl_stmt>
+        <for>for <control>(<init><decl><type><name>unsigned</name> <name>char</name></type> <name>c</name> <range>: <expr><call><name>str</name><argument_list>()</argument_list></call></expr></range></decl></init>)</control> <block>{<block_content>
+            <if_stmt><if>if <condition>(<expr><call><name>putc</name><argument_list>(<argument><expr><name>c</name></expr></argument>, <argument><expr><name>m_stream</name></expr></argument>)</argument_list></call> <operator>==</operator> <name>EOF</name></expr>)</condition> <block>{<block_content>
+                <expr_stmt><expr><name>ret</name> <operator>=</operator> <operator>-</operator><literal type="number">1</literal></expr>;</expr_stmt>
+                <break>break;</break>
+            </block_content>}</block></if></if_stmt>
+        </block_content>}</block></for>
+        <comment type="line">// Reset the buffer to avoid printing it multiple times</comment>
+        <expr_stmt><expr><call><name>str</name><argument_list>(<argument><expr><literal type="string">""</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        <return>return <expr><name>ret</name></expr>;</return>
+    </block_content>}</block></function>
+</public>}</block>;</class>
+
+<destructor><name><name>out_buff</name><operator>::</operator><name>~out_buff</name></name><parameter_list>()</parameter_list> <block>{<block_content> <expr_stmt><expr><call><name>pubsync</name><argument_list>()</argument_list></call></expr>;</expr_stmt> </block_content>}</block></destructor>
+
+<cpp:if xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">if</cpp:directive> <expr><call><name>defined</name><argument_list>(<argument><expr><name>__clang__</name></expr></argument>)</argument_list></call></expr></cpp:if>
+<cpp:pragma xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">pragma</cpp:directive> <name>clang</name> <name>diagnostic</name> <name>ignored</name> <cpp:literal xmlns:cpp="http://www.srcML.org/srcML/cpp">"-Wexit-time-destructors"</cpp:literal></cpp:pragma> <comment type="line">// static variables in cout/cerr/clog</comment>
+<cpp:endif xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">endif</cpp:directive></cpp:endif>
+
+<namespace>namespace <name>Catch</name> <block>{
+    <function><type><name><name>std</name><operator>::</operator><name>ostream</name></name><modifier>&amp;</modifier></type> <name>cout</name><parameter_list>()</parameter_list> <block>{<block_content>
+        <decl_stmt><decl><type><specifier>static</specifier> <name><name>std</name><operator>::</operator><name>ostream</name></name></type> <name>ret</name><argument_list>(<argument><expr><operator>new</operator> <call><name>out_buff</name><argument_list>(<argument><expr><name>stdout</name></expr></argument>)</argument_list></call></expr></argument>)</argument_list></decl>;</decl_stmt>
+        <return>return <expr><name>ret</name></expr>;</return>
+    </block_content>}</block></function>
+    <function><type><name><name>std</name><operator>::</operator><name>ostream</name></name><modifier>&amp;</modifier></type> <name>clog</name><parameter_list>()</parameter_list> <block>{<block_content>
+        <decl_stmt><decl><type><specifier>static</specifier> <name><name>std</name><operator>::</operator><name>ostream</name></name></type> <name>ret</name><argument_list>(<argument><expr><operator>new</operator> <call><name>out_buff</name><argument_list>(<argument><expr><name>stderr</name></expr></argument>)</argument_list></call></expr></argument>)</argument_list></decl>;</decl_stmt>
+        <return>return <expr><name>ret</name></expr>;</return>
+    </block_content>}</block></function>
+    <function><type><name><name>std</name><operator>::</operator><name>ostream</name></name><modifier>&amp;</modifier></type> <name>cerr</name><parameter_list>()</parameter_list> <block>{<block_content>
+        <return>return <expr><call><name>clog</name><argument_list>()</argument_list></call></expr>;</return>
+    </block_content>}</block></function>
+}</block></namespace>
+
+
+<macro><name>TEST_CASE</name><argument_list>(<argument><literal type="string">"This binary uses putc to write out output"</literal></argument>, <argument><literal type="string">"[compilation-only]"</literal></argument>)</argument_list></macro> <block>{<block_content>
+    <expr_stmt><expr><call><name>SUCCEED</name><argument_list>(<argument><expr><literal type="string">"Nothing to test."</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+</block_content>}</block>
+</unit>

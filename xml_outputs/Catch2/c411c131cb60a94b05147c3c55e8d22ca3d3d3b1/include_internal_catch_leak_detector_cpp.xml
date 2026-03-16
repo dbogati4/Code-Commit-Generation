@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" xmlns:diff="http://www.srcML.org/srcDiff" revision="1.0.0" language="C++" filename="C:\Users\saile\AppData\Local\Temp\catch2_100_z8gzpiwf\c411c131cb60a94b05147c3c55e8d22ca3d3d3b1\include_internal_catch_leak_detector_cpp\include_internal_catch_leak_detector_cpp.old|C:\Users\saile\AppData\Local\Temp\catch2_100_z8gzpiwf\c411c131cb60a94b05147c3c55e8d22ca3d3d3b1\include_internal_catch_leak_detector_cpp\include_internal_catch_leak_detector_cpp.new"><comment type="block">/*
+ *  Created by Martin on 12/07/2017.
+ *
+ *  Distributed under the Boost Software License, Version 1.0. (See accompanying
+ *  file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
+ */</comment>
+
+ <cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">"catch_leak_detector.h"</cpp:file></cpp:include>
+
+
+<diff:insert xmlns:diff="http://www.srcML.org/srcDiff"><cpp:ifdef xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">ifdef</cpp:directive><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><name>CATCH_CONFIG_WINDOWS_CRTDBG</name></cpp:ifdef><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+</diff:ws><cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;crtdbg.h&gt;</cpp:file></cpp:include><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+
+</diff:ws></diff:insert><namespace>namespace <name>Catch</name> <block>{
+
+<diff:delete xmlns:diff="http://www.srcML.org/srcDiff"><cpp:ifdef xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">ifdef</cpp:directive><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><name>CATCH_CONFIG_WINDOWS_CRTDBG</name></cpp:ifdef><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+</diff:ws><cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;crtdbg.h&gt;</cpp:file></cpp:include><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+
+</diff:ws></diff:delete>	<constructor><name><name>LeakDetector</name><operator>::</operator><name>LeakDetector</name></name><parameter_list>()</parameter_list> <block>{<block_content>
+		<decl_stmt><decl><type><name>int</name></type> <name>flag</name> <init>= <expr><call><name>_CrtSetDbgFlag</name><argument_list>(<argument><expr><name>_CRTDBG_REPORT_FLAG</name></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+		<expr_stmt><expr><name>flag</name> <operator>|=</operator> <name>_CRTDBG_LEAK_CHECK_DF</name></expr>;</expr_stmt>
+		<expr_stmt><expr><name>flag</name> <operator>|=</operator> <name>_CRTDBG_ALLOC_MEM_DF</name></expr>;</expr_stmt>
+		<expr_stmt><expr><call><name>_CrtSetDbgFlag</name><argument_list>(<argument><expr><name>flag</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+		<expr_stmt><expr><call><name>_CrtSetReportMode</name><argument_list>(<argument><expr><name>_CRT_WARN</name></expr></argument>, <argument><expr><name>_CRTDBG_MODE_FILE</name> <operator>|</operator> <name>_CRTDBG_MODE_DEBUG</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+		<expr_stmt><expr><call><name>_CrtSetReportFile</name><argument_list>(<argument><expr><name>_CRT_WARN</name></expr></argument>, <argument><expr><name>_CRTDBG_FILE_STDERR</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+		<comment type="line">// Change this to leaking allocation's number to break there</comment>
+		<expr_stmt><expr><call><name>_CrtSetBreakAlloc</name><argument_list>(<argument><expr><operator>-</operator><literal type="number">1</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+	</block_content>}</block></constructor>
+<diff:delete xmlns:diff="http://www.srcML.org/srcDiff"><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+</diff:ws><cpp:else xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">else</cpp:directive></cpp:else><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+
+    </diff:ws><constructor><name><name>LeakDetector</name><operator>::</operator><name>LeakDetector</name></name><parameter_list>()</parameter_list><block>{<block_content/>}</block></constructor><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+
+</diff:ws><cpp:endif xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">endif</cpp:directive></cpp:endif><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+
+</diff:ws></diff:delete>}</block></namespace>
+<diff:insert xmlns:diff="http://www.srcML.org/srcDiff"><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+</diff:ws><cpp:else xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">else</cpp:directive></cpp:else><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+
+    </diff:ws><constructor><name><name>Catch</name><operator>::</operator><name>LeakDetector</name><operator>::</operator><name>LeakDetector</name></name><parameter_list>()</parameter_list><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><block>{<block_content/>}</block></constructor><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+
+</diff:ws><cpp:endif xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">endif</cpp:directive></cpp:endif><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+</diff:ws></diff:insert></unit>

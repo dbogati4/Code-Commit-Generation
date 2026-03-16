@@ -1,0 +1,8 @@
+{
+  "commit_id": "5f6990d74695bf5452d9d5870cf5760628497114",
+  "parent_id": "5ca68829e10cc28471d2340439b53a41e8ff4e63",
+  "message": "Only start Section's timer if the duration will be used",
+  "changed_files": [
+    "src/catch2/internal/catch_section.cpp"
+  ]
+}

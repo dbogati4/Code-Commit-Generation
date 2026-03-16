@@ -1,0 +1,8 @@
+{
+  "commit_id": "85aa7707019879e8047eb0945342d8b324d5ae7b",
+  "parent_id": "f82e31255236420060c29b8d2a4cee465bf61ed0",
+  "message": "Disable unreachable code warning for TrickyTests.cpp",
+  "changed_files": [
+    "projects/SelfTest/TrickyTests.cpp"
+  ]
+}

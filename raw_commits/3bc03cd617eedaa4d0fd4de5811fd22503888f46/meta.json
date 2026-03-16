@@ -1,0 +1,8 @@
+{
+  "commit_id": "3bc03cd617eedaa4d0fd4de5811fd22503888f46",
+  "parent_id": "28f11a714948d28812d3867d3f5f3e9b35a3e86e",
+  "message": "Went back to Catch 1.x behaviour for -d",
+  "changed_files": [
+    "include/internal/catch_commandline.cpp"
+  ]
+}

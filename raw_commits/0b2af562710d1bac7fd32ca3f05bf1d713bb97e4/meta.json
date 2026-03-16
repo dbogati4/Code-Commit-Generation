@@ -1,0 +1,10 @@
+{
+  "commit_id": "0b2af562710d1bac7fd32ca3f05bf1d713bb97e4",
+  "parent_id": "69d62abc9a48033177b99ae79c13a6f1b280e94c",
+  "message": "Explicitly cast values of different types",
+  "changed_files": [
+    "src/catch2/benchmark/detail/catch_stats.cpp",
+    "src/catch2/catch_timer.cpp",
+    "src/catch2/internal/catch_random_number_generator.cpp"
+  ]
+}

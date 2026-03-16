@@ -1,0 +1,8 @@
+{
+  "commit_id": "88a6ff0b65b375fcf1c502b2de3f8f360ecff649",
+  "parent_id": "9e7c281e6eec890e2f53f54fdbf1c8711b7e00b6",
+  "message": "Cast to unsigned char when using std::isalnum",
+  "changed_files": [
+    "include/internal/catch_test_case_info.cpp"
+  ]
+}

@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" xmlns:diff="http://www.srcML.org/srcDiff" revision="1.0.0" language="C++" filename="C:\Users\saile\AppData\Local\Temp\catch2_100_z8gzpiwf\36ff7ba720e1bb301d19747349a06134f62bfe0d\Test_MiscTests_cpp\Test_MiscTests_cpp.old|C:\Users\saile\AppData\Local\Temp\catch2_100_z8gzpiwf\36ff7ba720e1bb301d19747349a06134f62bfe0d\Test_MiscTests_cpp\Test_MiscTests_cpp.new"><comment type="block">/*
+ *  MiscTests.cpp
+ *  Catch - Test
+ *
+ *  Created by Phil on 29/11/2010.
+ *  Copyright 2010 Two Blue Cubes Ltd. All rights reserved.
+ *
+ *  Distributed under the Boost Software License, Version 1.0. (See accompanying
+ *  file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
+ *
+ */</comment>
+
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">"../catch.hpp"</cpp:file></cpp:include>
+
+<macro><name>TEST_CASE</name><argument_list>( <argument><literal type="string">"succeeding/Misc/Sections"</literal></argument>, <argument><literal type="string">"random SECTION tests"</literal></argument> )</argument_list></macro>
+<block>{<block_content>
+    <decl_stmt><decl><type><name>int</name></type> <name>a</name> <init>= <expr><literal type="number">1</literal></expr></init></decl>;</decl_stmt>
+    <decl_stmt><decl><type><name>int</name></type> <name>b</name> <init>= <expr><literal type="number">2</literal></expr></init></decl>;</decl_stmt>
+    
+    <macro><name>SECTION</name><argument_list>( <argument><literal type="string">"s1"</literal></argument>, <argument><literal type="string">"doesn't equal"</literal></argument> )</argument_list></macro>
+    <block>{<block_content>
+        <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><name>a</name> <operator>!=</operator> <name>b</name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><name>b</name> <operator>!=</operator> <name>a</name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block>
+
+    <macro><name>SECTION</name><argument_list>( <argument><literal type="string">"s2"</literal></argument>, <argument><literal type="string">"not equal"</literal></argument> )</argument_list></macro>
+    <block>{<block_content>
+        <expr_stmt><expr><call><name>REQUIRE_FALSE</name><argument_list>( <argument><expr><name>a</name> <operator>==</operator> <name>b</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block>
+</block_content>}</block>
+
+<macro><name>TEST_CASE</name><argument_list>( <argument><literal type="string">"succeeding/Misc/Sections/nested"</literal></argument>, <argument><literal type="string">"nested SECTION tests"</literal></argument> )</argument_list></macro>
+<block>{<block_content>
+    <decl_stmt><decl><type><name>int</name></type> <name>a</name> <init>= <expr><literal type="number">1</literal></expr></init></decl>;</decl_stmt>
+    <decl_stmt><decl><type><name>int</name></type> <name>b</name> <init>= <expr><literal type="number">2</literal></expr></init></decl>;</decl_stmt>
+    
+    <macro><name>SECTION</name><argument_list>( <argument><literal type="string">"s1"</literal></argument>, <argument><literal type="string">"doesn't equal"</literal></argument> )</argument_list></macro>
+    <block>{<block_content>
+        <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><name>a</name> <operator>!=</operator> <name>b</name></expr></argument> )</argument_list></call><diff:insert xmlns:diff="http://www.srcML.org/srcDiff"><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><literal type="string">"a<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>should<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>not<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>equal<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>b"</literal></diff:insert></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><name>b</name> <operator>!=</operator> <name>a</name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+
+        <macro><name>SECTION</name><argument_list>( <argument><literal type="string">"s2"</literal></argument>, <argument><literal type="string">"not equal"</literal></argument> )</argument_list></macro>
+        <block>{<block_content>
+            <expr_stmt><expr><call><name>REQUIRE_FALSE</name><argument_list>( <argument><expr><name>a</name> <operator>==</operator> <name>b</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        </block_content>}</block>
+    </block_content>}</block>
+</block_content>}</block>
+
+<diff:insert xmlns:diff="http://www.srcML.org/srcDiff"><macro><name>TEST_CASE</name><argument_list>(<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><argument><literal type="string">"mixed/Misc/Sections/loops"</literal></argument>,<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><argument><literal type="string">"looped<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>SECTION<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>tests"</literal></argument><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>)</argument_list></macro><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+</diff:ws><block>{<block_content><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+    </diff:ws><decl_stmt><decl><type><name>int</name></type><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><name>a</name><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><init>=<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><expr><literal type="number">1</literal></expr></init></decl>;</decl_stmt><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+    
+    </diff:ws><for>for<control>(<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><init><decl><type><name>int</name></type><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><name>b</name><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><init>=<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><expr><literal type="number">0</literal></expr></init></decl>;</init><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><condition><expr><name>b</name><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><operator>&lt;</operator><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><literal type="number">10</literal></expr>;</condition><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><incr><expr><operator>++</operator><name>b</name></expr></incr><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>)</control><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+    </diff:ws><block>{<block_content><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+        </diff:ws><decl_stmt><decl><type><name><name>std</name><operator>::</operator><name>ostringstream</name></name></type><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><name>oss</name></decl>;</decl_stmt><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+        </diff:ws><expr_stmt><expr><name>oss</name><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><operator>&lt;&lt;</operator><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><literal type="string">"b<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>is<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>currently:<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>"</literal><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><operator>&lt;&lt;</operator><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><name>b</name></expr>;</expr_stmt><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+        </diff:ws><macro><name>SECTION</name><argument_list>(<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><argument><literal type="string">"s1"</literal></argument>,<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><argument>oss.str()</argument><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>)</argument_list></macro><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+        </diff:ws><block>{<block_content><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+            </diff:ws><expr_stmt><expr><call><name>CHECK</name><argument_list>(<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><argument><expr><name>b</name><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><operator>&gt;</operator><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><name>a</name></expr></argument><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>)</argument_list></call></expr>;</expr_stmt><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">            
+        </diff:ws></block_content>}</block><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+    </diff:ws></block_content>}</block></for><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+</diff:ws></block_content>}</block><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+
+</diff:ws><macro><name>TEST_CASE</name><argument_list>(<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><argument><literal type="string">"mixed/Misc/loops"</literal></argument>,<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><argument><literal type="string">"looped<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>tests"</literal></argument><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>)</argument_list></macro><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+</diff:ws><block>{<block_content><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+    </diff:ws><decl_stmt><decl><type><specifier>static</specifier><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><specifier>const</specifier><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><name>int</name></type><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><name><name>fib</name><index>[]</index></name><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">  </diff:ws><init>=<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><expr><block>{<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><expr><literal type="number">1</literal></expr>,<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><expr><literal type="number">1</literal></expr>,<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><expr><literal type="number">2</literal></expr>,<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><expr><literal type="number">3</literal></expr>,<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><expr><literal type="number">5</literal></expr>,<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><expr><literal type="number">8</literal></expr>,<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><expr><literal type="number">13</literal></expr>,<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><expr><literal type="number">21</literal></expr><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>}</block></expr></init></decl>;</decl_stmt><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+    
+    </diff:ws><for>for<control>(<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><init><decl><type><name>size_t</name></type><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><name>i</name><init>=<expr><literal type="number">0</literal></expr></init></decl>;</init><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><condition><expr><name>i</name><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><operator>&lt;</operator><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><sizeof>sizeof<argument_list>(<argument><expr><name>fib</name></expr></argument>)</argument_list></sizeof><operator>/</operator><sizeof>sizeof<argument_list>(<argument><expr><name>int</name></expr></argument>)</argument_list></sizeof></expr>;</condition><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><incr><expr><operator>++</operator><name>i</name></expr></incr><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>)</control><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+    </diff:ws><block>{<block_content><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+        </diff:ws><expr_stmt><expr><call><name>INFO</name><argument_list>(<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><argument><expr><literal type="string">"Testing<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>if<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>fib["</literal><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><operator>&lt;&lt;</operator><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><name>i</name><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><operator>&lt;&lt;</operator><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><literal type="string">"]<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>("</literal><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><operator>&lt;&lt;</operator><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><name><name>fib</name><index>[<expr><name>i</name></expr>]</index></name><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><operator>&lt;&lt;</operator><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><literal type="string">")<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>is<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>even"</literal></expr></argument><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>)</argument_list></call></expr>;</expr_stmt><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+        </diff:ws><expr_stmt><expr><call><name>CHECK</name><argument_list>(<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><argument><expr><operator>(</operator><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><name><name>fib</name><index>[<expr><name>i</name></expr>]</index></name><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><operator>%</operator><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><literal type="number">2</literal><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><operator>)</operator><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><operator>==</operator><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><literal type="number">0</literal></expr></argument><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>)</argument_list></call></expr>;</expr_stmt><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">                
+    </diff:ws></block_content>}</block></for><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+</diff:ws></block_content>}</block><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+
+</diff:ws></diff:insert><macro><name>TEST_CASE</name><argument_list>( <argument><literal type="string">"succeeding/Misc/stdout,stderr"</literal></argument>, <argument><literal type="string">"Sends stuff to stdout and stderr"</literal></argument> )</argument_list></macro>
+<block>{<block_content>
+    <expr_stmt><expr><name><name>std</name><operator>::</operator><name>cout</name></name> <operator>&lt;&lt;</operator> <literal type="string">"Some information"</literal></expr>;</expr_stmt>
+    
+    <expr_stmt><expr><name><name>std</name><operator>::</operator><name>cerr</name></name> <operator>&lt;&lt;</operator> <literal type="string">"An error"</literal></expr>;</expr_stmt>
+</block_content>}</block><diff:insert xmlns:diff="http://www.srcML.org/srcDiff"><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+</diff:ws></diff:insert></unit>

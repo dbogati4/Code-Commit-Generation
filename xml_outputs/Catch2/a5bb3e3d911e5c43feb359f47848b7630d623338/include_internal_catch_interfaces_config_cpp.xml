@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" xmlns:diff="http://www.srcML.org/srcDiff" revision="1.0.0" language="C++" filename="C:\Users\saile\AppData\Local\Temp\catch2_100_z8gzpiwf\a5bb3e3d911e5c43feb359f47848b7630d623338\include_internal_catch_interfaces_config_cpp\include_internal_catch_interfaces_config_cpp.old|C:\Users\saile\AppData\Local\Temp\catch2_100_z8gzpiwf\a5bb3e3d911e5c43feb359f47848b7630d623338\include_internal_catch_interfaces_config_cpp\include_internal_catch_interfaces_config_cpp.new"><cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">"<diff:delete type="replace" xmlns:diff="http://www.srcML.org/srcDiff">internal/catch_interfaces_config.h</diff:delete><diff:insert type="replace" xmlns:diff="http://www.srcML.org/srcDiff">catch_interfaces_config.h</diff:insert>"</cpp:file></cpp:include>
+
+<namespace>namespace <name>Catch</name> <block>{
+    <expr_stmt><expr><call><name><name>IConfig</name><operator>::</operator><name>~IConfig</name></name><argument_list>()</argument_list></call> <operator>=</operator> default</expr>;</expr_stmt>
+}</block></namespace>
+</unit>

@@ -1,0 +1,8 @@
+{
+  "commit_id": "2c269eb6332bc1dd29047851ae1efc3cd4c260d2",
+  "parent_id": "4b5812e932051cf3477db540291b81fdfe7d7dfd",
+  "message": "Fixed compilation under MinGW - use gmtime_s() instead of gmtime_r().",
+  "changed_files": [
+    "src/catch2/reporters/catch_reporter_junit.cpp"
+  ]
+}

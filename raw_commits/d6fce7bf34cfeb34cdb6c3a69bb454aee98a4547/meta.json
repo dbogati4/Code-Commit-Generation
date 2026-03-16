@@ -1,0 +1,9 @@
+{
+  "commit_id": "d6fce7bf34cfeb34cdb6c3a69bb454aee98a4547",
+  "parent_id": "c3c82f539c1d31df6b7f828efe4f4ba9eb650bf7",
+  "message": "Fix warnings generated with -Wshadow",
+  "changed_files": [
+    "include/internal/catch_approx.cpp",
+    "projects/SelfTest/UsageTests/Message.tests.cpp"
+  ]
+}

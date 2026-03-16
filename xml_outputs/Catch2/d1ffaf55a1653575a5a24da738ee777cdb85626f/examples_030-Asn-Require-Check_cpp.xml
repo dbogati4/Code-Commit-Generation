@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" xmlns:diff="http://www.srcML.org/srcDiff" revision="1.0.0" language="C++" filename="C:\Users\saile\AppData\Local\Temp\catch2_100_z8gzpiwf\d1ffaf55a1653575a5a24da738ee777cdb85626f\examples_030-Asn-Require-Check_cpp\examples_030-Asn-Require-Check_cpp.old|C:\Users\saile\AppData\Local\Temp\catch2_100_z8gzpiwf\d1ffaf55a1653575a5a24da738ee777cdb85626f\examples_030-Asn-Require-Check_cpp\examples_030-Asn-Require-Check_cpp.new"><comment type="line">// 030-Asn-Require-Check.cpp</comment>
+
+<comment type="line">// Catch has two natural expression assertion macro's:</comment>
+<comment type="line">// - REQUIRE() stops at first failure.</comment>
+<comment type="line">// - CHECK() continues after failure.</comment>
+
+<comment type="line">// There are two variants to support decomposing negated expressions:</comment>
+<comment type="line">// - REQUIRE_FALSE() stops at first failure.</comment>
+<comment type="line">// - CHECK_FALSE() continues after failure.</comment>
+
+<comment type="line">// main() provided in 000-CatchMain.cpp</comment>
+
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;catch2/catch.hpp&gt;</cpp:file></cpp:include>
+
+<function><type><diff:insert xmlns:diff="http://www.srcML.org/srcDiff"><specifier>static</specifier><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws></diff:insert><name><name>std</name><operator>::</operator><name>string</name></name></type> <name>one</name><parameter_list>()</parameter_list> <block>{<block_content>
+    <return>return <expr><literal type="string">"1"</literal></expr>;</return>
+</block_content>}</block></function>
+
+<macro><name>TEST_CASE</name><argument_list>( <argument><literal type="string">"Assert that something is true (pass)"</literal></argument>, <argument><literal type="string">"[require]"</literal></argument> )</argument_list></macro> <block>{<block_content>
+    <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name>one</name><argument_list>()</argument_list></call> <operator>==</operator> <literal type="string">"1"</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+</block_content>}</block>
+
+<macro><name>TEST_CASE</name><argument_list>( <argument><literal type="string">"Assert that something is true (fail)"</literal></argument>, <argument><literal type="string">"[require]"</literal></argument> )</argument_list></macro> <block>{<block_content>
+    <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name>one</name><argument_list>()</argument_list></call> <operator>==</operator> <literal type="string">"x"</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+</block_content>}</block>
+
+<macro><name>TEST_CASE</name><argument_list>( <argument><literal type="string">"Assert that something is true (stop at first failure)"</literal></argument>, <argument><literal type="string">"[require]"</literal></argument> )</argument_list></macro> <block>{<block_content>
+    <expr_stmt><expr><call><name>WARN</name><argument_list>( <argument><expr><literal type="string">"REQUIRE stops at first failure:"</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+
+    <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name>one</name><argument_list>()</argument_list></call> <operator>==</operator> <literal type="string">"x"</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name>one</name><argument_list>()</argument_list></call> <operator>==</operator> <literal type="string">"1"</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+</block_content>}</block>
+
+<macro><name>TEST_CASE</name><argument_list>( <argument><literal type="string">"Assert that something is true (continue after failure)"</literal></argument>, <argument><literal type="string">"[check]"</literal></argument> )</argument_list></macro> <block>{<block_content>
+    <expr_stmt><expr><call><name>WARN</name><argument_list>( <argument><expr><literal type="string">"CHECK continues after failure:"</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+
+    <expr_stmt><expr><call><name>CHECK</name><argument_list>(   <argument><expr><call><name>one</name><argument_list>()</argument_list></call> <operator>==</operator> <literal type="string">"x"</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name>one</name><argument_list>()</argument_list></call> <operator>==</operator> <literal type="string">"1"</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+</block_content>}</block>
+
+<macro><name>TEST_CASE</name><argument_list>( <argument><literal type="string">"Assert that something is false (stops at first failure)"</literal></argument>, <argument><literal type="string">"[require-false]"</literal></argument> )</argument_list></macro> <block>{<block_content>
+    <expr_stmt><expr><call><name>WARN</name><argument_list>( <argument><expr><literal type="string">"REQUIRE_FALSE stops at first failure:"</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+
+    <expr_stmt><expr><call><name>REQUIRE_FALSE</name><argument_list>( <argument><expr><call><name>one</name><argument_list>()</argument_list></call> <operator>==</operator> <literal type="string">"1"</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>REQUIRE_FALSE</name><argument_list>( <argument><expr><call><name>one</name><argument_list>()</argument_list></call> <operator>!=</operator> <literal type="string">"1"</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+</block_content>}</block>
+
+<macro><name>TEST_CASE</name><argument_list>( <argument><literal type="string">"Assert that something is false (continue after failure)"</literal></argument>, <argument><literal type="string">"[check-false]"</literal></argument> )</argument_list></macro> <block>{<block_content>
+    <expr_stmt><expr><call><name>WARN</name><argument_list>( <argument><expr><literal type="string">"CHECK_FALSE continues after failure:"</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+
+    <expr_stmt><expr><call><name>CHECK_FALSE</name><argument_list>(   <argument><expr><call><name>one</name><argument_list>()</argument_list></call> <operator>==</operator> <literal type="string">"1"</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>REQUIRE_FALSE</name><argument_list>( <argument><expr><call><name>one</name><argument_list>()</argument_list></call> <operator>!=</operator> <literal type="string">"1"</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+</block_content>}</block>
+
+<comment type="line">// Compile &amp; run:</comment>
+<comment type="line">// - g++ -std=c++11 -Wall -I$(CATCH_SINGLE_INCLUDE) -o 030-Asn-Require-Check 030-Asn-Require-Check.cpp 000-CatchMain.o &amp;&amp; 030-Asn-Require-Check --success</comment>
+<comment type="line">// - cl -EHsc -I%CATCH_SINGLE_INCLUDE% 030-Asn-Require-Check.cpp 000-CatchMain.obj &amp;&amp; 030-Asn-Require-Check --success</comment>
+
+<comment type="line">// Expected compact output (all assertions):</comment>
+<comment type="line">//</comment>
+<comment type="line">// prompt&gt; 030-Asn-Require-Check.exe --reporter compact --success</comment>
+<comment type="line">// 030-Asn-Require-Check.cpp:20: passed: one() == "1" for: "1" == "1"</comment>
+<comment type="line">// 030-Asn-Require-Check.cpp:24: failed: one() == "x" for: "1" == "x"</comment>
+<comment type="line">// 030-Asn-Require-Check.cpp:28: warning: 'REQUIRE stops at first failure:'</comment>
+<comment type="line">// 030-Asn-Require-Check.cpp:30: failed: one() == "x" for: "1" == "x"</comment>
+<comment type="line">// 030-Asn-Require-Check.cpp:35: warning: 'CHECK continues after failure:'</comment>
+<comment type="line">// 030-Asn-Require-Check.cpp:37: failed: one() == "x" for: "1" == "x"</comment>
+<comment type="line">// 030-Asn-Require-Check.cpp:38: passed: one() == "1" for: "1" == "1"</comment>
+<comment type="line">// 030-Asn-Require-Check.cpp:42: warning: 'REQUIRE_FALSE stops at first failure:'</comment>
+<comment type="line">// 030-Asn-Require-Check.cpp:44: failed: !(one() == "1") for: !("1" == "1")</comment>
+<comment type="line">// 030-Asn-Require-Check.cpp:49: warning: 'CHECK_FALSE continues after failure:'</comment>
+<comment type="line">// 030-Asn-Require-Check.cpp:51: failed: !(one() == "1") for: !("1" == "1")</comment>
+<comment type="line">// 030-Asn-Require-Check.cpp:52: passed: !(one() != "1") for: !("1" != "1")</comment>
+<comment type="line">// Failed 5 test cases, failed 5 assertions.</comment>
+</unit>

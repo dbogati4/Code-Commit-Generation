@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" xmlns:diff="http://www.srcML.org/srcDiff" revision="1.0.0" language="C++" filename="C:\Users\saile\AppData\Local\Temp\catch2_100_z8gzpiwf\17281c09c3f6ea3a04adfc12a651bcd97bcdc496\examples_100-Fix-Section_cpp\examples_100-Fix-Section_cpp.old|C:\Users\saile\AppData\Local\Temp\catch2_100_z8gzpiwf\17281c09c3f6ea3a04adfc12a651bcd97bcdc496\examples_100-Fix-Section_cpp\examples_100-Fix-Section_cpp.new"><comment type="line">// 100-Fix-Section.cpp</comment>
+
+<comment type="line">// Catch has two ways to express fixtures:</comment>
+<comment type="line">// - Sections (this file)</comment>
+<comment type="line">// - Traditional class-based fixtures</comment>
+
+<comment type="line">// main() provided in 000-CatchMain.cpp</comment>
+
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;<diff:delete type="replace" xmlns:diff="http://www.srcML.org/srcDiff">catch2/catch.hpp</diff:delete><diff:insert type="replace" xmlns:diff="http://www.srcML.org/srcDiff">catch2/catch_test_macros.hpp</diff:insert>&gt;</cpp:file></cpp:include>
+<diff:insert xmlns:diff="http://www.srcML.org/srcDiff"><cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;vector&gt;</cpp:file></cpp:include></diff:insert>
+<diff:insert xmlns:diff="http://www.srcML.org/srcDiff"><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+</diff:ws></diff:insert><macro><name>TEST_CASE</name><argument_list>( <argument><literal type="string">"vectors can be sized and resized"</literal></argument>, <argument><literal type="string">"[vector]"</literal></argument> )</argument_list></macro> <block>{<block_content>
+
+    <comment type="line">// For each section, vector v is anew:</comment>
+
+    <decl_stmt><decl><type><name><name>std</name><operator>::</operator><name>vector</name><argument_list type="generic">&lt;<argument><expr><name>int</name></expr></argument>&gt;</argument_list></name></type> <name>v</name><argument_list>( <argument><expr><literal type="number">5</literal></expr></argument> )</argument_list></decl>;</decl_stmt>
+
+    <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name><name>v</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call> <operator>==</operator> <literal type="number">5</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name><name>v</name><operator>.</operator><name>capacity</name></name><argument_list>()</argument_list></call> <operator>&gt;=</operator> <literal type="number">5</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+
+    <macro><name>SECTION</name><argument_list>( <argument><literal type="string">"resizing bigger changes size and capacity"</literal></argument> )</argument_list></macro> <block>{<block_content>
+        <expr_stmt><expr><call><name><name>v</name><operator>.</operator><name>resize</name></name><argument_list>( <argument><expr><literal type="number">10</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+
+        <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name><name>v</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call> <operator>==</operator> <literal type="number">10</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name><name>v</name><operator>.</operator><name>capacity</name></name><argument_list>()</argument_list></call> <operator>&gt;=</operator> <literal type="number">10</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block>
+    <macro><name>SECTION</name><argument_list>( <argument><literal type="string">"resizing smaller changes size but not capacity"</literal></argument> )</argument_list></macro> <block>{<block_content>
+        <expr_stmt><expr><call><name><name>v</name><operator>.</operator><name>resize</name></name><argument_list>( <argument><expr><literal type="number">0</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+
+        <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name><name>v</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call> <operator>==</operator> <literal type="number">0</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name><name>v</name><operator>.</operator><name>capacity</name></name><argument_list>()</argument_list></call> <operator>&gt;=</operator> <literal type="number">5</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block>
+    <macro><name>SECTION</name><argument_list>( <argument><literal type="string">"reserving bigger changes capacity but not size"</literal></argument> )</argument_list></macro> <block>{<block_content>
+        <expr_stmt><expr><call><name><name>v</name><operator>.</operator><name>reserve</name></name><argument_list>( <argument><expr><literal type="number">10</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+
+        <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name><name>v</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call> <operator>==</operator> <literal type="number">5</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name><name>v</name><operator>.</operator><name>capacity</name></name><argument_list>()</argument_list></call> <operator>&gt;=</operator> <literal type="number">10</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block>
+    <macro><name>SECTION</name><argument_list>( <argument><literal type="string">"reserving smaller does not change size or capacity"</literal></argument> )</argument_list></macro> <block>{<block_content>
+        <expr_stmt><expr><call><name><name>v</name><operator>.</operator><name>reserve</name></name><argument_list>( <argument><expr><literal type="number">0</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+
+        <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name><name>v</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call> <operator>==</operator> <literal type="number">5</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name><name>v</name><operator>.</operator><name>capacity</name></name><argument_list>()</argument_list></call> <operator>&gt;=</operator> <literal type="number">5</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block>
+</block_content>}</block>
+
+<comment type="line">// Compile &amp; run:</comment>
+<comment type="line">// - g++ -std=c++11 -Wall -I$(CATCH_SINGLE_INCLUDE) -o 100-Fix-Section 100-Fix-Section.cpp 000-CatchMain.o &amp;&amp; 100-Fix-Section --success</comment>
+<comment type="line">// - cl -EHsc -I%CATCH_SINGLE_INCLUDE% 100-Fix-Section.cpp 000-CatchMain.obj &amp;&amp; 100-Fix-Section --success</comment>
+
+<comment type="line">// Expected compact output (all assertions):</comment>
+<comment type="line">//</comment>
+<comment type="line">// prompt&gt; 100-Fix-Section.exe --reporter compact --success</comment>
+<comment type="line">// 100-Fix-Section.cpp:17: passed: v.size() == 5 for: 5 == 5</comment>
+<comment type="line">// 100-Fix-Section.cpp:18: passed: v.capacity() &gt;= 5 for: 5 &gt;= 5</comment>
+<comment type="line">// 100-Fix-Section.cpp:23: passed: v.size() == 10 for: 10 == 10</comment>
+<comment type="line">// 100-Fix-Section.cpp:24: passed: v.capacity() &gt;= 10 for: 10 &gt;= 10</comment>
+<comment type="line">// 100-Fix-Section.cpp:17: passed: v.size() == 5 for: 5 == 5</comment>
+<comment type="line">// 100-Fix-Section.cpp:18: passed: v.capacity() &gt;= 5 for: 5 &gt;= 5</comment>
+<comment type="line">// 100-Fix-Section.cpp:29: passed: v.size() == 0 for: 0 == 0</comment>
+<comment type="line">// 100-Fix-Section.cpp:30: passed: v.capacity() &gt;= 5 for: 5 &gt;= 5</comment>
+<comment type="line">// 100-Fix-Section.cpp:17: passed: v.size() == 5 for: 5 == 5</comment>
+<comment type="line">// 100-Fix-Section.cpp:18: passed: v.capacity() &gt;= 5 for: 5 &gt;= 5</comment>
+<comment type="line">// 100-Fix-Section.cpp:35: passed: v.size() == 5 for: 5 == 5</comment>
+<comment type="line">// 100-Fix-Section.cpp:36: passed: v.capacity() &gt;= 10 for: 10 &gt;= 10</comment>
+<comment type="line">// 100-Fix-Section.cpp:17: passed: v.size() == 5 for: 5 == 5</comment>
+<comment type="line">// 100-Fix-Section.cpp:18: passed: v.capacity() &gt;= 5 for: 5 &gt;= 5</comment>
+<comment type="line">// 100-Fix-Section.cpp:41: passed: v.size() == 5 for: 5 == 5</comment>
+<comment type="line">// 100-Fix-Section.cpp:42: passed: v.capacity() &gt;= 5 for: 5 &gt;= 5</comment>
+<comment type="line">// Passed 1 test case with 16 assertions.</comment>
+</unit>

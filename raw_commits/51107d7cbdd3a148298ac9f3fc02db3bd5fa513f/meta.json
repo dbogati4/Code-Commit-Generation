@@ -1,0 +1,9 @@
+{
+  "commit_id": "51107d7cbdd3a148298ac9f3fc02db3bd5fa513f",
+  "parent_id": "83f4b39680784e7ac6d8fd71ac8bc9541541385f",
+  "message": "Added copyright headers to benchmark files.",
+  "changed_files": [
+    "projects/Benchmark/BenchMain.cpp",
+    "projects/Benchmark/StringificationBench.cpp"
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "commit_id": "17281c09c3f6ea3a04adfc12a651bcd97bcdc496",
+  "parent_id": "26f78f96aa6eed4be97281b5b740ab0cf0466c48",
+  "message": "Convert examples to piecemeal includes",
+  "changed_files": [
+    "examples/100-Fix-Section.cpp",
+    "examples/110-Fix-ClassFixture.cpp",
+    "examples/210-Evt-EventListeners.cpp",
+    "examples/231-Cfg-OutputStreams.cpp",
+    "examples/300-Gen-OwnGenerator.cpp",
+    "examples/301-Gen-MapTypeConversion.cpp",
+    "examples/310-Gen-VariablesInGenerators.cpp",
+    "examples/311-Gen-CustomCapture.cpp"
+  ]
+}

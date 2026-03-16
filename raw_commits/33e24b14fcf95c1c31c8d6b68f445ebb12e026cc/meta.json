@@ -1,0 +1,8 @@
+{
+  "commit_id": "33e24b14fcf95c1c31c8d6b68f445ebb12e026cc",
+  "parent_id": "a40dd478f33e04964007ae5330e248b8eda175de",
+  "message": "Add missing break to a switch to silence fall-through warning",
+  "changed_files": [
+    "src/catch2/catch_message.cpp"
+  ]
+}

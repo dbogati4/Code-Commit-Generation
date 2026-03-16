@@ -1,0 +1,8 @@
+{
+  "commit_id": "3610eb81b14871b34112d09a3e8a29e5e6b22e03",
+  "parent_id": "bd1e76cc3ae94c0fb83ff11ca707ada66ace0be2",
+  "message": "Explicitly inline trivial function in CumulativeReporterBase impl",
+  "changed_files": [
+    "src/catch2/reporters/catch_reporter_cumulative_base.cpp"
+  ]
+}

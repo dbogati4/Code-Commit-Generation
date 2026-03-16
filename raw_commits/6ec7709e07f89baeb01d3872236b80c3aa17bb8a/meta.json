@@ -1,0 +1,9 @@
+{
+  "commit_id": "6ec7709e07f89baeb01d3872236b80c3aa17bb8a",
+  "parent_id": "58d8bc6985a70e537cfcc4959dfc405ba9cb2a00",
+  "message": "removed final use of tbc_text_format (console reporter)",
+  "changed_files": [
+    "include/reporters/catch_reporter_console.cpp",
+    "projects/SelfTest/TestMain.cpp"
+  ]
+}

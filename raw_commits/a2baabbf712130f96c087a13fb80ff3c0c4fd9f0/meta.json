@@ -1,0 +1,8 @@
+{
+  "commit_id": "a2baabbf712130f96c087a13fb80ff3c0c4fd9f0",
+  "parent_id": "6f9cdd6583f3f2ea92eac334213c4fa3c79bc71f",
+  "message": "Fix variant test for libstdc++ version 9 (#1515)",
+  "changed_files": [
+    "projects/SelfTest/UsageTests/ToStringVariant.tests.cpp"
+  ]
+}

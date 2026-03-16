@@ -1,0 +1,8 @@
+{
+  "commit_id": "c4d1aa90337300a8c7646b3f28b0a6783eec5a8f",
+  "parent_id": "495d2458e078cda2a61bc773cba24bdb4c7b1774",
+  "message": "Fix std::uncaught_exception deprecation warning in ~ScopedMessage",
+  "changed_files": [
+    "include/internal/catch_message.cpp"
+  ]
+}

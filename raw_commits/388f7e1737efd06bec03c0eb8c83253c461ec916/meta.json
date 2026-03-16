@@ -1,0 +1,11 @@
+{
+  "commit_id": "388f7e1737efd06bec03c0eb8c83253c461ec916",
+  "parent_id": "2ab20a0e008845e02bd06248e61ca6e5ad1aba33",
+  "message": "Cleanup unneeded allocations from reporters",
+  "changed_files": [
+    "src/catch2/reporters/catch_reporter_compact.cpp",
+    "src/catch2/reporters/catch_reporter_console.cpp",
+    "src/catch2/reporters/catch_reporter_tap.cpp",
+    "src/catch2/reporters/catch_reporter_xml.cpp"
+  ]
+}

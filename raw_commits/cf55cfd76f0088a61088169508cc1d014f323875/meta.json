@@ -1,0 +1,8 @@
+{
+  "commit_id": "cf55cfd76f0088a61088169508cc1d014f323875",
+  "parent_id": "3701c2e2e645df69e28914c72bf5c75158fa6613",
+  "message": "Tiny speedup when listing tags",
+  "changed_files": [
+    "include/internal/catch_list.cpp"
+  ]
+}

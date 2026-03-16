@@ -1,0 +1,26 @@
+diff --git a/projects/SelfTest/String.tests.cpp b/projects/SelfTest/String.tests.cpp
+index ccd90964..c27b7508 100644
+--- a/projects/SelfTest/String.tests.cpp
++++ b/projects/SelfTest/String.tests.cpp
+@@ -2,6 +2,8 @@
+ 
+ #include "catch.hpp"
+ 
++#include <cstring>
++
+ TEST_CASE( "String", "[Strings]" ) {
+     using Catch::String;
+     
+diff --git a/projects/SelfTest/StringRef.tests.cpp b/projects/SelfTest/StringRef.tests.cpp
+index e5da3f2a..4ebaa878 100644
+--- a/projects/SelfTest/StringRef.tests.cpp
++++ b/projects/SelfTest/StringRef.tests.cpp
+@@ -3,6 +3,8 @@
+ 
+ #include "catch.hpp"
+ 
++#include <cstring>
++
+ namespace Catch {
+ 
+     // Implementation of test accessors

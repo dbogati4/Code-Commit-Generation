@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" xmlns:diff="http://www.srcML.org/srcDiff" revision="1.0.0" language="C++" filename="C:\Users\saile\AppData\Local\Temp\catch2_100_z8gzpiwf\c24f7e5b3483b595b125b146fd175bab0e27e229\src_catch2_catch_message_cpp\src_catch2_catch_message_cpp.old|C:\Users\saile\AppData\Local\Temp\catch2_100_z8gzpiwf\c24f7e5b3483b595b125b146fd175bab0e27e229\src_catch2_catch_message_cpp\src_catch2_catch_message_cpp.new"><comment type="block">/*
+ *  Created by Phil Nash on 1/2/2013.
+ *  Copyright 2013 Two Blue Cubes Ltd. All rights reserved.
+ *
+ *  Distributed under the Boost Software License, Version 1.0. (See accompanying
+ *  file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
+ */</comment>
+
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;catch2/catch_message.hpp&gt;</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;catch2/interfaces/catch_interfaces_capture.hpp&gt;</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;catch2/internal/catch_uncaught_exceptions.hpp&gt;</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;catch2/internal/catch_enforce.hpp&gt;</cpp:file></cpp:include>
+
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;cassert&gt;</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;stack&gt;</cpp:file></cpp:include>
+
+<namespace>namespace <name>Catch</name> <block>{
+
+    <comment type="line" format="doxygen">////////////////////////////////////////////////////////////////////////////</comment>
+
+    <constructor><name><name>Catch</name><operator>::</operator><name>MessageBuilder</name><operator>::</operator><name>MessageBuilder</name></name><parameter_list>( <parameter><decl><type><name>StringRef</name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>macroName</name></decl></parameter>,
+                                           <parameter><decl><type><name>SourceLineInfo</name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>lineInfo</name></decl></parameter>,
+                                           <parameter><decl><type><name><name>ResultWas</name><operator>::</operator><name>OfType</name></name></type> <name>type</name></decl></parameter> )</parameter_list>
+        <member_init_list>:<call><name>m_info</name><argument_list>(<argument><expr><name>macroName</name></expr></argument>, <argument><expr><name>lineInfo</name></expr></argument>, <argument><expr><name>type</name></expr></argument>)</argument_list></call> </member_init_list><block>{<block_content/>}</block></constructor>
+
+    <comment type="line" format="doxygen">////////////////////////////////////////////////////////////////////////////</comment>
+
+
+    <constructor><name><name>ScopedMessage</name><operator>::</operator><name>ScopedMessage</name></name><parameter_list>( <parameter><decl><type><name>MessageBuilder</name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>builder</name></decl></parameter> )</parameter_list>
+    <member_init_list>: <call><name>m_info</name><argument_list>( <argument><expr><name><name>builder</name><operator>.</operator><name>m_info</name></name></expr></argument> )</argument_list></call>, <call><name>m_moved</name><argument_list>()</argument_list></call>
+    </member_init_list><block>{<block_content>
+        <expr_stmt><expr><name><name>m_info</name><operator>.</operator><name>message</name></name> <operator>=</operator> <call><name><name>builder</name><operator>.</operator><name>m_stream</name><operator>.</operator><name>str</name></name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name>getResultCapture</name><argument_list>()</argument_list></call><operator>.</operator><call><name>pushScopedMessage</name><argument_list>( <argument><expr><name>m_info</name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block></constructor>
+
+    <constructor><name><name>ScopedMessage</name><operator>::</operator><name>ScopedMessage</name></name><parameter_list>( <parameter><decl><type><name>ScopedMessage</name><modifier>&amp;&amp;</modifier></type> <name>old</name></decl></parameter> )</parameter_list>
+    <member_init_list>: <call><name>m_info</name><argument_list>( <argument><expr><name><name>old</name><operator>.</operator><name>m_info</name></name></expr></argument> )</argument_list></call>, <call><name>m_moved</name><argument_list>()</argument_list></call>
+    </member_init_list><block>{<block_content>
+        <expr_stmt><expr><name><name>old</name><operator>.</operator><name>m_moved</name></name> <operator>=</operator> <literal type="boolean">true</literal></expr>;</expr_stmt>
+    </block_content>}</block></constructor>
+
+    <destructor><name><name>ScopedMessage</name><operator>::</operator><name>~ScopedMessage</name></name><parameter_list>()</parameter_list> <block>{<block_content>
+        <if_stmt><if>if <condition>( <expr><operator>!</operator><call><name>uncaught_exceptions</name><argument_list>()</argument_list></call> <operator>&amp;&amp;</operator> <operator>!</operator><name>m_moved</name></expr> )</condition><block>{<block_content>
+            <expr_stmt><expr><call><name>getResultCapture</name><argument_list>()</argument_list></call><operator>.</operator><call><name>popScopedMessage</name><argument_list>(<argument><expr><name>m_info</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        </block_content>}</block></if></if_stmt>
+    </block_content>}</block></destructor>
+
+
+    <constructor><name><name>Capturer</name><operator>::</operator><name>Capturer</name></name><parameter_list>( <parameter><decl><type><name>StringRef</name></type> <name>macroName</name></decl></parameter>, <parameter><decl><type><name>SourceLineInfo</name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>lineInfo</name></decl></parameter>, <parameter><decl><type><name><name>ResultWas</name><operator>::</operator><name>OfType</name></name></type> <name>resultType</name></decl></parameter>, <parameter><decl><type><name>StringRef</name></type> <name>names</name></decl></parameter> )</parameter_list> <block>{<block_content>
+        <decl_stmt><decl><type><name>auto</name></type> <name>trimmed</name> <init>= <expr><lambda><capture>[<argument><modifier>&amp;</modifier></argument>]</capture> <parameter_list>(<parameter><decl><type><name>size_t</name></type> <name>start</name></decl></parameter>, <parameter><decl><type><name>size_t</name></type> <name>end</name></decl></parameter>)</parameter_list> <block>{<block_content>
+            <while>while <condition>(<expr><name><name>names</name><index>[<expr><name>start</name></expr>]</index></name> <operator>==</operator> <literal type="char">','</literal> <operator>||</operator> <call><name>isspace</name><argument_list>(<argument><diff:insert xmlns:diff="http://www.srcML.org/srcDiff"><expr><diff:delete type="replace" xmlns:diff="http://www.srcML.org/srcDiff"><expr><name><name>names</name><index>[<expr><name>start</name></expr>]</index></name></expr></diff:delete><diff:insert type="replace" xmlns:diff="http://www.srcML.org/srcDiff"><cast type="static">static_cast<argument_list type="generic">&lt;<argument><expr><name>unsigned</name><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><name>char</name></expr></argument>&gt;</argument_list><argument_list>(<argument><expr><name><name>names</name><index>[<expr><name>start</name></expr>]</index></name></expr></argument>)</argument_list></cast></diff:insert></expr></diff:insert></argument>)</argument_list></call></expr>)</condition> <block>{<block_content>
+                <expr_stmt><expr><operator>++</operator><name>start</name></expr>;</expr_stmt>
+            </block_content>}</block></while>
+            <while>while <condition>(<expr><name><name>names</name><index>[<expr><name>end</name></expr>]</index></name> <operator>==</operator> <literal type="char">','</literal> <operator>||</operator> <call><name>isspace</name><argument_list>(<argument><diff:insert xmlns:diff="http://www.srcML.org/srcDiff"><expr><diff:delete type="replace" xmlns:diff="http://www.srcML.org/srcDiff"><expr><name><name>names</name><index>[<expr><name>end</name></expr>]</index></name></expr></diff:delete><diff:insert type="replace" xmlns:diff="http://www.srcML.org/srcDiff"><cast type="static">static_cast<argument_list type="generic">&lt;<argument><expr><name>unsigned</name><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><name>char</name></expr></argument>&gt;</argument_list><argument_list>(<argument><expr><name><name>names</name><index>[<expr><name>end</name></expr>]</index></name></expr></argument>)</argument_list></cast></diff:insert></expr></diff:insert></argument>)</argument_list></call></expr>)</condition> <block>{<block_content>
+                <expr_stmt><expr><operator>--</operator><name>end</name></expr>;</expr_stmt>
+            </block_content>}</block></while>
+            <return>return <expr><call><name><name>names</name><operator>.</operator><name>substr</name></name><argument_list>(<argument><expr><name>start</name></expr></argument>, <argument><expr><name>end</name> <operator>-</operator> <name>start</name> <operator>+</operator> <literal type="number">1</literal></expr></argument>)</argument_list></call></expr>;</return>
+        </block_content>}</block></lambda></expr></init></decl>;</decl_stmt>
+        <decl_stmt><decl><type><name>auto</name></type> <name>skipq</name> <init>= <expr><lambda><capture>[<argument><modifier>&amp;</modifier></argument>]</capture> <parameter_list>(<parameter><decl><type><name>size_t</name></type> <name>start</name></decl></parameter>, <parameter><decl><type><name>char</name></type> <name>quote</name></decl></parameter>)</parameter_list> <block>{<block_content>
+            <for>for <control>(<init><decl><type><name>auto</name></type> <name>i</name> <init>= <expr><name>start</name> <operator>+</operator> <literal type="number">1</literal></expr></init></decl>;</init> <condition><expr><name>i</name> <operator>&lt;</operator> <call><name><name>names</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call></expr> ;</condition> <incr><expr><operator>++</operator><name>i</name></expr></incr>)</control> <block>{<block_content>
+                <if_stmt><if>if <condition>(<expr><name><name>names</name><index>[<expr><name>i</name></expr>]</index></name> <operator>==</operator> <name>quote</name></expr>)</condition><block type="pseudo"><block_content>
+                    <return>return <expr><name>i</name></expr>;</return></block_content></block></if></if_stmt>
+                <if_stmt><if>if <condition>(<expr><name><name>names</name><index>[<expr><name>i</name></expr>]</index></name> <operator>==</operator> <literal type="char">'\\'</literal></expr>)</condition><block type="pseudo"><block_content>
+                    <expr_stmt><expr><operator>++</operator><name>i</name></expr>;</expr_stmt></block_content></block></if></if_stmt>
+            </block_content>}</block></for>
+            <expr_stmt><expr><call><name>CATCH_INTERNAL_ERROR</name><argument_list>(<argument><expr><literal type="string">"CAPTURE parsing encountered unmatched quote"</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        </block_content>}</block></lambda></expr></init></decl>;</decl_stmt>
+
+        <decl_stmt><decl><type><name>size_t</name></type> <name>start</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</decl_stmt>
+        <decl_stmt><decl><type><name><name>std</name><operator>::</operator><name>stack</name><argument_list type="generic">&lt;<argument><expr><name>char</name></expr></argument>&gt;</argument_list></name></type> <name>openings</name></decl>;</decl_stmt>
+        <for>for <control>(<init><decl><type><name>size_t</name></type> <name>pos</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>pos</name> <operator>&lt;</operator> <call><name><name>names</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call></expr>;</condition> <incr><expr><operator>++</operator><name>pos</name></expr></incr>)</control> <block>{<block_content>
+            <decl_stmt><decl><type><name>char</name></type> <name>c</name> <init>= <expr><name><name>names</name><index>[<expr><name>pos</name></expr>]</index></name></expr></init></decl>;</decl_stmt>
+            <switch>switch <condition>(<expr><name>c</name></expr>)</condition> <block>{<block_content>
+            <case>case <expr><literal type="char">'['</literal></expr>:</case>
+            <case>case <expr><literal type="char">'{'</literal></expr>:</case>
+            <case>case <expr><literal type="char">'('</literal></expr>:</case>
+            <comment type="line">// It is basically impossible to disambiguate between</comment>
+            <comment type="line">// comparison and start of template args in this context</comment>
+<comment type="line">//            case '&lt;':</comment>
+                <expr_stmt><expr><call><name><name>openings</name><operator>.</operator><name>push</name></name><argument_list>(<argument><expr><name>c</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+                <break>break;</break>
+            <case>case <expr><literal type="char">']'</literal></expr>:</case>
+            <case>case <expr><literal type="char">'}'</literal></expr>:</case>
+            <case>case <expr><literal type="char">')'</literal></expr>:</case>
+<comment type="line">//           case '&gt;':</comment>
+                <expr_stmt><expr><call><name><name>openings</name><operator>.</operator><name>pop</name></name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+                <break>break;</break>
+            <case>case <expr><literal type="char">'"'</literal></expr>:</case>
+            <case>case <expr><literal type="char">'\''</literal></expr>:</case>
+                <expr_stmt><expr><name>pos</name> <operator>=</operator> <call><name>skipq</name><argument_list>(<argument><expr><name>pos</name></expr></argument>, <argument><expr><name>c</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+                <break>break;</break>
+            <case>case <expr><literal type="char">','</literal></expr>:</case>
+                <if_stmt><if>if <condition>(<expr><name>start</name> <operator>!=</operator> <name>pos</name> <operator>&amp;&amp;</operator> <call><name><name>openings</name><operator>.</operator><name>empty</name></name><argument_list>()</argument_list></call></expr>)</condition> <block>{<block_content>
+                    <expr_stmt><expr><call><name><name>m_messages</name><operator>.</operator><name>emplace_back</name></name><argument_list>(<argument><expr><name>macroName</name></expr></argument>, <argument><expr><name>lineInfo</name></expr></argument>, <argument><expr><name>resultType</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+                    <expr_stmt><expr><call><name><name>m_messages</name><operator>.</operator><name>back</name></name><argument_list>()</argument_list></call><operator>.</operator><name>message</name> <operator>=</operator> <cast type="static">static_cast<argument_list type="generic">&lt;<argument><expr><name><name>std</name><operator>::</operator><name>string</name></name></expr></argument>&gt;</argument_list><argument_list>(<argument><expr><call><name>trimmed</name><argument_list>(<argument><expr><name>start</name></expr></argument>, <argument><expr><name>pos</name></expr></argument>)</argument_list></call></expr></argument>)</argument_list></cast></expr>;</expr_stmt>
+                    <expr_stmt><expr><call><name><name>m_messages</name><operator>.</operator><name>back</name></name><argument_list>()</argument_list></call><operator>.</operator><name>message</name> <operator>+=</operator> <literal type="string">" := "</literal></expr>;</expr_stmt>
+                    <expr_stmt><expr><name>start</name> <operator>=</operator> <name>pos</name></expr>;</expr_stmt>
+                </block_content>}</block></if></if_stmt>
+            </block_content>}</block></switch>
+        </block_content>}</block></for>
+        <expr_stmt><expr><call><name>assert</name><argument_list>(<argument><expr><call><name><name>openings</name><operator>.</operator><name>empty</name></name><argument_list>()</argument_list></call> <operator>&amp;&amp;</operator> <literal type="string">"Mismatched openings"</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name><name>m_messages</name><operator>.</operator><name>emplace_back</name></name><argument_list>(<argument><expr><name>macroName</name></expr></argument>, <argument><expr><name>lineInfo</name></expr></argument>, <argument><expr><name>resultType</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name><name>m_messages</name><operator>.</operator><name>back</name></name><argument_list>()</argument_list></call><operator>.</operator><name>message</name> <operator>=</operator> <cast type="static">static_cast<argument_list type="generic">&lt;<argument><expr><name><name>std</name><operator>::</operator><name>string</name></name></expr></argument>&gt;</argument_list><argument_list>(<argument><expr><call><name>trimmed</name><argument_list>(<argument><expr><name>start</name></expr></argument>, <argument><expr><call><name><name>names</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call> <operator>-</operator> <literal type="number">1</literal></expr></argument>)</argument_list></call></expr></argument>)</argument_list></cast></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name><name>m_messages</name><operator>.</operator><name>back</name></name><argument_list>()</argument_list></call><operator>.</operator><name>message</name> <operator>+=</operator> <literal type="string">" := "</literal></expr>;</expr_stmt>
+    </block_content>}</block></constructor>
+    <destructor><name><name>Capturer</name><operator>::</operator><name>~Capturer</name></name><parameter_list>()</parameter_list> <block>{<block_content>
+        <if_stmt><if>if <condition>( <expr><operator>!</operator><call><name>uncaught_exceptions</name><argument_list>()</argument_list></call></expr> )</condition><block>{<block_content>
+            <expr_stmt><expr><call><name>assert</name><argument_list>( <argument><expr><name>m_captured</name> <operator>==</operator> <call><name><name>m_messages</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+            <for>for<control>( <init><decl><type><name>size_t</name></type> <name>i</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>i</name> <operator>&lt;</operator> <name>m_captured</name></expr>;</condition> <incr><expr><operator>++</operator><name>i</name></expr></incr>  )</control><block type="pseudo"><block_content>
+                <expr_stmt><expr><call><name><name>m_resultCapture</name><operator>.</operator><name>popScopedMessage</name></name><argument_list>( <argument><expr><name><name>m_messages</name><index>[<expr><name>i</name></expr>]</index></name></expr></argument> )</argument_list></call></expr>;</expr_stmt></block_content></block></for>
+        </block_content>}</block></if></if_stmt>
+    </block_content>}</block></destructor>
+
+    <function><type><name>void</name></type> <name><name>Capturer</name><operator>::</operator><name>captureValue</name></name><parameter_list>( <parameter><decl><type><name>size_t</name></type> <name>index</name></decl></parameter>, <parameter><decl><type><name><name>std</name><operator>::</operator><name>string</name></name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>value</name></decl></parameter> )</parameter_list> <block>{<block_content>
+        <expr_stmt><expr><call><name>assert</name><argument_list>( <argument><expr><name>index</name> <operator>&lt;</operator> <call><name><name>m_messages</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><name><name>m_messages</name><index>[<expr><name>index</name></expr>]</index></name><operator>.</operator><name>message</name> <operator>+=</operator> <name>value</name></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name><name>m_resultCapture</name><operator>.</operator><name>pushScopedMessage</name></name><argument_list>( <argument><expr><name><name>m_messages</name><index>[<expr><name>index</name></expr>]</index></name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><name>m_captured</name><operator>++</operator></expr>;</expr_stmt>
+    </block_content>}</block></function>
+
+}</block></namespace> <comment type="line">// end namespace Catch</comment>
+</unit>

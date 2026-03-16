@@ -1,0 +1,13 @@
+diff --git a/include/internal/catch_stringref.cpp b/include/internal/catch_stringref.cpp
+index a6389bd4..f6a1fc2a 100644
+--- a/include/internal/catch_stringref.cpp
++++ b/include/internal/catch_stringref.cpp
+@@ -11,6 +11,8 @@
+ #include <ostream>
+ #include <cassert>
+ 
++#define _CRT_SECURE_NO_WARNINGS // Suppress warnings from MSVC about strncpy not being secure
++
+ namespace Catch {
+ 
+     auto getEmptyStringRef() -> StringRef {

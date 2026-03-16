@@ -1,0 +1,8 @@
+{
+  "commit_id": "2331249a8d7a982aead69ef8d1193446953e8865",
+  "parent_id": "319cb9e1daec5076ff1a3acd10b959c2bce05c5b",
+  "message": "Simplified benchmark output with --benchmark-no-analysis",
+  "changed_files": [
+    "include/reporters/catch_reporter_console.cpp"
+  ]
+}

@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" xmlns:diff="http://www.srcML.org/srcDiff" revision="1.0.0" language="C++" filename="C:\Users\saile\AppData\Local\Temp\catch2_100_z8gzpiwf\b5547f2ef6be18f70d2e9638d8f1eb0d8d42d2ba\src_catch2_reporters_catch_reporter_listening_cpp\src_catch2_reporters_catch_reporter_listening_cpp.old|C:\Users\saile\AppData\Local\Temp\catch2_100_z8gzpiwf\b5547f2ef6be18f70d2e9638d8f1eb0d8d42d2ba\src_catch2_reporters_catch_reporter_listening_cpp\src_catch2_reporters_catch_reporter_listening_cpp.new">
+<comment type="line">//              Copyright Catch2 Authors</comment>
+<comment type="line">// Distributed under the Boost Software License, Version 1.0.</comment>
+<comment type="line">//   (See accompanying file LICENSE_1_0.txt or copy at</comment>
+<comment type="line">//        https://www.boost.org/LICENSE_1_0.txt)</comment>
+
+<comment type="line">// SPDX-License-Identifier: BSL-1.0</comment>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;catch2/reporters/catch_reporter_listening.hpp&gt;</cpp:file></cpp:include>
+
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;catch2/catch_config.hpp&gt;</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;catch2/internal/catch_move_and_forward.hpp&gt;</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;catch2/internal/catch_stream.hpp&gt;</cpp:file></cpp:include>
+
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;cassert&gt;</cpp:file></cpp:include>
+
+<namespace>namespace <name>Catch</name> <block>{
+    <function><type><name>void</name></type> <name><name>ListeningReporter</name><operator>::</operator><name>updatePreferences</name></name><parameter_list>(<parameter><decl><type><name>IStreamingReporter</name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>reporterish</name></decl></parameter>)</parameter_list> <block>{<block_content>
+        <expr_stmt><expr><name><name>m_preferences</name><operator>.</operator><name>shouldRedirectStdOut</name></name> <operator>|=</operator>
+            <call><name><name>reporterish</name><operator>.</operator><name>getPreferences</name></name><argument_list>()</argument_list></call><operator>.</operator><name>shouldRedirectStdOut</name></expr>;</expr_stmt>
+        <expr_stmt><expr><name><name>m_preferences</name><operator>.</operator><name>shouldReportAllAssertions</name></name> <operator>|=</operator>
+            <call><name><name>reporterish</name><operator>.</operator><name>getPreferences</name></name><argument_list>()</argument_list></call><operator>.</operator><name>shouldReportAllAssertions</name></expr>;</expr_stmt>
+    </block_content>}</block></function>
+
+    <function><type><name>void</name></type> <name><name>ListeningReporter</name><operator>::</operator><name>addListener</name></name><parameter_list>( <parameter><decl><type><name>IStreamingReporterPtr</name><modifier>&amp;&amp;</modifier></type> <name>listener</name></decl></parameter> )</parameter_list> <block>{<block_content>
+        <expr_stmt><expr><call><name>updatePreferences</name><argument_list>(<argument><expr><operator>*</operator><name>listener</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name><name>m_reporterLikes</name><operator>.</operator><name>insert</name></name><argument_list>(<argument><expr><call><name><name>m_reporterLikes</name><operator>.</operator><name>begin</name></name><argument_list>()</argument_list></call> <operator>+</operator> <name>m_insertedListeners</name></expr></argument>, <argument><expr><call><name>CATCH_MOVE</name><argument_list>(<argument><expr><name>listener</name></expr></argument>)</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><operator>++</operator><name>m_insertedListeners</name></expr>;</expr_stmt>
+    </block_content>}</block></function>
+
+    <function><type><name>void</name></type> <name><name>ListeningReporter</name><operator>::</operator><name>addReporter</name></name><parameter_list>( <parameter><decl><type><name>IStreamingReporterPtr</name><modifier>&amp;&amp;</modifier></type> <name>reporter</name></decl></parameter> )</parameter_list> <block>{<block_content>
+        <expr_stmt><expr><call><name>updatePreferences</name><argument_list>(<argument><expr><operator>*</operator><name>reporter</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+
+        <comment type="line">// We will need to output the captured stdout if there are reporters</comment>
+        <comment type="line">// that do not want it captured.</comment>
+        <comment type="line">// We do not consider listeners, because it is generally assumed that</comment>
+        <comment type="line">// listeners are output-transparent, even though they can ask for stdout</comment>
+        <comment type="line">// capture to do something with it.</comment>
+        <expr_stmt><expr><name>m_haveNoncapturingReporters</name> <operator>|=</operator> <operator>!</operator><call><name><name>reporter</name><operator>-&gt;</operator><name>getPreferences</name></name><argument_list>()</argument_list></call><operator>.</operator><name>shouldRedirectStdOut</name></expr>;</expr_stmt>
+
+        <comment type="line">// Reporters can always be placed to the back without breaking the</comment>
+        <comment type="line">// reporting order</comment>
+        <expr_stmt><expr><call><name><name>m_reporterLikes</name><operator>.</operator><name>push_back</name></name><argument_list>( <argument><expr><call><name>CATCH_MOVE</name><argument_list>( <argument><expr><name>reporter</name></expr></argument> )</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block></function>
+
+    <function><type><name>void</name></type> <name><name>ListeningReporter</name><operator>::</operator><name>noMatchingTestCases</name></name><parameter_list>( <parameter><decl><type><name>StringRef</name></type> <name>unmatchedSpec</name></decl></parameter> )</parameter_list> <block>{<block_content>
+        <for>for <control>( <init><expr><name>auto</name><operator>&amp;</operator> <name>reporterish</name> <operator>:</operator> <name>m_reporterLikes</name></expr></init> )</control> <block>{<block_content>
+            <expr_stmt><expr><call><name><name>reporterish</name><operator>-&gt;</operator><name>noMatchingTestCases</name></name><argument_list>( <argument><expr><name>unmatchedSpec</name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        </block_content>}</block></for>
+    </block_content>}</block></function>
+
+    <function><type><name>void</name></type> <name><name>ListeningReporter</name><operator>::</operator><name>fatalErrorEncountered</name></name><parameter_list>( <parameter><decl><type><name>StringRef</name></type> <name>error</name></decl></parameter> )</parameter_list> <block>{<block_content>
+        <for>for <control>( <init><expr><name>auto</name><operator>&amp;</operator> <name>reporterish</name> <operator>:</operator> <name>m_reporterLikes</name></expr></init> )</control> <block>{<block_content>
+            <expr_stmt><expr><call><name><name>reporterish</name><operator>-&gt;</operator><name>fatalErrorEncountered</name></name><argument_list>( <argument><expr><name>error</name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        </block_content>}</block></for>
+    </block_content>}</block></function>
+
+    <function><type><name>void</name></type> <name><name>ListeningReporter</name><operator>::</operator><name>reportInvalidTestSpec</name></name><parameter_list>( <parameter><decl><type><name>StringRef</name></type> <name>arg</name></decl></parameter> )</parameter_list> <block>{<block_content>
+        <for>for <control>( <init><expr><name>auto</name><operator>&amp;</operator> <name>reporterish</name> <operator>:</operator> <name>m_reporterLikes</name></expr></init> )</control> <block>{<block_content>
+            <expr_stmt><expr><call><name><name>reporterish</name><operator>-&gt;</operator><name>reportInvalidTestSpec</name></name><argument_list>( <argument><expr><name>arg</name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        </block_content>}</block></for>
+    </block_content>}</block></function>
+
+    <function><type><name>void</name></type> <name><name>ListeningReporter</name><operator>::</operator><name>benchmarkPreparing</name></name><parameter_list>( <parameter><decl><type><name>StringRef</name></type> <name>name</name></decl></parameter> )</parameter_list> <block>{<block_content>
+        <for>for <control>(<init><expr><name>auto</name><operator>&amp;</operator> <name>reporterish</name> <operator>:</operator> <name>m_reporterLikes</name></expr></init>)</control> <block>{<block_content>
+            <expr_stmt><expr><call><name><name>reporterish</name><operator>-&gt;</operator><name>benchmarkPreparing</name></name><argument_list>(<argument><expr><name>name</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        </block_content>}</block></for>
+    </block_content>}</block></function>
+    <function><type><name>void</name></type> <name><name>ListeningReporter</name><operator>::</operator><name>benchmarkStarting</name></name><parameter_list>( <parameter><decl><type><name>BenchmarkInfo</name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>benchmarkInfo</name></decl></parameter> )</parameter_list> <block>{<block_content>
+        <for>for <control>( <init><expr><name>auto</name><operator>&amp;</operator> <name>reporterish</name> <operator>:</operator> <name>m_reporterLikes</name></expr></init> )</control> <block>{<block_content>
+            <expr_stmt><expr><call><name><name>reporterish</name><operator>-&gt;</operator><name>benchmarkStarting</name></name><argument_list>( <argument><expr><name>benchmarkInfo</name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        </block_content>}</block></for>
+    </block_content>}</block></function>
+    <function><type><name>void</name></type> <name><name>ListeningReporter</name><operator>::</operator><name>benchmarkEnded</name></name><parameter_list>( <parameter><decl><type><name><name>BenchmarkStats</name><argument_list type="generic">&lt;&gt;</argument_list></name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>benchmarkStats</name></decl></parameter> )</parameter_list> <block>{<block_content>
+        <for>for <control>( <init><expr><name>auto</name><operator>&amp;</operator> <name>reporterish</name> <operator>:</operator> <name>m_reporterLikes</name></expr></init> )</control> <block>{<block_content>
+            <expr_stmt><expr><call><name><name>reporterish</name><operator>-&gt;</operator><name>benchmarkEnded</name></name><argument_list>( <argument><expr><name>benchmarkStats</name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        </block_content>}</block></for>
+    </block_content>}</block></function>
+
+    <function><type><name>void</name></type> <name><name>ListeningReporter</name><operator>::</operator><name>benchmarkFailed</name></name><parameter_list>( <parameter><decl><type><name>StringRef</name></type> <name>error</name></decl></parameter> )</parameter_list> <block>{<block_content>
+        <for>for <control>(<init><expr><name>auto</name><operator>&amp;</operator> <name>reporterish</name> <operator>:</operator> <name>m_reporterLikes</name></expr></init>)</control> <block>{<block_content>
+            <expr_stmt><expr><call><name><name>reporterish</name><operator>-&gt;</operator><name>benchmarkFailed</name></name><argument_list>(<argument><expr><name>error</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        </block_content>}</block></for>
+    </block_content>}</block></function>
+
+    <function><type><name>void</name></type> <name><name>ListeningReporter</name><operator>::</operator><name>testRunStarting</name></name><parameter_list>( <parameter><decl><type><name>TestRunInfo</name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>testRunInfo</name></decl></parameter> )</parameter_list> <block>{<block_content>
+        <for>for <control>( <init><expr><name>auto</name><operator>&amp;</operator> <name>reporterish</name> <operator>:</operator> <name>m_reporterLikes</name></expr></init> )</control> <block>{<block_content>
+            <expr_stmt><expr><call><name><name>reporterish</name><operator>-&gt;</operator><name>testRunStarting</name></name><argument_list>( <argument><expr><name>testRunInfo</name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        </block_content>}</block></for>
+    </block_content>}</block></function>
+
+    <function><type><name>void</name></type> <name><name>ListeningReporter</name><operator>::</operator><name>testCaseStarting</name></name><parameter_list>( <parameter><decl><type><name>TestCaseInfo</name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>testInfo</name></decl></parameter> )</parameter_list> <block>{<block_content>
+        <for>for <control>( <init><expr><name>auto</name><operator>&amp;</operator> <name>reporterish</name> <operator>:</operator> <name>m_reporterLikes</name></expr></init> )</control> <block>{<block_content>
+            <expr_stmt><expr><call><name><name>reporterish</name><operator>-&gt;</operator><name>testCaseStarting</name></name><argument_list>( <argument><expr><name>testInfo</name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        </block_content>}</block></for>
+    </block_content>}</block></function>
+
+    <function><type><name>void</name></type>
+    <name><name>ListeningReporter</name><operator>::</operator><name>testCasePartialStarting</name></name><parameter_list>( <parameter><decl><type><name>TestCaseInfo</name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>testInfo</name></decl></parameter>,
+                                                <parameter><decl><type><name>uint64_t</name></type> <name>partNumber</name></decl></parameter> )</parameter_list> <block>{<block_content>
+        <for>for <control>( <init><expr><name>auto</name><operator>&amp;</operator> <name>reporterish</name> <operator>:</operator> <name>m_reporterLikes</name></expr></init> )</control> <block>{<block_content>
+            <expr_stmt><expr><call><name><name>reporterish</name><operator>-&gt;</operator><name>testCasePartialStarting</name></name><argument_list>( <argument><expr><name>testInfo</name></expr></argument>, <argument><expr><name>partNumber</name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        </block_content>}</block></for>
+    </block_content>}</block></function>
+
+    <function><type><name>void</name></type> <name><name>ListeningReporter</name><operator>::</operator><name>sectionStarting</name></name><parameter_list>( <parameter><decl><type><name>SectionInfo</name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>sectionInfo</name></decl></parameter> )</parameter_list> <block>{<block_content>
+        <for>for <control>( <init><expr><name>auto</name><operator>&amp;</operator> <name>reporterish</name> <operator>:</operator> <name>m_reporterLikes</name></expr></init> )</control> <block>{<block_content>
+            <expr_stmt><expr><call><name><name>reporterish</name><operator>-&gt;</operator><name>sectionStarting</name></name><argument_list>( <argument><expr><name>sectionInfo</name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        </block_content>}</block></for>
+    </block_content>}</block></function>
+
+    <function><type><name>void</name></type> <name><name>ListeningReporter</name><operator>::</operator><name>assertionStarting</name></name><parameter_list>( <parameter><decl><type><name>AssertionInfo</name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>assertionInfo</name></decl></parameter> )</parameter_list> <block>{<block_content>
+        <for>for <control>( <init><expr><name>auto</name><operator>&amp;</operator> <name>reporterish</name> <operator>:</operator> <name>m_reporterLikes</name></expr></init> )</control> <block>{<block_content>
+            <expr_stmt><expr><call><name><name>reporterish</name><operator>-&gt;</operator><name>assertionStarting</name></name><argument_list>( <argument><expr><name>assertionInfo</name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        </block_content>}</block></for>
+    </block_content>}</block></function>
+
+    <comment type="line">// The return value indicates if the messages buffer should be cleared:</comment>
+    <function><type><name>void</name></type> <name><name>ListeningReporter</name><operator>::</operator><name>assertionEnded</name></name><parameter_list>( <parameter><decl><type><name>AssertionStats</name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>assertionStats</name></decl></parameter> )</parameter_list> <block>{<block_content>
+        <decl_stmt><decl><type><specifier>const</specifier> <name>bool</name></type> <name>reportByDefault</name> <init>=
+            <expr><call><name><name>assertionStats</name><operator>.</operator><name>assertionResult</name><operator>.</operator><name>getResultType</name></name><argument_list>()</argument_list></call> <operator>!=</operator> <name><name>ResultWas</name><operator>::</operator><name>Ok</name></name> <operator>||</operator>
+            <call><name><name>m_config</name><operator>-&gt;</operator><name>includeSuccessfulResults</name></name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+
+        <for>for <control>( <init><expr><name>auto</name> <operator>&amp;</operator> <name>reporterish</name> <operator>:</operator> <name>m_reporterLikes</name></expr></init> )</control> <block>{<block_content>
+            <if_stmt><if>if <condition>( <expr><name>reportByDefault</name> <operator>||</operator>
+                 <call><name><name>reporterish</name><operator>-&gt;</operator><name>getPreferences</name></name><argument_list>()</argument_list></call><operator>.</operator><name>shouldReportAllAssertions</name></expr> )</condition> <block>{<block_content>
+                    <expr_stmt><expr><call><name><name>reporterish</name><operator>-&gt;</operator><name>assertionEnded</name></name><argument_list>( <argument><expr><name>assertionStats</name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+            </block_content>}</block></if></if_stmt>
+        </block_content>}</block></for>
+    </block_content>}</block></function>
+
+    <function><type><name>void</name></type> <name><name>ListeningReporter</name><operator>::</operator><name>sectionEnded</name></name><parameter_list>( <parameter><decl><type><name>SectionStats</name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>sectionStats</name></decl></parameter> )</parameter_list> <block>{<block_content>
+        <for>for <control>( <init><expr><name>auto</name><operator>&amp;</operator> <name>reporterish</name> <operator>:</operator> <name>m_reporterLikes</name></expr></init> )</control> <block>{<block_content>
+            <expr_stmt><expr><call><name><name>reporterish</name><operator>-&gt;</operator><name>sectionEnded</name></name><argument_list>( <argument><expr><name>sectionStats</name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        </block_content>}</block></for>
+    </block_content>}</block></function>
+
+    <function><type><name>void</name></type> <name><name>ListeningReporter</name><operator>::</operator><name>testCasePartialEnded</name></name><parameter_list>( <parameter><decl><type><name>TestCaseStats</name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>testStats</name></decl></parameter>,
+                                                  <parameter><decl><type><name>uint64_t</name></type> <name>partNumber</name></decl></parameter> )</parameter_list> <block>{<block_content>
+<diff:delete type="replace" xmlns:diff="http://www.srcML.org/srcDiff"><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">        </diff:ws><comment type="line">//<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>TODO:<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>Fix<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>handling<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>of<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>stderr/stdout?</comment></diff:delete><diff:insert type="replace" xmlns:diff="http://www.srcML.org/srcDiff"><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">        </diff:ws><if_stmt><if>if<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><condition>(<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><expr><name><name>m_preferences</name><operator>.</operator><name>shouldRedirectStdOut</name></name><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><operator>&amp;&amp;</operator><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+             </diff:ws><name>m_haveNoncapturingReporters</name></expr><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>)</condition><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><block>{<block_content><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+            </diff:ws><if_stmt><if>if<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><condition>(<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><expr><operator>!</operator><call><name><name>testStats</name><operator>.</operator><name>stdOut</name><operator>.</operator><name>empty</name></name><argument_list>()</argument_list></call></expr><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>)</condition><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><block>{<block_content><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+                </diff:ws><expr_stmt><expr><call><name><name>Catch</name><operator>::</operator><name>cout</name></name><argument_list>()</argument_list></call><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><operator>&lt;&lt;</operator><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><name><name>testStats</name><operator>.</operator><name>stdOut</name></name><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><operator>&lt;&lt;</operator><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><name><name>std</name><operator>::</operator><name>flush</name></name></expr>;</expr_stmt><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+            </diff:ws></block_content>}</block></if></if_stmt><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+            </diff:ws><if_stmt><if>if<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><condition>(<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><expr><operator>!</operator><call><name><name>testStats</name><operator>.</operator><name>stdErr</name><operator>.</operator><name>empty</name></name><argument_list>()</argument_list></call></expr><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>)</condition><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><block>{<block_content><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+                </diff:ws><expr_stmt><expr><call><name><name>Catch</name><operator>::</operator><name>cerr</name></name><argument_list>()</argument_list></call><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><operator>&lt;&lt;</operator><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><name><name>testStats</name><operator>.</operator><name>stdErr</name></name><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><operator>&lt;&lt;</operator><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><name><name>std</name><operator>::</operator><name>flush</name></name></expr>;</expr_stmt><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+            </diff:ws></block_content>}</block></if></if_stmt><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+        </diff:ws></block_content>}</block></if></if_stmt></diff:insert>
+<diff:insert xmlns:diff="http://www.srcML.org/srcDiff"><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+</diff:ws></diff:insert>        <for>for <control>( <init><expr><name>auto</name><operator>&amp;</operator> <name>reporterish</name> <operator>:</operator> <name>m_reporterLikes</name></expr></init> )</control> <block>{<block_content>
+            <expr_stmt><expr><call><name><name>reporterish</name><operator>-&gt;</operator><name>testCasePartialEnded</name></name><argument_list>( <argument><expr><name>testStats</name></expr></argument>, <argument><expr><name>partNumber</name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        </block_content>}</block></for>
+    </block_content>}</block></function>
+
+    <function><type><name>void</name></type> <name><name>ListeningReporter</name><operator>::</operator><name>testCaseEnded</name></name><parameter_list>( <parameter><decl><type><name>TestCaseStats</name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>testCaseStats</name></decl></parameter> )</parameter_list> <block>{<block_content>
+<diff:delete xmlns:diff="http://www.srcML.org/srcDiff"><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">        </diff:ws><if_stmt><if>if<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><condition>(<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><expr><name><name>m_preferences</name><operator>.</operator><name>shouldRedirectStdOut</name></name><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><operator>&amp;&amp;</operator><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><name>m_haveNoncapturingReporters</name></expr><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>)</condition><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><block>{<block_content><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+            </diff:ws><if_stmt><if>if<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><condition>(<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><expr><operator>!</operator><call><name><name>testCaseStats</name><operator>.</operator><name>stdOut</name><operator>.</operator><name>empty</name></name><argument_list>()</argument_list></call></expr><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>)</condition><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><block>{<block_content><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+                </diff:ws><expr_stmt><expr><call><name><name>Catch</name><operator>::</operator><name>cout</name></name><argument_list>()</argument_list></call><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><operator>&lt;&lt;</operator><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><name><name>testCaseStats</name><operator>.</operator><name>stdOut</name></name><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><operator>&lt;&lt;</operator><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><name><name>std</name><operator>::</operator><name>flush</name></name></expr>;</expr_stmt><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+            </diff:ws></block_content>}</block></if></if_stmt><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+            </diff:ws><if_stmt><if>if<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><condition>(<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><expr><operator>!</operator><call><name><name>testCaseStats</name><operator>.</operator><name>stdErr</name><operator>.</operator><name>empty</name></name><argument_list>()</argument_list></call></expr><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>)</condition><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><block>{<block_content><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+                </diff:ws><expr_stmt><expr><call><name><name>Catch</name><operator>::</operator><name>cerr</name></name><argument_list>()</argument_list></call><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><operator>&lt;&lt;</operator><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><name><name>testCaseStats</name><operator>.</operator><name>stdErr</name></name><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><operator>&lt;&lt;</operator><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><name><name>std</name><operator>::</operator><name>flush</name></name></expr>;</expr_stmt><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+            </diff:ws></block_content>}</block></if></if_stmt><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+        </diff:ws></block_content>}</block></if></if_stmt><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+</diff:ws></diff:delete>        <for>for <control>( <init><expr><name>auto</name><operator>&amp;</operator> <name>reporterish</name> <operator>:</operator> <name>m_reporterLikes</name></expr></init> )</control> <block>{<block_content>
+            <expr_stmt><expr><call><name><name>reporterish</name><operator>-&gt;</operator><name>testCaseEnded</name></name><argument_list>( <argument><expr><name>testCaseStats</name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        </block_content>}</block></for>
+    </block_content>}</block></function>
+
+    <function><type><name>void</name></type> <name><name>ListeningReporter</name><operator>::</operator><name>testRunEnded</name></name><parameter_list>( <parameter><decl><type><name>TestRunStats</name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>testRunStats</name></decl></parameter> )</parameter_list> <block>{<block_content>
+        <for>for <control>( <init><expr><name>auto</name><operator>&amp;</operator> <name>reporterish</name> <operator>:</operator> <name>m_reporterLikes</name></expr></init> )</control> <block>{<block_content>
+            <expr_stmt><expr><call><name><name>reporterish</name><operator>-&gt;</operator><name>testRunEnded</name></name><argument_list>( <argument><expr><name>testRunStats</name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        </block_content>}</block></for>
+    </block_content>}</block></function>
+
+
+    <function><type><name>void</name></type> <name><name>ListeningReporter</name><operator>::</operator><name>skipTest</name></name><parameter_list>( <parameter><decl><type><name>TestCaseInfo</name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>testInfo</name></decl></parameter> )</parameter_list> <block>{<block_content>
+        <for>for <control>( <init><expr><name>auto</name><operator>&amp;</operator> <name>reporterish</name> <operator>:</operator> <name>m_reporterLikes</name></expr></init> )</control> <block>{<block_content>
+            <expr_stmt><expr><call><name><name>reporterish</name><operator>-&gt;</operator><name>skipTest</name></name><argument_list>( <argument><expr><name>testInfo</name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        </block_content>}</block></for>
+    </block_content>}</block></function>
+
+    <function><type><name>void</name></type> <name><name>ListeningReporter</name><operator>::</operator><name>listReporters</name></name><parameter_list>(<parameter><decl><type><name><name>std</name><operator>::</operator><name>vector</name><argument_list type="generic">&lt;<argument><expr><name>ReporterDescription</name></expr></argument>&gt;</argument_list></name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>descriptions</name></decl></parameter>)</parameter_list> <block>{<block_content>
+        <for>for <control>(<init><expr><name>auto</name><operator>&amp;</operator> <name>reporterish</name> <operator>:</operator> <name>m_reporterLikes</name></expr></init>)</control> <block>{<block_content>
+            <expr_stmt><expr><call><name><name>reporterish</name><operator>-&gt;</operator><name>listReporters</name></name><argument_list>(<argument><expr><name>descriptions</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        </block_content>}</block></for>
+    </block_content>}</block></function>
+
+    <function><type><name>void</name></type> <name><name>ListeningReporter</name><operator>::</operator><name>listTests</name></name><parameter_list>(<parameter><decl><type><name><name>std</name><operator>::</operator><name>vector</name><argument_list type="generic">&lt;<argument><expr><name>TestCaseHandle</name></expr></argument>&gt;</argument_list></name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>tests</name></decl></parameter>)</parameter_list> <block>{<block_content>
+        <for>for <control>(<init><expr><name>auto</name><operator>&amp;</operator> <name>reporterish</name> <operator>:</operator> <name>m_reporterLikes</name></expr></init>)</control> <block>{<block_content>
+            <expr_stmt><expr><call><name><name>reporterish</name><operator>-&gt;</operator><name>listTests</name></name><argument_list>(<argument><expr><name>tests</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        </block_content>}</block></for>
+    </block_content>}</block></function>
+
+    <function><type><name>void</name></type> <name><name>ListeningReporter</name><operator>::</operator><name>listTags</name></name><parameter_list>(<parameter><decl><type><name><name>std</name><operator>::</operator><name>vector</name><argument_list type="generic">&lt;<argument><expr><name>TagInfo</name></expr></argument>&gt;</argument_list></name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>tags</name></decl></parameter>)</parameter_list> <block>{<block_content>
+        <for>for <control>(<init><expr><name>auto</name><operator>&amp;</operator> <name>reporterish</name> <operator>:</operator> <name>m_reporterLikes</name></expr></init>)</control> <block>{<block_content>
+            <expr_stmt><expr><call><name><name>reporterish</name><operator>-&gt;</operator><name>listTags</name></name><argument_list>(<argument><expr><name>tags</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        </block_content>}</block></for>
+    </block_content>}</block></function>
+
+}</block></namespace> <comment type="line">// end namespace Catch</comment>
+</unit>

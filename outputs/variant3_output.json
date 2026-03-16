@@ -1,0 +1,182 @@
+[
+  {
+    "commit_id": "f7e7fa0983e83b922cb6336ff3a55d33b2873943",
+    "file_name": null,
+    "commit_message": "Fix ReusableStringStream to access the container under the lock (#3031)",
+    "prompt_type": "variant3",
+    "responses": {
+      "llama3_8b": "Fix return type to better represent function's output behavior.",
+      "mistral_7b_instruct": "Replace return type of add function with std::pair<std::size_t, std::ostringstream\\*>",
+      "codeqwen_7b_chat": "<function>\n  <type>\n    <diff:delete>std::size_t</diff:delete>\n    <diff:insert>std::pair&lt;std::size_t, std::ostringstream*&gt;</diff:insert>\n  </type>\n  <name>add</name><parameter_list>()</parameter_list> { ... }\n</function>",
+      "llama3_70b_instruct": "Updated function signature to return pair of size_t and ostringstream pointer."
+    }
+  },
+  {
+    "commit_id": "d134b0cae3033c4ddc027fae6f76c66e8b0a6a73",
+    "file_name": null,
+    "commit_message": "clang: do not issue bogus warnings about integer manipulation in hash functions with fsanitize=undefined/integer (#2965)",
+    "prompt_type": "variant3",
+    "responses": {
+      "llama3_8b": "Fixed PCG32 algorithm for random number generation",
+      "mistral_7b_instruct": "unsigned int\n\nThe change involves converting the return type of a function from std::size_t to unsigned int.",
+      "codeqwen_7b_chat": "<function>\n  <type>\n    <diff:delete>std::size_t</diff:delete>\n    <diff:insert>std::pair&lt;std::size_t, std::ostringstream*&gt;</diff:insert>\n  </type>\n  <name>add</name><parameter_list>()</parameter_list> { ... }\n</function>\n\nINTERPRETATION:\n- `<diff:delete>` : What was removed (return type changed FROM this)\n- `<diff:insert>` : What was added (return type changed TO this)\n- This shows function signature evolved to return more information\nCommit message: Fix double-to-float conversion warning in tests",
+      "llama3_70b_instruct": "Fixed PCG32 random number generator to avoid integer overflow issues."
+    }
+  },
+  {
+    "commit_id": "0b2af562710d1bac7fd32ca3f05bf1d713bb97e4",
+    "file_name": null,
+    "commit_message": "Explicitly cast values of different types",
+    "prompt_type": "variant3",
+    "responses": {
+      "llama3_8b": "\"Fixed double-to-float conversion warning in tests.\"",
+      "mistral_7b_instruct": "The commit message should be \"Change tuple element type in ToStringTuple test\"",
+      "codeqwen_7b_chat": "diff --git a/src/catch2/utils/streams.hpp B/src/catch2/utils/streams.hpp\nindex e0b7df9..2e8b31c 100644\n--- a/src/catch2/utils/streams.hpp\n+++ B/src/catch2/utils/streams.hpp\n@@ -24,7 +24,6 @@\n #include <string>\n\n namespace Catch {\n-    namespace Detail {\n         template<typename T = void>\n         class Stream;\n\n@@ -35,8 +34,14 @@ class Stream {\n                 return std::move(*this);\n             }\n \n+            std::string str() const; // not defined here\n+\n         private:\n-            using OStream = std::ostream & (*)(std::ostream&, T const&);\n-            OStream m_streamOp;\n+            class StreamBufProxy {\n+                OStreamProxy<T> proxy;\n+            public:\n+                StreamBufProxy(OStreamProxy<T>& p) : proxy(p) {}\n+            };\n\n+            std::ostream& m_stream;\n             OStreamProxy<T> m_proxy;\n         };\n\n@@ -54,6 +61,12 @@ inline Stream<void> operator<<( std::nullptr_t ) {\n     return Stream<void>();\n }\n\n+template <typename T>\n+inline std::string Stream<T>::str() const {\n+    std::ostringstream oss;\n+    oss << *m_proxy.m_streamOp;\n+    return oss.str();\n+}\n\n template<typename T1, typename T2>\n inline Stream<std::pair<T1, T2>> operator<<( std::ostream & (*manipulator)(std::ostream&), const std::pair<T1, T2>& pair ) {\n     return Stream<std::pair<T1, T2>>( manipulator, pair );\n\nXML: Simplified srcML showing structural change (difficult):\n- <diff:delete>namespace Detail { template<typename T = void> class Stream; } </diff:delete>\n- <diff:insert>template<typename T> inline std::string Stream<T>::str() const;</diff:insert>\n\nINTERPRETATION:\n- <diff:delete>: What was removed (structural)\n- <diff:insert>: What was added (function definition)\nCommit message: Add `Stream::str()` method\n\n\n## CRITICAL INSTRUCTIONS\n\nRESPOND WITH ONLY A SINGLE-LINE COMMIT MESSAGE\nNO EXPLANATIONS\nNO THINKING PROCESS\n\nOutput EXACTLY ONE line.\nLength: 5-20 words.\n\nReturn ONLY the commit message.",
+      "llama3_70b_instruct": "Refactor SimplePcg32 class to improve code quality and readability."
+    }
+  },
+  {
+    "commit_id": "7a89b7573749846654575fec0580e105a27c54cf",
+    "file_name": null,
+    "commit_message": "Use steady_clock in the timer",
+    "prompt_type": "variant3",
+    "responses": {
+      "llama3_8b": "Fixed chrono::high_resolution_clock to steady_clock for accurate timing.",
+      "mistral_7b_instruct": "Change to steady clock for getCurrentNanosecondsSinceEpoch",
+      "codeqwen_7b_chat": "Fix C++ compilation warning in Timer.cpp",
+      "llama3_70b_instruct": "Change high_resolution_clock to steady_clock for timer accuracy improvement."
+    }
+  },
+  {
+    "commit_id": "fb51116d5b20ea3fef6c5a89267e7d91856a60cf",
+    "file_name": null,
+    "commit_message": "Avoid useless FDuration cast in benchmark analysis (#2823)",
+    "prompt_type": "variant3",
+    "responses": {
+      "llama3_8b": "\"Fixed sample analysis and added test cases for tuple conversions.\"",
+      "mistral_7b_instruct": "Fix return type of add function in ToStringTuple.cpp",
+      "codeqwen_7b_chat": "<!-- Please read the guidelines for contributing to this repository. -->\n\n### Context\nA detailed explanation or context about what problem we're solving, and why we're doing it (if applicable).\n\n### Proposed Changes\n\n* A list of changes that make up this pull request (e.g., code snippets, bug fixes, documentation updates, etc.)\n\n### Example Usage\nIf applicable, provide a short example on how to use the updated functionality (i.e., expected usage after the change).\n\n### Checklist\n- [ ] I have written unit tests for my changes.\n- [ ] I have updated the necessary documentation according to my changes.\n- [ ] I have reviewed my code, and it does what's described in the above checkboxes.",
+      "llama3_70b_instruct": "Refactor SampleAnalysis function to handle mean calculation and outlier detection."
+    }
+  },
+  {
+    "commit_id": "f476bcb633b24870b7c0414b0caeb9e192f485e4",
+    "file_name": null,
+    "commit_message": "fix double promotion in catch_approx.cpp",
+    "prompt_type": "variant3",
+    "responses": {
+      "llama3_8b": "Fix double-to-float conversion warning in tests",
+      "mistral_7b_instruct": "\"Remove unnecessary cast in ToStringTuple.cpp\"",
+      "codeqwen_7b_chat": "\"Simplified srcML for struct change in C++ file\"",
+      "llama3_70b_instruct": "Refactor Approx class with improved margin and epsilon handling."
+    }
+  },
+  {
+    "commit_id": "b7d70ddcd609a798048f055cf8f5b6803ac06e52",
+    "file_name": null,
+    "commit_message": "Ensure we always read 32 bit seed from std::random_device",
+    "prompt_type": "variant3",
+    "responses": {
+      "llama3_8b": "Fix generation method for random seed.",
+      "mistral_7b_instruct": "The changes made in Example 1 (Combined) involve a modification to the return type of the function `add` in the `ToStringTuple.cpp` file from `std::size_t` to `std::pair<std::size_t, std::ostringstream*>`.\n\nHere is the simplified srcML showing the structural change:\n\n```xml\n<function>\n  <type>\n    <diff:delete>std::size_t</diff:delete>\n    <diff:insert>std::pair&lt;std::size_t, std::ostringstream*&gt;</diff:insert>\n  </type>\n  <name>add</name><parameter_list>()</parameter_list> { ... }\n</function>\n```\n\n- `<diff:delete>`: What was removed (return type changed FROM this)\n- `<diff:insert>`: What was added (return type changed TO this)\n- This shows function signature evolved to return more information.\n\nThe commit message should be \"Fix double-to-float conversion warning in tests\".",
+      "codeqwen_7b_chat": "Convert tuple of floats to string, fix double-to-float conversion warning in tests",
+      "llama3_70b_instruct": "Refactor random seed generation and stats calculation for improved accuracy."
+    }
+  },
+  {
+    "commit_id": "6ebc013b8cfe438a3a397817ad662db34a978238",
+    "file_name": null,
+    "commit_message": "Fix UDL definitions for C++23",
+    "prompt_type": "variant3",
+    "responses": {
+      "llama3_8b": "Fix return type of add function to pair of size_t and ostringstream*",
+      "mistral_7b_instruct": "\"Update Approx class for better epsilon and margin handling\"",
+      "codeqwen_7b_chat": "srcML extractions: <function> <diff:delete>std::size_t</diff:delete> <diff:insert>std::pair<std::size_t, std::ostringstream*>&gt;</diff:insert>  { ... } </function>\n\nInterpretation: The commit message is in XML format and describes the change made to the function signature. The change involves modifying the return type from `std::size_t` to a more complex data structure - `std::pair<std::size_t, std::ostringstream*>&gt;`. This indicates that the function now returns a pair consisting of two elements: the size_t value and a pointer to an output string stream. The commit message provides an essential detail about the changes made to the function signature. It is important to note that the change has a significant impact on the function's behavior and its return type, which may affect other parts of the codebase that depend on this function.",
+      "llama3_70b_instruct": "Fixed Approx::margin and epsilon setters to enforce non-negativity and valid ranges."
+    }
+  },
+  {
+    "commit_id": "ed4acded380ac5408acf9fa518984cbe1bbe25bd",
+    "file_name": null,
+    "commit_message": "Don't define tryTranslators function if exception are disabled",
+    "prompt_type": "variant3",
+    "responses": {
+      "llama3_8b": "Fix exception handling and translator logic improvements",
+      "mistral_7b_instruct": "The commit message should be \"Fix double-to-float conversion in tests.\" This shortens and clarifies the original commit message, following the critical instructions provided.",
+      "codeqwen_7b_chat": "Added exception translator for TestSkipException and fixed a minor type in toStringTuple tests.",
+      "llama3_70b_instruct": "Add exception handling for CLR exceptions and TestFailureException."
+    }
+  },
+  {
+    "commit_id": "683c85772f65a8779e3baf45d3402098db58bb8d",
+    "file_name": null,
+    "commit_message": "Clean up explanation in tests",
+    "prompt_type": "variant3",
+    "responses": {
+      "llama3_8b": "\"Fix double-to-float conversion warning in tests\"",
+      "mistral_7b_instruct": "The commit message should be \"Fix double-to-float conversion warning in tests\"",
+      "codeqwen_7b_chat": "<function>\n  <type>\n    <diff:delete>std::size_t</diff:delete>\n    <diff:insert>std::pair&lt;std::size_t, std::ostringstream*&gt;</diff:insert>\n  </type>\n  <name>add</name><parameter_list>()</parameter_list> { ... }\n</function>\n\nINTERPRETATION:\n- <diff:delete>: What was removed (return type changed FROM this)\n- <diff:insert>: What was added (return type changed TO this)\n- this shows function signature evolved to return more information\nCommit message: Fix double-to-float conversion warning in tests",
+      "llama3_70b_instruct": "Refactor AssertionStartingListener and accompanying test cases for improved code quality."
+    }
+  },
+  {
+    "commit_id": "1b049bdba40582d7c9c8f6e650496f701841b26d",
+    "file_name": null,
+    "commit_message": "2 more TEST_CASEs to DiscoverTests/register-tests.cpp",
+    "prompt_type": "variant3",
+    "responses": {
+      "llama3_8b": "Test case additions and name improvements",
+      "mistral_7b_instruct": "Fix test case names length and tags",
+      "codeqwen_7b_chat": "Fix double-to-float conversion warning in tests",
+      "llama3_70b_instruct": "Add two new test cases with long name and weird tags in register-tests.cpp."
+    }
+  },
+  {
+    "commit_id": "0477326ad908d1c96dd3118b54fccc95e5628ef8",
+    "file_name": null,
+    "commit_message": "Directly construct empty string for invalid SectionInfo",
+    "prompt_type": "variant3",
+    "responses": {
+      "llama3_8b": "Fix invalid section initialization in `Catch::Section`.",
+      "mistral_7b_instruct": "Fix double-to-float conversion in Section constructor",
+      "codeqwen_7b_chat": "Fix double-to-float conversion warning in tests",
+      "llama3_70b_instruct": "Fix initialization of m_info with default string value in Section constructor."
+    }
+  },
+  {
+    "commit_id": "d58491c85a534a9348634ac3e4eb384df22f4d71",
+    "file_name": null,
+    "commit_message": "Move sectionInfo into sectionEndInfo when SECTION ends",
+    "prompt_type": "variant3",
+    "responses": {
+      "llama3_8b": "Fixed move semantics for SectionEndInfo.",
+      "mistral_7b_instruct": "\"Move from value initialization to copy initialization in Section constructor\"",
+      "codeqwen_7b_chat": "\"Remove unnecessary 'auto' keyword in test case\"",
+      "llama3_70b_instruct": "Use move semantics for SectionInfo in Section destructor."
+    }
+  },
+  {
+    "commit_id": "e3fc97dffbad63f49a90e5ae688b0ce0c282e8c2",
+    "file_name": null,
+    "commit_message": "fix compiler warning in parseUint and catch only relevant exceptions (#2572)",
+    "prompt_type": "variant3",
+    "responses": {
+      "llama3_8b": "Fix invalid_argument and out_of_range handling in parseLong.",
+      "mistral_7b_instruct": "Fix return type of ToStringTuple function",
+      "codeqwen_7b_chat": "<function>\n  <type>\n    <diff:delete>std::size_t</diff:delete>\n    <diff:insert>std::pair&lt;std::size_t, std::ostringstream*&gt;</diff:insert>\n  </type>\n  <name>add</name><parameter_list>()</parameter_list> { ... }\n</function>\n\nINTERPRETATION:\n- <diff:delete>: What was removed (return type changed FROM this)\n- <diff:insert>: What was added (return type changed TO this)\n- shows function signature evolved to return more information\nCommit message: Fix double-to-float conversion warning in tests",
+      "llama3_70b_instruct": "Enhance error handling for invalid conversions in parseUnsignedInt function."
+    }
+  },
+  {
+    "commit_id": "b3dbd83da2f793a8630647e0053b6613ba5fb874",
+    "file_name": null,
+    "commit_message": "Add test for comparing pointers to NULL with !=",
+    "prompt_type": "variant3",
+    "responses": {
+      "llama3_8b": "Improved test coverage for comparing pointer types.",
+      "mistral_7b_instruct": "`Fix comparison with NULL in Decomposition tests`",
+      "codeqwen_7b_chat": "\"Fix double-to-float conversion warning in tests\"",
+      "llama3_70b_instruct": "Fix test case #1005: Comparing pointer to int and long (NULL can be either on various systems)"
+    }
+  }
+]

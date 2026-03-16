@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" xmlns:diff="http://www.srcML.org/srcDiff" revision="1.0.0" language="C++" filename="C:\Users\saile\AppData\Local\Temp\catch2_100_z8gzpiwf\79e4cd1af4c4afa25c459d18d37bb620846a50f9\tests_ExtraTests_X10-FallbackStringifier_cpp\tests_ExtraTests_X10-FallbackStringifier_cpp.old|C:\Users\saile\AppData\Local\Temp\catch2_100_z8gzpiwf\79e4cd1af4c4afa25c459d18d37bb620846a50f9\tests_ExtraTests_X10-FallbackStringifier_cpp\tests_ExtraTests_X10-FallbackStringifier_cpp.new">
+<comment type="line">//              Copyright Catch2 Authors</comment>
+<comment type="line">// Distributed under the Boost Software License, Version 1.0.</comment>
+<comment type="line">//   (See accompanying file LICENSE_1_0.txt or copy at</comment>
+<comment type="line">//        https://www.boost.org/LICENSE_1_0.txt)</comment>
+
+<comment type="line">// SPDX-License-Identifier: BSL-1.0</comment>
+
+<diff:delete type="replace" xmlns:diff="http://www.srcML.org/srcDiff"><comment type="line">//<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>X10-FallbackStringifier.cpp</comment><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+</diff:ws><comment type="line">//<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>Test<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>that<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>defining<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>fallbackStringifier<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>compiles</comment></diff:delete><diff:insert type="replace" xmlns:diff="http://www.srcML.org/srcDiff"><comment type="block" format="doxygen">/**\file<diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+ </diff:ws>*<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>Test<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>that<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>the<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>user<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>can<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>define<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>custom<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>fallbackStringifier<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> 
+ </diff:ws>*<diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+ </diff:ws>*<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>This<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>is<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>done<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>by<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>defining<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>a<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>custom<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>fallback<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>stringifier<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>that<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>prints<diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+ </diff:ws>*<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>out<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>a<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>specific<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>string,<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>and<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>then<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>asserting<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>(to<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>cause<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>stringification)<diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+ </diff:ws>*<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>over<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>a<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>type<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>without<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>stringification<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>support.<diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+ </diff:ws>*/</comment></diff:insert>
+
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;string&gt;</cpp:file></cpp:include>
+
+<comment type="line">// A catch-all stringifier</comment>
+<function><template>template <parameter_list>&lt;<parameter><type><name>typename</name></type> <name>T</name></parameter>&gt;</parameter_list></template>
+<type><name><name>std</name><operator>::</operator><name>string</name></name></type> <name>fallbackStringifier</name><parameter_list>(<parameter><decl><type><name>T</name> <specifier>const</specifier><modifier>&amp;</modifier></type></decl></parameter>)</parameter_list> <block>{<block_content>
+    <return>return <expr><literal type="string">"{ !!! }"</literal></expr>;</return>
+</block_content>}</block></function>
+
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;catch2/catch_test_macros.hpp&gt;</cpp:file></cpp:include>
+
+<struct>struct <name>foo</name> <block>{<public type="default">
+    <function type="operator"><type><specifier>explicit</specifier></type> <name>operator <name>bool</name></name><parameter_list>()</parameter_list> <specifier>const</specifier> <block>{<block_content>
+        <return>return <expr><literal type="boolean">true</literal></expr>;</return>
+    </block_content>}</block></function>
+</public>}</block>;</struct>
+
+<macro><name>TEST_CASE</name><argument_list>(<argument><literal type="string">"aa"</literal></argument>)</argument_list></macro> <block>{<block_content>
+    <expr_stmt><expr><call><name>REQUIRE</name><argument_list>(<argument><expr><call><name>foo</name><argument_list>{}</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+</block_content>}</block>
+</unit>

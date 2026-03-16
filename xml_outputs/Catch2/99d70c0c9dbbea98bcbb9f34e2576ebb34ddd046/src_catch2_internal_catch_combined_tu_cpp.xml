@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" xmlns:diff="http://www.srcML.org/srcDiff" revision="1.0.0" language="C++" filename="C:\Users\saile\AppData\Local\Temp\catch2_100_z8gzpiwf\99d70c0c9dbbea98bcbb9f34e2576ebb34ddd046\src_catch2_internal_catch_combined_tu_cpp\src_catch2_internal_catch_combined_tu_cpp.old|C:\Users\saile\AppData\Local\Temp\catch2_100_z8gzpiwf\99d70c0c9dbbea98bcbb9f34e2576ebb34ddd046\src_catch2_internal_catch_combined_tu_cpp\src_catch2_internal_catch_combined_tu_cpp.new">
+<comment type="line">//              Copyright Catch2 Authors</comment>
+<comment type="line">// Distributed under the Boost Software License, Version 1.0.</comment>
+<comment type="line">//   (See accompanying file LICENSE_1_0.txt or copy at</comment>
+<comment type="line">//        https://www.boost.org/LICENSE_1_0.txt)</comment>
+
+<comment type="line">// SPDX-License-Identifier: BSL-1.0</comment>
+<comment type="block" format="doxygen">/** \file
+ * This is a special TU that combines what would otherwise be a very
+ * small top-level TUs into one bigger TU.
+ *
+ * The reason for this is compilation performance improvements by
+ * avoiding reparsing headers for many small TUs, instead having this
+ * one TU include bit more, but having it all parsed only once.
+ *
+ * To avoid heavy-tail problem with compilation times, each "subpart"
+ * of Catch2 has its own combined TU like this.
+ */</comment>
+
+
+<comment type="line" format="doxygen">////////////////////////////////////////////////////////</comment>
+<comment type="line">// vvv formerly catch_tag_alias_autoregistrar.cpp vvv //</comment>
+<comment type="line" format="doxygen">////////////////////////////////////////////////////////</comment>
+
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;catch2/catch_tag_alias_autoregistrar.hpp&gt;</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;catch2/internal/catch_compiler_capabilities.hpp&gt;</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;catch2/interfaces/catch_interfaces_registry_hub.hpp&gt;</cpp:file></cpp:include>
+
+<namespace>namespace <name>Catch</name> <block>{
+
+    <constructor><name><name>RegistrarForTagAliases</name><operator>::</operator><name>RegistrarForTagAliases</name></name><parameter_list>(<parameter><decl><type><name>char</name> <specifier>const</specifier><modifier>*</modifier></type> <name>alias</name></decl></parameter>, <parameter><decl><type><name>char</name> <specifier>const</specifier><modifier>*</modifier></type> <name>tag</name></decl></parameter>, <parameter><decl><type><name>SourceLineInfo</name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>lineInfo</name></decl></parameter>)</parameter_list> <block>{<block_content>
+        <macro><name>CATCH_TRY</name></macro> <block>{<block_content>
+            <expr_stmt><expr><call><name>getMutableRegistryHub</name><argument_list>()</argument_list></call><operator>.</operator><call><name>registerTagAlias</name><argument_list>(<argument><expr><name>alias</name></expr></argument>, <argument><expr><name>tag</name></expr></argument>, <argument><expr><name>lineInfo</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        </block_content>}</block> <macro><name>CATCH_CATCH_ALL</name></macro> <block>{<block_content>
+            <comment type="line">// Do not throw when constructing global objects, instead register the exception to be processed later</comment>
+            <expr_stmt><expr><call><name>getMutableRegistryHub</name><argument_list>()</argument_list></call><operator>.</operator><call><name>registerStartupException</name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+        </block_content>}</block>
+    </block_content>}</block></constructor>
+
+}</block></namespace>
+
+
+<comment type="line" format="doxygen">//////////////////////////////////////////</comment>
+<comment type="line">// vvv formerly catch_polyfills.cpp vvv //</comment>
+<comment type="line" format="doxygen">//////////////////////////////////////////</comment>
+
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;catch2/internal/catch_polyfills.hpp&gt;</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;catch2/internal/catch_compiler_capabilities.hpp&gt;</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;cmath&gt;</cpp:file></cpp:include>
+
+<namespace>namespace <name>Catch</name> <block>{
+
+<cpp:if xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">if</cpp:directive> <expr><operator>!</operator><call><name>defined</name><argument_list>(<argument><expr><name>CATCH_CONFIG_POLYFILL_ISNAN</name></expr></argument>)</argument_list></call></expr></cpp:if>
+    <function><type><name>bool</name></type> <name>isnan</name><parameter_list>(<parameter><decl><type><name>float</name></type> <name>f</name></decl></parameter>)</parameter_list> <block>{<block_content>
+        <return>return <expr><call><name><name>std</name><operator>::</operator><name>isnan</name></name><argument_list>(<argument><expr><name>f</name></expr></argument>)</argument_list></call></expr>;</return>
+    </block_content>}</block></function>
+    <function><type><name>bool</name></type> <name>isnan</name><parameter_list>(<parameter><decl><type><name>double</name></type> <name>d</name></decl></parameter>)</parameter_list> <block>{<block_content>
+        <return>return <expr><call><name><name>std</name><operator>::</operator><name>isnan</name></name><argument_list>(<argument><expr><name>d</name></expr></argument>)</argument_list></call></expr>;</return>
+    </block_content>}</block></function>
+<cpp:else xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">else</cpp:directive></cpp:else>
+    <comment type="line">// For now we only use this for embarcadero</comment>
+    <function><type><name>bool</name></type> <name>isnan</name><parameter_list>(<parameter><decl><type><name>float</name></type> <name>f</name></decl></parameter>)</parameter_list> <block>{<block_content>
+        <return>return <expr><call><name><name>std</name><operator>::</operator><name>_isnan</name></name><argument_list>(<argument><expr><name>f</name></expr></argument>)</argument_list></call></expr>;</return>
+    </block_content>}</block></function>
+    <function><type><name>bool</name></type> <name>isnan</name><parameter_list>(<parameter><decl><type><name>double</name></type> <name>d</name></decl></parameter>)</parameter_list> <block>{<block_content>
+        <return>return <expr><call><name><name>std</name><operator>::</operator><name>_isnan</name></name><argument_list>(<argument><expr><name>d</name></expr></argument>)</argument_list></call></expr>;</return>
+    </block_content>}</block></function>
+<cpp:endif xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">endif</cpp:directive></cpp:endif>
+
+}</block></namespace> <comment type="line">// end namespace Catch</comment>
+
+
+<comment type="line" format="doxygen">////////////////////////////////////////////////////</comment>
+<comment type="line">// vvv formerly catch_uncaught_exceptions.cpp vvv //</comment>
+<comment type="line" format="doxygen">////////////////////////////////////////////////////</comment>
+
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;catch2/internal/catch_compiler_capabilities.hpp&gt;</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;catch2/internal/catch_uncaught_exceptions.hpp&gt;</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;exception&gt;</cpp:file></cpp:include>
+
+<namespace>namespace <name>Catch</name> <block>{
+    <function><type><name>bool</name></type> <name>uncaught_exceptions</name><parameter_list>()</parameter_list> <block>{<block_content>
+<cpp:if xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">if</cpp:directive> <expr><call><name>defined</name><argument_list>(<argument><expr><name>CATCH_CONFIG_DISABLE_EXCEPTIONS</name></expr></argument>)</argument_list></call></expr></cpp:if>
+        <return>return <expr><literal type="boolean">false</literal></expr>;</return>
+<cpp:elif xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">elif</cpp:directive> <expr><call><name>defined</name><argument_list>(<argument><expr><name>CATCH_CONFIG_CPP17_UNCAUGHT_EXCEPTIONS</name></expr></argument>)</argument_list></call> <operator>||</operator> <operator>(</operator><call><name>defined</name><argument_list>(<argument><expr><name>__cpp_lib_uncaught_exceptions</name></expr></argument>)</argument_list></call> <operator>&amp;&amp;</operator> <operator>!</operator><call><name>defined</name><argument_list>(<argument><expr><name>CATCH_CONFIG_NO_CPP17_UNCAUGHT_EXCEPTIONS</name></expr></argument>)</argument_list></call><operator>)</operator></expr></cpp:elif>
+        <return>return <expr><call><name><name>std</name><operator>::</operator><name>uncaught_exceptions</name></name><argument_list>()</argument_list></call> <operator>&gt;</operator> <literal type="number">0</literal></expr>;</return>
+<cpp:else xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">else</cpp:directive></cpp:else>
+        <return>return <expr><call><name><name>std</name><operator>::</operator><name>uncaught_exception</name></name><argument_list>()</argument_list></call></expr>;</return>
+<cpp:endif xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">endif</cpp:directive></cpp:endif>
+  </block_content>}</block></function>
+}</block></namespace> <comment type="line">// end namespace Catch</comment>
+
+
+<comment type="line" format="doxygen">////////////////////////////////////////////</comment>
+<comment type="line">// vvv formerly catch_errno_guard.cpp vvv //</comment>
+<comment type="line" format="doxygen">////////////////////////////////////////////</comment>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;catch2/internal/catch_errno_guard.hpp&gt;</cpp:file></cpp:include>
+
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;cerrno&gt;</cpp:file></cpp:include>
+
+<namespace>namespace <name>Catch</name> <block>{
+        <constructor><name><name>ErrnoGuard</name><operator>::</operator><name>ErrnoGuard</name></name><parameter_list>()</parameter_list><member_init_list>:<call><name>m_oldErrno</name><argument_list>(<argument><expr><name>errno</name></expr></argument>)</argument_list></call></member_init_list><block>{<block_content/>}</block></constructor>
+        <destructor><name><name>ErrnoGuard</name><operator>::</operator><name>~ErrnoGuard</name></name><parameter_list>()</parameter_list> <block>{<block_content> <expr_stmt><expr><name>errno</name> <operator>=</operator> <name>m_oldErrno</name></expr>;</expr_stmt> </block_content>}</block></destructor>
+}</block></namespace>
+
+
+<comment type="line" format="doxygen">///////////////////////////////////////////</comment>
+<comment type="line">// vvv formerly catch_decomposer.cpp vvv //</comment>
+<comment type="line" format="doxygen">///////////////////////////////////////////</comment>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;catch2/internal/catch_decomposer.hpp&gt;</cpp:file></cpp:include>
+
+<namespace>namespace <name>Catch</name> <block>{
+
+    <expr_stmt><expr><call><name><name>ITransientExpression</name><operator>::</operator><name>~ITransientExpression</name></name><argument_list>()</argument_list></call> <operator>=</operator> default</expr>;</expr_stmt>
+
+    <function><type><name>void</name></type> <name>formatReconstructedExpression</name><parameter_list>( <parameter><decl><type><name><name>std</name><operator>::</operator><name>ostream</name></name> <modifier>&amp;</modifier></type><name>os</name></decl></parameter>, <parameter><decl><type><name><name>std</name><operator>::</operator><name>string</name></name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>lhs</name></decl></parameter>, <parameter><decl><type><name>StringRef</name></type> <name>op</name></decl></parameter>, <parameter><decl><type><name><name>std</name><operator>::</operator><name>string</name></name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>rhs</name></decl></parameter> )</parameter_list> <block>{<block_content>
+        <if_stmt><if>if<condition>( <expr><call><name><name>lhs</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call> <operator>+</operator> <call><name><name>rhs</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call> <operator>&lt;</operator> <literal type="number">40</literal> <operator>&amp;&amp;</operator>
+                <call><name><name>lhs</name><operator>.</operator><name>find</name></name><argument_list>(<argument><expr><literal type="char">'\n'</literal></expr></argument>)</argument_list></call> <operator>==</operator> <name><name>std</name><operator>::</operator><name>string</name><operator>::</operator><name>npos</name></name> <operator>&amp;&amp;</operator>
+                <call><name><name>rhs</name><operator>.</operator><name>find</name></name><argument_list>(<argument><expr><literal type="char">'\n'</literal></expr></argument>)</argument_list></call> <operator>==</operator> <name><name>std</name><operator>::</operator><name>string</name><operator>::</operator><name>npos</name></name></expr> )</condition><block type="pseudo"><block_content>
+            <expr_stmt><expr><name>os</name> <operator>&lt;&lt;</operator> <name>lhs</name> <operator>&lt;&lt;</operator> <literal type="char">' '</literal> <operator>&lt;&lt;</operator> <name>op</name> <operator>&lt;&lt;</operator> <literal type="char">' '</literal> <operator>&lt;&lt;</operator> <name>rhs</name></expr>;</expr_stmt></block_content></block></if>
+        <else>else<block type="pseudo"><block_content>
+            <expr_stmt><expr><name>os</name> <operator>&lt;&lt;</operator> <name>lhs</name> <operator>&lt;&lt;</operator> <literal type="char">'\n'</literal> <operator>&lt;&lt;</operator> <name>op</name> <operator>&lt;&lt;</operator> <literal type="char">'\n'</literal> <operator>&lt;&lt;</operator> <name>rhs</name></expr>;</expr_stmt></block_content></block></else></if_stmt>
+    </block_content>}</block></function>
+}</block></namespace>
+
+
+<comment type="line" format="doxygen">///////////////////////////////////////////////////////////</comment>
+<comment type="line">// vvv formerly catch_startup_exception_registry.cpp vvv //</comment>
+<comment type="line" format="doxygen">///////////////////////////////////////////////////////////</comment>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;catch2/internal/catch_startup_exception_registry.hpp&gt;</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;catch2/internal/catch_compiler_capabilities.hpp&gt;</cpp:file></cpp:include>
+
+<namespace>namespace <name>Catch</name> <block>{
+<cpp:if xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">if</cpp:directive> <expr><operator>!</operator><call><name>defined</name><argument_list>(<argument><expr><name>CATCH_CONFIG_DISABLE_EXCEPTIONS</name></expr></argument>)</argument_list></call></expr></cpp:if>
+    <function><type><name>void</name></type> <name><name>StartupExceptionRegistry</name><operator>::</operator><name>add</name></name><parameter_list>( <parameter><decl><type><name><name>std</name><operator>::</operator><name>exception_ptr</name></name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>exception</name></decl></parameter> )</parameter_list> <noexcept>noexcept</noexcept> <block>{<block_content>
+        <macro><name>CATCH_TRY</name></macro> <block>{<block_content>
+            <expr_stmt><expr><call><name><name>m_exceptions</name><operator>.</operator><name>push_back</name></name><argument_list>(<argument><expr><name>exception</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        </block_content>}</block> <macro><name>CATCH_CATCH_ALL</name></macro> <block>{<block_content>
+            <comment type="line">// If we run out of memory during start-up there's really not a lot more we can do about it</comment>
+            <expr_stmt><expr><call><name><name>std</name><operator>::</operator><name>terminate</name></name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+        </block_content>}</block>
+    </block_content>}</block></function>
+
+    <function><type><name><name>std</name><operator>::</operator><name>vector</name><argument_list type="generic">&lt;<argument><expr><name><name>std</name><operator>::</operator><name>exception_ptr</name></name></expr></argument>&gt;</argument_list></name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name><name>StartupExceptionRegistry</name><operator>::</operator><name>getExceptions</name></name><parameter_list>()</parameter_list> <specifier>const</specifier> <noexcept>noexcept</noexcept> <block>{<block_content>
+        <return>return <expr><name>m_exceptions</name></expr>;</return>
+    </block_content>}</block></function>
+<cpp:endif xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">endif</cpp:directive></cpp:endif>
+
+}</block></namespace> <comment type="line">// end namespace Catch</comment>
+
+
+<comment type="line" format="doxygen">//////////////////////////////////////////////</comment>
+<comment type="line">// vvv formerly catch_leak_detector.cpp vvv //</comment>
+<comment type="line" format="doxygen">//////////////////////////////////////////////</comment>
+<diff:delete xmlns:diff="http://www.srcML.org/srcDiff"><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws></diff:delete><cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;catch2/internal/catch_leak_detector.hpp&gt;</cpp:file></cpp:include>
+<diff:delete xmlns:diff="http://www.srcML.org/srcDiff"><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws></diff:delete><cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;catch2/interfaces/catch_interfaces_registry_hub.hpp&gt;</cpp:file></cpp:include>
+
+
+<cpp:ifdef xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">ifdef</cpp:directive> <name>CATCH_CONFIG_WINDOWS_CRTDBG</name></cpp:ifdef>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;crtdbg.h&gt;</cpp:file></cpp:include>
+
+<namespace>namespace <name>Catch</name> <block>{
+
+    <constructor><name><name>LeakDetector</name><operator>::</operator><name>LeakDetector</name></name><parameter_list>()</parameter_list> <block>{<block_content>
+        <decl_stmt><decl><type><name>int</name></type> <name>flag</name> <init>= <expr><call><name>_CrtSetDbgFlag</name><argument_list>(<argument><expr><name>_CRTDBG_REPORT_FLAG</name></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+        <expr_stmt><expr><name>flag</name> <operator>|=</operator> <name>_CRTDBG_LEAK_CHECK_DF</name></expr>;</expr_stmt>
+        <expr_stmt><expr><name>flag</name> <operator>|=</operator> <name>_CRTDBG_ALLOC_MEM_DF</name></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name>_CrtSetDbgFlag</name><argument_list>(<argument><expr><name>flag</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name>_CrtSetReportMode</name><argument_list>(<argument><expr><name>_CRT_WARN</name></expr></argument>, <argument><expr><name>_CRTDBG_MODE_FILE</name> <operator>|</operator> <name>_CRTDBG_MODE_DEBUG</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name>_CrtSetReportFile</name><argument_list>(<argument><expr><name>_CRT_WARN</name></expr></argument>, <argument><expr><name>_CRTDBG_FILE_STDERR</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        <comment type="line">// Change this to leaking allocation's number to break there</comment>
+        <expr_stmt><expr><call><name>_CrtSetBreakAlloc</name><argument_list>(<argument><expr><operator>-</operator><literal type="number">1</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block></constructor>
+}</block></namespace>
+
+<cpp:else xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">else</cpp:directive></cpp:else> <comment type="line">// ^^ Windows crt debug heap enabled // Windows crt debug heap disabled vv</comment>
+
+    <constructor><name><name>Catch</name><operator>::</operator><name>LeakDetector</name><operator>::</operator><name>LeakDetector</name></name><parameter_list>()</parameter_list> <block>{<block_content/>}</block></constructor>
+
+<cpp:endif xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">endif</cpp:directive></cpp:endif> <comment type="line">// CATCH_CONFIG_WINDOWS_CRTDBG</comment>
+
+<destructor><name><name>Catch</name><operator>::</operator><name>LeakDetector</name><operator>::</operator><name>~LeakDetector</name></name><parameter_list>()</parameter_list> <block>{<block_content>
+    <expr_stmt><expr><call><name><name>Catch</name><operator>::</operator><name>cleanUp</name></name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+</block_content>}</block></destructor>
+
+
+<comment type="line" format="doxygen">/////////////////////////////////////////////</comment>
+<comment type="line">// vvv formerly catch_message_info.cpp vvv //</comment>
+<comment type="line" format="doxygen">/////////////////////////////////////////////</comment>
+
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;catch2/internal/catch_message_info.hpp&gt;</cpp:file></cpp:include>
+
+<namespace>namespace <name>Catch</name> <block>{
+
+    <constructor><name><name>MessageInfo</name><operator>::</operator><name>MessageInfo</name></name><parameter_list>(   <parameter><decl><type><name>StringRef</name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>_macroName</name></decl></parameter>,
+                                <parameter><decl><type><name>SourceLineInfo</name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>_lineInfo</name></decl></parameter>,
+                                <parameter><decl><type><name><name>ResultWas</name><operator>::</operator><name>OfType</name></name></type> <name>_type</name></decl></parameter> )</parameter_list>
+    <member_init_list>:   <call><name>macroName</name><argument_list>( <argument><expr><name>_macroName</name></expr></argument> )</argument_list></call>,
+        <call><name>lineInfo</name><argument_list>( <argument><expr><name>_lineInfo</name></expr></argument> )</argument_list></call>,
+        <call><name>type</name><argument_list>( <argument><expr><name>_type</name></expr></argument> )</argument_list></call>,
+        <call><name>sequence</name><argument_list>( <argument><expr><operator>++</operator><name>globalCount</name></expr></argument> )</argument_list></call>
+    </member_init_list><block>{<block_content/>}</block></constructor>
+
+    <comment type="line">// This may need protecting if threading support is added</comment>
+    <decl_stmt><decl><type><name>unsigned</name> <name>int</name></type> <name><name>MessageInfo</name><operator>::</operator><name>globalCount</name></name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</decl_stmt>
+
+}</block></namespace> <comment type="line">// end namespace Catch</comment>
+
+
+
+
+<comment type="line" format="doxygen">//////////////////////////////////////////</comment>
+<comment type="line">// vvv formerly catch_lazy_expr.cpp vvv //</comment>
+<comment type="line" format="doxygen">//////////////////////////////////////////</comment>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;catch2/internal/catch_lazy_expr.hpp&gt;</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;catch2/internal/catch_decomposer.hpp&gt;</cpp:file></cpp:include>
+
+<namespace>namespace <name>Catch</name> <block>{
+
+    <function type="operator"><type><name>auto</name></type> <name>operator <name>&lt;&lt;</name></name> <parameter_list>(<parameter><decl><type><name><name>std</name><operator>::</operator><name>ostream</name></name><modifier>&amp;</modifier></type> <name>os</name></decl></parameter>, <parameter><decl><type><name>LazyExpression</name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>lazyExpr</name></decl></parameter>)</parameter_list> -&gt; <type><name><name>std</name><operator>::</operator><name>ostream</name></name><modifier>&amp;</modifier></type> <block>{<block_content>
+        <if_stmt><if>if <condition>(<expr><name><name>lazyExpr</name><operator>.</operator><name>m_isNegated</name></name></expr>)</condition><block type="pseudo"><block_content>
+            <expr_stmt><expr><name>os</name> <operator>&lt;&lt;</operator> <literal type="string">"!"</literal></expr>;</expr_stmt></block_content></block></if></if_stmt>
+
+        <if_stmt><if>if <condition>(<expr><name>lazyExpr</name></expr>)</condition> <block>{<block_content>
+            <if_stmt><if>if <condition>(<expr><name><name>lazyExpr</name><operator>.</operator><name>m_isNegated</name></name> <operator>&amp;&amp;</operator> <call><name><name>lazyExpr</name><operator>.</operator><name>m_transientExpression</name><operator>-&gt;</operator><name>isBinaryExpression</name></name><argument_list>()</argument_list></call></expr>)</condition><block type="pseudo"><block_content>
+                <expr_stmt><expr><name>os</name> <operator>&lt;&lt;</operator> <literal type="string">"("</literal> <operator>&lt;&lt;</operator> <operator>*</operator><name><name>lazyExpr</name><operator>.</operator><name>m_transientExpression</name></name> <operator>&lt;&lt;</operator> <literal type="string">")"</literal></expr>;</expr_stmt></block_content></block></if>
+            <else>else<block type="pseudo"><block_content>
+                <expr_stmt><expr><name>os</name> <operator>&lt;&lt;</operator> <operator>*</operator><name><name>lazyExpr</name><operator>.</operator><name>m_transientExpression</name></name></expr>;</expr_stmt></block_content></block></else></if_stmt>
+        </block_content>}</block></if> <else>else <block>{<block_content>
+            <expr_stmt><expr><name>os</name> <operator>&lt;&lt;</operator> <literal type="string">"{** error - unchecked empty expression requested **}"</literal></expr>;</expr_stmt>
+        </block_content>}</block></else></if_stmt>
+        <return>return <expr><name>os</name></expr>;</return>
+    </block_content>}</block></function>
+
+}</block></namespace> <comment type="line">// namespace Catch</comment>
+</unit>

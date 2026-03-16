@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" xmlns:diff="http://www.srcML.org/srcDiff" revision="1.0.0" language="C++" filename="C:\Users\saile\AppData\Local\Temp\catch2_100_z8gzpiwf\3c06bcb374aaebf91ad1d63aba655dee66cf7b91\src_catch2_internal_catch_reporter_spec_parser_cpp\src_catch2_internal_catch_reporter_spec_parser_cpp.old|C:\Users\saile\AppData\Local\Temp\catch2_100_z8gzpiwf\3c06bcb374aaebf91ad1d63aba655dee66cf7b91\src_catch2_internal_catch_reporter_spec_parser_cpp\src_catch2_internal_catch_reporter_spec_parser_cpp.new">
+<comment type="line">//              Copyright Catch2 Authors</comment>
+<comment type="line">// Distributed under the Boost Software License, Version 1.0.</comment>
+<comment type="line">//   (See accompanying file LICENSE_1_0.txt or copy at</comment>
+<comment type="line">//        https://www.boost.org/LICENSE_1_0.txt)</comment>
+
+<comment type="line">// SPDX-License-Identifier: BSL-1.0</comment>
+
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;catch2/internal/catch_reporter_spec_parser.hpp&gt;</cpp:file></cpp:include>
+
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;catch2/interfaces/catch_interfaces_config.hpp&gt;</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;catch2/internal/catch_move_and_forward.hpp&gt;</cpp:file></cpp:include>
+
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;algorithm&gt;</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;ostream&gt;</cpp:file></cpp:include>
+
+<namespace>namespace <name>Catch</name> <block>{
+
+    <namespace>namespace <block>{
+        <struct>struct <name>kvPair</name> <block>{<public type="default">
+            <decl_stmt><decl><type><name>StringRef</name></type> <name>key</name></decl>, <decl><type ref="prev"/><name>value</name></decl>;</decl_stmt>
+        </public>}</block>;</struct>
+
+        <function><type><name>kvPair</name></type> <name>splitKVPair</name><parameter_list>(<parameter><decl><type><name>StringRef</name></type> <name>kvString</name></decl></parameter>)</parameter_list> <block>{<block_content>
+            <decl_stmt><decl><type><name>auto</name></type> <name>splitPos</name> <init>= <expr><cast type="static">static_cast<argument_list type="generic">&lt;<argument><expr><name>size_t</name></expr></argument>&gt;</argument_list><argument_list>( <argument><expr><call><name><name>std</name><operator>::</operator><name>distance</name></name><argument_list>(
+                <argument><expr><call><name><name>kvString</name><operator>.</operator><name>begin</name></name><argument_list>()</argument_list></call></expr></argument>,
+                <argument><expr><call><name><name>std</name><operator>::</operator><name>find</name></name><argument_list>( <argument><expr><call><name><name>kvString</name><operator>.</operator><name>begin</name></name><argument_list>()</argument_list></call></expr></argument>, <argument><expr><call><name><name>kvString</name><operator>.</operator><name>end</name></name><argument_list>()</argument_list></call></expr></argument>, <argument><expr><literal type="char">'='</literal></expr></argument> )</argument_list></call></expr></argument> )</argument_list></call></expr></argument> )</argument_list></cast></expr></init></decl>;</decl_stmt>
+
+            <return>return <expr><block>{ <expr><call><name><name>kvString</name><operator>.</operator><name>substr</name></name><argument_list>( <argument><expr><literal type="number">0</literal></expr></argument>, <argument><expr><name>splitPos</name></expr></argument> )</argument_list></call></expr>,
+                     <macro><name>kvString</name></macro><expr><operator>.</operator><macro><name>substr</name><argument_list>( <argument>splitPos + <literal type="number">1</literal></argument>, <argument>kvString.size()</argument> )</argument_list></macro></expr> }</block></expr>;</return>
+        </block_content>}</block></function>
+    }</block></namespace>
+
+    <namespace>namespace <name>Detail</name> <block>{
+        <function><type><name><name>std</name><operator>::</operator><name>vector</name><argument_list type="generic">&lt;<argument><expr><name><name>std</name><operator>::</operator><name>string</name></name></expr></argument>&gt;</argument_list></name></type> <name>splitReporterSpec</name><parameter_list>( <parameter><decl><type><name>StringRef</name></type> <name>reporterSpec</name></decl></parameter> )</parameter_list> <block>{<block_content>
+            <decl_stmt><decl><type><specifier>static</specifier> <specifier>constexpr</specifier> <name>auto</name></type> <name>separator</name> <init>= <expr><literal type="string">"::"</literal></expr></init></decl>;</decl_stmt>
+            <decl_stmt><decl><type><specifier>static</specifier> <specifier>constexpr</specifier> <name>size_t</name></type> <name>separatorSize</name> <init>= <expr><literal type="number">2</literal></expr></init></decl>;</decl_stmt>
+
+            <decl_stmt><decl><type><name>size_t</name></type> <name>separatorPos</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</decl_stmt>
+            <decl_stmt><decl><type><name>auto</name></type> <name>findNextSeparator</name> <init>= <expr><lambda><capture>[<argument><modifier>&amp;</modifier><name>reporterSpec</name></argument>]</capture><parameter_list>( <parameter><decl><type><name>size_t</name></type> <name>startPos</name></decl></parameter> )</parameter_list> <block>{<block_content>
+                <assert type="static">static_assert<argument_list>(
+                    <argument><expr><name>separatorSize</name> <operator>==</operator> <literal type="number">2</literal></expr></argument>,
+                    <argument><expr><literal type="string">"The code below currently assumes 2 char separator"</literal></expr></argument> )</argument_list>;</assert>
+
+                <decl_stmt><decl><type><name>auto</name></type> <name>currentPos</name> <init>= <expr><name>startPos</name></expr></init></decl>;</decl_stmt>
+                <do>do <block>{<block_content>
+                    <while>while <condition>( <expr><name>currentPos</name> <operator>&lt;</operator> <call><name><name>reporterSpec</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call> <operator>&amp;&amp;</operator>
+                            <name><name>reporterSpec</name><index>[<expr><name>currentPos</name></expr>]</index></name> <operator>!=</operator> <name><name>separator</name><index>[<expr><literal type="number">0</literal></expr>]</index></name></expr> )</condition> <block>{<block_content>
+                        <expr_stmt><expr><operator>++</operator><name>currentPos</name></expr>;</expr_stmt>
+                    </block_content>}</block></while>
+                    <if_stmt><if>if <condition>( <expr><name>currentPos</name> <operator>+</operator> <literal type="number">1</literal> <operator>&lt;</operator> <call><name><name>reporterSpec</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call> <operator>&amp;&amp;</operator>
+                         <name><name>reporterSpec</name><index>[<expr><name>currentPos</name> <operator>+</operator> <literal type="number">1</literal></expr>]</index></name> <operator>==</operator> <name><name>separator</name><index>[<expr><literal type="number">1</literal></expr>]</index></name></expr> )</condition> <block>{<block_content>
+                        <return>return <expr><name>currentPos</name></expr>;</return>
+                    </block_content>}</block></if></if_stmt>
+                    <expr_stmt><expr><operator>++</operator><name>currentPos</name></expr>;</expr_stmt>
+                </block_content>}</block> while <condition>( <expr><name>currentPos</name> <operator>&lt;</operator> <call><name><name>reporterSpec</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call></expr> )</condition>;</do>
+
+                <return>return <expr><cast type="static">static_cast<argument_list type="generic">&lt;<argument><expr><name>size_t</name></expr></argument>&gt;</argument_list><argument_list>( <argument><expr><operator>-</operator><literal type="number">1</literal></expr></argument> )</argument_list></cast></expr>;</return>
+            </block_content>}</block></lambda></expr></init></decl>;</decl_stmt>
+
+            <decl_stmt><decl><type><name><name>std</name><operator>::</operator><name>vector</name><argument_list type="generic">&lt;<argument><expr><name><name>std</name><operator>::</operator><name>string</name></name></expr></argument>&gt;</argument_list></name></type> <name>parts</name></decl>;</decl_stmt>
+
+            <while>while <condition>( <expr><name>separatorPos</name> <operator>&lt;</operator> <call><name><name>reporterSpec</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call></expr> )</condition> <block>{<block_content>
+                <decl_stmt><decl><type><specifier>const</specifier> <specifier>auto</specifier></type> <name>nextSeparator</name> <init>= <expr><call><name>findNextSeparator</name><argument_list>( <argument><expr><name>separatorPos</name></expr></argument> )</argument_list></call></expr></init></decl>;</decl_stmt>
+                <expr_stmt><expr><call><name><name>parts</name><operator>.</operator><name>push_back</name></name><argument_list>( <argument><expr><cast type="static">static_cast<argument_list type="generic">&lt;<argument><expr><name><name>std</name><operator>::</operator><name>string</name></name></expr></argument>&gt;</argument_list><argument_list>( <argument><expr><call><name><name>reporterSpec</name><operator>.</operator><name>substr</name></name><argument_list>(
+                    <argument><expr><name>separatorPos</name></expr></argument>, <argument><expr><name>nextSeparator</name> <operator>-</operator> <name>separatorPos</name></expr></argument> )</argument_list></call></expr></argument> )</argument_list></cast></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+
+                <if_stmt><if>if <condition>( <expr><name>nextSeparator</name> <operator>==</operator> <cast type="static">static_cast<argument_list type="generic">&lt;<argument><expr><name>size_t</name></expr></argument>&gt;</argument_list><argument_list>( <argument><expr><operator>-</operator><literal type="number">1</literal></expr></argument> )</argument_list></cast></expr> )</condition> <block>{<block_content>
+                    <break>break;</break>
+                </block_content>}</block></if></if_stmt>
+                <expr_stmt><expr><name>separatorPos</name> <operator>=</operator> <name>nextSeparator</name> <operator>+</operator> <name>separatorSize</name></expr>;</expr_stmt>
+            </block_content>}</block></while>
+
+            <comment type="line">// Handle a separator at the end.</comment>
+            <comment type="line">// This is not a valid spec, but we want to do validation in a</comment>
+            <comment type="line">// centralized place</comment>
+            <if_stmt><if>if <condition>( <expr><name>separatorPos</name> <operator>==</operator> <call><name><name>reporterSpec</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call></expr> )</condition> <block>{<block_content>
+                <expr_stmt><expr><call><name><name>parts</name><operator>.</operator><name>emplace_back</name></name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+            </block_content>}</block></if></if_stmt>
+
+            <return>return <expr><name>parts</name></expr>;</return>
+        </block_content>}</block></function>
+
+        <function><type><name><name>Optional</name><argument_list type="generic">&lt;<argument><expr><name>ColourMode</name></expr></argument>&gt;</argument_list></name></type> <name>stringToColourMode</name><parameter_list>( <parameter><decl><type><name>StringRef</name></type> <name>colourMode</name></decl></parameter> )</parameter_list> <block>{<block_content>
+            <if_stmt><if>if <condition>( <expr><name>colourMode</name> <operator>==</operator> <literal type="string">"default"</literal></expr> )</condition> <block>{<block_content>
+                <return>return <expr><name><name>ColourMode</name><operator>::</operator><name>PlatformDefault</name></name></expr>;</return>
+            </block_content>}</block></if> <if type="elseif">else if <condition>( <expr><name>colourMode</name> <operator>==</operator> <literal type="string">"ansi"</literal></expr> )</condition> <block>{<block_content>
+                <return>return <expr><name><name>ColourMode</name><operator>::</operator><name>ANSI</name></name></expr>;</return>
+            </block_content>}</block></if> <if type="elseif">else if <condition>( <expr><name>colourMode</name> <operator>==</operator> <literal type="string">"win32"</literal></expr> )</condition> <block>{<block_content>
+                <return>return <expr><name><name>ColourMode</name><operator>::</operator><name>Win32</name></name></expr>;</return>
+            </block_content>}</block></if> <if type="elseif">else if <condition>( <expr><name>colourMode</name> <operator>==</operator> <literal type="string">"none"</literal></expr> )</condition> <block>{<block_content>
+                <return>return <expr><name><name>ColourMode</name><operator>::</operator><name>None</name></name></expr>;</return>
+            </block_content>}</block></if> <else>else <block>{<block_content>
+                <return>return <expr><block>{}</block></expr>;</return>
+            </block_content>}</block></else></if_stmt>
+        </block_content>}</block></function>
+    }</block></namespace> <comment type="line">// namespace Detail</comment>
+
+
+    <function type="operator"><type><name>bool</name></type> <name>operator<name>==</name></name><parameter_list>( <parameter><decl><type><name>ReporterSpec</name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>lhs</name></decl></parameter>, <parameter><decl><type><name>ReporterSpec</name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>rhs</name></decl></parameter> )</parameter_list> <block>{<block_content>
+        <return>return <expr><name><name>lhs</name><operator>.</operator><name>m_name</name></name> <operator>==</operator> <name><name>rhs</name><operator>.</operator><name>m_name</name></name> <operator>&amp;&amp;</operator>
+               <name><name>lhs</name><operator>.</operator><name>m_outputFileName</name></name> <operator>==</operator> <name><name>rhs</name><operator>.</operator><name>m_outputFileName</name></name> <operator>&amp;&amp;</operator>
+               <name><name>lhs</name><operator>.</operator><name>m_colourMode</name></name> <operator>==</operator> <name><name>rhs</name><operator>.</operator><name>m_colourMode</name></name> <operator>&amp;&amp;</operator>
+               <name><name>lhs</name><operator>.</operator><name>m_customOptions</name></name> <operator>==</operator> <name><name>rhs</name><operator>.</operator><name>m_customOptions</name></name></expr>;</return>
+    </block_content>}</block></function>
+
+    <function><type><name><name>Optional</name><argument_list type="generic">&lt;<argument><expr><name>ReporterSpec</name></expr></argument>&gt;</argument_list></name></type> <name>parseReporterSpec</name><parameter_list>( <parameter><decl><type><name>StringRef</name></type> <name>reporterSpec</name></decl></parameter> )</parameter_list> <block>{<block_content>
+        <decl_stmt><decl><type><name>auto</name></type> <name>parts</name> <init>= <expr><call><name><name>Detail</name><operator>::</operator><name>splitReporterSpec</name></name><argument_list>( <argument><expr><name>reporterSpec</name></expr></argument> )</argument_list></call></expr></init></decl>;</decl_stmt>
+
+        <expr_stmt><expr><call><name>assert</name><argument_list>( <argument><expr><call><name><name>parts</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call> <operator>&gt;</operator> <literal type="number">0</literal> <operator>&amp;&amp;</operator> <literal type="string">"Split should never return empty vector"</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+
+        <decl_stmt><decl><type><name><name>std</name><operator>::</operator><name>map</name><argument_list type="generic">&lt;<argument><expr><name><name>std</name><operator>::</operator><name>string</name></name></expr></argument>, <argument><expr><name><name>std</name><operator>::</operator><name>string</name></name></expr></argument>&gt;</argument_list></name></type> <name>kvPairs</name></decl>;</decl_stmt>
+        <decl_stmt><decl><type><name><name>Optional</name><argument_list type="generic">&lt;<argument><expr><name><name>std</name><operator>::</operator><name>string</name></name></expr></argument>&gt;</argument_list></name></type> <name>outputFileName</name></decl>;</decl_stmt>
+        <decl_stmt><decl><type><name><name>Optional</name><argument_list type="generic">&lt;<argument><expr><name>ColourMode</name></expr></argument>&gt;</argument_list></name></type> <name>colourMode</name></decl>;</decl_stmt>
+
+        <comment type="line">// First part is always reporter name, so we skip it</comment>
+        <for>for <control>( <init><decl><type><name>size_t</name></type> <name>i</name> <init>= <expr><literal type="number">1</literal></expr></init></decl>;</init> <condition><expr><name>i</name> <operator>&lt;</operator> <call><name><name>parts</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call></expr>;</condition> <incr><expr><operator>++</operator><name>i</name></expr></incr> )</control> <block>{<block_content>
+            <decl_stmt><decl><type><name>auto</name></type> <name>kv</name> <init>= <expr><call><name>splitKVPair</name><argument_list>( <argument><expr><name><name>parts</name><index>[<expr><name>i</name></expr>]</index></name></expr></argument> )</argument_list></call></expr></init></decl>;</decl_stmt>
+            <decl_stmt><decl><type><name>auto</name></type> <name>key</name> <init>= <expr><name><name>kv</name><operator>.</operator><name>key</name></name></expr></init></decl>, <decl><type ref="prev"/><name>value</name> <init>= <expr><name><name>kv</name><operator>.</operator><name>value</name></name></expr></init></decl>;</decl_stmt>
+
+            <if_stmt><if>if <condition>( <expr><call><name><name>key</name><operator>.</operator><name>empty</name></name><argument_list>()</argument_list></call> <operator>||</operator> <call><name><name>value</name><operator>.</operator><name>empty</name></name><argument_list>()</argument_list></call></expr> )</condition> <block>{<block_content>
+                <return>return <expr><block>{}</block></expr>;</return>
+            </block_content>}</block></if> <if type="elseif">else if <condition>( <expr><name><name>key</name><index>[<expr><literal type="number">0</literal></expr>]</index></name> <operator>==</operator> <literal type="char">'X'</literal></expr> )</condition> <block>{<block_content>
+                <comment type="line">// This is a reporter-specific option, we don't check these</comment>
+                <comment type="line">// apart from basic sanity checks</comment>
+                <if_stmt><if>if <condition>( <expr><call><name><name>key</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call> <operator>==</operator> <literal type="number">1</literal></expr> )</condition> <block>{<block_content>
+                    <return>return <expr><block>{}</block></expr>;</return>
+                </block_content>}</block></if></if_stmt>
+
+                <decl_stmt><decl><type><name>auto</name></type> <name>ret</name> <init>= <expr><call><name><name>kvPairs</name><operator>.</operator><name>emplace</name></name><argument_list>( <argument><expr><name><name>kv</name><operator>.</operator><name>key</name></name></expr></argument>, <argument><expr><name><name>kv</name><operator>.</operator><name>value</name></name></expr></argument> )</argument_list></call></expr></init></decl>;</decl_stmt>
+                <if_stmt><if>if <condition>( <expr><operator>!</operator><name><name>ret</name><operator>.</operator><name>second</name></name></expr> )</condition> <block>{<block_content>
+                    <comment type="line">// Duplicated key. We might want to handle this differently,</comment>
+                    <comment type="line">// e.g. by overwriting the existing value?</comment>
+                    <return>return <expr><block>{}</block></expr>;</return>
+                </block_content>}</block></if></if_stmt>
+            </block_content>}</block></if> <if type="elseif">else if <condition>( <expr><name>key</name> <operator>==</operator> <literal type="string">"out"</literal></expr> )</condition> <block>{<block_content>
+                <comment type="line">// Duplicated key</comment>
+                <if_stmt><if>if <condition>( <expr><name>outputFileName</name></expr> )</condition> <block>{<block_content>
+                    <return>return <expr><block>{}</block></expr>;</return>
+                </block_content>}</block></if></if_stmt>
+                <expr_stmt><expr><name>outputFileName</name> <operator>=</operator> <cast type="static">static_cast<argument_list type="generic">&lt;<argument><expr><name><name>std</name><operator>::</operator><name>string</name></name></expr></argument>&gt;</argument_list><argument_list>( <argument><expr><name>value</name></expr></argument> )</argument_list></cast></expr>;</expr_stmt>
+            </block_content>}</block></if> <if type="elseif">else if <condition>( <expr><name>key</name> <operator>==</operator> <literal type="string">"<diff:delete type="replace" xmlns:diff="http://www.srcML.org/srcDiff">colour</diff:delete><diff:insert type="replace" xmlns:diff="http://www.srcML.org/srcDiff">colour-mode</diff:insert>"</literal></expr> )</condition> <block>{<block_content>
+                <comment type="line">// Duplicated key</comment>
+                <if_stmt><if>if <condition>( <expr><name>colourMode</name></expr> )</condition> <block>{<block_content>
+                    <return>return <expr><block>{}</block></expr>;</return>
+                </block_content>}</block></if></if_stmt>
+                <expr_stmt><expr><name>colourMode</name> <operator>=</operator> <call><name><name>Detail</name><operator>::</operator><name>stringToColourMode</name></name><argument_list>( <argument><expr><name>value</name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+                <comment type="line">// Parsing failed</comment>
+                <if_stmt><if>if <condition>( <expr><operator>!</operator><name>colourMode</name></expr> )</condition> <block>{<block_content>
+                    <return>return <expr><block>{}</block></expr>;</return>
+                </block_content>}</block></if></if_stmt>
+            </block_content>}</block></if> <else>else <block>{<block_content>
+                <comment type="line">// Unrecognized option</comment>
+                <return>return <expr><block>{}</block></expr>;</return>
+            </block_content>}</block></else></if_stmt>
+        </block_content>}</block></for>
+
+        <return>return <expr><call><name>ReporterSpec</name><argument_list>{ <argument><expr><call><name>CATCH_MOVE</name><argument_list>( <argument><expr><name><name>parts</name><index>[<expr><literal type="number">0</literal></expr>]</index></name></expr></argument> )</argument_list></call></expr></argument>,
+                             <argument><expr><call><name>CATCH_MOVE</name><argument_list>( <argument><expr><name>outputFileName</name></expr></argument> )</argument_list></call></expr></argument>,
+                             <argument><expr><call><name>CATCH_MOVE</name><argument_list>( <argument><expr><name>colourMode</name></expr></argument> )</argument_list></call></expr></argument>,
+                             <argument><expr><macro><name>CATCH_MOVE</name><argument_list>( <argument>kvPairs</argument> )</argument_list></macro></expr></argument> }</argument_list></call></expr>;</return>
+    </block_content>}</block></function>
+
+<constructor><name><name>ReporterSpec</name><operator>::</operator><name>ReporterSpec</name></name><parameter_list>(
+        <parameter><decl><type><name><name>std</name><operator>::</operator><name>string</name></name></type> <name>name</name></decl></parameter>,
+        <parameter><decl><type><name><name>Optional</name><argument_list type="generic">&lt;<argument><expr><name><name>std</name><operator>::</operator><name>string</name></name></expr></argument>&gt;</argument_list></name></type> <name>outputFileName</name></decl></parameter>,
+        <parameter><decl><type><name><name>Optional</name><argument_list type="generic">&lt;<argument><expr><name>ColourMode</name></expr></argument>&gt;</argument_list></name></type> <name>colourMode</name></decl></parameter>,
+        <parameter><decl><type><name><name>std</name><operator>::</operator><name>map</name><argument_list type="generic">&lt;<argument><expr><name><name>std</name><operator>::</operator><name>string</name></name></expr></argument>, <argument><expr><name><name>std</name><operator>::</operator><name>string</name></name></expr></argument>&gt;</argument_list></name></type> <name>customOptions</name></decl></parameter> )</parameter_list><member_init_list>:
+        <call><name>m_name</name><argument_list>( <argument><expr><call><name>CATCH_MOVE</name><argument_list>( <argument><expr><name>name</name></expr></argument> )</argument_list></call></expr></argument> )</argument_list></call>,
+        <call><name>m_outputFileName</name><argument_list>( <argument><expr><call><name>CATCH_MOVE</name><argument_list>( <argument><expr><name>outputFileName</name></expr></argument> )</argument_list></call></expr></argument> )</argument_list></call>,
+        <call><name>m_colourMode</name><argument_list>( <argument><expr><call><name>CATCH_MOVE</name><argument_list>( <argument><expr><name>colourMode</name></expr></argument> )</argument_list></call></expr></argument> )</argument_list></call>,
+        <call><name>m_customOptions</name><argument_list>( <argument><expr><call><name>CATCH_MOVE</name><argument_list>( <argument><expr><name>customOptions</name></expr></argument> )</argument_list></call></expr></argument> )</argument_list></call> </member_init_list><block>{<block_content/>}</block></constructor>
+
+}</block></namespace> <comment type="line">// namespace Catch</comment>
+</unit>

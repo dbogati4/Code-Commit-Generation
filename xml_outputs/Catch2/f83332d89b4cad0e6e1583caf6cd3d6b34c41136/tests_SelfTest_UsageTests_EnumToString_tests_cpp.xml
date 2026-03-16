@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" xmlns:diff="http://www.srcML.org/srcDiff" revision="1.0.0" language="C++" filename="C:\Users\saile\AppData\Local\Temp\catch2_100_z8gzpiwf\f83332d89b4cad0e6e1583caf6cd3d6b34c41136\tests_SelfTest_UsageTests_EnumToString_tests_cpp\tests_SelfTest_UsageTests_EnumToString_tests_cpp.old|C:\Users\saile\AppData\Local\Temp\catch2_100_z8gzpiwf\f83332d89b4cad0e6e1583caf6cd3d6b34c41136\tests_SelfTest_UsageTests_EnumToString_tests_cpp\tests_SelfTest_UsageTests_EnumToString_tests_cpp.new"><diff:insert xmlns:diff="http://www.srcML.org/srcDiff"><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+</diff:ws><comment type="line">//<diff:ws xmlns:diff="http://www.srcML.org/srcDiff">              </diff:ws>Copyright<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>Catch2<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>Authors</comment><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+</diff:ws><comment type="line">//<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>Distributed<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>under<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>the<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>Boost<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>Software<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>License,<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>Version<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>1.0.</comment><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+</diff:ws><comment type="line">//<diff:ws xmlns:diff="http://www.srcML.org/srcDiff">   </diff:ws>(See<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>accompanying<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>file<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>LICENSE_1_0.txt<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>or<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>copy<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>at</comment><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+</diff:ws><comment type="line">//<diff:ws xmlns:diff="http://www.srcML.org/srcDiff">        </diff:ws>https://www.boost.org/LICENSE_1_0.txt)</comment><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+
+</diff:ws><comment type="line">//<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>SPDX-License-Identifier:<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>BSL-1.0</comment><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+
+</diff:ws></diff:insert><cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;catch2/catch_test_macros.hpp&gt;</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;catch2/internal/catch_enum_values_registry.hpp&gt;</cpp:file></cpp:include>
+
+
+<namespace>namespace <block>{
+<comment type="line">// Enum without user-provided stream operator</comment>
+<enum>enum <name>Enum1</name> <block>{ <decl><name>Enum1Value0</name></decl>, <decl><name>Enum1Value1</name></decl> }</block>;</enum>
+
+<comment type="line">// Enum with user-provided stream operator</comment>
+<enum>enum <name>Enum2</name> <block>{ <decl><name>Enum2Value0</name></decl>, <decl><name>Enum2Value1</name></decl> }</block>;</enum>
+
+<function type="operator"><type><name><name>std</name><operator>::</operator><name>ostream</name></name><modifier>&amp;</modifier></type> <name>operator<name>&lt;&lt;</name></name><parameter_list>( <parameter><decl><type><name><name>std</name><operator>::</operator><name>ostream</name></name><modifier>&amp;</modifier></type> <name>os</name></decl></parameter>, <parameter><decl><type><name>Enum2</name></type> <name>v</name></decl></parameter> )</parameter_list> <block>{<block_content>
+    <return>return <expr><name>os</name> <operator>&lt;&lt;</operator> <literal type="string">"E2{"</literal> <operator>&lt;&lt;</operator> <cast type="static">static_cast<argument_list type="generic">&lt;<argument><expr><name>int</name></expr></argument>&gt;</argument_list><argument_list>(<argument><expr><name>v</name></expr></argument>)</argument_list></cast> <operator>&lt;&lt;</operator> <literal type="string">"}"</literal></expr>;</return>
+</block_content>}</block></function>
+}</block></namespace> <comment type="line">// end anonymous namespace</comment>
+
+<macro><name>TEST_CASE</name><argument_list>( <argument><literal type="string">"toString(enum)"</literal></argument>, <argument><literal type="string">"[toString][enum]"</literal></argument> )</argument_list></macro> <block>{<block_content>
+    <decl_stmt><decl><type><name>Enum1</name></type> <name>e0</name> <init>= <expr><name>Enum1Value0</name></expr></init></decl>;</decl_stmt>
+    <expr_stmt><expr><call><name>CHECK</name><argument_list>( <argument><expr><call><name><operator>::</operator><name>Catch</name><operator>::</operator><name>Detail</name><operator>::</operator><name>stringify</name></name><argument_list>(<argument><expr><name>e0</name></expr></argument>)</argument_list></call> <operator>==</operator> <literal type="string">"0"</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    <decl_stmt><decl><type><name>Enum1</name></type> <name>e1</name> <init>= <expr><name>Enum1Value1</name></expr></init></decl>;</decl_stmt>
+    <expr_stmt><expr><call><name>CHECK</name><argument_list>( <argument><expr><call><name><operator>::</operator><name>Catch</name><operator>::</operator><name>Detail</name><operator>::</operator><name>stringify</name></name><argument_list>(<argument><expr><name>e1</name></expr></argument>)</argument_list></call> <operator>==</operator> <literal type="string">"1"</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+</block_content>}</block>
+
+<macro><name>TEST_CASE</name><argument_list>( <argument><literal type="string">"toString(enum w/operator&lt;&lt;)"</literal></argument>, <argument><literal type="string">"[toString][enum]"</literal></argument> )</argument_list></macro> <block>{<block_content>
+    <decl_stmt><decl><type><name>Enum2</name></type> <name>e0</name> <init>= <expr><name>Enum2Value0</name></expr></init></decl>;</decl_stmt>
+    <expr_stmt><expr><call><name>CHECK</name><argument_list>( <argument><expr><call><name><operator>::</operator><name>Catch</name><operator>::</operator><name>Detail</name><operator>::</operator><name>stringify</name></name><argument_list>(<argument><expr><name>e0</name></expr></argument>)</argument_list></call> <operator>==</operator> <literal type="string">"E2{0}"</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    <decl_stmt><decl><type><name>Enum2</name></type> <name>e1</name> <init>= <expr><name>Enum2Value1</name></expr></init></decl>;</decl_stmt>
+    <expr_stmt><expr><call><name>CHECK</name><argument_list>( <argument><expr><call><name><operator>::</operator><name>Catch</name><operator>::</operator><name>Detail</name><operator>::</operator><name>stringify</name></name><argument_list>(<argument><expr><name>e1</name></expr></argument>)</argument_list></call> <operator>==</operator> <literal type="string">"E2{1}"</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+</block_content>}</block>
+
+<comment type="line">// Enum class without user-provided stream operator</comment>
+<namespace>namespace <block>{
+<enum type="class">enum class <name>EnumClass1</name> <block>{ <decl><name>EnumClass1Value0</name></decl>, <decl><name>EnumClass1Value1</name></decl> }</block>;</enum>
+
+<comment type="line">// Enum class with user-provided stream operator</comment>
+<enum type="class">enum class <name>EnumClass2</name> <block>{ <decl><name>EnumClass2Value0</name></decl>, <decl><name>EnumClass2Value1</name></decl> }</block>;</enum>
+
+<function type="operator"><type><name><name>std</name><operator>::</operator><name>ostream</name></name><modifier>&amp;</modifier></type> <name>operator<name>&lt;&lt;</name></name><parameter_list>( <parameter><decl><type><name><name>std</name><operator>::</operator><name>ostream</name></name><modifier>&amp;</modifier></type> <name>os</name></decl></parameter>, <parameter><decl><type><name>EnumClass2</name></type> <name>e2</name></decl></parameter> )</parameter_list> <block>{<block_content>
+    <switch>switch<condition>( <expr><cast type="static">static_cast<argument_list type="generic">&lt;<argument><expr><name>int</name></expr></argument>&gt;</argument_list><argument_list>( <argument><expr><name>e2</name></expr></argument> )</argument_list></cast></expr> )</condition> <block>{<block_content>
+        <case>case <expr><cast type="static">static_cast<argument_list type="generic">&lt;<argument><expr><name>int</name></expr></argument>&gt;</argument_list><argument_list>( <argument><expr><name><name>EnumClass2</name><operator>::</operator><name>EnumClass2Value0</name></name></expr></argument> )</argument_list></cast></expr>:</case>
+            <return>return <expr><name>os</name> <operator>&lt;&lt;</operator> <literal type="string">"E2/V0"</literal></expr>;</return>
+        <case>case <expr><cast type="static">static_cast<argument_list type="generic">&lt;<argument><expr><name>int</name></expr></argument>&gt;</argument_list><argument_list>( <argument><expr><name><name>EnumClass2</name><operator>::</operator><name>EnumClass2Value1</name></name></expr></argument> )</argument_list></cast></expr>:</case>
+            <return>return <expr><name>os</name> <operator>&lt;&lt;</operator> <literal type="string">"E2/V1"</literal></expr>;</return>
+        <default>default:</default>
+            <return>return <expr><name>os</name> <operator>&lt;&lt;</operator> <literal type="string">"Unknown enum value "</literal> <operator>&lt;&lt;</operator> <cast type="static">static_cast<argument_list type="generic">&lt;<argument><expr><name>int</name></expr></argument>&gt;</argument_list><argument_list>( <argument><expr><name>e2</name></expr></argument> )</argument_list></cast></expr>;</return>
+    </block_content>}</block></switch>
+</block_content>}</block></function>
+
+}</block></namespace> <comment type="line">// end anonymous namespace</comment>
+
+<macro><name>TEST_CASE</name><argument_list>( <argument><literal type="string">"toString(enum class)"</literal></argument>, <argument><literal type="string">"[toString][enum][enumClass]"</literal></argument> )</argument_list></macro> <block>{<block_content>
+    <decl_stmt><decl><type><name>EnumClass1</name></type> <name>e0</name> <init>= <expr><name><name>EnumClass1</name><operator>::</operator><name>EnumClass1Value0</name></name></expr></init></decl>;</decl_stmt>
+    <expr_stmt><expr><call><name>CHECK</name><argument_list>( <argument><expr><call><name><operator>::</operator><name>Catch</name><operator>::</operator><name>Detail</name><operator>::</operator><name>stringify</name></name><argument_list>(<argument><expr><name>e0</name></expr></argument>)</argument_list></call> <operator>==</operator> <literal type="string">"0"</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    <decl_stmt><decl><type><name>EnumClass1</name></type> <name>e1</name> <init>= <expr><name><name>EnumClass1</name><operator>::</operator><name>EnumClass1Value1</name></name></expr></init></decl>;</decl_stmt>
+    <expr_stmt><expr><call><name>CHECK</name><argument_list>( <argument><expr><call><name><operator>::</operator><name>Catch</name><operator>::</operator><name>Detail</name><operator>::</operator><name>stringify</name></name><argument_list>(<argument><expr><name>e1</name></expr></argument>)</argument_list></call> <operator>==</operator> <literal type="string">"1"</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+</block_content>}</block>
+
+
+<macro><name>TEST_CASE</name><argument_list>( <argument><literal type="string">"toString(enum class w/operator&lt;&lt;)"</literal></argument>, <argument><literal type="string">"[toString][enum][enumClass]"</literal></argument> )</argument_list></macro> <block>{<block_content>
+    <decl_stmt><decl><type><name>EnumClass2</name></type> <name>e0</name> <init>= <expr><name><name>EnumClass2</name><operator>::</operator><name>EnumClass2Value0</name></name></expr></init></decl>;</decl_stmt>
+    <expr_stmt><expr><call><name>CHECK</name><argument_list>( <argument><expr><call><name><operator>::</operator><name>Catch</name><operator>::</operator><name>Detail</name><operator>::</operator><name>stringify</name></name><argument_list>(<argument><expr><name>e0</name></expr></argument>)</argument_list></call> <operator>==</operator> <literal type="string">"E2/V0"</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    <decl_stmt><decl><type><name>EnumClass2</name></type> <name>e1</name> <init>= <expr><name><name>EnumClass2</name><operator>::</operator><name>EnumClass2Value1</name></name></expr></init></decl>;</decl_stmt>
+    <expr_stmt><expr><call><name>CHECK</name><argument_list>( <argument><expr><call><name><operator>::</operator><name>Catch</name><operator>::</operator><name>Detail</name><operator>::</operator><name>stringify</name></name><argument_list>(<argument><expr><name>e1</name></expr></argument>)</argument_list></call> <operator>==</operator> <literal type="string">"E2/V1"</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+
+    <decl_stmt><decl><type><name>auto</name></type> <name>e3</name> <init>= <expr><cast type="static">static_cast<argument_list type="generic">&lt;<argument><expr><name>EnumClass2</name></expr></argument>&gt;</argument_list><argument_list>(<argument><expr><literal type="number">10</literal></expr></argument>)</argument_list></cast></expr></init></decl>;</decl_stmt>
+    <expr_stmt><expr><call><name>CHECK</name><argument_list>( <argument><expr><call><name><operator>::</operator><name>Catch</name><operator>::</operator><name>Detail</name><operator>::</operator><name>stringify</name></name><argument_list>(<argument><expr><name>e3</name></expr></argument>)</argument_list></call> <operator>==</operator> <literal type="string">"Unknown enum value 10"</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+</block_content>}</block>
+
+<enum type="class">enum class <name>EnumClass3</name> <block>{ <decl><name>Value1</name></decl>, <decl><name>Value2</name></decl>, <decl><name>Value3</name></decl>, <decl><name>Value4</name></decl> }</block>;</enum>
+
+<macro><name>CATCH_REGISTER_ENUM</name><argument_list>( <argument>EnumClass3</argument>, <argument>EnumClass3::Value1</argument>, <argument>EnumClass3::Value2</argument>, <argument>EnumClass3::Value3</argument> )</argument_list></macro>
+
+
+<macro><name>TEST_CASE</name><argument_list>( <argument><literal type="string">"Enums can quickly have stringification enabled using REGISTER_ENUM"</literal></argument> )</argument_list></macro> <block>{<block_content>
+    <using>using <name><name>Catch</name><operator>::</operator><name>Detail</name><operator>::</operator><name>stringify</name></name>;</using>
+    <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name>stringify</name><argument_list>( <argument><expr><name><name>EnumClass3</name><operator>::</operator><name>Value1</name></name></expr></argument> )</argument_list></call> <operator>==</operator> <literal type="string">"Value1"</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name>stringify</name><argument_list>( <argument><expr><name><name>EnumClass3</name><operator>::</operator><name>Value2</name></name></expr></argument> )</argument_list></call> <operator>==</operator> <literal type="string">"Value2"</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name>stringify</name><argument_list>( <argument><expr><name><name>EnumClass3</name><operator>::</operator><name>Value3</name></name></expr></argument> )</argument_list></call> <operator>==</operator> <literal type="string">"Value3"</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name>stringify</name><argument_list>( <argument><expr><name><name>EnumClass3</name><operator>::</operator><name>Value4</name></name></expr></argument> )</argument_list></call> <operator>==</operator> <literal type="string">"{** unexpected enum value **}"</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+
+    <decl_stmt><decl><type><name>EnumClass3</name></type> <name>ec3</name> <init>= <expr><name><name>EnumClass3</name> <operator>::</operator><name>Value2</name></name></expr></init></decl>;</decl_stmt>
+    <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name>stringify</name><argument_list>( <argument><expr><name>ec3</name></expr></argument> )</argument_list></call> <operator>==</operator> <literal type="string">"Value2"</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+</block_content>}</block>
+
+<namespace>namespace <name>Bikeshed</name> <block>{
+    <enum type="class">enum class <name>Colours</name> <block>{ <decl><name>Red</name></decl>, <decl><name>Green</name></decl>, <decl><name>Blue</name></decl> }</block>;</enum>
+}</block></namespace>
+
+<comment type="line">// Important!: This macro must appear at top level scope - not inside a namespace</comment>
+<comment type="line">// You can fully qualify the names, or use a using if you prefer</comment>
+<macro><name>CATCH_REGISTER_ENUM</name><argument_list>( <argument>Bikeshed::Colours</argument>,
+                     <argument>Bikeshed::Colours::Red</argument>,
+                     <argument>Bikeshed::Colours::Green</argument>,
+                     <argument>Bikeshed::Colours::Blue</argument> )</argument_list></macro>
+
+<macro><name>TEST_CASE</name><argument_list>( <argument><literal type="string">"Enums in namespaces can quickly have stringification enabled using REGISTER_ENUM"</literal></argument> )</argument_list></macro> <block>{<block_content>
+    <using>using <name><name>Catch</name><operator>::</operator><name>Detail</name><operator>::</operator><name>stringify</name></name>;</using>
+    <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name>stringify</name><argument_list>( <argument><expr><name><name>Bikeshed</name><operator>::</operator><name>Colours</name><operator>::</operator><name>Red</name></name></expr></argument> )</argument_list></call> <operator>==</operator> <literal type="string">"Red"</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name>stringify</name><argument_list>( <argument><expr><name><name>Bikeshed</name><operator>::</operator><name>Colours</name><operator>::</operator><name>Blue</name></name></expr></argument> )</argument_list></call> <operator>==</operator> <literal type="string">"Blue"</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+</block_content>}</block>
+</unit>

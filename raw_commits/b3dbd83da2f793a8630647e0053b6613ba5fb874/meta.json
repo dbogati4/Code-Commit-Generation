@@ -1,0 +1,8 @@
+{
+  "commit_id": "b3dbd83da2f793a8630647e0053b6613ba5fb874",
+  "parent_id": "0a1b0ae9d1a1159f29ad061ff68c7126c6681f75",
+  "message": "Add test for comparing pointers to NULL with !=",
+  "changed_files": [
+    "tests/SelfTest/UsageTests/Decomposition.tests.cpp"
+  ]
+}

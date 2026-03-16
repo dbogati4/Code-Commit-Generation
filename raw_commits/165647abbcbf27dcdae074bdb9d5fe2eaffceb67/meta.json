@@ -1,0 +1,8 @@
+{
+  "commit_id": "165647abbcbf27dcdae074bdb9d5fe2eaffceb67",
+  "parent_id": "7e4ec432d00ccb082846bf9a74c6d8b48e039ba9",
+  "message": "Change provideBazelReporterOutput to local linkage",
+  "changed_files": [
+    "src/catch2/catch_config.cpp"
+  ]
+}

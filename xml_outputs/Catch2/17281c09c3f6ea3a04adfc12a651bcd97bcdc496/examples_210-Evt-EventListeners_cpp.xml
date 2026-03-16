@@ -1,0 +1,432 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" xmlns:diff="http://www.srcML.org/srcDiff" revision="1.0.0" language="C++" filename="C:\Users\saile\AppData\Local\Temp\catch2_100_z8gzpiwf\17281c09c3f6ea3a04adfc12a651bcd97bcdc496\examples_210-Evt-EventListeners_cpp\examples_210-Evt-EventListeners_cpp.old|C:\Users\saile\AppData\Local\Temp\catch2_100_z8gzpiwf\17281c09c3f6ea3a04adfc12a651bcd97bcdc496\examples_210-Evt-EventListeners_cpp\examples_210-Evt-EventListeners_cpp.new"><comment type="line">// 210-Evt-EventListeners.cpp</comment>
+
+<comment type="line">// Contents:</comment>
+<comment type="line">// 1. Printing of listener data</comment>
+<comment type="line">// 2. My listener and registration</comment>
+<comment type="line">// 3. Test cases</comment>
+
+<comment type="line">// main() provided in 000-CatchMain.cpp</comment>
+
+<comment type="line">// Let Catch provide the required interfaces:</comment>
+<cpp:define xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">define</cpp:directive> <cpp:macro xmlns:cpp="http://www.srcML.org/srcML/cpp"><name>CATCH_CONFIG_EXTERNAL_INTERFACES</name></cpp:macro></cpp:define>
+
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;<diff:delete type="replace" xmlns:diff="http://www.srcML.org/srcDiff">catch2/catch.hpp</diff:delete><diff:insert type="replace" xmlns:diff="http://www.srcML.org/srcDiff">catch2/catch_test_macros.hpp</diff:insert>&gt;</cpp:file></cpp:include>
+<diff:insert xmlns:diff="http://www.srcML.org/srcDiff"><cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;catch2/reporters/catch_reporter_bases.hpp&gt;</cpp:file></cpp:include><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+</diff:ws><cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;catch2/catch_reporter_registrars.hpp&gt;</cpp:file></cpp:include><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+</diff:ws></diff:insert><cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;iostream&gt;</cpp:file></cpp:include>
+
+<comment type="line">// -----------------------------------------------------------------------</comment>
+<comment type="line">// 1. Printing of listener data:</comment>
+<comment type="line">//</comment>
+
+<function><type><name><name>std</name><operator>::</operator><name>string</name></name></type> <name>ws</name><parameter_list>(<parameter><decl><type><name>int</name> <specifier>const</specifier></type> <name>level</name></decl></parameter>)</parameter_list> <block>{<block_content>
+    <return>return <expr><call><name><name>std</name><operator>::</operator><name>string</name></name><argument_list>( <argument><expr><literal type="number">2</literal> <operator>*</operator> <name>level</name></expr></argument>, <argument><expr><literal type="char">' '</literal></expr></argument> )</argument_list></call></expr>;</return>
+</block_content>}</block></function>
+
+<function type="operator"><type><name><name>std</name><operator>::</operator><name>ostream</name></name><modifier>&amp;</modifier></type> <name>operator<name>&lt;&lt;</name></name><parameter_list>(<parameter><decl><type><name><name>std</name><operator>::</operator><name>ostream</name></name><modifier>&amp;</modifier></type> <name>out</name></decl></parameter>, <parameter><decl><type><name><name>Catch</name><operator>::</operator><name>Tag</name></name></type> <name>t</name></decl></parameter>)</parameter_list> <block>{<block_content>
+    <return>return <expr><name>out</name> <operator>&lt;&lt;</operator> <literal type="string">"original: "</literal> <operator>&lt;&lt;</operator> <name><name>t</name><operator>.</operator><name>original</name></name> <operator>&lt;&lt;</operator> <literal type="string">"lower cased: "</literal> <operator>&lt;&lt;</operator> <name><name>t</name><operator>.</operator><name>lowerCased</name></name></expr>;</return>
+</block_content>}</block></function>
+
+<function type="operator"><template>template<parameter_list>&lt; <parameter><type><name>typename</name></type> <name>T</name></parameter> &gt;</parameter_list></template>
+<type><name><name>std</name><operator>::</operator><name>ostream</name></name><modifier>&amp;</modifier></type> <name>operator<name>&lt;&lt;</name></name><parameter_list>( <parameter><decl><type><name><name>std</name><operator>::</operator><name>ostream</name></name><modifier>&amp;</modifier></type> <name>os</name></decl></parameter>, <parameter><decl><type><name><name>std</name><operator>::</operator><name>vector</name><argument_list type="generic">&lt;<argument><expr><name>T</name></expr></argument>&gt;</argument_list></name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>v</name></decl></parameter> )</parameter_list> <block>{<block_content>
+    <expr_stmt><expr><name>os</name> <operator>&lt;&lt;</operator> <literal type="string">"{ "</literal></expr>;</expr_stmt>
+    <for>for <control>( <init><decl><type><name>auto</name></type> <name>x</name> <range>: <expr><name>v</name></expr></range></decl></init> )</control><block type="pseudo"><block_content>
+        <expr_stmt><expr><name>os</name> <operator>&lt;&lt;</operator> <name>x</name> <operator>&lt;&lt;</operator> <literal type="string">", "</literal></expr>;</expr_stmt></block_content></block></for>
+    <return>return <expr><name>os</name> <operator>&lt;&lt;</operator> <literal type="string">"}"</literal></expr>;</return>
+</block_content>}</block></function>
+
+<comment type="line">// struct SourceLineInfo {</comment>
+<comment type="line">//     char const* file;</comment>
+<comment type="line">//     std::size_t line;</comment>
+<comment type="line">// };</comment>
+
+<function><type><name>void</name></type> <name>print</name><parameter_list>( <parameter><decl><type><name><name>std</name><operator>::</operator><name>ostream</name></name><modifier>&amp;</modifier></type> <name>os</name></decl></parameter>, <parameter><decl><type><name>int</name> <specifier>const</specifier></type> <name>level</name></decl></parameter>, <parameter><decl><type><name><name>std</name><operator>::</operator><name>string</name></name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>title</name></decl></parameter>, <parameter><decl><type><name><name>Catch</name><operator>::</operator><name>SourceLineInfo</name></name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>info</name></decl></parameter> )</parameter_list> <block>{<block_content>
+    <expr_stmt><expr><name>os</name> <operator>&lt;&lt;</operator> <call><name>ws</name><argument_list>(<argument><expr><name>level</name></expr></argument>  )</argument_list></call> <operator>&lt;&lt;</operator> <name>title</name> <operator>&lt;&lt;</operator> <literal type="string">":\n"</literal>
+       <operator>&lt;&lt;</operator> <call><name>ws</name><argument_list>(<argument><expr><name>level</name><operator>+</operator><literal type="number">1</literal></expr></argument>)</argument_list></call> <operator>&lt;&lt;</operator> <literal type="string">"- file: "</literal> <operator>&lt;&lt;</operator> <name><name>info</name><operator>.</operator><name>file</name></name> <operator>&lt;&lt;</operator> <literal type="string">"\n"</literal>
+       <operator>&lt;&lt;</operator> <call><name>ws</name><argument_list>(<argument><expr><name>level</name><operator>+</operator><literal type="number">1</literal></expr></argument>)</argument_list></call> <operator>&lt;&lt;</operator> <literal type="string">"- line: "</literal> <operator>&lt;&lt;</operator> <name><name>info</name><operator>.</operator><name>line</name></name> <operator>&lt;&lt;</operator> <literal type="string">"\n"</literal></expr>;</expr_stmt>
+</block_content>}</block></function>
+
+<comment type="line">//struct MessageInfo {</comment>
+<comment type="line">//    std::string macroName;</comment>
+<comment type="line">//    std::string message;</comment>
+<comment type="line">//    SourceLineInfo lineInfo;</comment>
+<comment type="line">//    ResultWas::OfType type;</comment>
+<comment type="line">//    unsigned int sequence;</comment>
+<comment type="line">//};</comment>
+
+<function><type><name>void</name></type> <name>print</name><parameter_list>( <parameter><decl><type><name><name>std</name><operator>::</operator><name>ostream</name></name><modifier>&amp;</modifier></type> <name>os</name></decl></parameter>, <parameter><decl><type><name>int</name> <specifier>const</specifier></type> <name>level</name></decl></parameter>, <parameter><decl><type><name><name>Catch</name><operator>::</operator><name>MessageInfo</name></name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>info</name></decl></parameter> )</parameter_list> <block>{<block_content>
+    <expr_stmt><expr><name>os</name> <operator>&lt;&lt;</operator> <call><name>ws</name><argument_list>(<argument><expr><name>level</name><operator>+</operator><literal type="number">1</literal></expr></argument>)</argument_list></call> <operator>&lt;&lt;</operator> <literal type="string">"- macroName: '"</literal> <operator>&lt;&lt;</operator> <name><name>info</name><operator>.</operator><name>macroName</name></name> <operator>&lt;&lt;</operator> <literal type="string">"'\n"</literal>
+       <operator>&lt;&lt;</operator> <call><name>ws</name><argument_list>(<argument><expr><name>level</name><operator>+</operator><literal type="number">1</literal></expr></argument>)</argument_list></call> <operator>&lt;&lt;</operator> <literal type="string">"- message '"</literal>    <operator>&lt;&lt;</operator> <name><name>info</name><operator>.</operator><name>message</name></name>   <operator>&lt;&lt;</operator> <literal type="string">"'\n"</literal></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>print</name><argument_list>( <argument><expr><name>os</name></expr></argument>,<argument><expr><name>level</name><operator>+</operator><literal type="number">1</literal></expr></argument>  , <argument><expr><literal type="string">"- lineInfo"</literal></expr></argument>, <argument><expr><name><name>info</name><operator>.</operator><name>lineInfo</name></name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><name>os</name> <operator>&lt;&lt;</operator> <call><name>ws</name><argument_list>(<argument><expr><name>level</name><operator>+</operator><literal type="number">1</literal></expr></argument>)</argument_list></call> <operator>&lt;&lt;</operator> <literal type="string">"- sequence "</literal>    <operator>&lt;&lt;</operator> <name><name>info</name><operator>.</operator><name>sequence</name></name>  <operator>&lt;&lt;</operator> <literal type="string">"\n"</literal></expr>;</expr_stmt>
+</block_content>}</block></function>
+
+<function><type><name>void</name></type> <name>print</name><parameter_list>( <parameter><decl><type><name><name>std</name><operator>::</operator><name>ostream</name></name><modifier>&amp;</modifier></type> <name>os</name></decl></parameter>, <parameter><decl><type><name>int</name> <specifier>const</specifier></type> <name>level</name></decl></parameter>, <parameter><decl><type><name><name>std</name><operator>::</operator><name>string</name></name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>title</name></decl></parameter>, <parameter><decl><type><name><name>std</name><operator>::</operator><name>vector</name><argument_list type="generic">&lt;<argument><expr><name><name>Catch</name><operator>::</operator><name>MessageInfo</name></name></expr></argument>&gt;</argument_list></name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>v</name></decl></parameter> )</parameter_list> <block>{<block_content>
+    <expr_stmt><expr><name>os</name> <operator>&lt;&lt;</operator> <call><name>ws</name><argument_list>(<argument><expr><name>level</name></expr></argument>  )</argument_list></call> <operator>&lt;&lt;</operator> <name>title</name> <operator>&lt;&lt;</operator> <literal type="string">":\n"</literal></expr>;</expr_stmt>
+    <for>for <control>( <init><decl><type><name>auto</name></type> <name>x</name> <range>: <expr><name>v</name></expr></range></decl></init> )</control>
+    <block>{<block_content>
+        <expr_stmt><expr><name>os</name> <operator>&lt;&lt;</operator> <call><name>ws</name><argument_list>(<argument><expr><name>level</name><operator>+</operator><literal type="number">1</literal></expr></argument>)</argument_list></call> <operator>&lt;&lt;</operator> <literal type="string">"{\n"</literal></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name>print</name><argument_list>( <argument><expr><name>os</name></expr></argument>, <argument><expr><name>level</name><operator>+</operator><literal type="number">2</literal></expr></argument>, <argument><expr><name>x</name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><name>os</name> <operator>&lt;&lt;</operator> <call><name>ws</name><argument_list>(<argument><expr><name>level</name><operator>+</operator><literal type="number">1</literal></expr></argument>)</argument_list></call> <operator>&lt;&lt;</operator> <literal type="string">"}\n"</literal></expr>;</expr_stmt>
+    </block_content>}</block></for>
+<comment type="line">//    os &lt;&lt; ws(level+1) &lt;&lt; "\n";</comment>
+</block_content>}</block></function>
+
+<comment type="line">// struct TestRunInfo {</comment>
+<comment type="line">//     std::string name;</comment>
+<comment type="line">// };</comment>
+
+<function><type><name>void</name></type> <name>print</name><parameter_list>( <parameter><decl><type><name><name>std</name><operator>::</operator><name>ostream</name></name><modifier>&amp;</modifier></type> <name>os</name></decl></parameter>, <parameter><decl><type><name>int</name> <specifier>const</specifier></type> <name>level</name></decl></parameter>, <parameter><decl><type><name><name>std</name><operator>::</operator><name>string</name></name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>title</name></decl></parameter>, <parameter><decl><type><name><name>Catch</name><operator>::</operator><name>TestRunInfo</name></name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>info</name></decl></parameter> )</parameter_list> <block>{<block_content>
+    <expr_stmt><expr><name>os</name> <operator>&lt;&lt;</operator> <call><name>ws</name><argument_list>(<argument><expr><name>level</name></expr></argument>  )</argument_list></call> <operator>&lt;&lt;</operator> <name>title</name> <operator>&lt;&lt;</operator> <literal type="string">":\n"</literal>
+       <operator>&lt;&lt;</operator> <call><name>ws</name><argument_list>(<argument><expr><name>level</name><operator>+</operator><literal type="number">1</literal></expr></argument>)</argument_list></call> <operator>&lt;&lt;</operator> <literal type="string">"- name: "</literal> <operator>&lt;&lt;</operator> <name><name>info</name><operator>.</operator><name>name</name></name> <operator>&lt;&lt;</operator> <literal type="string">"\n"</literal></expr>;</expr_stmt>
+</block_content>}</block></function>
+
+<comment type="line">// struct Counts {</comment>
+<comment type="line">//     std::size_t total() const;</comment>
+<comment type="line">//     bool allPassed() const;</comment>
+<comment type="line">//     bool allOk() const;</comment>
+<comment type="line">//</comment>
+<comment type="line">//     std::size_t passed = 0;</comment>
+<comment type="line">//     std::size_t failed = 0;</comment>
+<comment type="line">//     std::size_t failedButOk = 0;</comment>
+<comment type="line">// };</comment>
+
+<function><type><name>void</name></type> <name>print</name><parameter_list>( <parameter><decl><type><name><name>std</name><operator>::</operator><name>ostream</name></name><modifier>&amp;</modifier></type> <name>os</name></decl></parameter>, <parameter><decl><type><name>int</name> <specifier>const</specifier></type> <name>level</name></decl></parameter>, <parameter><decl><type><name><name>std</name><operator>::</operator><name>string</name></name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>title</name></decl></parameter>, <parameter><decl><type><name><name>Catch</name><operator>::</operator><name>Counts</name></name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>info</name></decl></parameter> )</parameter_list> <block>{<block_content>
+    <expr_stmt><expr><name>os</name> <operator>&lt;&lt;</operator> <call><name>ws</name><argument_list>(<argument><expr><name>level</name></expr></argument>  )</argument_list></call> <operator>&lt;&lt;</operator> <name>title</name> <operator>&lt;&lt;</operator> <literal type="string">":\n"</literal>
+       <operator>&lt;&lt;</operator> <call><name>ws</name><argument_list>(<argument><expr><name>level</name><operator>+</operator><literal type="number">1</literal></expr></argument>)</argument_list></call> <operator>&lt;&lt;</operator> <literal type="string">"- total(): "</literal>     <operator>&lt;&lt;</operator> <call><name><name>info</name><operator>.</operator><name>total</name></name><argument_list>()</argument_list></call>     <operator>&lt;&lt;</operator> <literal type="string">"\n"</literal>
+       <operator>&lt;&lt;</operator> <call><name>ws</name><argument_list>(<argument><expr><name>level</name><operator>+</operator><literal type="number">1</literal></expr></argument>)</argument_list></call> <operator>&lt;&lt;</operator> <literal type="string">"- allPassed(): "</literal> <operator>&lt;&lt;</operator> <call><name><name>info</name><operator>.</operator><name>allPassed</name></name><argument_list>()</argument_list></call> <operator>&lt;&lt;</operator> <literal type="string">"\n"</literal>
+       <operator>&lt;&lt;</operator> <call><name>ws</name><argument_list>(<argument><expr><name>level</name><operator>+</operator><literal type="number">1</literal></expr></argument>)</argument_list></call> <operator>&lt;&lt;</operator> <literal type="string">"- allOk(): "</literal>     <operator>&lt;&lt;</operator> <call><name><name>info</name><operator>.</operator><name>allOk</name></name><argument_list>()</argument_list></call>     <operator>&lt;&lt;</operator> <literal type="string">"\n"</literal>
+       <operator>&lt;&lt;</operator> <call><name>ws</name><argument_list>(<argument><expr><name>level</name><operator>+</operator><literal type="number">1</literal></expr></argument>)</argument_list></call> <operator>&lt;&lt;</operator> <literal type="string">"- passed: "</literal>      <operator>&lt;&lt;</operator> <name><name>info</name><operator>.</operator><name>passed</name></name>      <operator>&lt;&lt;</operator> <literal type="string">"\n"</literal>
+       <operator>&lt;&lt;</operator> <call><name>ws</name><argument_list>(<argument><expr><name>level</name><operator>+</operator><literal type="number">1</literal></expr></argument>)</argument_list></call> <operator>&lt;&lt;</operator> <literal type="string">"- failed: "</literal>      <operator>&lt;&lt;</operator> <name><name>info</name><operator>.</operator><name>failed</name></name>      <operator>&lt;&lt;</operator> <literal type="string">"\n"</literal>
+       <operator>&lt;&lt;</operator> <call><name>ws</name><argument_list>(<argument><expr><name>level</name><operator>+</operator><literal type="number">1</literal></expr></argument>)</argument_list></call> <operator>&lt;&lt;</operator> <literal type="string">"- failedButOk: "</literal> <operator>&lt;&lt;</operator> <name><name>info</name><operator>.</operator><name>failedButOk</name></name> <operator>&lt;&lt;</operator> <literal type="string">"\n"</literal></expr>;</expr_stmt>
+</block_content>}</block></function>
+
+<comment type="line">// struct Totals {</comment>
+<comment type="line">//     Counts assertions;</comment>
+<comment type="line">//     Counts testCases;</comment>
+<comment type="line">// };</comment>
+
+<function><type><name>void</name></type> <name>print</name><parameter_list>( <parameter><decl><type><name><name>std</name><operator>::</operator><name>ostream</name></name><modifier>&amp;</modifier></type> <name>os</name></decl></parameter>, <parameter><decl><type><name>int</name> <specifier>const</specifier></type> <name>level</name></decl></parameter>, <parameter><decl><type><name><name>std</name><operator>::</operator><name>string</name></name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>title</name></decl></parameter>, <parameter><decl><type><name><name>Catch</name><operator>::</operator><name>Totals</name></name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>info</name></decl></parameter> )</parameter_list> <block>{<block_content>
+    <expr_stmt><expr><name>os</name> <operator>&lt;&lt;</operator> <call><name>ws</name><argument_list>(<argument><expr><name>level</name></expr></argument>)</argument_list></call> <operator>&lt;&lt;</operator> <name>title</name> <operator>&lt;&lt;</operator> <literal type="string">":\n"</literal></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>print</name><argument_list>( <argument><expr><name>os</name></expr></argument>, <argument><expr><name>level</name><operator>+</operator><literal type="number">1</literal></expr></argument>, <argument><expr><literal type="string">"- assertions"</literal></expr></argument>, <argument><expr><name><name>info</name><operator>.</operator><name>assertions</name></name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>print</name><argument_list>( <argument><expr><name>os</name></expr></argument>, <argument><expr><name>level</name><operator>+</operator><literal type="number">1</literal></expr></argument>, <argument><expr><literal type="string">"- testCases"</literal></expr></argument> , <argument><expr><name><name>info</name><operator>.</operator><name>testCases</name></name></expr></argument>  )</argument_list></call></expr>;</expr_stmt>
+</block_content>}</block></function>
+
+<comment type="line">// struct TestRunStats {</comment>
+<comment type="line">//     TestRunInfo runInfo;</comment>
+<comment type="line">//     Totals totals;</comment>
+<comment type="line">//     bool aborting;</comment>
+<comment type="line">// };</comment>
+
+<function><type><name>void</name></type> <name>print</name><parameter_list>( <parameter><decl><type><name><name>std</name><operator>::</operator><name>ostream</name></name><modifier>&amp;</modifier></type> <name>os</name></decl></parameter>, <parameter><decl><type><name>int</name> <specifier>const</specifier></type> <name>level</name></decl></parameter>, <parameter><decl><type><name><name>std</name><operator>::</operator><name>string</name></name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>title</name></decl></parameter>, <parameter><decl><type><name><name>Catch</name><operator>::</operator><name>TestRunStats</name></name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>info</name></decl></parameter> )</parameter_list> <block>{<block_content>
+    <expr_stmt><expr><name>os</name> <operator>&lt;&lt;</operator> <call><name>ws</name><argument_list>(<argument><expr><name>level</name></expr></argument>)</argument_list></call> <operator>&lt;&lt;</operator> <name>title</name> <operator>&lt;&lt;</operator> <literal type="string">":\n"</literal></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>print</name><argument_list>( <argument><expr><name>os</name></expr></argument>, <argument><expr><name>level</name><operator>+</operator><literal type="number">1</literal></expr></argument> , <argument><expr><literal type="string">"- runInfo"</literal></expr></argument>, <argument><expr><name><name>info</name><operator>.</operator><name>runInfo</name></name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>print</name><argument_list>( <argument><expr><name>os</name></expr></argument>, <argument><expr><name>level</name><operator>+</operator><literal type="number">1</literal></expr></argument> , <argument><expr><literal type="string">"- totals"</literal></expr></argument> , <argument><expr><name><name>info</name><operator>.</operator><name>totals</name></name></expr></argument>  )</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><name>os</name> <operator>&lt;&lt;</operator> <call><name>ws</name><argument_list>(<argument><expr><name>level</name><operator>+</operator><literal type="number">1</literal></expr></argument>)</argument_list></call> <operator>&lt;&lt;</operator> <literal type="string">"- aborting: "</literal> <operator>&lt;&lt;</operator> <name><name>info</name><operator>.</operator><name>aborting</name></name> <operator>&lt;&lt;</operator> <literal type="string">"\n"</literal></expr>;</expr_stmt>
+</block_content>}</block></function>
+
+<comment type="line">//    struct Tag {</comment>
+<comment type="line">//        StringRef original, lowerCased;</comment>
+<comment type="line">//    };</comment>
+<comment type="line">//</comment>
+<comment type="line">//</comment>
+<comment type="line">//    enum class TestCaseProperties : uint8_t {</comment>
+<comment type="line">//        None = 0,</comment>
+<comment type="line">//        IsHidden = 1 &lt;&lt; 1,</comment>
+<comment type="line">//        ShouldFail = 1 &lt;&lt; 2,</comment>
+<comment type="line">//        MayFail = 1 &lt;&lt; 3,</comment>
+<comment type="line">//        Throws = 1 &lt;&lt; 4,</comment>
+<comment type="line">//        NonPortable = 1 &lt;&lt; 5,</comment>
+<comment type="line">//        Benchmark = 1 &lt;&lt; 6</comment>
+<comment type="line">//    };</comment>
+<comment type="line">//</comment>
+<comment type="line">//</comment>
+<comment type="line">//    struct TestCaseInfo : NonCopyable {</comment>
+<comment type="line">//</comment>
+<comment type="line">//        bool isHidden() const;</comment>
+<comment type="line">//        bool throws() const;</comment>
+<comment type="line">//        bool okToFail() const;</comment>
+<comment type="line">//        bool expectedToFail() const;</comment>
+<comment type="line">//</comment>
+<comment type="line">//</comment>
+<comment type="line">//        std::string name;</comment>
+<comment type="line">//        std::string className;</comment>
+<comment type="line">//        std::vector&lt;Tag&gt; tags;</comment>
+<comment type="line">//        SourceLineInfo lineInfo;</comment>
+<comment type="line">//        TestCaseProperties properties = TestCaseProperties::None;</comment>
+<comment type="line">//    };</comment>
+
+<function><type><name>void</name></type> <name>print</name><parameter_list>( <parameter><decl><type><name><name>std</name><operator>::</operator><name>ostream</name></name><modifier>&amp;</modifier></type> <name>os</name></decl></parameter>, <parameter><decl><type><name>int</name> <specifier>const</specifier></type> <name>level</name></decl></parameter>, <parameter><decl><type><name><name>std</name><operator>::</operator><name>string</name></name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>title</name></decl></parameter>, <parameter><decl><type><name><name>Catch</name><operator>::</operator><name>TestCaseInfo</name></name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>info</name></decl></parameter> )</parameter_list> <block>{<block_content>
+    <expr_stmt><expr><name>os</name> <operator>&lt;&lt;</operator> <call><name>ws</name><argument_list>(<argument><expr><name>level</name></expr></argument>  )</argument_list></call> <operator>&lt;&lt;</operator> <name>title</name> <operator>&lt;&lt;</operator> <literal type="string">":\n"</literal>
+       <operator>&lt;&lt;</operator> <call><name>ws</name><argument_list>(<argument><expr><name>level</name><operator>+</operator><literal type="number">1</literal></expr></argument>)</argument_list></call> <operator>&lt;&lt;</operator> <literal type="string">"- isHidden(): "</literal>       <operator>&lt;&lt;</operator> <call><name><name>info</name><operator>.</operator><name>isHidden</name></name><argument_list>()</argument_list></call> <operator>&lt;&lt;</operator> <literal type="string">"\n"</literal>
+       <operator>&lt;&lt;</operator> <call><name>ws</name><argument_list>(<argument><expr><name>level</name><operator>+</operator><literal type="number">1</literal></expr></argument>)</argument_list></call> <operator>&lt;&lt;</operator> <literal type="string">"- throws(): "</literal>         <operator>&lt;&lt;</operator> <call><name><name>info</name><operator>.</operator><name>throws</name></name><argument_list>()</argument_list></call> <operator>&lt;&lt;</operator> <literal type="string">"\n"</literal>
+       <operator>&lt;&lt;</operator> <call><name>ws</name><argument_list>(<argument><expr><name>level</name><operator>+</operator><literal type="number">1</literal></expr></argument>)</argument_list></call> <operator>&lt;&lt;</operator> <literal type="string">"- okToFail(): "</literal>       <operator>&lt;&lt;</operator> <call><name><name>info</name><operator>.</operator><name>okToFail</name></name><argument_list>()</argument_list></call> <operator>&lt;&lt;</operator> <literal type="string">"\n"</literal>
+       <operator>&lt;&lt;</operator> <call><name>ws</name><argument_list>(<argument><expr><name>level</name><operator>+</operator><literal type="number">1</literal></expr></argument>)</argument_list></call> <operator>&lt;&lt;</operator> <literal type="string">"- expectedToFail(): "</literal> <operator>&lt;&lt;</operator> <call><name><name>info</name><operator>.</operator><name>expectedToFail</name></name><argument_list>()</argument_list></call> <operator>&lt;&lt;</operator> <literal type="string">"\n"</literal>
+       <operator>&lt;&lt;</operator> <call><name>ws</name><argument_list>(<argument><expr><name>level</name><operator>+</operator><literal type="number">1</literal></expr></argument>)</argument_list></call> <operator>&lt;&lt;</operator> <literal type="string">"- tagsAsString(): '"</literal>  <operator>&lt;&lt;</operator> <call><name><name>info</name><operator>.</operator><name>tagsAsString</name></name><argument_list>()</argument_list></call> <operator>&lt;&lt;</operator> <literal type="string">"'\n"</literal>
+       <operator>&lt;&lt;</operator> <call><name>ws</name><argument_list>(<argument><expr><name>level</name><operator>+</operator><literal type="number">1</literal></expr></argument>)</argument_list></call> <operator>&lt;&lt;</operator> <literal type="string">"- name: '"</literal>            <operator>&lt;&lt;</operator> <name><name>info</name><operator>.</operator><name>name</name></name> <operator>&lt;&lt;</operator> <literal type="string">"'\n"</literal>
+       <operator>&lt;&lt;</operator> <call><name>ws</name><argument_list>(<argument><expr><name>level</name><operator>+</operator><literal type="number">1</literal></expr></argument>)</argument_list></call> <operator>&lt;&lt;</operator> <literal type="string">"- className: '"</literal>       <operator>&lt;&lt;</operator> <name><name>info</name><operator>.</operator><name>className</name></name> <operator>&lt;&lt;</operator> <literal type="string">"'\n"</literal>
+       <operator>&lt;&lt;</operator> <call><name>ws</name><argument_list>(<argument><expr><name>level</name><operator>+</operator><literal type="number">1</literal></expr></argument>)</argument_list></call> <operator>&lt;&lt;</operator> <literal type="string">"- tags: "</literal>             <operator>&lt;&lt;</operator> <name><name>info</name><operator>.</operator><name>tags</name></name> <operator>&lt;&lt;</operator> <literal type="string">"\n"</literal></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>print</name><argument_list>( <argument><expr><name>os</name></expr></argument>, <argument><expr><name>level</name><operator>+</operator><literal type="number">1</literal></expr></argument> , <argument><expr><literal type="string">"- lineInfo"</literal></expr></argument>, <argument><expr><name><name>info</name><operator>.</operator><name>lineInfo</name></name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><name>os</name> <operator>&lt;&lt;</operator> <call><name>ws</name><argument_list>(<argument><expr><name>level</name><operator>+</operator><literal type="number">1</literal></expr></argument>)</argument_list></call> <operator>&lt;&lt;</operator> <literal type="string">"- properties (flags): 0x"</literal> <operator>&lt;&lt;</operator> <name><name>std</name><operator>::</operator><name>hex</name></name> <operator>&lt;&lt;</operator> <cast type="static">static_cast<argument_list type="generic">&lt;<argument><expr><name>uint32_t</name></expr></argument>&gt;</argument_list><argument_list>(<argument><expr><name><name>info</name><operator>.</operator><name>properties</name></name></expr></argument>)</argument_list></cast> <operator>&lt;&lt;</operator> <name><name>std</name><operator>::</operator><name>dec</name></name> <operator>&lt;&lt;</operator> <literal type="string">"\n"</literal></expr>;</expr_stmt>
+</block_content>}</block></function>
+
+<comment type="line">// struct TestCaseStats {</comment>
+<comment type="line">//     TestCaseInfo testInfo;</comment>
+<comment type="line">//     Totals totals;</comment>
+<comment type="line">//     std::string stdOut;</comment>
+<comment type="line">//     std::string stdErr;</comment>
+<comment type="line">//     bool aborting;</comment>
+<comment type="line">// };</comment>
+
+<function><type><name>void</name></type> <name>print</name><parameter_list>( <parameter><decl><type><name><name>std</name><operator>::</operator><name>ostream</name></name><modifier>&amp;</modifier></type> <name>os</name></decl></parameter>, <parameter><decl><type><name>int</name> <specifier>const</specifier></type> <name>level</name></decl></parameter>, <parameter><decl><type><name><name>std</name><operator>::</operator><name>string</name></name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>title</name></decl></parameter>, <parameter><decl><type><name><name>Catch</name><operator>::</operator><name>TestCaseStats</name></name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>info</name></decl></parameter> )</parameter_list> <block>{<block_content>
+    <expr_stmt><expr><name>os</name> <operator>&lt;&lt;</operator> <call><name>ws</name><argument_list>(<argument><expr><name>level</name></expr></argument>  )</argument_list></call> <operator>&lt;&lt;</operator> <name>title</name> <operator>&lt;&lt;</operator> <literal type="string">":\n"</literal></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>print</name><argument_list>( <argument><expr><name>os</name></expr></argument>, <argument><expr><name>level</name><operator>+</operator><literal type="number">1</literal></expr></argument> , <argument><expr><literal type="string">"- testInfo"</literal></expr></argument>, <argument><expr><operator>*</operator><name><name>info</name><operator>.</operator><name>testInfo</name></name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>print</name><argument_list>( <argument><expr><name>os</name></expr></argument>, <argument><expr><name>level</name><operator>+</operator><literal type="number">1</literal></expr></argument> , <argument><expr><literal type="string">"- totals"</literal></expr></argument>  , <argument><expr><name><name>info</name><operator>.</operator><name>totals</name></name></expr></argument>   )</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><name>os</name> <operator>&lt;&lt;</operator> <call><name>ws</name><argument_list>(<argument><expr><name>level</name><operator>+</operator><literal type="number">1</literal></expr></argument>)</argument_list></call> <operator>&lt;&lt;</operator> <literal type="string">"- stdOut: "</literal>   <operator>&lt;&lt;</operator> <name><name>info</name><operator>.</operator><name>stdOut</name></name> <operator>&lt;&lt;</operator> <literal type="string">"\n"</literal>
+       <operator>&lt;&lt;</operator> <call><name>ws</name><argument_list>(<argument><expr><name>level</name><operator>+</operator><literal type="number">1</literal></expr></argument>)</argument_list></call> <operator>&lt;&lt;</operator> <literal type="string">"- stdErr: "</literal>   <operator>&lt;&lt;</operator> <name><name>info</name><operator>.</operator><name>stdErr</name></name> <operator>&lt;&lt;</operator> <literal type="string">"\n"</literal>
+       <operator>&lt;&lt;</operator> <call><name>ws</name><argument_list>(<argument><expr><name>level</name><operator>+</operator><literal type="number">1</literal></expr></argument>)</argument_list></call> <operator>&lt;&lt;</operator> <literal type="string">"- aborting: "</literal> <operator>&lt;&lt;</operator> <name><name>info</name><operator>.</operator><name>aborting</name></name> <operator>&lt;&lt;</operator> <literal type="string">"\n"</literal></expr>;</expr_stmt>
+</block_content>}</block></function>
+
+<comment type="line">// struct SectionInfo {</comment>
+<comment type="line">//     std::string name;</comment>
+<comment type="line">//     std::string description;</comment>
+<comment type="line">//     SourceLineInfo lineInfo;</comment>
+<comment type="line">// };</comment>
+
+<function><type><name>void</name></type> <name>print</name><parameter_list>( <parameter><decl><type><name><name>std</name><operator>::</operator><name>ostream</name></name><modifier>&amp;</modifier></type> <name>os</name></decl></parameter>, <parameter><decl><type><name>int</name> <specifier>const</specifier></type> <name>level</name></decl></parameter>, <parameter><decl><type><name><name>std</name><operator>::</operator><name>string</name></name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>title</name></decl></parameter>, <parameter><decl><type><name><name>Catch</name><operator>::</operator><name>SectionInfo</name></name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>info</name></decl></parameter> )</parameter_list> <block>{<block_content>
+    <expr_stmt><expr><name>os</name> <operator>&lt;&lt;</operator> <call><name>ws</name><argument_list>(<argument><expr><name>level</name></expr></argument>  )</argument_list></call> <operator>&lt;&lt;</operator> <name>title</name> <operator>&lt;&lt;</operator> <literal type="string">":\n"</literal>
+       <operator>&lt;&lt;</operator> <call><name>ws</name><argument_list>(<argument><expr><name>level</name><operator>+</operator><literal type="number">1</literal></expr></argument>)</argument_list></call> <operator>&lt;&lt;</operator> <literal type="string">"- name: "</literal>         <operator>&lt;&lt;</operator> <name><name>info</name><operator>.</operator><name>name</name></name> <operator>&lt;&lt;</operator> <literal type="string">"\n"</literal></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>print</name><argument_list>( <argument><expr><name>os</name></expr></argument>, <argument><expr><name>level</name><operator>+</operator><literal type="number">1</literal></expr></argument> , <argument><expr><literal type="string">"- lineInfo"</literal></expr></argument>, <argument><expr><name><name>info</name><operator>.</operator><name>lineInfo</name></name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+</block_content>}</block></function>
+
+<comment type="line">// struct SectionStats {</comment>
+<comment type="line">//     SectionInfo sectionInfo;</comment>
+<comment type="line">//     Counts assertions;</comment>
+<comment type="line">//     double durationInSeconds;</comment>
+<comment type="line">//     bool missingAssertions;</comment>
+<comment type="line">// };</comment>
+
+<function><type><name>void</name></type> <name>print</name><parameter_list>( <parameter><decl><type><name><name>std</name><operator>::</operator><name>ostream</name></name><modifier>&amp;</modifier></type> <name>os</name></decl></parameter>, <parameter><decl><type><name>int</name> <specifier>const</specifier></type> <name>level</name></decl></parameter>, <parameter><decl><type><name><name>std</name><operator>::</operator><name>string</name></name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>title</name></decl></parameter>, <parameter><decl><type><name><name>Catch</name><operator>::</operator><name>SectionStats</name></name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>info</name></decl></parameter> )</parameter_list> <block>{<block_content>
+    <expr_stmt><expr><name>os</name> <operator>&lt;&lt;</operator> <call><name>ws</name><argument_list>(<argument><expr><name>level</name></expr></argument>  )</argument_list></call> <operator>&lt;&lt;</operator> <name>title</name> <operator>&lt;&lt;</operator> <literal type="string">":\n"</literal></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>print</name><argument_list>( <argument><expr><name>os</name></expr></argument>, <argument><expr><name>level</name><operator>+</operator><literal type="number">1</literal></expr></argument> , <argument><expr><literal type="string">"- sectionInfo"</literal></expr></argument>, <argument><expr><name><name>info</name><operator>.</operator><name>sectionInfo</name></name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>print</name><argument_list>( <argument><expr><name>os</name></expr></argument>, <argument><expr><name>level</name><operator>+</operator><literal type="number">1</literal></expr></argument> , <argument><expr><literal type="string">"- assertions"</literal></expr></argument> , <argument><expr><name><name>info</name><operator>.</operator><name>assertions</name></name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><name>os</name> <operator>&lt;&lt;</operator> <call><name>ws</name><argument_list>(<argument><expr><name>level</name><operator>+</operator><literal type="number">1</literal></expr></argument>)</argument_list></call> <operator>&lt;&lt;</operator> <literal type="string">"- durationInSeconds: "</literal> <operator>&lt;&lt;</operator> <name><name>info</name><operator>.</operator><name>durationInSeconds</name></name> <operator>&lt;&lt;</operator> <literal type="string">"\n"</literal>
+       <operator>&lt;&lt;</operator> <call><name>ws</name><argument_list>(<argument><expr><name>level</name><operator>+</operator><literal type="number">1</literal></expr></argument>)</argument_list></call> <operator>&lt;&lt;</operator> <literal type="string">"- missingAssertions: "</literal> <operator>&lt;&lt;</operator> <name><name>info</name><operator>.</operator><name>missingAssertions</name></name> <operator>&lt;&lt;</operator> <literal type="string">"\n"</literal></expr>;</expr_stmt>
+</block_content>}</block></function>
+
+<comment type="line">// struct AssertionInfo</comment>
+<comment type="line">// {</comment>
+<comment type="line">//     StringRef macroName;</comment>
+<comment type="line">//     SourceLineInfo lineInfo;</comment>
+<comment type="line">//     StringRef capturedExpression;</comment>
+<comment type="line">//     ResultDisposition::Flags resultDisposition;</comment>
+<comment type="line">// };</comment>
+
+<function><type><name>void</name></type> <name>print</name><parameter_list>( <parameter><decl><type><name><name>std</name><operator>::</operator><name>ostream</name></name><modifier>&amp;</modifier></type> <name>os</name></decl></parameter>, <parameter><decl><type><name>int</name> <specifier>const</specifier></type> <name>level</name></decl></parameter>, <parameter><decl><type><name><name>std</name><operator>::</operator><name>string</name></name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>title</name></decl></parameter>, <parameter><decl><type><name><name>Catch</name><operator>::</operator><name>AssertionInfo</name></name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>info</name></decl></parameter> )</parameter_list> <block>{<block_content>
+    <expr_stmt><expr><name>os</name> <operator>&lt;&lt;</operator> <call><name>ws</name><argument_list>(<argument><expr><name>level</name></expr></argument>  )</argument_list></call> <operator>&lt;&lt;</operator> <name>title</name> <operator>&lt;&lt;</operator> <literal type="string">":\n"</literal>
+       <operator>&lt;&lt;</operator> <call><name>ws</name><argument_list>(<argument><expr><name>level</name><operator>+</operator><literal type="number">1</literal></expr></argument>)</argument_list></call> <operator>&lt;&lt;</operator> <literal type="string">"- macroName: '"</literal>  <operator>&lt;&lt;</operator> <name><name>info</name><operator>.</operator><name>macroName</name></name> <operator>&lt;&lt;</operator> <literal type="string">"'\n"</literal></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>print</name><argument_list>( <argument><expr><name>os</name></expr></argument>, <argument><expr><name>level</name><operator>+</operator><literal type="number">1</literal></expr></argument> , <argument><expr><literal type="string">"- lineInfo"</literal></expr></argument> , <argument><expr><name><name>info</name><operator>.</operator><name>lineInfo</name></name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><name>os</name> <operator>&lt;&lt;</operator> <call><name>ws</name><argument_list>(<argument><expr><name>level</name><operator>+</operator><literal type="number">1</literal></expr></argument>)</argument_list></call> <operator>&lt;&lt;</operator> <literal type="string">"- capturedExpression: '"</literal> <operator>&lt;&lt;</operator> <name><name>info</name><operator>.</operator><name>capturedExpression</name></name> <operator>&lt;&lt;</operator> <literal type="string">"'\n"</literal>
+       <operator>&lt;&lt;</operator> <call><name>ws</name><argument_list>(<argument><expr><name>level</name><operator>+</operator><literal type="number">1</literal></expr></argument>)</argument_list></call> <operator>&lt;&lt;</operator> <literal type="string">"- resultDisposition (flags): 0x"</literal> <operator>&lt;&lt;</operator> <name><name>std</name><operator>::</operator><name>hex</name></name> <operator>&lt;&lt;</operator> <name><name>info</name><operator>.</operator><name>resultDisposition</name></name>  <operator>&lt;&lt;</operator> <name><name>std</name><operator>::</operator><name>dec</name></name> <operator>&lt;&lt;</operator> <literal type="string">"\n"</literal></expr>;</expr_stmt>
+</block_content>}</block></function>
+
+<comment type="line">//struct AssertionResultData</comment>
+<comment type="line">//{</comment>
+<comment type="line">//    std::string reconstructExpression() const;</comment>
+<comment type="line">//</comment>
+<comment type="line">//    std::string message;</comment>
+<comment type="line">//    mutable std::string reconstructedExpression;</comment>
+<comment type="line">//    LazyExpression lazyExpression;</comment>
+<comment type="line">//    ResultWas::OfType resultType;</comment>
+<comment type="line">//};</comment>
+
+<function><type><name>void</name></type> <name>print</name><parameter_list>( <parameter><decl><type><name><name>std</name><operator>::</operator><name>ostream</name></name><modifier>&amp;</modifier></type> <name>os</name></decl></parameter>, <parameter><decl><type><name>int</name> <specifier>const</specifier></type> <name>level</name></decl></parameter>, <parameter><decl><type><name><name>std</name><operator>::</operator><name>string</name></name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>title</name></decl></parameter>, <parameter><decl><type><name><name>Catch</name><operator>::</operator><name>AssertionResultData</name></name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>info</name></decl></parameter> )</parameter_list> <block>{<block_content>
+    <expr_stmt><expr><name>os</name> <operator>&lt;&lt;</operator> <call><name>ws</name><argument_list>(<argument><expr><name>level</name></expr></argument>  )</argument_list></call> <operator>&lt;&lt;</operator> <name>title</name> <operator>&lt;&lt;</operator> <literal type="string">":\n"</literal>
+       <operator>&lt;&lt;</operator> <call><name>ws</name><argument_list>(<argument><expr><name>level</name><operator>+</operator><literal type="number">1</literal></expr></argument>)</argument_list></call> <operator>&lt;&lt;</operator> <literal type="string">"- reconstructExpression(): '"</literal> <operator>&lt;&lt;</operator>   <call><name><name>info</name><operator>.</operator><name>reconstructExpression</name></name><argument_list>()</argument_list></call> <operator>&lt;&lt;</operator> <literal type="string">"'\n"</literal>
+       <operator>&lt;&lt;</operator> <call><name>ws</name><argument_list>(<argument><expr><name>level</name><operator>+</operator><literal type="number">1</literal></expr></argument>)</argument_list></call> <operator>&lt;&lt;</operator> <literal type="string">"- message: '"</literal>                 <operator>&lt;&lt;</operator>   <name><name>info</name><operator>.</operator><name>message</name></name> <operator>&lt;&lt;</operator> <literal type="string">"'\n"</literal>
+       <operator>&lt;&lt;</operator> <call><name>ws</name><argument_list>(<argument><expr><name>level</name><operator>+</operator><literal type="number">1</literal></expr></argument>)</argument_list></call> <operator>&lt;&lt;</operator> <literal type="string">"- lazyExpression: '"</literal>          <operator>&lt;&lt;</operator> <literal type="string">"(info.lazyExpression)"</literal> <operator>&lt;&lt;</operator> <literal type="string">"'\n"</literal>
+       <operator>&lt;&lt;</operator> <call><name>ws</name><argument_list>(<argument><expr><name>level</name><operator>+</operator><literal type="number">1</literal></expr></argument>)</argument_list></call> <operator>&lt;&lt;</operator> <literal type="string">"- resultType: '"</literal>              <operator>&lt;&lt;</operator>   <name><name>info</name><operator>.</operator><name>resultType</name></name> <operator>&lt;&lt;</operator> <literal type="string">"'\n"</literal></expr>;</expr_stmt>
+</block_content>}</block></function>
+
+<comment type="line">//class AssertionResult {</comment>
+<comment type="line">//    bool isOk() const;</comment>
+<comment type="line">//    bool succeeded() const;</comment>
+<comment type="line">//    ResultWas::OfType getResultType() const;</comment>
+<comment type="line">//    bool hasExpression() const;</comment>
+<comment type="line">//    bool hasMessage() const;</comment>
+<comment type="line">//    std::string getExpression() const;</comment>
+<comment type="line">//    std::string getExpressionInMacro() const;</comment>
+<comment type="line">//    bool hasExpandedExpression() const;</comment>
+<comment type="line">//    std::string getExpandedExpression() const;</comment>
+<comment type="line">//    std::string getMessage() const;</comment>
+<comment type="line">//    SourceLineInfo getSourceInfo() const;</comment>
+<comment type="line">//    std::string getTestMacroName() const;</comment>
+<comment type="line">//</comment>
+<comment type="line">//    AssertionInfo m_info;</comment>
+<comment type="line">//    AssertionResultData m_resultData;</comment>
+<comment type="line">//};</comment>
+
+<function><type><name>void</name></type> <name>print</name><parameter_list>( <parameter><decl><type><name><name>std</name><operator>::</operator><name>ostream</name></name><modifier>&amp;</modifier></type> <name>os</name></decl></parameter>, <parameter><decl><type><name>int</name> <specifier>const</specifier></type> <name>level</name></decl></parameter>, <parameter><decl><type><name><name>std</name><operator>::</operator><name>string</name></name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>title</name></decl></parameter>, <parameter><decl><type><name><name>Catch</name><operator>::</operator><name>AssertionResult</name></name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>info</name></decl></parameter> )</parameter_list> <block>{<block_content>
+    <expr_stmt><expr><name>os</name> <operator>&lt;&lt;</operator> <call><name>ws</name><argument_list>(<argument><expr><name>level</name></expr></argument>  )</argument_list></call> <operator>&lt;&lt;</operator> <name>title</name> <operator>&lt;&lt;</operator> <literal type="string">":\n"</literal>
+       <operator>&lt;&lt;</operator> <call><name>ws</name><argument_list>(<argument><expr><name>level</name><operator>+</operator><literal type="number">1</literal></expr></argument>)</argument_list></call> <operator>&lt;&lt;</operator> <literal type="string">"- isOk(): "</literal>  <operator>&lt;&lt;</operator> <call><name><name>info</name><operator>.</operator><name>isOk</name></name><argument_list>()</argument_list></call> <operator>&lt;&lt;</operator> <literal type="string">"\n"</literal>
+       <operator>&lt;&lt;</operator> <call><name>ws</name><argument_list>(<argument><expr><name>level</name><operator>+</operator><literal type="number">1</literal></expr></argument>)</argument_list></call> <operator>&lt;&lt;</operator> <literal type="string">"- succeeded(): "</literal>  <operator>&lt;&lt;</operator> <call><name><name>info</name><operator>.</operator><name>succeeded</name></name><argument_list>()</argument_list></call> <operator>&lt;&lt;</operator> <literal type="string">"\n"</literal>
+       <operator>&lt;&lt;</operator> <call><name>ws</name><argument_list>(<argument><expr><name>level</name><operator>+</operator><literal type="number">1</literal></expr></argument>)</argument_list></call> <operator>&lt;&lt;</operator> <literal type="string">"- getResultType(): "</literal>  <operator>&lt;&lt;</operator> <call><name><name>info</name><operator>.</operator><name>getResultType</name></name><argument_list>()</argument_list></call> <operator>&lt;&lt;</operator> <literal type="string">"\n"</literal>
+       <operator>&lt;&lt;</operator> <call><name>ws</name><argument_list>(<argument><expr><name>level</name><operator>+</operator><literal type="number">1</literal></expr></argument>)</argument_list></call> <operator>&lt;&lt;</operator> <literal type="string">"- hasExpression(): "</literal>  <operator>&lt;&lt;</operator> <call><name><name>info</name><operator>.</operator><name>hasExpression</name></name><argument_list>()</argument_list></call> <operator>&lt;&lt;</operator> <literal type="string">"\n"</literal>
+       <operator>&lt;&lt;</operator> <call><name>ws</name><argument_list>(<argument><expr><name>level</name><operator>+</operator><literal type="number">1</literal></expr></argument>)</argument_list></call> <operator>&lt;&lt;</operator> <literal type="string">"- hasMessage(): "</literal>  <operator>&lt;&lt;</operator> <call><name><name>info</name><operator>.</operator><name>hasMessage</name></name><argument_list>()</argument_list></call> <operator>&lt;&lt;</operator> <literal type="string">"\n"</literal>
+       <operator>&lt;&lt;</operator> <call><name>ws</name><argument_list>(<argument><expr><name>level</name><operator>+</operator><literal type="number">1</literal></expr></argument>)</argument_list></call> <operator>&lt;&lt;</operator> <literal type="string">"- getExpression(): '"</literal>  <operator>&lt;&lt;</operator> <call><name><name>info</name><operator>.</operator><name>getExpression</name></name><argument_list>()</argument_list></call> <operator>&lt;&lt;</operator> <literal type="string">"'\n"</literal>
+       <operator>&lt;&lt;</operator> <call><name>ws</name><argument_list>(<argument><expr><name>level</name><operator>+</operator><literal type="number">1</literal></expr></argument>)</argument_list></call> <operator>&lt;&lt;</operator> <literal type="string">"- getExpressionInMacro(): '"</literal>  <operator>&lt;&lt;</operator> <call><name><name>info</name><operator>.</operator><name>getExpressionInMacro</name></name><argument_list>()</argument_list></call>  <operator>&lt;&lt;</operator> <literal type="string">"'\n"</literal>
+       <operator>&lt;&lt;</operator> <call><name>ws</name><argument_list>(<argument><expr><name>level</name><operator>+</operator><literal type="number">1</literal></expr></argument>)</argument_list></call> <operator>&lt;&lt;</operator> <literal type="string">"- hasExpandedExpression(): "</literal>  <operator>&lt;&lt;</operator> <call><name><name>info</name><operator>.</operator><name>hasExpandedExpression</name></name><argument_list>()</argument_list></call> <operator>&lt;&lt;</operator> <literal type="string">"\n"</literal>
+       <operator>&lt;&lt;</operator> <call><name>ws</name><argument_list>(<argument><expr><name>level</name><operator>+</operator><literal type="number">1</literal></expr></argument>)</argument_list></call> <operator>&lt;&lt;</operator> <literal type="string">"- getExpandedExpression(): "</literal>  <operator>&lt;&lt;</operator> <call><name><name>info</name><operator>.</operator><name>getExpandedExpression</name></name><argument_list>()</argument_list></call> <operator>&lt;&lt;</operator> <literal type="string">"'\n"</literal>
+       <operator>&lt;&lt;</operator> <call><name>ws</name><argument_list>(<argument><expr><name>level</name><operator>+</operator><literal type="number">1</literal></expr></argument>)</argument_list></call> <operator>&lt;&lt;</operator> <literal type="string">"- getMessage(): '"</literal>  <operator>&lt;&lt;</operator> <call><name><name>info</name><operator>.</operator><name>getMessage</name></name><argument_list>()</argument_list></call> <operator>&lt;&lt;</operator> <literal type="string">"'\n"</literal></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>print</name><argument_list>( <argument><expr><name>os</name></expr></argument>, <argument><expr><name>level</name><operator>+</operator><literal type="number">1</literal></expr></argument> , <argument><expr><literal type="string">"- getSourceInfo(): "</literal></expr></argument>, <argument><expr><call><name><name>info</name><operator>.</operator><name>getSourceInfo</name></name><argument_list>()</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><name>os</name> <operator>&lt;&lt;</operator> <call><name>ws</name><argument_list>(<argument><expr><name>level</name><operator>+</operator><literal type="number">1</literal></expr></argument>)</argument_list></call> <operator>&lt;&lt;</operator> <literal type="string">"- getTestMacroName(): '"</literal>  <operator>&lt;&lt;</operator> <call><name><name>info</name><operator>.</operator><name>getTestMacroName</name></name><argument_list>()</argument_list></call> <operator>&lt;&lt;</operator> <literal type="string">"'\n"</literal></expr>;</expr_stmt>
+
+<comment type="line">//    print( os, level+1 , "- *** m_info (AssertionInfo)", info.m_info );</comment>
+<comment type="line">//    print( os, level+1 , "- *** m_resultData (AssertionResultData)", info.m_resultData );</comment>
+</block_content>}</block></function>
+
+<comment type="line">// struct AssertionStats {</comment>
+<comment type="line">//     AssertionResult assertionResult;</comment>
+<comment type="line">//     std::vector&lt;MessageInfo&gt; infoMessages;</comment>
+<comment type="line">//     Totals totals;</comment>
+<comment type="line">// };</comment>
+
+<function><type><name>void</name></type> <name>print</name><parameter_list>( <parameter><decl><type><name><name>std</name><operator>::</operator><name>ostream</name></name><modifier>&amp;</modifier></type> <name>os</name></decl></parameter>, <parameter><decl><type><name>int</name> <specifier>const</specifier></type> <name>level</name></decl></parameter>, <parameter><decl><type><name><name>std</name><operator>::</operator><name>string</name></name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>title</name></decl></parameter>, <parameter><decl><type><name><name>Catch</name><operator>::</operator><name>AssertionStats</name></name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>info</name></decl></parameter> )</parameter_list> <block>{<block_content>
+    <expr_stmt><expr><name>os</name> <operator>&lt;&lt;</operator> <call><name>ws</name><argument_list>(<argument><expr><name>level</name></expr></argument>  )</argument_list></call> <operator>&lt;&lt;</operator> <name>title</name> <operator>&lt;&lt;</operator> <literal type="string">":\n"</literal></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>print</name><argument_list>( <argument><expr><name>os</name></expr></argument>, <argument><expr><name>level</name><operator>+</operator><literal type="number">1</literal></expr></argument> , <argument><expr><literal type="string">"- assertionResult"</literal></expr></argument>, <argument><expr><name><name>info</name><operator>.</operator><name>assertionResult</name></name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>print</name><argument_list>( <argument><expr><name>os</name></expr></argument>, <argument><expr><name>level</name><operator>+</operator><literal type="number">1</literal></expr></argument> , <argument><expr><literal type="string">"- infoMessages"</literal></expr></argument>, <argument><expr><name><name>info</name><operator>.</operator><name>infoMessages</name></name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>print</name><argument_list>( <argument><expr><name>os</name></expr></argument>, <argument><expr><name>level</name><operator>+</operator><literal type="number">1</literal></expr></argument> , <argument><expr><literal type="string">"- totals"</literal></expr></argument>, <argument><expr><name><name>info</name><operator>.</operator><name>totals</name></name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+</block_content>}</block></function>
+
+<comment type="line">// -----------------------------------------------------------------------</comment>
+<comment type="line">// 2. My listener and registration:</comment>
+<comment type="line">//</comment>
+
+<decl_stmt><decl><type><name>char</name> <specifier>const</specifier> <modifier>*</modifier></type> <name>dashed_line</name> <init>=
+    <expr><literal type="string">"--------------------------------------------------------------------------"</literal></expr></init></decl>;</decl_stmt>
+
+<struct>struct <name>MyListener</name> <super_list>: <super><name><name>Catch</name><operator>::</operator><name>TestEventListenerBase</name></name></super></super_list> <block>{<public type="default">
+
+    <using>using <name><name>TestEventListenerBase</name><operator>::</operator><name>TestEventListenerBase</name></name>;</using> <comment type="line">// inherit constructor</comment>
+<diff:delete xmlns:diff="http://www.srcML.org/srcDiff"><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">    </diff:ws></diff:delete>
+    <comment type="line">// Get rid of Wweak-tables</comment>
+    <destructor_decl><name>~MyListener</name><parameter_list>()</parameter_list>;</destructor_decl>
+
+    <comment type="line">// The whole test run starting</comment>
+    <function><type><name>void</name></type> <name>testRunStarting</name><parameter_list>( <parameter><decl><type><name><name>Catch</name><operator>::</operator><name>TestRunInfo</name></name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>testRunInfo</name></decl></parameter> )</parameter_list> <specifier>override</specifier> <block>{<block_content>
+        <expr_stmt><expr><name><name>std</name><operator>::</operator><name>cout</name></name>
+            <operator>&lt;&lt;</operator> <name><name>std</name><operator>::</operator><name>boolalpha</name></name>
+            <operator>&lt;&lt;</operator> <literal type="string">"\nEvent: testRunStarting:\n"</literal></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name>print</name><argument_list>( <argument><expr><name><name>std</name><operator>::</operator><name>cout</name></name></expr></argument>, <argument><expr><literal type="number">1</literal></expr></argument>, <argument><expr><literal type="string">"- testRunInfo"</literal></expr></argument>, <argument><expr><name>testRunInfo</name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block></function>
+
+    <comment type="line">// The whole test run ending</comment>
+    <function><type><name>void</name></type> <name>testRunEnded</name><parameter_list>( <parameter><decl><type><name><name>Catch</name><operator>::</operator><name>TestRunStats</name></name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>testRunStats</name></decl></parameter> )</parameter_list> <specifier>override</specifier> <block>{<block_content>
+        <expr_stmt><expr><name><name>std</name><operator>::</operator><name>cout</name></name>
+            <operator>&lt;&lt;</operator> <name>dashed_line</name>
+            <operator>&lt;&lt;</operator> <literal type="string">"\nEvent: testRunEnded:\n"</literal></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name>print</name><argument_list>( <argument><expr><name><name>std</name><operator>::</operator><name>cout</name></name></expr></argument>, <argument><expr><literal type="number">1</literal></expr></argument>, <argument><expr><literal type="string">"- testRunStats"</literal></expr></argument>, <argument><expr><name>testRunStats</name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block></function>
+
+    <comment type="line">// A test is being skipped (because it is "hidden")</comment>
+    <function><type><name>void</name></type> <name>skipTest</name><parameter_list>( <parameter><decl><type><name><name>Catch</name><operator>::</operator><name>TestCaseInfo</name></name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>testInfo</name></decl></parameter> )</parameter_list> <specifier>override</specifier> <block>{<block_content>
+        <expr_stmt><expr><name><name>std</name><operator>::</operator><name>cout</name></name>
+            <operator>&lt;&lt;</operator> <name>dashed_line</name>
+            <operator>&lt;&lt;</operator> <literal type="string">"\nEvent: skipTest:\n"</literal></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name>print</name><argument_list>( <argument><expr><name><name>std</name><operator>::</operator><name>cout</name></name></expr></argument>, <argument><expr><literal type="number">1</literal></expr></argument>, <argument><expr><literal type="string">"- testInfo"</literal></expr></argument>, <argument><expr><name>testInfo</name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block></function>
+
+    <comment type="line">// Test cases starting</comment>
+    <function><type><name>void</name></type> <name>testCaseStarting</name><parameter_list>( <parameter><decl><type><name><name>Catch</name><operator>::</operator><name>TestCaseInfo</name></name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>testInfo</name></decl></parameter> )</parameter_list> <specifier>override</specifier> <block>{<block_content>
+        <expr_stmt><expr><name><name>std</name><operator>::</operator><name>cout</name></name>
+            <operator>&lt;&lt;</operator> <name>dashed_line</name>
+            <operator>&lt;&lt;</operator> <literal type="string">"\nEvent: testCaseStarting:\n"</literal></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name>print</name><argument_list>( <argument><expr><name><name>std</name><operator>::</operator><name>cout</name></name></expr></argument>, <argument><expr><literal type="number">1</literal></expr></argument>, <argument><expr><literal type="string">"- testInfo"</literal></expr></argument>, <argument><expr><name>testInfo</name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block></function>
+
+    <comment type="line">// Test cases ending</comment>
+    <function><type><name>void</name></type> <name>testCaseEnded</name><parameter_list>( <parameter><decl><type><name><name>Catch</name><operator>::</operator><name>TestCaseStats</name></name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>testCaseStats</name></decl></parameter> )</parameter_list> <specifier>override</specifier> <block>{<block_content>
+        <expr_stmt><expr><name><name>std</name><operator>::</operator><name>cout</name></name> <operator>&lt;&lt;</operator> <literal type="string">"\nEvent: testCaseEnded:\n"</literal></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name>print</name><argument_list>( <argument><expr><name><name>std</name><operator>::</operator><name>cout</name></name></expr></argument>, <argument><expr><literal type="number">1</literal></expr></argument>, <argument><expr><literal type="string">"testCaseStats"</literal></expr></argument>, <argument><expr><name>testCaseStats</name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block></function>
+
+    <comment type="line">// Sections starting</comment>
+    <function><type><name>void</name></type> <name>sectionStarting</name><parameter_list>( <parameter><decl><type><name><name>Catch</name><operator>::</operator><name>SectionInfo</name></name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>sectionInfo</name></decl></parameter> )</parameter_list> <specifier>override</specifier> <block>{<block_content>
+        <expr_stmt><expr><name><name>std</name><operator>::</operator><name>cout</name></name> <operator>&lt;&lt;</operator> <literal type="string">"\nEvent: sectionStarting:\n"</literal></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name>print</name><argument_list>( <argument><expr><name><name>std</name><operator>::</operator><name>cout</name></name></expr></argument>, <argument><expr><literal type="number">1</literal></expr></argument>, <argument><expr><literal type="string">"- sectionInfo"</literal></expr></argument>, <argument><expr><name>sectionInfo</name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block></function>
+
+    <comment type="line">// Sections ending</comment>
+    <function><type><name>void</name></type> <name>sectionEnded</name><parameter_list>( <parameter><decl><type><name><name>Catch</name><operator>::</operator><name>SectionStats</name></name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>sectionStats</name></decl></parameter> )</parameter_list> <specifier>override</specifier> <block>{<block_content>
+        <expr_stmt><expr><name><name>std</name><operator>::</operator><name>cout</name></name> <operator>&lt;&lt;</operator> <literal type="string">"\nEvent: sectionEnded:\n"</literal></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name>print</name><argument_list>( <argument><expr><name><name>std</name><operator>::</operator><name>cout</name></name></expr></argument>, <argument><expr><literal type="number">1</literal></expr></argument>, <argument><expr><literal type="string">"- sectionStats"</literal></expr></argument>, <argument><expr><name>sectionStats</name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block></function>
+
+    <comment type="line">// Assertions before/ after</comment>
+    <function><type><name>void</name></type> <name>assertionStarting</name><parameter_list>( <parameter><decl><type><name><name>Catch</name><operator>::</operator><name>AssertionInfo</name></name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>assertionInfo</name></decl></parameter> )</parameter_list> <specifier>override</specifier> <block>{<block_content>
+        <expr_stmt><expr><name><name>std</name><operator>::</operator><name>cout</name></name> <operator>&lt;&lt;</operator> <literal type="string">"\nEvent: assertionStarting:\n"</literal></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name>print</name><argument_list>( <argument><expr><name><name>std</name><operator>::</operator><name>cout</name></name></expr></argument>, <argument><expr><literal type="number">1</literal></expr></argument>, <argument><expr><literal type="string">"- assertionInfo"</literal></expr></argument>, <argument><expr><name>assertionInfo</name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block></function>
+
+    <function><type><name>bool</name></type> <name>assertionEnded</name><parameter_list>( <parameter><decl><type><name><name>Catch</name><operator>::</operator><name>AssertionStats</name></name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>assertionStats</name></decl></parameter> )</parameter_list> <specifier>override</specifier> <block>{<block_content>
+        <expr_stmt><expr><name><name>std</name><operator>::</operator><name>cout</name></name> <operator>&lt;&lt;</operator> <literal type="string">"\nEvent: assertionEnded:\n"</literal></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name>print</name><argument_list>( <argument><expr><name><name>std</name><operator>::</operator><name>cout</name></name></expr></argument>, <argument><expr><literal type="number">1</literal></expr></argument>, <argument><expr><literal type="string">"- assertionStats"</literal></expr></argument>, <argument><expr><name>assertionStats</name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        <return>return <expr><literal type="boolean">true</literal></expr>;</return>
+    </block_content>}</block></function>
+</public>}</block>;</struct>
+
+<macro><name>CATCH_REGISTER_LISTENER</name><argument_list>( <argument>MyListener</argument> )</argument_list></macro>
+
+<comment type="line">// Get rid of Wweak-tables</comment>
+<destructor><name><name>MyListener</name><operator>::</operator><name>~MyListener</name></name><parameter_list>()</parameter_list> <block>{<block_content/>}</block></destructor>
+
+
+<comment type="line">// -----------------------------------------------------------------------</comment>
+<comment type="line">// 3. Test cases:</comment>
+<comment type="line">//</comment>
+
+<macro><name>TEST_CASE</name><argument_list>( <argument><literal type="string">"1: Hidden testcase"</literal></argument>, <argument><literal type="string">"[.hidden]"</literal></argument> )</argument_list></macro> <block>{<block_content>
+</block_content>}</block>
+
+<macro><name>TEST_CASE</name><argument_list>( <argument><literal type="string">"2: Testcase with sections"</literal></argument>, <argument><literal type="string">"[tag-A][tag-B]"</literal></argument> )</argument_list></macro> <block>{<block_content>
+
+    <decl_stmt><decl><type><name>int</name></type> <name>i</name> <init>= <expr><literal type="number">42</literal></expr></init></decl>;</decl_stmt>
+
+    <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><name>i</name> <operator>==</operator> <literal type="number">42</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+
+    <macro><name>SECTION</name><argument_list>(<argument><literal type="string">"Section 1"</literal></argument>)</argument_list></macro> <block>{<block_content>
+        <expr_stmt><expr><call><name>INFO</name><argument_list>(<argument><expr><literal type="string">"Section 1"</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><name>i</name> <operator>=</operator> <literal type="number">7</literal></expr>;</expr_stmt>
+        <macro><name>SECTION</name><argument_list>(<argument><literal type="string">"Section 1.1"</literal></argument>)</argument_list></macro> <block>{<block_content>
+            <expr_stmt><expr><call><name>INFO</name><argument_list>(<argument><expr><literal type="string">"Section 1.1"</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+            <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><name>i</name> <operator>==</operator> <literal type="number">42</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        </block_content>}</block>
+    </block_content>}</block>
+
+    <macro><name>SECTION</name><argument_list>(<argument><literal type="string">"Section 2"</literal></argument>)</argument_list></macro> <block>{<block_content>
+        <expr_stmt><expr><call><name>INFO</name><argument_list>(<argument><expr><literal type="string">"Section 2"</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><name>i</name> <operator>==</operator> <literal type="number">42</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block>
+    <expr_stmt><expr><call><name>WARN</name><argument_list>(<argument><expr><literal type="string">"At end of test case"</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+</block_content>}</block>
+
+<struct>struct <name>Fixture</name> <block>{<public type="default">
+    <function><type><name>int</name></type> <name>fortytwo</name><parameter_list>()</parameter_list> <specifier>const</specifier> <block>{<block_content>
+        <return>return <expr><literal type="number">42</literal></expr>;</return>
+    </block_content>}</block></function>
+</public>}</block>;</struct>
+
+<macro><name>TEST_CASE_METHOD</name><argument_list>( <argument>Fixture</argument>, <argument><literal type="string">"3: Testcase with class-based fixture"</literal></argument>, <argument><literal type="string">"[tag-C][tag-D]"</literal></argument> )</argument_list></macro> <block>{<block_content>
+    <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name>fortytwo</name><argument_list>()</argument_list></call> <operator>==</operator> <literal type="number">42</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+</block_content>}</block>
+
+<comment type="line">// Compile &amp; run:</comment>
+<comment type="line">// - g++ -std=c++11 -Wall -I$(CATCH_SINGLE_INCLUDE) -o 210-Evt-EventListeners 210-Evt-EventListeners.cpp 000-CatchMain.o &amp;&amp; 210-Evt-EventListeners --success</comment>
+<comment type="line">// - cl -EHsc -I%CATCH_SINGLE_INCLUDE% 210-Evt-EventListeners.cpp 000-CatchMain.obj &amp;&amp; 210-Evt-EventListeners --success</comment>
+
+<comment type="line">// Expected compact output (all assertions):</comment>
+<comment type="line">//</comment>
+<comment type="line">// prompt&gt; 210-Evt-EventListeners --reporter compact --success</comment>
+<comment type="line">// result omitted for brevity.</comment>
+</unit>

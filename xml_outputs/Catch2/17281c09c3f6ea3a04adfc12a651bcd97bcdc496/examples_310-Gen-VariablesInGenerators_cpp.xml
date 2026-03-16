@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" xmlns:diff="http://www.srcML.org/srcDiff" revision="1.0.0" language="C++" filename="C:\Users\saile\AppData\Local\Temp\catch2_100_z8gzpiwf\17281c09c3f6ea3a04adfc12a651bcd97bcdc496\examples_310-Gen-VariablesInGenerators_cpp\examples_310-Gen-VariablesInGenerators_cpp.old|C:\Users\saile\AppData\Local\Temp\catch2_100_z8gzpiwf\17281c09c3f6ea3a04adfc12a651bcd97bcdc496\examples_310-Gen-VariablesInGenerators_cpp\examples_310-Gen-VariablesInGenerators_cpp.new"><comment type="line">// 310-Gen-VariablesInGenerator.cpp</comment>
+<comment type="line">// Shows how to use variables when creating generators.</comment>
+
+<comment type="line">// Note that using variables inside generators is dangerous and should</comment>
+<comment type="line">// be done only if you know what you are doing, because the generators</comment>
+<comment type="line">// _WILL_ outlive the variables -- thus they should be either captured</comment>
+<comment type="line">// by value directly, or copied by the generators during construction.</comment>
+
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;<diff:delete type="replace" xmlns:diff="http://www.srcML.org/srcDiff">catch2/catch.hpp</diff:delete><diff:insert type="replace" xmlns:diff="http://www.srcML.org/srcDiff">catch2/catch_test_macros.hpp</diff:insert>&gt;</cpp:file></cpp:include>
+<diff:insert xmlns:diff="http://www.srcML.org/srcDiff"><cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;catch2/catch_generators_generic.hpp&gt;</cpp:file></cpp:include><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+</diff:ws><cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;catch2/catch_generators_specific.hpp&gt;</cpp:file></cpp:include></diff:insert>
+<diff:insert xmlns:diff="http://www.srcML.org/srcDiff"><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+</diff:ws></diff:insert><macro><name>TEST_CASE</name><argument_list>(<argument><literal type="string">"Generate random doubles across different ranges"</literal></argument>,
+          <argument><literal type="string">"[generator][example][advanced]"</literal></argument>)</argument_list></macro> <block>{<block_content>
+    <comment type="line">// Workaround for old libstdc++</comment>
+    <using>using <name>record</name> <init>= <type><name><name>std</name><operator>::</operator><name>tuple</name><argument_list type="generic">&lt;<argument><expr><name>double</name></expr></argument>, <argument><expr><name>double</name></expr></argument>&gt;</argument_list></name></type></init>;</using>
+    <comment type="line">// Set up 3 ranges to generate numbers from</comment>
+    <decl_stmt><decl><type><name>auto</name></type> <name>r</name> <init>= <expr><call><name>GENERATE</name><argument_list>(<argument><expr><call><name><name>table</name><argument_list type="generic">&lt;<argument><expr><name>double</name></expr></argument>, <argument><expr><name>double</name></expr></argument>&gt;</argument_list></name><argument_list>(<argument><expr><block>{
+        <expr><call><name>record</name><argument_list>{<argument><expr><literal type="number">3</literal></expr></argument>, <argument><expr><literal type="number">4</literal></expr></argument>}</argument_list></call></expr>,
+        <expr><call><name>record</name><argument_list>{<argument><expr><operator>-</operator><literal type="number">4</literal></expr></argument>, <argument><expr><operator>-</operator><literal type="number">3</literal></expr></argument>}</argument_list></call></expr>,
+        <macro><name>record</name></macro><expr><block>{<expr><literal type="number">10</literal></expr>, <expr><literal type="number">1000</literal></expr>}</block></expr>
+    }</block></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+
+    <comment type="line">// This will not compile (intentionally), because it accesses a variable</comment>
+    <comment type="line">// auto number = GENERATE(take(50, random(std::get&lt;0&gt;(r), std::get&lt;1&gt;(r))));</comment>
+
+   <comment type="line">// GENERATE_COPY copies all variables mentioned inside the expression</comment>
+   <comment type="line">// thus this will work.</comment>
+    <decl_stmt><decl><type><name>auto</name></type> <name>number</name> <init>= <expr><call><name>GENERATE_COPY</name><argument_list>(<argument><expr><call><name>take</name><argument_list>(<argument><expr><literal type="number">50</literal></expr></argument>, <argument><expr><call><name>random</name><argument_list>(<argument><expr><call><name><name>std</name><operator>::</operator><name>get</name><argument_list type="generic">&lt;<argument><expr><literal type="number">0</literal></expr></argument>&gt;</argument_list></name><argument_list>(<argument><expr><name>r</name></expr></argument>)</argument_list></call></expr></argument>, <argument><expr><call><name><name>std</name><operator>::</operator><name>get</name><argument_list type="generic">&lt;<argument><expr><literal type="number">1</literal></expr></argument>&gt;</argument_list></name><argument_list>(<argument><expr><name>r</name></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+
+    <expr_stmt><expr><call><name>REQUIRE</name><argument_list>(<argument><expr><call><name><name>std</name><operator>::</operator><name>abs</name></name><argument_list>(<argument><expr><name>number</name></expr></argument>)</argument_list></call> <operator>&gt;</operator> <literal type="number">0</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+</block_content>}</block>
+
+<comment type="line">// Compiling and running this file will result in 150 successful assertions</comment>
+
+</unit>

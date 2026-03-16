@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" xmlns:diff="http://www.srcML.org/srcDiff" revision="1.0.0" language="C++" filename="C:\Users\saile\AppData\Local\Temp\catch2_100_z8gzpiwf\ed4acded380ac5408acf9fa518984cbe1bbe25bd\src_catch2_internal_catch_exception_translator_registry_cpp\src_catch2_internal_catch_exception_translator_registry_cpp.old|C:\Users\saile\AppData\Local\Temp\catch2_100_z8gzpiwf\ed4acded380ac5408acf9fa518984cbe1bbe25bd\src_catch2_internal_catch_exception_translator_registry_cpp\src_catch2_internal_catch_exception_translator_registry_cpp.new">
+<comment type="line">//              Copyright Catch2 Authors</comment>
+<comment type="line">// Distributed under the Boost Software License, Version 1.0.</comment>
+<comment type="line">//   (See accompanying file LICENSE.txt or copy at</comment>
+<comment type="line">//        https://www.boost.org/LICENSE_1_0.txt)</comment>
+
+<comment type="line">// SPDX-License-Identifier: BSL-1.0</comment>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;catch2/internal/catch_exception_translator_registry.hpp&gt;</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;catch2/internal/catch_compiler_capabilities.hpp&gt;</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;catch2/internal/catch_enforce.hpp&gt;</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;catch2/internal/catch_test_failure_exception.hpp&gt;</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;catch2/internal/catch_move_and_forward.hpp&gt;</cpp:file></cpp:include>
+
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;exception&gt;</cpp:file></cpp:include>
+
+<namespace>namespace <name>Catch</name> <block>{
+
+<diff:insert xmlns:diff="http://www.srcML.org/srcDiff"><cpp:if xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">if</cpp:directive><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><expr><operator>!</operator><call><name>defined</name><argument_list>(<argument><expr><name>CATCH_CONFIG_DISABLE_EXCEPTIONS</name></expr></argument>)</argument_list></call></expr></cpp:if><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+</diff:ws></diff:insert>    <namespace>namespace <block>{
+        <function><type><specifier>static</specifier> <name><name>std</name><operator>::</operator><name>string</name></name></type> <name>tryTranslators</name><parameter_list>(
+            <parameter><decl><type><name><name>std</name><operator>::</operator><name>vector</name><argument_list type="generic">&lt;
+                <argument><expr><name><name>Detail</name><operator>::</operator><name>unique_ptr</name><argument_list type="generic">&lt;<argument><expr><name>IExceptionTranslator</name> <specifier>const</specifier></expr></argument>&gt;</argument_list></name></expr></argument>&gt;</argument_list></name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>translators</name></decl></parameter> )</parameter_list> <block>{<block_content>
+            <if_stmt><if>if <condition>( <expr><call><name><name>translators</name><operator>.</operator><name>empty</name></name><argument_list>()</argument_list></call></expr> )</condition> <block>{<block_content>
+                <expr_stmt><expr><call><name><name>std</name><operator>::</operator><name>rethrow_exception</name></name><argument_list>( <argument><expr><call><name><name>std</name><operator>::</operator><name>current_exception</name></name><argument_list>()</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+            </block_content>}</block></if> <else>else <block>{<block_content>
+                <return>return <expr><name><name>translators</name><index>[<expr><literal type="number">0</literal></expr>]</index></name><operator>-&gt;</operator><call><name>translate</name><argument_list>( <argument><expr><call><name><name>translators</name><operator>.</operator><name>begin</name></name><argument_list>()</argument_list></call> <operator>+</operator> <literal type="number">1</literal></expr></argument>,
+                                                  <argument><expr><call><name><name>translators</name><operator>.</operator><name>end</name></name><argument_list>()</argument_list></call></expr></argument> )</argument_list></call></expr>;</return>
+            </block_content>}</block></else></if_stmt>
+        </block_content>}</block></function>
+
+    }</block></namespace>
+<diff:insert xmlns:diff="http://www.srcML.org/srcDiff"><cpp:endif xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">endif</cpp:directive></cpp:endif><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><comment type="line" format="doxygen">//!defined(CATCH_CONFIG_DISABLE_EXCEPTIONS)</comment></diff:insert>
+<diff:insert xmlns:diff="http://www.srcML.org/srcDiff"><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+</diff:ws></diff:insert>    <destructor><name><name>ExceptionTranslatorRegistry</name><operator>::</operator><name>~ExceptionTranslatorRegistry</name></name><parameter_list>()</parameter_list> <block>{<block_content>
+    </block_content>}</block></destructor>
+
+    <function><type><name>void</name></type> <name><name>ExceptionTranslatorRegistry</name><operator>::</operator><name>registerTranslator</name></name><parameter_list>( <parameter><decl><type><name><name>Detail</name><operator>::</operator><name>unique_ptr</name><argument_list type="generic">&lt;<argument><expr><name>IExceptionTranslator</name></expr></argument>&gt;</argument_list></name><modifier>&amp;&amp;</modifier></type> <name>translator</name></decl></parameter> )</parameter_list> <block>{<block_content>
+        <expr_stmt><expr><call><name><name>m_translators</name><operator>.</operator><name>push_back</name></name><argument_list>( <argument><expr><call><name>CATCH_MOVE</name><argument_list>( <argument><expr><name>translator</name></expr></argument> )</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block></function>
+
+<cpp:if xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">if</cpp:directive> <expr><operator>!</operator><call><name>defined</name><argument_list>(<argument><expr><name>CATCH_CONFIG_DISABLE_EXCEPTIONS</name></expr></argument>)</argument_list></call></expr></cpp:if>
+    <function><type><name><name>std</name><operator>::</operator><name>string</name></name></type> <name><name>ExceptionTranslatorRegistry</name><operator>::</operator><name>translateActiveException</name></name><parameter_list>()</parameter_list> <specifier>const</specifier> <block>{<block_content>
+        <comment type="line">// Compiling a mixed mode project with MSVC means that CLR</comment>
+        <comment type="line">// exceptions will be caught in (...) as well. However, these do</comment>
+        <comment type="line">// do not fill-in std::current_exception and thus lead to crash</comment>
+        <comment type="line">// when attempting rethrow.</comment>
+        <comment type="line">// /EHa switch also causes structured exceptions to be caught</comment>
+        <comment type="line">// here, but they fill-in current_exception properly, so</comment>
+        <comment type="line">// at worst the output should be a little weird, instead of</comment>
+        <comment type="line">// causing a crash.</comment>
+        <if_stmt><if>if <condition>( <expr><call><name><name>std</name><operator>::</operator><name>current_exception</name></name><argument_list>()</argument_list></call> <operator>==</operator> <literal type="null">nullptr</literal></expr> )</condition> <block>{<block_content>
+            <return>return <expr><literal type="string">"Non C++ exception. Possibly a CLR exception."</literal></expr>;</return>
+        </block_content>}</block></if></if_stmt>
+
+        <comment type="line">// First we try user-registered translators. If none of them can</comment>
+        <comment type="line">// handle the exception, it will be rethrown handled by our defaults.</comment>
+        <try>try <block>{<block_content>
+            <return>return <expr><call><name>tryTranslators</name><argument_list>(<argument><expr><name>m_translators</name></expr></argument>)</argument_list></call></expr>;</return>
+        </block_content>}</block>
+        <comment type="line">// To avoid having to handle TFE explicitly everywhere, we just</comment>
+        <comment type="line">// rethrow it so that it goes back up the caller.</comment>
+        <catch>catch<parameter_list>( <parameter><decl><type><name>TestFailureException</name><modifier>&amp;</modifier></type></decl></parameter> )</parameter_list> <block>{<block_content>
+            <expr_stmt><expr><call><name><name>std</name><operator>::</operator><name>rethrow_exception</name></name><argument_list>(<argument><expr><call><name><name>std</name><operator>::</operator><name>current_exception</name></name><argument_list>()</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        </block_content>}</block></catch>
+        <catch>catch<parameter_list>( <parameter><decl><type><name>TestSkipException</name><modifier>&amp;</modifier></type></decl></parameter> )</parameter_list> <block>{<block_content>
+            <expr_stmt><expr><call><name><name>std</name><operator>::</operator><name>rethrow_exception</name></name><argument_list>(<argument><expr><call><name><name>std</name><operator>::</operator><name>current_exception</name></name><argument_list>()</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        </block_content>}</block></catch>
+        <catch>catch<parameter_list>( <parameter><decl><type><name><name>std</name><operator>::</operator><name>exception</name></name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>ex</name></decl></parameter> )</parameter_list> <block>{<block_content>
+            <return>return <expr><call><name><name>ex</name><operator>.</operator><name>what</name></name><argument_list>()</argument_list></call></expr>;</return>
+        </block_content>}</block></catch>
+        <catch>catch<parameter_list>( <parameter><decl><type><name><name>std</name><operator>::</operator><name>string</name></name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>msg</name></decl></parameter> )</parameter_list> <block>{<block_content>
+            <return>return <expr><name>msg</name></expr>;</return>
+        </block_content>}</block></catch>
+        <catch>catch<parameter_list>( <parameter><decl><type><specifier>const</specifier> <name>char</name><modifier>*</modifier></type> <name>msg</name></decl></parameter> )</parameter_list> <block>{<block_content>
+            <return>return <expr><name>msg</name></expr>;</return>
+        </block_content>}</block></catch>
+        <catch>catch<parameter_list>(<parameter><decl><type><modifier>...</modifier></type></decl></parameter>)</parameter_list> <block>{<block_content>
+            <return>return <expr><literal type="string">"Unknown exception"</literal></expr>;</return>
+        </block_content>}</block></catch></try>
+    </block_content>}</block></function>
+
+<cpp:else xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">else</cpp:directive></cpp:else> <comment type="line">// ^^ Exceptions are enabled // Exceptions are disabled vv</comment>
+    <function><type><name><name>std</name><operator>::</operator><name>string</name></name></type> <name><name>ExceptionTranslatorRegistry</name><operator>::</operator><name>translateActiveException</name></name><parameter_list>()</parameter_list> <specifier>const</specifier> <block>{<block_content>
+        <expr_stmt><expr><call><name>CATCH_INTERNAL_ERROR</name><argument_list>(<argument><expr><literal type="string">"Attempted to translate active exception under CATCH_CONFIG_DISABLE_EXCEPTIONS!"</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block></function>
+<cpp:endif xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">endif</cpp:directive></cpp:endif>
+
+}</block></namespace>
+</unit>

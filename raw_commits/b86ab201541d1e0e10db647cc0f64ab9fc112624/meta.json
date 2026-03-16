@@ -1,0 +1,8 @@
+{
+  "commit_id": "b86ab201541d1e0e10db647cc0f64ab9fc112624",
+  "parent_id": "1327946785cd33dcd0ed3142dcb6e8849ccbc893",
+  "message": "OpenCppCoverage skips coverage of non-source directories",
+  "changed_files": [
+    "tools/misc/coverage-helper.cpp"
+  ]
+}

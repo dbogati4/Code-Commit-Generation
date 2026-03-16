@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" xmlns:diff="http://www.srcML.org/srcDiff" revision="1.0.0" language="C++" filename="C:\Users\saile\AppData\Local\Temp\catch2_100_z8gzpiwf\36ff7ba720e1bb301d19747349a06134f62bfe0d\Test_MessageTests_cpp\Test_MessageTests_cpp.old|C:\Users\saile\AppData\Local\Temp\catch2_100_z8gzpiwf\36ff7ba720e1bb301d19747349a06134f62bfe0d\Test_MessageTests_cpp\Test_MessageTests_cpp.new"><comment type="block">/*
+ *  MessageTests.cpp
+ *  Catch - Test
+ *
+ *  Created by Phil on 09/11/2010.
+ *  Copyright 2010 Two Blue Cubes Ltd. All rights reserved.
+ *
+ *  Distributed under the Boost Software License, Version 1.0. (See accompanying
+ *  file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
+ *
+ */</comment>
+
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">"../catch.hpp"</cpp:file></cpp:include>
+
+<macro><name>TEST_CASE</name><argument_list>( <argument><literal type="string">"succeeding/message"</literal></argument>, <argument><literal type="string">"INFO and WARN do not abort tests"</literal></argument> )</argument_list></macro>
+<block>{<block_content>
+    <expr_stmt><expr><call><name>INFO</name><argument_list>( <argument><expr><literal type="string">"this is a "</literal> <operator>&lt;&lt;</operator> <literal type="string">"message"</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>    <comment type="line">// This should output the message if a failure occurs</comment>
+    <expr_stmt><expr><call><name>WARN</name><argument_list>( <argument><expr><literal type="string">"this is a "</literal> <operator>&lt;&lt;</operator> <literal type="string">"warning"</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>    <comment type="line">// This should always output the message but then continue</comment>
+</block_content>}</block>
+
+<macro><name>TEST_CASE</name><argument_list>( <argument><literal type="string">"failing/message/info/1"</literal></argument>, <argument><literal type="string">"INFO gets logged on failure"</literal></argument> )</argument_list></macro>
+<block>{<block_content>
+    <expr_stmt><expr><call><name>INFO</name><argument_list>( <argument><expr><literal type="string">"this message should be logged"</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>INFO</name><argument_list>( <argument><expr><literal type="string">"so should this"</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    <decl_stmt><decl><type><name>int</name></type> <name>a</name> <init>= <expr><literal type="number">2</literal></expr></init></decl>;</decl_stmt>
+    <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><name>a</name> <operator>==</operator> <literal type="number">1</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+</block_content>}</block>
+
+<macro><name>TEST_CASE</name><argument_list>( <argument><literal type="string">"<diff:delete type="replace" xmlns:diff="http://www.srcML.org/srcDiff">failing/message/info/2</diff:delete><diff:insert type="replace" xmlns:diff="http://www.srcML.org/srcDiff">mixed/message/info/2</diff:insert>"</literal></argument>, <argument><literal type="string">"INFO gets logged on failure"</literal></argument> )</argument_list></macro>
+<block>{<block_content>
+    <expr_stmt><expr><call><name>INFO</name><argument_list>( <argument><expr><literal type="string">"this message should be logged"</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    <decl_stmt><decl><type><name>int</name></type> <name>a</name> <init>= <expr><literal type="number">2</literal></expr></init></decl>;</decl_stmt>
+    <expr_stmt><expr><call><name>CHECK</name><argument_list>( <argument><expr><name>a</name> <operator>==</operator> <literal type="number">2</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+
+    <expr_stmt><expr><call><name>INFO</name><argument_list>( <argument><expr><literal type="string">"this message should be logged, too"</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    
+    <expr_stmt><expr><call><name>CHECK</name><argument_list>( <argument><expr><name>a</name> <operator>==</operator> <literal type="number">1</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+
+    <expr_stmt><expr><call><name>INFO</name><argument_list>( <argument><expr><literal type="string">"and this, but later"</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+
+    <expr_stmt><expr><call><name>CHECK</name><argument_list>( <argument><expr><name>a</name> <operator>==</operator> <literal type="number">0</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+
+    <expr_stmt><expr><call><name>INFO</name><argument_list>( <argument><expr><literal type="string">"but not this"</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+
+    <expr_stmt><expr><call><name>CHECK</name><argument_list>( <argument><expr><name>a</name> <operator>==</operator> <literal type="number">2</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+</block_content>}</block>
+
+<macro><name>TEST_CASE</name><argument_list>( <argument><literal type="string">"failing/message/fail"</literal></argument>, <argument><literal type="string">"FAIL aborts the test"</literal></argument> )</argument_list></macro>
+<block>{<block_content>
+    <expr_stmt><expr><call><name>FAIL</name><argument_list>( <argument><expr><literal type="string">"This is a "</literal> <operator>&lt;&lt;</operator> <literal type="string">"failure"</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>    <comment type="line">// This should output the message and abort</comment>
+</block_content>}</block></unit>

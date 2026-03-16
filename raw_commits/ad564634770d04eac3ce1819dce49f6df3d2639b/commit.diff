@@ -1,0 +1,61 @@
+diff --git a/src/catch2/reporters/catch_reporter_console.cpp b/src/catch2/reporters/catch_reporter_console.cpp
+index a46b22cf..04d6f128 100644
+--- a/src/catch2/reporters/catch_reporter_console.cpp
++++ b/src/catch2/reporters/catch_reporter_console.cpp
+@@ -218,6 +218,7 @@ struct ColumnInfo {
+ };
+ struct ColumnBreak {};
+ struct RowBreak {};
++struct OutputFlush {};
+ 
+ class Duration {
+     enum class Unit {
+@@ -334,12 +335,12 @@ public:
+     }
+ 
+     template<typename T>
+-    friend TablePrinter& operator << (TablePrinter& tp, T const& value) {
++    friend TablePrinter& operator<< (TablePrinter& tp, T const& value) {
+         tp.m_oss << value;
+         return tp;
+     }
+ 
+-    friend TablePrinter& operator << (TablePrinter& tp, ColumnBreak) {
++    friend TablePrinter& operator<< (TablePrinter& tp, ColumnBreak) {
+         auto colStr = tp.m_oss.str();
+         const auto strSize = colStr.size();
+         tp.m_oss.str("");
+@@ -361,13 +362,18 @@ public:
+         return tp;
+     }
+ 
+-    friend TablePrinter& operator << (TablePrinter& tp, RowBreak) {
++    friend TablePrinter& operator<< (TablePrinter& tp, RowBreak) {
+         if (tp.m_currentColumn > 0) {
+             tp.m_os << '\n';
+             tp.m_currentColumn = -1;
+         }
+         return tp;
+     }
++
++    friend TablePrinter& operator<<(TablePrinter& tp, OutputFlush) {
++        tp.m_os << std::flush;
++        return tp;
++    }
+ };
+ 
+ ConsoleReporter::ConsoleReporter(ReporterConfig&& config):
+@@ -473,8 +479,11 @@ void ConsoleReporter::benchmarkPreparing( StringRef name ) {
+ void ConsoleReporter::benchmarkStarting(BenchmarkInfo const& info) {
+     (*m_tablePrinter) << info.samples << ColumnBreak()
+         << info.iterations << ColumnBreak();
+-    if (!m_config->benchmarkNoAnalysis())
+-        (*m_tablePrinter) << Duration(info.estimatedDuration) << ColumnBreak();
++    if ( !m_config->benchmarkNoAnalysis() ) {
++        ( *m_tablePrinter )
++            << Duration( info.estimatedDuration ) << ColumnBreak();
++    }
++    ( *m_tablePrinter ) << OutputFlush{};
+ }
+ void ConsoleReporter::benchmarkEnded(BenchmarkStats<> const& stats) {
+     if (m_config->benchmarkNoAnalysis())

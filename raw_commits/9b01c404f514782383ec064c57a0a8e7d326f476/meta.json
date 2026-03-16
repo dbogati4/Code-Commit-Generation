@@ -1,0 +1,8 @@
+{
+  "commit_id": "9b01c404f514782383ec064c57a0a8e7d326f476",
+  "parent_id": "f206162b2da1eb651d271d73312c94f0b9804972",
+  "message": "Fix cli help tooltip for --use-colour",
+  "changed_files": [
+    "src/catch2/internal/catch_commandline.cpp"
+  ]
+}

@@ -1,0 +1,8 @@
+{
+  "commit_id": "3c8fb6bbb25284a6f4966723f9f1f502da59da45",
+  "parent_id": "72f3ce4db5620ba54f9da9f60cd4076d322d98ae",
+  "message": "Internal linkage for generator trackers",
+  "changed_files": [
+    "src/catch2/internal/catch_run_context.cpp"
+  ]
+}

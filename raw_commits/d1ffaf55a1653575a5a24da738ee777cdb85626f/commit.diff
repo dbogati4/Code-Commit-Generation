@@ -1,0 +1,171 @@
+diff --git a/examples/010-TestCase.cpp b/examples/010-TestCase.cpp
+index f8af548a..9c676f82 100644
+--- a/examples/010-TestCase.cpp
++++ b/examples/010-TestCase.cpp
+@@ -6,7 +6,7 @@
+ // And write tests in the same file:
+ #include <catch2/catch.hpp>
+ 
+-int Factorial( int number ) {
++static int Factorial( int number ) {
+    return number <= 1 ? number : Factorial( number - 1 ) * number;  // fail
+ // return number <= 1 ? 1      : Factorial( number - 1 ) * number;  // pass
+ }
+diff --git a/examples/020-TestCase-2.cpp b/examples/020-TestCase-2.cpp
+index 08b313e0..43c0aee0 100644
+--- a/examples/020-TestCase-2.cpp
++++ b/examples/020-TestCase-2.cpp
+@@ -4,7 +4,7 @@
+ 
+ #include <catch2/catch.hpp>
+ 
+-int Factorial( int number ) {
++static int Factorial( int number ) {
+    return number <= 1 ? number : Factorial( number - 1 ) * number;  // fail
+ // return number <= 1 ? 1      : Factorial( number - 1 ) * number;  // pass
+ }
+diff --git a/examples/030-Asn-Require-Check.cpp b/examples/030-Asn-Require-Check.cpp
+index f814a1b3..84935bbc 100644
+--- a/examples/030-Asn-Require-Check.cpp
++++ b/examples/030-Asn-Require-Check.cpp
+@@ -12,7 +12,7 @@
+ 
+ #include <catch2/catch.hpp>
+ 
+-std::string one() {
++static std::string one() {
+     return "1";
+ }
+ 
+diff --git a/examples/210-Evt-EventListeners.cpp b/examples/210-Evt-EventListeners.cpp
+index 0e03902e..e3395828 100644
+--- a/examples/210-Evt-EventListeners.cpp
++++ b/examples/210-Evt-EventListeners.cpp
+@@ -19,6 +19,8 @@
+ // 1. Printing of listener data:
+ //
+ 
++
++namespace {
+ std::string ws(int const level) {
+     return std::string( 2 * level, ' ' );
+ }
+@@ -34,7 +36,6 @@ std::ostream& operator<<( std::ostream& os, std::vector<T> const& v ) {
+         os << x << ", ";
+     return os << "}";
+ }
+-
+ // struct SourceLineInfo {
+ //     char const* file;
+ //     std::size_t line;
+@@ -281,8 +282,8 @@ void print( std::ostream& os, int const level, std::string const& title, Catch::
+     print( os, level+1 , "- getSourceInfo(): ", info.getSourceInfo() );
+     os << ws(level+1) << "- getTestMacroName(): '"  << info.getTestMacroName() << "'\n";
+ 
+-//    print( os, level+1 , "- *** m_info (AssertionInfo)", info.m_info );
+-//    print( os, level+1 , "- *** m_resultData (AssertionResultData)", info.m_resultData );
++    print( os, level+1 , "- *** m_info (AssertionInfo)", info.m_info );
++    print( os, level+1 , "- *** m_resultData (AssertionResultData)", info.m_resultData );
+ }
+ 
+ // struct AssertionStats {
+@@ -305,6 +306,7 @@ void print( std::ostream& os, int const level, std::string const& title, Catch::
+ char const * dashed_line =
+     "--------------------------------------------------------------------------";
+ 
++
+ struct MyListener : Catch::TestEventListenerBase {
+ 
+     using TestEventListenerBase::TestEventListenerBase; // inherit constructor
+@@ -375,6 +377,8 @@ struct MyListener : Catch::TestEventListenerBase {
+     }
+ };
+ 
++} // end anonymous namespace
++
+ CATCH_REGISTER_LISTENER( MyListener )
+ 
+ // Get rid of Wweak-tables
+diff --git a/examples/300-Gen-OwnGenerator.cpp b/examples/300-Gen-OwnGenerator.cpp
+index 0cb80c2f..ec98a048 100644
+--- a/examples/300-Gen-OwnGenerator.cpp
++++ b/examples/300-Gen-OwnGenerator.cpp
+@@ -10,6 +10,8 @@
+ 
+ #include <random>
+ 
++namespace {
++
+ // This class shows how to implement a simple generator for Catch tests
+ class RandomIntGenerator : public Catch::Generators::IGenerator<int> {
+     std::minstd_rand m_rand;
+@@ -45,6 +47,8 @@ Catch::Generators::GeneratorWrapper<int> random(int low, int high) {
+     );
+ }
+ 
++} // end anonymous namespaces
++
+ // The two sections in this test case are equivalent, but the first one
+ // is much more readable/nicer to use
+ TEST_CASE("Generating random ints", "[example][generator]") {
+diff --git a/examples/301-Gen-MapTypeConversion.cpp b/examples/301-Gen-MapTypeConversion.cpp
+index 56434a0d..425da347 100644
+--- a/examples/301-Gen-MapTypeConversion.cpp
++++ b/examples/301-Gen-MapTypeConversion.cpp
+@@ -8,6 +8,8 @@
+ #include <string>
+ #include <sstream>
+ 
++namespace {
++
+ // Returns a line from a stream. You could have it e.g. read lines from
+ // a file, but to avoid problems with paths in examples, we will use
+ // a fixed stringstream.
+@@ -42,6 +44,7 @@ Catch::Generators::GeneratorWrapper<std::string> lines(std::string /* ignored fo
+     );
+ }
+ 
++} // end anonymous namespace
+ 
+ 
+ TEST_CASE("filter can convert types inside the generator expression", "[example][generator]") {
+diff --git a/tests/ExtraTests/X01-PrefixedMacros.cpp b/tests/ExtraTests/X01-PrefixedMacros.cpp
+index 683b86ed..89f128b7 100644
+--- a/tests/ExtraTests/X01-PrefixedMacros.cpp
++++ b/tests/ExtraTests/X01-PrefixedMacros.cpp
+@@ -11,11 +11,13 @@
+ #include <type_traits>
+ #include <stdexcept>
+ 
+-[[noreturn]]
+-void this_throws() {
+-    throw std::runtime_error("Some msg");
++namespace {
++    [[noreturn]]
++    void this_throws() {
++        throw std::runtime_error("Some msg");
++    }
++    void this_doesnt_throw() {}
+ }
+-void this_doesnt_throw() {}
+ 
+ CATCH_TEST_CASE("PrefixedMacros") {
+     using namespace Catch::Matchers;
+diff --git a/tests/ExtraTests/X11-DisableStringification.cpp b/tests/ExtraTests/X11-DisableStringification.cpp
+index 79d4f6b4..0d84771d 100644
+--- a/tests/ExtraTests/X11-DisableStringification.cpp
++++ b/tests/ExtraTests/X11-DisableStringification.cpp
+@@ -7,9 +7,11 @@
+ #include <catch2/catch_default_main.hpp>
+ #include <catch2/catch_test_macros.hpp>
+ 
+-struct Hidden {};
++namespace {
++    struct Hidden {};
+ 
+-bool operator==(Hidden, Hidden) { return true; }
++    bool operator==(Hidden, Hidden) { return true; }
++}
+ 
+ TEST_CASE("DisableStringification") {
+     REQUIRE( Hidden{} == Hidden{} );

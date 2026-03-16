@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" xmlns:diff="http://www.srcML.org/srcDiff" revision="1.0.0" language="C++" filename="C:\Users\saile\AppData\Local\Temp\catch2_100_z8gzpiwf\5f6990d74695bf5452d9d5870cf5760628497114\src_catch2_internal_catch_section_cpp\src_catch2_internal_catch_section_cpp.old|C:\Users\saile\AppData\Local\Temp\catch2_100_z8gzpiwf\5f6990d74695bf5452d9d5870cf5760628497114\src_catch2_internal_catch_section_cpp\src_catch2_internal_catch_section_cpp.new"><comment type="block">/*
+ *  Created by Phil on 03/11/2010.
+ *  Copyright 2010 Two Blue Cubes Ltd. All rights reserved.
+ *
+ *  Distributed under the Boost Software License, Version 1.0. (See accompanying
+ *  file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
+ */</comment>
+
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;catch2/internal/catch_section.hpp&gt;</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;catch2/internal/catch_test_macro_impl.hpp&gt;</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;catch2/internal/catch_uncaught_exceptions.hpp&gt;</cpp:file></cpp:include>
+
+<namespace>namespace <name>Catch</name> <block>{
+
+    <constructor><name><name>Section</name><operator>::</operator><name>Section</name></name><parameter_list>( <parameter><decl><type><name>SectionInfo</name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>info</name></decl></parameter> )</parameter_list>
+    <member_init_list>:   <call><name>m_info</name><argument_list>( <argument><expr><name>info</name></expr></argument> )</argument_list></call>,
+        <call><name>m_sectionIncluded</name><argument_list>( <argument><expr><call><name>getResultCapture</name><argument_list>()</argument_list></call><operator>.</operator><call><name>sectionStarted</name><argument_list>( <argument><expr><name>m_info</name></expr></argument>, <argument><expr><name>m_assertions</name></expr></argument> )</argument_list></call></expr></argument> )</argument_list></call>
+    </member_init_list><block>{<block_content><diff:insert xmlns:diff="http://www.srcML.org/srcDiff"><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+        </diff:ws><comment type="line">//<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>Non-"included"<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>sections<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>will<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>not<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>use<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>the<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>timing<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>information</comment><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+        </diff:ws><comment type="line">//<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>anyway,<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>so<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>don't<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>bother<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>with<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>the<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>potential<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>syscall.</comment></diff:insert>
+<diff:insert xmlns:diff="http://www.srcML.org/srcDiff"><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">        </diff:ws><if_stmt><if>if<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><condition>(<expr><name>m_sectionIncluded</name></expr>)</condition><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><block>{<block_content><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+    </diff:ws><diff:common xmlns:diff="http://www.srcML.org/srcDiff">        <expr_stmt><expr><call><name><name>m_timer</name><operator>.</operator><name>start</name></name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+</diff:common><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">        </diff:ws></block_content>}</block></if></if_stmt><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+</diff:ws></diff:insert>    </block_content>}</block></constructor>
+
+    <destructor><name><name>Section</name><operator>::</operator><name>~Section</name></name><parameter_list>()</parameter_list> <block>{<block_content>
+        <if_stmt><if>if<condition>( <expr><name>m_sectionIncluded</name></expr> )</condition> <block>{<block_content>
+            <decl_stmt><decl><type><name>SectionEndInfo</name></type> <name>endInfo</name><argument_list>{ <argument><expr><name>m_info</name></expr></argument>, <argument><expr><name>m_assertions</name></expr></argument>, <argument><expr><macro><name>m_timer</name></macro><operator>.</operator><macro><name>getElapsedSeconds</name><argument_list>()</argument_list></macro></expr></argument> }</argument_list></decl>;</decl_stmt>
+            <if_stmt><if>if<condition>( <expr><call><name>uncaught_exceptions</name><argument_list>()</argument_list></call></expr> )</condition><block type="pseudo"><block_content>
+                <expr_stmt><expr><call><name>getResultCapture</name><argument_list>()</argument_list></call><operator>.</operator><call><name>sectionEndedEarly</name><argument_list>( <argument><expr><name>endInfo</name></expr></argument> )</argument_list></call></expr>;</expr_stmt></block_content></block></if>
+            <else>else<block type="pseudo"><block_content>
+                <expr_stmt><expr><call><name>getResultCapture</name><argument_list>()</argument_list></call><operator>.</operator><call><name>sectionEnded</name><argument_list>( <argument><expr><name>endInfo</name></expr></argument> )</argument_list></call></expr>;</expr_stmt></block_content></block></else></if_stmt>
+        </block_content>}</block></if></if_stmt>
+    </block_content>}</block></destructor>
+
+    <comment type="line">// This indicates whether the section should be executed or not</comment>
+    <function type="operator"><name><name>Section</name><operator>::</operator><name>operator <name>bool</name></name></name><parameter_list>()</parameter_list> <specifier>const</specifier> <block>{<block_content>
+        <return>return <expr><name>m_sectionIncluded</name></expr>;</return>
+    </block_content>}</block></function>
+
+
+}</block></namespace> <comment type="line">// end namespace Catch</comment>
+</unit>

@@ -1,0 +1,14 @@
+diff --git a/projects/SelfTest/TrickyTests.cpp b/projects/SelfTest/TrickyTests.cpp
+index 130d5f43..820d2fbd 100644
+--- a/projects/SelfTest/TrickyTests.cpp
++++ b/projects/SelfTest/TrickyTests.cpp
+@@ -445,9 +445,3 @@ TEST_CASE( "Bitfields can be captured (#1027)" ) {
+     REQUIRE( y.v == 0 );
+     REQUIRE( 0 == y.v );
+ }
+-
+-TEST_CASE( "null deref", "[.][failing][!nonportable]" ) {
+-    CHECK( false );
+-    int *x = NULL;
+-    *x = 1;
+-}

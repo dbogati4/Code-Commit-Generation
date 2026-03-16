@@ -1,0 +1,8 @@
+{
+  "commit_id": "7b4dd326c0cf85b40ba9268fcda055a9cd8af2ff",
+  "parent_id": "1dfaa8abe7ee6da548697ed8c6a704a2e7db1e41",
+  "message": "Remove obsolete comment in multireporter",
+  "changed_files": [
+    "src/catch2/reporters/catch_reporter_multi.cpp"
+  ]
+}

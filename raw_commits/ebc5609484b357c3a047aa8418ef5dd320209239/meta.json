@@ -1,0 +1,8 @@
+{
+  "commit_id": "ebc5609484b357c3a047aa8418ef5dd320209239",
+  "parent_id": "fcda35f6458d76458826161f2499576b6ca70d54",
+  "message": "Add test for INF == Approx(1)",
+  "changed_files": [
+    "projects/SelfTest/UsageTests/Approx.tests.cpp"
+  ]
+}

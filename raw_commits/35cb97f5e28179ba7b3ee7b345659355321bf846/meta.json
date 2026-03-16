@@ -1,0 +1,10 @@
+{
+  "commit_id": "35cb97f5e28179ba7b3ee7b345659355321bf846",
+  "parent_id": "ca79d19325e9a901d4d50f70304f276856d7f17a",
+  "message": "Cleaned up some stray tests",
+  "changed_files": [
+    "projects/SelfTest/MessageTests.cpp",
+    "projects/SelfTest/MiscTests.cpp",
+    "projects/SelfTest/TestMain.cpp"
+  ]
+}

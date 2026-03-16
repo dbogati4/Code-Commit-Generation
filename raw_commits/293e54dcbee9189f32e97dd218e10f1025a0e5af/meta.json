@@ -1,0 +1,8 @@
+{
+  "commit_id": "293e54dcbee9189f32e97dd218e10f1025a0e5af",
+  "parent_id": "9a6a0865f2a0c60a831438c0516f3eb94043ca02",
+  "message": "Added IndexTracker and got it working with a single generator - made some simplifications to state machine",
+  "changed_files": [
+    "projects/SelfTest/PartTrackerTests.cpp"
+  ]
+}

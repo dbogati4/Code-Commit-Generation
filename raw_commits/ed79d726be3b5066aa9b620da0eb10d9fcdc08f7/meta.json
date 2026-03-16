@@ -1,0 +1,8 @@
+{
+  "commit_id": "ed79d726be3b5066aa9b620da0eb10d9fcdc08f7",
+  "parent_id": "30cb460d426c426e86b1196ec91ed4ecb3f71da0",
+  "message": "Clara: support for positional arguments",
+  "changed_files": [
+    "projects/SelfTest/CmdLineTests.cpp"
+  ]
+}

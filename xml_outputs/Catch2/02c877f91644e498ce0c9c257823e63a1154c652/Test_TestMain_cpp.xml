@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" xmlns:diff="http://www.srcML.org/srcDiff" revision="1.0.0" language="C++" filename="C:\Users\saile\AppData\Local\Temp\catch2_100_z8gzpiwf\02c877f91644e498ce0c9c257823e63a1154c652\Test_TestMain_cpp\Test_TestMain_cpp.old|C:\Users\saile\AppData\Local\Temp\catch2_100_z8gzpiwf\02c877f91644e498ce0c9c257823e63a1154c652\Test_TestMain_cpp\Test_TestMain_cpp.new"><comment type="block">/*
+ *  main.cpp
+ *  Catch - Test
+ *
+ *  Created by Phil on 22/10/2010.
+ *  Copyright 2010 Two Blue Cubes Ltd
+ *
+ *  Distributed under the Boost Software License, Version 1.0. (See accompanying
+ *  file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
+ *
+ */</comment>
+
+<comment type="line">//#include "../catch_with_main.hpp"</comment>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">"../internal/catch_self_test.hpp"</cpp:file></cpp:include>
+
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">"catch_runner.hpp"</cpp:file></cpp:include>
+<function><type><name>int</name></type> <name>main</name> <parameter_list>(<parameter><decl><type><name>int</name></type> <name>argc</name></decl></parameter>, <parameter><decl><type><name>char</name> <modifier>*</modifier> <specifier>const</specifier></type> <name><name>argv</name><index>[]</index></name></decl></parameter>)</parameter_list>
+<block>{<block_content>
+    <return>return <expr><call><name><name>Catch</name><operator>::</operator><name>Main</name></name><argument_list>( <argument><expr><name>argc</name></expr></argument>, <argument><expr><name>argv</name></expr></argument> )</argument_list></call></expr>;</return>
+</block_content>}</block></function>
+
+<macro><name>TEST_CASE</name><argument_list>( <argument><literal type="string">"selftest/main"</literal></argument>, <argument><literal type="string">"Runs all Catch self tests and checks their results"</literal></argument> )</argument_list></macro>
+<block>{<block_content>
+    <using>using <namespace>namespace <name>Catch</name>;</namespace></using>
+    
+    <comment type="line" format="doxygen">///////////////////////////////////////////////////////////////////////////</comment>
+    <macro><name>SECTION</name><argument_list>(    <argument><literal type="string">"selftest/expected result"</literal></argument>,
+                <argument><literal type="string">"Tests do what they claim"</literal></argument> )</argument_list></macro>
+    <block>{<block_content>
+        <macro><name>SECTION</name><argument_list>(    <argument><literal type="string">"selftest/expected result/failing tests"</literal></argument>, 
+                    <argument><literal type="string">"Tests in the 'failing' branch fail"</literal></argument> )</argument_list></macro>
+        <block>{<block_content>
+            <expr_stmt><expr><call><name><name>MetaTestRunner</name><operator>::</operator><name>runMatching</name></name><argument_list>( <argument><expr><literal type="string">"./failing/*"</literal></expr></argument>,  <argument><expr><name><name>MetaTestRunner</name><operator>::</operator><name>Expected</name><operator>::</operator><name>ToFail</name></name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        </block_content>}</block>
+        
+        <macro><name>SECTION</name><argument_list>(    <argument><literal type="string">"selftest/expected result/succeeding tests"</literal></argument>, 
+                    <argument><literal type="string">"Tests in the 'succeeding' branch succeed"</literal></argument> )</argument_list></macro>
+        <block>{<block_content>
+            <expr_stmt><expr><call><name><name>MetaTestRunner</name><operator>::</operator><name>runMatching</name></name><argument_list>( <argument><expr><literal type="string">"./succeeding/*"</literal></expr></argument>,  <argument><expr><name><name>MetaTestRunner</name><operator>::</operator><name>Expected</name><operator>::</operator><name>ToSucceed</name></name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        </block_content>}</block>
+    </block_content>}</block>
+    
+    <comment type="line" format="doxygen">///////////////////////////////////////////////////////////////////////////</comment>
+    <macro><name>SECTION</name><argument_list>(    <argument><literal type="string">"selftest/test counts"</literal></argument>, 
+                <argument><literal type="string">"Number of test cases that run is fixed"</literal></argument> )</argument_list></macro>
+    <block>{<block_content>
+        <decl_stmt><decl><type><name>EmbeddedRunner</name></type> <name>runner</name></decl>;</decl_stmt>
+        
+        <macro><name>SECTION</name><argument_list>(    <argument><literal type="string">"selftest/test counts/succeeding tests"</literal></argument>, 
+                    <argument><literal type="string">"Number of 'succeeding' tests is fixed"</literal></argument> )</argument_list></macro>
+        <block>{<block_content>
+            <expr_stmt><expr><call><name><name>runner</name><operator>.</operator><name>runMatching</name></name><argument_list>( <argument><expr><literal type="string">"./succeeding/*"</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+            <expr_stmt><expr><call><name>CHECK</name><argument_list>( <argument><expr><call><name><name>runner</name><operator>.</operator><name>getSuccessCount</name></name><argument_list>()</argument_list></call> <operator>==</operator> <literal type="number"><diff:delete type="replace" xmlns:diff="http://www.srcML.org/srcDiff">224</diff:delete><diff:insert type="replace" xmlns:diff="http://www.srcML.org/srcDiff">223</diff:insert></literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+            <expr_stmt><expr><call><name>CHECK</name><argument_list>( <argument><expr><call><name><name>runner</name><operator>.</operator><name>getFailureCount</name></name><argument_list>()</argument_list></call> <operator>==</operator> <literal type="number">0</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        </block_content>}</block>
+
+        <macro><name>SECTION</name><argument_list>(    <argument><literal type="string">"selftest/test counts/failing tests"</literal></argument>, 
+                    <argument><literal type="string">"Number of 'failing' tests is fixed"</literal></argument> )</argument_list></macro>
+        <block>{<block_content>
+            <expr_stmt><expr><call><name><name>runner</name><operator>.</operator><name>runMatching</name></name><argument_list>( <argument><expr><literal type="string">"./failing/*"</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>        
+            <expr_stmt><expr><call><name>CHECK</name><argument_list>( <argument><expr><call><name><name>runner</name><operator>.</operator><name>getSuccessCount</name></name><argument_list>()</argument_list></call> <operator>==</operator> <literal type="number">0</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+            <expr_stmt><expr><call><name>CHECK</name><argument_list>( <argument><expr><call><name><name>runner</name><operator>.</operator><name>getFailureCount</name></name><argument_list>()</argument_list></call> <operator>==</operator> <literal type="number"><diff:delete type="replace" xmlns:diff="http://www.srcML.org/srcDiff">55</diff:delete><diff:insert type="replace" xmlns:diff="http://www.srcML.org/srcDiff">60</diff:insert></literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        </block_content>}</block>
+    </block_content>}</block>
+</block_content>}</block>
+
+<macro><name>TEST_CASE</name><argument_list>( <argument><literal type="string">"meta/Misc/Sections"</literal></argument>, <argument><literal type="string">"looped tests"</literal></argument> )</argument_list></macro>
+<block>{<block_content>
+    <decl_stmt><decl><type><name><name>Catch</name><operator>::</operator><name>EmbeddedRunner</name></name></type> <name>runner</name></decl>;</decl_stmt>
+    
+    <expr_stmt><expr><call><name><name>runner</name><operator>.</operator><name>runMatching</name></name><argument_list>( <argument><expr><literal type="string">"./mixed/Misc/Sections/nested2"</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>CHECK</name><argument_list>( <argument><expr><call><name><name>runner</name><operator>.</operator><name>getSuccessCount</name></name><argument_list>()</argument_list></call> <operator>==</operator> <literal type="number">2</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>CHECK</name><argument_list>( <argument><expr><call><name><name>runner</name><operator>.</operator><name>getFailureCount</name></name><argument_list>()</argument_list></call> <operator>==</operator> <literal type="number">1</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    
+</block_content>}</block>
+</unit>

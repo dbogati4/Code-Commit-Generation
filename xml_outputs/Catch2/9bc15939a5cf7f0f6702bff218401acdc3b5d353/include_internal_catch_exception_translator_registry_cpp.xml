@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" xmlns:diff="http://www.srcML.org/srcDiff" revision="1.0.0" language="C++" filename="C:\Users\saile\AppData\Local\Temp\catch2_100_z8gzpiwf\9bc15939a5cf7f0f6702bff218401acdc3b5d353\include_internal_catch_exception_translator_registry_cpp\include_internal_catch_exception_translator_registry_cpp.old|C:\Users\saile\AppData\Local\Temp\catch2_100_z8gzpiwf\9bc15939a5cf7f0f6702bff218401acdc3b5d353\include_internal_catch_exception_translator_registry_cpp\include_internal_catch_exception_translator_registry_cpp.new"><comment type="block">/*
+ *  Created by Phil on 20/04/2011.
+ *  Copyright 2011 Two Blue Cubes Ltd. All rights reserved.
+ *
+ *  Distributed under the Boost Software License, Version 1.0. (See accompanying
+ *  file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
+ */</comment>
+
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">"catch_exception_translator_registry.h"</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">"catch_assertionhandler.h"</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">"catch_compiler_capabilities.h"</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">"catch_enforce.h"</cpp:file></cpp:include>
+
+<cpp:ifdef xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">ifdef</cpp:directive> <name>__OBJC__</name></cpp:ifdef>
+<cpp:empty xmlns:cpp="http://www.srcML.org/srcML/cpp">#import "Foundation/Foundation.h"</cpp:empty>
+<cpp:endif xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">endif</cpp:directive></cpp:endif>
+
+<namespace>namespace <name>Catch</name> <block>{
+
+    <destructor><name><name>ExceptionTranslatorRegistry</name><operator>::</operator><name>~ExceptionTranslatorRegistry</name></name><parameter_list>()</parameter_list> <block>{<block_content>
+    </block_content>}</block></destructor>
+
+    <function><type><name>void</name></type> <name><name>ExceptionTranslatorRegistry</name><operator>::</operator><name>registerTranslator</name></name><parameter_list>( <parameter><decl><type><specifier>const</specifier> <name>IExceptionTranslator</name><modifier>*</modifier></type> <name>translator</name></decl></parameter> )</parameter_list> <block>{<block_content>
+        <expr_stmt><expr><call><name><name>m_translators</name><operator>.</operator><name>push_back</name></name><argument_list>( <argument><expr><call><name><name>std</name><operator>::</operator><name>unique_ptr</name><argument_list type="generic">&lt;<argument><expr><specifier>const</specifier> <name>IExceptionTranslator</name></expr></argument>&gt;</argument_list></name><argument_list>( <argument><expr><name>translator</name></expr></argument> )</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block></function>
+
+<cpp:if xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">if</cpp:directive> <expr><operator>!</operator><call><name>defined</name><argument_list>(<argument><expr><name>CATCH_CONFIG_DISABLE_EXCEPTIONS</name></expr></argument>)</argument_list></call></expr></cpp:if>
+    <function><type><name><name>std</name><operator>::</operator><name>string</name></name></type> <name><name>ExceptionTranslatorRegistry</name><operator>::</operator><name>translateActiveException</name></name><parameter_list>()</parameter_list> <specifier>const</specifier> <block>{<block_content>
+        <try>try <block>{<block_content>
+<cpp:ifdef xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">ifdef</cpp:directive> <name>__OBJC__</name></cpp:ifdef>
+            <comment type="line">// In Objective-C try objective-c exceptions first</comment>
+            @<try>try <block>{<block_content>
+                <return>return <expr><call><name>tryTranslators</name><argument_list>()</argument_list></call></expr>;</return>
+            </block_content>}</block></try>
+            @<catch>catch <parameter_list>(<parameter><decl><type><name>NSException</name> <modifier>*</modifier></type><name>exception</name></decl></parameter>)</parameter_list> <block>{<block_content>
+                <return>return <macro><name>Catch</name></macro><expr><name><operator>::</operator><name>Detail</name><operator>::</operator><name>stringify</name></name><operator>(</operator> <index>[<expr><name>exception</name> <name>description</name></expr>]</index> <operator>)</operator></expr>;</return>
+            </block_content>}</block></catch>
+<cpp:else xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">else</cpp:directive></cpp:else>
+            <comment type="line">// Compiling a mixed mode project with MSVC means that CLR</comment>
+            <comment type="line">// exceptions will be caught in (...) as well. However, these</comment>
+            <comment type="line">// do not fill-in std::current_exception and thus lead to crash</comment>
+            <comment type="line">// when attempting rethrow.</comment>
+            <comment type="line">// /EHa switch also causes structured exceptions to be caught</comment>
+            <comment type="line">// here, but they fill-in current_exception properly, so</comment>
+            <comment type="line">// at worst the output should be a little weird, instead of</comment>
+            <comment type="line">// causing a crash.</comment>
+            <if_stmt><if>if <condition>(<expr><call><name><name>std</name><operator>::</operator><name>current_exception</name></name><argument_list>()</argument_list></call> <operator>==</operator> <literal type="null">nullptr</literal></expr>)</condition> <block>{<block_content>
+                <return>return <expr><literal type="string">"Non C++ exception. Possibly a CLR exception."</literal></expr>;</return>
+            </block_content>}</block></if></if_stmt>
+            <return>return <expr><call><name>tryTranslators</name><argument_list>()</argument_list></call></expr>;</return>
+<cpp:endif xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">endif</cpp:directive></cpp:endif>
+        </block_content>}</block>
+        <catch>catch<parameter_list>( <parameter><decl><type><name>TestFailureException</name><modifier>&amp;</modifier></type></decl></parameter> )</parameter_list> <block>{<block_content>
+            <expr_stmt><expr><call><name><name>std</name><operator>::</operator><name>rethrow_exception</name></name><argument_list>(<argument><expr><call><name><name>std</name><operator>::</operator><name>current_exception</name></name><argument_list>()</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        </block_content>}</block></catch>
+        <catch>catch<parameter_list>( <parameter><decl><type><name><name>std</name><operator>::</operator><name>exception</name></name><modifier>&amp;</modifier></type> <name>ex</name></decl></parameter> )</parameter_list> <block>{<block_content>
+            <return>return <expr><call><name><name>ex</name><operator>.</operator><name>what</name></name><argument_list>()</argument_list></call></expr>;</return>
+        </block_content>}</block></catch>
+        <catch>catch<parameter_list>( <parameter><decl><type><name><name>std</name><operator>::</operator><name>string</name></name><modifier>&amp;</modifier></type> <name>msg</name></decl></parameter> )</parameter_list> <block>{<block_content>
+            <return>return <expr><name>msg</name></expr>;</return>
+        </block_content>}</block></catch>
+        <catch>catch<parameter_list>( <parameter><decl><type><specifier>const</specifier> <name>char</name><modifier>*</modifier></type> <name>msg</name></decl></parameter> )</parameter_list> <block>{<block_content>
+            <return>return <expr><name>msg</name></expr>;</return>
+        </block_content>}</block></catch>
+        <catch>catch<parameter_list>(<parameter><decl><type><modifier>...</modifier></type></decl></parameter>)</parameter_list> <block>{<block_content>
+            <return>return <expr><literal type="string">"Unknown exception"</literal></expr>;</return>
+        </block_content>}</block></catch></try>
+    </block_content>}</block></function>
+
+<diff:insert xmlns:diff="http://www.srcML.org/srcDiff"><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">    </diff:ws><function><type><name><name>std</name><operator>::</operator><name>string</name></name></type><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><name><name>ExceptionTranslatorRegistry</name><operator>::</operator><name>tryTranslators</name></name><parameter_list>()</parameter_list><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><specifier>const</specifier><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><block>{<block_content><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+        </diff:ws><if_stmt><if>if<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><condition>(<expr><call><name><name>m_translators</name><operator>.</operator><name>empty</name></name><argument_list>()</argument_list></call></expr>)</condition><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><block>{<block_content><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+            </diff:ws><expr_stmt><expr><call><name><name>std</name><operator>::</operator><name>rethrow_exception</name></name><argument_list>(<argument><expr><call><name><name>std</name><operator>::</operator><name>current_exception</name></name><argument_list>()</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+        </diff:ws></block_content>}</block></if><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><else>else<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><block>{<block_content><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+            </diff:ws><return>return<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><expr><name><name>m_translators</name><index>[<expr><literal type="number">0</literal></expr>]</index></name><operator>-&gt;</operator><call><name>translate</name><argument_list>(<argument><expr><call><name><name>m_translators</name><operator>.</operator><name>begin</name></name><argument_list>()</argument_list></call><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><operator>+</operator><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><literal type="number">1</literal></expr></argument>,<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><argument><expr><call><name><name>m_translators</name><operator>.</operator><name>end</name></name><argument_list>()</argument_list></call></expr></argument>)</argument_list></call></expr>;</return><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+        </diff:ws></block_content>}</block></else></if_stmt><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+    </diff:ws></block_content>}</block></function><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+
+</diff:ws></diff:insert><cpp:else xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">else</cpp:directive></cpp:else> <comment type="line">// ^^ Exceptions are enabled // Exceptions are disabled vv</comment>
+    <function><type><name><name>std</name><operator>::</operator><name>string</name></name></type> <name><name>ExceptionTranslatorRegistry</name><operator>::</operator><name>translateActiveException</name></name><parameter_list>()</parameter_list> <specifier>const</specifier> <block>{<block_content>
+        <expr_stmt><expr><call><name>CATCH_INTERNAL_ERROR</name><argument_list>(<argument><expr><literal type="string">"Attempted to translate active exception under CATCH_CONFIG_DISABLE_EXCEPTIONS!"</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block></function>
+<diff:insert xmlns:diff="http://www.srcML.org/srcDiff"><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+    </diff:ws><function><type><name><name>std</name><operator>::</operator><name>string</name></name></type><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><name><name>ExceptionTranslatorRegistry</name><operator>::</operator><name>tryTranslators</name></name><parameter_list>()</parameter_list><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><specifier>const</specifier><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><block>{<block_content><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+        </diff:ws><expr_stmt><expr><call><name>CATCH_INTERNAL_ERROR</name><argument_list>(<argument><expr><literal type="string">"Attempted<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>to<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>use<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>exception<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>translators<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>under<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>CATCH_CONFIG_DISABLE_EXCEPTIONS!"</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+    </diff:ws></block_content>}</block></function><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+</diff:ws></diff:insert><cpp:endif xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">endif</cpp:directive></cpp:endif>
+
+
+<diff:delete xmlns:diff="http://www.srcML.org/srcDiff"><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">    </diff:ws><function><type><name><name>std</name><operator>::</operator><name>string</name></name></type><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><name><name>ExceptionTranslatorRegistry</name><operator>::</operator><name>tryTranslators</name></name><parameter_list>()</parameter_list><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><specifier>const</specifier><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><block>{<block_content><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+        </diff:ws><if_stmt><if>if<condition>(<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><expr><call><name><name>m_translators</name><operator>.</operator><name>empty</name></name><argument_list>()</argument_list></call></expr><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>)</condition><block type="pseudo"><block_content><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+            </diff:ws><expr_stmt><expr><call><name><name>std</name><operator>::</operator><name>rethrow_exception</name></name><argument_list>(<argument><expr><call><name><name>std</name><operator>::</operator><name>current_exception</name></name><argument_list>()</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt></block_content></block></if><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+        </diff:ws><else>else<block type="pseudo"><block_content><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+            </diff:ws><return>return<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><expr><name><name>m_translators</name><index>[<expr><literal type="number">0</literal></expr>]</index></name><operator>-&gt;</operator><call><name>translate</name><argument_list>(<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><argument><expr><call><name><name>m_translators</name><operator>.</operator><name>begin</name></name><argument_list>()</argument_list></call><operator>+</operator><literal type="number">1</literal></expr></argument>,<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><argument><expr><call><name><name>m_translators</name><operator>.</operator><name>end</name></name><argument_list>()</argument_list></call></expr></argument><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>)</argument_list></call></expr>;</return></block_content></block></else></if_stmt><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+    </diff:ws></block_content>}</block></function><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+</diff:ws></diff:delete>}</block></namespace>
+</unit>

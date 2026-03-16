@@ -1,0 +1,28 @@
+diff --git a/src/catch2/catch_session.cpp b/src/catch2/catch_session.cpp
+index 3b58adbd..ed6479e0 100644
+--- a/src/catch2/catch_session.cpp
++++ b/src/catch2/catch_session.cpp
+@@ -257,16 +257,17 @@ namespace Catch {
+         if( m_startupExceptions )
+             return 1;
+ 
+-
+-        if( m_configData.shardIndex >= m_configData.shardCount ) {
+-            Catch::cerr() << "The shard count (" << m_configData.shardCount << ") must be greater than the shard index ("  << m_configData.shardIndex << ")\n" << std::flush;
+-            return 1;
+-        }
+-
+         if (m_configData.showHelp || m_configData.libIdentify) {
+             return 0;
+         }
+ 
++        if ( m_configData.shardIndex >= m_configData.shardCount ) {
++            Catch::cerr() << "The shard count (" << m_configData.shardCount
++                          << ") must be greater than the shard index ("
++                          << m_configData.shardIndex << ")\n"
++                          << std::flush;
++            return 1;
++        }
+ 
+         CATCH_TRY {
+             config(); // Force config to be constructed

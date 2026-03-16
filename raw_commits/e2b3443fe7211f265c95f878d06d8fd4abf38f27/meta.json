@@ -1,0 +1,8 @@
+{
+  "commit_id": "e2b3443fe7211f265c95f878d06d8fd4abf38f27",
+  "parent_id": "7b865daccc7bba2dcc25a4f0b9ea7348b1b4d61f",
+  "message": "Do not blindly access empty StringRefs",
+  "changed_files": [
+    "include/internal/catch_assertionresult.cpp"
+  ]
+}

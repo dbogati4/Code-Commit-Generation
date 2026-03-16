@@ -1,0 +1,8 @@
+{
+  "commit_id": "c43947eb473d19dc183cd55ed0a4f7b06155342e",
+  "parent_id": "423e1d2ebbd75bb92cb486f83f2c5800b4b9689e",
+  "message": "Fix CLI hints for colour and reporter options",
+  "changed_files": [
+    "src/catch2/internal/catch_commandline.cpp"
+  ]
+}

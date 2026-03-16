@@ -1,0 +1,13 @@
+diff --git a/src/catch2/catch_timer.cpp b/src/catch2/catch_timer.cpp
+index d75ea70c..51396654 100644
+--- a/src/catch2/catch_timer.cpp
++++ b/src/catch2/catch_timer.cpp
+@@ -13,7 +13,7 @@ namespace Catch {
+ 
+     namespace {
+         static auto getCurrentNanosecondsSinceEpoch() -> uint64_t {
+-            return std::chrono::duration_cast<std::chrono::nanoseconds>(std::chrono::high_resolution_clock::now().time_since_epoch()).count();
++            return std::chrono::duration_cast<std::chrono::nanoseconds>(std::chrono::steady_clock::now().time_since_epoch()).count();
+         }
+     } // end unnamed namespace
+ 

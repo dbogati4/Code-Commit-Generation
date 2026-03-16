@@ -1,0 +1,338 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" xmlns:diff="http://www.srcML.org/srcDiff" revision="1.0.0" language="C++" filename="C:\Users\saile\AppData\Local\Temp\catch2_100_z8gzpiwf\0221148ac36ef88dce2fcc49a4fce78fed14ddb4\src_catch2_internal_catch_xmlwriter_cpp\src_catch2_internal_catch_xmlwriter_cpp.old|C:\Users\saile\AppData\Local\Temp\catch2_100_z8gzpiwf\0221148ac36ef88dce2fcc49a4fce78fed14ddb4\src_catch2_internal_catch_xmlwriter_cpp\src_catch2_internal_catch_xmlwriter_cpp.new">
+<comment type="line">//              Copyright Catch2 Authors</comment>
+<comment type="line">// Distributed under the Boost Software License, Version 1.0.</comment>
+<comment type="line">//   (See accompanying file LICENSE_1_0.txt or copy at</comment>
+<comment type="line">//        https://www.boost.org/LICENSE_1_0.txt)</comment>
+
+<comment type="line">// SPDX-License-Identifier: BSL-1.0</comment>
+<comment type="line">// Note: swapping these two includes around causes MSVC to error out</comment>
+<comment type="line">//       while in /permissive- mode. No, I don't know why.</comment>
+<comment type="line">//       Tested on VS 2019, 18.{3, 4}.x</comment>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;catch2/internal/catch_enforce.hpp&gt;</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;catch2/internal/catch_xmlwriter.hpp&gt;</cpp:file></cpp:include>
+
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;iomanip&gt;</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;type_traits&gt;</cpp:file></cpp:include>
+
+<namespace>namespace <name>Catch</name> <block>{
+
+<namespace>namespace <block>{
+
+    <function><type><name>size_t</name></type> <name>trailingBytes</name><parameter_list>(<parameter><decl><type><name>unsigned</name> <name>char</name></type> <name>c</name></decl></parameter>)</parameter_list> <block>{<block_content>
+        <if_stmt><if>if <condition>(<expr><operator>(</operator><name>c</name> <operator>&amp;</operator> <literal type="number">0xE0</literal><operator>)</operator> <operator>==</operator> <literal type="number">0xC0</literal></expr>)</condition> <block>{<block_content>
+            <return>return <expr><literal type="number">2</literal></expr>;</return>
+        </block_content>}</block></if></if_stmt>
+        <if_stmt><if>if <condition>(<expr><operator>(</operator><name>c</name> <operator>&amp;</operator> <literal type="number">0xF0</literal><operator>)</operator> <operator>==</operator> <literal type="number">0xE0</literal></expr>)</condition> <block>{<block_content>
+            <return>return <expr><literal type="number">3</literal></expr>;</return>
+        </block_content>}</block></if></if_stmt>
+        <if_stmt><if>if <condition>(<expr><operator>(</operator><name>c</name> <operator>&amp;</operator> <literal type="number">0xF8</literal><operator>)</operator> <operator>==</operator> <literal type="number">0xF0</literal></expr>)</condition> <block>{<block_content>
+            <return>return <expr><literal type="number">4</literal></expr>;</return>
+        </block_content>}</block></if></if_stmt>
+        <expr_stmt><expr><call><name>CATCH_INTERNAL_ERROR</name><argument_list>(<argument><expr><literal type="string">"Invalid multibyte utf-8 start byte encountered"</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block></function>
+
+    <function><type><name>uint32_t</name></type> <name>headerValue</name><parameter_list>(<parameter><decl><type><name>unsigned</name> <name>char</name></type> <name>c</name></decl></parameter>)</parameter_list> <block>{<block_content>
+        <if_stmt><if>if <condition>(<expr><operator>(</operator><name>c</name> <operator>&amp;</operator> <literal type="number">0xE0</literal><operator>)</operator> <operator>==</operator> <literal type="number">0xC0</literal></expr>)</condition> <block>{<block_content>
+            <return>return <expr><name>c</name> <operator>&amp;</operator> <literal type="number">0x1F</literal></expr>;</return>
+        </block_content>}</block></if></if_stmt>
+        <if_stmt><if>if <condition>(<expr><operator>(</operator><name>c</name> <operator>&amp;</operator> <literal type="number">0xF0</literal><operator>)</operator> <operator>==</operator> <literal type="number">0xE0</literal></expr>)</condition> <block>{<block_content>
+            <return>return <expr><name>c</name> <operator>&amp;</operator> <literal type="number">0x0F</literal></expr>;</return>
+        </block_content>}</block></if></if_stmt>
+        <if_stmt><if>if <condition>(<expr><operator>(</operator><name>c</name> <operator>&amp;</operator> <literal type="number">0xF8</literal><operator>)</operator> <operator>==</operator> <literal type="number">0xF0</literal></expr>)</condition> <block>{<block_content>
+            <return>return <expr><name>c</name> <operator>&amp;</operator> <literal type="number">0x07</literal></expr>;</return>
+        </block_content>}</block></if></if_stmt>
+        <expr_stmt><expr><call><name>CATCH_INTERNAL_ERROR</name><argument_list>(<argument><expr><literal type="string">"Invalid multibyte utf-8 start byte encountered"</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block></function>
+
+    <function><type><name>void</name></type> <name>hexEscapeChar</name><parameter_list>(<parameter><decl><type><name><name>std</name><operator>::</operator><name>ostream</name></name><modifier>&amp;</modifier></type> <name>os</name></decl></parameter>, <parameter><decl><type><name>unsigned</name> <name>char</name></type> <name>c</name></decl></parameter>)</parameter_list> <block>{<block_content>
+        <decl_stmt><decl><type><name><name>std</name><operator>::</operator><name>ios_base</name><operator>::</operator><name>fmtflags</name></name></type> <name>f</name><argument_list>(<argument><expr><call><name><name>os</name><operator>.</operator><name>flags</name></name><argument_list>()</argument_list></call></expr></argument>)</argument_list></decl>;</decl_stmt>
+        <expr_stmt><expr><name>os</name> <operator>&lt;&lt;</operator> <literal type="string">"\\x"</literal>
+            <operator>&lt;&lt;</operator> <name><name>std</name><operator>::</operator><name>uppercase</name></name> <operator>&lt;&lt;</operator> <name><name>std</name><operator>::</operator><name>hex</name></name> <operator>&lt;&lt;</operator> <call><name><name>std</name><operator>::</operator><name>setfill</name></name><argument_list>(<argument><expr><literal type="char">'0'</literal></expr></argument>)</argument_list></call> <operator>&lt;&lt;</operator> <call><name><name>std</name><operator>::</operator><name>setw</name></name><argument_list>(<argument><expr><literal type="number">2</literal></expr></argument>)</argument_list></call>
+            <operator>&lt;&lt;</operator> <cast type="static">static_cast<argument_list type="generic">&lt;<argument><expr><name>int</name></expr></argument>&gt;</argument_list><argument_list>(<argument><expr><name>c</name></expr></argument>)</argument_list></cast></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name><name>os</name><operator>.</operator><name>flags</name></name><argument_list>(<argument><expr><name>f</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block></function>
+
+    <function><type><name>bool</name></type> <name>shouldNewline</name><parameter_list>(<parameter><decl><type><name>XmlFormatting</name></type> <name>fmt</name></decl></parameter>)</parameter_list> <block>{<block_content>
+        <return>return <expr><operator>!</operator><operator>!</operator><operator>(</operator><cast type="static">static_cast<argument_list type="generic">&lt;<argument><expr><name><name>std</name><operator>::</operator><name>underlying_type_t</name><argument_list type="generic">&lt;<argument><expr><name>XmlFormatting</name></expr></argument>&gt;</argument_list></name></expr></argument>&gt;</argument_list><argument_list>(<argument><expr><name>fmt</name> <operator>&amp;</operator> <name><name>XmlFormatting</name><operator>::</operator><name>Newline</name></name></expr></argument>)</argument_list></cast><operator>)</operator></expr>;</return>
+    </block_content>}</block></function>
+
+    <function><type><name>bool</name></type> <name>shouldIndent</name><parameter_list>(<parameter><decl><type><name>XmlFormatting</name></type> <name>fmt</name></decl></parameter>)</parameter_list> <block>{<block_content>
+        <return>return <expr><operator>!</operator><operator>!</operator><operator>(</operator><cast type="static">static_cast<argument_list type="generic">&lt;<argument><expr><name><name>std</name><operator>::</operator><name>underlying_type_t</name><argument_list type="generic">&lt;<argument><expr><name>XmlFormatting</name></expr></argument>&gt;</argument_list></name></expr></argument>&gt;</argument_list><argument_list>(<argument><expr><name>fmt</name> <operator>&amp;</operator> <name><name>XmlFormatting</name><operator>::</operator><name>Indent</name></name></expr></argument>)</argument_list></cast><operator>)</operator></expr>;</return>
+    </block_content>}</block></function>
+
+}</block></namespace> <comment type="line">// anonymous namespace</comment>
+
+    <function type="operator"><type><name>XmlFormatting</name></type> <name>operator <name>|</name></name> <parameter_list>(<parameter><decl><type><name>XmlFormatting</name></type> <name>lhs</name></decl></parameter>, <parameter><decl><type><name>XmlFormatting</name></type> <name>rhs</name></decl></parameter>)</parameter_list> <block>{<block_content>
+        <return>return <expr><cast type="static">static_cast<argument_list type="generic">&lt;<argument><expr><name>XmlFormatting</name></expr></argument>&gt;</argument_list><argument_list>(
+            <argument><expr><cast type="static">static_cast<argument_list type="generic">&lt;<argument><expr><name><name>std</name><operator>::</operator><name>underlying_type_t</name><argument_list type="generic">&lt;<argument><expr><name>XmlFormatting</name></expr></argument>&gt;</argument_list></name></expr></argument>&gt;</argument_list><argument_list>(<argument><expr><name>lhs</name></expr></argument>)</argument_list></cast> <operator>|</operator>
+            <cast type="static">static_cast<argument_list type="generic">&lt;<argument><expr><name><name>std</name><operator>::</operator><name>underlying_type_t</name><argument_list type="generic">&lt;<argument><expr><name>XmlFormatting</name></expr></argument>&gt;</argument_list></name></expr></argument>&gt;</argument_list><argument_list>(<argument><expr><name>rhs</name></expr></argument>)</argument_list></cast></expr></argument>
+        )</argument_list></cast></expr>;</return>
+    </block_content>}</block></function>
+
+    <function type="operator"><type><name>XmlFormatting</name></type> <name>operator <name>&amp;</name></name> <parameter_list>(<parameter><decl><type><name>XmlFormatting</name></type> <name>lhs</name></decl></parameter>, <parameter><decl><type><name>XmlFormatting</name></type> <name>rhs</name></decl></parameter>)</parameter_list> <block>{<block_content>
+        <return>return <expr><cast type="static">static_cast<argument_list type="generic">&lt;<argument><expr><name>XmlFormatting</name></expr></argument>&gt;</argument_list><argument_list>(
+            <argument><expr><cast type="static">static_cast<argument_list type="generic">&lt;<argument><expr><name><name>std</name><operator>::</operator><name>underlying_type_t</name><argument_list type="generic">&lt;<argument><expr><name>XmlFormatting</name></expr></argument>&gt;</argument_list></name></expr></argument>&gt;</argument_list><argument_list>(<argument><expr><name>lhs</name></expr></argument>)</argument_list></cast> <operator>&amp;</operator>
+            <cast type="static">static_cast<argument_list type="generic">&lt;<argument><expr><name><name>std</name><operator>::</operator><name>underlying_type_t</name><argument_list type="generic">&lt;<argument><expr><name>XmlFormatting</name></expr></argument>&gt;</argument_list></name></expr></argument>&gt;</argument_list><argument_list>(<argument><expr><name>rhs</name></expr></argument>)</argument_list></cast></expr></argument>
+        )</argument_list></cast></expr>;</return>
+    </block_content>}</block></function>
+
+
+    <constructor><name><name>XmlEncode</name><operator>::</operator><name>XmlEncode</name></name><parameter_list>( <parameter><decl><type><name><name>std</name><operator>::</operator><name>string</name></name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>str</name></decl></parameter>, <parameter><decl><type><name>ForWhat</name></type> <name>forWhat</name></decl></parameter> )</parameter_list>
+    <member_init_list>:   <call><name>m_str</name><argument_list>( <argument><expr><name>str</name></expr></argument> )</argument_list></call>,
+        <call><name>m_forWhat</name><argument_list>( <argument><expr><name>forWhat</name></expr></argument> )</argument_list></call>
+    </member_init_list><block>{<block_content/>}</block></constructor>
+
+    <function><type><name>void</name></type> <name><name>XmlEncode</name><operator>::</operator><name>encodeTo</name></name><parameter_list>( <parameter><decl><type><name><name>std</name><operator>::</operator><name>ostream</name></name><modifier>&amp;</modifier></type> <name>os</name></decl></parameter> )</parameter_list> <specifier>const</specifier> <block>{<block_content>
+        <comment type="line">// Apostrophe escaping not necessary if we always use " to write attributes</comment>
+        <comment type="line">// (see: http://www.w3.org/TR/xml/#syntax)</comment>
+
+        <for>for<control>( <init><decl><type><name><name>std</name><operator>::</operator><name>size_t</name></name></type> <name>idx</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>idx</name> <operator>&lt;</operator> <call><name><name>m_str</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call></expr>;</condition> <incr><expr><operator>++</operator> <name>idx</name></expr></incr> )</control> <block>{<block_content>
+            <decl_stmt><decl><type><name>unsigned</name> <name>char</name></type> <name>c</name> <init>= <expr><name><name>m_str</name><index>[<expr><name>idx</name></expr>]</index></name></expr></init></decl>;</decl_stmt>
+            <switch>switch <condition>(<expr><name>c</name></expr>)</condition> <block>{<block_content>
+            <case>case <expr><literal type="char">'&lt;'</literal></expr>:</case>   <expr_stmt><expr><name>os</name> <operator>&lt;&lt;</operator> <literal type="string">"&amp;lt;"</literal></expr>;</expr_stmt> <break>break;</break>
+            <case>case <expr><literal type="char">'&amp;'</literal></expr>:</case>   <expr_stmt><expr><name>os</name> <operator>&lt;&lt;</operator> <literal type="string">"&amp;amp;"</literal></expr>;</expr_stmt> <break>break;</break>
+
+            <case>case <expr><literal type="char">'&gt;'</literal></expr>:</case>
+                <comment type="line">// See: http://www.w3.org/TR/xml/#syntax</comment>
+                <if_stmt><if>if <condition>(<expr><name>idx</name> <operator>&gt;</operator> <literal type="number">2</literal> <operator>&amp;&amp;</operator> <name><name>m_str</name><index>[<expr><name>idx</name> <operator>-</operator> <literal type="number">1</literal></expr>]</index></name> <operator>==</operator> <literal type="char">']'</literal> <operator>&amp;&amp;</operator> <name><name>m_str</name><index>[<expr><name>idx</name> <operator>-</operator> <literal type="number">2</literal></expr>]</index></name> <operator>==</operator> <literal type="char">']'</literal></expr>)</condition><block type="pseudo"><block_content>
+                    <expr_stmt><expr><name>os</name> <operator>&lt;&lt;</operator> <literal type="string">"&amp;gt;"</literal></expr>;</expr_stmt></block_content></block></if>
+                <else>else<block type="pseudo"><block_content>
+                    <expr_stmt><expr><name>os</name> <operator>&lt;&lt;</operator> <name>c</name></expr>;</expr_stmt></block_content></block></else></if_stmt>
+                <break>break;</break>
+
+            <case>case <expr><literal type="char">'\"'</literal></expr>:</case>
+                <if_stmt><if>if <condition>(<expr><name>m_forWhat</name> <operator>==</operator> <name>ForAttributes</name></expr>)</condition><block type="pseudo"><block_content>
+                    <expr_stmt><expr><name>os</name> <operator>&lt;&lt;</operator> <literal type="string">"&amp;quot;"</literal></expr>;</expr_stmt></block_content></block></if>
+                <else>else<block type="pseudo"><block_content>
+                    <expr_stmt><expr><name>os</name> <operator>&lt;&lt;</operator> <name>c</name></expr>;</expr_stmt></block_content></block></else></if_stmt>
+                <break>break;</break>
+
+            <default>default:</default>
+                <comment type="line">// Check for control characters and invalid utf-8</comment>
+
+                <comment type="line">// Escape control characters in standard ascii</comment>
+                <comment type="line">// see http://stackoverflow.com/questions/404107/why-are-control-characters-illegal-in-xml-1-0</comment>
+                <if_stmt><if>if <condition>(<expr><name>c</name> <operator>&lt;</operator> <literal type="number">0x09</literal> <operator>||</operator> <operator>(</operator><name>c</name> <operator>&gt;</operator> <literal type="number">0x0D</literal> <operator>&amp;&amp;</operator> <name>c</name> <operator>&lt;</operator> <literal type="number">0x20</literal><operator>)</operator> <operator>||</operator> <name>c</name> <operator>==</operator> <literal type="number">0x7F</literal></expr>)</condition> <block>{<block_content>
+                    <expr_stmt><expr><call><name>hexEscapeChar</name><argument_list>(<argument><expr><name>os</name></expr></argument>, <argument><expr><name>c</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+                    <break>break;</break>
+                </block_content>}</block></if></if_stmt>
+
+                <comment type="line">// Plain ASCII: Write it to stream</comment>
+                <if_stmt><if>if <condition>(<expr><name>c</name> <operator>&lt;</operator> <literal type="number">0x7F</literal></expr>)</condition> <block>{<block_content>
+                    <expr_stmt><expr><name>os</name> <operator>&lt;&lt;</operator> <name>c</name></expr>;</expr_stmt>
+                    <break>break;</break>
+                </block_content>}</block></if></if_stmt>
+
+                <comment type="line">// UTF-8 territory</comment>
+                <comment type="line">// Check if the encoding is valid and if it is not, hex escape bytes.</comment>
+                <comment type="line">// Important: We do not check the exact decoded values for validity, only the encoding format</comment>
+                <comment type="line">// First check that this bytes is a valid lead byte:</comment>
+                <comment type="line">// This means that it is not encoded as 1111 1XXX</comment>
+                <comment type="line">// Or as 10XX XXXX</comment>
+                <if_stmt><if>if <condition>(<expr><name>c</name> <operator>&lt;</operator>  <literal type="number">0xC0</literal> <operator>||</operator>
+                    <name>c</name> <operator>&gt;=</operator> <literal type="number">0xF8</literal></expr>)</condition> <block>{<block_content>
+                    <expr_stmt><expr><call><name>hexEscapeChar</name><argument_list>(<argument><expr><name>os</name></expr></argument>, <argument><expr><name>c</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+                    <break>break;</break>
+                </block_content>}</block></if></if_stmt>
+
+                <decl_stmt><decl><type><name>auto</name></type> <name>encBytes</name> <init>= <expr><call><name>trailingBytes</name><argument_list>(<argument><expr><name>c</name></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+                <comment type="line">// Are there enough bytes left to avoid accessing out-of-bounds memory?</comment>
+                <if_stmt><if>if <condition>(<expr><name>idx</name> <operator>+</operator> <name>encBytes</name> <operator>-</operator> <literal type="number">1</literal> <operator>&gt;=</operator> <call><name><name>m_str</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call></expr>)</condition> <block>{<block_content>
+                    <expr_stmt><expr><call><name>hexEscapeChar</name><argument_list>(<argument><expr><name>os</name></expr></argument>, <argument><expr><name>c</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+                    <break>break;</break>
+                </block_content>}</block></if></if_stmt>
+                <comment type="line">// The header is valid, check data</comment>
+                <comment type="line">// The next encBytes bytes must together be a valid utf-8</comment>
+                <comment type="line">// This means: bitpattern 10XX XXXX and the extracted value is sane (ish)</comment>
+                <decl_stmt><decl><type><name>bool</name></type> <name>valid</name> <init>= <expr><literal type="boolean">true</literal></expr></init></decl>;</decl_stmt>
+                <decl_stmt><decl><type><name>uint32_t</name></type> <name>value</name> <init>= <expr><call><name>headerValue</name><argument_list>(<argument><expr><name>c</name></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+                <for>for <control>(<init><decl><type><name><name>std</name><operator>::</operator><name>size_t</name></name></type> <name>n</name> <init>= <expr><literal type="number">1</literal></expr></init></decl>;</init> <condition><expr><name>n</name> <operator>&lt;</operator> <name>encBytes</name></expr>;</condition> <incr><expr><operator>++</operator><name>n</name></expr></incr>)</control> <block>{<block_content>
+                    <decl_stmt><decl><type><name>unsigned</name> <name>char</name></type> <name>nc</name> <init>= <expr><name><name>m_str</name><index>[<expr><name>idx</name> <operator>+</operator> <name>n</name></expr>]</index></name></expr></init></decl>;</decl_stmt>
+                    <expr_stmt><expr><name>valid</name> <operator>&amp;=</operator> <operator>(</operator><operator>(</operator><name>nc</name> <operator>&amp;</operator> <literal type="number">0xC0</literal><operator>)</operator> <operator>==</operator> <literal type="number">0x80</literal><operator>)</operator></expr>;</expr_stmt>
+                    <expr_stmt><expr><name>value</name> <operator>=</operator> <operator>(</operator><name>value</name> <operator>&lt;&lt;</operator> <literal type="number">6</literal><operator>)</operator> <operator>|</operator> <operator>(</operator><name>nc</name> <operator>&amp;</operator> <literal type="number">0x3F</literal><operator>)</operator></expr>;</expr_stmt>
+                </block_content>}</block></for>
+
+                <if_stmt><if>if <condition>(
+                    <comment type="line">// Wrong bit pattern of following bytes</comment>
+                    <expr><operator>(</operator><operator>!</operator><name>valid</name><operator>)</operator> <operator>||</operator>
+                    <comment type="line">// Overlong encodings</comment>
+                    <operator>(</operator><name>value</name> <operator>&lt;</operator> <literal type="number">0x80</literal><operator>)</operator> <operator>||</operator>
+                    <operator>(</operator><literal type="number">0x80</literal> <operator>&lt;=</operator> <name>value</name> <operator>&amp;&amp;</operator> <name><name>value</name> <argument_list type="generic">&lt; <argument><expr><literal type="number">0x800</literal>   <operator>&amp;&amp;</operator> <name>encBytes</name></expr></argument> &gt;</argument_list></name> <literal type="number">2</literal><operator>)</operator> <operator>||</operator>
+                    <operator>(</operator><literal type="number">0x800</literal> <operator>&lt;</operator> <name>value</name> <operator>&amp;&amp;</operator> <name><name>value</name> <argument_list type="generic">&lt; <argument><expr><literal type="number">0x10000</literal> <operator>&amp;&amp;</operator> <name>encBytes</name></expr></argument> &gt;</argument_list></name> <literal type="number">3</literal><operator>)</operator> <operator>||</operator>
+                    <comment type="line">// Encoded value out of range</comment>
+                    <operator>(</operator><name>value</name> <operator>&gt;=</operator> <literal type="number">0x110000</literal><operator>)</operator></expr>
+                    )</condition> <block>{<block_content>
+                    <expr_stmt><expr><call><name>hexEscapeChar</name><argument_list>(<argument><expr><name>os</name></expr></argument>, <argument><expr><name>c</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+                    <break>break;</break>
+                </block_content>}</block></if></if_stmt>
+
+                <comment type="line">// If we got here, this is in fact a valid(ish) utf-8 sequence</comment>
+                <for>for <control>(<init><decl><type><name><name>std</name><operator>::</operator><name>size_t</name></name></type> <name>n</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>n</name> <operator>&lt;</operator> <name>encBytes</name></expr>;</condition> <incr><expr><operator>++</operator><name>n</name></expr></incr>)</control> <block>{<block_content>
+                    <expr_stmt><expr><name>os</name> <operator>&lt;&lt;</operator> <name><name>m_str</name><index>[<expr><name>idx</name> <operator>+</operator> <name>n</name></expr>]</index></name></expr>;</expr_stmt>
+                </block_content>}</block></for>
+                <expr_stmt><expr><name>idx</name> <operator>+=</operator> <name>encBytes</name> <operator>-</operator> <literal type="number">1</literal></expr>;</expr_stmt>
+                <break>break;</break>
+            </block_content>}</block></switch>
+        </block_content>}</block></for>
+    </block_content>}</block></function>
+
+    <function type="operator"><type><name><name>std</name><operator>::</operator><name>ostream</name></name><modifier>&amp;</modifier></type> <name>operator <name>&lt;&lt;</name></name> <parameter_list>( <parameter><decl><type><name><name>std</name><operator>::</operator><name>ostream</name></name><modifier>&amp;</modifier></type> <name>os</name></decl></parameter>, <parameter><decl><type><name>XmlEncode</name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>xmlEncode</name></decl></parameter> )</parameter_list> <block>{<block_content>
+        <expr_stmt><expr><call><name><name>xmlEncode</name><operator>.</operator><name>encodeTo</name></name><argument_list>( <argument><expr><name>os</name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        <return>return <expr><name>os</name></expr>;</return>
+    </block_content>}</block></function>
+
+    <constructor><name><name>XmlWriter</name><operator>::</operator><name>ScopedElement</name><operator>::</operator><name>ScopedElement</name></name><parameter_list>( <parameter><decl><type><name>XmlWriter</name><modifier>*</modifier></type> <name>writer</name></decl></parameter>, <parameter><decl><type><name>XmlFormatting</name></type> <name>fmt</name></decl></parameter> )</parameter_list>
+    <member_init_list>:   <call><name>m_writer</name><argument_list>( <argument><expr><name>writer</name></expr></argument> )</argument_list></call>,
+        <call><name>m_fmt</name><argument_list>(<argument><expr><name>fmt</name></expr></argument>)</argument_list></call>
+    </member_init_list><block>{<block_content/>}</block></constructor>
+
+    <constructor><name><name>XmlWriter</name><operator>::</operator><name>ScopedElement</name><operator>::</operator><name>ScopedElement</name></name><parameter_list>( <parameter><decl><type><name>ScopedElement</name><modifier>&amp;&amp;</modifier></type> <name>other</name></decl></parameter> )</parameter_list> <noexcept>noexcept</noexcept>
+    :   <name>m_writer</name>( <name>other</name>.<name>m_writer</name></constructor> )</block><operator>,</operator>
+        <name>m_fmt</name>(<name><name>other</name><operator>.</operator><name>m_fmt</name></name></namespace>)
+    <block>{<block_content>
+        <expr_stmt><expr><name><name>other</name><operator>.</operator><name>m_writer</name></name> <operator>=</operator> <literal type="null">nullptr</literal></expr>;</expr_stmt>
+        <expr_stmt><expr><name><name>other</name><operator>.</operator><name>m_fmt</name></name> <operator>=</operator> <name><name>XmlFormatting</name><operator>::</operator><name>None</name></name></expr>;</expr_stmt>
+    </block_content>}</block>
+    <function type="operator"><type><name><name>XmlWriter</name><operator>::</operator><name>ScopedElement</name></name><modifier>&amp;</modifier></type> <name><name>XmlWriter</name><operator>::</operator><name>ScopedElement</name><operator>::</operator><name>operator<name>=</name></name></name><parameter_list>( <parameter><decl><type><name>ScopedElement</name><modifier>&amp;&amp;</modifier></type> <name>other</name></decl></parameter> )</parameter_list> <noexcept>noexcept</noexcept> <block>{<block_content>
+        <if_stmt><if>if <condition>( <expr><name>m_writer</name></expr> )</condition> <block>{<block_content>
+            <expr_stmt><expr><call><name><name>m_writer</name><operator>-&gt;</operator><name>endElement</name></name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+        </block_content>}</block></if></if_stmt>
+        <expr_stmt><expr><name>m_writer</name> <operator>=</operator> <name><name>other</name><operator>.</operator><name>m_writer</name></name></expr>;</expr_stmt>
+        <expr_stmt><expr><name><name>other</name><operator>.</operator><name>m_writer</name></name> <operator>=</operator> <literal type="null">nullptr</literal></expr>;</expr_stmt>
+        <expr_stmt><expr><name>m_fmt</name> <operator>=</operator> <name><name>other</name><operator>.</operator><name>m_fmt</name></name></expr>;</expr_stmt>
+        <expr_stmt><expr><name><name>other</name><operator>.</operator><name>m_fmt</name></name> <operator>=</operator> <name><name>XmlFormatting</name><operator>::</operator><name>None</name></name></expr>;</expr_stmt>
+        <return>return <expr><operator>*</operator><name>this</name></expr>;</return>
+    </block_content>}</block></function>
+
+
+    <destructor><name><name>XmlWriter</name><operator>::</operator><name>ScopedElement</name><operator>::</operator><name>~ScopedElement</name></name><parameter_list>()</parameter_list> <block>{<block_content>
+        <if_stmt><if>if <condition>(<expr><name>m_writer</name></expr>)</condition> <block>{<block_content>
+            <expr_stmt><expr><call><name><name>m_writer</name><operator>-&gt;</operator><name>endElement</name></name><argument_list>(<argument><expr><name>m_fmt</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        </block_content>}</block></if></if_stmt>
+    </block_content>}</block></destructor>
+
+    <function><type><name><name>XmlWriter</name><operator>::</operator><name>ScopedElement</name></name><modifier>&amp;</modifier></type> <name><name>XmlWriter</name><operator>::</operator><name>ScopedElement</name><operator>::</operator><name>writeText</name></name><parameter_list>( <parameter><decl><type><name><name>std</name><operator>::</operator><name>string</name></name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>text</name></decl></parameter>, <parameter><decl><type><name>XmlFormatting</name></type> <name>fmt</name></decl></parameter> )</parameter_list> <block>{<block_content>
+        <expr_stmt><expr><call><name><name>m_writer</name><operator>-&gt;</operator><name>writeText</name></name><argument_list>( <argument><expr><name>text</name></expr></argument>, <argument><expr><name>fmt</name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        <return>return <expr><operator>*</operator><name>this</name></expr>;</return>
+    </block_content>}</block></function>
+
+    <constructor><name><name>XmlWriter</name><operator>::</operator><name>XmlWriter</name></name><parameter_list>( <parameter><decl><type><name><name>std</name><operator>::</operator><name>ostream</name></name><modifier>&amp;</modifier></type> <name>os</name></decl></parameter> )</parameter_list> <member_init_list>: <call><name>m_os</name><argument_list>( <argument><expr><name>os</name></expr></argument> )</argument_list></call>
+    </member_init_list><block>{<block_content>
+        <expr_stmt><expr><call><name>writeDeclaration</name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block></constructor>
+
+    <destructor><name><name>XmlWriter</name><operator>::</operator><name>~XmlWriter</name></name><parameter_list>()</parameter_list> <block>{<block_content>
+        <while>while <condition>(<expr><operator>!</operator><call><name><name>m_tags</name><operator>.</operator><name>empty</name></name><argument_list>()</argument_list></call></expr>)</condition> <block>{<block_content>
+            <expr_stmt><expr><call><name>endElement</name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+        </block_content>}</block></while>
+        <expr_stmt><expr><call><name>newlineIfNecessary</name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block></destructor>
+
+    <function><type><name>XmlWriter</name><modifier>&amp;</modifier></type> <name><name>XmlWriter</name><operator>::</operator><name>startElement</name></name><parameter_list>( <parameter><decl><type><name><name>std</name><operator>::</operator><name>string</name></name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>name</name></decl></parameter>, <parameter><decl><type><name>XmlFormatting</name></type> <name>fmt</name></decl></parameter> )</parameter_list> <block>{<block_content>
+        <expr_stmt><expr><call><name>ensureTagClosed</name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name>newlineIfNecessary</name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+        <if_stmt><if>if <condition>(<expr><call><name>shouldIndent</name><argument_list>(<argument><expr><name>fmt</name></expr></argument>)</argument_list></call></expr>)</condition> <block>{<block_content>
+            <expr_stmt><expr><name>m_os</name> <operator>&lt;&lt;</operator> <name>m_indent</name></expr>;</expr_stmt>
+            <expr_stmt><expr><name>m_indent</name> <operator>+=</operator> <literal type="string">"  "</literal></expr>;</expr_stmt>
+        </block_content>}</block></if></if_stmt>
+        <expr_stmt><expr><name>m_os</name> <operator>&lt;&lt;</operator> <literal type="char">'&lt;'</literal> <operator>&lt;&lt;</operator> <name>name</name></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name><name>m_tags</name><operator>.</operator><name>push_back</name></name><argument_list>( <argument><expr><name>name</name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><name>m_tagIsOpen</name> <operator>=</operator> <literal type="boolean">true</literal></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name>applyFormatting</name><argument_list>(<argument><expr><name>fmt</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        <return>return <expr><operator>*</operator><name>this</name></expr>;</return>
+    </block_content>}</block></function>
+
+    <function><type><name><name>XmlWriter</name><operator>::</operator><name>ScopedElement</name></name></type> <name><name>XmlWriter</name><operator>::</operator><name>scopedElement</name></name><parameter_list>( <parameter><decl><type><name><name>std</name><operator>::</operator><name>string</name></name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>name</name></decl></parameter>, <parameter><decl><type><name>XmlFormatting</name></type> <name>fmt</name></decl></parameter> )</parameter_list> <block>{<block_content>
+        <decl_stmt><decl><type><name>ScopedElement</name></type> <name>scoped</name><argument_list>( <argument><expr><name>this</name></expr></argument>, <argument><expr><name>fmt</name></expr></argument> )</argument_list></decl>;</decl_stmt>
+        <expr_stmt><expr><call><name>startElement</name><argument_list>( <argument><expr><name>name</name></expr></argument>, <argument><expr><name>fmt</name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        <return>return <expr><name>scoped</name></expr>;</return>
+    </block_content>}</block></function>
+
+    <function><type><name>XmlWriter</name><modifier>&amp;</modifier></type> <name><name>XmlWriter</name><operator>::</operator><name>endElement</name></name><parameter_list>(<parameter><decl><type><name>XmlFormatting</name></type> <name>fmt</name></decl></parameter>)</parameter_list> <block>{<block_content>
+        <expr_stmt><expr><name>m_indent</name> <operator>=</operator> <call><name><name>m_indent</name><operator>.</operator><name>substr</name></name><argument_list>(<argument><expr><literal type="number">0</literal></expr></argument>, <argument><expr><call><name><name>m_indent</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call> <operator>-</operator> <literal type="number">2</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+
+        <if_stmt><if>if<condition>( <expr><name>m_tagIsOpen</name></expr> )</condition> <block>{<block_content>
+            <expr_stmt><expr><name>m_os</name> <operator>&lt;&lt;</operator> <literal type="string">"/&gt;"</literal></expr>;</expr_stmt>
+            <expr_stmt><expr><name>m_tagIsOpen</name> <operator>=</operator> <literal type="boolean">false</literal></expr>;</expr_stmt>
+        </block_content>}</block></if> <else>else <block>{<block_content>
+            <expr_stmt><expr><call><name>newlineIfNecessary</name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+            <if_stmt><if>if <condition>(<expr><call><name>shouldIndent</name><argument_list>(<argument><expr><name>fmt</name></expr></argument>)</argument_list></call></expr>)</condition> <block>{<block_content>
+                <expr_stmt><expr><name>m_os</name> <operator>&lt;&lt;</operator> <name>m_indent</name></expr>;</expr_stmt>
+            </block_content>}</block></if></if_stmt>
+            <expr_stmt><expr><name>m_os</name> <operator>&lt;&lt;</operator> <literal type="string">"&lt;/"</literal> <operator>&lt;&lt;</operator> <call><name><name>m_tags</name><operator>.</operator><name>back</name></name><argument_list>()</argument_list></call> <operator>&lt;&lt;</operator> <literal type="string">"&gt;"</literal></expr>;</expr_stmt>
+        </block_content>}</block></else></if_stmt>
+        <expr_stmt><expr><name>m_os</name> <operator>&lt;&lt;</operator> <name><name>std</name><operator>::</operator><name>flush</name></name></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name>applyFormatting</name><argument_list>(<argument><expr><name>fmt</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name><name>m_tags</name><operator>.</operator><name>pop_back</name></name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+        <return>return <expr><operator>*</operator><name>this</name></expr>;</return>
+    </block_content>}</block></function>
+
+    <function><type><name>XmlWriter</name><modifier>&amp;</modifier></type> <name><name>XmlWriter</name><operator>::</operator><name>writeAttribute</name></name><parameter_list>( <parameter><decl><type><name><name>std</name><operator>::</operator><name>string</name></name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>name</name></decl></parameter>, <parameter><decl><type><name><name>std</name><operator>::</operator><name>string</name></name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>attribute</name></decl></parameter> )</parameter_list> <block>{<block_content>
+        <if_stmt><if>if<condition>( <expr><operator>!</operator><call><name><name>name</name><operator>.</operator><name>empty</name></name><argument_list>()</argument_list></call> <operator>&amp;&amp;</operator> <operator>!</operator><call><name><name>attribute</name><operator>.</operator><name>empty</name></name><argument_list>()</argument_list></call></expr> )</condition><block type="pseudo"><block_content>
+            <expr_stmt><expr><name>m_os</name> <operator>&lt;&lt;</operator> <literal type="char">' '</literal> <operator>&lt;&lt;</operator> <name>name</name> <operator>&lt;&lt;</operator> <literal type="string">"=\""</literal> <operator>&lt;&lt;</operator> <call><name>XmlEncode</name><argument_list>( <argument><expr><name>attribute</name></expr></argument>, <argument><expr><name><name>XmlEncode</name><operator>::</operator><name>ForAttributes</name></name></expr></argument> )</argument_list></call> <operator>&lt;&lt;</operator> <literal type="char">'"'</literal></expr>;</expr_stmt></block_content></block></if></if_stmt>
+        <return>return <expr><operator>*</operator><name>this</name></expr>;</return>
+    </block_content>}</block></function>
+
+    <function><type><name>XmlWriter</name><modifier>&amp;</modifier></type> <name><name>XmlWriter</name><operator>::</operator><name>writeAttribute</name></name><parameter_list>( <parameter><decl><type><name><name>std</name><operator>::</operator><name>string</name></name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>name</name></decl></parameter>, <parameter><decl><type><name>bool</name></type> <name>attribute</name></decl></parameter> )</parameter_list> <block>{<block_content>
+        <expr_stmt><expr><name>m_os</name> <operator>&lt;&lt;</operator> <literal type="char">' '</literal> <operator>&lt;&lt;</operator> <name>name</name> <operator>&lt;&lt;</operator> <literal type="string">"=\""</literal> <operator>&lt;&lt;</operator> <operator>(</operator> <ternary><condition><expr><name>attribute</name></expr> ?</condition><then> <expr><literal type="string">"true"</literal></expr> </then><else>: <expr><literal type="string">"false"</literal></expr></else></ternary> <operator>)</operator> <operator>&lt;&lt;</operator> <literal type="char">'"'</literal></expr>;</expr_stmt>
+        <return>return <expr><operator>*</operator><name>this</name></expr>;</return>
+    </block_content>}</block></function>
+
+    <function><type><name>XmlWriter</name><modifier>&amp;</modifier></type> <name><name>XmlWriter</name><operator>::</operator><name>writeText</name></name><parameter_list>( <parameter><decl><type><name><name>std</name><operator>::</operator><name>string</name></name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>text</name></decl></parameter>, <parameter><decl><type><name>XmlFormatting</name></type> <name>fmt</name></decl></parameter>)</parameter_list> <block>{<block_content>
+        <if_stmt><if>if<condition>( <expr><operator>!</operator><call><name><name>text</name><operator>.</operator><name>empty</name></name><argument_list>()</argument_list></call></expr> )</condition><block>{<block_content>
+            <decl_stmt><decl><type><name>bool</name></type> <name>tagWasOpen</name> <init>= <expr><name>m_tagIsOpen</name></expr></init></decl>;</decl_stmt>
+            <expr_stmt><expr><call><name>ensureTagClosed</name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+            <if_stmt><if>if <condition>(<expr><name>tagWasOpen</name> <operator>&amp;&amp;</operator> <call><name>shouldIndent</name><argument_list>(<argument><expr><name>fmt</name></expr></argument>)</argument_list></call></expr>)</condition> <block>{<block_content>
+                <expr_stmt><expr><name>m_os</name> <operator>&lt;&lt;</operator> <name>m_indent</name></expr>;</expr_stmt>
+            </block_content>}</block></if></if_stmt>
+            <expr_stmt><expr><name>m_os</name> <operator>&lt;&lt;</operator> <call><name>XmlEncode</name><argument_list>( <argument><expr><name>text</name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+            <expr_stmt><expr><call><name>applyFormatting</name><argument_list>(<argument><expr><name>fmt</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        </block_content>}</block></if></if_stmt>
+        <return>return <expr><operator>*</operator><name>this</name></expr>;</return>
+    </block_content>}</block></function>
+
+    <function><type><name>XmlWriter</name><modifier>&amp;</modifier></type> <name><name>XmlWriter</name><operator>::</operator><name>writeComment</name></name><parameter_list>( <parameter><decl><type><name><name>std</name><operator>::</operator><name>string</name></name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>text</name></decl></parameter>, <parameter><decl><type><name>XmlFormatting</name></type> <name>fmt</name></decl></parameter>)</parameter_list> <block>{<block_content>
+        <expr_stmt><expr><call><name>ensureTagClosed</name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+        <if_stmt><if>if <condition>(<expr><call><name>shouldIndent</name><argument_list>(<argument><expr><name>fmt</name></expr></argument>)</argument_list></call></expr>)</condition> <block>{<block_content>
+            <expr_stmt><expr><name>m_os</name> <operator>&lt;&lt;</operator> <name>m_indent</name></expr>;</expr_stmt>
+        </block_content>}</block></if></if_stmt>
+        <expr_stmt><expr><name>m_os</name> <operator>&lt;&lt;</operator> <literal type="string">"&lt;!--"</literal> <operator>&lt;&lt;</operator> <name>text</name> <operator>&lt;&lt;</operator> <literal type="string">"--&gt;"</literal></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name>applyFormatting</name><argument_list>(<argument><expr><name>fmt</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        <return>return <expr><operator>*</operator><name>this</name></expr>;</return>
+    </block_content>}</block></function>
+
+    <function><type><name>void</name></type> <name><name>XmlWriter</name><operator>::</operator><name>writeStylesheetRef</name></name><parameter_list>( <parameter><decl><type><name><name>std</name><operator>::</operator><name>string</name></name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>url</name></decl></parameter> )</parameter_list> <block>{<block_content>
+        <expr_stmt><expr><name>m_os</name> <operator>&lt;&lt;</operator> <literal type="string"><diff:insert xmlns:diff="http://www.srcML.org/srcDiff">R</diff:insert>"<diff:insert xmlns:diff="http://www.srcML.org/srcDiff">(</diff:insert>&lt;?xml-stylesheet type=<diff:delete type="replace" xmlns:diff="http://www.srcML.org/srcDiff">\"</diff:delete><diff:insert type="replace" xmlns:diff="http://www.srcML.org/srcDiff">"</diff:insert>text/xsl<diff:delete type="replace" xmlns:diff="http://www.srcML.org/srcDiff">\"</diff:delete><diff:insert type="replace" xmlns:diff="http://www.srcML.org/srcDiff">"</diff:insert> href=<diff:delete type="replace" xmlns:diff="http://www.srcML.org/srcDiff">\""</diff:delete><diff:insert type="replace" xmlns:diff="http://www.srcML.org/srcDiff">")"</diff:insert></literal> <operator>&lt;&lt;</operator> <name>url</name> <operator>&lt;&lt;</operator> <literal type="string"><diff:delete type="replace" xmlns:diff="http://www.srcML.org/srcDiff">"\"</diff:delete><diff:insert type="replace" xmlns:diff="http://www.srcML.org/srcDiff">R"("</diff:insert>?&gt;<diff:delete type="replace" xmlns:diff="http://www.srcML.org/srcDiff">\n"</diff:delete><diff:insert type="replace" xmlns:diff="http://www.srcML.org/srcDiff">)"</diff:insert></literal><diff:insert xmlns:diff="http://www.srcML.org/srcDiff"><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><operator>&lt;&lt;</operator><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><literal type="char">'\n'</literal></diff:insert></expr>;</expr_stmt>
+    </block_content>}</block></function>
+
+    <function><type><name>XmlWriter</name><modifier>&amp;</modifier></type> <name><name>XmlWriter</name><operator>::</operator><name>writeBlankLine</name></name><parameter_list>()</parameter_list> <block>{<block_content>
+        <expr_stmt><expr><call><name>ensureTagClosed</name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><name>m_os</name> <operator>&lt;&lt;</operator> <literal type="char">'\n'</literal></expr>;</expr_stmt>
+        <return>return <expr><operator>*</operator><name>this</name></expr>;</return>
+    </block_content>}</block></function>
+
+    <function><type><name>void</name></type> <name><name>XmlWriter</name><operator>::</operator><name>ensureTagClosed</name></name><parameter_list>()</parameter_list> <block>{<block_content>
+        <if_stmt><if>if<condition>( <expr><name>m_tagIsOpen</name></expr> )</condition> <block>{<block_content>
+            <expr_stmt><expr><name>m_os</name> <operator>&lt;&lt;</operator> <literal type="char">'&gt;'</literal> <operator>&lt;&lt;</operator> <name><name>std</name><operator>::</operator><name>flush</name></name></expr>;</expr_stmt>
+            <expr_stmt><expr><call><name>newlineIfNecessary</name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+            <expr_stmt><expr><name>m_tagIsOpen</name> <operator>=</operator> <literal type="boolean">false</literal></expr>;</expr_stmt>
+        </block_content>}</block></if></if_stmt>
+    </block_content>}</block></function>
+
+    <function><type><name>void</name></type> <name><name>XmlWriter</name><operator>::</operator><name>applyFormatting</name></name><parameter_list>(<parameter><decl><type><name>XmlFormatting</name></type> <name>fmt</name></decl></parameter>)</parameter_list> <block>{<block_content>
+        <expr_stmt><expr><name>m_needsNewline</name> <operator>=</operator> <call><name>shouldNewline</name><argument_list>(<argument><expr><name>fmt</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block></function>
+
+    <function><type><name>void</name></type> <name><name>XmlWriter</name><operator>::</operator><name>writeDeclaration</name></name><parameter_list>()</parameter_list> <block>{<block_content>
+        <expr_stmt><expr><name>m_os</name> <operator>&lt;&lt;</operator> <literal type="string"><diff:insert xmlns:diff="http://www.srcML.org/srcDiff">R</diff:insert>"<diff:insert xmlns:diff="http://www.srcML.org/srcDiff">(</diff:insert>&lt;?xml version=<diff:delete type="replace" xmlns:diff="http://www.srcML.org/srcDiff">\"</diff:delete><diff:insert type="replace" xmlns:diff="http://www.srcML.org/srcDiff">"</diff:insert>1.0<diff:delete type="replace" xmlns:diff="http://www.srcML.org/srcDiff">\"</diff:delete><diff:insert type="replace" xmlns:diff="http://www.srcML.org/srcDiff">"</diff:insert> encoding=<diff:delete type="replace" xmlns:diff="http://www.srcML.org/srcDiff">\"</diff:delete><diff:insert type="replace" xmlns:diff="http://www.srcML.org/srcDiff">"</diff:insert>UTF-8<diff:delete type="replace" xmlns:diff="http://www.srcML.org/srcDiff">\"</diff:delete><diff:insert type="replace" xmlns:diff="http://www.srcML.org/srcDiff">"</diff:insert>?&gt;<diff:delete type="replace" xmlns:diff="http://www.srcML.org/srcDiff">\n"</diff:delete><diff:insert type="replace" xmlns:diff="http://www.srcML.org/srcDiff">)"</diff:insert></literal><diff:insert xmlns:diff="http://www.srcML.org/srcDiff"><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><operator>&lt;&lt;</operator><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><literal type="char">'\n'</literal></diff:insert></expr>;</expr_stmt>
+    </block_content>}</block></function>
+
+    <function><type><name>void</name></type> <name><name>XmlWriter</name><operator>::</operator><name>newlineIfNecessary</name></name><parameter_list>()</parameter_list> <block>{<block_content>
+        <if_stmt><if>if<condition>( <expr><name>m_needsNewline</name></expr> )</condition> <block>{<block_content>
+            <expr_stmt><expr><name>m_os</name> <operator>&lt;&lt;</operator> <literal type="char">'\n'</literal> <operator>&lt;&lt;</operator> <name><name>std</name><operator>::</operator><name>flush</name></name></expr>;</expr_stmt>
+            <expr_stmt><expr><name>m_needsNewline</name> <operator>=</operator> <literal type="boolean">false</literal></expr>;</expr_stmt>
+        </block_content>}</block></if></if_stmt>
+    </block_content>}</block></function>
+}
+</unit>

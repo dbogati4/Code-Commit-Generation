@@ -1,0 +1,15 @@
+diff --git a/src/catch2/internal/catch_test_spec_parser.cpp b/src/catch2/internal/catch_test_spec_parser.cpp
+index bae25475..d6e4cb58 100644
+--- a/src/catch2/internal/catch_test_spec_parser.cpp
++++ b/src/catch2/internal/catch_test_spec_parser.cpp
+@@ -221,10 +221,8 @@ namespace Catch {
+                 token.erase(token.begin());
+                 if (m_exclusion) {
+                     m_currentFilter.m_forbidden.emplace_back(Detail::make_unique<TestSpec::TagPattern>(".", m_substring));
+-                    m_currentFilter.m_forbidden.emplace_back(Detail::make_unique<TestSpec::TagPattern>(token, m_substring));
+                 } else {
+                     m_currentFilter.m_required.emplace_back(Detail::make_unique<TestSpec::TagPattern>(".", m_substring));
+-                    m_currentFilter.m_required.emplace_back(Detail::make_unique<TestSpec::TagPattern>(token, m_substring));
+                 }
+             }
+             if (m_exclusion) {

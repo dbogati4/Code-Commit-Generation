@@ -1,0 +1,8 @@
+{
+  "commit_id": "cff3818e68158275d4d0353dc4bf359bbba1c57f",
+  "parent_id": "519db85758220faa34b587249c335dcc79b0192a",
+  "message": "Correctly handle special tags that also imply being hidden (!benchmark)",
+  "changed_files": [
+    "include/internal/catch_test_case_info.cpp"
+  ]
+}

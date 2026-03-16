@@ -1,0 +1,366 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" xmlns:diff="http://www.srcML.org/srcDiff" revision="1.0.0" language="C++" filename="C:\Users\saile\AppData\Local\Temp\catch2_100_z8gzpiwf\bd2d918f328ddb916202f4952b25cf809434b290\src_catch2_reporters_catch_reporter_helpers_cpp\src_catch2_reporters_catch_reporter_helpers_cpp.old|C:\Users\saile\AppData\Local\Temp\catch2_100_z8gzpiwf\bd2d918f328ddb916202f4952b25cf809434b290\src_catch2_reporters_catch_reporter_helpers_cpp\src_catch2_reporters_catch_reporter_helpers_cpp.new">
+<comment type="line">//              Copyright Catch2 Authors</comment>
+<comment type="line">// Distributed under the Boost Software License, Version 1.0.</comment>
+<comment type="line">//   (See accompanying file LICENSE.txt or copy at</comment>
+<comment type="line">//        https://www.boost.org/LICENSE_1_0.txt)</comment>
+
+<comment type="line">// SPDX-License-Identifier: BSL-1.0</comment>
+
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;catch2/reporters/catch_reporter_helpers.hpp&gt;</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;catch2/interfaces/catch_interfaces_config.hpp&gt;</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;catch2/internal/catch_console_width.hpp&gt;</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;catch2/internal/catch_errno_guard.hpp&gt;</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;catch2/internal/catch_textflow.hpp&gt;</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;catch2/internal/catch_reusable_string_stream.hpp&gt;</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;catch2/internal/catch_string_manip.hpp&gt;</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;catch2/internal/catch_console_colour.hpp&gt;</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;catch2/catch_tostring.hpp&gt;</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;catch2/catch_test_case_info.hpp&gt;</cpp:file></cpp:include>
+
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;algorithm&gt;</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;cfloat&gt;</cpp:file></cpp:include>
+<diff:insert xmlns:diff="http://www.srcML.org/srcDiff"><cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;cmath&gt;</cpp:file></cpp:include><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+</diff:ws></diff:insert><cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;cstdio&gt;</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;ostream&gt;</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;iomanip&gt;</cpp:file></cpp:include>
+
+<namespace>namespace <name>Catch</name> <block>{
+
+    <namespace>namespace <block>{
+        <function><type><name>void</name></type> <name>listTestNamesOnly</name><parameter_list>(<parameter><decl><type><name><name>std</name><operator>::</operator><name>ostream</name></name><modifier>&amp;</modifier></type> <name>out</name></decl></parameter>,
+                               <parameter><decl><type><name><name>std</name><operator>::</operator><name>vector</name><argument_list type="generic">&lt;<argument><expr><name>TestCaseHandle</name></expr></argument>&gt;</argument_list></name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>tests</name></decl></parameter>)</parameter_list> <block>{<block_content>
+            <for>for <control>(<init><decl><type><specifier>auto</specifier> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>test</name> <range>: <expr><name>tests</name></expr></range></decl></init>)</control> <block>{<block_content>
+                <decl_stmt><decl><type><specifier>auto</specifier> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>testCaseInfo</name> <init>= <expr><call><name><name>test</name><operator>.</operator><name>getTestCaseInfo</name></name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+
+                <if_stmt><if>if <condition>(<expr><call><name>startsWith</name><argument_list>(<argument><expr><name><name>testCaseInfo</name><operator>.</operator><name>name</name></name></expr></argument>, <argument><expr><literal type="char">'#'</literal></expr></argument>)</argument_list></call></expr>)</condition> <block>{<block_content>
+                    <expr_stmt><expr><name>out</name> <operator>&lt;&lt;</operator> <literal type="char">'"'</literal> <operator>&lt;&lt;</operator> <name><name>testCaseInfo</name><operator>.</operator><name>name</name></name> <operator>&lt;&lt;</operator> <literal type="char">'"'</literal></expr>;</expr_stmt>
+                </block_content>}</block></if> <else>else <block>{<block_content>
+                    <expr_stmt><expr><name>out</name> <operator>&lt;&lt;</operator> <name><name>testCaseInfo</name><operator>.</operator><name>name</name></name></expr>;</expr_stmt>
+                </block_content>}</block></else></if_stmt>
+
+                <expr_stmt><expr><name>out</name> <operator>&lt;&lt;</operator> <literal type="char">'\n'</literal></expr>;</expr_stmt>
+            </block_content>}</block></for>
+            <expr_stmt><expr><name>out</name> <operator>&lt;&lt;</operator> <name><name>std</name><operator>::</operator><name>flush</name></name></expr>;</expr_stmt>
+        </block_content>}</block></function>
+    }</block></namespace> <comment type="line">// end unnamed namespace</comment>
+
+
+    <comment type="line">// Because formatting using c++ streams is stateful, drop down to C is</comment>
+    <comment type="line">// required Alternatively we could use stringstream, but its performance</comment>
+    <comment type="line">// is... not good.</comment>
+    <function><type><name><name>std</name><operator>::</operator><name>string</name></name></type> <name>getFormattedDuration</name><parameter_list>( <parameter><decl><type><name>double</name></type> <name>duration</name></decl></parameter> )</parameter_list> <block>{<block_content>
+        <comment type="line">// Max exponent + 1 is required to represent the whole part</comment>
+        <comment type="line">// + 1 for decimal point</comment>
+        <comment type="line">// + 3 for the 3 decimal places</comment>
+        <comment type="line">// + 1 for null terminator</comment>
+        <decl_stmt><decl><type><specifier>const</specifier> <name><name>std</name><operator>::</operator><name>size_t</name></name></type> <name>maxDoubleSize</name> <init>= <expr><name>DBL_MAX_10_EXP</name> <operator>+</operator> <literal type="number">1</literal> <operator>+</operator> <literal type="number">1</literal> <operator>+</operator> <literal type="number">3</literal> <operator>+</operator> <literal type="number">1</literal></expr></init></decl>;</decl_stmt>
+        <decl_stmt><decl><type><name>char</name></type> <name><name>buffer</name><index>[<expr><name>maxDoubleSize</name></expr>]</index></name></decl>;</decl_stmt>
+
+        <comment type="line">// Save previous errno, to prevent sprintf from overwriting it</comment>
+        <decl_stmt><decl><type><name>ErrnoGuard</name></type> <name>guard</name></decl>;</decl_stmt>
+<cpp:ifdef xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">ifdef</cpp:directive> <name>_MSC_VER</name></cpp:ifdef>
+        <decl_stmt><decl><type><name>size_t</name></type> <name>printedLength</name> <init>= <expr><cast type="static">static_cast<argument_list type="generic">&lt;<argument><expr><name>size_t</name></expr></argument>&gt;</argument_list><argument_list>(
+            <argument><expr><call><name>sprintf_s</name><argument_list>( <argument><expr><name>buffer</name></expr></argument>, <argument><expr><literal type="string">"%.3f"</literal></expr></argument>, <argument><expr><name>duration</name></expr></argument> )</argument_list></call></expr></argument> )</argument_list></cast></expr></init></decl>;</decl_stmt>
+<cpp:else xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">else</cpp:directive></cpp:else>
+        <decl_stmt><decl><type><name>size_t</name></type> <name>printedLength</name> <init>= <expr><cast type="static">static_cast<argument_list type="generic">&lt;<argument><expr><name>size_t</name></expr></argument>&gt;</argument_list><argument_list>(
+            <argument><expr><call><name><name>std</name><operator>::</operator><name>snprintf</name></name><argument_list>( <argument><expr><name>buffer</name></expr></argument>, <argument><expr><name>maxDoubleSize</name></expr></argument>, <argument><expr><literal type="string">"%.3f"</literal></expr></argument>, <argument><expr><name>duration</name></expr></argument> )</argument_list></call></expr></argument> )</argument_list></cast></expr></init></decl>;</decl_stmt>
+<cpp:endif xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">endif</cpp:directive></cpp:endif>
+        <return>return <expr><call><name><name>std</name><operator>::</operator><name>string</name></name><argument_list>( <argument><expr><name>buffer</name></expr></argument>, <argument><expr><name>printedLength</name></expr></argument> )</argument_list></call></expr>;</return>
+    </block_content>}</block></function>
+
+    <function><type><name>bool</name></type> <name>shouldShowDuration</name><parameter_list>( <parameter><decl><type><name>IConfig</name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>config</name></decl></parameter>, <parameter><decl><type><name>double</name></type> <name>duration</name></decl></parameter> )</parameter_list> <block>{<block_content>
+        <if_stmt><if>if <condition>( <expr><call><name><name>config</name><operator>.</operator><name>showDurations</name></name><argument_list>()</argument_list></call> <operator>==</operator> <name><name>ShowDurations</name><operator>::</operator><name>Always</name></name></expr> )</condition> <block>{<block_content>
+            <return>return <expr><literal type="boolean">true</literal></expr>;</return>
+        </block_content>}</block></if></if_stmt>
+        <if_stmt><if>if <condition>( <expr><call><name><name>config</name><operator>.</operator><name>showDurations</name></name><argument_list>()</argument_list></call> <operator>==</operator> <name><name>ShowDurations</name><operator>::</operator><name>Never</name></name></expr> )</condition> <block>{<block_content>
+            <return>return <expr><literal type="boolean">false</literal></expr>;</return>
+        </block_content>}</block></if></if_stmt>
+        <decl_stmt><decl><type><specifier>const</specifier> <name>double</name></type> <name>min</name> <init>= <expr><call><name><name>config</name><operator>.</operator><name>minDuration</name></name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+        <return>return <expr><name>min</name> <operator>&gt;=</operator> <literal type="number">0</literal> <operator>&amp;&amp;</operator> <name>duration</name> <operator>&gt;=</operator> <name>min</name></expr>;</return>
+    </block_content>}</block></function>
+
+    <function><type><name><name>std</name><operator>::</operator><name>string</name></name></type> <name>serializeFilters</name><parameter_list>( <parameter><decl><type><name><name>std</name><operator>::</operator><name>vector</name><argument_list type="generic">&lt;<argument><expr><name><name>std</name><operator>::</operator><name>string</name></name></expr></argument>&gt;</argument_list></name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>filters</name></decl></parameter> )</parameter_list> <block>{<block_content>
+        <comment type="line">// We add a ' ' separator between each filter</comment>
+        <decl_stmt><decl><type><name>size_t</name></type> <name>serialized_size</name> <init>= <expr><call><name><name>filters</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call> <operator>-</operator> <literal type="number">1</literal></expr></init></decl>;</decl_stmt>
+        <for>for <control>(<init><decl><type><specifier>auto</specifier> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>filter</name> <range>: <expr><name>filters</name></expr></range></decl></init>)</control> <block>{<block_content>
+            <expr_stmt><expr><name>serialized_size</name> <operator>+=</operator> <call><name><name>filter</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+        </block_content>}</block></for>
+
+        <decl_stmt><decl><type><name><name>std</name><operator>::</operator><name>string</name></name></type> <name>serialized</name></decl>;</decl_stmt>
+        <expr_stmt><expr><call><name><name>serialized</name><operator>.</operator><name>reserve</name></name><argument_list>(<argument><expr><name>serialized_size</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        <decl_stmt><decl><type><name>bool</name></type> <name>first</name> <init>= <expr><literal type="boolean">true</literal></expr></init></decl>;</decl_stmt>
+
+        <for>for <control>(<init><decl><type><specifier>auto</specifier> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>filter</name> <range>: <expr><name>filters</name></expr></range></decl></init>)</control> <block>{<block_content>
+            <if_stmt><if>if <condition>(<expr><operator>!</operator><name>first</name></expr>)</condition> <block>{<block_content>
+                <expr_stmt><expr><call><name><name>serialized</name><operator>.</operator><name>push_back</name></name><argument_list>(<argument><expr><literal type="char">' '</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+            </block_content>}</block></if></if_stmt>
+            <expr_stmt><expr><name>first</name> <operator>=</operator> <literal type="boolean">false</literal></expr>;</expr_stmt>
+            <expr_stmt><expr><call><name><name>serialized</name><operator>.</operator><name>append</name></name><argument_list>(<argument><expr><name>filter</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        </block_content>}</block></for>
+
+        <return>return <expr><name>serialized</name></expr>;</return>
+    </block_content>}</block></function>
+
+    <function type="operator"><type><name><name>std</name><operator>::</operator><name>ostream</name></name><modifier>&amp;</modifier></type> <name>operator<name>&lt;&lt;</name></name><parameter_list>( <parameter><decl><type><name><name>std</name><operator>::</operator><name>ostream</name></name><modifier>&amp;</modifier></type> <name>out</name></decl></parameter>, <parameter><decl><type><name>lineOfChars</name></type> <name>value</name></decl></parameter> )</parameter_list> <block>{<block_content>
+        <for>for <control>( <init><decl><type><name>size_t</name></type> <name>idx</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>idx</name> <operator>&lt;</operator> <name>CATCH_CONFIG_CONSOLE_WIDTH</name> <operator>-</operator> <literal type="number">1</literal></expr>;</condition> <incr><expr><operator>++</operator><name>idx</name></expr></incr> )</control> <block>{<block_content>
+            <expr_stmt><expr><call><name><name>out</name><operator>.</operator><name>put</name></name><argument_list>( <argument><expr><name><name>value</name><operator>.</operator><name>c</name></name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        </block_content>}</block></for>
+        <return>return <expr><name>out</name></expr>;</return>
+    </block_content>}</block></function>
+
+    <function><type><name>void</name></type>
+    <name>defaultListReporters</name><parameter_list>( <parameter><decl><type><name><name>std</name><operator>::</operator><name>ostream</name></name><modifier>&amp;</modifier></type> <name>out</name></decl></parameter>,
+                          <parameter><decl><type><name><name>std</name><operator>::</operator><name>vector</name><argument_list type="generic">&lt;<argument><expr><name>ReporterDescription</name></expr></argument>&gt;</argument_list></name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>descriptions</name></decl></parameter>,
+                          <parameter><decl><type><name>Verbosity</name></type> <name>verbosity</name></decl></parameter> )</parameter_list> <block>{<block_content>
+        <expr_stmt><expr><name>out</name> <operator>&lt;&lt;</operator> <literal type="string">"Available reporters:\n"</literal></expr>;</expr_stmt>
+        <decl_stmt><decl><type><specifier>const</specifier> <specifier>auto</specifier></type> <name>maxNameLen</name> <init>=
+            <expr><call><name><name>std</name><operator>::</operator><name>max_element</name></name><argument_list>( <argument><expr><call><name><name>descriptions</name><operator>.</operator><name>begin</name></name><argument_list>()</argument_list></call></expr></argument>,
+                              <argument><expr><call><name><name>descriptions</name><operator>.</operator><name>end</name></name><argument_list>()</argument_list></call></expr></argument>,
+                              <argument><expr><lambda><capture>[]</capture><parameter_list>( <parameter><decl><type><name>ReporterDescription</name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>lhs</name></decl></parameter>,
+                                  <parameter><decl><type><name>ReporterDescription</name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>rhs</name></decl></parameter> )</parameter_list> <block>{<block_content>
+                                  <return>return <expr><call><name><name>lhs</name><operator>.</operator><name>name</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call> <operator>&lt;</operator> <call><name><name>rhs</name><operator>.</operator><name>name</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call></expr>;</return>
+                              </block_content>}</block></lambda></expr></argument> )</argument_list></call>
+                <operator>-&gt;</operator><call><name><name>name</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+
+        <for>for <control>( <init><decl><type><specifier>auto</specifier> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>desc</name> <range>: <expr><name>descriptions</name></expr></range></decl></init> )</control> <block>{<block_content>
+            <if_stmt><if>if <condition>( <expr><name>verbosity</name> <operator>==</operator> <name><name>Verbosity</name><operator>::</operator><name>Quiet</name></name></expr> )</condition> <block>{<block_content>
+                <expr_stmt><expr><name>out</name> <operator>&lt;&lt;</operator> <call><name><name>TextFlow</name><operator>::</operator><name>Column</name></name><argument_list>( <argument><expr><name><name>desc</name><operator>.</operator><name>name</name></name></expr></argument> )</argument_list></call>
+                           <operator>.</operator><call><name>indent</name><argument_list>( <argument><expr><literal type="number">2</literal></expr></argument> )</argument_list></call>
+                           <operator>.</operator><call><name>width</name><argument_list>( <argument><expr><literal type="number">5</literal> <operator>+</operator> <name>maxNameLen</name></expr></argument> )</argument_list></call>
+                    <operator>&lt;&lt;</operator> <literal type="char">'\n'</literal></expr>;</expr_stmt>
+            </block_content>}</block></if> <else>else <block>{<block_content>
+                <expr_stmt><expr><name>out</name> <operator>&lt;&lt;</operator> <call><name><name>TextFlow</name><operator>::</operator><name>Column</name></name><argument_list>( <argument><expr><name><name>desc</name><operator>.</operator><name>name</name></name> <operator>+</operator> <literal type="char">':'</literal></expr></argument> )</argument_list></call>
+                               <operator>.</operator><call><name>indent</name><argument_list>( <argument><expr><literal type="number">2</literal></expr></argument> )</argument_list></call>
+                               <operator>.</operator><call><name>width</name><argument_list>( <argument><expr><literal type="number">5</literal> <operator>+</operator> <name>maxNameLen</name></expr></argument> )</argument_list></call> <operator>+</operator>
+                           <call><name><name>TextFlow</name><operator>::</operator><name>Column</name></name><argument_list>( <argument><expr><name><name>desc</name><operator>.</operator><name>description</name></name></expr></argument> )</argument_list></call>
+                               <operator>.</operator><call><name>initialIndent</name><argument_list>( <argument><expr><literal type="number">0</literal></expr></argument> )</argument_list></call>
+                               <operator>.</operator><call><name>indent</name><argument_list>( <argument><expr><literal type="number">2</literal></expr></argument> )</argument_list></call>
+                               <operator>.</operator><call><name>width</name><argument_list>( <argument><expr><name>CATCH_CONFIG_CONSOLE_WIDTH</name> <operator>-</operator> <name>maxNameLen</name> <operator>-</operator> <literal type="number">8</literal></expr></argument> )</argument_list></call>
+                    <operator>&lt;&lt;</operator> <literal type="char">'\n'</literal></expr>;</expr_stmt>
+            </block_content>}</block></else></if_stmt>
+        </block_content>}</block></for>
+        <expr_stmt><expr><name>out</name> <operator>&lt;&lt;</operator> <literal type="char">'\n'</literal> <operator>&lt;&lt;</operator> <name><name>std</name><operator>::</operator><name>flush</name></name></expr>;</expr_stmt>
+    </block_content>}</block></function>
+
+    <function><type><name>void</name></type> <name>defaultListListeners</name><parameter_list>( <parameter><decl><type><name><name>std</name><operator>::</operator><name>ostream</name></name><modifier>&amp;</modifier></type> <name>out</name></decl></parameter>,
+                               <parameter><decl><type><name><name>std</name><operator>::</operator><name>vector</name><argument_list type="generic">&lt;<argument><expr><name>ListenerDescription</name></expr></argument>&gt;</argument_list></name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>descriptions</name></decl></parameter> )</parameter_list> <block>{<block_content>
+        <expr_stmt><expr><name>out</name> <operator>&lt;&lt;</operator> <literal type="string">"Registered listeners:\n"</literal></expr>;</expr_stmt>
+
+        <if_stmt><if>if<condition>(<expr><call><name><name>descriptions</name><operator>.</operator><name>empty</name></name><argument_list>()</argument_list></call></expr>)</condition> <block>{<block_content>
+            <return>return;</return>
+        </block_content>}</block></if></if_stmt>
+
+        <decl_stmt><decl><type><specifier>const</specifier> <specifier>auto</specifier></type> <name>maxNameLen</name> <init>=
+            <expr><call><name><name>std</name><operator>::</operator><name>max_element</name></name><argument_list>( <argument><expr><call><name><name>descriptions</name><operator>.</operator><name>begin</name></name><argument_list>()</argument_list></call></expr></argument>,
+                              <argument><expr><call><name><name>descriptions</name><operator>.</operator><name>end</name></name><argument_list>()</argument_list></call></expr></argument>,
+                              <argument><expr><lambda><capture>[]</capture><parameter_list>( <parameter><decl><type><name>ListenerDescription</name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>lhs</name></decl></parameter>,
+                                  <parameter><decl><type><name>ListenerDescription</name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>rhs</name></decl></parameter> )</parameter_list> <block>{<block_content>
+                                  <return>return <expr><call><name><name>lhs</name><operator>.</operator><name>name</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call> <operator>&lt;</operator> <call><name><name>rhs</name><operator>.</operator><name>name</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call></expr>;</return>
+                              </block_content>}</block></lambda></expr></argument> )</argument_list></call>
+                <operator>-&gt;</operator><call><name><name>name</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+
+        <for>for <control>( <init><decl><type><specifier>auto</specifier> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>desc</name> <range>: <expr><name>descriptions</name></expr></range></decl></init> )</control> <block>{<block_content>
+            <expr_stmt><expr><name>out</name> <operator>&lt;&lt;</operator> <call><name><name>TextFlow</name><operator>::</operator><name>Column</name></name><argument_list>( <argument><expr><cast type="static">static_cast<argument_list type="generic">&lt;<argument><expr><name><name>std</name><operator>::</operator><name>string</name></name></expr></argument>&gt;</argument_list><argument_list>( <argument><expr><name><name>desc</name><operator>.</operator><name>name</name></name></expr></argument> )</argument_list></cast> <operator>+</operator>
+                                     <literal type="char">':'</literal></expr></argument> )</argument_list></call>
+                           <operator>.</operator><call><name>indent</name><argument_list>( <argument><expr><literal type="number">2</literal></expr></argument> )</argument_list></call>
+                           <operator>.</operator><call><name>width</name><argument_list>( <argument><expr><name>maxNameLen</name> <operator>+</operator> <literal type="number">5</literal></expr></argument> )</argument_list></call> <operator>+</operator>
+                       <call><name><name>TextFlow</name><operator>::</operator><name>Column</name></name><argument_list>( <argument><expr><name><name>desc</name><operator>.</operator><name>description</name></name></expr></argument> )</argument_list></call>
+                           <operator>.</operator><call><name>initialIndent</name><argument_list>( <argument><expr><literal type="number">0</literal></expr></argument> )</argument_list></call>
+                           <operator>.</operator><call><name>indent</name><argument_list>( <argument><expr><literal type="number">2</literal></expr></argument> )</argument_list></call>
+                           <operator>.</operator><call><name>width</name><argument_list>( <argument><expr><name>CATCH_CONFIG_CONSOLE_WIDTH</name> <operator>-</operator> <name>maxNameLen</name> <operator>-</operator> <literal type="number">8</literal></expr></argument> )</argument_list></call>
+                <operator>&lt;&lt;</operator> <literal type="char">'\n'</literal></expr>;</expr_stmt>
+        </block_content>}</block></for>
+
+        <expr_stmt><expr><name>out</name> <operator>&lt;&lt;</operator> <literal type="char">'\n'</literal> <operator>&lt;&lt;</operator> <name><name>std</name><operator>::</operator><name>flush</name></name></expr>;</expr_stmt>
+    </block_content>}</block></function>
+
+    <function><type><name>void</name></type> <name>defaultListTags</name><parameter_list>( <parameter><decl><type><name><name>std</name><operator>::</operator><name>ostream</name></name><modifier>&amp;</modifier></type> <name>out</name></decl></parameter>,
+                          <parameter><decl><type><name><name>std</name><operator>::</operator><name>vector</name><argument_list type="generic">&lt;<argument><expr><name>TagInfo</name></expr></argument>&gt;</argument_list></name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>tags</name></decl></parameter>,
+                          <parameter><decl><type><name>bool</name></type> <name>isFiltered</name></decl></parameter> )</parameter_list> <block>{<block_content>
+        <if_stmt><if>if <condition>( <expr><name>isFiltered</name></expr> )</condition> <block>{<block_content>
+            <expr_stmt><expr><name>out</name> <operator>&lt;&lt;</operator> <literal type="string">"Tags for matching test cases:\n"</literal></expr>;</expr_stmt>
+        </block_content>}</block></if> <else>else <block>{<block_content>
+            <expr_stmt><expr><name>out</name> <operator>&lt;&lt;</operator> <literal type="string">"All available tags:\n"</literal></expr>;</expr_stmt>
+        </block_content>}</block></else></if_stmt>
+
+<diff:insert xmlns:diff="http://www.srcML.org/srcDiff"><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">        </diff:ws><comment type="line">//<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>minimum<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>whitespace<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>to<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>pad<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>tag<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>counts,<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>possibly<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>overwritten<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>below</comment><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+        </diff:ws><decl_stmt><decl><type><name>size_t</name></type><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><name>maxTagCountLen</name><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><init>=<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><expr><literal type="number">2</literal></expr></init></decl>;</decl_stmt><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+
+        </diff:ws><comment type="line">//<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>determine<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>necessary<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>padding<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>for<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>tag<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>count<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>column</comment><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+        </diff:ws><if_stmt><if>if<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><condition>(<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><expr><operator>!</operator><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><call><name><name>tags</name><operator>.</operator><name>empty</name></name><argument_list>()</argument_list></call></expr><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>)</condition><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><block>{<block_content><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+            </diff:ws><decl_stmt><decl><type><specifier>const</specifier><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><specifier>auto</specifier></type><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><name>maxTagCount</name><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><init>=<diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+                </diff:ws><expr><call><name><name>std</name><operator>::</operator><name>max_element</name></name><argument_list>(<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><argument><expr><call><name><name>tags</name><operator>.</operator><name>begin</name></name><argument_list>()</argument_list></call></expr></argument>,<diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+                                  </diff:ws><argument><expr><call><name><name>tags</name><operator>.</operator><name>end</name></name><argument_list>()</argument_list></call></expr></argument>,<diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+                                  </diff:ws><argument><expr><lambda><capture>[]</capture><parameter_list>(<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><parameter><decl><type><specifier>auto</specifier><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><specifier>const</specifier><modifier>&amp;</modifier></type><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><name>lhs</name></decl></parameter>,<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><parameter><decl><type><specifier>auto</specifier><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><specifier>const</specifier><modifier>&amp;</modifier></type><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><name>rhs</name></decl></parameter><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>)</parameter_list><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><block>{<block_content><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+                                      </diff:ws><return>return<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><expr><name><name>lhs</name><operator>.</operator><name>count</name></name><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><operator>&lt;</operator><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><name><name>rhs</name><operator>.</operator><name>count</name></name></expr>;</return><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+                                  </diff:ws></block_content>}</block></lambda></expr></argument><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>)</argument_list></call><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+                    </diff:ws><operator>-&gt;</operator><name>count</name></expr></init></decl>;</decl_stmt><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+            
+            </diff:ws><comment type="line">//<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>more<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>padding<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>necessary<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>for<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>3+<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>digits</comment><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+            </diff:ws><if_stmt><if>if<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><condition>(<expr><name>maxTagCount</name><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><operator>&gt;=</operator><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><literal type="number">100</literal></expr>)</condition><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><block>{<block_content><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+                </diff:ws><decl_stmt><decl><type><name>auto</name></type><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><name>numDigits</name><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><init>=<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><expr><literal type="number">1</literal><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><operator>+</operator><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><call><name><name>std</name><operator>::</operator><name>floor</name></name><argument_list>(<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><argument><expr><call><name><name>std</name><operator>::</operator><name>log10</name></name><argument_list>(<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><argument><expr><name>maxTagCount</name></expr></argument><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>)</argument_list></call></expr></argument><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>)</argument_list></call></expr></init></decl>;</decl_stmt><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+                </diff:ws><expr_stmt><expr><name>maxTagCountLen</name><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><operator>=</operator><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><cast type="static">static_cast<argument_list type="generic">&lt;<argument><expr><name>size_t</name></expr></argument>&gt;</argument_list><argument_list>(<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><argument><expr><name>numDigits</name></expr></argument><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>)</argument_list></cast></expr>;</expr_stmt><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+            </diff:ws></block_content>}</block></if></if_stmt><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+        </diff:ws></block_content>}</block></if></if_stmt><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+
+</diff:ws></diff:insert>        <for>for <control>( <init><decl><type><specifier>auto</specifier> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>tagCount</name> <range>: <expr><name>tags</name></expr></range></decl></init> )</control> <block>{<block_content>
+            <decl_stmt><decl><type><name>ReusableStringStream</name></type> <name>rss</name></decl>;</decl_stmt>
+            <expr_stmt><expr><name>rss</name> <operator>&lt;&lt;</operator> <literal type="string">"  "</literal> <operator>&lt;&lt;</operator> <call><name><name>std</name><operator>::</operator><name>setw</name></name><argument_list>( <argument><expr><diff:delete type="replace" xmlns:diff="http://www.srcML.org/srcDiff"><literal type="number">2</literal></diff:delete><diff:insert type="replace" xmlns:diff="http://www.srcML.org/srcDiff"><name>maxTagCountLen</name></diff:insert></expr></argument> )</argument_list></call> <operator>&lt;&lt;</operator> <name><name>tagCount</name><operator>.</operator><name>count</name></name> <operator>&lt;&lt;</operator> <literal type="string">"  "</literal></expr>;</expr_stmt>
+            <decl_stmt><decl><type><name>auto</name></type> <name>str</name> <init>= <expr><call><name><name>rss</name><operator>.</operator><name>str</name></name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+            <decl_stmt><decl><type><name>auto</name></type> <name>wrapper</name> <init>= <expr><call><name><name>TextFlow</name><operator>::</operator><name>Column</name></name><argument_list>( <argument><expr><call><name><name>tagCount</name><operator>.</operator><name>all</name></name><argument_list>()</argument_list></call></expr></argument> )</argument_list></call>
+                               <operator>.</operator><call><name>initialIndent</name><argument_list>( <argument><expr><literal type="number">0</literal></expr></argument> )</argument_list></call>
+                               <operator>.</operator><call><name>indent</name><argument_list>( <argument><expr><call><name><name>str</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call></expr></argument> )</argument_list></call>
+                               <operator>.</operator><call><name>width</name><argument_list>( <argument><expr><name>CATCH_CONFIG_CONSOLE_WIDTH</name> <operator>-</operator> <literal type="number">10</literal></expr></argument> )</argument_list></call></expr></init></decl>;</decl_stmt>
+            <expr_stmt><expr><name>out</name> <operator>&lt;&lt;</operator> <name>str</name> <operator>&lt;&lt;</operator> <name>wrapper</name> <operator>&lt;&lt;</operator> <literal type="char">'\n'</literal></expr>;</expr_stmt>
+        </block_content>}</block></for>
+        <expr_stmt><expr><name>out</name> <operator>&lt;&lt;</operator> <call><name>pluralise</name><argument_list>(<argument><expr><call><name><name>tags</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call></expr></argument>, <argument><expr><literal type="string">"tag"</literal><name>_sr</name></expr></argument>)</argument_list></call> <operator>&lt;&lt;</operator> <literal type="string">"\n\n"</literal> <operator>&lt;&lt;</operator> <name><name>std</name><operator>::</operator><name>flush</name></name></expr>;</expr_stmt>
+    </block_content>}</block></function>
+
+    <function><type><name>void</name></type> <name>defaultListTests</name><parameter_list>(<parameter><decl><type><name><name>std</name><operator>::</operator><name>ostream</name></name><modifier>&amp;</modifier></type> <name>out</name></decl></parameter>, <parameter><decl><type><name>ColourImpl</name><modifier>*</modifier></type> <name>streamColour</name></decl></parameter>, <parameter><decl><type><name><name>std</name><operator>::</operator><name>vector</name><argument_list type="generic">&lt;<argument><expr><name>TestCaseHandle</name></expr></argument>&gt;</argument_list></name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>tests</name></decl></parameter>, <parameter><decl><type><name>bool</name></type> <name>isFiltered</name></decl></parameter>, <parameter><decl><type><name>Verbosity</name></type> <name>verbosity</name></decl></parameter>)</parameter_list> <block>{<block_content>
+        <comment type="line">// We special case this to provide the equivalent of old</comment>
+        <comment type="line">// `--list-test-names-only`, which could then be used by the</comment>
+        <comment type="line">// `--input-file` option.</comment>
+        <if_stmt><if>if <condition>(<expr><name>verbosity</name> <operator>==</operator> <name><name>Verbosity</name><operator>::</operator><name>Quiet</name></name></expr>)</condition> <block>{<block_content>
+            <expr_stmt><expr><call><name>listTestNamesOnly</name><argument_list>(<argument><expr><name>out</name></expr></argument>, <argument><expr><name>tests</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+            <return>return;</return>
+        </block_content>}</block></if></if_stmt>
+
+        <if_stmt><if>if <condition>(<expr><name>isFiltered</name></expr>)</condition> <block>{<block_content>
+            <expr_stmt><expr><name>out</name> <operator>&lt;&lt;</operator> <literal type="string">"Matching test cases:\n"</literal></expr>;</expr_stmt>
+        </block_content>}</block></if> <else>else <block>{<block_content>
+            <expr_stmt><expr><name>out</name> <operator>&lt;&lt;</operator> <literal type="string">"All available test cases:\n"</literal></expr>;</expr_stmt>
+        </block_content>}</block></else></if_stmt>
+
+        <for>for <control>(<init><decl><type><specifier>auto</specifier> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>test</name> <range>: <expr><name>tests</name></expr></range></decl></init>)</control> <block>{<block_content>
+            <decl_stmt><decl><type><specifier>auto</specifier> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>testCaseInfo</name> <init>= <expr><call><name><name>test</name><operator>.</operator><name>getTestCaseInfo</name></name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+            <decl_stmt><decl><type><name><name>Colour</name><operator>::</operator><name>Code</name></name></type> <name>colour</name> <init>= <expr><ternary><condition><expr><call><name><name>testCaseInfo</name><operator>.</operator><name>isHidden</name></name><argument_list>()</argument_list></call></expr>
+                ?</condition><then> <expr><name><name>Colour</name><operator>::</operator><name>SecondaryText</name></name></expr>
+                </then><else>: <expr><name><name>Colour</name><operator>::</operator><name>None</name></name></expr></else></ternary></expr></init></decl>;</decl_stmt>
+            <decl_stmt><decl><type><name>auto</name></type> <name>colourGuard</name> <init>= <expr><call><name><name>streamColour</name><operator>-&gt;</operator><name>guardColour</name></name><argument_list>( <argument><expr><name>colour</name></expr></argument> )</argument_list></call><operator>.</operator><call><name>engage</name><argument_list>( <argument><expr><name>out</name></expr></argument> )</argument_list></call></expr></init></decl>;</decl_stmt>
+
+            <expr_stmt><expr><name>out</name> <operator>&lt;&lt;</operator> <call><name><name>TextFlow</name><operator>::</operator><name>Column</name></name><argument_list>(<argument><expr><name><name>testCaseInfo</name><operator>.</operator><name>name</name></name></expr></argument>)</argument_list></call><operator>.</operator><call><name>indent</name><argument_list>(<argument><expr><literal type="number">2</literal></expr></argument>)</argument_list></call> <operator>&lt;&lt;</operator> <literal type="char">'\n'</literal></expr>;</expr_stmt>
+            <if_stmt><if>if <condition>(<expr><name>verbosity</name> <operator>&gt;=</operator> <name><name>Verbosity</name><operator>::</operator><name>High</name></name></expr>)</condition> <block>{<block_content>
+                <expr_stmt><expr><name>out</name> <operator>&lt;&lt;</operator> <call><name><name>TextFlow</name><operator>::</operator><name>Column</name></name><argument_list>(<argument><expr><call><name><name>Catch</name><operator>::</operator><name>Detail</name><operator>::</operator><name>stringify</name></name><argument_list>(<argument><expr><name><name>testCaseInfo</name><operator>.</operator><name>lineInfo</name></name></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call><operator>.</operator><call><name>indent</name><argument_list>(<argument><expr><literal type="number">4</literal></expr></argument>)</argument_list></call> <operator>&lt;&lt;</operator> <literal type="char">'\n'</literal></expr>;</expr_stmt>
+            </block_content>}</block></if></if_stmt>
+            <if_stmt><if>if <condition>(<expr><operator>!</operator><call><name><name>testCaseInfo</name><operator>.</operator><name>tags</name><operator>.</operator><name>empty</name></name><argument_list>()</argument_list></call> <operator>&amp;&amp;</operator>
+                <name>verbosity</name> <operator>&gt;</operator> <name><name>Verbosity</name><operator>::</operator><name>Quiet</name></name></expr>)</condition> <block>{<block_content>
+                <expr_stmt><expr><name>out</name> <operator>&lt;&lt;</operator> <call><name><name>TextFlow</name><operator>::</operator><name>Column</name></name><argument_list>(<argument><expr><call><name><name>testCaseInfo</name><operator>.</operator><name>tagsAsString</name></name><argument_list>()</argument_list></call></expr></argument>)</argument_list></call><operator>.</operator><call><name>indent</name><argument_list>(<argument><expr><literal type="number">6</literal></expr></argument>)</argument_list></call> <operator>&lt;&lt;</operator> <literal type="char">'\n'</literal></expr>;</expr_stmt>
+            </block_content>}</block></if></if_stmt>
+        </block_content>}</block></for>
+
+        <if_stmt><if>if <condition>(<expr><name>isFiltered</name></expr>)</condition> <block>{<block_content>
+            <expr_stmt><expr><name>out</name> <operator>&lt;&lt;</operator> <call><name>pluralise</name><argument_list>(<argument><expr><call><name><name>tests</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call></expr></argument>, <argument><expr><literal type="string">"matching test case"</literal><name>_sr</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        </block_content>}</block></if> <else>else <block>{<block_content>
+            <expr_stmt><expr><name>out</name> <operator>&lt;&lt;</operator> <call><name>pluralise</name><argument_list>(<argument><expr><call><name><name>tests</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call></expr></argument>, <argument><expr><literal type="string">"test case"</literal><name>_sr</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        </block_content>}</block></else></if_stmt>
+        <expr_stmt><expr><name>out</name> <operator>&lt;&lt;</operator> <literal type="string">"\n\n"</literal> <operator>&lt;&lt;</operator> <name><name>std</name><operator>::</operator><name>flush</name></name></expr>;</expr_stmt>
+    </block_content>}</block></function>
+
+    <namespace>namespace <block>{
+        <class>class <name>SummaryColumn</name> <block>{<private type="default">
+        </private><public>public:
+            <constructor><name>SummaryColumn</name><parameter_list>( <parameter><decl><type><name><name>std</name><operator>::</operator><name>string</name></name></type> <name>suffix</name></decl></parameter>, <parameter><decl><type><name><name>Colour</name><operator>::</operator><name>Code</name></name></type> <name>colour</name></decl></parameter> )</parameter_list><member_init_list>:
+                <call><name>m_suffix</name><argument_list>( <argument><expr><call><name>CATCH_MOVE</name><argument_list>( <argument><expr><name>suffix</name></expr></argument> )</argument_list></call></expr></argument> )</argument_list></call>, <call><name>m_colour</name><argument_list>( <argument><expr><name>colour</name></expr></argument> )</argument_list></call> </member_init_list><block>{<block_content/>}</block></constructor>
+
+            <function><type><name>SummaryColumn</name><modifier>&amp;&amp;</modifier></type> <name>addRow</name><parameter_list>( <parameter><decl><type><name><name>std</name><operator>::</operator><name>uint64_t</name></name></type> <name>count</name></decl></parameter> )</parameter_list> <ref_qualifier>&amp;&amp;</ref_qualifier> <block>{<block_content>
+                <decl_stmt><decl><type><name><name>std</name><operator>::</operator><name>string</name></name></type> <name>row</name> <init>= <expr><call><name><name>std</name><operator>::</operator><name>to_string</name></name><argument_list>(<argument><expr><name>count</name></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+                <decl_stmt><decl><type><specifier>auto</specifier> <specifier>const</specifier></type> <name>new_width</name> <init>= <expr><call><name><name>std</name><operator>::</operator><name>max</name></name><argument_list>( <argument><expr><name>m_width</name></expr></argument>, <argument><expr><call><name><name>row</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call></expr></argument> )</argument_list></call></expr></init></decl>;</decl_stmt>
+                <if_stmt><if>if <condition>( <expr><name>new_width</name> <operator>&gt;</operator> <name>m_width</name></expr> )</condition> <block>{<block_content>
+                    <for>for <control>( <init><expr><name>auto</name><operator>&amp;</operator> <name>oldRow</name> <operator>:</operator> <name>m_rows</name></expr></init> )</control> <block>{<block_content>
+                        <expr_stmt><expr><call><name><name>oldRow</name><operator>.</operator><name>insert</name></name><argument_list>( <argument><expr><literal type="number">0</literal></expr></argument>, <argument><expr><name>new_width</name> <operator>-</operator> <name>m_width</name></expr></argument>, <argument><expr><literal type="char">' '</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+                    </block_content>}</block></for>
+                </block_content>}</block></if> <else>else <block>{<block_content>
+                    <expr_stmt><expr><call><name><name>row</name><operator>.</operator><name>insert</name></name><argument_list>( <argument><expr><literal type="number">0</literal></expr></argument>, <argument><expr><name>m_width</name> <operator>-</operator> <call><name><name>row</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call></expr></argument>, <argument><expr><literal type="char">' '</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+                </block_content>}</block></else></if_stmt>
+                <expr_stmt><expr><name>m_width</name> <operator>=</operator> <name>new_width</name></expr>;</expr_stmt>
+                <expr_stmt><expr><call><name><name>m_rows</name><operator>.</operator><name>push_back</name></name><argument_list>( <argument><expr><name>row</name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+                <return>return <expr><call><name><name>std</name><operator>::</operator><name>move</name></name><argument_list>( <argument><expr><operator>*</operator><name>this</name></expr></argument> )</argument_list></call></expr>;</return>
+            </block_content>}</block></function>
+
+            <function><type><name><name>std</name><operator>::</operator><name>string</name></name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>getSuffix</name><parameter_list>()</parameter_list> <specifier>const</specifier> <block>{<block_content> <return>return <expr><name>m_suffix</name></expr>;</return> </block_content>}</block></function>
+            <function><type><name><name>Colour</name><operator>::</operator><name>Code</name></name></type> <name>getColour</name><parameter_list>()</parameter_list> <specifier>const</specifier> <block>{<block_content> <return>return <expr><name>m_colour</name></expr>;</return> </block_content>}</block></function>
+            <function><type><name><name>std</name><operator>::</operator><name>string</name></name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>getRow</name><parameter_list>( <parameter><decl><type><name><name>std</name><operator>::</operator><name>size_t</name></name></type> <name>index</name></decl></parameter> )</parameter_list> <specifier>const</specifier> <block>{<block_content>
+                <return>return <expr><name><name>m_rows</name><index>[<expr><name>index</name></expr>]</index></name></expr>;</return>
+            </block_content>}</block></function>
+
+        </public><private>private:
+            <decl_stmt><decl><type><name><name>std</name><operator>::</operator><name>string</name></name></type> <name>m_suffix</name></decl>;</decl_stmt>
+            <decl_stmt><decl><type><name><name>Colour</name><operator>::</operator><name>Code</name></name></type> <name>m_colour</name></decl>;</decl_stmt>
+            <decl_stmt><decl><type><name><name>std</name><operator>::</operator><name>size_t</name></name></type> <name>m_width</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</decl_stmt>
+            <decl_stmt><decl><type><name><name>std</name><operator>::</operator><name>vector</name><argument_list type="generic">&lt;<argument><expr><name><name>std</name><operator>::</operator><name>string</name></name></expr></argument>&gt;</argument_list></name></type> <name>m_rows</name></decl>;</decl_stmt>
+        </private>}</block>;</class>
+
+        <function><type><name>void</name></type> <name>printSummaryRow</name><parameter_list>( <parameter><decl><type><name><name>std</name><operator>::</operator><name>ostream</name></name><modifier>&amp;</modifier></type> <name>stream</name></decl></parameter>,
+                              <parameter><decl><type><name>ColourImpl</name><modifier>&amp;</modifier></type> <name>colour</name></decl></parameter>,
+                              <parameter><decl><type><name>StringRef</name></type> <name>label</name></decl></parameter>,
+                              <parameter><decl><type><name><name>std</name><operator>::</operator><name>vector</name><argument_list type="generic">&lt;<argument><expr><name>SummaryColumn</name></expr></argument>&gt;</argument_list></name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>cols</name></decl></parameter>,
+                              <parameter><decl><type><name><name>std</name><operator>::</operator><name>size_t</name></name></type> <name>row</name></decl></parameter> )</parameter_list> <block>{<block_content>
+            <for>for <control>( <init><decl><type><specifier>auto</specifier> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>col</name> <range>: <expr><name>cols</name></expr></range></decl></init> )</control> <block>{<block_content>
+                <decl_stmt><decl><type><specifier>auto</specifier> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>value</name> <init>= <expr><call><name><name>col</name><operator>.</operator><name>getRow</name></name><argument_list>( <argument><expr><name>row</name></expr></argument> )</argument_list></call></expr></init></decl>;</decl_stmt>
+                <decl_stmt><decl><type><specifier>auto</specifier> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>suffix</name> <init>= <expr><call><name><name>col</name><operator>.</operator><name>getSuffix</name></name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+                <if_stmt><if>if <condition>( <expr><call><name><name>suffix</name><operator>.</operator><name>empty</name></name><argument_list>()</argument_list></call></expr> )</condition> <block>{<block_content>
+                    <expr_stmt><expr><name>stream</name> <operator>&lt;&lt;</operator> <name>label</name> <operator>&lt;&lt;</operator> <literal type="string">": "</literal></expr>;</expr_stmt>
+                    <if_stmt><if>if <condition>( <expr><name>value</name> <operator>!=</operator> <literal type="string">"0"</literal></expr> )</condition> <block>{<block_content>
+                        <expr_stmt><expr><name>stream</name> <operator>&lt;&lt;</operator> <name>value</name></expr>;</expr_stmt>
+                    </block_content>}</block></if> <else>else <block>{<block_content>
+                        <expr_stmt><expr><name>stream</name> <operator>&lt;&lt;</operator> <call><name><name>colour</name><operator>.</operator><name>guardColour</name></name><argument_list>( <argument><expr><name><name>Colour</name><operator>::</operator><name>Warning</name></name></expr></argument> )</argument_list></call>
+                               <operator>&lt;&lt;</operator> <literal type="string">"- none -"</literal></expr>;</expr_stmt>
+                    </block_content>}</block></else></if_stmt>
+                </block_content>}</block></if> <if type="elseif">else if <condition>( <expr><name>value</name> <operator>!=</operator> <literal type="string">"0"</literal></expr> )</condition> <block>{<block_content>
+                    <expr_stmt><expr><name>stream</name> <operator>&lt;&lt;</operator> <call><name><name>colour</name><operator>.</operator><name>guardColour</name></name><argument_list>( <argument><expr><name><name>Colour</name><operator>::</operator><name>LightGrey</name></name></expr></argument> )</argument_list></call> <operator>&lt;&lt;</operator> <literal type="string">" | "</literal>
+                           <operator>&lt;&lt;</operator> <call><name><name>colour</name><operator>.</operator><name>guardColour</name></name><argument_list>( <argument><expr><call><name><name>col</name><operator>.</operator><name>getColour</name></name><argument_list>()</argument_list></call></expr></argument> )</argument_list></call> <operator>&lt;&lt;</operator> <name>value</name>
+                           <operator>&lt;&lt;</operator> <literal type="char">' '</literal> <operator>&lt;&lt;</operator> <name>suffix</name></expr>;</expr_stmt>
+                </block_content>}</block></if></if_stmt>
+            </block_content>}</block></for>
+            <expr_stmt><expr><name>stream</name> <operator>&lt;&lt;</operator> <literal type="char">'\n'</literal></expr>;</expr_stmt>
+        </block_content>}</block></function>
+    }</block></namespace> <comment type="line">// namespace</comment>
+
+    <function><type><name>void</name></type> <name>printTestRunTotals</name><parameter_list>( <parameter><decl><type><name><name>std</name><operator>::</operator><name>ostream</name></name><modifier>&amp;</modifier></type> <name>stream</name></decl></parameter>,
+                             <parameter><decl><type><name>ColourImpl</name><modifier>&amp;</modifier></type> <name>streamColour</name></decl></parameter>,
+                             <parameter><decl><type><name>Totals</name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>totals</name></decl></parameter> )</parameter_list> <block>{<block_content>
+        <if_stmt><if>if <condition>( <expr><call><name><name>totals</name><operator>.</operator><name>testCases</name><operator>.</operator><name>total</name></name><argument_list>()</argument_list></call> <operator>==</operator> <literal type="number">0</literal></expr> )</condition> <block>{<block_content>
+            <expr_stmt><expr><name>stream</name> <operator>&lt;&lt;</operator> <call><name><name>streamColour</name><operator>.</operator><name>guardColour</name></name><argument_list>( <argument><expr><name><name>Colour</name><operator>::</operator><name>Warning</name></name></expr></argument> )</argument_list></call>
+                   <operator>&lt;&lt;</operator> <literal type="string">"No tests ran\n"</literal></expr>;</expr_stmt>
+            <return>return;</return>
+        </block_content>}</block></if></if_stmt>
+
+        <if_stmt><if>if <condition>( <expr><call><name><name>totals</name><operator>.</operator><name>assertions</name><operator>.</operator><name>total</name></name><argument_list>()</argument_list></call> <operator>&gt;</operator> <literal type="number">0</literal> <operator>&amp;&amp;</operator> <call><name><name>totals</name><operator>.</operator><name>testCases</name><operator>.</operator><name>allPassed</name></name><argument_list>()</argument_list></call></expr> )</condition> <block>{<block_content>
+            <expr_stmt><expr><name>stream</name> <operator>&lt;&lt;</operator> <call><name><name>streamColour</name><operator>.</operator><name>guardColour</name></name><argument_list>( <argument><expr><name><name>Colour</name><operator>::</operator><name>ResultSuccess</name></name></expr></argument> )</argument_list></call>
+                   <operator>&lt;&lt;</operator> <literal type="string">"All tests passed"</literal></expr>;</expr_stmt>
+            <expr_stmt><expr><name>stream</name> <operator>&lt;&lt;</operator> <literal type="string">" ("</literal>
+                   <operator>&lt;&lt;</operator> <call><name>pluralise</name><argument_list>( <argument><expr><name><name>totals</name><operator>.</operator><name>assertions</name><operator>.</operator><name>passed</name></name></expr></argument>, <argument><expr><literal type="string">"assertion"</literal><name>_sr</name></expr></argument> )</argument_list></call>
+                   <operator>&lt;&lt;</operator> <literal type="string">" in "</literal>
+                   <operator>&lt;&lt;</operator> <call><name>pluralise</name><argument_list>( <argument><expr><name><name>totals</name><operator>.</operator><name>testCases</name><operator>.</operator><name>passed</name></name></expr></argument>, <argument><expr><literal type="string">"test case"</literal><name>_sr</name></expr></argument> )</argument_list></call>
+                   <operator>&lt;&lt;</operator> <literal type="char">')'</literal> <operator>&lt;&lt;</operator> <literal type="char">'\n'</literal></expr>;</expr_stmt>
+            <return>return;</return>
+        </block_content>}</block></if></if_stmt>
+
+        <decl_stmt><decl><type><name><name>std</name><operator>::</operator><name>vector</name><argument_list type="generic">&lt;<argument><expr><name>SummaryColumn</name></expr></argument>&gt;</argument_list></name></type> <name>columns</name></decl>;</decl_stmt>
+        <comment type="line">// Don't include "skipped assertions" in total count</comment>
+        <decl_stmt><decl><type><specifier>const</specifier> <specifier>auto</specifier></type> <name>totalAssertionCount</name> <init>=
+            <expr><call><name><name>totals</name><operator>.</operator><name>assertions</name><operator>.</operator><name>total</name></name><argument_list>()</argument_list></call> <operator>-</operator> <name><name>totals</name><operator>.</operator><name>assertions</name><operator>.</operator><name>skipped</name></name></expr></init></decl>;</decl_stmt>
+        <expr_stmt><expr><call><name><name>columns</name><operator>.</operator><name>push_back</name></name><argument_list>( <argument><expr><call><name>SummaryColumn</name><argument_list>( <argument><expr><literal type="string">""</literal></expr></argument>, <argument><expr><name><name>Colour</name><operator>::</operator><name>None</name></name></expr></argument> )</argument_list></call>
+                               <operator>.</operator><call><name>addRow</name><argument_list>( <argument><expr><call><name><name>totals</name><operator>.</operator><name>testCases</name><operator>.</operator><name>total</name></name><argument_list>()</argument_list></call></expr></argument> )</argument_list></call>
+                               <operator>.</operator><call><name>addRow</name><argument_list>( <argument><expr><name>totalAssertionCount</name></expr></argument> )</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name><name>columns</name><operator>.</operator><name>push_back</name></name><argument_list>( <argument><expr><call><name>SummaryColumn</name><argument_list>( <argument><expr><literal type="string">"passed"</literal></expr></argument>, <argument><expr><name><name>Colour</name><operator>::</operator><name>Success</name></name></expr></argument> )</argument_list></call>
+                               <operator>.</operator><call><name>addRow</name><argument_list>( <argument><expr><name><name>totals</name><operator>.</operator><name>testCases</name><operator>.</operator><name>passed</name></name></expr></argument> )</argument_list></call>
+                               <operator>.</operator><call><name>addRow</name><argument_list>( <argument><expr><name><name>totals</name><operator>.</operator><name>assertions</name><operator>.</operator><name>passed</name></name></expr></argument> )</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name><name>columns</name><operator>.</operator><name>push_back</name></name><argument_list>( <argument><expr><call><name>SummaryColumn</name><argument_list>( <argument><expr><literal type="string">"failed"</literal></expr></argument>, <argument><expr><name><name>Colour</name><operator>::</operator><name>ResultError</name></name></expr></argument> )</argument_list></call>
+                               <operator>.</operator><call><name>addRow</name><argument_list>( <argument><expr><name><name>totals</name><operator>.</operator><name>testCases</name><operator>.</operator><name>failed</name></name></expr></argument> )</argument_list></call>
+                               <operator>.</operator><call><name>addRow</name><argument_list>( <argument><expr><name><name>totals</name><operator>.</operator><name>assertions</name><operator>.</operator><name>failed</name></name></expr></argument> )</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name><name>columns</name><operator>.</operator><name>push_back</name></name><argument_list>( <argument><expr><call><name>SummaryColumn</name><argument_list>( <argument><expr><literal type="string">"skipped"</literal></expr></argument>, <argument><expr><name><name>Colour</name><operator>::</operator><name>Skip</name></name></expr></argument> )</argument_list></call>
+                               <operator>.</operator><call><name>addRow</name><argument_list>( <argument><expr><name><name>totals</name><operator>.</operator><name>testCases</name><operator>.</operator><name>skipped</name></name></expr></argument> )</argument_list></call>
+                               <comment type="line">// Don't print "skipped assertions"</comment>
+                               <operator>.</operator><call><name>addRow</name><argument_list>( <argument><expr><literal type="number">0</literal></expr></argument> )</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name><name>columns</name><operator>.</operator><name>push_back</name></name><argument_list>(
+            <argument><expr><call><name>SummaryColumn</name><argument_list>( <argument><expr><literal type="string">"failed as expected"</literal></expr></argument>, <argument><expr><name><name>Colour</name><operator>::</operator><name>ResultExpectedFailure</name></name></expr></argument> )</argument_list></call>
+                <operator>.</operator><call><name>addRow</name><argument_list>( <argument><expr><name><name>totals</name><operator>.</operator><name>testCases</name><operator>.</operator><name>failedButOk</name></name></expr></argument> )</argument_list></call>
+                <operator>.</operator><call><name>addRow</name><argument_list>( <argument><expr><name><name>totals</name><operator>.</operator><name>assertions</name><operator>.</operator><name>failedButOk</name></name></expr></argument> )</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name>printSummaryRow</name><argument_list>( <argument><expr><name>stream</name></expr></argument>, <argument><expr><name>streamColour</name></expr></argument>, <argument><expr><literal type="string">"test cases"</literal><name>_sr</name></expr></argument>, <argument><expr><name>columns</name></expr></argument>, <argument><expr><literal type="number">0</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name>printSummaryRow</name><argument_list>( <argument><expr><name>stream</name></expr></argument>, <argument><expr><name>streamColour</name></expr></argument>, <argument><expr><literal type="string">"assertions"</literal><name>_sr</name></expr></argument>, <argument><expr><name>columns</name></expr></argument>, <argument><expr><literal type="number">1</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block></function>
+
+}</block></namespace> <comment type="line">// namespace Catch</comment>
+</unit>

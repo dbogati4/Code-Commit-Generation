@@ -1,0 +1,8 @@
+{
+  "commit_id": "ff78e7c45af8910d6b4377a2c343b17b312c2799",
+  "parent_id": "470561cbbd3454c8df7bcf857bf9e10641366b93",
+  "message": "Fixed typo in test name",
+  "changed_files": [
+    "projects/SelfTest/TestMain.cpp"
+  ]
+}

@@ -1,0 +1,8 @@
+{
+  "commit_id": "c7cf0a9f8b4a622ad254cb7f0debbcceab53bb4c",
+  "parent_id": "7b0a84a048e5e0b84a2e3794e3d27a32aaf89803",
+  "message": "Catch's Travis builds are using gcc that doesn't like the auto keyword",
+  "changed_files": [
+    "projects/SelfTest/MiscTests.cpp"
+  ]
+}

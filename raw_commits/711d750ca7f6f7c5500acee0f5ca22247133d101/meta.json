@@ -1,0 +1,8 @@
+{
+  "commit_id": "711d750ca7f6f7c5500acee0f5ca22247133d101",
+  "parent_id": "dbbab8727c342733f75045483048cdcb52421e32",
+  "message": "use \"std\" namespace for \"sprintf\"",
+  "changed_files": [
+    "include/reporters/catch_reporter_bases.cpp"
+  ]
+}

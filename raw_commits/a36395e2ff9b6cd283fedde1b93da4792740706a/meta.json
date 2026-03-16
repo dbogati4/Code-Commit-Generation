@@ -1,0 +1,8 @@
+{
+  "commit_id": "a36395e2ff9b6cd283fedde1b93da4792740706a",
+  "parent_id": "699e571400955aa0a9b7bd4212cf5a058bcf550f",
+  "message": "Changed use of strncpy to memcpy",
+  "changed_files": [
+    "include/internal/catch_stringref.cpp"
+  ]
+}

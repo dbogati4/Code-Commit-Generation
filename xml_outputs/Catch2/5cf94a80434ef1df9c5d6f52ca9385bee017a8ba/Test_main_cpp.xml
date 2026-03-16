@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" xmlns:diff="http://www.srcML.org/srcDiff" revision="1.0.0" language="C++" filename="C:\Users\saile\AppData\Local\Temp\catch2_100_z8gzpiwf\5cf94a80434ef1df9c5d6f52ca9385bee017a8ba\Test_main_cpp\Test_main_cpp.old|C:\Users\saile\AppData\Local\Temp\catch2_100_z8gzpiwf\5cf94a80434ef1df9c5d6f52ca9385bee017a8ba\Test_main_cpp\Test_main_cpp.new"><comment type="block">/*
+ *  main.cpp
+ *  Catch - Test
+ *
+ *  Created by Phil on 22/10/2010.
+ *  Copyright 2010 Two Blue Cubes Ltd
+ *
+ *  Distributed under the Boost Software License, Version 1.0. (See accompanying
+ *  file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
+ *
+ */</comment>
+
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">"catch.hpp"</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">"catch_runner.hpp"</cpp:file></cpp:include>
+
+<comment type="line">// This code runs the meta tests and verifies that the failing ones failed and the successful ones succeeded</comment>
+<function><type><name>int</name></type> <name>main</name> <parameter_list>(<parameter><decl><type><name>int</name></type> <name>argc</name></decl></parameter>, <parameter><decl><type><name>char</name> <modifier>*</modifier> <specifier>const</specifier></type> <name><name>argv</name><index>[]</index></name></decl></parameter>)</parameter_list>
+<block>{<block_content>
+    <using>using <namespace>namespace <name>Catch</name>;</namespace></using>
+<diff:insert xmlns:diff="http://www.srcML.org/srcDiff"><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">    
+    </diff:ws><decl_stmt><decl><type><name>bool</name></type><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><name>showAllResults</name><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><init>=<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><expr><literal type="boolean">false</literal></expr></init></decl>;</decl_stmt><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+    </diff:ws><if_stmt><if>if<condition>(<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><expr><name>argc</name><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><operator>&gt;</operator><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><literal type="number">1</literal><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><operator>&amp;&amp;</operator><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><operator>(</operator><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><call><name><name>std</name><operator>::</operator><name>string</name></name><argument_list>(<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><argument><expr><name><name>argv</name><index>[<expr><literal type="number">1</literal></expr>]</index></name></expr></argument><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>)</argument_list></call><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><operator>==</operator><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><literal type="string">"-s"</literal><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><operator>||</operator><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><call><name><name>std</name><operator>::</operator><name>string</name></name><argument_list>(<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><argument><expr><name><name>argv</name><index>[<expr><literal type="number">1</literal></expr>]</index></name></expr></argument><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>)</argument_list></call><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><operator>==</operator><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><literal type="string">"--success"</literal><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><operator>)</operator></expr><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>)</condition><block type="pseudo"><block_content><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+        </diff:ws><expr_stmt><expr><name>showAllResults</name><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><operator>=</operator><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><literal type="boolean">true</literal></expr>;</expr_stmt></block_content></block></if></if_stmt><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+</diff:ws></diff:insert>        
+    <decl_stmt><decl><type><name>ReporterConfig</name></type> <name>reporterConfig</name><argument_list>( <argument><expr><name><name>ReporterConfig</name><operator>::</operator><name>Include</name><operator>::</operator><name>SuccessfulResults</name></name></expr></argument> )</argument_list></decl>;</decl_stmt>
+    <decl_stmt><decl><type><name>BasicReporter</name></type> <name>reporter</name> <argument_list>(<argument><expr><name>reporterConfig</name></expr></argument> )</argument_list></decl>;</decl_stmt>
+    <decl_stmt><decl><type><name>Runner</name></type> <name>runner</name></decl>;</decl_stmt>
+    <expr_stmt><expr><call><name><name>runner</name><operator>.</operator><name>setReporter</name></name><argument_list>( <argument><expr><operator>&amp;</operator><name>reporter</name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+
+    <decl_stmt><decl><type><name><name>std</name><operator>::</operator><name>ostringstream</name></name></type> <name>ossSucceeding</name></decl>;</decl_stmt>
+    <expr_stmt><expr><call><name><name>reporterConfig</name><operator>.</operator><name>setStreamBuf</name></name><argument_list>( <argument><expr><call><name><name>ossSucceeding</name><operator>.</operator><name>rdbuf</name></name><argument_list>()</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name><name>runner</name><operator>.</operator><name>runMatching</name></name><argument_list>( <argument><expr><literal type="string">"succeeding/*"</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    <decl_stmt><decl><type><name><name>std</name><operator>::</operator><name>string</name></name></type> <name>succeedingResults</name> <init>= <expr><call><name><name>ossSucceeding</name><operator>.</operator><name>str</name></name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+    
+    <decl_stmt><decl><type><name><name>std</name><operator>::</operator><name>ostringstream</name></name></type> <name>ossFailing</name></decl>;</decl_stmt>
+    <expr_stmt><expr><call><name><name>reporterConfig</name><operator>.</operator><name>setStreamBuf</name></name><argument_list>( <argument><expr><call><name><name>ossFailing</name><operator>.</operator><name>rdbuf</name></name><argument_list>()</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name><name>runner</name><operator>.</operator><name>runMatching</name></name><argument_list>( <argument><expr><literal type="string">"failing/*"</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    <decl_stmt><decl><type><name><name>std</name><operator>::</operator><name>string</name></name></type> <name>failingResults</name> <init>= <expr><call><name><name>ossFailing</name><operator>.</operator><name>str</name></name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+
+    <decl_stmt><decl><type><name>int</name></type> <name>result</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</decl_stmt>
+    <if_stmt><if>if<condition>( <expr><call><name><name>succeedingResults</name><operator>.</operator><name>find</name></name><argument_list>( <argument><expr><literal type="string">"failed"</literal></expr></argument> )</argument_list></call> <operator>!=</operator> <name><name>std</name><operator>::</operator><name>string</name><operator>::</operator><name>npos</name></name></expr> )</condition>
+    <block>{<block_content>
+        <expr_stmt><expr><name><name>std</name><operator>::</operator><name>cerr</name></name> <operator>&lt;&lt;</operator> <literal type="string">"Some tests that should have succeeded failed:\n\n"</literal> <operator>&lt;&lt;</operator> <name>succeedingResults</name></expr>;</expr_stmt>
+        <expr_stmt><expr><name>result</name> <operator>=</operator> <literal type="number">1</literal></expr>;</expr_stmt>
+    </block_content>}</block></if><diff:insert xmlns:diff="http://www.srcML.org/srcDiff"><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+    </diff:ws><if type="elseif">else<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>if<condition>(<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><expr><name>showAllResults</name></expr><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>)</condition><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+    </diff:ws><block>{<block_content><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+        </diff:ws><expr_stmt><expr><name><name>std</name><operator>::</operator><name>cout</name></name><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><operator>&lt;&lt;</operator><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><name>succeedingResults</name><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><operator>&lt;&lt;</operator><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><literal type="string">"\n\n"</literal></expr>;</expr_stmt><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+    </diff:ws></block_content>}</block></if></diff:insert></if_stmt>
+    <if_stmt><if>if<condition>( <expr><call><name><name>failingResults</name><operator>.</operator><name>find</name></name><argument_list>( <argument><expr><literal type="string">"succeeded"</literal></expr></argument> )</argument_list></call> <operator>!=</operator> <name><name>std</name><operator>::</operator><name>string</name><operator>::</operator><name>npos</name></name></expr> )</condition>
+    <block>{<block_content>
+        <expr_stmt><expr><name><name>std</name><operator>::</operator><name>cerr</name></name> <operator>&lt;&lt;</operator> <literal type="string">"Some tests that should have failed succeeded:\n\n"</literal> <operator>&lt;&lt;</operator> <name>failingResults</name></expr>;</expr_stmt>
+        <expr_stmt><expr><name>result</name> <operator>=</operator> <literal type="number">1</literal></expr>;</expr_stmt>
+    </block_content>}</block></if><diff:insert xmlns:diff="http://www.srcML.org/srcDiff"><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+    </diff:ws><if type="elseif">else<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>if<condition>(<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><expr><name>showAllResults</name></expr><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>)</condition><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+    </diff:ws><block>{<block_content><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+        </diff:ws><expr_stmt><expr><name><name>std</name><operator>::</operator><name>cout</name></name><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><operator>&lt;&lt;</operator><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><name>failingResults</name><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><operator>&lt;&lt;</operator><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><literal type="string">"\n\n"</literal></expr>;</expr_stmt><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+    </diff:ws></block_content>}</block></if></diff:insert></if_stmt>
+    
+    <if_stmt><if>if<condition>( <expr><name>result</name> <operator>==</operator> <literal type="number">0</literal></expr> )</condition>
+    <block>{<block_content>
+        <expr_stmt><expr><name><name>std</name><operator>::</operator><name>cout</name></name> <operator>&lt;&lt;</operator> <literal type="string">"All tests completed successfully"</literal> <operator>&lt;&lt;</operator> <name><name>std</name><operator>::</operator><name>endl</name></name></expr>;</expr_stmt>
+    </block_content>}</block></if></if_stmt>
+    <return>return <expr><name>result</name></expr>;</return>
+</block_content>}</block></function>
+</unit>

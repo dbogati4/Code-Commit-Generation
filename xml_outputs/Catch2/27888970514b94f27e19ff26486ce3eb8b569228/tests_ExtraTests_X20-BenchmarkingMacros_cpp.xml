@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" xmlns:diff="http://www.srcML.org/srcDiff" revision="1.0.0" language="C++" filename="C:\Users\saile\AppData\Local\Temp\catch2_100_z8gzpiwf\27888970514b94f27e19ff26486ce3eb8b569228\tests_ExtraTests_X20-BenchmarkingMacros_cpp\tests_ExtraTests_X20-BenchmarkingMacros_cpp.old|C:\Users\saile\AppData\Local\Temp\catch2_100_z8gzpiwf\27888970514b94f27e19ff26486ce3eb8b569228\tests_ExtraTests_X20-BenchmarkingMacros_cpp\tests_ExtraTests_X20-BenchmarkingMacros_cpp.new"><comment type="line">// X20-BenchmarkingMacros.cpp</comment>
+<comment type="line">// Test that the benchmarking support macros compile properly with the single header</comment>
+
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;catch2/catch_default_main.hpp&gt;</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;catch2/catch_test_macros.hpp&gt;</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;catch2/benchmark/catch_benchmark.hpp&gt;</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;catch2/catch_generators_specific.hpp&gt;</cpp:file></cpp:include>
+
+<namespace>namespace <block>{
+<function><type><name><name>std</name><operator>::</operator><name>uint64_t</name></name></type> <name>factorial</name><parameter_list>(<parameter><decl><type><name><name>std</name><operator>::</operator><name>uint64_t</name></name></type> <name>number</name></decl></parameter>)</parameter_list> <block>{<block_content>
+    <if_stmt><if>if <condition>(<expr><name>number</name> <operator>&lt;</operator> <literal type="number">2</literal></expr>)</condition> <block>{<block_content>
+        <return>return <expr><literal type="number">1</literal></expr>;</return>
+    </block_content>}</block></if></if_stmt>
+    <return>return <expr><name>number</name> <operator>*</operator> <call><name>factorial</name><argument_list>(<argument><expr><name>number</name> <operator>-</operator> <literal type="number">1</literal></expr></argument>)</argument_list></call></expr>;</return>
+</block_content>}</block></function>
+}</block></namespace>
+
+<macro><name>TEST_CASE</name><argument_list>(<argument><literal type="string">"Benchmark factorial"</literal></argument>, <argument><literal type="string">"[benchmark]"</literal></argument>)</argument_list></macro> <block>{<block_content>
+    <expr_stmt><expr><call><name>CHECK</name><argument_list>(<argument><expr><call><name>factorial</name><argument_list>(<argument><expr><literal type="number">0</literal></expr></argument>)</argument_list></call> <operator>==</operator> <literal type="number">1</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    <comment type="line">// some more asserts..</comment>
+    <expr_stmt><expr><call><name>CHECK</name><argument_list>(<argument><expr><call><name>factorial</name><argument_list>(<argument><expr><literal type="number">10</literal></expr></argument>)</argument_list></call> <operator>==</operator> <literal type="number">3628800</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+
+    <macro><name>BENCHMARK</name><argument_list>(<argument><literal type="string">"factorial 10"</literal></argument>)</argument_list></macro> <block>{<block_content>
+        <return>return <expr><call><name>factorial</name><argument_list>(<argument><expr><literal type="number">10</literal></expr></argument>)</argument_list></call></expr>;</return>
+    </block_content>}</block><empty_stmt>;</empty_stmt>
+
+    <expr_stmt><expr><call><name>CHECK</name><argument_list>(<argument><expr><call><name>factorial</name><argument_list>(<argument><expr><literal type="number">14</literal></expr></argument>)</argument_list></call> <operator>==</operator> <literal type="number">87178291200ull</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    <macro><name>BENCHMARK</name><argument_list>(<argument><literal type="string">"factorial 14"</literal></argument>)</argument_list></macro> <block>{<block_content>
+        <return>return <expr><call><name>factorial</name><argument_list>(<argument><expr><literal type="number">14</literal></expr></argument>)</argument_list></call></expr>;</return>
+    </block_content>}</block><empty_stmt>;</empty_stmt>
+<diff:delete xmlns:diff="http://www.srcML.org/srcDiff"><comment type="line">//</comment><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+</diff:ws><comment type="line">//<diff:ws xmlns:diff="http://www.srcML.org/srcDiff">    </diff:ws>BENCHMARK("factorial<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>20")<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>{</comment><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+</diff:ws><comment type="line">//<diff:ws xmlns:diff="http://www.srcML.org/srcDiff">        </diff:ws>return<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>factorial(20);</comment><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+</diff:ws><comment type="line">//<diff:ws xmlns:diff="http://www.srcML.org/srcDiff">    </diff:ws>};</comment><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+</diff:ws><comment type="line">//</comment><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+</diff:ws><comment type="line">//<diff:ws xmlns:diff="http://www.srcML.org/srcDiff">    </diff:ws>BENCHMARK("factorial<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>35")<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>{</comment><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+</diff:ws><comment type="line">//<diff:ws xmlns:diff="http://www.srcML.org/srcDiff">        </diff:ws>return<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>factorial(35);</comment><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+</diff:ws><comment type="line">//<diff:ws xmlns:diff="http://www.srcML.org/srcDiff">    </diff:ws>};</comment><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+</diff:ws></diff:delete></block_content>}</block>
+
+<macro><name>TEST_CASE</name><argument_list>(<argument><literal type="string">"Benchmark containers"</literal></argument>, <argument><literal type="string">"[.][benchmark]"</literal></argument>)</argument_list></macro> <block>{<block_content>
+    <decl_stmt><decl><type><specifier>static</specifier> <specifier>const</specifier> <name>int</name></type> <name>size</name> <init>= <expr><literal type="number">100</literal></expr></init></decl>;</decl_stmt>
+
+    <decl_stmt><decl><type><name><name>std</name><operator>::</operator><name>vector</name><argument_list type="generic">&lt;<argument><expr><name>int</name></expr></argument>&gt;</argument_list></name></type> <name>v</name></decl>;</decl_stmt>
+    <decl_stmt><decl><type><name><name>std</name><operator>::</operator><name>map</name><argument_list type="generic">&lt;<argument><expr><name>int</name></expr></argument>, <argument><expr><name>int</name></expr></argument>&gt;</argument_list></name></type> <name>m</name></decl>;</decl_stmt>
+
+    <macro><name>SECTION</name><argument_list>(<argument><literal type="string">"without generator"</literal></argument>)</argument_list></macro> <block>{<block_content>
+        <macro><name>BENCHMARK</name><argument_list>(<argument><literal type="string">"Load up a vector"</literal></argument>)</argument_list></macro> <block>{<block_content>
+            <expr_stmt><expr><name>v</name> <operator>=</operator> <call><name><name>std</name><operator>::</operator><name>vector</name><argument_list type="generic">&lt;<argument><expr><name>int</name></expr></argument>&gt;</argument_list></name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+            <for>for <control>(<init><decl><type><name>int</name></type> <name>i</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>i</name> <operator>&lt;</operator> <name>size</name></expr>;</condition> <incr><expr><operator>++</operator><name>i</name></expr></incr>)</control><block type="pseudo"><block_content>
+                <expr_stmt><expr><call><name><name>v</name><operator>.</operator><name>push_back</name></name><argument_list>(<argument><expr><name>i</name></expr></argument>)</argument_list></call></expr>;</expr_stmt></block_content></block></for>
+        </block_content>}</block><empty_stmt>;</empty_stmt>
+        <expr_stmt><expr><call><name>REQUIRE</name><argument_list>(<argument><expr><call><name><name>v</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call> <operator>==</operator> <name>size</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+
+        <comment type="line">// test optimizer control</comment>
+        <macro><name>BENCHMARK</name><argument_list>(<argument><literal type="string">"Add up a vector's content"</literal></argument>)</argument_list></macro> <block>{<block_content>
+            <decl_stmt><decl><type><name>uint64_t</name></type> <name>add</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</decl_stmt>
+            <for>for <control>(<init><decl><type><name>int</name></type> <name>i</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>i</name> <operator>&lt;</operator> <name>size</name></expr>;</condition> <incr><expr><operator>++</operator><name>i</name></expr></incr>)</control><block type="pseudo"><block_content>
+                <expr_stmt><expr><name>add</name> <operator>+=</operator> <name><name>v</name><index>[<expr><name>i</name></expr>]</index></name></expr>;</expr_stmt></block_content></block></for>
+            <return>return <expr><name>add</name></expr>;</return>
+        </block_content>}</block><empty_stmt>;</empty_stmt>
+
+        <macro><name>BENCHMARK</name><argument_list>(<argument><literal type="string">"Load up a map"</literal></argument>)</argument_list></macro> <block>{<block_content>
+            <expr_stmt><expr><name>m</name> <operator>=</operator> <call><name><name>std</name><operator>::</operator><name>map</name><argument_list type="generic">&lt;<argument><expr><name>int</name></expr></argument>, <argument><expr><name>int</name></expr></argument>&gt;</argument_list></name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+            <for>for <control>(<init><decl><type><name>int</name></type> <name>i</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>i</name> <operator>&lt;</operator> <name>size</name></expr>;</condition> <incr><expr><operator>++</operator><name>i</name></expr></incr>)</control><block type="pseudo"><block_content>
+                <expr_stmt><expr><call><name><name>m</name><operator>.</operator><name>insert</name></name><argument_list>(<argument><expr><block>{ <expr><name>i</name></expr>, <expr><name>i</name> <operator>+</operator> <literal type="number">1</literal></expr> }</block></expr></argument>)</argument_list></call></expr>;</expr_stmt></block_content></block></for>
+        </block_content>}</block><empty_stmt>;</empty_stmt>
+        <expr_stmt><expr><call><name>REQUIRE</name><argument_list>(<argument><expr><call><name><name>m</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call> <operator>==</operator> <name>size</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+
+        <macro><name>BENCHMARK</name><argument_list>(<argument><literal type="string">"Reserved vector"</literal></argument>)</argument_list></macro> <block>{<block_content>
+            <expr_stmt><expr><name>v</name> <operator>=</operator> <call><name><name>std</name><operator>::</operator><name>vector</name><argument_list type="generic">&lt;<argument><expr><name>int</name></expr></argument>&gt;</argument_list></name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+            <expr_stmt><expr><call><name><name>v</name><operator>.</operator><name>reserve</name></name><argument_list>(<argument><expr><name>size</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+            <for>for <control>(<init><decl><type><name>int</name></type> <name>i</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>i</name> <operator>&lt;</operator> <name>size</name></expr>;</condition> <incr><expr><operator>++</operator><name>i</name></expr></incr>)</control><block type="pseudo"><block_content>
+                <expr_stmt><expr><call><name><name>v</name><operator>.</operator><name>push_back</name></name><argument_list>(<argument><expr><name>i</name></expr></argument>)</argument_list></call></expr>;</expr_stmt></block_content></block></for>
+        </block_content>}</block><empty_stmt>;</empty_stmt>
+        <expr_stmt><expr><call><name>REQUIRE</name><argument_list>(<argument><expr><call><name><name>v</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call> <operator>==</operator> <name>size</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+
+        <macro><name>BENCHMARK</name><argument_list>(<argument><literal type="string">"Resized vector"</literal></argument>)</argument_list></macro> <block>{<block_content>
+            <expr_stmt><expr><name>v</name> <operator>=</operator> <call><name><name>std</name><operator>::</operator><name>vector</name><argument_list type="generic">&lt;<argument><expr><name>int</name></expr></argument>&gt;</argument_list></name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+            <expr_stmt><expr><call><name><name>v</name><operator>.</operator><name>resize</name></name><argument_list>(<argument><expr><name>size</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+            <for>for <control>(<init><decl><type><name>int</name></type> <name>i</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>i</name> <operator>&lt;</operator> <name>size</name></expr>;</condition> <incr><expr><operator>++</operator><name>i</name></expr></incr>)</control><block type="pseudo"><block_content>
+                <expr_stmt><expr><name><name>v</name><index>[<expr><name>i</name></expr>]</index></name> <operator>=</operator> <name>i</name></expr>;</expr_stmt></block_content></block></for>
+        </block_content>}</block><empty_stmt>;</empty_stmt>
+        <expr_stmt><expr><call><name>REQUIRE</name><argument_list>(<argument><expr><call><name><name>v</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call> <operator>==</operator> <name>size</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+
+        <decl_stmt><decl><type><name>int</name></type> <name><name>array</name><index>[<expr><name>size</name></expr>]</index></name></decl>;</decl_stmt>
+        <macro><name>BENCHMARK</name><argument_list>(<argument><literal type="string">"A fixed size array that should require no allocations"</literal></argument>)</argument_list></macro> <block>{<block_content>
+            <for>for <control>(<init><decl><type><name>int</name></type> <name>i</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>i</name> <operator>&lt;</operator> <name>size</name></expr>;</condition> <incr><expr><operator>++</operator><name>i</name></expr></incr>)</control><block type="pseudo"><block_content>
+                <expr_stmt><expr><name><name>array</name><index>[<expr><name>i</name></expr>]</index></name> <operator>=</operator> <name>i</name></expr>;</expr_stmt></block_content></block></for>
+        </block_content>}</block><empty_stmt>;</empty_stmt>
+        <decl_stmt><decl><type><name>int</name></type> <name>sum</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</decl_stmt>
+        <for>for <control>(<init><decl><type><name>int</name></type> <name>i</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>i</name> <operator>&lt;</operator> <name>size</name></expr>;</condition> <incr><expr><operator>++</operator><name>i</name></expr></incr>)</control><block type="pseudo"><block_content>
+            <expr_stmt><expr><name>sum</name> <operator>+=</operator> <name><name>array</name><index>[<expr><name>i</name></expr>]</index></name></expr>;</expr_stmt></block_content></block></for>
+        <expr_stmt><expr><call><name>REQUIRE</name><argument_list>(<argument><expr><name>sum</name> <operator>&gt;</operator> <name>size</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+
+        <macro><name>SECTION</name><argument_list>(<argument><literal type="string">"XYZ"</literal></argument>)</argument_list></macro> <block>{<block_content>
+
+            <macro><name>BENCHMARK_ADVANCED</name><argument_list>(<argument><literal type="string">"Load up vector with chronometer"</literal></argument>)</argument_list></macro><expr_stmt><expr><operator>(</operator><name><name>Catch</name><operator>::</operator><name>Benchmark</name><operator>::</operator><name>Chronometer</name></name> <name>meter</name><operator>)</operator> <block>{
+                <expr><name><name>std</name><operator>::</operator><name>vector</name><argument_list type="generic">&lt;<argument><expr><name>int</name></expr></argument>&gt;</argument_list></name> <name>k</name></expr>;
+                <expr><call><name><name>meter</name><operator>.</operator><name>measure</name></name><argument_list>(<argument><expr><lambda><capture>[<argument><modifier>&amp;</modifier></argument>]</capture><parameter_list>(<parameter><decl><type><name>int</name></type> <name>idx</name></decl></parameter>)</parameter_list> <block>{<block_content>
+                    <expr_stmt><expr><name>k</name> <operator>=</operator> <call><name><name>std</name><operator>::</operator><name>vector</name><argument_list type="generic">&lt;<argument><expr><name>int</name></expr></argument>&gt;</argument_list></name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+                    <for>for <control>(<init><decl><type><name>int</name> <name>i</name> = 0</type></decl>;</init> <condition><expr><name>i</name> <operator>&lt;</operator> <name>size</name></expr>;</condition> <incr><expr><operator>++</operator><name>i</name></expr></incr>)</control><block type="pseudo"><block_content>
+                        <expr_stmt><expr><call><name><name>k</name><operator>.</operator><name>push_back</name></name><argument_list>(<argument><expr><name>idx</name></expr></argument>)</argument_list></call></expr>;</expr_stmt></block_content></block></for>
+                <expr_stmt/>}</block_content></block></lambda></expr></argument>)</argument_list></call></expr>;
+                <expr><call><name>REQUIRE</name><argument_list>(<argument><expr><call><name><name>k</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call> <operator>==</operator> <name>size</name></expr></argument>)</argument_list></call></expr>;
+            }</block></expr>;</expr_stmt>
+
+            <decl_stmt><decl><type><name>int</name></type> <name>runs</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</decl_stmt>
+            <macro><name>BENCHMARK</name><argument_list>(<argument><literal type="string">"Fill vector indexed"</literal></argument>, <argument>benchmarkIndex</argument>)</argument_list></macro> <block>{<block_content>
+                <expr_stmt><expr><name>v</name> <operator>=</operator> <call><name><name>std</name><operator>::</operator><name>vector</name><argument_list type="generic">&lt;<argument><expr><name>int</name></expr></argument>&gt;</argument_list></name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+                <expr_stmt><expr><call><name><name>v</name><operator>.</operator><name>resize</name></name><argument_list>(<argument><expr><name>size</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+                <for>for <control>(<init><decl><type><name>int</name></type> <name>i</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>i</name> <operator>&lt;</operator> <name>size</name></expr>;</condition> <incr><expr><operator>++</operator><name>i</name></expr></incr>)</control><block type="pseudo"><block_content>
+                    <expr_stmt><expr><name><name>v</name><index>[<expr><name>i</name></expr>]</index></name> <operator>=</operator> <name>benchmarkIndex</name></expr>;</expr_stmt></block_content></block></for>
+                <expr_stmt><expr><name>runs</name> <operator>=</operator> <name>benchmarkIndex</name></expr>;</expr_stmt>
+            </block_content>}</block><empty_stmt>;</empty_stmt>
+
+            <for>for <control>(<init><decl><type><name>size_t</name></type> <name>i</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>i</name> <operator>&lt;</operator> <call><name><name>v</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call></expr>;</condition> <incr><expr><operator>++</operator><name>i</name></expr></incr>)</control> <block>{<block_content>
+                <expr_stmt><expr><call><name>REQUIRE</name><argument_list>(<argument><expr><name><name>v</name><index>[<expr><name>i</name></expr>]</index></name> <operator>==</operator> <name>runs</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+            </block_content>}</block></for>
+        </block_content>}</block>
+    </block_content>}</block>
+
+    <macro><name>SECTION</name><argument_list>(<argument><literal type="string">"with generator"</literal></argument>)</argument_list></macro> <block>{<block_content>
+        <decl_stmt><decl><type><name>auto</name></type> <name>generated</name> <init>= <expr><call><name>GENERATE</name><argument_list>(<argument><expr><call><name>range</name><argument_list>(<argument><expr><literal type="number">0</literal></expr></argument>, <argument><expr><literal type="number">10</literal></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+        <macro><name>BENCHMARK</name><argument_list>(<argument><literal type="string">"Fill vector generated"</literal></argument>)</argument_list></macro> <block>{<block_content>
+            <expr_stmt><expr><name>v</name> <operator>=</operator> <call><name><name>std</name><operator>::</operator><name>vector</name><argument_list type="generic">&lt;<argument><expr><name>int</name></expr></argument>&gt;</argument_list></name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+            <expr_stmt><expr><call><name><name>v</name><operator>.</operator><name>resize</name></name><argument_list>(<argument><expr><name>size</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+            <for>for <control>(<init><decl><type><name>int</name></type> <name>i</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>i</name> <operator>&lt;</operator> <name>size</name></expr>;</condition> <incr><expr><operator>++</operator><name>i</name></expr></incr>)</control><block type="pseudo"><block_content>
+                <expr_stmt><expr><name><name>v</name><index>[<expr><name>i</name></expr>]</index></name> <operator>=</operator> <name>generated</name></expr>;</expr_stmt></block_content></block></for>
+        </block_content>}</block><empty_stmt>;</empty_stmt>
+        <for>for <control>(<init><decl><type><name>size_t</name></type> <name>i</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>i</name> <operator>&lt;</operator> <call><name><name>v</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call></expr>;</condition> <incr><expr><operator>++</operator><name>i</name></expr></incr>)</control> <block>{<block_content>
+            <expr_stmt><expr><call><name>REQUIRE</name><argument_list>(<argument><expr><name><name>v</name><index>[<expr><name>i</name></expr>]</index></name> <operator>==</operator> <name>generated</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        </block_content>}</block></for>
+    </block_content>}</block>
+</block_content>}</block>
+</unit>

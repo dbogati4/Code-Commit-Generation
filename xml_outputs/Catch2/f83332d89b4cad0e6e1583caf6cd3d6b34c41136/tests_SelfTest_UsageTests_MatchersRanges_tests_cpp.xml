@@ -1,0 +1,552 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" xmlns:diff="http://www.srcML.org/srcDiff" revision="1.0.0" language="C++" filename="C:\Users\saile\AppData\Local\Temp\catch2_100_z8gzpiwf\f83332d89b4cad0e6e1583caf6cd3d6b34c41136\tests_SelfTest_UsageTests_MatchersRanges_tests_cpp\tests_SelfTest_UsageTests_MatchersRanges_tests_cpp.old|C:\Users\saile\AppData\Local\Temp\catch2_100_z8gzpiwf\f83332d89b4cad0e6e1583caf6cd3d6b34c41136\tests_SelfTest_UsageTests_MatchersRanges_tests_cpp\tests_SelfTest_UsageTests_MatchersRanges_tests_cpp.new"><diff:insert xmlns:diff="http://www.srcML.org/srcDiff"><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+</diff:ws><comment type="line">//<diff:ws xmlns:diff="http://www.srcML.org/srcDiff">              </diff:ws>Copyright<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>Catch2<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>Authors</comment><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+</diff:ws></diff:insert><comment type="line">// Distributed under the Boost Software License, Version 1.0.<diff:delete xmlns:diff="http://www.srcML.org/srcDiff"><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>(See<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>accompanying</diff:delete></comment>
+<comment type="line">// <diff:insert xmlns:diff="http://www.srcML.org/srcDiff"><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">  </diff:ws>(See<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>accompanying<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws></diff:insert>file LICENSE_1_0.txt or copy at<diff:delete xmlns:diff="http://www.srcML.org/srcDiff"><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>http://www.boost.org/LICENSE_1_0.txt)</diff:delete></comment>
+<diff:insert xmlns:diff="http://www.srcML.org/srcDiff"><comment type="line">//<diff:ws xmlns:diff="http://www.srcML.org/srcDiff">        </diff:ws>https://www.boost.org/LICENSE_1_0.txt)</comment><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+
+</diff:ws><comment type="line">//<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>SPDX-License-Identifier:<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>BSL-1.0</comment></diff:insert>
+<diff:insert xmlns:diff="http://www.srcML.org/srcDiff"><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+</diff:ws></diff:insert><cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;catch2/catch_test_macros.hpp&gt;</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;catch2/matchers/catch_matchers_container_properties.hpp&gt;</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;catch2/matchers/catch_matchers_contains.hpp&gt;</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;catch2/matchers/catch_matchers_floating_point.hpp&gt;</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;catch2/matchers/catch_matchers_quantifiers.hpp&gt;</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;catch2/matchers/catch_matchers_predicate.hpp&gt;</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;catch2/matchers/catch_matchers_string.hpp&gt;</cpp:file></cpp:include>
+
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;array&gt;</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;cmath&gt;</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;list&gt;</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;map&gt;</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;vector&gt;</cpp:file></cpp:include>
+
+<namespace>namespace <block>{
+<namespace>namespace <name>unrelated</name> <block>{
+    <class>class <name>needs_ADL_begin</name> <block>{<private type="default">
+        <decl_stmt><decl><type><name><name>std</name><operator>::</operator><name>array</name><argument_list type="generic">&lt;<argument><expr><name>int</name></expr></argument>, <argument><expr><literal type="number">5</literal></expr></argument>&gt;</argument_list></name></type> <name>elements</name><argument_list>{ <argument><expr><block>{<expr><literal type="number">1</literal></expr>, <expr><literal type="number">2</literal></expr>, <expr><literal type="number">3</literal></expr>, <expr><literal type="number">4</literal></expr>, <expr><literal type="number">5</literal></expr>}</block></expr></argument> }</argument_list></decl>;</decl_stmt>
+    </private><public>public:
+        <using>using <name>iterator</name> <init>= <type><name><name>std</name><operator>::</operator><name>array</name><argument_list type="generic">&lt;<argument><expr><name>int</name></expr></argument>, <argument><expr><literal type="number">5</literal></expr></argument>&gt;</argument_list><operator>::</operator><name>iterator</name></name></type></init>;</using>
+        <using>using <name>const_iterator</name> <init>= <type><name><name>std</name><operator>::</operator><name>array</name><argument_list type="generic">&lt;<argument><expr><name>int</name></expr></argument>, <argument><expr><literal type="number">5</literal></expr></argument>&gt;</argument_list><operator>::</operator><name>const_iterator</name></name></type></init>;</using>
+
+        <function><type><name>const_iterator</name></type> <name>Begin</name><parameter_list>()</parameter_list> <specifier>const</specifier> <block>{<block_content> <return>return <expr><call><name><name>elements</name><operator>.</operator><name>begin</name></name><argument_list>()</argument_list></call></expr>;</return> </block_content>}</block></function>
+        <function><type><name>const_iterator</name></type> <name>End</name><parameter_list>()</parameter_list> <specifier>const</specifier> <block>{<block_content> <return>return <expr><call><name><name>elements</name><operator>.</operator><name>end</name></name><argument_list>()</argument_list></call></expr>;</return> </block_content>}</block></function>
+
+        <friend>friend <function><type><name>const_iterator</name></type> <name>begin</name><parameter_list>(<parameter><decl><type><name>needs_ADL_begin</name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>lhs</name></decl></parameter>)</parameter_list> <block>{<block_content>
+            <return>return <expr><call><name><name>lhs</name><operator>.</operator><name>Begin</name></name><argument_list>()</argument_list></call></expr>;</return>
+        </block_content>}</block></function></friend>
+        <friend>friend <function><type><name>const_iterator</name></type> <name>end</name><parameter_list>(<parameter><decl><type><name>needs_ADL_begin</name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>rhs</name></decl></parameter>)</parameter_list> <block>{<block_content>
+            <return>return <expr><call><name><name>rhs</name><operator>.</operator><name>End</name></name><argument_list>()</argument_list></call></expr>;</return>
+        </block_content>}</block></function></friend>
+    </public>}</block>;</class>
+}</block></namespace> <comment type="line">// end unrelated namespace</comment>
+
+<cpp:if xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">if</cpp:directive> <expr><call><name>defined</name><argument_list>(<argument><expr><name>__clang__</name></expr></argument>)</argument_list></call></expr></cpp:if>
+<cpp:pragma xmlns:cpp="http://www.srcML.org/srcML/cpp">#  <cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">pragma</cpp:directive> <name>clang</name> <name>diagnostic</name> <name>push</name></cpp:pragma>
+<cpp:pragma xmlns:cpp="http://www.srcML.org/srcML/cpp">#  <cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">pragma</cpp:directive> <name>clang</name> <name>diagnostic</name> <name>ignored</name> <cpp:literal xmlns:cpp="http://www.srcML.org/srcML/cpp">"-Wunused-function"</cpp:literal></cpp:pragma>
+<cpp:endif xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">endif</cpp:directive></cpp:endif>
+
+<class>class <name>has_different_begin_end_types</name> <block>{<private type="default">
+    <decl_stmt><decl><type><name><name>std</name><operator>::</operator><name>array</name><argument_list type="generic">&lt;<argument><expr><name>int</name></expr></argument>, <argument><expr><literal type="number">5</literal></expr></argument>&gt;</argument_list></name></type> <name>elements</name><argument_list>{ <argument><expr><block>{<expr><literal type="number">1</literal></expr>, <expr><literal type="number">2</literal></expr>, <expr><literal type="number">3</literal></expr>, <expr><literal type="number">4</literal></expr>, <expr><literal type="number">5</literal></expr>}</block></expr></argument> }</argument_list></decl>;</decl_stmt>
+
+    <comment type="line">// Different type for the "end" iterator</comment>
+    <struct>struct <name>iterator_end</name> <block>{<public type="default"/>}</block>;</struct>
+    <comment type="line">// Just a fake forward iterator, that only compares to a different</comment>
+    <comment type="line">// type (so we can test two-type ranges).</comment>
+    <struct>struct <name>iterator</name> <block>{<public type="default">
+        <decl_stmt><decl><type><name>int</name> <specifier>const</specifier><modifier>*</modifier></type> <name>start</name></decl>;</decl_stmt>
+        <decl_stmt><decl><type><name>int</name> <specifier>const</specifier><modifier>*</modifier></type> <name>end</name></decl>;</decl_stmt>
+
+        <using>using <name>iterator_category</name> <init>= <type><name><name>std</name><operator>::</operator><name>forward_iterator_tag</name></name></type></init>;</using>
+        <using>using <name>difference_type</name> <init>= <type><name><name>std</name><operator>::</operator><name>ptrdiff_t</name></name></type></init>;</using>
+        <using>using <name>value_type</name> <init>= <type><name>int</name></type></init>;</using>
+        <using>using <name>reference</name> <init>= <type><name>int</name> <specifier>const</specifier><modifier>&amp;</modifier></type></init>;</using>
+        <using>using <name>pointer</name> <init>= <type><name>int</name> <specifier>const</specifier><modifier>*</modifier></type></init>;</using>
+
+
+        <friend>friend <function type="operator"><type><name>bool</name></type> <name>operator<name>==</name></name><parameter_list>( <parameter><decl><type><name>iterator</name></type> <name>iter</name></decl></parameter>, <parameter><decl><type><name>iterator_end</name></type></decl></parameter> )</parameter_list> <block>{<block_content>
+            <return>return <expr><name><name>iter</name><operator>.</operator><name>start</name></name> <operator>==</operator> <name><name>iter</name><operator>.</operator><name>end</name></name></expr>;</return>
+        </block_content>}</block></function></friend>
+        <friend>friend <function type="operator"><type><name>bool</name></type> <name>operator<name>!=</name></name><parameter_list>( <parameter><decl><type><name>iterator</name></type> <name>iter</name></decl></parameter>, <parameter><decl><type><name>iterator_end</name></type></decl></parameter> )</parameter_list> <block>{<block_content>
+            <return>return <expr><name><name>iter</name><operator>.</operator><name>start</name></name> <operator>!=</operator> <name><name>iter</name><operator>.</operator><name>end</name></name></expr>;</return>
+        </block_content>}</block></function></friend>
+        <function type="operator"><type><name>iterator</name><modifier>&amp;</modifier></type> <name>operator<name>++</name></name><parameter_list>()</parameter_list> <block>{<block_content>
+            <expr_stmt><expr><operator>++</operator><name>start</name></expr>;</expr_stmt>
+            <return>return <expr><operator>*</operator><name>this</name></expr>;</return>
+        </block_content>}</block></function>
+        <function type="operator"><type><name>iterator</name></type> <name>operator<name>++</name></name><parameter_list>(<parameter><decl><type><name>int</name></type></decl></parameter>)</parameter_list> <block>{<block_content>
+            <decl_stmt><decl><type><name>auto</name></type> <name>tmp</name><argument_list>(<argument><expr><operator>*</operator><name>this</name></expr></argument>)</argument_list></decl>;</decl_stmt>
+            <expr_stmt><expr><operator>++</operator><name>start</name></expr>;</expr_stmt>
+            <return>return <expr><name>tmp</name></expr>;</return>
+        </block_content>}</block></function>
+        <function type="operator"><type><name>reference</name></type> <name>operator<name>*</name></name><parameter_list>()</parameter_list> <specifier>const</specifier> <block>{<block_content>
+            <return>return <expr><operator>*</operator><name>start</name></expr>;</return>
+        </block_content>}</block></function>
+        <function type="operator"><type><name>pointer</name></type> <name>operator<name>-&gt;</name></name><parameter_list>()</parameter_list> <specifier>const</specifier> <block>{<block_content>
+            <return>return <expr><name>start</name></expr>;</return>
+        </block_content>}</block></function>
+    </public>}</block>;</struct>
+
+
+</private><public>public:
+    <function><type><name>iterator</name></type> <name>begin</name><parameter_list>()</parameter_list> <specifier>const</specifier> <block>{<block_content>
+        <return>return <expr><block>{ <expr><call><name><name>elements</name><operator>.</operator><name>data</name></name><argument_list>()</argument_list></call></expr>, <expr><call><name><name>elements</name><operator>.</operator><name>data</name></name><argument_list>()</argument_list></call> <operator>+</operator> <macro><name>elements</name></macro><operator>.</operator><macro><name>size</name><argument_list>()</argument_list></macro></expr> }</block></expr>;</return>
+    </block_content>}</block></function>
+
+    <function><type><name>iterator_end</name></type> <name>end</name><parameter_list>()</parameter_list> <specifier>const</specifier> <block>{<block_content>
+        <return>return <expr><block>{}</block></expr>;</return>
+    </block_content>}</block></function>
+</public>}</block>;</class>
+
+<cpp:if xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">if</cpp:directive> <expr><call><name>defined</name><argument_list>(<argument><expr><name>__clang__</name></expr></argument>)</argument_list></call></expr></cpp:if>
+<cpp:pragma xmlns:cpp="http://www.srcML.org/srcML/cpp">#  <cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">pragma</cpp:directive> <name>clang</name> <name>diagnostic</name> <name>pop</name></cpp:pragma>
+<cpp:endif xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">endif</cpp:directive></cpp:endif>
+
+
+<struct>struct <name>with_mocked_iterator_access</name> <block>{<public type="default">
+    <decl_stmt><decl><type><specifier>static</specifier> <specifier>constexpr</specifier> <name>size_t</name></type> <name>data_size</name> <init>= <expr><literal type="number">5</literal></expr></init></decl>;</decl_stmt>
+    <decl_stmt><decl><type><name><name>std</name><operator>::</operator><name>array</name><argument_list type="generic">&lt;<argument><expr><name>int</name></expr></argument>, <argument><expr><name>data_size</name></expr></argument>&gt;</argument_list></name></type> <name>elements</name><argument_list>{ <argument><expr><block>{<expr><literal type="number">1</literal></expr>, <expr><literal type="number">2</literal></expr>, <expr><literal type="number">3</literal></expr>, <expr><literal type="number">4</literal></expr>, <expr><literal type="number">5</literal></expr>}</block></expr></argument> }</argument_list></decl>;</decl_stmt>
+    <decl_stmt><decl><type><name><name>std</name><operator>::</operator><name>array</name><argument_list type="generic">&lt;<argument><expr><name>bool</name></expr></argument>, <argument><expr><name>data_size</name></expr></argument>&gt;</argument_list></name></type> <name>touched</name><argument_list>{}</argument_list></decl>;</decl_stmt>
+    <decl_stmt><decl><type><name><name>std</name><operator>::</operator><name>array</name><argument_list type="generic">&lt;<argument><expr><name>bool</name></expr></argument>, <argument><expr><name>data_size</name></expr></argument>&gt;</argument_list></name></type> <name>derefed</name><argument_list>{}</argument_list></decl>;</decl_stmt>
+
+    <comment type="line">// We want to check which elements were touched when iterating, so</comment>
+    <comment type="line">// we can check whether iterator-using code traverses range correctly</comment>
+    <struct>struct <name>iterator</name> <block>{<public type="default">
+        <decl_stmt><decl><type><name>with_mocked_iterator_access</name><modifier>*</modifier></type> <name>m_origin</name></decl>;</decl_stmt>
+        <decl_stmt><decl><type><name>size_t</name></type> <name>m_origin_idx</name></decl>;</decl_stmt>
+
+        <using>using <name>iterator_category</name> <init>= <type><name><name>std</name><operator>::</operator><name>forward_iterator_tag</name></name></type></init>;</using>
+        <using>using <name>difference_type</name> <init>= <type><name><name>std</name><operator>::</operator><name>ptrdiff_t</name></name></type></init>;</using>
+        <using>using <name>value_type</name> <init>= <type><name>int</name></type></init>;</using>
+        <using>using <name>reference</name> <init>= <type><name>int</name> <specifier>const</specifier><modifier>&amp;</modifier></type></init>;</using>
+        <using>using <name>pointer</name> <init>= <type><name>int</name> <specifier>const</specifier><modifier>*</modifier></type></init>;</using>
+
+        <friend>friend <function type="operator"><type><name>bool</name></type> <name>operator<name>==</name></name><parameter_list>(<parameter><decl><type><name>iterator</name></type> <name>lhs</name></decl></parameter>, <parameter><decl><type><name>iterator</name></type> <name>rhs</name></decl></parameter>)</parameter_list> <block>{<block_content>
+            <return>return <expr><name><name>lhs</name><operator>.</operator><name>m_origin</name></name> <operator>==</operator> <name><name>rhs</name><operator>.</operator><name>m_origin</name></name>
+                <operator>&amp;&amp;</operator> <name><name>lhs</name><operator>.</operator><name>m_origin_idx</name></name> <operator>==</operator> <name><name>rhs</name><operator>.</operator><name>m_origin_idx</name></name></expr>;</return>
+        </block_content>}</block></function></friend>
+        <friend>friend <function type="operator"><type><name>bool</name></type> <name>operator<name>!=</name></name><parameter_list>(<parameter><decl><type><name>iterator</name></type> <name>lhs</name></decl></parameter>, <parameter><decl><type><name>iterator</name></type> <name>rhs</name></decl></parameter>)</parameter_list> <block>{<block_content>
+            <return>return <expr><operator>!</operator><operator>(</operator><name>lhs</name> <operator>==</operator> <name>rhs</name><operator>)</operator></expr>;</return>
+        </block_content>}</block></function></friend>
+        <function type="operator"><type><name>iterator</name><modifier>&amp;</modifier></type> <name>operator<name>++</name></name><parameter_list>()</parameter_list> <block>{<block_content>
+            <expr_stmt><expr><operator>++</operator><name>m_origin_idx</name></expr>;</expr_stmt>
+            <expr_stmt><expr><call><name>assert</name><argument_list>(<argument><expr><name>m_origin_idx</name> <operator>&lt;</operator> <name>data_size</name> <operator>+</operator> <literal type="number">1</literal> <operator>&amp;&amp;</operator> <literal type="string">"Outside of valid alloc"</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+            <if_stmt><if>if <condition>(<expr><name>m_origin_idx</name> <operator>&lt;</operator> <name>data_size</name></expr>)</condition> <block>{<block_content>
+                <expr_stmt><expr><name><name>m_origin</name><operator>-&gt;</operator><name>touched</name><index>[<expr><name>m_origin_idx</name></expr>]</index></name> <operator>=</operator> <literal type="boolean">true</literal></expr>;</expr_stmt>
+            </block_content>}</block></if></if_stmt>
+            <return>return <expr><operator>*</operator><name>this</name></expr>;</return>
+        </block_content>}</block></function>
+        <function type="operator"><type><name>iterator</name></type> <name>operator<name>++</name></name><parameter_list>(<parameter><decl><type><name>int</name></type></decl></parameter>)</parameter_list> <block>{<block_content>
+            <decl_stmt><decl><type><name>auto</name></type> <name>tmp</name><argument_list>(<argument><expr><operator>*</operator><name>this</name></expr></argument>)</argument_list></decl>;</decl_stmt>
+            <expr_stmt><expr><operator>++</operator><operator>(</operator><operator>*</operator><name>this</name><operator>)</operator></expr>;</expr_stmt>
+            <return>return <expr><name>tmp</name></expr>;</return>
+        </block_content>}</block></function>
+        <function type="operator"><type><name>reference</name></type> <name>operator<name>*</name></name><parameter_list>()</parameter_list> <specifier>const</specifier> <block>{<block_content>
+            <expr_stmt><expr><call><name>assert</name><argument_list>(<argument><expr><name>m_origin_idx</name> <operator>&lt;</operator> <name>data_size</name> <operator>&amp;&amp;</operator> <literal type="string">"Attempted to deref invalid position"</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+            <expr_stmt><expr><name><name>m_origin</name><operator>-&gt;</operator><name>derefed</name><index>[<expr><name>m_origin_idx</name></expr>]</index></name> <operator>=</operator> <literal type="boolean">true</literal></expr>;</expr_stmt>
+            <return>return <expr><name><name>m_origin</name><operator>-&gt;</operator><name>elements</name><index>[<expr><name>m_origin_idx</name></expr>]</index></name></expr>;</return>
+        </block_content>}</block></function>
+        <function type="operator"><type><name>pointer</name></type> <name>operator<name>-&gt;</name></name><parameter_list>()</parameter_list> <specifier>const</specifier> <block>{<block_content>
+            <expr_stmt><expr><call><name>assert</name><argument_list>(<argument><expr><name>m_origin_idx</name> <operator>&lt;</operator> <name>data_size</name> <operator>&amp;&amp;</operator> <literal type="string">"Attempted to deref invalid position"</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+            <return>return <expr><operator>&amp;</operator><name><name>m_origin</name><operator>-&gt;</operator><name>elements</name><index>[<expr><name>m_origin_idx</name></expr>]</index></name></expr>;</return>
+        </block_content>}</block></function>
+
+    </public>}</block>;</struct>
+
+    <function><type><name>iterator</name></type> <name>begin</name><parameter_list>()</parameter_list> <specifier>const</specifier> <block>{<block_content>
+        <comment type="line">// Const-cast away to avoid overcomplicating the iterators</comment>
+        <comment type="line">// We should actually fix this over time</comment>
+        <return>return <expr><block>{ <expr><cast type="const">const_cast<argument_list type="generic">&lt;<argument><expr><name>with_mocked_iterator_access</name><operator>*</operator></expr></argument>&gt;</argument_list><argument_list>(<argument><expr><name>this</name></expr></argument>)</argument_list></cast></expr>, <expr><literal type="number">0</literal></expr> }</block></expr>;</return>
+    </block_content>}</block></function>
+    <function><type><name>iterator</name></type> <name>end</name><parameter_list>()</parameter_list> <specifier>const</specifier> <block>{<block_content>
+        <return>return <expr><block>{ <expr><cast type="const">const_cast<argument_list type="generic">&lt;<argument><expr><name>with_mocked_iterator_access</name><operator>*</operator></expr></argument>&gt;</argument_list><argument_list>(<argument><expr><name>this</name></expr></argument>)</argument_list></cast></expr>, <expr><name>data_size</name></expr> }</block></expr>;</return>
+    </block_content>}</block></function>
+
+</public>}</block>;</struct>
+
+}</block></namespace> <comment type="line">// end anon namespace</comment>
+
+<namespace>namespace <name>Catch</name> <block>{
+    <struct><template>template <parameter_list>&lt;&gt;</parameter_list></template>
+    struct <name><name>StringMaker</name><argument_list type="generic">&lt;<argument><expr><name>with_mocked_iterator_access</name></expr></argument>&gt;</argument_list></name> <block>{<public type="default">
+        <function><type><specifier>static</specifier> <name><name>std</name><operator>::</operator><name>string</name></name></type> <name>convert</name><parameter_list>(<parameter><decl><type><name>with_mocked_iterator_access</name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>access</name></decl></parameter>)</parameter_list> <block>{<block_content>
+            <comment type="line">// We have to avoid the type's iterators, because we check</comment>
+            <comment type="line">// their use in tests</comment>
+            <return>return <expr><call><name><operator>::</operator><name>Catch</name><operator>::</operator><name>Detail</name><operator>::</operator><name>stringify</name></name><argument_list>(<argument><expr><name><name>access</name><operator>.</operator><name>elements</name></name></expr></argument>)</argument_list></call></expr>;</return>
+        </block_content>}</block></function>
+    </public>}</block>;</struct>
+}</block></namespace>
+
+<struct>struct <name>MoveOnlyTestElement</name> <block>{<public type="default">
+    <decl_stmt><decl><type><name>int</name></type> <name>num</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</decl_stmt>
+    <constructor><name>MoveOnlyTestElement</name><parameter_list>(<parameter><decl><type><name>int</name></type> <name>n</name></decl></parameter>)</parameter_list> <member_init_list>:<call><name>num</name><argument_list>(<argument><expr><name>n</name></expr></argument>)</argument_list></call> </member_init_list><block>{<block_content/>}</block></constructor>
+
+    <constructor_decl><name>MoveOnlyTestElement</name><parameter_list>(<parameter><decl><type><name>MoveOnlyTestElement</name><modifier>&amp;&amp;</modifier></type> <name>rhs</name></decl></parameter>)</parameter_list> = <specifier>default</specifier>;</constructor_decl>
+    <function_decl type="operator"><type><name>MoveOnlyTestElement</name><modifier>&amp;</modifier></type> <name>operator<name>=</name></name><parameter_list>(<parameter><decl><type><name>MoveOnlyTestElement</name><modifier>&amp;&amp;</modifier></type> <name>rhs</name></decl></parameter>)</parameter_list> = <specifier>default</specifier>;</function_decl>
+
+    <friend>friend <function type="operator"><type><name>bool</name></type> <name>operator<name>==</name></name><parameter_list>(<parameter><decl><type><name>MoveOnlyTestElement</name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>lhs</name></decl></parameter>, <parameter><decl><type><name>MoveOnlyTestElement</name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>rhs</name></decl></parameter>)</parameter_list> <block>{<block_content>
+        <return>return <expr><name><name>lhs</name><operator>.</operator><name>num</name></name> <operator>==</operator> <name><name>rhs</name><operator>.</operator><name>num</name></name></expr>;</return>
+    </block_content>}</block></function></friend>
+
+    <friend>friend <function type="operator"><type><name><name>std</name><operator>::</operator><name>ostream</name></name><modifier>&amp;</modifier></type> <name>operator<name>&lt;&lt;</name></name><parameter_list>(<parameter><decl><type><name><name>std</name><operator>::</operator><name>ostream</name></name><modifier>&amp;</modifier></type> <name>out</name></decl></parameter>, <parameter><decl><type><name>MoveOnlyTestElement</name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>elem</name></decl></parameter>)</parameter_list> <block>{<block_content>
+        <name>out</name> <expr_stmt><expr><operator>&lt;&lt;</operator> <name><name>elem</name><operator>.</operator><name>num</name></name></expr>;</expr_stmt>
+        <return>return <expr><name>out</name></expr>;</return>
+    </block_content>}</block></function></friend>
+</public>}</block>;</struct>
+
+<macro><name>TEST_CASE</name><argument_list>(<argument><literal type="string">"Basic use of the Contains range matcher"</literal></argument>, <argument><literal type="string">"[matchers][templated][contains]"</literal></argument>)</argument_list></macro> <block>{<block_content>
+    <using>using <name><name>Catch</name><operator>::</operator><name>Matchers</name><operator>::</operator><name>Contains</name></name>;</using>
+
+    <macro><name>SECTION</name><argument_list>(<argument><literal type="string">"Different argument ranges, same element type, default comparison"</literal></argument>)</argument_list></macro> <block>{<block_content>
+        <decl_stmt><decl><type><name><name>std</name><operator>::</operator><name>array</name><argument_list type="generic">&lt;<argument><expr><name>int</name></expr></argument>, <argument><expr><literal type="number">3</literal></expr></argument>&gt;</argument_list></name></type> <name>a</name><argument_list>{ <argument><expr><block>{ <expr><literal type="number">1</literal></expr>,<expr><literal type="number">2</literal></expr>,<expr><literal type="number">3</literal></expr> }</block></expr></argument> }</argument_list></decl>;</decl_stmt>
+        <decl_stmt><decl><type><name><name>std</name><operator>::</operator><name>vector</name><argument_list type="generic">&lt;<argument><expr><name>int</name></expr></argument>&gt;</argument_list></name></type> <name>b</name><argument_list>{ <argument><expr><literal type="number">0</literal></expr></argument>,<argument><expr><literal type="number">1</literal></expr></argument>,<argument><expr><literal type="number">2</literal></expr></argument> }</argument_list></decl>;</decl_stmt>
+        <decl_stmt><decl><type><name><name>std</name><operator>::</operator><name>list</name><argument_list type="generic">&lt;<argument><expr><name>int</name></expr></argument>&gt;</argument_list></name></type> <name>c</name><argument_list>{ <argument><expr><literal type="number">4</literal></expr></argument>,<argument><expr><literal type="number">5</literal></expr></argument>,<argument><expr><literal type="number">6</literal></expr></argument> }</argument_list></decl>;</decl_stmt>
+
+        <comment type="line">// A contains 1</comment>
+        <expr_stmt><expr><call><name>REQUIRE_THAT</name><argument_list>(<argument><expr><name>a</name></expr></argument>,  <argument><expr><call><name>Contains</name><argument_list>(<argument><expr><literal type="number">1</literal></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        <comment type="line">// B contains 1</comment>
+        <expr_stmt><expr><call><name>REQUIRE_THAT</name><argument_list>(<argument><expr><name>b</name></expr></argument>,  <argument><expr><call><name>Contains</name><argument_list>(<argument><expr><literal type="number">1</literal></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        <comment type="line">// C does not contain 1</comment>
+        <expr_stmt><expr><call><name>REQUIRE_THAT</name><argument_list>(<argument><expr><name>c</name></expr></argument>, <argument><expr><operator>!</operator><call><name>Contains</name><argument_list>(<argument><expr><literal type="number">1</literal></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block>
+
+    <macro><name>SECTION</name><argument_list>(<argument><literal type="string">"Different argument ranges, same element type, custom comparison"</literal></argument>)</argument_list></macro> <block>{<block_content>
+        <decl_stmt><decl><type><name><name>std</name><operator>::</operator><name>array</name><argument_list type="generic">&lt;<argument><expr><name>int</name></expr></argument>, <argument><expr><literal type="number">3</literal></expr></argument>&gt;</argument_list></name></type> <name>a</name><argument_list>{ <argument><expr><block>{ <expr><literal type="number">1</literal></expr>,<expr><literal type="number">2</literal></expr>,<expr><literal type="number">3</literal></expr> }</block></expr></argument> }</argument_list></decl>;</decl_stmt>
+        <decl_stmt><decl><type><name><name>std</name><operator>::</operator><name>vector</name><argument_list type="generic">&lt;<argument><expr><name>int</name></expr></argument>&gt;</argument_list></name></type> <name>b</name><argument_list>{ <argument><expr><literal type="number">0</literal></expr></argument>,<argument><expr><literal type="number">1</literal></expr></argument>,<argument><expr><literal type="number">2</literal></expr></argument> }</argument_list></decl>;</decl_stmt>
+        <decl_stmt><decl><type><name><name>std</name><operator>::</operator><name>list</name><argument_list type="generic">&lt;<argument><expr><name>int</name></expr></argument>&gt;</argument_list></name></type> <name>c</name><argument_list>{ <argument><expr><literal type="number">4</literal></expr></argument>,<argument><expr><literal type="number">5</literal></expr></argument>,<argument><expr><literal type="number">6</literal></expr></argument> }</argument_list></decl>;</decl_stmt>
+
+        <decl_stmt><decl><type><name>auto</name></type> <name>close_enough</name> <init>= <expr><lambda><capture>[]</capture><parameter_list>(<parameter><decl><type><name>int</name></type> <name>lhs</name></decl></parameter>, <parameter><decl><type><name>int</name></type> <name>rhs</name></decl></parameter>)</parameter_list> <block>{<block_content> <return>return <expr><call><name><name>std</name><operator>::</operator><name>abs</name></name><argument_list>(<argument><expr><name>lhs</name> <operator>-</operator> <name>rhs</name></expr></argument>)</argument_list></call> <operator>&lt;=</operator> <literal type="number">1</literal></expr>;</return> </block_content>}</block></lambda></expr></init></decl>;</decl_stmt>
+
+        <comment type="line">// A contains 1, which is "close enough" to 0</comment>
+        <expr_stmt><expr><call><name>REQUIRE_THAT</name><argument_list>(<argument><expr><name>a</name></expr></argument>,  <argument><expr><call><name>Contains</name><argument_list>(<argument><expr><literal type="number">0</literal></expr></argument>, <argument><expr><name>close_enough</name></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        <comment type="line">// B contains 0 directly</comment>
+        <expr_stmt><expr><call><name>REQUIRE_THAT</name><argument_list>(<argument><expr><name>b</name></expr></argument>,  <argument><expr><call><name>Contains</name><argument_list>(<argument><expr><literal type="number">0</literal></expr></argument>, <argument><expr><name>close_enough</name></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        <comment type="line">// C does not contain anything "close enough" to 0</comment>
+        <expr_stmt><expr><call><name>REQUIRE_THAT</name><argument_list>(<argument><expr><name>c</name></expr></argument>, <argument><expr><operator>!</operator><call><name>Contains</name><argument_list>(<argument><expr><literal type="number">0</literal></expr></argument>, <argument><expr><name>close_enough</name></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block>
+
+    <macro><name>SECTION</name><argument_list>(<argument><literal type="string">"Different element type, custom comparisons"</literal></argument>)</argument_list></macro> <block>{<block_content>
+        <decl_stmt><decl><type><name><name>std</name><operator>::</operator><name>array</name><argument_list type="generic">&lt;<argument><expr><name><name>std</name><operator>::</operator><name>string</name></name></expr></argument>, <argument><expr><literal type="number">3</literal></expr></argument>&gt;</argument_list></name></type> <name>a</name><argument_list>{ <argument><expr><block>{ <expr><literal type="string">"abc"</literal></expr>, <expr><literal type="string">"abcd"</literal></expr> , <expr><literal type="string">"abcde"</literal></expr> }</block></expr></argument> }</argument_list></decl>;</decl_stmt>
+
+        <expr_stmt><expr><call><name>REQUIRE_THAT</name><argument_list>(<argument><expr><name>a</name></expr></argument>, <argument><expr><call><name>Contains</name><argument_list>(<argument><expr><literal type="number">4</literal></expr></argument>, <argument><expr><lambda><capture>[]</capture><parameter_list>(<parameter><decl/></parameter></parameter_list>auto<ref_qualifier>&amp;&amp;</ref_qualifier> <name>lhs</name></lambda></expr></argument>, <argument><expr><name>size_t</name> <name>sz</name></expr></argument>)</argument_list></call> <block>{
+            <return>return <expr><call><name><name>lhs</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call> <operator>==</operator> <name>sz</name></expr>;</return>
+        }</block></expr></argument></argument_list></call></expr></expr_stmt>)</block_content></block>)</block_content></block><empty_stmt>;</empty_stmt>
+    }
+
+    SECTION<expr_stmt><expr><operator>(</operator><literal type="string">"Can handle type that requires ADL-found free function begin and end"</literal><operator>)</operator> <block>{
+        <expr><name><name>unrelated</name><operator>::</operator><name>needs_ADL_begin</name></name> <name>in</name></expr>;
+
+        <expr><call><name>REQUIRE_THAT</name><argument_list>(<argument><expr><name>in</name></expr></argument>,  <argument><expr><call><name>Contains</name><argument_list>(<argument><expr><literal type="number">1</literal></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr>;
+        <expr><call><name>REQUIRE_THAT</name><argument_list>(<argument><expr><name>in</name></expr></argument>, <argument><expr><operator>!</operator><call><name>Contains</name><argument_list>(<argument><expr><literal type="number">8</literal></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr>;
+    }</block>
+
+    <macro><name>SECTION</name><argument_list>(<argument><literal type="string">"Initialization with move only types"</literal></argument>)</argument_list></macro> <block>{
+        <expr><name><name>std</name><operator>::</operator><name>array</name><argument_list type="generic">&lt;<argument><expr><name>MoveOnlyTestElement</name></expr></argument>, <argument><expr><literal type="number">3</literal></expr></argument>&gt;</argument_list></name> <call><name>in</name><argument_list>{ <argument><expr><block>{ <expr><call><name>MoveOnlyTestElement</name><argument_list>{ <argument><expr><literal type="number">1</literal></expr></argument> }</argument_list></call></expr>, <expr><call><name>MoveOnlyTestElement</name><argument_list>{ <argument><expr><literal type="number">2</literal></expr></argument> }</argument_list></call></expr>, <macro><name>MoveOnlyTestElement</name></macro><expr><block>{ <expr><literal type="number">3</literal></expr> }</block></expr> }</block></expr></argument> }</argument_list></call></expr>;
+
+        <expr><call><name>REQUIRE_THAT</name><argument_list>(<argument><expr><name>in</name></expr></argument>,  <argument><expr><call><name>Contains</name><argument_list>(<argument><expr><call><name>MoveOnlyTestElement</name><argument_list>{ <argument><expr><literal type="number">2</literal></expr></argument> }</argument_list></call></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr>;
+        <expr><call><name>REQUIRE_THAT</name><argument_list>(<argument><expr><name>in</name></expr></argument>, <argument><expr><operator>!</operator><call><name>Contains</name><argument_list>(<argument><expr><call><name>MoveOnlyTestElement</name><argument_list>{ <argument><expr><literal type="number">9</literal></expr></argument> }</argument_list></call></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr>;
+    }</block>
+
+    <macro><name>SECTION</name><argument_list>(<argument><literal type="string">"Matching using matcher"</literal></argument>)</argument_list></macro> <block>{
+        <expr><name><name>std</name><operator>::</operator><name>array</name><argument_list type="generic">&lt;<argument><expr><name>double</name></expr></argument>, <argument><expr><literal type="number">4</literal></expr></argument>&gt;</argument_list></name> <call><name>in</name><argument_list>{ <argument><expr><block>{<expr><literal type="number">1</literal></expr>, <expr><literal type="number">2</literal></expr>, <expr><literal type="number">3</literal></expr>}</block></expr></argument> }</argument_list></call></expr>;
+
+        <expr><call><name>REQUIRE_THAT</name><argument_list>(<argument><expr><name>in</name></expr></argument>, <argument><expr><call><name>Contains</name><argument_list>(<argument><expr><call><name><name>Catch</name><operator>::</operator><name>Matchers</name><operator>::</operator><name>WithinAbs</name></name><argument_list>(<argument><expr><literal type="number">0.5</literal></expr></argument>, <argument><expr><literal type="number">0.5</literal></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr>;
+    }</block></expr></expr_stmt>
+}
+
+namespace <block>{<block_content>
+
+    <struct>struct <name>has_empty</name> <block>{<public type="default">
+        <function><type><name>bool</name></type> <name>empty</name><parameter_list>()</parameter_list> <specifier>const</specifier> <block>{<block_content> <return>return <expr><literal type="boolean">false</literal></expr>;</return> </block_content>}</block></function>
+    </public>}</block>;</struct>
+
+<namespace>namespace <name>unrelated</name> <block>{
+    <struct>struct <name>ADL_empty</name> <block>{<public type="default">
+        <function><type><name>bool</name></type> <name>Empty</name><parameter_list>()</parameter_list> <specifier>const</specifier> <block>{<block_content> <return>return <expr><literal type="boolean">true</literal></expr>;</return> </block_content>}</block></function>
+
+        <friend>friend <function><type><name>bool</name></type> <name>empty</name><parameter_list>(<parameter><decl><type><name>ADL_empty</name></type> <name>e</name></decl></parameter>)</parameter_list> <block>{<block_content>
+            <return>return <expr><call><name><name>e</name><operator>.</operator><name>Empty</name></name><argument_list>()</argument_list></call></expr>;</return>
+        </block_content>}</block></function></friend>
+    </public>}</block>;</struct>
+
+}</block></namespace> <comment type="line">// end namespace unrelated</comment>
+</block_content>}</block> <comment type="line">// end unnamed namespace</comment>
+
+<macro><name>TEST_CASE</name><argument_list>(<argument><literal type="string">"Basic use of the Empty range matcher"</literal></argument>, <argument><literal type="string">"[matchers][templated][empty]"</literal></argument>)</argument_list></macro> <block>{<block_content>
+    <using>using <name><name>Catch</name><operator>::</operator><name>Matchers</name><operator>::</operator><name>IsEmpty</name></name>;</using>
+    <macro><name>SECTION</name><argument_list>(<argument><literal type="string">"Simple, std-provided containers"</literal></argument>)</argument_list></macro> <block>{<block_content>
+        <decl_stmt><decl><type><name><name>std</name><operator>::</operator><name>array</name><argument_list type="generic">&lt;<argument><expr><name>int</name></expr></argument>, <argument><expr><literal type="number">0</literal></expr></argument>&gt;</argument_list></name></type> <name>empty_array</name><argument_list>{}</argument_list></decl>;</decl_stmt>
+        <decl_stmt><decl><type><name><name>std</name><operator>::</operator><name>array</name><argument_list type="generic">&lt;<argument><expr><name>double</name></expr></argument>, <argument><expr><literal type="number">1</literal></expr></argument>&gt;</argument_list></name></type> <name>non_empty_array</name><argument_list>{}</argument_list></decl>;</decl_stmt>
+        <expr_stmt><expr><call><name>REQUIRE_THAT</name><argument_list>(<argument><expr><name>empty_array</name></expr></argument>, <argument><expr><call><name>IsEmpty</name><argument_list>()</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name>REQUIRE_THAT</name><argument_list>(<argument><expr><name>non_empty_array</name></expr></argument>, <argument><expr><operator>!</operator><call><name>IsEmpty</name><argument_list>()</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+
+        <decl_stmt><decl><type><name><name>std</name><operator>::</operator><name>vector</name><argument_list type="generic">&lt;<argument><expr><name><name>std</name><operator>::</operator><name>string</name></name></expr></argument>&gt;</argument_list></name></type> <name>empty_vec</name></decl>;</decl_stmt>
+        <decl_stmt><decl><type><name><name>std</name><operator>::</operator><name>vector</name><argument_list type="generic">&lt;<argument><expr><name>char</name></expr></argument>&gt;</argument_list></name></type> <name>non_empty_vec</name><argument_list>{ <argument><expr><literal type="char">'a'</literal></expr></argument>, <argument><expr><literal type="char">'b'</literal></expr></argument>, <argument><expr><literal type="char">'c'</literal></expr></argument> }</argument_list></decl>;</decl_stmt>
+        <expr_stmt><expr><call><name>REQUIRE_THAT</name><argument_list>(<argument><expr><name>empty_vec</name></expr></argument>, <argument><expr><call><name>IsEmpty</name><argument_list>()</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name>REQUIRE_THAT</name><argument_list>(<argument><expr><name>non_empty_vec</name></expr></argument>, <argument><expr><operator>!</operator><call><name>IsEmpty</name><argument_list>()</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+
+        <decl_stmt><decl><type><name><name>std</name><operator>::</operator><name>list</name><argument_list type="generic">&lt;<argument><expr><name><name>std</name><operator>::</operator><name>list</name><argument_list type="generic">&lt;<argument><expr><name><name>std</name><operator>::</operator><name>list</name><argument_list type="generic">&lt;<argument><expr><name>int</name></expr></argument>&gt;</argument_list></name></expr></argument>&gt;</argument_list></name></expr></argument>&gt;</argument_list></name></type> <name>inner_lists_are_empty</name></decl>;</decl_stmt>
+        <expr_stmt><expr><call><name><name>inner_lists_are_empty</name><operator>.</operator><name>push_back</name></name><argument_list>(<argument><expr><block>{}</block></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name>REQUIRE_THAT</name><argument_list>(<argument><expr><name>inner_lists_are_empty</name></expr></argument>, <argument><expr><operator>!</operator><call><name>IsEmpty</name><argument_list>()</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name>REQUIRE_THAT</name><argument_list>(<argument><expr><call><name><name>inner_lists_are_empty</name><operator>.</operator><name>front</name></name><argument_list>()</argument_list></call></expr></argument>, <argument><expr><call><name>IsEmpty</name><argument_list>()</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block>
+    <macro><name>SECTION</name><argument_list>(<argument><literal type="string">"Type with empty"</literal></argument>)</argument_list></macro> <block>{<block_content>
+        <expr_stmt><expr><call><name>REQUIRE_THAT</name><argument_list>(<argument><expr><call><name>has_empty</name><argument_list>{}</argument_list></call></expr></argument>, <argument><expr><operator>!</operator><call><name>IsEmpty</name><argument_list>()</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block>
+    <macro><name>SECTION</name><argument_list>(<argument><literal type="string">"Type requires ADL found empty free function"</literal></argument>)</argument_list></macro> <block>{<block_content>
+        <expr_stmt><expr><call><name>REQUIRE_THAT</name><argument_list>(<argument><expr><call><name><name>unrelated</name><operator>::</operator><name>ADL_empty</name></name><argument_list>{}</argument_list></call></expr></argument>, <argument><expr><call><name>IsEmpty</name><argument_list>()</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block>
+</block_content>}</block>
+
+<namespace>namespace <block>{
+    <class>class <name>LessThanMatcher</name> <specifier>final</specifier> <super_list>: <super><specifier>public</specifier> <name><name>Catch</name><operator>::</operator><name>Matchers</name><operator>::</operator><name>MatcherBase</name><argument_list type="generic">&lt;<argument><expr><name>size_t</name></expr></argument>&gt;</argument_list></name></super></super_list> <block>{<private type="default">
+        <decl_stmt><decl><type><name>size_t</name></type> <name>m_target</name></decl>;</decl_stmt>
+    </private><public>public:
+        <constructor><specifier>explicit</specifier> <name>LessThanMatcher</name><parameter_list>(<parameter><decl><type><name>size_t</name></type> <name>target</name></decl></parameter>)</parameter_list><member_init_list>:
+            <call><name>m_target</name><argument_list>(<argument><expr><name>target</name></expr></argument>)</argument_list></call>
+        </member_init_list><block>{<block_content/>}</block></constructor>
+
+        <function><type><name>bool</name></type> <name>match</name><parameter_list>(<parameter><decl><type><name>size_t</name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>size</name></decl></parameter>)</parameter_list> <specifier>const</specifier> <specifier>override</specifier> <block>{<block_content>
+            <return>return <expr><name>size</name> <operator>&lt;</operator> <name>m_target</name></expr>;</return>
+        </block_content>}</block></function>
+
+        <function><type><name><name>std</name><operator>::</operator><name>string</name></name></type> <name>describe</name><parameter_list>()</parameter_list> <specifier>const</specifier> <specifier>override</specifier> <block>{<block_content>
+            <return>return <expr><literal type="string">"is less than "</literal> <operator>+</operator> <call><name><name>std</name><operator>::</operator><name>to_string</name></name><argument_list>(<argument><expr><name>m_target</name></expr></argument>)</argument_list></call></expr>;</return>
+        </block_content>}</block></function>
+    </public>}</block>;</class>
+
+    <function><type><name>LessThanMatcher</name></type> <name>Lt</name><parameter_list>(<parameter><decl><type><name>size_t</name></type> <name>sz</name></decl></parameter>)</parameter_list> <block>{<block_content>
+        <return>return <expr><call><name>LessThanMatcher</name><argument_list>{ <argument><expr><name>sz</name></expr></argument> }</argument_list></call></expr>;</return>
+    </block_content>}</block></function>
+
+    <namespace>namespace <name>unrelated</name> <block>{
+        <struct>struct <name>ADL_size</name> <block>{<public type="default">
+            <function><type><name>size_t</name></type> <name>sz</name><parameter_list>()</parameter_list> <specifier>const</specifier> <block>{<block_content>
+                <return>return <expr><literal type="number">12</literal></expr>;</return>
+            </block_content>}</block></function>
+            <friend>friend <function><type><name>size_t</name></type> <name>size</name><parameter_list>(<parameter><decl><type><name>ADL_size</name></type> <name>s</name></decl></parameter>)</parameter_list> <block>{<block_content>
+                <return>return <expr><call><name><name>s</name><operator>.</operator><name>sz</name></name><argument_list>()</argument_list></call></expr>;</return>
+            </block_content>}</block></function></friend>
+        </public>}</block>;</struct>
+    }</block></namespace> <comment type="line">// end namespace unrelated</comment>
+
+    <struct>struct <name>has_size</name> <block>{<public type="default">
+        <function><type><name>size_t</name></type> <name>size</name><parameter_list>()</parameter_list> <specifier>const</specifier> <block>{<block_content>
+            <return>return <expr><literal type="number">13</literal></expr>;</return>
+        </block_content>}</block></function>
+    </public>}</block>;</struct>
+
+}</block></namespace> <comment type="line">// end unnamed namespace</comment>
+
+<macro><name>TEST_CASE</name><argument_list>(<argument><literal type="string">"Usage of the SizeIs range matcher"</literal></argument>, <argument><literal type="string">"[matchers][templated][size]"</literal></argument>)</argument_list></macro> <block>{<block_content>
+    <using>using <name><name>Catch</name><operator>::</operator><name>Matchers</name><operator>::</operator><name>SizeIs</name></name>;</using>
+    <macro><name>SECTION</name><argument_list>(<argument><literal type="string">"Some with stdlib containers"</literal></argument>)</argument_list></macro> <block>{<block_content>
+        <decl_stmt><decl><type><name><name>std</name><operator>::</operator><name>vector</name><argument_list type="generic">&lt;<argument><expr><name>int</name></expr></argument>&gt;</argument_list></name></type> <name>empty_vec</name></decl>;</decl_stmt>
+        <expr_stmt><expr><call><name>REQUIRE_THAT</name><argument_list>(<argument><expr><name>empty_vec</name></expr></argument>,  <argument><expr><call><name>SizeIs</name><argument_list>(<argument><expr><literal type="number">0</literal></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name>REQUIRE_THAT</name><argument_list>(<argument><expr><name>empty_vec</name></expr></argument>, <argument><expr><operator>!</operator><call><name>SizeIs</name><argument_list>(<argument><expr><literal type="number">2</literal></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name>REQUIRE_THAT</name><argument_list>(<argument><expr><name>empty_vec</name></expr></argument>,  <argument><expr><call><name>SizeIs</name><argument_list>(<argument><expr><call><name>Lt</name><argument_list>(<argument><expr><literal type="number">2</literal></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+
+        <decl_stmt><decl><type><name><name>std</name><operator>::</operator><name>array</name><argument_list type="generic">&lt;<argument><expr><name>int</name></expr></argument>, <argument><expr><literal type="number">2</literal></expr></argument>&gt;</argument_list></name></type> <name>arr</name><argument_list>{}</argument_list></decl>;</decl_stmt>
+        <expr_stmt><expr><call><name>REQUIRE_THAT</name><argument_list>(<argument><expr><name>arr</name></expr></argument>,  <argument><expr><call><name>SizeIs</name><argument_list>(<argument><expr><literal type="number">2</literal></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name>REQUIRE_THAT</name><argument_list>(<argument><expr><name>arr</name></expr></argument>,  <argument><expr><call><name>SizeIs</name><argument_list>( <argument><expr><call><name>Lt</name><argument_list>(<argument><expr><literal type="number">3</literal></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name>REQUIRE_THAT</name><argument_list>(<argument><expr><name>arr</name></expr></argument>, <argument><expr><operator>!</operator><call><name>SizeIs</name><argument_list>(<argument><expr><operator>!</operator><call><name>Lt</name><argument_list>(<argument><expr><literal type="number">3</literal></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+
+        <decl_stmt><decl><type><name><name>std</name><operator>::</operator><name>map</name><argument_list type="generic">&lt;<argument><expr><name>int</name></expr></argument>, <argument><expr><name>int</name></expr></argument>&gt;</argument_list></name></type> <name>map</name><argument_list>{ <argument><expr><block>{<expr><literal type="number">1</literal></expr>, <expr><literal type="number">1</literal></expr>}</block></expr></argument>, <argument><expr><block>{<expr><literal type="number">2</literal></expr>, <expr><literal type="number">2</literal></expr>}</block></expr></argument>, <argument><expr><block>{<expr><literal type="number">3</literal></expr>, <expr><literal type="number">3</literal></expr>}</block></expr></argument> }</argument_list></decl>;</decl_stmt>
+        <expr_stmt><expr><call><name>REQUIRE_THAT</name><argument_list>(<argument><expr><name>map</name></expr></argument>, <argument><expr><call><name>SizeIs</name><argument_list>(<argument><expr><literal type="number">3</literal></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block>
+    <macro><name>SECTION</name><argument_list>(<argument><literal type="string">"Type requires ADL found size free function"</literal></argument>)</argument_list></macro> <block>{<block_content>
+        <expr_stmt><expr><call><name>REQUIRE_THAT</name><argument_list>(<argument><expr><call><name><name>unrelated</name><operator>::</operator><name>ADL_size</name></name><argument_list>{}</argument_list></call></expr></argument>, <argument><expr><call><name>SizeIs</name><argument_list>(<argument><expr><literal type="number">12</literal></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block>
+    <macro><name>SECTION</name><argument_list>(<argument><literal type="string">"Type has size member"</literal></argument>)</argument_list></macro> <block>{<block_content>
+        <expr_stmt><expr><call><name>REQUIRE_THAT</name><argument_list>(<argument><expr><call><name>has_size</name><argument_list>{}</argument_list></call></expr></argument>, <argument><expr><call><name>SizeIs</name><argument_list>(<argument><expr><literal type="number">13</literal></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block>
+</block_content>}</block>
+
+
+<macro><name>TEST_CASE</name><argument_list>(<argument><literal type="string">"Usage of AllMatch range matcher"</literal></argument>, <argument><literal type="string">"[matchers][templated][quantifiers]"</literal></argument>)</argument_list></macro> <block>{<block_content>
+    <using>using <name><name>Catch</name><operator>::</operator><name>Matchers</name><operator>::</operator><name>AllMatch</name></name>;</using>
+    <using>using <name><name>Catch</name><operator>::</operator><name>Matchers</name><operator>::</operator><name>Predicate</name></name>;</using>
+
+    <macro><name>SECTION</name><argument_list>(<argument><literal type="string">"Basic usage"</literal></argument>)</argument_list></macro> <block>{<block_content>
+        <using>using <name><name>Catch</name><operator>::</operator><name>Matchers</name><operator>::</operator><name>Contains</name></name>;</using>
+        <using>using <name><name>Catch</name><operator>::</operator><name>Matchers</name><operator>::</operator><name>SizeIs</name></name>;</using>
+
+        <decl_stmt><decl><type><name><name>std</name><operator>::</operator><name>array</name><argument_list type="generic">&lt;<argument><expr><name><name>std</name><operator>::</operator><name>array</name><argument_list type="generic">&lt;<argument><expr><name>int</name></expr></argument>, <argument><expr><literal type="number">5</literal></expr></argument>&gt;</argument_list></name></expr></argument>, <argument><expr><literal type="number">5</literal></expr></argument>&gt;</argument_list></name></type> <name>data</name><argument_list>{<argument><expr><block>{
+                                        <expr><block>{<expr><block>{ <expr><literal type="number">0</literal></expr>, <expr><literal type="number">1</literal></expr>, <expr><literal type="number">2</literal></expr>, <expr><literal type="number">3</literal></expr>, <expr><literal type="number">5</literal></expr> }</block></expr>}</block></expr>,
+                                        <expr><block>{<expr><block>{ <expr><literal type="number">4</literal></expr>,<expr><operator>-</operator><literal type="number">3</literal></expr>,<expr><operator>-</operator><literal type="number">2</literal></expr>, <expr><literal type="number">5</literal></expr>, <expr><literal type="number">0</literal></expr> }</block></expr>}</block></expr>,
+                                        <expr><block>{<expr><block>{ <expr><literal type="number">0</literal></expr>, <expr><literal type="number">0</literal></expr>, <expr><literal type="number">0</literal></expr>, <expr><literal type="number">5</literal></expr>, <expr><literal type="number">0</literal></expr> }</block></expr>}</block></expr>,
+                                        <expr><block>{<expr><block>{ <expr><literal type="number">0</literal></expr>,<expr><operator>-</operator><literal type="number">5</literal></expr>, <expr><literal type="number">0</literal></expr>, <expr><literal type="number">5</literal></expr>, <expr><literal type="number">0</literal></expr> }</block></expr>}</block></expr>,
+                                        <expr><block>{<expr><block>{ <expr><literal type="number">1</literal></expr>, <expr><literal type="number">0</literal></expr>, <expr><literal type="number">0</literal></expr>,<expr><operator>-</operator><literal type="number">1</literal></expr>, <expr><literal type="number">5</literal></expr> }</block></expr>}</block></expr>
+        }</block></expr></argument>}</argument_list></decl>;</decl_stmt>
+
+        <expr_stmt><expr><call><name>REQUIRE_THAT</name><argument_list>(<argument><expr><name>data</name></expr></argument>,  <argument><expr><call><name>AllMatch</name><argument_list>(<argument><expr><call><name>SizeIs</name><argument_list>(<argument><expr><literal type="number">5</literal></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name>REQUIRE_THAT</name><argument_list>(<argument><expr><name>data</name></expr></argument>, <argument><expr><operator>!</operator><call><name>AllMatch</name><argument_list>(<argument><expr><call><name>Contains</name><argument_list>(<argument><expr><literal type="number">0</literal></expr></argument>)</argument_list></call> <operator>&amp;&amp;</operator> <call><name>Contains</name><argument_list>(<argument><expr><literal type="number">1</literal></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block>
+
+    <macro><name>SECTION</name><argument_list>(<argument><literal type="string">"Type requires ADL found begin and end"</literal></argument>)</argument_list></macro> <block>{<block_content>
+        <decl_stmt><decl><type><name><name>unrelated</name><operator>::</operator><name>needs_ADL_begin</name></name></type> <name>needs_adl</name></decl>;</decl_stmt>
+        <expr_stmt><expr><call><name>REQUIRE_THAT</name><argument_list>( <argument><expr><name>needs_adl</name></expr></argument>, <argument><expr><call><name>AllMatch</name><argument_list>( <argument><expr><call><name><name>Predicate</name><argument_list type="generic">&lt;<argument><expr><name>int</name></expr></argument>&gt;</argument_list></name><argument_list>( <argument><expr><lambda><capture>[]</capture><parameter_list>( <parameter><decl><type><name>int</name></type> <name>elem</name></decl></parameter> )</parameter_list> <block>{<block_content>
+                          <return>return <expr><name>elem</name> <operator>&lt;</operator> <literal type="number">6</literal></expr>;</return>
+                      </block_content>}</block></lambda></expr></argument> )</argument_list></call></expr></argument> )</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block>
+
+    <macro><name>SECTION</name><argument_list>(<argument><literal type="string">"Shortcircuiting"</literal></argument>)</argument_list></macro> <block>{<block_content>
+        <decl_stmt><decl><type><name>with_mocked_iterator_access</name></type> <name>mocked</name></decl>;</decl_stmt>
+        <macro><name>SECTION</name><argument_list>(<argument><literal type="string">"All are read"</literal></argument>)</argument_list></macro> <block>{<block_content>
+            <decl_stmt><decl><type><name>auto</name></type> <name>allMatch</name> <init>= <expr><call><name>AllMatch</name><argument_list>(<argument><expr><call><name><name>Predicate</name><argument_list type="generic">&lt;<argument><expr><name>int</name></expr></argument>&gt;</argument_list></name><argument_list>(<argument><expr><lambda><capture>[]</capture><parameter_list>(<parameter><decl><type><name>int</name></type> <name>elem</name></decl></parameter>)</parameter_list> <block>{<block_content>
+                <return>return <expr><name>elem</name> <operator>&lt;</operator> <literal type="number">10</literal></expr>;</return>
+            </block_content>}</block></lambda></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+            <expr_stmt><expr><call><name>REQUIRE_THAT</name><argument_list>(<argument><expr><name>mocked</name></expr></argument>, <argument><expr><name>allMatch</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+            <expr_stmt><expr><call><name>REQUIRE</name><argument_list>(<argument><expr><name><name>mocked</name><operator>.</operator><name>derefed</name><index>[<expr><literal type="number">0</literal></expr>]</index></name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+            <expr_stmt><expr><call><name>REQUIRE</name><argument_list>(<argument><expr><name><name>mocked</name><operator>.</operator><name>derefed</name><index>[<expr><literal type="number">1</literal></expr>]</index></name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+            <expr_stmt><expr><call><name>REQUIRE</name><argument_list>(<argument><expr><name><name>mocked</name><operator>.</operator><name>derefed</name><index>[<expr><literal type="number">2</literal></expr>]</index></name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+            <expr_stmt><expr><call><name>REQUIRE</name><argument_list>(<argument><expr><name><name>mocked</name><operator>.</operator><name>derefed</name><index>[<expr><literal type="number">3</literal></expr>]</index></name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+            <expr_stmt><expr><call><name>REQUIRE</name><argument_list>(<argument><expr><name><name>mocked</name><operator>.</operator><name>derefed</name><index>[<expr><literal type="number">4</literal></expr>]</index></name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        </block_content>}</block>
+        <macro><name>SECTION</name><argument_list>(<argument><literal type="string">"Short-circuited"</literal></argument>)</argument_list></macro> <block>{<block_content>
+            <decl_stmt><decl><type><name>auto</name></type> <name>allMatch</name> <init>= <expr><call><name>AllMatch</name><argument_list>(<argument><expr><call><name><name>Predicate</name><argument_list type="generic">&lt;<argument><expr><name>int</name></expr></argument>&gt;</argument_list></name><argument_list>(<argument><expr><lambda><capture>[]</capture><parameter_list>(<parameter><decl><type><name>int</name></type> <name>elem</name></decl></parameter>)</parameter_list> <block>{<block_content>
+                <return>return <expr><name>elem</name> <operator>&lt;</operator> <literal type="number">3</literal></expr>;</return>
+            </block_content>}</block></lambda></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+            <expr_stmt><expr><call><name>REQUIRE_THAT</name><argument_list>(<argument><expr><name>mocked</name></expr></argument>, <argument><expr><operator>!</operator><name>allMatch</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+            <expr_stmt><expr><call><name>REQUIRE</name><argument_list>(<argument><expr><name><name>mocked</name><operator>.</operator><name>derefed</name><index>[<expr><literal type="number">0</literal></expr>]</index></name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+            <expr_stmt><expr><call><name>REQUIRE</name><argument_list>(<argument><expr><name><name>mocked</name><operator>.</operator><name>derefed</name><index>[<expr><literal type="number">1</literal></expr>]</index></name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+            <expr_stmt><expr><call><name>REQUIRE</name><argument_list>(<argument><expr><name><name>mocked</name><operator>.</operator><name>derefed</name><index>[<expr><literal type="number">2</literal></expr>]</index></name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+            <expr_stmt><expr><call><name>REQUIRE_FALSE</name><argument_list>(<argument><expr><name><name>mocked</name><operator>.</operator><name>derefed</name><index>[<expr><literal type="number">3</literal></expr>]</index></name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+            <expr_stmt><expr><call><name>REQUIRE_FALSE</name><argument_list>(<argument><expr><name><name>mocked</name><operator>.</operator><name>derefed</name><index>[<expr><literal type="number">4</literal></expr>]</index></name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        </block_content>}</block>
+    </block_content>}</block>
+</block_content>}</block>
+
+<macro><name>TEST_CASE</name><argument_list>(<argument><literal type="string">"Usage of AnyMatch range matcher"</literal></argument>, <argument><literal type="string">"[matchers][templated][quantifiers]"</literal></argument>)</argument_list></macro> <block>{<block_content>
+    <using>using <name><name>Catch</name><operator>::</operator><name>Matchers</name><operator>::</operator><name>AnyMatch</name></name>;</using>
+    <using>using <name><name>Catch</name><operator>::</operator><name>Matchers</name><operator>::</operator><name>Predicate</name></name>;</using>
+
+    <macro><name>SECTION</name><argument_list>(<argument><literal type="string">"Basic usage"</literal></argument>)</argument_list></macro> <block>{<block_content>
+        <using>using <name><name>Catch</name><operator>::</operator><name>Matchers</name><operator>::</operator><name>Contains</name></name>;</using>
+        <using>using <name><name>Catch</name><operator>::</operator><name>Matchers</name><operator>::</operator><name>SizeIs</name></name>;</using>
+
+        <decl_stmt><decl><type><name><name>std</name><operator>::</operator><name>array</name><argument_list type="generic">&lt;<argument><expr><name><name>std</name><operator>::</operator><name>array</name><argument_list type="generic">&lt;<argument><expr><name>int</name></expr></argument>, <argument><expr><literal type="number">5</literal></expr></argument>&gt;</argument_list></name></expr></argument>, <argument><expr><literal type="number">5</literal></expr></argument>&gt;</argument_list></name></type> <name>data</name><argument_list>{ <argument><expr><block>{
+                                        <expr><block>{<expr><block>{ <expr><literal type="number">0</literal></expr>, <expr><literal type="number">1</literal></expr>, <expr><literal type="number">2</literal></expr>, <expr><literal type="number">3</literal></expr>, <expr><literal type="number">5</literal></expr> }</block></expr>}</block></expr>,
+                                        <expr><block>{<expr><block>{ <expr><literal type="number">4</literal></expr>,<expr><operator>-</operator><literal type="number">3</literal></expr>,<expr><operator>-</operator><literal type="number">2</literal></expr>, <expr><literal type="number">5</literal></expr>, <expr><literal type="number">0</literal></expr> }</block></expr>}</block></expr>,
+                                        <expr><block>{<expr><block>{ <expr><literal type="number">0</literal></expr>, <expr><literal type="number">0</literal></expr>, <expr><literal type="number">0</literal></expr>, <expr><literal type="number">5</literal></expr>, <expr><literal type="number">0</literal></expr> }</block></expr>}</block></expr>,
+                                        <expr><block>{<expr><block>{ <expr><literal type="number">0</literal></expr>,<expr><operator>-</operator><literal type="number">5</literal></expr>, <expr><literal type="number">0</literal></expr>, <expr><literal type="number">5</literal></expr>, <expr><literal type="number">0</literal></expr> }</block></expr>}</block></expr>,
+                                        <expr><block>{<expr><block>{ <expr><literal type="number">1</literal></expr>, <expr><literal type="number">0</literal></expr>, <expr><literal type="number">0</literal></expr>,<expr><operator>-</operator><literal type="number">1</literal></expr>, <expr><literal type="number">5</literal></expr> }</block></expr>}</block></expr>
+        }</block></expr></argument> }</argument_list></decl>;</decl_stmt>
+
+        <expr_stmt><expr><call><name>REQUIRE_THAT</name><argument_list>(<argument><expr><name>data</name></expr></argument>,  <argument><expr><call><name>AnyMatch</name><argument_list>(<argument><expr><call><name>SizeIs</name><argument_list>(<argument><expr><literal type="number">5</literal></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name>REQUIRE_THAT</name><argument_list>(<argument><expr><name>data</name></expr></argument>, <argument><expr><operator>!</operator><call><name>AnyMatch</name><argument_list>(<argument><expr><call><name>Contains</name><argument_list>(<argument><expr><literal type="number">0</literal></expr></argument>)</argument_list></call> <operator>&amp;&amp;</operator> <call><name>Contains</name><argument_list>(<argument><expr><literal type="number">10</literal></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block>
+
+    <macro><name>SECTION</name><argument_list>(<argument><literal type="string">"Type requires ADL found begin and end"</literal></argument>)</argument_list></macro> <block>{<block_content>
+        <decl_stmt><decl><type><name><name>unrelated</name><operator>::</operator><name>needs_ADL_begin</name></name></type> <name>needs_adl</name></decl>;</decl_stmt>
+        <expr_stmt><expr><call><name>REQUIRE_THAT</name><argument_list>( <argument><expr><name>needs_adl</name></expr></argument>, <argument><expr><call><name>AnyMatch</name><argument_list>( <argument><expr><call><name><name>Predicate</name><argument_list type="generic">&lt;<argument><expr><name>int</name></expr></argument>&gt;</argument_list></name><argument_list>( <argument><expr><lambda><capture>[]</capture><parameter_list>( <parameter><decl><type><name>int</name></type> <name>elem</name></decl></parameter> )</parameter_list> <block>{<block_content>
+                          <return>return <expr><name>elem</name> <operator>&lt;</operator> <literal type="number">3</literal></expr>;</return>
+                      </block_content>}</block></lambda></expr></argument> )</argument_list></call></expr></argument> )</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block>
+
+    <macro><name>SECTION</name><argument_list>(<argument><literal type="string">"Shortcircuiting"</literal></argument>)</argument_list></macro> <block>{<block_content>
+        <decl_stmt><decl><type><name>with_mocked_iterator_access</name></type> <name>mocked</name></decl>;</decl_stmt>
+        <macro><name>SECTION</name><argument_list>(<argument><literal type="string">"All are read"</literal></argument>)</argument_list></macro> <block>{<block_content>
+            <decl_stmt><decl><type><name>auto</name></type> <name>anyMatch</name> <init>= <expr><call><name>AnyMatch</name><argument_list>(
+                <argument><expr><call><name><name>Predicate</name><argument_list type="generic">&lt;<argument><expr><name>int</name></expr></argument>&gt;</argument_list></name><argument_list>( <argument><expr><lambda><capture>[]</capture><parameter_list>( <parameter><decl><type><name>int</name></type> <name>elem</name></decl></parameter> )</parameter_list> <block>{<block_content> <return>return <expr><name>elem</name> <operator>&gt;</operator> <literal type="number">10</literal></expr>;</return> </block_content>}</block></lambda></expr></argument> )</argument_list></call></expr></argument> )</argument_list></call></expr></init></decl>;</decl_stmt>
+            <expr_stmt><expr><call><name>REQUIRE_THAT</name><argument_list>( <argument><expr><name>mocked</name></expr></argument>, <argument><expr><operator>!</operator><name>anyMatch</name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+            <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><name><name>mocked</name><operator>.</operator><name>derefed</name><index>[<expr><literal type="number">0</literal></expr>]</index></name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+            <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><name><name>mocked</name><operator>.</operator><name>derefed</name><index>[<expr><literal type="number">1</literal></expr>]</index></name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+            <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><name><name>mocked</name><operator>.</operator><name>derefed</name><index>[<expr><literal type="number">2</literal></expr>]</index></name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+            <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><name><name>mocked</name><operator>.</operator><name>derefed</name><index>[<expr><literal type="number">3</literal></expr>]</index></name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+            <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><name><name>mocked</name><operator>.</operator><name>derefed</name><index>[<expr><literal type="number">4</literal></expr>]</index></name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        </block_content>}</block>
+        <macro><name>SECTION</name><argument_list>(<argument><literal type="string">"Short-circuited"</literal></argument>)</argument_list></macro> <block>{<block_content>
+            <decl_stmt><decl><type><name>auto</name></type> <name>anyMatch</name> <init>= <expr><call><name>AnyMatch</name><argument_list>(
+                <argument><expr><call><name><name>Predicate</name><argument_list type="generic">&lt;<argument><expr><name>int</name></expr></argument>&gt;</argument_list></name><argument_list>( <argument><expr><lambda><capture>[]</capture><parameter_list>( <parameter><decl><type><name>int</name></type> <name>elem</name></decl></parameter> )</parameter_list> <block>{<block_content> <return>return <expr><name>elem</name> <operator>&lt;</operator> <literal type="number">3</literal></expr>;</return> </block_content>}</block></lambda></expr></argument> )</argument_list></call></expr></argument> )</argument_list></call></expr></init></decl>;</decl_stmt>
+            <expr_stmt><expr><call><name>REQUIRE_THAT</name><argument_list>( <argument><expr><name>mocked</name></expr></argument>, <argument><expr><name>anyMatch</name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+            <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><name><name>mocked</name><operator>.</operator><name>derefed</name><index>[<expr><literal type="number">0</literal></expr>]</index></name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+            <expr_stmt><expr><call><name>REQUIRE_FALSE</name><argument_list>( <argument><expr><name><name>mocked</name><operator>.</operator><name>derefed</name><index>[<expr><literal type="number">1</literal></expr>]</index></name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+            <expr_stmt><expr><call><name>REQUIRE_FALSE</name><argument_list>( <argument><expr><name><name>mocked</name><operator>.</operator><name>derefed</name><index>[<expr><literal type="number">2</literal></expr>]</index></name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+            <expr_stmt><expr><call><name>REQUIRE_FALSE</name><argument_list>( <argument><expr><name><name>mocked</name><operator>.</operator><name>derefed</name><index>[<expr><literal type="number">3</literal></expr>]</index></name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+            <expr_stmt><expr><call><name>REQUIRE_FALSE</name><argument_list>( <argument><expr><name><name>mocked</name><operator>.</operator><name>derefed</name><index>[<expr><literal type="number">4</literal></expr>]</index></name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        </block_content>}</block>
+    </block_content>}</block>
+</block_content>}</block>
+
+<macro><name>TEST_CASE</name><argument_list>(<argument><literal type="string">"Usage of NoneMatch range matcher"</literal></argument>, <argument><literal type="string">"[matchers][templated][quantifiers]"</literal></argument>)</argument_list></macro> <block>{<block_content>
+    <using>using <name><name>Catch</name><operator>::</operator><name>Matchers</name><operator>::</operator><name>NoneMatch</name></name>;</using>
+    <using>using <name><name>Catch</name><operator>::</operator><name>Matchers</name><operator>::</operator><name>Predicate</name></name>;</using>
+
+    <macro><name>SECTION</name><argument_list>(<argument><literal type="string">"Basic usage"</literal></argument>)</argument_list></macro> <block>{<block_content>
+        <using>using <name><name>Catch</name><operator>::</operator><name>Matchers</name><operator>::</operator><name>Contains</name></name>;</using>
+        <using>using <name><name>Catch</name><operator>::</operator><name>Matchers</name><operator>::</operator><name>SizeIs</name></name>;</using>
+
+        <decl_stmt><decl><type><name><name>std</name><operator>::</operator><name>array</name><argument_list type="generic">&lt;<argument><expr><name><name>std</name><operator>::</operator><name>array</name><argument_list type="generic">&lt;<argument><expr><name>int</name></expr></argument>, <argument><expr><literal type="number">5</literal></expr></argument>&gt;</argument_list></name></expr></argument>, <argument><expr><literal type="number">5</literal></expr></argument>&gt;</argument_list></name></type> <name>data</name><argument_list>{ <argument><expr><block>{
+                                        <expr><block>{<expr><block>{ <expr><literal type="number">0</literal></expr>, <expr><literal type="number">1</literal></expr>, <expr><literal type="number">2</literal></expr>, <expr><literal type="number">3</literal></expr>, <expr><literal type="number">5</literal></expr> }</block></expr>}</block></expr>,
+                                        <expr><block>{<expr><block>{ <expr><literal type="number">4</literal></expr>,<expr><operator>-</operator><literal type="number">3</literal></expr>,<expr><operator>-</operator><literal type="number">2</literal></expr>, <expr><literal type="number">5</literal></expr>, <expr><literal type="number">0</literal></expr> }</block></expr>}</block></expr>,
+                                        <expr><block>{<expr><block>{ <expr><literal type="number">0</literal></expr>, <expr><literal type="number">0</literal></expr>, <expr><literal type="number">0</literal></expr>, <expr><literal type="number">5</literal></expr>, <expr><literal type="number">0</literal></expr> }</block></expr>}</block></expr>,
+                                        <expr><block>{<expr><block>{ <expr><literal type="number">0</literal></expr>,<expr><operator>-</operator><literal type="number">5</literal></expr>, <expr><literal type="number">0</literal></expr>, <expr><literal type="number">5</literal></expr>, <expr><literal type="number">0</literal></expr> }</block></expr>}</block></expr>,
+                                        <expr><block>{<expr><block>{ <expr><literal type="number">1</literal></expr>, <expr><literal type="number">0</literal></expr>, <expr><literal type="number">0</literal></expr>,<expr><operator>-</operator><literal type="number">1</literal></expr>, <expr><literal type="number">5</literal></expr> }</block></expr>}</block></expr>
+        }</block></expr></argument> }</argument_list></decl>;</decl_stmt>
+
+        <expr_stmt><expr><call><name>REQUIRE_THAT</name><argument_list>(<argument><expr><name>data</name></expr></argument>, <argument><expr><call><name>NoneMatch</name><argument_list>(<argument><expr><call><name>SizeIs</name><argument_list>(<argument><expr><literal type="number">6</literal></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name>REQUIRE_THAT</name><argument_list>(<argument><expr><name>data</name></expr></argument>, <argument><expr><operator>!</operator><call><name>NoneMatch</name><argument_list>(<argument><expr><call><name>Contains</name><argument_list>(<argument><expr><literal type="number">0</literal></expr></argument>)</argument_list></call> <operator>&amp;&amp;</operator> <call><name>Contains</name><argument_list>(<argument><expr><literal type="number">1</literal></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block>
+
+    <macro><name>SECTION</name><argument_list>( <argument><literal type="string">"Type requires ADL found begin and end"</literal></argument> )</argument_list></macro> <block>{<block_content>
+        <decl_stmt><decl><type><name><name>unrelated</name><operator>::</operator><name>needs_ADL_begin</name></name></type> <name>needs_adl</name></decl>;</decl_stmt>
+        <expr_stmt><expr><call><name>REQUIRE_THAT</name><argument_list>( <argument><expr><name>needs_adl</name></expr></argument>, <argument><expr><call><name>NoneMatch</name><argument_list>( <argument><expr><call><name><name>Predicate</name><argument_list type="generic">&lt;<argument><expr><name>int</name></expr></argument>&gt;</argument_list></name><argument_list>( <argument><expr><lambda><capture>[]</capture><parameter_list>( <parameter><decl><type><name>int</name></type> <name>elem</name></decl></parameter> )</parameter_list> <block>{<block_content>
+                          <return>return <expr><name>elem</name> <operator>&gt;</operator> <literal type="number">6</literal></expr>;</return>
+                      </block_content>}</block></lambda></expr></argument> )</argument_list></call></expr></argument> )</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block>
+
+    <macro><name>SECTION</name><argument_list>(<argument><literal type="string">"Shortcircuiting"</literal></argument>)</argument_list></macro> <block>{<block_content>
+        <decl_stmt><decl><type><name>with_mocked_iterator_access</name></type> <name>mocked</name></decl>;</decl_stmt>
+        <macro><name>SECTION</name><argument_list>(<argument><literal type="string">"All are read"</literal></argument>)</argument_list></macro> <block>{<block_content>
+            <decl_stmt><decl><type><name>auto</name></type> <name>noneMatch</name> <init>= <expr><call><name>NoneMatch</name><argument_list>(
+                <argument><expr><call><name><name>Predicate</name><argument_list type="generic">&lt;<argument><expr><name>int</name></expr></argument>&gt;</argument_list></name><argument_list>(<argument><expr><lambda><capture>[]</capture><parameter_list>(<parameter><decl><type><name>int</name></type> <name>elem</name></decl></parameter>)</parameter_list> <block>{<block_content> <return>return <expr><name>elem</name> <operator>&gt;</operator> <literal type="number">10</literal></expr>;</return> </block_content>}</block></lambda></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+            <expr_stmt><expr><call><name>REQUIRE_THAT</name><argument_list>(<argument><expr><name>mocked</name></expr></argument>, <argument><expr><name>noneMatch</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+            <expr_stmt><expr><call><name>REQUIRE</name><argument_list>(<argument><expr><name><name>mocked</name><operator>.</operator><name>derefed</name><index>[<expr><literal type="number">0</literal></expr>]</index></name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+            <expr_stmt><expr><call><name>REQUIRE</name><argument_list>(<argument><expr><name><name>mocked</name><operator>.</operator><name>derefed</name><index>[<expr><literal type="number">1</literal></expr>]</index></name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+            <expr_stmt><expr><call><name>REQUIRE</name><argument_list>(<argument><expr><name><name>mocked</name><operator>.</operator><name>derefed</name><index>[<expr><literal type="number">2</literal></expr>]</index></name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+            <expr_stmt><expr><call><name>REQUIRE</name><argument_list>(<argument><expr><name><name>mocked</name><operator>.</operator><name>derefed</name><index>[<expr><literal type="number">3</literal></expr>]</index></name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+            <expr_stmt><expr><call><name>REQUIRE</name><argument_list>(<argument><expr><name><name>mocked</name><operator>.</operator><name>derefed</name><index>[<expr><literal type="number">4</literal></expr>]</index></name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        </block_content>}</block>
+        <macro><name>SECTION</name><argument_list>(<argument><literal type="string">"Short-circuited"</literal></argument>)</argument_list></macro> <block>{<block_content>
+            <decl_stmt><decl><type><name>auto</name></type> <name>noneMatch</name> <init>= <expr><call><name>NoneMatch</name><argument_list>(
+                <argument><expr><call><name><name>Predicate</name><argument_list type="generic">&lt;<argument><expr><name>int</name></expr></argument>&gt;</argument_list></name><argument_list>(<argument><expr><lambda><capture>[]</capture><parameter_list>(<parameter><decl><type><name>int</name></type> <name>elem</name></decl></parameter>)</parameter_list> <block>{<block_content> <return>return <expr><name>elem</name> <operator>&lt;</operator> <literal type="number">3</literal></expr>;</return> </block_content>}</block></lambda></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+            <expr_stmt><expr><call><name>REQUIRE_THAT</name><argument_list>(<argument><expr><name>mocked</name></expr></argument>, <argument><expr><operator>!</operator><name>noneMatch</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+            <expr_stmt><expr><call><name>REQUIRE</name><argument_list>(<argument><expr><name><name>mocked</name><operator>.</operator><name>derefed</name><index>[<expr><literal type="number">0</literal></expr>]</index></name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+            <expr_stmt><expr><call><name>REQUIRE_FALSE</name><argument_list>(<argument><expr><name><name>mocked</name><operator>.</operator><name>derefed</name><index>[<expr><literal type="number">1</literal></expr>]</index></name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+            <expr_stmt><expr><call><name>REQUIRE_FALSE</name><argument_list>(<argument><expr><name><name>mocked</name><operator>.</operator><name>derefed</name><index>[<expr><literal type="number">2</literal></expr>]</index></name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+            <expr_stmt><expr><call><name>REQUIRE_FALSE</name><argument_list>(<argument><expr><name><name>mocked</name><operator>.</operator><name>derefed</name><index>[<expr><literal type="number">3</literal></expr>]</index></name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+            <expr_stmt><expr><call><name>REQUIRE_FALSE</name><argument_list>(<argument><expr><name><name>mocked</name><operator>.</operator><name>derefed</name><index>[<expr><literal type="number">4</literal></expr>]</index></name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        </block_content>}</block>
+    </block_content>}</block>
+</block_content>}</block>
+
+
+<comment type="line">// This is a C++17 extension, and GCC refuses to compile such code</comment>
+<comment type="line">// unless it is set to C++17 or later</comment>
+<cpp:if xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">if</cpp:directive> <expr><call><name>defined</name><argument_list>(<argument><expr><name>CATCH_CPP17_OR_GREATER</name></expr></argument>)</argument_list></call></expr></cpp:if>
+
+<macro><name>TEST_CASE</name><argument_list>( <argument><literal type="string">"The quantifier range matchers support types with different types returned from begin and end"</literal></argument>,
+           <argument><literal type="string">"[matchers][templated][quantifiers][approvals]"</literal></argument> )</argument_list></macro> <block>{<block_content>
+    <using>using <name><name>Catch</name><operator>::</operator><name>Matchers</name><operator>::</operator><name>AllMatch</name></name>;</using>
+    <using>using <name><name>Catch</name><operator>::</operator><name>Matchers</name><operator>::</operator><name>AnyMatch</name></name>;</using>
+    <using>using <name><name>Catch</name><operator>::</operator><name>Matchers</name><operator>::</operator><name>NoneMatch</name></name>;</using>
+
+    <using>using <name><name>Catch</name><operator>::</operator><name>Matchers</name><operator>::</operator><name>Predicate</name></name>;</using>
+
+    <decl_stmt><decl><type><name>has_different_begin_end_types</name></type> <name>diff_types</name></decl>;</decl_stmt>
+    <expr_stmt><expr><call><name>REQUIRE_THAT</name><argument_list>( <argument><expr><name>diff_types</name></expr></argument>, <argument><expr><operator>!</operator><call><name>AllMatch</name><argument_list>( <argument><expr><call><name><name>Predicate</name><argument_list type="generic">&lt;<argument><expr><name>int</name></expr></argument>&gt;</argument_list></name><argument_list>( <argument><expr><lambda><capture>[]</capture><parameter_list>( <parameter><decl><type><name>int</name></type> <name>elem</name></decl></parameter> )</parameter_list> <block>{<block_content>
+                      <return>return <expr><name>elem</name> <operator>&lt;</operator> <literal type="number">3</literal></expr>;</return>
+                  </block_content>}</block></lambda></expr></argument> )</argument_list></call></expr></argument> )</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+
+    <expr_stmt><expr><call><name>REQUIRE_THAT</name><argument_list>( <argument><expr><name>diff_types</name></expr></argument>, <argument><expr><call><name>AnyMatch</name><argument_list>( <argument><expr><call><name><name>Predicate</name><argument_list type="generic">&lt;<argument><expr><name>int</name></expr></argument>&gt;</argument_list></name><argument_list>( <argument><expr><lambda><capture>[]</capture><parameter_list>( <parameter><decl><type><name>int</name></type> <name>elem</name></decl></parameter> )</parameter_list> <block>{<block_content>
+                      <return>return <expr><name>elem</name> <operator>&lt;</operator> <literal type="number">2</literal></expr>;</return>
+                  </block_content>}</block></lambda></expr></argument> )</argument_list></call></expr></argument> )</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+
+    <expr_stmt><expr><call><name>REQUIRE_THAT</name><argument_list>( <argument><expr><name>diff_types</name></expr></argument>, <argument><expr><operator>!</operator><call><name>NoneMatch</name><argument_list>( <argument><expr><call><name><name>Predicate</name><argument_list type="generic">&lt;<argument><expr><name>int</name></expr></argument>&gt;</argument_list></name><argument_list>( <argument><expr><lambda><capture>[]</capture><parameter_list>( <parameter><decl><type><name>int</name></type> <name>elem</name></decl></parameter> )</parameter_list> <block>{<block_content>
+                      <return>return <expr><name>elem</name> <operator>&lt;</operator> <literal type="number">3</literal></expr>;</return>
+                  </block_content>}</block></lambda></expr></argument> )</argument_list></call></expr></argument> )</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+</block_content>}</block>
+
+<cpp:endif xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">endif</cpp:directive></cpp:endif>
+</unit>

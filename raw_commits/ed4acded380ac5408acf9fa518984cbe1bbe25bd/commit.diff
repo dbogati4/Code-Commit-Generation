@@ -1,0 +1,20 @@
+diff --git a/src/catch2/internal/catch_exception_translator_registry.cpp b/src/catch2/internal/catch_exception_translator_registry.cpp
+index f3d47c0c..103fc9ae 100644
+--- a/src/catch2/internal/catch_exception_translator_registry.cpp
++++ b/src/catch2/internal/catch_exception_translator_registry.cpp
+@@ -15,6 +15,7 @@
+ 
+ namespace Catch {
+ 
++#if !defined(CATCH_CONFIG_DISABLE_EXCEPTIONS)
+     namespace {
+         static std::string tryTranslators(
+             std::vector<
+@@ -28,6 +29,7 @@ namespace Catch {
+         }
+ 
+     }
++#endif //!defined(CATCH_CONFIG_DISABLE_EXCEPTIONS)
+ 
+     ExceptionTranslatorRegistry::~ExceptionTranslatorRegistry() {
+     }

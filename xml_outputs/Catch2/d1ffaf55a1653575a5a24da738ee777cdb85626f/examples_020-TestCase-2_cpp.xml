@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" xmlns:diff="http://www.srcML.org/srcDiff" revision="1.0.0" language="C++" filename="C:\Users\saile\AppData\Local\Temp\catch2_100_z8gzpiwf\d1ffaf55a1653575a5a24da738ee777cdb85626f\examples_020-TestCase-2_cpp\examples_020-TestCase-2_cpp.old|C:\Users\saile\AppData\Local\Temp\catch2_100_z8gzpiwf\d1ffaf55a1653575a5a24da738ee777cdb85626f\examples_020-TestCase-2_cpp\examples_020-TestCase-2_cpp.new"><comment type="line">// 020-TestCase-2.cpp</comment>
+
+<comment type="line">// main() provided by Catch in file 020-TestCase-1.cpp.</comment>
+
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;catch2/catch.hpp&gt;</cpp:file></cpp:include>
+
+<function><type><diff:insert xmlns:diff="http://www.srcML.org/srcDiff"><specifier>static</specifier><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws></diff:insert><name>int</name></type> <name>Factorial</name><parameter_list>( <parameter><decl><type><name>int</name></type> <name>number</name></decl></parameter> )</parameter_list> <block>{<block_content>
+   <return>return <expr><ternary><condition><expr><name>number</name> <operator>&lt;=</operator> <literal type="number">1</literal></expr> ?</condition><then> <expr><name>number</name></expr> </then><else>: <expr><call><name>Factorial</name><argument_list>( <argument><expr><name>number</name> <operator>-</operator> <literal type="number">1</literal></expr></argument> )</argument_list></call> <operator>*</operator> <name>number</name></expr></else></ternary></expr>;</return>  <comment type="line">// fail</comment>
+<comment type="line">// return number &lt;= 1 ? 1      : Factorial( number - 1 ) * number;  // pass</comment>
+</block_content>}</block></function>
+
+<macro><name>TEST_CASE</name><argument_list>( <argument><literal type="string">"2: Factorial of 0 is 1 (fail)"</literal></argument>, <argument><literal type="string">"[multi-file:2]"</literal></argument> )</argument_list></macro> <block>{<block_content>
+    <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name>Factorial</name><argument_list>(<argument><expr><literal type="number">0</literal></expr></argument>)</argument_list></call> <operator>==</operator> <literal type="number">1</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+</block_content>}</block>
+
+<macro><name>TEST_CASE</name><argument_list>( <argument><literal type="string">"2: Factorials of 1 and higher are computed (pass)"</literal></argument>, <argument><literal type="string">"[multi-file:2]"</literal></argument> )</argument_list></macro> <block>{<block_content>
+    <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name>Factorial</name><argument_list>(<argument><expr><literal type="number">1</literal></expr></argument>)</argument_list></call> <operator>==</operator> <literal type="number">1</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name>Factorial</name><argument_list>(<argument><expr><literal type="number">2</literal></expr></argument>)</argument_list></call> <operator>==</operator> <literal type="number">2</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name>Factorial</name><argument_list>(<argument><expr><literal type="number">3</literal></expr></argument>)</argument_list></call> <operator>==</operator> <literal type="number">6</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name>Factorial</name><argument_list>(<argument><expr><literal type="number">10</literal></expr></argument>)</argument_list></call> <operator>==</operator> <literal type="number">3628800</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+</block_content>}</block>
+
+<comment type="line">// Compile: see 020-TestCase-1.cpp</comment>
+
+<comment type="line">// Expected compact output (all assertions):</comment>
+<comment type="line">//</comment>
+<comment type="line">// prompt&gt; 020-TestCase --reporter compact --success</comment>
+<comment type="line">// 020-TestCase-2.cpp:13: failed: Factorial(0) == 1 for: 0 == 1</comment>
+<comment type="line">// 020-TestCase-2.cpp:17: passed: Factorial(1) == 1 for: 1 == 1</comment>
+<comment type="line">// 020-TestCase-2.cpp:18: passed: Factorial(2) == 2 for: 2 == 2</comment>
+<comment type="line">// 020-TestCase-2.cpp:19: passed: Factorial(3) == 6 for: 6 == 6</comment>
+<comment type="line">// 020-TestCase-2.cpp:20: passed: Factorial(10) == 3628800 for: 3628800 (0x375f00) == 3628800 (0x375f00)</comment>
+<comment type="line">// Failed 1 test case, failed 1 assertion.</comment>
+</unit>

@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" xmlns:diff="http://www.srcML.org/srcDiff" revision="1.0.0" language="C++" filename="C:\Users\saile\AppData\Local\Temp\catch2_100_z8gzpiwf\b8262439564094de8e182bdebd4d67cae5a2e8d0\Test_TrickyTests_cpp\Test_TrickyTests_cpp.old|C:\Users\saile\AppData\Local\Temp\catch2_100_z8gzpiwf\b8262439564094de8e182bdebd4d67cae5a2e8d0\Test_TrickyTests_cpp\Test_TrickyTests_cpp.new"><comment type="block">/*
+ *  TrickyTests.cpp
+ *  Catch - Test
+ *
+ *  Created by Phil on 09/11/2010.
+ *  Copyright 2010 Two Blue Cubes Ltd. All rights reserved.
+ *
+ *  Distributed under the Boost Software License, Version 1.0. (See accompanying
+ *  file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
+ *
+ */</comment>
+
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">"../catch.hpp"</cpp:file></cpp:include>
+
+<namespace>namespace <name>Catch</name>
+<block>{
+    <function><template>template<parameter_list>&lt;&gt;</parameter_list></template>
+    <type><name><name>std</name><operator>::</operator><name>string</name></name></type> <name><name>toString</name><argument_list type="generic">&lt;<argument><expr><name><name>std</name><operator>::</operator><name>pair</name><argument_list type="generic">&lt;<argument><expr><name>int</name></expr></argument>, <argument><expr><name>int</name></expr></argument>&gt;</argument_list></name></expr></argument> &gt;</argument_list></name><parameter_list>( <parameter><decl><type><specifier>const</specifier> <name><name>std</name><operator>::</operator><name>pair</name><argument_list type="generic">&lt;<argument><expr><name>int</name></expr></argument>, <argument><expr><name>int</name></expr></argument>&gt;</argument_list></name><modifier>&amp;</modifier></type> <name>value</name></decl></parameter> )</parameter_list>
+    <block>{<block_content>
+        <decl_stmt><decl><type><name><name>std</name><operator>::</operator><name>ostringstream</name></name></type> <name>oss</name></decl>;</decl_stmt>
+        <expr_stmt><expr><name>oss</name> <operator>&lt;&lt;</operator> <literal type="string">"std::pair( "</literal> <operator>&lt;&lt;</operator> <name><name>value</name><operator>.</operator><name>first</name></name> <operator>&lt;&lt;</operator> <literal type="string">", "</literal> <operator>&lt;&lt;</operator> <name><name>value</name><operator>.</operator><name>second</name></name> <operator>&lt;&lt;</operator> <literal type="string">" )"</literal></expr>;</expr_stmt>
+        <return>return <expr><call><name><name>oss</name><operator>.</operator><name>str</name></name><argument_list>()</argument_list></call></expr>;</return>
+        
+    </block_content>}</block></function>
+}</block></namespace>
+
+<comment type="line" format="doxygen">///////////////////////////////////////////////////////////////////////////////</comment>
+<macro><name>TEST_CASE</name>
+<argument_list>(
+    <argument><literal type="string">"./succeeding/Tricky/std::pair"</literal></argument>, 
+    <argument><literal type="string">"Parsing a std::pair"</literal></argument>
+)</argument_list></macro>
+<block>{<block_content>
+    <decl_stmt><decl><type><name><name>std</name><operator>::</operator><name>pair</name><argument_list type="generic">&lt;<argument><expr><name>int</name></expr></argument>, <argument><expr><name>int</name></expr></argument>&gt;</argument_list></name></type> <name>aNicePair</name><argument_list>( <argument><expr><literal type="number">1</literal></expr></argument>, <argument><expr><literal type="number">2</literal></expr></argument> )</argument_list></decl>;</decl_stmt>
+
+    <comment type="line">// !TBD: would be nice if this could compile without the extra parentheses</comment>
+    <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><operator>(</operator><call><name><name>std</name><operator>::</operator><name>pair</name><argument_list type="generic">&lt;<argument><expr><name>int</name></expr></argument>, <argument><expr><name>int</name></expr></argument>&gt;</argument_list></name><argument_list>( <argument><expr><literal type="number">1</literal></expr></argument>, <argument><expr><literal type="number">2</literal></expr></argument> )</argument_list></call><operator>)</operator> <operator>==</operator> <name>aNicePair</name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    
+</block_content>}</block>
+
+<comment type="line" format="doxygen">///////////////////////////////////////////////////////////////////////////////</comment>
+<diff:insert xmlns:diff="http://www.srcML.org/srcDiff"><macro><name>TEST_CASE</name><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+</diff:ws><argument_list>(<diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+    </diff:ws><argument><literal type="string">"./inprogress/failing/Tricky/trailing<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>expression"</literal></argument>,<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> 
+    </diff:ws><argument><literal type="string">"Where<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>the<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>is<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>more<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>to<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>the<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>expression<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>after<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>the<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>RHS"</literal></argument><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+</diff:ws>)</argument_list></macro><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+</diff:ws><block>{<block_content><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+    </diff:ws><comment type="block">/*<diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+    </diff:ws>int<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>a<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>=<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>1;<diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+    </diff:ws>int<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>b<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>=<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>2;<diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+
+    </diff:ws>//<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>This<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>only<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>captures<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>part<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>of<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>the<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>expression,<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>but<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>issues<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>a<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>warning<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>about<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>the<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>rest<diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+    </diff:ws>REQUIRE(<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>a<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>==<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>2<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>||<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>b<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>==<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>2<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>);<diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+     </diff:ws>*/</comment><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+    </diff:ws><expr_stmt><expr><call><name>WARN</name><argument_list>(<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><argument><expr><literal type="string">"Uncomment<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>the<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>code<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>in<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>this<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>test<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>to<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>check<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>that<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>it<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>gives<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>a<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>sensible<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>compiler<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>error"</literal></expr></argument><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>)</argument_list></call></expr>;</expr_stmt><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+</diff:ws></block_content>}</block><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+</diff:ws><diff:insert move="1" xmlns:diff="http://www.srcML.org/srcDiff"><comment type="line" format="doxygen">///////////////////////////////////////////////////////////////////////////////</comment></diff:insert><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+</diff:ws></diff:insert><macro><name>TEST_CASE</name>
+<argument_list>(
+    <argument><literal type="string">"<diff:delete type="replace" xmlns:diff="http://www.srcML.org/srcDiff">./inprogress/failing/Tricky/complex</diff:delete><diff:insert type="replace" xmlns:diff="http://www.srcML.org/srcDiff">./inprogress/failing/Tricky/compound</diff:insert> lhs"</literal></argument>, 
+    <argument><literal type="string">"Where the LHS is not a simple value"</literal></argument>
+)</argument_list></macro>
+<diff:delete xmlns:diff="http://www.srcML.org/srcDiff"><block>{<block_content><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+    </diff:ws><comment type="block">/*<diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+    </diff:ws>int<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>a<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>=<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>1;<diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+    </diff:ws>int<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>b<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>=<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>2;<diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+
+    </diff:ws>//<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>This<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>only<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>captures<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>part<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>of<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>the<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>expression,<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>but<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>issues<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>a<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>warning<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>about<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>the<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>rest<diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+    </diff:ws>REQUIRE(<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>a<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>==<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>2<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>||<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>b<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>==<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>2<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>);<diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+     </diff:ws>*/</comment><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+</diff:ws></block_content>}</block><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+</diff:ws><diff:delete move="1" xmlns:diff="http://www.srcML.org/srcDiff"><comment type="line" format="doxygen">///////////////////////////////////////////////////////////////////////////////</comment></diff:delete><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+</diff:ws><macro><name>TEST_CASE</name><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+</diff:ws><argument_list>(<diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+    </diff:ws><argument><literal type="string">"./inprogress/failing/Tricky/complex<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>2"</literal></argument>,<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> 
+    </diff:ws><argument><literal type="string">"Where<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>the<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>LHS<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>is<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>not<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>a<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>simple<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>value"</literal></argument><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+</diff:ws>)</argument_list></macro><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+</diff:ws></diff:delete><block>{<block_content>
+    <comment type="block">/*
+    int a = 1;
+    int b = 2;
+    
+    // This only captures part of the expression, but issues a warning about the rest
+    REQUIRE( a+1 == b-1 );
+    */</comment>
+<diff:insert xmlns:diff="http://www.srcML.org/srcDiff"><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">    </diff:ws><expr_stmt><expr><call><name>WARN</name><argument_list>(<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><argument><expr><literal type="string">"Uncomment<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>the<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>code<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>in<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>this<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>test<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>to<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>check<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>that<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>it<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>gives<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>a<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>sensible<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>compiler<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>error"</literal></expr></argument><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>)</argument_list></call></expr>;</expr_stmt><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+</diff:ws></diff:insert></block_content>}</block>
+
+<struct>struct <name>Opaque</name>
+<block>{<public type="default">
+    <decl_stmt><decl><type><name>int</name></type> <name>val</name></decl>;</decl_stmt>
+    <function type="operator"><type><name>bool</name></type> <name>operator <name>==</name></name><parameter_list>( <parameter><decl><type><specifier>const</specifier> <name>Opaque</name><modifier>&amp;</modifier></type> <name>o</name></decl></parameter> )</parameter_list> <specifier>const</specifier>
+    <block>{<block_content>
+        <return>return <expr><name>val</name> <operator>==</operator> <name><name>o</name><operator>.</operator><name>val</name></name></expr>;</return>
+    </block_content>}</block></function>
+</public>}</block>;</struct>
+
+<comment type="line" format="doxygen">///////////////////////////////////////////////////////////////////////////////</comment>
+<macro><name>TEST_CASE</name>
+<argument_list>(
+    <argument><literal type="string">"./failing/Tricky/non streamable type"</literal></argument>, 
+    <argument><literal type="string">"A failing expression with a non streamable type is still captured"</literal></argument> 
+)</argument_list></macro>
+<block>{<block_content>
+    
+    <decl_stmt><decl><type><name>Opaque</name></type> <name>o1</name></decl>, <decl><type ref="prev"/><name>o2</name></decl>;</decl_stmt>
+    <expr_stmt><expr><name><name>o1</name><operator>.</operator><name>val</name></name> <operator>=</operator> <literal type="number">7</literal></expr>;</expr_stmt>
+    <expr_stmt><expr><name><name>o2</name><operator>.</operator><name>val</name></name> <operator>=</operator> <literal type="number">8</literal></expr>;</expr_stmt>
+  
+    <expr_stmt><expr><call><name>CHECK</name><argument_list>( <argument><expr><operator>&amp;</operator><name>o1</name> <operator>==</operator> <operator>&amp;</operator><name>o2</name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>CHECK</name><argument_list>( <argument><expr><name>o1</name> <operator>==</operator> <name>o2</name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+</block_content>}</block>
+
+<comment type="line" format="doxygen">///////////////////////////////////////////////////////////////////////////////</comment>
+<macro><name>TEST_CASE</name>
+<argument_list>(   
+    <argument><literal type="string">"./failing/string literals"</literal></argument>, 
+    <argument><literal type="string">"string literals of different sizes can be compared"</literal></argument> 
+)</argument_list></macro>
+<block>{<block_content>
+    <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name><name>std</name><operator>::</operator><name>string</name></name><argument_list>( <argument><expr><literal type="string">"first"</literal></expr></argument> )</argument_list></call> <operator>==</operator> <literal type="string">"second"</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    
+</block_content>}</block>
+
+<comment type="line" format="doxygen">///////////////////////////////////////////////////////////////////////////////</comment>
+<macro><name>TEST_CASE</name>
+<argument_list>(   
+    <argument><literal type="string">"./succeeding/side-effects"</literal></argument>, 
+    <argument><literal type="string">"An expression with side-effects should only be evaluated once"</literal></argument> 
+)</argument_list></macro>
+<block>{<block_content>
+    <decl_stmt><decl><type><name>int</name></type> <name>i</name> <init>= <expr><literal type="number">7</literal></expr></init></decl>;</decl_stmt>
+    
+    <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><name>i</name><operator>++</operator> <operator>==</operator> <literal type="number">7</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><name>i</name><operator>++</operator> <operator>==</operator> <literal type="number">8</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    
+</block_content>}</block>
+</unit>

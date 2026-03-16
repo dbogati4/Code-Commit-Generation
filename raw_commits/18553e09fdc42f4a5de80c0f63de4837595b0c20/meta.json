@@ -1,0 +1,8 @@
+{
+  "commit_id": "18553e09fdc42f4a5de80c0f63de4837595b0c20",
+  "parent_id": "7dfd830a3a273a6b2b23ff66eb96f0c72ff6f991",
+  "message": "Fixed warning in 32 bit builds",
+  "changed_files": [
+    "Test/ConditionTests.cpp"
+  ]
+}

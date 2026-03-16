@@ -1,0 +1,34 @@
+diff --git a/src/catch2/reporters/catch_reporter_combined_tu.cpp b/src/catch2/reporters/catch_reporter_combined_tu.cpp
+index a05b4998..42974249 100644
+--- a/src/catch2/reporters/catch_reporter_combined_tu.cpp
++++ b/src/catch2/reporters/catch_reporter_combined_tu.cpp
+@@ -69,11 +69,13 @@ namespace Catch {
+         // Save previous errno, to prevent sprintf from overwriting it
+         ErrnoGuard guard;
+ #ifdef _MSC_VER
+-        sprintf_s( buffer, "%.3f", duration );
++        size_t printedLength = static_cast<size_t>(
++            sprintf_s( buffer, "%.3f", duration ) );
+ #else
+-        std::snprintf( buffer, maxDoubleSize, "%.3f", duration );
++        size_t printedLength = static_cast<size_t>(
++            std::snprintf( buffer, maxDoubleSize, "%.3f", duration ) );
+ #endif
+-        return std::string( buffer );
++        return std::string( buffer, printedLength );
+     }
+ 
+     bool shouldShowDuration( IConfig const& config, double duration ) {
+diff --git a/src/catch2/reporters/catch_reporter_junit.cpp b/src/catch2/reporters/catch_reporter_junit.cpp
+index c5d0929c..7570d9ea 100644
+--- a/src/catch2/reporters/catch_reporter_junit.cpp
++++ b/src/catch2/reporters/catch_reporter_junit.cpp
+@@ -38,7 +38,7 @@ namespace Catch {
+ 
+             std::strftime(timeStamp, timeStampSize, fmt, &timeInfo);
+ 
+-            return std::string(timeStamp);
++            return std::string(timeStamp, timeStampSize - 1);
+         }
+ 
+         std::string fileNameTag(std::vector<Tag> const& tags) {

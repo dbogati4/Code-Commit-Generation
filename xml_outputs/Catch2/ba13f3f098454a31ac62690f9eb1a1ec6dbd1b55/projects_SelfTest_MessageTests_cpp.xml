@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" xmlns:diff="http://www.srcML.org/srcDiff" revision="1.0.0" language="C++" filename="C:\Users\saile\AppData\Local\Temp\catch2_100_z8gzpiwf\ba13f3f098454a31ac62690f9eb1a1ec6dbd1b55\projects_SelfTest_MessageTests_cpp\projects_SelfTest_MessageTests_cpp.old|C:\Users\saile\AppData\Local\Temp\catch2_100_z8gzpiwf\ba13f3f098454a31ac62690f9eb1a1ec6dbd1b55\projects_SelfTest_MessageTests_cpp\projects_SelfTest_MessageTests_cpp.new"><comment type="block">/*
+ *  Created by Phil on 09/11/2010.
+ *  Copyright 2010 Two Blue Cubes Ltd. All rights reserved.
+ *
+ *  Distributed under the Boost Software License, Version 1.0. (See accompanying
+ *  file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
+ */</comment>
+
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">"catch.hpp"</cpp:file></cpp:include>
+
+<macro><name>TEST_CASE</name><argument_list>( <argument><literal type="string">"INFO and WARN do not abort tests"</literal></argument>, <argument><literal type="string">"[messages]"</literal></argument> )</argument_list></macro>
+<block>{<block_content>
+    <expr_stmt><expr><call><name>INFO</name><argument_list>( <argument><expr><literal type="string">"this is a "</literal> <operator>&lt;&lt;</operator> <literal type="string">"message"</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>    <comment type="line">// This should output the message if a failure occurs</comment>
+    <expr_stmt><expr><call><name>WARN</name><argument_list>( <argument><expr><literal type="string">"this is a "</literal> <operator>&lt;&lt;</operator> <literal type="string">"warning"</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>    <comment type="line">// This should always output the message but then continue</comment>
+</block_content>}</block>
+<macro><name>TEST_CASE</name><argument_list>( <argument><literal type="string">"SUCCEED counts as a test pass"</literal></argument><diff:insert xmlns:diff="http://www.srcML.org/srcDiff">,<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><argument><literal type="string">"[messages]"</literal></argument></diff:insert> )</argument_list></macro>
+<block>{<block_content>
+    <expr_stmt><expr><call><name>SUCCEED</name><argument_list>( <argument><expr><literal type="string">"this is a "</literal> <operator>&lt;&lt;</operator> <literal type="string">"success"</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+</block_content>}</block>
+
+<macro><name>TEST_CASE</name><argument_list>( <argument><literal type="string">"INFO gets logged on failure"</literal></argument>, <argument><literal type="string">"[failing][messages][.]"</literal></argument> )</argument_list></macro>
+<block>{<block_content>
+    <expr_stmt><expr><call><name>INFO</name><argument_list>( <argument><expr><literal type="string">"this message should be logged"</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>INFO</name><argument_list>( <argument><expr><literal type="string">"so should this"</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    <decl_stmt><decl><type><name>int</name></type> <name>a</name> <init>= <expr><literal type="number">2</literal></expr></init></decl>;</decl_stmt>
+    <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><name>a</name> <operator>==</operator> <literal type="number">1</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+</block_content>}</block>
+
+<macro><name>TEST_CASE</name><argument_list>( <argument><literal type="string">"INFO gets logged on failure, even if captured before successful assertions"</literal></argument>, <argument><literal type="string">"[failing][messages][.]"</literal></argument> )</argument_list></macro>
+<block>{<block_content>
+    <expr_stmt><expr><call><name>INFO</name><argument_list>( <argument><expr><literal type="string">"this message may be logged later"</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    <decl_stmt><decl><type><name>int</name></type> <name>a</name> <init>= <expr><literal type="number">2</literal></expr></init></decl>;</decl_stmt>
+    <expr_stmt><expr><call><name>CHECK</name><argument_list>( <argument><expr><name>a</name> <operator>==</operator> <literal type="number">2</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+
+    <expr_stmt><expr><call><name>INFO</name><argument_list>( <argument><expr><literal type="string">"this message should be logged"</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    
+    <expr_stmt><expr><call><name>CHECK</name><argument_list>( <argument><expr><name>a</name> <operator>==</operator> <literal type="number">1</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+
+    <expr_stmt><expr><call><name>INFO</name><argument_list>( <argument><expr><literal type="string">"and this, but later"</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+
+    <expr_stmt><expr><call><name>CHECK</name><argument_list>( <argument><expr><name>a</name> <operator>==</operator> <literal type="number">0</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+
+    <expr_stmt><expr><call><name>INFO</name><argument_list>( <argument><expr><literal type="string">"but not this"</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+
+    <expr_stmt><expr><call><name>CHECK</name><argument_list>( <argument><expr><name>a</name> <operator>==</operator> <literal type="number">2</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+</block_content>}</block>
+
+<macro><name>TEST_CASE</name><argument_list>( <argument><literal type="string">"FAIL aborts the test"</literal></argument>, <argument><literal type="string">"[failing][messages][.]"</literal></argument> )</argument_list></macro>
+<block>{<block_content>
+	<if_stmt><if>if<condition>( <expr><call><name><name>Catch</name><operator>::</operator><name>isTrue</name></name><argument_list>( <argument><expr><literal type="boolean">true</literal></expr></argument> )</argument_list></call></expr> )</condition><block type="pseudo"><block_content>
+        <expr_stmt><expr><call><name>FAIL</name><argument_list>( <argument><expr><literal type="string">"This is a "</literal> <operator>&lt;&lt;</operator> <literal type="string">"failure"</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt></block_content></block></if></if_stmt>    <comment type="line">// This should output the message and abort</comment>
+</block_content>}</block>
+
+<macro><name>TEST_CASE</name><argument_list>( <argument><literal type="string">"Output from all sections is reported"</literal></argument>, <argument><literal type="string">"[failing][messages][.]"</literal></argument> )</argument_list></macro>
+<block>{<block_content>
+    <macro><name>SECTION</name><argument_list>( <argument><literal type="string">"one"</literal></argument>, <argument><literal type="string">""</literal></argument> )</argument_list></macro>
+    <block>{<block_content>
+        <expr_stmt><expr><call><name>FAIL</name><argument_list>( <argument><expr><literal type="string">"Message from section one"</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block>
+
+    <macro><name>SECTION</name><argument_list>( <argument><literal type="string">"two"</literal></argument>, <argument><literal type="string">""</literal></argument> )</argument_list></macro>
+    <block>{<block_content>
+        <expr_stmt><expr><call><name>FAIL</name><argument_list>( <argument><expr><literal type="string">"Message from section two"</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block>
+</block_content>}</block>
+
+<macro><name>TEST_CASE</name><argument_list>( <argument><literal type="string">"Standard output from all sections is reported"</literal></argument>, <argument><literal type="string">"[messages]"</literal></argument> )</argument_list></macro>
+<block>{<block_content>
+    <macro><name>SECTION</name><argument_list>( <argument><literal type="string">"one"</literal></argument>, <argument><literal type="string">""</literal></argument> )</argument_list></macro>
+    <block>{<block_content>
+        <expr_stmt><expr><name><name>std</name><operator>::</operator><name>cout</name></name> <operator>&lt;&lt;</operator> <literal type="string">"Message from section one"</literal> <operator>&lt;&lt;</operator> <name><name>std</name><operator>::</operator><name>endl</name></name></expr>;</expr_stmt>
+    </block_content>}</block>
+    
+    <macro><name>SECTION</name><argument_list>( <argument><literal type="string">"two"</literal></argument>, <argument><literal type="string">""</literal></argument> )</argument_list></macro>
+    <block>{<block_content>
+        <expr_stmt><expr><name><name>std</name><operator>::</operator><name>cout</name></name> <operator>&lt;&lt;</operator> <literal type="string">"Message from section two"</literal> <operator>&lt;&lt;</operator> <name><name>std</name><operator>::</operator><name>endl</name></name></expr>;</expr_stmt>
+    </block_content>}</block>
+</block_content>}</block>
+
+<macro><name>TEST_CASE</name><argument_list>( <argument><literal type="string">"SCOPED_INFO is reset for each loop"</literal></argument>, <argument><literal type="string">"[messages][failing][.]"</literal></argument> )</argument_list></macro>
+<block>{<block_content>
+    <for>for<control>( <init><decl><type><name>int</name></type> <name>i</name><init>=<expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>i</name><operator>&lt;</operator><literal type="number">100</literal></expr>;</condition> <incr><expr><name>i</name><operator>++</operator></expr></incr> )</control>
+    <block>{<block_content>
+        <expr_stmt><expr><call><name>SCOPED_INFO</name><argument_list>( <argument><expr><literal type="string">"current counter "</literal> <operator>&lt;&lt;</operator> <name>i</name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name>SCOPED_CAPTURE</name><argument_list>( <argument><expr><name>i</name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><name>i</name> <operator>&lt;</operator> <literal type="number">10</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block></for>
+</block_content>}</block>
+
+<macro><name>TEST_CASE</name><argument_list>( <argument><literal type="string">"The NO_FAIL macro reports a failure but does not fail the test"</literal></argument>, <argument><literal type="string">"[messages]"</literal></argument> )</argument_list></macro>
+<block>{<block_content>
+    <expr_stmt><expr><call><name>CHECK_NOFAIL</name><argument_list>( <argument><expr><literal type="number">1</literal> <operator>==</operator> <literal type="number">2</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+</block_content>}</block>
+
+<macro><name>TEST_CASE</name><argument_list>( <argument><literal type="string">"just info"</literal></argument>, <argument><literal type="string">"[info][isolated info][messages]"</literal></argument> )</argument_list></macro>
+<block>{<block_content>
+    <expr_stmt><expr><call><name>INFO</name><argument_list>( <argument><expr><literal type="string">"this should never be seen"</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+</block_content>}</block>
+<macro><name>TEST_CASE</name><argument_list>( <argument><literal type="string">"just failure"</literal></argument>, <argument><literal type="string">"[fail][isolated info][.][messages]"</literal></argument> )</argument_list></macro>
+<block>{<block_content>
+    <expr_stmt><expr><call><name>FAIL</name><argument_list>( <argument><expr><literal type="string">"Previous info should not be seen"</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+</block_content>}</block>
+
+
+<macro><name>TEST_CASE</name><argument_list>( <argument><literal type="string">"sends information to INFO"</literal></argument>, <argument><literal type="string">"[.][failing]"</literal></argument> )</argument_list></macro>
+<block>{<block_content>
+    <expr_stmt><expr><call><name>INFO</name><argument_list>( <argument><expr><literal type="string">"hi"</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    <decl_stmt><decl><type><name>int</name></type> <name>i</name> <init>= <expr><literal type="number">7</literal></expr></init></decl>;</decl_stmt>
+    <expr_stmt><expr><call><name>CAPTURE</name><argument_list>( <argument><expr><name>i</name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><literal type="boolean">false</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+</block_content>}</block>
+</unit>

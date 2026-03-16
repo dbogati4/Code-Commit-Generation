@@ -1,0 +1,12 @@
+diff --git a/src/catch2/internal/catch_run_context.cpp b/src/catch2/internal/catch_run_context.cpp
+index 7da8f714..de75ab4a 100644
+--- a/src/catch2/internal/catch_run_context.cpp
++++ b/src/catch2/internal/catch_run_context.cpp
+@@ -599,7 +599,6 @@ namespace Catch {
+ 
+     void seedRng(IConfig const& config) {
+         if (config.rngSeed() != 0) {
+-            std::srand(config.rngSeed());
+             rng().seed(config.rngSeed());
+         }
+     }

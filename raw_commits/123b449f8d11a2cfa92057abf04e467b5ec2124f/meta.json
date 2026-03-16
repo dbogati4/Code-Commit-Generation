@@ -1,0 +1,9 @@
+{
+  "commit_id": "123b449f8d11a2cfa92057abf04e467b5ec2124f",
+  "parent_id": "6ad743a62b766082dbadfec67e812a006898e856",
+  "message": "catch_console_colour.cpp - adjust useColourOnPlatform for iOS",
+  "changed_files": [
+    "src/catch2/catch_console_colour.cpp",
+    "src/catch2/catch_debugger.cpp"
+  ]
+}

@@ -1,0 +1,8 @@
+{
+  "commit_id": "23c80bcc92c817d48699e667428d3501ff09598b",
+  "parent_id": "a2c8dce85c554aa30607914c57be300feaa3b05f",
+  "message": "Provide workaround for platforms where INFINITY is double",
+  "changed_files": [
+    "include/internal/catch_matchers_floating.cpp"
+  ]
+}

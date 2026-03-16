@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" xmlns:diff="http://www.srcML.org/srcDiff" revision="1.0.0" language="C++" filename="C:\Users\saile\AppData\Local\Temp\catch2_100_z8gzpiwf\d1ffaf55a1653575a5a24da738ee777cdb85626f\tests_ExtraTests_X11-DisableStringification_cpp\tests_ExtraTests_X11-DisableStringification_cpp.old|C:\Users\saile\AppData\Local\Temp\catch2_100_z8gzpiwf\d1ffaf55a1653575a5a24da738ee777cdb85626f\tests_ExtraTests_X11-DisableStringification_cpp\tests_ExtraTests_X11-DisableStringification_cpp.new"><comment type="line">// X11-DisableStringification.cpp</comment>
+<comment type="line">// Test that stringification of original expression can be disabled</comment>
+<comment type="line">// this is a workaround for VS 2017 issue with Raw String literal</comment>
+<comment type="line">// and preprocessor token pasting. In other words, hopefully this test</comment>
+<comment type="line">// will be deleted soon :-)</comment>
+
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;catch2/catch_default_main.hpp&gt;</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;catch2/catch_test_macros.hpp&gt;</cpp:file></cpp:include>
+
+<diff:delete type="replace" xmlns:diff="http://www.srcML.org/srcDiff"><struct>struct<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><name>Hidden</name><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><block>{<public type="default"/>}</block>;</struct><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+
+</diff:ws><function type="operator"><type><name>bool</name></type><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><name>operator<name>==</name></name><parameter_list>(<parameter><decl><type><name>Hidden</name></type></decl></parameter>,<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><parameter><decl><type><name>Hidden</name></type></decl></parameter>)</parameter_list><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><block>{<block_content><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><return>return<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><expr><literal type="boolean">true</literal></expr>;</return><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws></block_content>}</block></function></diff:delete><diff:insert type="replace" xmlns:diff="http://www.srcML.org/srcDiff"><namespace>namespace<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><block>{<diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+    </diff:ws><struct>struct<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><name>Hidden</name><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><block>{<public type="default"/>}</block>;</struct><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+
+    </diff:ws><function type="operator"><type><name>bool</name></type><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><name>operator<name>==</name></name><parameter_list>(<parameter><decl><type><name>Hidden</name></type></decl></parameter>,<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><parameter><decl><type><name>Hidden</name></type></decl></parameter>)</parameter_list><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><block>{<block_content><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><return>return<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><expr><literal type="boolean">true</literal></expr>;</return><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws></block_content>}</block></function><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+</diff:ws>}</block></namespace></diff:insert>
+
+<macro><name>TEST_CASE</name><argument_list>(<argument><literal type="string">"DisableStringification"</literal></argument>)</argument_list></macro> <block>{<block_content>
+    <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name>Hidden</name><argument_list>{}</argument_list></call> <operator>==</operator> <call><name>Hidden</name><argument_list>{}</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+</block_content>}</block>
+</unit>

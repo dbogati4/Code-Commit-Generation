@@ -1,0 +1,8 @@
+{
+  "commit_id": "0510d4755f715d21695ea4a5b15069d69789d7a2",
+  "parent_id": "e92b9c07c3a7b8b3c40590a191bd2f7fb59cd268",
+  "message": "Fix missing include and wrong comment format",
+  "changed_files": [
+    "include/internal/catch_output_redirect.cpp"
+  ]
+}

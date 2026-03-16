@@ -1,0 +1,29 @@
+diff --git a/include/reporters/catch_reporter_console.cpp b/include/reporters/catch_reporter_console.cpp
+index 192a4506..74d2f19d 100644
+--- a/include/reporters/catch_reporter_console.cpp
++++ b/include/reporters/catch_reporter_console.cpp
+@@ -30,11 +30,11 @@ namespace Catch {
+ namespace {
+ 
+ // Formatter impl for ConsoleReporter
+-class AssertionPrinter {
++class ConsoleAssertionPrinter {
+ public:
+-    AssertionPrinter& operator= (AssertionPrinter const&) = delete;
+-    AssertionPrinter(AssertionPrinter const&) = delete;
+-    AssertionPrinter(std::ostream& _stream, AssertionStats const& _stats, bool _printInfoMessages)
++    ConsoleAssertionPrinter& operator= (ConsoleAssertionPrinter const&) = delete;
++    ConsoleAssertionPrinter(ConsoleAssertionPrinter const&) = delete;
++    ConsoleAssertionPrinter(std::ostream& _stream, AssertionStats const& _stats, bool _printInfoMessages)
+         : stream(_stream),
+         stats(_stats),
+         result(_stats.assertionResult),
+@@ -368,7 +368,7 @@ bool ConsoleReporter::assertionEnded(AssertionStats const& _assertionStats) {
+ 
+     lazyPrint();
+ 
+-    AssertionPrinter printer(stream, _assertionStats, includeResults);
++    ConsoleAssertionPrinter printer(stream, _assertionStats, includeResults);
+     printer.print();
+     stream << std::endl;
+     return true;

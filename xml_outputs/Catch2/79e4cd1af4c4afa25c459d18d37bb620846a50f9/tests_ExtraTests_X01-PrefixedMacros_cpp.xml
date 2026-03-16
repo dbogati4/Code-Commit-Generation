@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" xmlns:diff="http://www.srcML.org/srcDiff" revision="1.0.0" language="C++" filename="C:\Users\saile\AppData\Local\Temp\catch2_100_z8gzpiwf\79e4cd1af4c4afa25c459d18d37bb620846a50f9\tests_ExtraTests_X01-PrefixedMacros_cpp\tests_ExtraTests_X01-PrefixedMacros_cpp.old|C:\Users\saile\AppData\Local\Temp\catch2_100_z8gzpiwf\79e4cd1af4c4afa25c459d18d37bb620846a50f9\tests_ExtraTests_X01-PrefixedMacros_cpp\tests_ExtraTests_X01-PrefixedMacros_cpp.new">
+<comment type="line">//              Copyright Catch2 Authors</comment>
+<comment type="line">// Distributed under the Boost Software License, Version 1.0.</comment>
+<comment type="line">//   (See accompanying file LICENSE_1_0.txt or copy at</comment>
+<comment type="line">//        https://www.boost.org/LICENSE_1_0.txt)</comment>
+
+<comment type="line">// SPDX-License-Identifier: BSL-1.0</comment>
+
+<diff:delete type="replace" xmlns:diff="http://www.srcML.org/srcDiff"><comment type="line">//<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>X01-DisableStringification.cpp</comment><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+</diff:ws><comment type="line">//<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>Test<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>that<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>Catch's<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>prefixed<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>macros<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>compile<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>and<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>run<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>properly.</comment><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+</diff:ws><comment type="line">//<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>This<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>won't<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>provide<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>full<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>coverage,<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>but<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>it<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>might<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>be<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>worth<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>checking</comment><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+</diff:ws><comment type="line">//<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>the<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>other<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>branch<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>as<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>well</comment></diff:delete><diff:insert type="replace" xmlns:diff="http://www.srcML.org/srcDiff"><comment type="block" format="doxygen">/**\file<diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+ </diff:ws>*<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>Test<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>that<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>Catch's<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>prefixed<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>macros<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>compile<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>and<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>run<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>properly.<diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+ </diff:ws>*<diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+ </diff:ws>*<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>We<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>intentionally<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>do<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>not<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>provide<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>full<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>coverage<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>of<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>all<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>macros,<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>but<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>we<diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+ </diff:ws>*<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>test<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>a<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>smattering<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>and<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>can<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>add<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>other<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>ones<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>as<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>they<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>have<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>regressions.<diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+ </diff:ws>*/</comment></diff:insert>
+
+<diff:insert xmlns:diff="http://www.srcML.org/srcDiff"><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+</diff:ws></diff:insert><cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;catch2/catch_test_macros.hpp&gt;</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;catch2/matchers/catch_matchers_predicate.hpp&gt;</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;catch2/matchers/catch_matchers_string.hpp&gt;</cpp:file></cpp:include>
+
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;type_traits&gt;</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;stdexcept&gt;</cpp:file></cpp:include>
+
+<namespace>namespace <block>{
+    <function><attribute>[[<expr><name>noreturn</name></expr>]]</attribute>
+    <type><name>void</name></type> <name>this_throws</name><parameter_list>()</parameter_list> <block>{<block_content>
+        <throw>throw <expr><call><name><name>std</name><operator>::</operator><name>runtime_error</name></name><argument_list>(<argument><expr><literal type="string">"Some msg"</literal></expr></argument>)</argument_list></call></expr>;</throw>
+    </block_content>}</block></function>
+    <function><type><name>void</name></type> <name>this_doesnt_throw</name><parameter_list>()</parameter_list> <block>{<block_content/>}</block></function>
+}</block></namespace>
+
+<macro><name>CATCH_TEST_CASE</name><argument_list>(<argument><literal type="string">"PrefixedMacros"</literal></argument>)</argument_list></macro> <block>{<block_content>
+    <using>using <namespace>namespace <name><name>Catch</name><operator>::</operator><name>Matchers</name></name>;</namespace></using>
+
+    <expr_stmt><expr><call><name>CATCH_REQUIRE</name><argument_list>( <argument><expr><literal type="number">1</literal> <operator>==</operator> <literal type="number">1</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>CATCH_REQUIRE_FALSE</name><argument_list>( <argument><expr><literal type="number">1</literal> <operator>!=</operator> <literal type="number">1</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+
+    <expr_stmt><expr><call><name>CATCH_REQUIRE_THROWS</name><argument_list>(<argument><expr><call><name>this_throws</name><argument_list>()</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>CATCH_REQUIRE_THROWS_AS</name><argument_list>(<argument><expr><call><name>this_throws</name><argument_list>()</argument_list></call></expr></argument>, <argument><expr><name><name>std</name><operator>::</operator><name>runtime_error</name></name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>CATCH_REQUIRE_THROWS_WITH</name><argument_list>(<argument><expr><call><name>this_throws</name><argument_list>()</argument_list></call></expr></argument>, <argument><expr><literal type="string">"Some msg"</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>CATCH_REQUIRE_THROWS_MATCHES</name><argument_list>(<argument><expr><call><name>this_throws</name><argument_list>()</argument_list></call></expr></argument>, <argument><expr><name><name>std</name><operator>::</operator><name>runtime_error</name></name></expr></argument>, <argument><expr><call><name><name>Predicate</name><argument_list type="generic">&lt;<argument><expr><name><name>std</name><operator>::</operator><name>runtime_error</name></name></expr></argument>&gt;</argument_list></name><argument_list>(<argument><expr><lambda><capture>[]</capture><parameter_list>(<parameter><decl><type><name><name>std</name><operator>::</operator><name>runtime_error</name></name> <specifier>const</specifier><modifier>&amp;</modifier></type></decl></parameter>)</parameter_list> <block>{<block_content> <return>return <expr><literal type="boolean">true</literal></expr>;</return> </block_content>}</block></lambda></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>CATCH_REQUIRE_NOTHROW</name><argument_list>(<argument><expr><call><name>this_doesnt_throw</name><argument_list>()</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+
+    <expr_stmt><expr><call><name>CATCH_CHECK</name><argument_list>( <argument><expr><literal type="number">1</literal> <operator>==</operator> <literal type="number">1</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>CATCH_CHECK_FALSE</name><argument_list>( <argument><expr><literal type="number">1</literal> <operator>!=</operator> <literal type="number">1</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    <macro><name>CATCH_CHECKED_IF</name><argument_list>( <argument><literal type="number">1</literal> == <literal type="number">1</literal></argument> )</argument_list></macro> <block>{<block_content>
+        <expr_stmt><expr><call><name>CATCH_SUCCEED</name><argument_list>(<argument><expr><literal type="string">"don't care"</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block> <macro><name>CATCH_CHECKED_ELSE</name> <argument_list>( <argument><literal type="number">1</literal> == <literal type="number">1</literal></argument> )</argument_list></macro> <block>{<block_content>
+        <expr_stmt><expr><call><name>CATCH_SUCCEED</name><argument_list>(<argument><expr><literal type="string">"don't care"</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block>
+
+    <expr_stmt><expr><call><name>CATCH_CHECK_NOFAIL</name><argument_list>(<argument><expr><literal type="number">1</literal> <operator>==</operator> <literal type="number">2</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+
+    <expr_stmt><expr><call><name>CATCH_CHECK_THROWS</name><argument_list>(<argument><expr><call><name>this_throws</name><argument_list>()</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>CATCH_CHECK_THROWS_AS</name><argument_list>(<argument><expr><call><name>this_throws</name><argument_list>()</argument_list></call></expr></argument>, <argument><expr><name><name>std</name><operator>::</operator><name>runtime_error</name></name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>CATCH_CHECK_THROWS_WITH</name><argument_list>(<argument><expr><call><name>this_throws</name><argument_list>()</argument_list></call></expr></argument>, <argument><expr><literal type="string">"Some msg"</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>CATCH_CHECK_THROWS_MATCHES</name><argument_list>(<argument><expr><call><name>this_throws</name><argument_list>()</argument_list></call></expr></argument>, <argument><expr><name><name>std</name><operator>::</operator><name>runtime_error</name></name></expr></argument>, <argument><expr><call><name><name>Predicate</name><argument_list type="generic">&lt;<argument><expr><name><name>std</name><operator>::</operator><name>runtime_error</name></name></expr></argument>&gt;</argument_list></name><argument_list>(<argument><expr><lambda><capture>[]</capture><parameter_list>(<parameter><decl><type><name><name>std</name><operator>::</operator><name>runtime_error</name></name> <specifier>const</specifier><modifier>&amp;</modifier></type></decl></parameter>)</parameter_list> <block>{<block_content> <return>return <expr><literal type="boolean">true</literal></expr>;</return> </block_content>}</block></lambda></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>CATCH_CHECK_NOTHROW</name><argument_list>(<argument><expr><call><name>this_doesnt_throw</name><argument_list>()</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+
+    <expr_stmt><expr><call><name>CATCH_REQUIRE_THAT</name><argument_list>(<argument><expr><literal type="string">"abcd"</literal></expr></argument>, <argument><expr><call><name>Equals</name><argument_list>(<argument><expr><literal type="string">"abcd"</literal></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>CATCH_CHECK_THAT</name><argument_list>(<argument><expr><literal type="string">"bdef"</literal></expr></argument>, <argument><expr><call><name>Equals</name><argument_list>(<argument><expr><literal type="string">"bdef"</literal></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+
+    <expr_stmt><expr><call><name>CATCH_INFO</name><argument_list>( <argument><expr><literal type="string">"some info"</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>CATCH_UNSCOPED_INFO</name><argument_list>( <argument><expr><literal type="string">"some info"</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>CATCH_WARN</name><argument_list>( <argument><expr><literal type="string">"some warn"</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    <macro><name>CATCH_SECTION</name><argument_list>(<argument><literal type="string">"some section"</literal></argument>)</argument_list></macro> <block>{<block_content>
+        <decl_stmt><decl><type><name>int</name></type> <name>i</name> <init>= <expr><literal type="number">1</literal></expr></init></decl>;</decl_stmt>
+        <expr_stmt><expr><call><name>CATCH_CAPTURE</name><argument_list>( <argument><expr><name>i</name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        <macro><name>CATCH_DYNAMIC_SECTION</name><argument_list>(<argument><literal type="string">"Dynamic section: "</literal> &lt;&lt; i</argument>)</argument_list></macro> <block>{<block_content>
+            <expr_stmt><expr><call><name>CATCH_FAIL_CHECK</name><argument_list>( <argument><expr><literal type="string">"failure"</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        </block_content>}</block>
+    </block_content>}</block>
+
+    <expr_stmt><expr><call><name>CATCH_STATIC_REQUIRE</name><argument_list>( <argument><expr><name><name>std</name><operator>::</operator><name>is_void</name><argument_list type="generic">&lt;<argument><expr><name>void</name></expr></argument>&gt;</argument_list><operator>::</operator><name>value</name></name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>CATCH_STATIC_REQUIRE_FALSE</name><argument_list>( <argument><expr><name><name>std</name><operator>::</operator><name>is_void</name><argument_list type="generic">&lt;<argument><expr><name>int</name></expr></argument>&gt;</argument_list><operator>::</operator><name>value</name></name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>CATCH_STATIC_CHECK</name><argument_list>( <argument><expr><name><name>std</name><operator>::</operator><name>is_void</name><argument_list type="generic">&lt;<argument><expr><name>void</name></expr></argument>&gt;</argument_list><operator>::</operator><name>value</name></name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>CATCH_STATIC_CHECK_FALSE</name><argument_list>( <argument><expr><name><name>std</name><operator>::</operator><name>is_void</name><argument_list type="generic">&lt;<argument><expr><name>int</name></expr></argument>&gt;</argument_list><operator>::</operator><name>value</name></name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>CATCH_FAIL</name><argument_list>(<argument><expr><literal type="string">""</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+</block_content>}</block>
+
+<comment type="line">// Missing:</comment>
+
+<comment type="line">//</comment>
+<comment type="line">// #define CATCH_TEST_CASE_METHOD( className, ... ) INTERNAL_CATCH_TEST_CASE_METHOD( className, __VA_ARGS__ )</comment>
+<comment type="line">// #define CATCH_METHOD_AS_TEST_CASE( method, ... ) INTERNAL_CATCH_METHOD_AS_TEST_CASE( method, __VA_ARGS__ )</comment>
+<comment type="line">// #define CATCH_REGISTER_TEST_CASE( Function, ... ) INTERNAL_CATCH_REGISTER_TESTCASE( Function, __VA_ARGS__ )</comment>
+<comment type="line">//</comment>
+<comment type="line">// // "BDD-style" convenience wrappers</comment>
+<comment type="line">// #define CATCH_SCENARIO( ... ) CATCH_TEST_CASE( "Scenario: " __VA_ARGS__ )</comment>
+<comment type="line">// #define CATCH_SCENARIO_METHOD( className, ... ) INTERNAL_CATCH_TEST_CASE_METHOD( className, "Scenario: " __VA_ARGS__ )</comment>
+<comment type="line">// #define CATCH_GIVEN( desc )    INTERNAL_CATCH_DYNAMIC_SECTION( "   Given: " &lt;&lt; desc )</comment>
+<comment type="line">// #define CATCH_WHEN( desc )     INTERNAL_CATCH_DYNAMIC_SECTION( "    When: " &lt;&lt; desc )</comment>
+<comment type="line">// #define CATCH_AND_WHEN( desc ) INTERNAL_CATCH_DYNAMIC_SECTION( "And when: " &lt;&lt; desc )</comment>
+<comment type="line">// #define CATCH_THEN( desc )     INTERNAL_CATCH_DYNAMIC_SECTION( "    Then: " &lt;&lt; desc )</comment>
+<comment type="line">// #define CATCH_AND_THEN( desc ) INTERNAL_CATCH_DYNAMIC_SECTION( "     And: " &lt;&lt; desc )</comment>
+<comment type="line">//</comment>
+</unit>

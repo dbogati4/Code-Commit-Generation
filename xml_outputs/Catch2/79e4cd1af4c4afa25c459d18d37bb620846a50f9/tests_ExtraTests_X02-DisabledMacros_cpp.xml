@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" xmlns:diff="http://www.srcML.org/srcDiff" revision="1.0.0" language="C++" filename="C:\Users\saile\AppData\Local\Temp\catch2_100_z8gzpiwf\79e4cd1af4c4afa25c459d18d37bb620846a50f9\tests_ExtraTests_X02-DisabledMacros_cpp\tests_ExtraTests_X02-DisabledMacros_cpp.old|C:\Users\saile\AppData\Local\Temp\catch2_100_z8gzpiwf\79e4cd1af4c4afa25c459d18d37bb620846a50f9\tests_ExtraTests_X02-DisabledMacros_cpp\tests_ExtraTests_X02-DisabledMacros_cpp.new">
+<comment type="line">//              Copyright Catch2 Authors</comment>
+<comment type="line">// Distributed under the Boost Software License, Version 1.0.</comment>
+<comment type="line">//   (See accompanying file LICENSE_1_0.txt or copy at</comment>
+<comment type="line">//        https://www.boost.org/LICENSE_1_0.txt)</comment>
+
+<comment type="line">// SPDX-License-Identifier: BSL-1.0</comment>
+
+<diff:delete type="replace" xmlns:diff="http://www.srcML.org/srcDiff"><comment type="line">//<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>X02-DisabledMacros.cpp</comment><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+</diff:ws><comment type="line">//<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>Test<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>that<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>CATCH_CONFIG_DISABLE<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>turns<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>off<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>TEST_CASE<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>autoregistration</comment><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+</diff:ws><comment type="line">//<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>and<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>expressions<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>in<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>assertion<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>macros<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>are<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>not<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>run.</comment></diff:delete><diff:insert type="replace" xmlns:diff="http://www.srcML.org/srcDiff"><comment type="block" format="doxygen">/**\file<diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+ </diff:ws>*<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>Test<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>that<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>CATCH_CONFIG_DISABLE<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>turns<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>off<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>TEST_CASE<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>autoregistration<diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+ </diff:ws>*<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>and<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>expressions<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>in<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>assertion<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>macros<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>are<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>not<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>run.<diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+ </diff:ws>*/</comment></diff:insert>
+
+<diff:insert xmlns:diff="http://www.srcML.org/srcDiff"><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+</diff:ws></diff:insert><cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;catch2/catch_test_macros.hpp&gt;</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;catch2/benchmark/catch_benchmark.hpp&gt;</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;catch2/matchers/catch_matchers.hpp&gt;</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;catch2/matchers/catch_matchers_predicate.hpp&gt;</cpp:file></cpp:include>
+
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;iostream&gt;</cpp:file></cpp:include>
+
+<struct>struct <name>foo</name> <block>{<public type="default">
+    <constructor><name>foo</name><parameter_list>()</parameter_list><block>{<block_content>
+        <expr_stmt><expr><call><name>REQUIRE_NOTHROW</name><argument_list>( <argument><expr><call><name>print</name><argument_list>()</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block></constructor>
+    <function><type><name>void</name></type> <name>print</name><parameter_list>()</parameter_list> <specifier>const</specifier> <block>{<block_content>
+        <expr_stmt><expr><name><name>std</name><operator>::</operator><name>cout</name></name> <operator>&lt;&lt;</operator> <literal type="string">"This should not happen\n"</literal></expr>;</expr_stmt>
+    </block_content>}</block></function>
+</public>}</block>;</struct>
+
+<cpp:if xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">if</cpp:directive> <expr><call><name>defined</name><argument_list>(<argument><expr><name>__clang__</name></expr></argument>)</argument_list></call></expr></cpp:if>
+<cpp:pragma xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">pragma</cpp:directive> <name>clang</name> <name>diagnostic</name> <name>push</name></cpp:pragma>
+<cpp:pragma xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">pragma</cpp:directive> <name>clang</name> <name>diagnostic</name> <name>ignored</name> <cpp:literal xmlns:cpp="http://www.srcML.org/srcML/cpp">"-Wglobal-constructors"</cpp:literal></cpp:pragma>
+<cpp:endif xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">endif</cpp:directive></cpp:endif>
+<comment type="line">// Construct foo, but `foo::print` should not be run</comment>
+<decl_stmt><decl><type><name>foo</name></type> <name>f</name></decl>;</decl_stmt>
+
+
+<cpp:if xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">if</cpp:directive> <expr><call><name>defined</name><argument_list>(<argument><expr><name>__clang__</name></expr></argument>)</argument_list></call></expr></cpp:if>
+<comment type="line">// The test is unused since the registration is disabled</comment>
+<cpp:pragma xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">pragma</cpp:directive> <name>clang</name> <name>diagnostic</name> <name>ignored</name> <cpp:literal xmlns:cpp="http://www.srcML.org/srcML/cpp">"-Wunused-function"</cpp:literal></cpp:pragma>
+<cpp:endif xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">endif</cpp:directive></cpp:endif>
+
+<comment type="line">// This test should not be run, because it won't be registered</comment>
+<macro><name>TEST_CASE</name><argument_list>( <argument><literal type="string">"Disabled Macros"</literal></argument> )</argument_list></macro> <block>{<block_content>
+    <expr_stmt><expr><call><name>CHECK</name><argument_list>( <argument><expr><literal type="number">1</literal> <operator>==</operator> <literal type="number">2</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><literal type="number">1</literal> <operator>==</operator> <literal type="number">2</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><name><name>std</name><operator>::</operator><name>cout</name></name> <operator>&lt;&lt;</operator> <literal type="string">"This should not happen\n"</literal></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>FAIL</name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+
+    <comment type="line">// Test that static assertions don't fire when macros are disabled</comment>
+    <expr_stmt><expr><call><name>STATIC_CHECK</name><argument_list>( <argument><expr><literal type="number">0</literal> <operator>==</operator> <literal type="number">1</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>STATIC_REQUIRE</name><argument_list>( <argument><expr><operator>!</operator><literal type="boolean">true</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+
+    <expr_stmt><expr><call><name>REQUIRE_THAT</name><argument_list>( <argument><expr><literal type="number">1</literal></expr></argument>,
+                  <argument><expr><call><name><name>Catch</name><operator>::</operator><name>Matchers</name><operator>::</operator><name>Predicate</name></name><argument_list>( <argument><expr><lambda><capture>[]</capture><parameter_list>( <parameter><decl><type><name>int</name></type></decl></parameter> )</parameter_list> <block>{<block_content> <return>return <expr><literal type="boolean">false</literal></expr>;</return> </block_content>}</block></lambda></expr></argument> )</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    <macro><name>BENCHMARK</name><argument_list>( <argument><literal type="string">"Disabled benchmark"</literal></argument> )</argument_list></macro> <block>{<block_content> <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><literal type="number">1</literal> <operator>==</operator> <literal type="number">2</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt> </block_content>}</block><empty_stmt>;</empty_stmt>
+</block_content>}</block>
+
+<cpp:if xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">if</cpp:directive> <expr><call><name>defined</name><argument_list>(<argument><expr><name>__clang__</name></expr></argument>)</argument_list></call></expr></cpp:if>
+<cpp:pragma xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">pragma</cpp:directive> <name>clang</name> <name>diagnostic</name> <name>pop</name></cpp:pragma>
+<cpp:endif xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">endif</cpp:directive></cpp:endif>
+</unit>

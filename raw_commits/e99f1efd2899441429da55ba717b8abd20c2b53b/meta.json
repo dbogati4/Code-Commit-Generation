@@ -1,0 +1,10 @@
+{
+  "commit_id": "e99f1efd2899441429da55ba717b8abd20c2b53b",
+  "parent_id": "b9dd1936e5f2fdb2a454accf6d0e43d5fcccce1f",
+  "message": "Avoid adding a default test spec when none was provided",
+  "changed_files": [
+    "include/internal/catch_config.cpp",
+    "include/internal/catch_session.cpp",
+    "include/internal/catch_test_case_registry_impl.cpp"
+  ]
+}

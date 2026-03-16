@@ -1,0 +1,340 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" xmlns:diff="http://www.srcML.org/srcDiff" revision="1.0.0" language="C++" filename="C:\Users\saile\AppData\Local\Temp\catch2_100_z8gzpiwf\d09fe4459d0ed1174383a173a9bb50b028fe0d9e\include_internal_catch_run_context_cpp\include_internal_catch_run_context_cpp.old|C:\Users\saile\AppData\Local\Temp\catch2_100_z8gzpiwf\d09fe4459d0ed1174383a173a9bb50b028fe0d9e\include_internal_catch_run_context_cpp\include_internal_catch_run_context_cpp.new"><cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">"catch_run_context.h"</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">"catch_context.h"</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">"catch_enforce.h"</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">"catch_random_number_generator.h"</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">"catch_stream.h"</cpp:file></cpp:include>
+
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;cassert&gt;</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;algorithm&gt;</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;sstream&gt;</cpp:file></cpp:include>
+
+<diff:insert xmlns:diff="http://www.srcML.org/srcDiff"><decl_stmt><decl><type><specifier>static</specifier><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><specifier>auto</specifier><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><specifier>const</specifier><modifier>&amp;</modifier></type><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><name>defaultExpression</name><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><init>=<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><expr><literal type="string">"{Unknown<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>expression<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>after<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>the<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>reported<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>line}"</literal></expr></init></decl>;</decl_stmt><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+
+</diff:ws></diff:insert><namespace>namespace <name>Catch</name> <block>{
+
+    <constructor><name><name>StreamRedirect</name><operator>::</operator><name>StreamRedirect</name></name><parameter_list>(<parameter><decl><type><name><name>std</name><operator>::</operator><name>ostream</name></name><modifier>&amp;</modifier></type> <name>stream</name></decl></parameter>, <parameter><decl><type><name><name>std</name><operator>::</operator><name>string</name></name><modifier>&amp;</modifier></type> <name>targetString</name></decl></parameter>)</parameter_list>
+        <member_init_list>: <call><name>m_stream</name><argument_list>(<argument><expr><name>stream</name></expr></argument>)</argument_list></call>,
+        <call><name>m_prevBuf</name><argument_list>(<argument><expr><call><name><name>stream</name><operator>.</operator><name>rdbuf</name></name><argument_list>()</argument_list></call></expr></argument>)</argument_list></call>,
+        <call><name>m_targetString</name><argument_list>(<argument><expr><name>targetString</name></expr></argument>)</argument_list></call> </member_init_list><block>{<block_content>
+        <expr_stmt><expr><call><name><name>stream</name><operator>.</operator><name>rdbuf</name></name><argument_list>(<argument><expr><call><name><name>m_oss</name><operator>.</operator><name>get</name></name><argument_list>()</argument_list></call><operator>.</operator><call><name>rdbuf</name><argument_list>()</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block></constructor>
+
+    <destructor><name><name>StreamRedirect</name><operator>::</operator><name>~StreamRedirect</name></name><parameter_list>()</parameter_list> <block>{<block_content>
+        <expr_stmt><expr><name>m_targetString</name> <operator>+=</operator> <call><name><name>m_oss</name><operator>.</operator><name>str</name></name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name><name>m_stream</name><operator>.</operator><name>rdbuf</name></name><argument_list>(<argument><expr><name>m_prevBuf</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block></destructor>
+
+    <constructor><name><name>StdErrRedirect</name><operator>::</operator><name>StdErrRedirect</name></name><parameter_list>(<parameter><decl><type><name><name>std</name><operator>::</operator><name>string</name></name> <modifier>&amp;</modifier></type> <name>targetString</name></decl></parameter>)</parameter_list>
+        <member_init_list>:<call><name>m_cerrBuf</name><argument_list>(<argument><expr><call><name>cerr</name><argument_list>()</argument_list></call><operator>.</operator><call><name>rdbuf</name><argument_list>()</argument_list></call></expr></argument>)</argument_list></call>, <call><name>m_clogBuf</name><argument_list>(<argument><expr><call><name>clog</name><argument_list>()</argument_list></call><operator>.</operator><call><name>rdbuf</name><argument_list>()</argument_list></call></expr></argument>)</argument_list></call>,
+        <call><name>m_targetString</name><argument_list>(<argument><expr><name>targetString</name></expr></argument>)</argument_list></call> </member_init_list><block>{<block_content>
+        <expr_stmt><expr><call><name>cerr</name><argument_list>()</argument_list></call><operator>.</operator><call><name>rdbuf</name><argument_list>(<argument><expr><call><name><name>m_oss</name><operator>.</operator><name>get</name></name><argument_list>()</argument_list></call><operator>.</operator><call><name>rdbuf</name><argument_list>()</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name>clog</name><argument_list>()</argument_list></call><operator>.</operator><call><name>rdbuf</name><argument_list>(<argument><expr><call><name><name>m_oss</name><operator>.</operator><name>get</name></name><argument_list>()</argument_list></call><operator>.</operator><call><name>rdbuf</name><argument_list>()</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block></constructor>
+
+    <destructor><name><name>StdErrRedirect</name><operator>::</operator><name>~StdErrRedirect</name></name><parameter_list>()</parameter_list> <block>{<block_content>
+        <expr_stmt><expr><name>m_targetString</name> <operator>+=</operator> <call><name><name>m_oss</name><operator>.</operator><name>str</name></name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name>cerr</name><argument_list>()</argument_list></call><operator>.</operator><call><name>rdbuf</name><argument_list>(<argument><expr><name>m_cerrBuf</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name>clog</name><argument_list>()</argument_list></call><operator>.</operator><call><name>rdbuf</name><argument_list>(<argument><expr><name>m_clogBuf</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block></destructor>
+
+    <constructor><name><name>RunContext</name><operator>::</operator><name>RunContext</name></name><parameter_list>(<parameter><decl><type><name>IConfigPtr</name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>_config</name></decl></parameter>, <parameter><decl><type><name>IStreamingReporterPtr</name><modifier>&amp;&amp;</modifier></type> <name>reporter</name></decl></parameter>)</parameter_list>
+    <member_init_list>:   <call><name>m_runInfo</name><argument_list>(<argument><expr><call><name><name>_config</name><operator>-&gt;</operator><name>name</name></name><argument_list>()</argument_list></call></expr></argument>)</argument_list></call>,
+        <call><name>m_context</name><argument_list>(<argument><expr><call><name>getCurrentMutableContext</name><argument_list>()</argument_list></call></expr></argument>)</argument_list></call>,
+        <call><name>m_config</name><argument_list>(<argument><expr><name>_config</name></expr></argument>)</argument_list></call>,
+        <call><name>m_reporter</name><argument_list>(<argument><expr><call><name><name>std</name><operator>::</operator><name>move</name></name><argument_list>(<argument><expr><name>reporter</name></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call>,
+        <call><name>m_lastAssertionInfo</name><argument_list>{ <argument><expr><literal type="string">""</literal></expr></argument>, <argument><expr><call><name>SourceLineInfo</name><argument_list>(<argument><expr><literal type="string">""</literal></expr></argument>,<argument><expr><literal type="number">0</literal></expr></argument>)</argument_list></call></expr></argument>, <argument><expr><literal type="string">""</literal></expr></argument>, <argument><expr><name><name>ResultDisposition</name><operator>::</operator><name>Normal</name></name></expr></argument> }</argument_list></call>
+    </member_init_list><block>{<block_content>
+        <expr_stmt><expr><call><name><name>m_context</name><operator>.</operator><name>setRunner</name></name><argument_list>(<argument><expr><name>this</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name><name>m_context</name><operator>.</operator><name>setConfig</name></name><argument_list>(<argument><expr><name>m_config</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name><name>m_context</name><operator>.</operator><name>setResultCapture</name></name><argument_list>(<argument><expr><name>this</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name><name>m_reporter</name><operator>-&gt;</operator><name>testRunStarting</name></name><argument_list>(<argument><expr><name>m_runInfo</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block></constructor>
+
+    <destructor><name><name>RunContext</name><operator>::</operator><name>~RunContext</name></name><parameter_list>()</parameter_list> <block>{<block_content>
+        <expr_stmt><expr><call><name><name>m_reporter</name><operator>-&gt;</operator><name>testRunEnded</name></name><argument_list>(<argument><expr><call><name>TestRunStats</name><argument_list>(<argument><expr><name>m_runInfo</name></expr></argument>, <argument><expr><name>m_totals</name></expr></argument>, <argument><expr><call><name>aborting</name><argument_list>()</argument_list></call></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block></destructor>
+
+    <function><type><name>void</name></type> <name><name>RunContext</name><operator>::</operator><name>testGroupStarting</name></name><parameter_list>(<parameter><decl><type><name><name>std</name><operator>::</operator><name>string</name></name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>testSpec</name></decl></parameter>, <parameter><decl><type><name><name>std</name><operator>::</operator><name>size_t</name></name></type> <name>groupIndex</name></decl></parameter>, <parameter><decl><type><name><name>std</name><operator>::</operator><name>size_t</name></name></type> <name>groupsCount</name></decl></parameter>)</parameter_list> <block>{<block_content>
+        <expr_stmt><expr><call><name><name>m_reporter</name><operator>-&gt;</operator><name>testGroupStarting</name></name><argument_list>(<argument><expr><call><name>GroupInfo</name><argument_list>(<argument><expr><name>testSpec</name></expr></argument>, <argument><expr><name>groupIndex</name></expr></argument>, <argument><expr><name>groupsCount</name></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block></function>
+
+    <function><type><name>void</name></type> <name><name>RunContext</name><operator>::</operator><name>testGroupEnded</name></name><parameter_list>(<parameter><decl><type><name><name>std</name><operator>::</operator><name>string</name></name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>testSpec</name></decl></parameter>, <parameter><decl><type><name>Totals</name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>totals</name></decl></parameter>, <parameter><decl><type><name><name>std</name><operator>::</operator><name>size_t</name></name></type> <name>groupIndex</name></decl></parameter>, <parameter><decl><type><name><name>std</name><operator>::</operator><name>size_t</name></name></type> <name>groupsCount</name></decl></parameter>)</parameter_list> <block>{<block_content>
+        <expr_stmt><expr><call><name><name>m_reporter</name><operator>-&gt;</operator><name>testGroupEnded</name></name><argument_list>(<argument><expr><call><name>TestGroupStats</name><argument_list>(<argument><expr><call><name>GroupInfo</name><argument_list>(<argument><expr><name>testSpec</name></expr></argument>, <argument><expr><name>groupIndex</name></expr></argument>, <argument><expr><name>groupsCount</name></expr></argument>)</argument_list></call></expr></argument>, <argument><expr><name>totals</name></expr></argument>, <argument><expr><call><name>aborting</name><argument_list>()</argument_list></call></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block></function>
+
+    <function><type><name>Totals</name></type> <name><name>RunContext</name><operator>::</operator><name>runTest</name></name><parameter_list>(<parameter><decl><type><name>TestCase</name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>testCase</name></decl></parameter>)</parameter_list> <block>{<block_content>
+        <decl_stmt><decl><type><name>Totals</name></type> <name>prevTotals</name> <init>= <expr><name>m_totals</name></expr></init></decl>;</decl_stmt>
+
+        <decl_stmt><decl><type><name><name>std</name><operator>::</operator><name>string</name></name></type> <name>redirectedCout</name></decl>;</decl_stmt>
+        <decl_stmt><decl><type><name><name>std</name><operator>::</operator><name>string</name></name></type> <name>redirectedCerr</name></decl>;</decl_stmt>
+
+        <decl_stmt><decl><type><name>TestCaseInfo</name></type> <name>testInfo</name> <init>= <expr><call><name><name>testCase</name><operator>.</operator><name>getTestCaseInfo</name></name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+
+        <expr_stmt><expr><call><name><name>m_reporter</name><operator>-&gt;</operator><name>testCaseStarting</name></name><argument_list>(<argument><expr><name>testInfo</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+
+        <expr_stmt><expr><name>m_activeTestCase</name> <operator>=</operator> <operator>&amp;</operator><name>testCase</name></expr>;</expr_stmt>
+
+
+        <decl_stmt><decl><type><name>ITracker</name><modifier>&amp;</modifier></type> <name>rootTracker</name> <init>= <expr><call><name><name>m_trackerContext</name><operator>.</operator><name>startRun</name></name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+        <expr_stmt><expr><call><name>assert</name><argument_list>(<argument><expr><call><name><name>rootTracker</name><operator>.</operator><name>isSectionTracker</name></name><argument_list>()</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><cast type="static">static_cast<argument_list type="generic">&lt;<argument><expr><name>SectionTracker</name><operator>&amp;</operator></expr></argument>&gt;</argument_list><argument_list>(<argument><expr><name>rootTracker</name></expr></argument>)</argument_list></cast><operator>.</operator><call><name>addInitialFilters</name><argument_list>(<argument><expr><call><name><name>m_config</name><operator>-&gt;</operator><name>getSectionsToRun</name></name><argument_list>()</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        <do>do <block>{<block_content>
+            <expr_stmt><expr><call><name><name>m_trackerContext</name><operator>.</operator><name>startCycle</name></name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+            <expr_stmt><expr><name>m_testCaseTracker</name> <operator>=</operator> <operator>&amp;</operator><call><name><name>SectionTracker</name><operator>::</operator><name>acquire</name></name><argument_list>(<argument><expr><name>m_trackerContext</name></expr></argument>, <argument><expr><call><name><name>TestCaseTracking</name><operator>::</operator><name>NameAndLocation</name></name><argument_list>(<argument><expr><name><name>testInfo</name><operator>.</operator><name>name</name></name></expr></argument>, <argument><expr><name><name>testInfo</name><operator>.</operator><name>lineInfo</name></name></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+            <expr_stmt><expr><call><name>runCurrentTest</name><argument_list>(<argument><expr><name>redirectedCout</name></expr></argument>, <argument><expr><name>redirectedCerr</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        </block_content>}</block> while <condition>(<expr><operator>!</operator><call><name><name>m_testCaseTracker</name><operator>-&gt;</operator><name>isSuccessfullyCompleted</name></name><argument_list>()</argument_list></call> <operator>&amp;&amp;</operator> <operator>!</operator><call><name>aborting</name><argument_list>()</argument_list></call></expr>)</condition>;</do>
+
+        <decl_stmt><decl><type><name>Totals</name></type> <name>deltaTotals</name> <init>= <expr><call><name><name>m_totals</name><operator>.</operator><name>delta</name></name><argument_list>(<argument><expr><name>prevTotals</name></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+        <if_stmt><if>if <condition>(<expr><call><name><name>testInfo</name><operator>.</operator><name>expectedToFail</name></name><argument_list>()</argument_list></call> <operator>&amp;&amp;</operator> <name><name>deltaTotals</name><operator>.</operator><name>testCases</name><operator>.</operator><name>passed</name></name> <operator>&gt;</operator> <literal type="number">0</literal></expr>)</condition> <block>{<block_content>
+            <expr_stmt><expr><name><name>deltaTotals</name><operator>.</operator><name>assertions</name><operator>.</operator><name>failed</name></name><operator>++</operator></expr>;</expr_stmt>
+            <expr_stmt><expr><name><name>deltaTotals</name><operator>.</operator><name>testCases</name><operator>.</operator><name>passed</name></name><operator>--</operator></expr>;</expr_stmt>
+            <expr_stmt><expr><name><name>deltaTotals</name><operator>.</operator><name>testCases</name><operator>.</operator><name>failed</name></name><operator>++</operator></expr>;</expr_stmt>
+        </block_content>}</block></if></if_stmt>
+        <expr_stmt><expr><name><name>m_totals</name><operator>.</operator><name>testCases</name></name> <operator>+=</operator> <name><name>deltaTotals</name><operator>.</operator><name>testCases</name></name></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name><name>m_reporter</name><operator>-&gt;</operator><name>testCaseEnded</name></name><argument_list>(<argument><expr><call><name>TestCaseStats</name><argument_list>(<argument><expr><name>testInfo</name></expr></argument>,
+                                  <argument><expr><name>deltaTotals</name></expr></argument>,
+                                  <argument><expr><name>redirectedCout</name></expr></argument>,
+                                  <argument><expr><name>redirectedCerr</name></expr></argument>,
+                                  <argument><expr><call><name>aborting</name><argument_list>()</argument_list></call></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+
+        <expr_stmt><expr><name>m_activeTestCase</name> <operator>=</operator> <literal type="null">nullptr</literal></expr>;</expr_stmt>
+        <expr_stmt><expr><name>m_testCaseTracker</name> <operator>=</operator> <literal type="null">nullptr</literal></expr>;</expr_stmt>
+
+        <return>return <expr><name>deltaTotals</name></expr>;</return>
+    </block_content>}</block></function>
+
+    <function><type><name>IConfigPtr</name></type> <name><name>RunContext</name><operator>::</operator><name>config</name></name><parameter_list>()</parameter_list> <specifier>const</specifier> <block>{<block_content>
+        <return>return <expr><name>m_config</name></expr>;</return>
+    </block_content>}</block></function>
+
+    <function><type><name>IStreamingReporter</name><modifier>&amp;</modifier></type> <name><name>RunContext</name><operator>::</operator><name>reporter</name></name><parameter_list>()</parameter_list> <specifier>const</specifier> <block>{<block_content>
+        <return>return <expr><operator>*</operator><name>m_reporter</name></expr>;</return>
+    </block_content>}</block></function>
+
+    <function><type><name>void</name></type> <name><name>RunContext</name><operator>::</operator><name>assertionStarting</name></name><parameter_list>(<parameter><decl><type><name>AssertionInfo</name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>info</name></decl></parameter>)</parameter_list> <block>{<block_content>
+        <expr_stmt><expr><call><name><name>m_reporter</name><operator>-&gt;</operator><name>assertionStarting</name></name><argument_list>( <argument><expr><name>info</name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block></function>
+    <function><type><name>void</name></type> <name><name>RunContext</name><operator>::</operator><name>assertionEnded</name></name><parameter_list>(<parameter><decl><type><name>AssertionResult</name> <specifier>const</specifier> <modifier>&amp;</modifier></type> <name>result</name></decl></parameter>)</parameter_list> <block>{<block_content>
+        <if_stmt><if>if <condition>(<expr><call><name><name>result</name><operator>.</operator><name>getResultType</name></name><argument_list>()</argument_list></call> <operator>==</operator> <name><name>ResultWas</name><operator>::</operator><name>Ok</name></name></expr>)</condition> <block>{<block_content>
+            <expr_stmt><expr><name><name>m_totals</name><operator>.</operator><name>assertions</name><operator>.</operator><name>passed</name></name><operator>++</operator></expr>;</expr_stmt>
+        </block_content>}</block></if> <if type="elseif">else if <condition>(<expr><operator>!</operator><call><name><name>result</name><operator>.</operator><name>isOk</name></name><argument_list>()</argument_list></call></expr>)</condition> <block>{<block_content>
+            <if_stmt><if>if<condition>( <expr><call><name><name>m_activeTestCase</name><operator>-&gt;</operator><name>getTestCaseInfo</name></name><argument_list>()</argument_list></call><operator>.</operator><call><name>okToFail</name><argument_list>()</argument_list></call></expr> )</condition><block type="pseudo"><block_content>
+                <expr_stmt><expr><name><name>m_totals</name><operator>.</operator><name>assertions</name><operator>.</operator><name>failedButOk</name></name><operator>++</operator></expr>;</expr_stmt></block_content></block></if>
+            <else>else<block type="pseudo"><block_content>
+                <expr_stmt><expr><name><name>m_totals</name><operator>.</operator><name>assertions</name><operator>.</operator><name>failed</name></name><operator>++</operator></expr>;</expr_stmt></block_content></block></else></if_stmt>
+        </block_content>}</block></if></if_stmt>
+
+        <comment type="line">// We have no use for the return value (whether messages should be cleared), because messages were made scoped</comment>
+        <comment type="line">// and should be let to clear themselves out.</comment>
+        <expr_stmt><expr><cast type="static">static_cast<argument_list type="generic">&lt;<argument><expr><name>void</name></expr></argument>&gt;</argument_list><argument_list>(<argument><expr><call><name><name>m_reporter</name><operator>-&gt;</operator><name>assertionEnded</name></name><argument_list>(<argument><expr><call><name>AssertionStats</name><argument_list>(<argument><expr><name>result</name></expr></argument>, <argument><expr><name>m_messages</name></expr></argument>, <argument><expr><name>m_totals</name></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr></argument>)</argument_list></cast></expr>;</expr_stmt>
+
+        <comment type="line">// Reset working state</comment>
+        <expr_stmt><expr><name>m_lastAssertionInfo</name> <operator>=</operator> <block>{ <expr><literal type="string">""</literal></expr>, <expr><name><name>m_lastAssertionInfo</name><operator>.</operator><name>lineInfo</name></name></expr>, <expr><literal type="string">"{Unknown expression after the reported line}"</literal></expr>, <expr><name><name>m_lastAssertionInfo</name><operator>.</operator><name>resultDisposition</name></name></expr> }</block></expr>;</expr_stmt>
+        <expr_stmt><expr><name>m_lastResult</name> <operator>=</operator> <name>result</name></expr>;</expr_stmt>
+    </block_content>}</block></function>
+
+    <function><type><name>bool</name></type> <name><name>RunContext</name><operator>::</operator><name>sectionStarted</name></name><parameter_list>(<parameter><decl><type><name>SectionInfo</name> <specifier>const</specifier> <modifier>&amp;</modifier></type> <name>sectionInfo</name></decl></parameter>, <parameter><decl><type><name>Counts</name> <modifier>&amp;</modifier></type> <name>assertions</name></decl></parameter>)</parameter_list> <block>{<block_content>
+        <decl_stmt><decl><type><name>ITracker</name><modifier>&amp;</modifier></type> <name>sectionTracker</name> <init>= <expr><call><name><name>SectionTracker</name><operator>::</operator><name>acquire</name></name><argument_list>(<argument><expr><name>m_trackerContext</name></expr></argument>, <argument><expr><call><name><name>TestCaseTracking</name><operator>::</operator><name>NameAndLocation</name></name><argument_list>(<argument><expr><name><name>sectionInfo</name><operator>.</operator><name>name</name></name></expr></argument>, <argument><expr><name><name>sectionInfo</name><operator>.</operator><name>lineInfo</name></name></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+        <if_stmt><if>if <condition>(<expr><operator>!</operator><call><name><name>sectionTracker</name><operator>.</operator><name>isOpen</name></name><argument_list>()</argument_list></call></expr>)</condition><block type="pseudo"><block_content>
+            <return>return <expr><literal type="boolean">false</literal></expr>;</return></block_content></block></if></if_stmt>
+        <expr_stmt><expr><call><name><name>m_activeSections</name><operator>.</operator><name>push_back</name></name><argument_list>(<argument><expr><operator>&amp;</operator><name>sectionTracker</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+
+        <expr_stmt><expr><name><name>m_lastAssertionInfo</name><operator>.</operator><name>lineInfo</name></name> <operator>=</operator> <name><name>sectionInfo</name><operator>.</operator><name>lineInfo</name></name></expr>;</expr_stmt>
+
+        <expr_stmt><expr><call><name><name>m_reporter</name><operator>-&gt;</operator><name>sectionStarting</name></name><argument_list>(<argument><expr><name>sectionInfo</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+
+        <expr_stmt><expr><name>assertions</name> <operator>=</operator> <name><name>m_totals</name><operator>.</operator><name>assertions</name></name></expr>;</expr_stmt>
+
+        <return>return <expr><literal type="boolean">true</literal></expr>;</return>
+    </block_content>}</block></function>
+
+    <function><type><name>bool</name></type> <name><name>RunContext</name><operator>::</operator><name>testForMissingAssertions</name></name><parameter_list>(<parameter><decl><type><name>Counts</name><modifier>&amp;</modifier></type> <name>assertions</name></decl></parameter>)</parameter_list> <block>{<block_content>
+        <if_stmt><if>if <condition>(<expr><call><name><name>assertions</name><operator>.</operator><name>total</name></name><argument_list>()</argument_list></call> <operator>!=</operator> <literal type="number">0</literal></expr>)</condition><block type="pseudo"><block_content>
+            <return>return <expr><literal type="boolean">false</literal></expr>;</return></block_content></block></if></if_stmt>
+        <if_stmt><if>if <condition>(<expr><operator>!</operator><call><name><name>m_config</name><operator>-&gt;</operator><name>warnAboutMissingAssertions</name></name><argument_list>()</argument_list></call></expr>)</condition><block type="pseudo"><block_content>
+            <return>return <expr><literal type="boolean">false</literal></expr>;</return></block_content></block></if></if_stmt>
+        <if_stmt><if>if <condition>(<expr><call><name><name>m_trackerContext</name><operator>.</operator><name>currentTracker</name></name><argument_list>()</argument_list></call><operator>.</operator><call><name>hasChildren</name><argument_list>()</argument_list></call></expr>)</condition><block type="pseudo"><block_content>
+            <return>return <expr><literal type="boolean">false</literal></expr>;</return></block_content></block></if></if_stmt>
+        <expr_stmt><expr><name><name>m_totals</name><operator>.</operator><name>assertions</name><operator>.</operator><name>failed</name></name><operator>++</operator></expr>;</expr_stmt>
+        <expr_stmt><expr><name><name>assertions</name><operator>.</operator><name>failed</name></name><operator>++</operator></expr>;</expr_stmt>
+        <return>return <expr><literal type="boolean">true</literal></expr>;</return>
+    </block_content>}</block></function>
+
+    <function><type><name>void</name></type> <name><name>RunContext</name><operator>::</operator><name>sectionEnded</name></name><parameter_list>(<parameter><decl><type><name>SectionEndInfo</name> <specifier>const</specifier> <modifier>&amp;</modifier></type> <name>endInfo</name></decl></parameter>)</parameter_list> <block>{<block_content>
+        <decl_stmt><decl><type><name>Counts</name></type> <name>assertions</name> <init>= <expr><name><name>m_totals</name><operator>.</operator><name>assertions</name></name> <operator>-</operator> <name><name>endInfo</name><operator>.</operator><name>prevAssertions</name></name></expr></init></decl>;</decl_stmt>
+        <decl_stmt><decl><type><name>bool</name></type> <name>missingAssertions</name> <init>= <expr><call><name>testForMissingAssertions</name><argument_list>(<argument><expr><name>assertions</name></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+
+        <if_stmt><if>if <condition>(<expr><operator>!</operator><call><name><name>m_activeSections</name><operator>.</operator><name>empty</name></name><argument_list>()</argument_list></call></expr>)</condition> <block>{<block_content>
+            <expr_stmt><expr><call><name><name>m_activeSections</name><operator>.</operator><name>back</name></name><argument_list>()</argument_list></call><operator>-&gt;</operator><call><name>close</name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+            <expr_stmt><expr><call><name><name>m_activeSections</name><operator>.</operator><name>pop_back</name></name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+        </block_content>}</block></if></if_stmt>
+
+        <expr_stmt><expr><call><name><name>m_reporter</name><operator>-&gt;</operator><name>sectionEnded</name></name><argument_list>(<argument><expr><call><name>SectionStats</name><argument_list>(<argument><expr><name><name>endInfo</name><operator>.</operator><name>sectionInfo</name></name></expr></argument>, <argument><expr><name>assertions</name></expr></argument>, <argument><expr><name><name>endInfo</name><operator>.</operator><name>durationInSeconds</name></name></expr></argument>, <argument><expr><name>missingAssertions</name></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name><name>m_messages</name><operator>.</operator><name>clear</name></name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block></function>
+
+    <function><type><name>void</name></type> <name><name>RunContext</name><operator>::</operator><name>sectionEndedEarly</name></name><parameter_list>(<parameter><decl><type><name>SectionEndInfo</name> <specifier>const</specifier> <modifier>&amp;</modifier></type> <name>endInfo</name></decl></parameter>)</parameter_list> <block>{<block_content>
+        <if_stmt><if>if <condition>(<expr><call><name><name>m_unfinishedSections</name><operator>.</operator><name>empty</name></name><argument_list>()</argument_list></call></expr>)</condition><block type="pseudo"><block_content>
+            <expr_stmt><expr><call><name><name>m_activeSections</name><operator>.</operator><name>back</name></name><argument_list>()</argument_list></call><operator>-&gt;</operator><call><name>fail</name><argument_list>()</argument_list></call></expr>;</expr_stmt></block_content></block></if>
+        <else>else<block type="pseudo"><block_content>
+            <expr_stmt><expr><call><name><name>m_activeSections</name><operator>.</operator><name>back</name></name><argument_list>()</argument_list></call><operator>-&gt;</operator><call><name>close</name><argument_list>()</argument_list></call></expr>;</expr_stmt></block_content></block></else></if_stmt>
+        <expr_stmt><expr><call><name><name>m_activeSections</name><operator>.</operator><name>pop_back</name></name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+
+        <expr_stmt><expr><call><name><name>m_unfinishedSections</name><operator>.</operator><name>push_back</name></name><argument_list>(<argument><expr><name>endInfo</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block></function>
+    <function><type><name>void</name></type> <name><name>RunContext</name><operator>::</operator><name>benchmarkStarting</name></name><parameter_list>( <parameter><decl><type><name>BenchmarkInfo</name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>info</name></decl></parameter> )</parameter_list> <block>{<block_content>
+        <expr_stmt><expr><call><name><name>m_reporter</name><operator>-&gt;</operator><name>benchmarkStarting</name></name><argument_list>( <argument><expr><name>info</name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block></function>
+    <function><type><name>void</name></type> <name><name>RunContext</name><operator>::</operator><name>benchmarkEnded</name></name><parameter_list>( <parameter><decl><type><name>BenchmarkStats</name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>stats</name></decl></parameter> )</parameter_list> <block>{<block_content>
+        <expr_stmt><expr><call><name><name>m_reporter</name><operator>-&gt;</operator><name>benchmarkEnded</name></name><argument_list>( <argument><expr><name>stats</name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block></function>
+
+    <function><type><name>void</name></type> <name><name>RunContext</name><operator>::</operator><name>pushScopedMessage</name></name><parameter_list>(<parameter><decl><type><name>MessageInfo</name> <specifier>const</specifier> <modifier>&amp;</modifier></type> <name>message</name></decl></parameter>)</parameter_list> <block>{<block_content>
+        <expr_stmt><expr><call><name><name>m_messages</name><operator>.</operator><name>push_back</name></name><argument_list>(<argument><expr><name>message</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block></function>
+
+    <function><type><name>void</name></type> <name><name>RunContext</name><operator>::</operator><name>popScopedMessage</name></name><parameter_list>(<parameter><decl><type><name>MessageInfo</name> <specifier>const</specifier> <modifier>&amp;</modifier></type> <name>message</name></decl></parameter>)</parameter_list> <block>{<block_content>
+        <expr_stmt><expr><call><name><name>m_messages</name><operator>.</operator><name>erase</name></name><argument_list>(<argument><expr><call><name><name>std</name><operator>::</operator><name>remove</name></name><argument_list>(<argument><expr><call><name><name>m_messages</name><operator>.</operator><name>begin</name></name><argument_list>()</argument_list></call></expr></argument>, <argument><expr><call><name><name>m_messages</name><operator>.</operator><name>end</name></name><argument_list>()</argument_list></call></expr></argument>, <argument><expr><name>message</name></expr></argument>)</argument_list></call></expr></argument>, <argument><expr><call><name><name>m_messages</name><operator>.</operator><name>end</name></name><argument_list>()</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block></function>
+
+    <function><type><name><name>std</name><operator>::</operator><name>string</name></name></type> <name><name>RunContext</name><operator>::</operator><name>getCurrentTestName</name></name><parameter_list>()</parameter_list> <specifier>const</specifier> <block>{<block_content>
+        <return>return <expr><ternary><condition><expr><name>m_activeTestCase</name></expr>
+            ?</condition><then> <expr><call><name><name>m_activeTestCase</name><operator>-&gt;</operator><name>getTestCaseInfo</name></name><argument_list>()</argument_list></call><operator>.</operator><name>name</name></expr>
+            </then><else>: <expr><call><name><name>std</name><operator>::</operator><name>string</name></name><argument_list>()</argument_list></call></expr></else></ternary></expr>;</return>
+    </block_content>}</block></function>
+
+    <function><type><specifier>const</specifier> <name>AssertionResult</name> <modifier>*</modifier></type> <name><name>RunContext</name><operator>::</operator><name>getLastResult</name></name><parameter_list>()</parameter_list> <specifier>const</specifier> <block>{<block_content>
+        <return>return <expr><operator>&amp;</operator><operator>(</operator><operator>*</operator><name>m_lastResult</name><operator>)</operator></expr>;</return>
+    </block_content>}</block></function>
+
+    <function><type><name>void</name></type> <name><name>RunContext</name><operator>::</operator><name>exceptionEarlyReported</name></name><parameter_list>()</parameter_list> <block>{<block_content>
+        <expr_stmt><expr><name>m_shouldReportUnexpected</name> <operator>=</operator> <literal type="boolean">false</literal></expr>;</expr_stmt>
+    </block_content>}</block></function>
+
+    <function><type><name>void</name></type> <name><name>RunContext</name><operator>::</operator><name>handleFatalErrorCondition</name></name><parameter_list>( <parameter><decl><type><name>StringRef</name></type> <name>message</name></decl></parameter> )</parameter_list> <block>{<block_content>
+        <comment type="line">// First notify reporter that bad things happened</comment>
+        <expr_stmt><expr><call><name><name>m_reporter</name><operator>-&gt;</operator><name>fatalErrorEncountered</name></name><argument_list>(<argument><expr><name>message</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+
+        <comment type="line">// Don't rebuild the result -- the stringification itself can cause more fatal errors</comment>
+        <comment type="line">// Instead, fake a result data.</comment>
+        <decl_stmt><decl><type><name>AssertionResultData</name></type> <name>tempResult</name><argument_list>( <argument><expr><name><name>ResultWas</name><operator>::</operator><name>FatalErrorCondition</name></name></expr></argument>, <argument><expr><block>{ <expr><literal type="boolean">false</literal></expr> }</block></expr></argument> )</argument_list></decl>;</decl_stmt>
+        <expr_stmt><expr><name><name>tempResult</name><operator>.</operator><name>message</name></name> <operator>=</operator> <name>message</name></expr>;</expr_stmt>
+        <decl_stmt><decl><type><name>AssertionResult</name></type> <name>result</name><argument_list>(<argument><expr><name>m_lastAssertionInfo</name></expr></argument>, <argument><expr><name>tempResult</name></expr></argument>)</argument_list></decl>;</decl_stmt>
+
+        <expr_stmt><expr><call><name>getResultCapture</name><argument_list>()</argument_list></call><operator>.</operator><call><name>assertionEnded</name><argument_list>(<argument><expr><name>result</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+
+        <expr_stmt><expr><call><name>handleUnfinishedSections</name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+
+        <comment type="line">// Recreate section for test case (as we will lose the one that was in scope)</comment>
+        <decl_stmt><decl><type><specifier>auto</specifier> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>testCaseInfo</name> <init>= <expr><call><name><name>m_activeTestCase</name><operator>-&gt;</operator><name>getTestCaseInfo</name></name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+        <decl_stmt><decl><type><name>SectionInfo</name></type> <name>testCaseSection</name><argument_list>(<argument><expr><name><name>testCaseInfo</name><operator>.</operator><name>lineInfo</name></name></expr></argument>, <argument><expr><name><name>testCaseInfo</name><operator>.</operator><name>name</name></name></expr></argument>, <argument><expr><name><name>testCaseInfo</name><operator>.</operator><name>description</name></name></expr></argument>)</argument_list></decl>;</decl_stmt>
+
+        <decl_stmt><decl><type><name>Counts</name></type> <name>assertions</name></decl>;</decl_stmt>
+        <expr_stmt><expr><name><name>assertions</name><operator>.</operator><name>failed</name></name> <operator>=</operator> <literal type="number">1</literal></expr>;</expr_stmt>
+        <decl_stmt><decl><type><name>SectionStats</name></type> <name>testCaseSectionStats</name><argument_list>(<argument><expr><name>testCaseSection</name></expr></argument>, <argument><expr><name>assertions</name></expr></argument>, <argument><expr><literal type="number">0</literal></expr></argument>, <argument><expr><literal type="boolean">false</literal></expr></argument>)</argument_list></decl>;</decl_stmt>
+        <expr_stmt><expr><call><name><name>m_reporter</name><operator>-&gt;</operator><name>sectionEnded</name></name><argument_list>(<argument><expr><name>testCaseSectionStats</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+
+        <decl_stmt><decl><type><specifier>auto</specifier> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>testInfo</name> <init>= <expr><call><name><name>m_activeTestCase</name><operator>-&gt;</operator><name>getTestCaseInfo</name></name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+
+        <decl_stmt><decl><type><name>Totals</name></type> <name>deltaTotals</name></decl>;</decl_stmt>
+        <expr_stmt><expr><name><name>deltaTotals</name><operator>.</operator><name>testCases</name><operator>.</operator><name>failed</name></name> <operator>=</operator> <literal type="number">1</literal></expr>;</expr_stmt>
+        <expr_stmt><expr><name><name>deltaTotals</name><operator>.</operator><name>assertions</name><operator>.</operator><name>failed</name></name> <operator>=</operator> <literal type="number">1</literal></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name><name>m_reporter</name><operator>-&gt;</operator><name>testCaseEnded</name></name><argument_list>(<argument><expr><call><name>TestCaseStats</name><argument_list>(<argument><expr><name>testInfo</name></expr></argument>,
+                                  <argument><expr><name>deltaTotals</name></expr></argument>,
+                                  <argument><expr><call><name><name>std</name><operator>::</operator><name>string</name></name><argument_list>()</argument_list></call></expr></argument>,
+                                  <argument><expr><call><name><name>std</name><operator>::</operator><name>string</name></name><argument_list>()</argument_list></call></expr></argument>,
+                                  <argument><expr><literal type="boolean">false</literal></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><name><name>m_totals</name><operator>.</operator><name>testCases</name><operator>.</operator><name>failed</name></name><operator>++</operator></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name>testGroupEnded</name><argument_list>(<argument><expr><call><name><name>std</name><operator>::</operator><name>string</name></name><argument_list>()</argument_list></call></expr></argument>, <argument><expr><name>m_totals</name></expr></argument>, <argument><expr><literal type="number">1</literal></expr></argument>, <argument><expr><literal type="number">1</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name><name>m_reporter</name><operator>-&gt;</operator><name>testRunEnded</name></name><argument_list>(<argument><expr><call><name>TestRunStats</name><argument_list>(<argument><expr><name>m_runInfo</name></expr></argument>, <argument><expr><name>m_totals</name></expr></argument>, <argument><expr><literal type="boolean">false</literal></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block></function>
+
+    <function><type><name>bool</name></type> <name><name>RunContext</name><operator>::</operator><name>lastAssertionPassed</name></name><parameter_list>()</parameter_list> <block>{<block_content>
+         <return>return <expr><name><name>m_totals</name><operator>.</operator><name>assertions</name><operator>.</operator><name>passed</name></name> <operator>==</operator> <operator>(</operator><name>m_prevPassed</name> <operator>+</operator> <literal type="number">1</literal><operator>)</operator></expr>;</return>
+    </block_content>}</block></function>
+
+    <function><type><name>void</name></type> <name><name>RunContext</name><operator>::</operator><name>assertionPassed</name></name><parameter_list>()</parameter_list> <block>{<block_content>
+        <expr_stmt><expr><operator>++</operator><name><name>m_totals</name><operator>.</operator><name>assertions</name><operator>.</operator><name>passed</name></name></expr>;</expr_stmt>
+<diff:delete type="replace" xmlns:diff="http://www.srcML.org/srcDiff"><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">        </diff:ws><expr_stmt><expr><name><name>m_lastAssertionInfo</name><operator>.</operator><name>capturedExpression</name></name><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><operator>=</operator><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><literal type="string">"{Unknown<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>expression<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>after<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>the<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>reported<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>line}"</literal></expr>;</expr_stmt></diff:delete><diff:insert type="replace" xmlns:diff="http://www.srcML.org/srcDiff"><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">        </diff:ws><expr_stmt><expr><name><name>m_lastAssertionInfo</name><operator>.</operator><name>capturedExpression</name></name><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><operator>=</operator><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><call><name>StringRef</name><argument_list>(<argument><expr><name>defaultExpression</name></expr></argument>,<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><argument><expr><sizeof>sizeof<argument_list>(<argument><expr><name>defaultExpression</name></expr></argument>)</argument_list></sizeof><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><operator>-</operator><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><literal type="number">1</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt></diff:insert>
+        <expr_stmt><expr><name><name>m_lastAssertionInfo</name><operator>.</operator><name>macroName</name></name> <operator>=</operator> <diff:insert xmlns:diff="http://www.srcML.org/srcDiff"><call><name>StringRef</name><argument_list>(<argument><expr><diff:common xmlns:diff="http://www.srcML.org/srcDiff"><literal type="string">""</literal></diff:common></expr></argument>,<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><argument><expr><literal type="number">0</literal></expr></argument>)</argument_list></call></diff:insert></expr>;</expr_stmt>
+    </block_content>}</block></function>
+
+    <function><type><name>void</name></type> <name><name>RunContext</name><operator>::</operator><name>assertionRun</name></name><parameter_list>()</parameter_list> <block>{<block_content>
+        <expr_stmt><expr><name>m_prevPassed</name> <operator>=</operator> <name><name>m_totals</name><operator>.</operator><name>assertions</name><operator>.</operator><name>passed</name></name></expr>;</expr_stmt>
+    </block_content>}</block></function>
+
+    <function><type><name>bool</name></type> <name><name>RunContext</name><operator>::</operator><name>aborting</name></name><parameter_list>()</parameter_list> <specifier>const</specifier> <block>{<block_content>
+        <return>return <expr><name><name>m_totals</name><operator>.</operator><name>assertions</name><operator>.</operator><name>failed</name></name> <operator>==</operator> <cast type="static">static_cast<argument_list type="generic">&lt;<argument><expr><name><name>std</name><operator>::</operator><name>size_t</name></name></expr></argument>&gt;</argument_list><argument_list>(<argument><expr><call><name><name>m_config</name><operator>-&gt;</operator><name>abortAfter</name></name><argument_list>()</argument_list></call></expr></argument>)</argument_list></cast></expr>;</return>
+    </block_content>}</block></function>
+
+    <function><type><name>void</name></type> <name><name>RunContext</name><operator>::</operator><name>runCurrentTest</name></name><parameter_list>(<parameter><decl><type><name><name>std</name><operator>::</operator><name>string</name></name> <modifier>&amp;</modifier></type> <name>redirectedCout</name></decl></parameter>, <parameter><decl><type><name><name>std</name><operator>::</operator><name>string</name></name> <modifier>&amp;</modifier></type> <name>redirectedCerr</name></decl></parameter>)</parameter_list> <block>{<block_content>
+        <decl_stmt><decl><type><specifier>auto</specifier> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>testCaseInfo</name> <init>= <expr><call><name><name>m_activeTestCase</name><operator>-&gt;</operator><name>getTestCaseInfo</name></name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+        <decl_stmt><decl><type><name>SectionInfo</name></type> <name>testCaseSection</name><argument_list>(<argument><expr><name><name>testCaseInfo</name><operator>.</operator><name>lineInfo</name></name></expr></argument>, <argument><expr><name><name>testCaseInfo</name><operator>.</operator><name>name</name></name></expr></argument>, <argument><expr><name><name>testCaseInfo</name><operator>.</operator><name>description</name></name></expr></argument>)</argument_list></decl>;</decl_stmt>
+        <expr_stmt><expr><call><name><name>m_reporter</name><operator>-&gt;</operator><name>sectionStarting</name></name><argument_list>(<argument><expr><name>testCaseSection</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        <decl_stmt><decl><type><name>Counts</name></type> <name>prevAssertions</name> <init>= <expr><name><name>m_totals</name><operator>.</operator><name>assertions</name></name></expr></init></decl>;</decl_stmt>
+        <decl_stmt><decl><type><name>double</name></type> <name>duration</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</decl_stmt>
+        <expr_stmt><expr><name>m_shouldReportUnexpected</name> <operator>=</operator> <literal type="boolean">true</literal></expr>;</expr_stmt>
+        <try>try <block>{<block_content>
+            <expr_stmt><expr><name>m_lastAssertionInfo</name> <operator>=</operator> <block>{ <expr><literal type="string">"TEST_CASE"</literal></expr>, <expr><name><name>testCaseInfo</name><operator>.</operator><name>lineInfo</name></name></expr>, <expr><literal type="string">""</literal></expr>, <expr><name><name>ResultDisposition</name><operator>::</operator><name>Normal</name></name></expr> }</block></expr>;</expr_stmt>
+
+            <expr_stmt><expr><call><name>seedRng</name><argument_list>(<argument><expr><operator>*</operator><name>m_config</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+
+            <decl_stmt><decl><type><name>Timer</name></type> <name>timer</name></decl>;</decl_stmt>
+            <expr_stmt><expr><call><name><name>timer</name><operator>.</operator><name>start</name></name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+            <if_stmt><if>if <condition>(<expr><call><name><name>m_reporter</name><operator>-&gt;</operator><name>getPreferences</name></name><argument_list>()</argument_list></call><operator>.</operator><name>shouldRedirectStdOut</name></expr>)</condition> <block>{<block_content>
+                <decl_stmt><decl><type><name>StreamRedirect</name></type> <name>coutRedir</name><argument_list>(<argument><expr><call><name>cout</name><argument_list>()</argument_list></call></expr></argument>, <argument><expr><name>redirectedCout</name></expr></argument>)</argument_list></decl>;</decl_stmt>
+                <decl_stmt><decl><type><name>StdErrRedirect</name></type> <name>errRedir</name><argument_list>(<argument><expr><name>redirectedCerr</name></expr></argument>)</argument_list></decl>;</decl_stmt>
+                <expr_stmt><expr><call><name>invokeActiveTestCase</name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+            </block_content>}</block></if> <else>else <block>{<block_content>
+                <expr_stmt><expr><call><name>invokeActiveTestCase</name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+            </block_content>}</block></else></if_stmt>
+            <expr_stmt><expr><name>duration</name> <operator>=</operator> <call><name><name>timer</name><operator>.</operator><name>getElapsedSeconds</name></name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+        </block_content>}</block> <catch>catch <parameter_list>(<parameter><decl><type><name>TestFailureException</name><modifier>&amp;</modifier></type></decl></parameter>)</parameter_list> <block>{<block_content>
+            <comment type="line">// This just means the test was aborted due to failure</comment>
+        </block_content>}</block></catch> <catch>catch <parameter_list>(<parameter><decl><type><modifier>...</modifier></type></decl></parameter>)</parameter_list> <block>{<block_content>
+            <comment type="line">// Under CATCH_CONFIG_FAST_COMPILE, unexpected exceptions under REQUIRE assertions</comment>
+            <comment type="line">// are reported without translation at the point of origin.</comment>
+            <if_stmt><if>if <condition>(<expr><name>m_shouldReportUnexpected</name></expr>)</condition> <block>{<block_content>
+                <expr_stmt><expr><call><name>AssertionHandler</name>
+                    <argument_list>( <argument><expr><name><name>m_lastAssertionInfo</name><operator>.</operator><name>macroName</name></name></expr></argument>,
+                      <argument><expr><name><name>m_lastAssertionInfo</name><operator>.</operator><name>lineInfo</name></name></expr></argument>,
+                      <argument><expr><name><name>m_lastAssertionInfo</name><operator>.</operator><name>capturedExpression</name></name></expr></argument>,
+                      <argument><expr><name><name>m_lastAssertionInfo</name><operator>.</operator><name>resultDisposition</name></name></expr></argument> )</argument_list></call><operator>.</operator><call><name>useActiveException</name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+            </block_content>}</block></if></if_stmt>
+        </block_content>}</block></catch></try>
+        <expr_stmt><expr><call><name><name>m_testCaseTracker</name><operator>-&gt;</operator><name>close</name></name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name>handleUnfinishedSections</name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name><name>m_messages</name><operator>.</operator><name>clear</name></name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+
+        <decl_stmt><decl><type><name>Counts</name></type> <name>assertions</name> <init>= <expr><name><name>m_totals</name><operator>.</operator><name>assertions</name></name> <operator>-</operator> <name>prevAssertions</name></expr></init></decl>;</decl_stmt>
+        <decl_stmt><decl><type><name>bool</name></type> <name>missingAssertions</name> <init>= <expr><call><name>testForMissingAssertions</name><argument_list>(<argument><expr><name>assertions</name></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+        <decl_stmt><decl><type><name>SectionStats</name></type> <name>testCaseSectionStats</name><argument_list>(<argument><expr><name>testCaseSection</name></expr></argument>, <argument><expr><name>assertions</name></expr></argument>, <argument><expr><name>duration</name></expr></argument>, <argument><expr><name>missingAssertions</name></expr></argument>)</argument_list></decl>;</decl_stmt>
+        <expr_stmt><expr><call><name><name>m_reporter</name><operator>-&gt;</operator><name>sectionEnded</name></name><argument_list>(<argument><expr><name>testCaseSectionStats</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block></function>
+
+    <function><type><name>void</name></type> <name><name>RunContext</name><operator>::</operator><name>invokeActiveTestCase</name></name><parameter_list>()</parameter_list> <block>{<block_content>
+        <decl_stmt><decl><type><name>FatalConditionHandler</name></type> <name>fatalConditionHandler</name></decl>;</decl_stmt> <comment type="line">// Handle signals</comment>
+        <expr_stmt><expr><call><name><name>m_activeTestCase</name><operator>-&gt;</operator><name>invoke</name></name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name><name>fatalConditionHandler</name><operator>.</operator><name>reset</name></name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block></function>
+
+    <function><type><name>void</name></type> <name><name>RunContext</name><operator>::</operator><name>handleUnfinishedSections</name></name><parameter_list>()</parameter_list> <block>{<block_content>
+        <comment type="line">// If sections ended prematurely due to an exception we stored their</comment>
+        <comment type="line">// infos here so we can tear them down outside the unwind process.</comment>
+        <for>for <control>(<init><decl><type><name>auto</name></type> <name>it</name> <init>= <expr><call><name><name>m_unfinishedSections</name><operator>.</operator><name>rbegin</name></name><argument_list>()</argument_list></call></expr></init></decl>,
+             <decl><type ref="prev"/><name>itEnd</name> <init>= <expr><call><name><name>m_unfinishedSections</name><operator>.</operator><name>rend</name></name><argument_list>()</argument_list></call></expr></init></decl>;</init>
+             <condition><expr><name>it</name> <operator>!=</operator> <name>itEnd</name></expr>;</condition>
+             <incr><expr><operator>++</operator><name>it</name></expr></incr>)</control><block type="pseudo"><block_content>
+            <expr_stmt><expr><call><name>sectionEnded</name><argument_list>(<argument><expr><operator>*</operator><name>it</name></expr></argument>)</argument_list></call></expr>;</expr_stmt></block_content></block></for>
+        <expr_stmt><expr><call><name><name>m_unfinishedSections</name><operator>.</operator><name>clear</name></name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block></function>
+
+    <function><type><name>IResultCapture</name><modifier>&amp;</modifier></type> <name>getResultCapture</name><parameter_list>()</parameter_list> <block>{<block_content>
+        <if_stmt><if>if <condition>(<expr><name>auto</name><operator>*</operator> <name>capture</name> <operator>=</operator> <call><name>getCurrentContext</name><argument_list>()</argument_list></call><operator>.</operator><call><name>getResultCapture</name><argument_list>()</argument_list></call></expr>)</condition><block type="pseudo"><block_content>
+            <return>return <expr><operator>*</operator><name>capture</name></expr>;</return></block_content></block></if>
+        <else>else<block type="pseudo"><block_content>
+            <expr_stmt><expr><call><name>CATCH_INTERNAL_ERROR</name><argument_list>(<argument><expr><literal type="string">"No result capture instance"</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt></block_content></block></else></if_stmt>
+    </block_content>}</block></function>
+}</block></namespace>
+</unit>

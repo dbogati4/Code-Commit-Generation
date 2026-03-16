@@ -1,0 +1,16 @@
+diff --git a/misc/coverage-helper.cpp b/misc/coverage-helper.cpp
+index 9783d693..17218905 100644
+--- a/misc/coverage-helper.cpp
++++ b/misc/coverage-helper.cpp
+@@ -96,5 +96,10 @@ int main(int argc, char** argv) {
+         return lhs + ' ' + rhs;
+     });
+ 
+-    exec_cmd(cmdline, num, windowsify_path(catch_path(args[0])));
++    try {
++        return exec_cmd(cmdline, num, windowsify_path(catch_path(args[0])));
++    } catch (std::exception const& ex) {
++        std::cerr << "Helper failed with: '" << ex.what() << "'\n";
++        return 12;
++    }
+ }

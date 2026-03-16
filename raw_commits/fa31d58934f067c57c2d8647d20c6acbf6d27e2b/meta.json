@@ -1,0 +1,8 @@
+{
+  "commit_id": "fa31d58934f067c57c2d8647d20c6acbf6d27e2b",
+  "parent_id": "9ac8cad2d16e8f1a21db104672fe1ab26c872819",
+  "message": "Don't use removed-in-C++20 allocator parts in CustomAllocator tests",
+  "changed_files": [
+    "tests/SelfTest/UsageTests/Matchers.tests.cpp"
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "commit_id": "98a6c69e1e429a86140301dfa5563b1d7263e813",
+  "parent_id": "d3199c42c2af0f69e43686c2b47189c8bad04026",
+  "message": "Switch from AddVectoredExceptionHandler to SetUnhandledExceptionFilter",
+  "changed_files": [
+    "src/catch2/internal/catch_fatal_condition_handler.cpp",
+    "tests/SelfTest/UsageTests/Misc.tests.cpp"
+  ]
+}

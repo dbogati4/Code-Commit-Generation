@@ -1,0 +1,31 @@
+diff --git a/projects/SelfTest/MiscTests.cpp b/projects/SelfTest/MiscTests.cpp
+index 622a30fb..957578fd 100644
+--- a/projects/SelfTest/MiscTests.cpp
++++ b/projects/SelfTest/MiscTests.cpp
+@@ -175,3 +175,13 @@ TEST_CASE( "./manual/onechar", "send a single char to INFO" )
+     INFO(3);
+     REQUIRE(false);    
+ }
++
++TEST_CASE("./succeeding/atomic if", "")
++{
++    size_t x = 0;
++    
++    if( x )
++        REQUIRE(x > 0);
++    else
++        REQUIRE(x == 0);
++}
+diff --git a/projects/SelfTest/TestMain.cpp b/projects/SelfTest/TestMain.cpp
+index 44d56745..c9a1e458 100644
+--- a/projects/SelfTest/TestMain.cpp
++++ b/projects/SelfTest/TestMain.cpp
+@@ -43,7 +43,7 @@ TEST_CASE( "selftest/main", "Runs all Catch self tests and checks their results"
+                     "Number of 'succeeding' tests is fixed" )
+         {
+             runner.runMatching( "./succeeding/*" );
+-            CHECK( runner.getTotals().assertions.passed == 267 );
++            CHECK( runner.getTotals().assertions.passed == 268 );
+             CHECK( runner.getTotals().assertions.failed == 0 );
+         }
+ 

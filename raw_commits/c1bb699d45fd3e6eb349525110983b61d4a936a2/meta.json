@@ -1,0 +1,9 @@
+{
+  "commit_id": "c1bb699d45fd3e6eb349525110983b61d4a936a2",
+  "parent_id": "bf1e902ca130a9e8d8c9e54da3277e9c0091ffc1",
+  "message": "Remove superfluous catch_reporter_registrars.hpp includes from reporters",
+  "changed_files": [
+    "src/catch2/reporters/catch_reporter_console.cpp",
+    "src/catch2/reporters/catch_reporter_junit.cpp"
+  ]
+}

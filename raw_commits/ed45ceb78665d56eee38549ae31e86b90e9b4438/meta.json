@@ -1,0 +1,8 @@
+{
+  "commit_id": "ed45ceb78665d56eee38549ae31e86b90e9b4438",
+  "parent_id": "46846a47f3b0c89f573fb169d7421b7eaca3b3f8",
+  "message": "Added support for binding to methods and generating usage strings. Also renamed namespace to Clara",
+  "changed_files": [
+    "projects/SelfTest/CmdLineTests.cpp"
+  ]
+}

@@ -1,0 +1,59 @@
+diff --git a/projects/SelfTest/CompileTimePerfTests/10.tests.cpp b/projects/SelfTest/CompileTimePerfTests/10.tests.cpp
+new file mode 100644
+index 00000000..01cd072d
+--- /dev/null
++++ b/projects/SelfTest/CompileTimePerfTests/10.tests.cpp
+@@ -0,0 +1,13 @@
++// Include set of usage tests multiple times - for compile-time performance testing
++// (do not run)
++
++#include "All.tests.cpp"
++#include "All.tests.cpp"
++#include "All.tests.cpp"
++#include "All.tests.cpp"
++#include "All.tests.cpp"
++#include "All.tests.cpp"
++#include "All.tests.cpp"
++#include "All.tests.cpp"
++#include "All.tests.cpp"
++#include "All.tests.cpp"
+diff --git a/projects/SelfTest/CompileTimePerfTests/100.tests.cpp b/projects/SelfTest/CompileTimePerfTests/100.tests.cpp
+new file mode 100644
+index 00000000..e03ca838
+--- /dev/null
++++ b/projects/SelfTest/CompileTimePerfTests/100.tests.cpp
+@@ -0,0 +1,13 @@
++// Include set of usage tests multiple times - for compile-time performance testing
++// (do not run)
++
++#include "10.tests.cpp"
++#include "10.tests.cpp"
++#include "10.tests.cpp"
++#include "10.tests.cpp"
++#include "10.tests.cpp"
++#include "10.tests.cpp"
++#include "10.tests.cpp"
++#include "10.tests.cpp"
++#include "10.tests.cpp"
++#include "10.tests.cpp"
+diff --git a/projects/SelfTest/CompileTimePerfTests/All.tests.cpp b/projects/SelfTest/CompileTimePerfTests/All.tests.cpp
+new file mode 100644
+index 00000000..2b6a1029
+--- /dev/null
++++ b/projects/SelfTest/CompileTimePerfTests/All.tests.cpp
+@@ -0,0 +1,15 @@
++// include set of usage tests into one file for compiler performance test purposes
++// This whole file can now be included multiple times in 10.tests.cpp, and *that*
++// file included multiple times (in 100.tests.cpp)
++
++// Note that the intention is only for these files to be compiled. They will
++// fail at runtime due to the re-user of test case names
++
++#include "../UsageTests/Approx.tests.cpp"
++#include "../UsageTests/BDD.tests.cpp"
++#include "../UsageTests/Class.tests.cpp"
++#include "../UsageTests/Compilation.tests.cpp"
++#include "../UsageTests/Condition.tests.cpp"
++#include "../UsageTests/Exception.tests.cpp"
++#include "../UsageTests/Matchers.tests.cpp"
++#include "../UsageTests/Misc.tests.cpp"

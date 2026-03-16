@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" xmlns:diff="http://www.srcML.org/srcDiff" revision="1.0.0" language="C++" filename="C:\Users\saile\AppData\Local\Temp\catch2_100_z8gzpiwf\b8553d62a3a98ac9d358d20b48cf99f775291557\include_internal_catch_assertionhandler_cpp\include_internal_catch_assertionhandler_cpp.old|C:\Users\saile\AppData\Local\Temp\catch2_100_z8gzpiwf\b8553d62a3a98ac9d358d20b48cf99f775291557\include_internal_catch_assertionhandler_cpp\include_internal_catch_assertionhandler_cpp.new"><comment type="block">/*
+ *  Created by Phil on 8/8/2017.
+ *  Copyright 2017 Two Blue Cubes Ltd. All rights reserved.
+ *
+ *  Distributed under the Boost Software License, Version 1.0. (See accompanying
+ *  file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
+ */</comment>
+
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">"catch_assertionhandler.h"</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">"catch_assertionresult.h"</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">"catch_interfaces_runner.h"</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">"catch_interfaces_config.h"</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">"catch_context.h"</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">"catch_debugger.h"</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">"catch_interfaces_registry_hub.h"</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">"catch_capture_matchers.h"</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">"catch_run_context.h"</cpp:file></cpp:include>
+
+<namespace>namespace <name>Catch</name> <block>{
+
+<diff:delete type="replace" xmlns:diff="http://www.srcML.org/srcDiff"><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">    </diff:ws><function type="operator"><type><specifier>inline</specifier><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><name>auto</name></type><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><name>operator<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><name>&lt;&lt;</name></name><parameter_list>(<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><parameter><decl><type><name><name>std</name><operator>::</operator><name>ostream</name></name><modifier>&amp;</modifier></type><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><name>os</name></decl></parameter>,<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><parameter><decl><type><name>ITransientExpression</name><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><specifier>const</specifier><modifier>&amp;</modifier></type><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><name>expr</name></decl></parameter><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>)</parameter_list><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>-&gt;<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><type><name><name>std</name><operator>::</operator><name>ostream</name></name><modifier>&amp;</modifier></type><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><block>{<block_content><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+        </diff:ws><expr_stmt><expr><call><name><name>expr</name><operator>.</operator><name>streamReconstructedExpression</name></name><argument_list>(<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><argument><expr><name>os</name></expr></argument><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>)</argument_list></call></expr>;</expr_stmt><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+        </diff:ws><return>return<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><expr><name>os</name></expr>;</return><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+    </diff:ws></block_content>}</block></function></diff:delete><diff:insert type="replace" xmlns:diff="http://www.srcML.org/srcDiff"><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">    </diff:ws><namespace>namespace<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><block>{<diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+        </diff:ws><function type="operator"><type><name>auto</name></type><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><name>operator<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><name>&lt;&lt;</name></name><parameter_list>(<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><parameter><decl><type><name><name>std</name><operator>::</operator><name>ostream</name></name><modifier>&amp;</modifier></type><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><name>os</name></decl></parameter>,<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><parameter><decl><type><name>ITransientExpression</name><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><specifier>const</specifier><modifier>&amp;</modifier></type><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><name>expr</name></decl></parameter><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>)</parameter_list><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>-&gt;<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><type><name><name>std</name><operator>::</operator><name>ostream</name></name><modifier>&amp;</modifier></type><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><block>{<block_content><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+            </diff:ws><expr_stmt><expr><call><name><name>expr</name><operator>.</operator><name>streamReconstructedExpression</name></name><argument_list>(<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><argument><expr><name>os</name></expr></argument><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>)</argument_list></call></expr>;</expr_stmt><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+            </diff:ws><return>return<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><expr><name>os</name></expr>;</return><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+        </diff:ws></block_content>}</block></function><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+    </diff:ws>}</block></namespace></diff:insert>
+
+    <constructor><name><name>LazyExpression</name><operator>::</operator><name>LazyExpression</name></name><parameter_list>( <parameter><decl><type><name>bool</name></type> <name>isNegated</name></decl></parameter> )</parameter_list>
+    <member_init_list>:   <call><name>m_isNegated</name><argument_list>( <argument><expr><name>isNegated</name></expr></argument> )</argument_list></call>
+    </member_init_list><block>{<block_content/>}</block></constructor>
+
+    <constructor><name><name>LazyExpression</name><operator>::</operator><name>LazyExpression</name></name><parameter_list>( <parameter><decl><type><name>LazyExpression</name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>other</name></decl></parameter> )</parameter_list> <member_init_list>: <call><name>m_isNegated</name><argument_list>( <argument><expr><name><name>other</name><operator>.</operator><name>m_isNegated</name></name></expr></argument> )</argument_list></call> </member_init_list><block>{<block_content/>}</block></constructor>
+
+    <function type="operator"><name><name>LazyExpression</name><operator>::</operator><name>operator <name>bool</name></name></name><parameter_list>()</parameter_list> <specifier>const</specifier> <block>{<block_content>
+        <return>return <expr><name>m_transientExpression</name> <operator>!=</operator> <literal type="null">nullptr</literal></expr>;</return>
+    </block_content>}</block></function>
+
+    <function type="operator"><type><name>auto</name></type> <name>operator <name>&lt;&lt;</name></name> <parameter_list>( <parameter><decl><type><name><name>std</name><operator>::</operator><name>ostream</name></name><modifier>&amp;</modifier></type> <name>os</name></decl></parameter>, <parameter><decl><type><name>LazyExpression</name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>lazyExpr</name></decl></parameter> )</parameter_list> -&gt; <type><name><name>std</name><operator>::</operator><name>ostream</name></name><modifier>&amp;</modifier></type> <block>{<block_content>
+        <if_stmt><if>if<condition>( <expr><name><name>lazyExpr</name><operator>.</operator><name>m_isNegated</name></name></expr> )</condition><block type="pseudo"><block_content>
+            <expr_stmt><expr><name>os</name> <operator>&lt;&lt;</operator> <literal type="string">"!"</literal></expr>;</expr_stmt></block_content></block></if></if_stmt>
+
+        <if_stmt><if>if<condition>( <expr><name>lazyExpr</name></expr> )</condition> <block>{<block_content>
+            <if_stmt><if>if<condition>( <expr><name><name>lazyExpr</name><operator>.</operator><name>m_isNegated</name></name> <operator>&amp;&amp;</operator> <call><name><name>lazyExpr</name><operator>.</operator><name>m_transientExpression</name><operator>-&gt;</operator><name>isBinaryExpression</name></name><argument_list>()</argument_list></call></expr> )</condition><block type="pseudo"><block_content>
+                <expr_stmt><expr><name>os</name> <operator>&lt;&lt;</operator> <literal type="string">"("</literal> <operator>&lt;&lt;</operator> <operator>*</operator><name><name>lazyExpr</name><operator>.</operator><name>m_transientExpression</name></name> <operator>&lt;&lt;</operator> <literal type="string">")"</literal></expr>;</expr_stmt></block_content></block></if>
+            <else>else<block type="pseudo"><block_content>
+                <expr_stmt><expr><name>os</name> <operator>&lt;&lt;</operator> <operator>*</operator><name><name>lazyExpr</name><operator>.</operator><name>m_transientExpression</name></name></expr>;</expr_stmt></block_content></block></else></if_stmt>
+        </block_content>}</block></if>
+        <else>else <block>{<block_content>
+            <expr_stmt><expr><name>os</name> <operator>&lt;&lt;</operator> <literal type="string">"{** error - unchecked empty expression requested **}"</literal></expr>;</expr_stmt>
+        </block_content>}</block></else></if_stmt>
+        <return>return <expr><name>os</name></expr>;</return>
+    </block_content>}</block></function>
+
+    <constructor><name><name>AssertionHandler</name><operator>::</operator><name>AssertionHandler</name></name>
+        <parameter_list>(   <parameter><decl><type><name>StringRef</name></type> <name>macroName</name></decl></parameter>,
+            <parameter><decl><type><name>SourceLineInfo</name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>lineInfo</name></decl></parameter>,
+            <parameter><decl><type><name>StringRef</name></type> <name>capturedExpression</name></decl></parameter>,
+            <parameter><decl><type><name><name>ResultDisposition</name><operator>::</operator><name>Flags</name></name></type> <name>resultDisposition</name></decl></parameter> )</parameter_list>
+    <member_init_list>:   <call><name>m_assertionInfo</name><argument_list>{ <argument><expr><name>macroName</name></expr></argument>, <argument><expr><name>lineInfo</name></expr></argument>, <argument><expr><name>capturedExpression</name></expr></argument>, <argument><expr><name>resultDisposition</name></expr></argument> }</argument_list></call>,
+        <call><name>m_resultCapture</name><argument_list>( <argument><expr><call><name>getResultCapture</name><argument_list>()</argument_list></call></expr></argument> )</argument_list></call>
+    </member_init_list><block>{<block_content/>}</block></constructor>
+
+    <function><type><name>void</name></type> <name><name>AssertionHandler</name><operator>::</operator><name>handleExpr</name></name><parameter_list>( <parameter><decl><type><name>ITransientExpression</name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>expr</name></decl></parameter> )</parameter_list> <block>{<block_content>
+        <expr_stmt><expr><call><name><name>m_resultCapture</name><operator>.</operator><name>handleExpr</name></name><argument_list>( <argument><expr><name>m_assertionInfo</name></expr></argument>, <argument><expr><name>expr</name></expr></argument>, <argument><expr><name>m_reaction</name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block></function>
+    <function><type><name>void</name></type> <name><name>AssertionHandler</name><operator>::</operator><name>handleMessage</name></name><parameter_list>(<parameter><decl><type><name><name>ResultWas</name><operator>::</operator><name>OfType</name></name></type> <name>resultType</name></decl></parameter>, <parameter><decl><type><name>StringRef</name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>message</name></decl></parameter>)</parameter_list> <block>{<block_content>
+        <expr_stmt><expr><call><name><name>m_resultCapture</name><operator>.</operator><name>handleMessage</name></name><argument_list>( <argument><expr><name>m_assertionInfo</name></expr></argument>, <argument><expr><name>resultType</name></expr></argument>, <argument><expr><name>message</name></expr></argument>, <argument><expr><name>m_reaction</name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block></function>
+
+    <function><type><name>auto</name></type> <name><name>AssertionHandler</name><operator>::</operator><name>allowThrows</name></name><parameter_list>()</parameter_list> <specifier>const</specifier> -&gt; <type><name>bool</name></type> <block>{<block_content>
+        <return>return <expr><call><name>getCurrentContext</name><argument_list>()</argument_list></call><operator>.</operator><call><name>getConfig</name><argument_list>()</argument_list></call><operator>-&gt;</operator><call><name>allowThrows</name><argument_list>()</argument_list></call></expr>;</return>
+    </block_content>}</block></function>
+
+    <function><type><name>void</name></type> <name><name>AssertionHandler</name><operator>::</operator><name>complete</name></name><parameter_list>()</parameter_list> <block>{<block_content>
+        <expr_stmt><expr><call><name>setCompleted</name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+        <if_stmt><if>if<condition>( <expr><name><name>m_reaction</name><operator>.</operator><name>shouldDebugBreak</name></name></expr> )</condition> <block>{<block_content>
+
+            <comment type="line">// If you find your debugger stopping you here then go one level up on the</comment>
+            <comment type="line">// call-stack for the code that caused it (typically a failed assertion)</comment>
+
+            <comment type="line">// (To go back to the test and change execution, jump over the throw, next)</comment>
+            <expr_stmt><expr><call><name>CATCH_BREAK_INTO_DEBUGGER</name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+        </block_content>}</block></if></if_stmt>
+        <if_stmt><if>if<condition>( <expr><name><name>m_reaction</name><operator>.</operator><name>shouldThrow</name></name></expr> )</condition><block type="pseudo"><block_content>
+            <throw>throw <expr><call><name><name>Catch</name><operator>::</operator><name>TestFailureException</name></name><argument_list>()</argument_list></call></expr>;</throw></block_content></block></if></if_stmt>
+    </block_content>}</block></function>
+    <function><type><name>void</name></type> <name><name>AssertionHandler</name><operator>::</operator><name>setCompleted</name></name><parameter_list>()</parameter_list> <block>{<block_content>
+        <expr_stmt><expr><name>m_completed</name> <operator>=</operator> <literal type="boolean">true</literal></expr>;</expr_stmt>
+    </block_content>}</block></function>
+
+    <function><type><name>void</name></type> <name><name>AssertionHandler</name><operator>::</operator><name>handleUnexpectedInflightException</name></name><parameter_list>()</parameter_list> <block>{<block_content>
+        <expr_stmt><expr><call><name><name>m_resultCapture</name><operator>.</operator><name>handleUnexpectedInflightException</name></name><argument_list>( <argument><expr><name>m_assertionInfo</name></expr></argument>, <argument><expr><call><name><name>Catch</name><operator>::</operator><name>translateActiveException</name></name><argument_list>()</argument_list></call></expr></argument>, <argument><expr><name>m_reaction</name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block></function>
+
+    <function><type><name>void</name></type> <name><name>AssertionHandler</name><operator>::</operator><name>handleExceptionThrownAsExpected</name></name><parameter_list>()</parameter_list> <block>{<block_content>
+        <expr_stmt><expr><call><name><name>m_resultCapture</name><operator>.</operator><name>handleNonExpr</name></name><argument_list>(<argument><expr><name>m_assertionInfo</name></expr></argument>, <argument><expr><name><name>ResultWas</name><operator>::</operator><name>Ok</name></name></expr></argument>, <argument><expr><name>m_reaction</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block></function>
+    <function><type><name>void</name></type> <name><name>AssertionHandler</name><operator>::</operator><name>handleExceptionNotThrownAsExpected</name></name><parameter_list>()</parameter_list> <block>{<block_content>
+        <expr_stmt><expr><call><name><name>m_resultCapture</name><operator>.</operator><name>handleNonExpr</name></name><argument_list>(<argument><expr><name>m_assertionInfo</name></expr></argument>, <argument><expr><name><name>ResultWas</name><operator>::</operator><name>Ok</name></name></expr></argument>, <argument><expr><name>m_reaction</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block></function>
+
+    <function><type><name>void</name></type> <name><name>AssertionHandler</name><operator>::</operator><name>handleUnexpectedExceptionNotThrown</name></name><parameter_list>()</parameter_list> <block>{<block_content>
+        <expr_stmt><expr><call><name><name>m_resultCapture</name><operator>.</operator><name>handleUnexpectedExceptionNotThrown</name></name><argument_list>( <argument><expr><name>m_assertionInfo</name></expr></argument>, <argument><expr><name>m_reaction</name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block></function>
+
+    <function><type><name>void</name></type> <name><name>AssertionHandler</name><operator>::</operator><name>handleThrowingCallSkipped</name></name><parameter_list>()</parameter_list> <block>{<block_content>
+        <expr_stmt><expr><call><name><name>m_resultCapture</name><operator>.</operator><name>handleNonExpr</name></name><argument_list>(<argument><expr><name>m_assertionInfo</name></expr></argument>, <argument><expr><name><name>ResultWas</name><operator>::</operator><name>Ok</name></name></expr></argument>, <argument><expr><name>m_reaction</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block></function>
+
+    <comment type="line">// This is the overload that takes a string and infers the Equals matcher from it</comment>
+    <comment type="line">// The more general overload, that takes any string matcher, is in catch_capture_matchers.cpp</comment>
+    <function><type><name>void</name></type> <name>handleExceptionMatchExpr</name><parameter_list>( <parameter><decl><type><name>AssertionHandler</name><modifier>&amp;</modifier></type> <name>handler</name></decl></parameter>, <parameter><decl><type><name><name>std</name><operator>::</operator><name>string</name></name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>str</name></decl></parameter>, <parameter><decl><type><name>StringRef</name></type> <name>matcherString</name></decl></parameter>  )</parameter_list> <block>{<block_content>
+        <expr_stmt><expr><call><name>handleExceptionMatchExpr</name><argument_list>( <argument><expr><name>handler</name></expr></argument>, <argument><expr><call><name><name>Matchers</name><operator>::</operator><name>Equals</name></name><argument_list>( <argument><expr><name>str</name></expr></argument> )</argument_list></call></expr></argument>, <argument><expr><name>matcherString</name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block></function>
+
+}</block></namespace> <comment type="line">// namespace Catch</comment>
+</unit>

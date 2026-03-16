@@ -1,0 +1,8 @@
+{
+  "commit_id": "7be258536ed8b90c307947d11852660666b2f811",
+  "parent_id": "94d347b05939385a827499932f7b02ce7ccc9c45",
+  "message": "Suppress strncpy copy warnings on MSVC",
+  "changed_files": [
+    "include/internal/catch_stringref.cpp"
+  ]
+}

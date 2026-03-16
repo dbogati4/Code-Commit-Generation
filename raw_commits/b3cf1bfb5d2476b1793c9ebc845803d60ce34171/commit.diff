@@ -1,0 +1,12 @@
+diff --git a/tests/SelfTest/IntrospectiveTests/GeneratorsImpl.tests.cpp b/tests/SelfTest/IntrospectiveTests/GeneratorsImpl.tests.cpp
+index 64e943f8..f7b7c57c 100644
+--- a/tests/SelfTest/IntrospectiveTests/GeneratorsImpl.tests.cpp
++++ b/tests/SelfTest/IntrospectiveTests/GeneratorsImpl.tests.cpp
+@@ -412,6 +412,7 @@ TEST_CASE("GENERATE handles function (pointers)", "[generators][compilation][app
+ 
+ TEST_CASE("GENERATE decays arrays", "[generators][compilation][approvals]") {
+     auto str = GENERATE("abc", "def", "gh");
++    (void)str;
+     STATIC_REQUIRE(std::is_same<decltype(str), const char*>::value);
+ }
+ 

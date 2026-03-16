@@ -1,0 +1,8 @@
+{
+  "commit_id": "c24f7e5b3483b595b125b146fd175bab0e27e229",
+  "parent_id": "7dae3efad2c49853ddab0b26d6d1c0e8b39603f7",
+  "message": "Fix invalid isspace call detected by PREfast",
+  "changed_files": [
+    "src/catch2/catch_message.cpp"
+  ]
+}

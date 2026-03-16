@@ -1,0 +1,8 @@
+{
+  "commit_id": "27888970514b94f27e19ff26486ce3eb8b569228",
+  "parent_id": "2945b80f61b8ad5b7e05c36fadcac8a35b0e3a8f",
+  "message": "Minor cleanup in the benchmarking tests",
+  "changed_files": [
+    "tests/ExtraTests/X20-BenchmarkingMacros.cpp"
+  ]
+}

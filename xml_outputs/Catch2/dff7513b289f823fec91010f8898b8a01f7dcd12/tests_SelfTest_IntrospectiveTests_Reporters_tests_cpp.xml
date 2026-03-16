@@ -1,0 +1,330 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" xmlns:diff="http://www.srcML.org/srcDiff" revision="1.0.0" language="C++" filename="C:\Users\saile\AppData\Local\Temp\catch2_100_z8gzpiwf\dff7513b289f823fec91010f8898b8a01f7dcd12\tests_SelfTest_IntrospectiveTests_Reporters_tests_cpp\tests_SelfTest_IntrospectiveTests_Reporters_tests_cpp.old|C:\Users\saile\AppData\Local\Temp\catch2_100_z8gzpiwf\dff7513b289f823fec91010f8898b8a01f7dcd12\tests_SelfTest_IntrospectiveTests_Reporters_tests_cpp\tests_SelfTest_IntrospectiveTests_Reporters_tests_cpp.new">
+<comment type="line">//              Copyright Catch2 Authors</comment>
+<comment type="line">// Distributed under the Boost Software License, Version 1.0.</comment>
+<comment type="line">//   (See accompanying file LICENSE.txt or copy at</comment>
+<comment type="line">//        https://www.boost.org/LICENSE_1_0.txt)</comment>
+
+<comment type="line">// SPDX-License-Identifier: BSL-1.0</comment>
+
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;catch2/catch_test_macros.hpp&gt;</cpp:file></cpp:include>
+
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;catch2/catch_test_case_info.hpp&gt;</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;catch2/catch_config.hpp&gt;</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;catch2/interfaces/catch_interfaces_reporter.hpp&gt;</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;catch2/interfaces/catch_interfaces_reporter_factory.hpp&gt;</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;catch2/internal/catch_console_colour.hpp&gt;</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;catch2/internal/catch_enforce.hpp&gt;</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;catch2/internal/catch_list.hpp&gt;</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;catch2/internal/catch_reporter_registry.hpp&gt;</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;catch2/internal/catch_istream.hpp&gt;</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;catch2/matchers/catch_matchers_string.hpp&gt;</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;catch2/reporters/catch_reporter_helpers.hpp&gt;</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;catch2/reporters/catch_reporter_event_listener.hpp&gt;</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;catch2/reporters/catch_reporter_streaming_base.hpp&gt;</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;catch2/reporters/catch_reporter_multi.hpp&gt;</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;catch2/internal/catch_move_and_forward.hpp&gt;</cpp:file></cpp:include>
+
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;sstream&gt;</cpp:file></cpp:include>
+
+<namespace>namespace <block>{
+    <class>class <name>StringIStream</name> <super_list>: <super><specifier>public</specifier> <name><name>Catch</name><operator>::</operator><name>IStream</name></name></super></super_list> <block>{<private type="default">
+    </private><public>public:
+        <function><type><name><name>std</name><operator>::</operator><name>ostream</name></name><modifier>&amp;</modifier></type> <name>stream</name><parameter_list>()</parameter_list> <specifier>override</specifier> <block>{<block_content> <return>return <expr><name>sstr</name></expr>;</return> </block_content>}</block></function>
+        <function><type><name><name>std</name><operator>::</operator><name>string</name></name></type> <name>str</name><parameter_list>()</parameter_list> <specifier>const</specifier> <block>{<block_content> <return>return <expr><call><name><name>sstr</name><operator>.</operator><name>str</name></name><argument_list>()</argument_list></call></expr>;</return> </block_content>}</block></function>
+    </public><private>private:
+        <decl_stmt><decl><type><name><name>std</name><operator>::</operator><name>stringstream</name></name></type> <name>sstr</name></decl>;</decl_stmt>
+    </private>}</block>;</class>
+
+    <comment type="line" format="doxygen">//! config must outlive the function</comment>
+    <function><type><name><name>Catch</name><operator>::</operator><name>ReporterConfig</name></name></type> <name>makeDummyRepConfig</name><parameter_list>( <parameter><decl><type><name><name>Catch</name><operator>::</operator><name>Config</name></name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>config</name></decl></parameter> )</parameter_list> <block>{<block_content>
+        <return>return <expr><call><name><name>Catch</name><operator>::</operator><name>ReporterConfig</name></name><argument_list>{
+            <argument><expr><operator>&amp;</operator><name>config</name></expr></argument>,
+            <argument><expr><call><name><name>Catch</name><operator>::</operator><name>Detail</name><operator>::</operator><name>make_unique</name><argument_list type="generic">&lt;<argument><expr><name>StringIStream</name></expr></argument>&gt;</argument_list></name><argument_list>()</argument_list></call></expr></argument>,
+            <argument><expr><name><name>Catch</name><operator>::</operator><name>ColourMode</name><operator>::</operator><name>None</name></name></expr></argument>,
+            <block>{<block_content><expr_stmt/>}</block_content> }</block>;
+    }</argument_list></call></expr></return>
+</block_content>}</block></function>
+
+<macro><name>TEST_CASE</name><argument_list>( <argument><literal type="string">"The default listing implementation write to provided stream"</literal></argument>,
+           <argument><literal type="string">"[reporters][reporter-helpers]"</literal></argument> )</argument_list></macro> <block>{<block_content>
+    <using>using <name><name>Catch</name><operator>::</operator><name>Matchers</name><operator>::</operator><name>ContainsSubstring</name></name>;</using>
+    <using>using <namespace>namespace <name><name>std</name><operator>::</operator><name>string_literals</name></name>;</namespace></using>
+
+    <decl_stmt><decl><type><name>StringIStream</name></type> <name>sstream</name></decl>;</decl_stmt>
+    <macro><name>SECTION</name><argument_list>( <argument><literal type="string">"Listing tags"</literal></argument> )</argument_list></macro> <block>{<block_content>
+        <decl_stmt><decl><type><name><name>std</name><operator>::</operator><name>vector</name><argument_list type="generic">&lt;<argument><expr><name><name>Catch</name><operator>::</operator><name>TagInfo</name></name></expr></argument>&gt;</argument_list></name></type> <name>tags</name><argument_list>(<argument><expr><literal type="number">1</literal></expr></argument>)</argument_list></decl>;</decl_stmt>
+        <expr_stmt><expr><name><name>tags</name><index>[<expr><literal type="number">0</literal></expr>]</index></name><operator>.</operator><call><name>add</name><argument_list>(<argument><expr><literal type="string">"fakeTag"</literal><name>_catch_sr</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name><name>Catch</name><operator>::</operator><name>defaultListTags</name></name><argument_list>(<argument><expr><call><name><name>sstream</name><operator>.</operator><name>stream</name></name><argument_list>()</argument_list></call></expr></argument>, <argument><expr><name>tags</name></expr></argument>, <argument><expr><literal type="boolean">false</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+
+        <decl_stmt><decl><type><name>auto</name></type> <name>listingString</name> <init>= <expr><call><name><name>sstream</name><operator>.</operator><name>str</name></name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+        <expr_stmt><expr><call><name>REQUIRE_THAT</name><argument_list>(<argument><expr><name>listingString</name></expr></argument>, <argument><expr><call><name>ContainsSubstring</name><argument_list>(<argument><expr><literal type="string">"[fakeTag]"</literal><name>s</name></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block>
+    <macro><name>SECTION</name><argument_list>( <argument><literal type="string">"Listing reporters"</literal></argument> )</argument_list></macro> <block>{<block_content>
+        <decl_stmt><decl><type><name><name>std</name><operator>::</operator><name>vector</name><argument_list type="generic">&lt;<argument><expr><name><name>Catch</name><operator>::</operator><name>ReporterDescription</name></name></expr></argument>&gt;</argument_list></name></type> <name>reporters</name><argument_list>(
+            <argument><expr><block>{ <expr><block>{ <expr><literal type="string">"fake reporter"</literal></expr>, <expr><literal type="string">"fake description"</literal></expr> }</block></expr> }</block></expr></argument> )</argument_list></decl>;</decl_stmt>
+        <expr_stmt><expr><call><name><name>Catch</name><operator>::</operator><name>defaultListReporters</name></name><argument_list>(<argument><expr><call><name><name>sstream</name><operator>.</operator><name>stream</name></name><argument_list>()</argument_list></call></expr></argument>, <argument><expr><name>reporters</name></expr></argument>, <argument><expr><name><name>Catch</name><operator>::</operator><name>Verbosity</name><operator>::</operator><name>Normal</name></name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+
+        <decl_stmt><decl><type><name>auto</name></type> <name>listingString</name> <init>= <expr><call><name><name>sstream</name><operator>.</operator><name>str</name></name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+        <expr_stmt><expr><call><name>REQUIRE_THAT</name><argument_list>( <argument><expr><name>listingString</name></expr></argument>,
+                      <argument><expr><call><name>ContainsSubstring</name><argument_list>( <argument><expr><literal type="string">"fake reporter"</literal><name>s</name></expr></argument> )</argument_list></call> <operator>&amp;&amp;</operator>
+                          <call><name>ContainsSubstring</name><argument_list>( <argument><expr><literal type="string">"fake description"</literal><name>s</name></expr></argument> )</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block>
+    <macro><name>SECTION</name><argument_list>( <argument><literal type="string">"Listing tests"</literal></argument> )</argument_list></macro> <block>{<block_content>
+        <decl_stmt><decl><type><name><name>Catch</name><operator>::</operator><name>TestCaseInfo</name></name></type> <name>fakeInfo</name><argument_list>{
+            <argument><expr><literal type="string">""</literal><name>s</name></expr></argument>,
+            <argument><expr><block>{ <expr><literal type="string">"fake test name"</literal><name>_catch_sr</name></expr>, <expr><literal type="string">"[fakeTestTag]"</literal><name>_catch_sr</name></expr> }</block></expr></argument>,
+            <argument><expr><block>{ <expr><literal type="string">"fake-file.cpp"</literal></expr>, <expr><literal type="number">123456789</literal></expr> }</block></expr></argument> }</argument_list></decl>;</decl_stmt>
+        <decl_stmt><decl><type><name><name>std</name><operator>::</operator><name>vector</name><argument_list type="generic">&lt;<argument><expr><name><name>Catch</name><operator>::</operator><name>TestCaseHandle</name></name></expr></argument>&gt;</argument_list></name></type> <name>tests</name><argument_list>(<argument><expr><block>{ <expr><block>{<expr><operator>&amp;</operator><name>fakeInfo</name></expr>, <expr><literal type="null">nullptr</literal></expr>}</block></expr> }</block></expr></argument>)</argument_list></decl>;</decl_stmt>
+        <decl_stmt><decl><type><name>auto</name></type> <name>colour</name> <init>= <expr><call><name><name>Catch</name><operator>::</operator><name>makeColourImpl</name></name><argument_list>( <argument><expr><name><name>Catch</name><operator>::</operator><name>ColourMode</name><operator>::</operator><name>None</name></name></expr></argument>, <argument><expr><operator>&amp;</operator><name>sstream</name></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+        <expr_stmt><expr><call><name><name>Catch</name><operator>::</operator><name>defaultListTests</name></name><argument_list>(<argument><expr><call><name><name>sstream</name><operator>.</operator><name>stream</name></name><argument_list>()</argument_list></call></expr></argument>, <argument><expr><call><name><name>colour</name><operator>.</operator><name>get</name></name><argument_list>()</argument_list></call></expr></argument>, <argument><expr><name>tests</name></expr></argument>, <argument><expr><literal type="boolean">false</literal></expr></argument>, <argument><expr><name><name>Catch</name><operator>::</operator><name>Verbosity</name><operator>::</operator><name>Normal</name></name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+
+        <decl_stmt><decl><type><name>auto</name></type> <name>listingString</name> <init>= <expr><call><name><name>sstream</name><operator>.</operator><name>str</name></name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+        <expr_stmt><expr><call><name>REQUIRE_THAT</name><argument_list>( <argument><expr><name>listingString</name></expr></argument>,
+                      <argument><expr><call><name>ContainsSubstring</name><argument_list>( <argument><expr><literal type="string">"fake test name"</literal><name>s</name></expr></argument> )</argument_list></call> <operator>&amp;&amp;</operator>
+                          <call><name>ContainsSubstring</name><argument_list>( <argument><expr><literal type="string">"fakeTestTag"</literal><name>s</name></expr></argument> )</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block>
+    <macro><name>SECTION</name><argument_list>( <argument><literal type="string">"Listing listeners"</literal></argument> )</argument_list></macro> <block>{<block_content>
+        <decl_stmt><decl><type><name><name>std</name><operator>::</operator><name>vector</name><argument_list type="generic">&lt;<argument><expr><name><name>Catch</name><operator>::</operator><name>ListenerDescription</name></name></expr></argument>&gt;</argument_list></name></type> <name>listeners</name><argument_list>(
+            <argument><expr><block>{ <expr><block>{ <expr><literal type="string">"fakeListener"</literal><name>_catch_sr</name></expr>, <expr><literal type="string">"fake description"</literal></expr> }</block></expr> }</block></expr></argument> )</argument_list></decl>;</decl_stmt>
+
+        <expr_stmt><expr><call><name><name>Catch</name><operator>::</operator><name>defaultListListeners</name></name><argument_list>( <argument><expr><call><name><name>sstream</name><operator>.</operator><name>stream</name></name><argument_list>()</argument_list></call></expr></argument>, <argument><expr><name>listeners</name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        <decl_stmt><decl><type><name>auto</name></type> <name>listingString</name> <init>= <expr><call><name><name>sstream</name><operator>.</operator><name>str</name></name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+        <expr_stmt><expr><call><name>REQUIRE_THAT</name><argument_list>( <argument><expr><name>listingString</name></expr></argument>,
+                      <argument><expr><call><name>ContainsSubstring</name><argument_list>( <argument><expr><literal type="string">"fakeListener"</literal><name>s</name></expr></argument> )</argument_list></call> <operator>&amp;&amp;</operator>
+                          <call><name>ContainsSubstring</name><argument_list>( <argument><expr><literal type="string">"fake description"</literal><name>s</name></expr></argument> )</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block>
+</block_content>}</block>
+
+<macro><name>TEST_CASE</name><argument_list>( <argument><literal type="string">"Reporter's write listings to provided stream"</literal></argument>, <argument><literal type="string">"[reporters]"</literal></argument> )</argument_list></macro> <block>{<block_content>
+    <using>using <name><name>Catch</name><operator>::</operator><name>Matchers</name><operator>::</operator><name>ContainsSubstring</name></name>;</using>
+    <using>using <namespace>namespace <name><name>std</name><operator>::</operator><name>string_literals</name></name>;</namespace></using>
+
+    <decl_stmt><decl><type><specifier>auto</specifier> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>factories</name> <init>= <expr><call><name><name>Catch</name><operator>::</operator><name>getRegistryHub</name></name><argument_list>()</argument_list></call><operator>.</operator><call><name>getReporterRegistry</name><argument_list>()</argument_list></call><operator>.</operator><call><name>getFactories</name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+    <comment type="line">// If there are no reporters, the test would pass falsely</comment>
+    <comment type="line">// while there is something obviously broken</comment>
+    <expr_stmt><expr><call><name>REQUIRE_FALSE</name><argument_list>(<argument><expr><call><name><name>factories</name><operator>.</operator><name>empty</name></name><argument_list>()</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+
+    <for>for <control>(<init><decl><type><specifier>auto</specifier> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>factory</name> <range>: <expr><name>factories</name></expr></range></decl></init>)</control> <block>{<block_content>
+        <expr_stmt><expr><call><name>INFO</name><argument_list>(<argument><expr><literal type="string">"Tested reporter: "</literal> <operator>&lt;&lt;</operator> <name><name>factory</name><operator>.</operator><name>first</name></name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        <decl_stmt><decl><type><name>auto</name></type> <name>sstream</name> <init>= <expr><call><name><name>Catch</name><operator>::</operator><name>Detail</name><operator>::</operator><name>make_unique</name><argument_list type="generic">&lt;<argument><expr><name>StringIStream</name></expr></argument>&gt;</argument_list></name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+        <expr_stmt><expr><name>auto</name><operator>&amp;</operator> <name>sstreamRef</name> <operator>=</operator> <operator>*</operator><call><name><name>sstream</name><operator>.</operator><name>get</name></name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+
+        <decl_stmt><decl><type><name><name>Catch</name><operator>::</operator><name>Config</name></name></type> <name>config</name><argument_list>( <argument><expr><call><name><name>Catch</name><operator>::</operator><name>ConfigData</name></name><argument_list>{}</argument_list></call></expr></argument> )</argument_list></decl>;</decl_stmt>
+        <decl_stmt><decl><type><name>auto</name></type> <name>reporter</name> <init>= <expr><call><name><name>factory</name><operator>.</operator><name>second</name><operator>-&gt;</operator><name>create</name></name><argument_list>( <argument><expr><call><name><name>Catch</name><operator>::</operator><name>ReporterConfig</name></name><argument_list>{
+            <argument><expr><operator>&amp;</operator><name>config</name></expr></argument>, <argument><expr><call><name>CATCH_MOVE</name><argument_list>( <argument><expr><name>sstream</name></expr></argument> )</argument_list></call></expr></argument>, <argument><expr><name><name>Catch</name><operator>::</operator><name>ColourMode</name><operator>::</operator><name>None</name></name></expr></argument>, <argument><expr><block>{}</block></expr></argument> }</argument_list></call></expr></argument> )</argument_list></call></expr></init></decl>;</decl_stmt>
+
+        <macro><name>DYNAMIC_SECTION</name><argument_list>( <argument>factory.first &lt;&lt; <literal type="string">" reporter lists tags"</literal></argument> )</argument_list></macro> <block>{<block_content>
+            <decl_stmt><decl><type><name><name>std</name><operator>::</operator><name>vector</name><argument_list type="generic">&lt;<argument><expr><name><name>Catch</name><operator>::</operator><name>TagInfo</name></name></expr></argument>&gt;</argument_list></name></type> <name>tags</name><argument_list>(<argument><expr><literal type="number">1</literal></expr></argument>)</argument_list></decl>;</decl_stmt>
+            <expr_stmt><expr><name><name>tags</name><index>[<expr><literal type="number">0</literal></expr>]</index></name><operator>.</operator><call><name>add</name><argument_list>(<argument><expr><literal type="string">"fakeTag"</literal><name>_catch_sr</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+            <expr_stmt><expr><call><name><name>reporter</name><operator>-&gt;</operator><name>listTags</name></name><argument_list>(<argument><expr><name>tags</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+
+            <decl_stmt><decl><type><name>auto</name></type> <name>listingString</name> <init>= <expr><call><name><name>sstreamRef</name><operator>.</operator><name>str</name></name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+            <expr_stmt><expr><call><name>REQUIRE_THAT</name><argument_list>(<argument><expr><name>listingString</name></expr></argument>, <argument><expr><call><name>ContainsSubstring</name><argument_list>(<argument><expr><literal type="string">"fakeTag"</literal><name>s</name></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        </block_content>}</block>
+
+        <macro><name>DYNAMIC_SECTION</name><argument_list>( <argument>factory.first &lt;&lt; <literal type="string">" reporter lists reporters"</literal></argument> )</argument_list></macro> <block>{<block_content>
+            <decl_stmt><decl><type><name><name>std</name><operator>::</operator><name>vector</name><argument_list type="generic">&lt;<argument><expr><name><name>Catch</name><operator>::</operator><name>ReporterDescription</name></name></expr></argument>&gt;</argument_list></name></type> <name>reporters</name><argument_list>(
+                <argument><expr><block>{ <expr><block>{ <expr><literal type="string">"fake reporter"</literal></expr>, <expr><literal type="string">"fake description"</literal></expr> }</block></expr> }</block></expr></argument> )</argument_list></decl>;</decl_stmt>
+            <expr_stmt><expr><call><name><name>reporter</name><operator>-&gt;</operator><name>listReporters</name></name><argument_list>(<argument><expr><name>reporters</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+
+            <decl_stmt><decl><type><name>auto</name></type> <name>listingString</name> <init>= <expr><call><name><name>sstreamRef</name><operator>.</operator><name>str</name></name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+            <expr_stmt><expr><call><name>REQUIRE_THAT</name><argument_list>(<argument><expr><name>listingString</name></expr></argument>, <argument><expr><call><name>ContainsSubstring</name><argument_list>(<argument><expr><literal type="string">"fake reporter"</literal><name>s</name></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        </block_content>}</block>
+
+        <macro><name>DYNAMIC_SECTION</name><argument_list>( <argument>factory.first &lt;&lt; <literal type="string">" reporter lists tests"</literal></argument> )</argument_list></macro> <block>{<block_content>
+            <decl_stmt><decl><type><name><name>Catch</name><operator>::</operator><name>TestCaseInfo</name></name></type> <name>fakeInfo</name><argument_list>{
+                <argument><expr><literal type="string">""</literal><name>s</name></expr></argument>,
+                <argument><expr><block>{ <expr><literal type="string">"fake test name"</literal><name>_catch_sr</name></expr>, <expr><literal type="string">"[fakeTestTag]"</literal><name>_catch_sr</name></expr> }</block></expr></argument>,
+                <argument><expr><block>{ <expr><literal type="string">"fake-file.cpp"</literal></expr>, <expr><literal type="number">123456789</literal></expr> }</block></expr></argument> }</argument_list></decl>;</decl_stmt>
+            <decl_stmt><decl><type><name><name>std</name><operator>::</operator><name>vector</name><argument_list type="generic">&lt;<argument><expr><name><name>Catch</name><operator>::</operator><name>TestCaseHandle</name></name></expr></argument>&gt;</argument_list></name></type> <name>tests</name><argument_list>(<argument><expr><block>{ <expr><block>{<expr><operator>&amp;</operator><name>fakeInfo</name></expr>, <expr><literal type="null">nullptr</literal></expr>}</block></expr> }</block></expr></argument>)</argument_list></decl>;</decl_stmt>
+            <expr_stmt><expr><call><name><name>reporter</name><operator>-&gt;</operator><name>listTests</name></name><argument_list>(<argument><expr><name>tests</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+
+            <decl_stmt><decl><type><name>auto</name></type> <name>listingString</name> <init>= <expr><call><name><name>sstreamRef</name><operator>.</operator><name>str</name></name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+            <expr_stmt><expr><call><name>REQUIRE_THAT</name><argument_list>( <argument><expr><name>listingString</name></expr></argument>,
+                          <argument><expr><call><name>ContainsSubstring</name><argument_list>( <argument><expr><literal type="string">"fake test name"</literal><name>s</name></expr></argument> )</argument_list></call> <operator>&amp;&amp;</operator>
+                              <call><name>ContainsSubstring</name><argument_list>( <argument><expr><literal type="string">"fakeTestTag"</literal><name>s</name></expr></argument> )</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        </block_content>}</block>
+    </block_content>}</block></for>
+</block_content>}</block>
+
+
+<macro><name>TEST_CASE</name><argument_list>(<argument><literal type="string">"Reproducer for #2309 - a very long description past 80 chars (default console width) with a late colon : blablabla"</literal></argument>, <argument><literal type="string">"[console-reporter]"</literal></argument>)</argument_list></macro> <block>{<block_content>
+    <expr_stmt><expr><call><name>SUCCEED</name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+</block_content>}</block>
+
+<namespace>namespace <block>{
+    <comment type="line">// A listener that writes provided string into destination,</comment>
+    <comment type="line">// to record order of testRunStarting invocation.</comment>
+    <class>class <name>MockListener</name> <super_list>: <super><specifier>public</specifier> <name><name>Catch</name><operator>::</operator><name>EventListenerBase</name></name></super></super_list> <block>{<private type="default">
+        <decl_stmt><decl><type><name><name>std</name><operator>::</operator><name>string</name></name></type> <name>m_witness</name></decl>;</decl_stmt>
+        <decl_stmt><decl><type><name><name>std</name><operator>::</operator><name>vector</name><argument_list type="generic">&lt;<argument><expr><name><name>std</name><operator>::</operator><name>string</name></name></expr></argument>&gt;</argument_list></name><modifier>&amp;</modifier></type> <name>m_recorder</name></decl>;</decl_stmt>
+    </private><public>public:
+        <constructor><name>MockListener</name><parameter_list>( <parameter><decl><type><name><name>std</name><operator>::</operator><name>string</name></name></type> <name>witness</name></decl></parameter>,
+                      <parameter><decl><type><name><name>std</name><operator>::</operator><name>vector</name><argument_list type="generic">&lt;<argument><expr><name><name>std</name><operator>::</operator><name>string</name></name></expr></argument>&gt;</argument_list></name><modifier>&amp;</modifier></type> <name>recorder</name></decl></parameter>,
+                      <parameter><decl><type><name><name>Catch</name><operator>::</operator><name>IConfig</name></name> <specifier>const</specifier><modifier>*</modifier></type> <name>config</name></decl></parameter> )</parameter_list><member_init_list>:
+            <call><name>EventListenerBase</name><argument_list>( <argument><expr><name>config</name></expr></argument> )</argument_list></call>,
+            <call><name>m_witness</name><argument_list>( <argument><diff:insert xmlns:diff="http://www.srcML.org/srcDiff"><expr><call><name>CATCH_MOVE</name><argument_list>(<argument><diff:common xmlns:diff="http://www.srcML.org/srcDiff"><expr><name>witness</name></expr></diff:common></argument>)</argument_list></call></expr></diff:insert></argument> )</argument_list></call>,
+            <call><name>m_recorder</name><argument_list>( <argument><expr><name>recorder</name></expr></argument> )</argument_list></call>
+        </member_init_list><block>{<block_content/>}</block></constructor>
+
+        <function><type><name>void</name></type> <name>testRunStarting</name><parameter_list>( <parameter><decl><type><name><name>Catch</name><operator>::</operator><name>TestRunInfo</name></name> <specifier>const</specifier><modifier>&amp;</modifier></type></decl></parameter> )</parameter_list> <specifier>override</specifier> <block>{<block_content>
+            <expr_stmt><expr><call><name><name>m_recorder</name><operator>.</operator><name>push_back</name></name><argument_list>( <argument><expr><name>m_witness</name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        </block_content>}</block></function>
+    </public>}</block>;</class>
+    <comment type="line">// A reporter that writes provided string into destination,</comment>
+    <comment type="line">// to record order of testRunStarting invocation.</comment>
+    <class>class <name>MockReporter</name> <super_list>: <super><specifier>public</specifier> <name><name>Catch</name><operator>::</operator><name>StreamingReporterBase</name></name></super></super_list> <block>{<private type="default">
+        <decl_stmt><decl><type><name><name>std</name><operator>::</operator><name>string</name></name></type> <name>m_witness</name></decl>;</decl_stmt>
+        <decl_stmt><decl><type><name><name>std</name><operator>::</operator><name>vector</name><argument_list type="generic">&lt;<argument><expr><name><name>std</name><operator>::</operator><name>string</name></name></expr></argument>&gt;</argument_list></name><modifier>&amp;</modifier></type> <name>m_recorder</name></decl>;</decl_stmt>
+    </private><public>public:
+        <constructor><name>MockReporter</name><parameter_list>( <parameter><decl><type><name><name>std</name><operator>::</operator><name>string</name></name></type> <name>witness</name></decl></parameter>,
+                      <parameter><decl><type><name><name>std</name><operator>::</operator><name>vector</name><argument_list type="generic">&lt;<argument><expr><name><name>std</name><operator>::</operator><name>string</name></name></expr></argument>&gt;</argument_list></name><modifier>&amp;</modifier></type> <name>recorder</name></decl></parameter>,
+                      <parameter><decl><type><name><name>Catch</name><operator>::</operator><name>ReporterConfig</name></name><modifier>&amp;&amp;</modifier></type> <name>config</name></decl></parameter> )</parameter_list><member_init_list>:
+            <call><name>StreamingReporterBase</name><argument_list>( <argument><expr><call><name>CATCH_MOVE</name><argument_list>(<argument><expr><name>config</name></expr></argument>)</argument_list></call></expr></argument> )</argument_list></call>,
+            <call><name>m_witness</name><argument_list>( <argument><diff:insert xmlns:diff="http://www.srcML.org/srcDiff"><expr><call><name>CATCH_MOVE</name><argument_list>(<argument><diff:common xmlns:diff="http://www.srcML.org/srcDiff"><expr><name>witness</name></expr></diff:common></argument>)</argument_list></call></expr></diff:insert></argument> )</argument_list></call>,
+            <call><name>m_recorder</name><argument_list>( <argument><expr><name>recorder</name></expr></argument> )</argument_list></call>
+        </member_init_list><block>{<block_content/>}</block></constructor>
+
+        <function><type><name>void</name></type> <name>testRunStarting</name><parameter_list>( <parameter><decl><type><name><name>Catch</name><operator>::</operator><name>TestRunInfo</name></name> <specifier>const</specifier><modifier>&amp;</modifier></type></decl></parameter> )</parameter_list> <specifier>override</specifier> <block>{<block_content>
+            <expr_stmt><expr><call><name><name>m_recorder</name><operator>.</operator><name>push_back</name></name><argument_list>( <argument><expr><name>m_witness</name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        </block_content>}</block></function>
+    </public>}</block>;</class>
+}</block></namespace> <comment type="line">// namespace</comment>
+
+<macro><name>TEST_CASE</name><argument_list>(<argument><literal type="string">"Multireporter calls reporters and listeners in correct order"</literal></argument>,
+          <argument><literal type="string">"[reporters][multi-reporter]"</literal></argument>)</argument_list></macro> <block>{<block_content>
+    <decl_stmt><decl><type><name><name>Catch</name><operator>::</operator><name>Config</name></name></type> <name>config</name><argument_list>( <argument><expr><call><name><name>Catch</name><operator>::</operator><name>ConfigData</name></name><argument_list>{}</argument_list></call></expr></argument> )</argument_list></decl>;</decl_stmt>
+
+    <comment type="line">// We add reporters before listeners, to check that internally they</comment>
+    <comment type="line">// get sorted properly, and listeners are called first anyway.</comment>
+    <decl_stmt><decl><type><name><name>Catch</name><operator>::</operator><name>MultiReporter</name></name></type> <name>multiReporter</name><argument_list>( <argument><expr><operator>&amp;</operator><name>config</name></expr></argument> )</argument_list></decl>;</decl_stmt>
+    <decl_stmt><decl><type><name><name>std</name><operator>::</operator><name>vector</name><argument_list type="generic">&lt;<argument><expr><name><name>std</name><operator>::</operator><name>string</name></name></expr></argument>&gt;</argument_list></name></type> <name>records</name></decl>;</decl_stmt>
+    <expr_stmt><expr><call><name><name>multiReporter</name><operator>.</operator><name>addReporter</name></name><argument_list>( <argument><expr><call><name><name>Catch</name><operator>::</operator><name>Detail</name><operator>::</operator><name>make_unique</name><argument_list type="generic">&lt;<argument><expr><name>MockReporter</name></expr></argument>&gt;</argument_list></name><argument_list>(
+        <argument><expr><literal type="string">"Goodbye"</literal></expr></argument>, <argument><expr><name>records</name></expr></argument>, <argument><expr><call><name>makeDummyRepConfig</name><argument_list>(<argument><expr><name>config</name></expr></argument>)</argument_list></call></expr></argument> )</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name><name>multiReporter</name><operator>.</operator><name>addListener</name></name><argument_list>(
+        <argument><expr><call><name><name>Catch</name><operator>::</operator><name>Detail</name><operator>::</operator><name>make_unique</name><argument_list type="generic">&lt;<argument><expr><name>MockListener</name></expr></argument>&gt;</argument_list></name><argument_list>( <argument><expr><literal type="string">"Hello"</literal></expr></argument>, <argument><expr><name>records</name></expr></argument>, <argument><expr><operator>&amp;</operator><name>config</name></expr></argument> )</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name><name>multiReporter</name><operator>.</operator><name>addListener</name></name><argument_list>(
+        <argument><expr><call><name><name>Catch</name><operator>::</operator><name>Detail</name><operator>::</operator><name>make_unique</name><argument_list type="generic">&lt;<argument><expr><name>MockListener</name></expr></argument>&gt;</argument_list></name><argument_list>( <argument><expr><literal type="string">"world"</literal></expr></argument>, <argument><expr><name>records</name></expr></argument>, <argument><expr><operator>&amp;</operator><name>config</name></expr></argument> )</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name><name>multiReporter</name><operator>.</operator><name>addReporter</name></name><argument_list>( <argument><expr><call><name><name>Catch</name><operator>::</operator><name>Detail</name><operator>::</operator><name>make_unique</name><argument_list type="generic">&lt;<argument><expr><name>MockReporter</name></expr></argument>&gt;</argument_list></name><argument_list>(
+        <argument><expr><literal type="string">"world"</literal></expr></argument>, <argument><expr><name>records</name></expr></argument>, <argument><expr><call><name>makeDummyRepConfig</name><argument_list>(<argument><expr><name>config</name></expr></argument>)</argument_list></call></expr></argument> )</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name><name>multiReporter</name><operator>.</operator><name>testRunStarting</name></name><argument_list>( <argument><expr><block>{ <expr><literal type="string">""</literal></expr> }</block></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+
+    <decl_stmt><decl><type><name><name>std</name><operator>::</operator><name>vector</name><argument_list type="generic">&lt;<argument><expr><name><name>std</name><operator>::</operator><name>string</name></name></expr></argument>&gt;</argument_list></name></type> <name>expected</name><argument_list>( <argument><expr><block>{ <expr><literal type="string">"Hello"</literal></expr>, <expr><literal type="string">"world"</literal></expr>, <expr><literal type="string">"Goodbye"</literal></expr>, <expr><literal type="string">"world"</literal></expr> }</block></expr></argument> )</argument_list></decl>;</decl_stmt>
+    <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><name>records</name> <operator>==</operator> <name>expected</name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+</block_content>}</block>
+
+<namespace>namespace <block>{
+    <comment type="line">// A listener that sets it preferences to test that multireporter,</comment>
+    <comment type="line">// properly sets up its own preferences</comment>
+    <class>class <name>PreferenceListener</name> <super_list>: <super><specifier>public</specifier> <name><name>Catch</name><operator>::</operator><name>EventListenerBase</name></name></super></super_list> <block>{<private type="default">
+    </private><public>public:
+        <constructor><name>PreferenceListener</name><parameter_list>( <parameter><decl><type><name>bool</name></type> <name>redirectStdout</name></decl></parameter>,
+                            <parameter><decl><type><name>bool</name></type> <name>reportAllAssertions</name></decl></parameter>,
+                            <parameter><decl><type><name><name>Catch</name><operator>::</operator><name>IConfig</name></name> <specifier>const</specifier><modifier>*</modifier></type> <name>config</name></decl></parameter> )</parameter_list><member_init_list>:
+            <call><name>EventListenerBase</name><argument_list>( <argument><expr><name>config</name></expr></argument> )</argument_list></call> </member_init_list><block>{<block_content>
+            <expr_stmt><expr><name><name>m_preferences</name><operator>.</operator><name>shouldRedirectStdOut</name></name> <operator>=</operator> <name>redirectStdout</name></expr>;</expr_stmt>
+            <expr_stmt><expr><name><name>m_preferences</name><operator>.</operator><name>shouldReportAllAssertions</name></name> <operator>=</operator> <name>reportAllAssertions</name></expr>;</expr_stmt>
+        </block_content>}</block></constructor>
+    </public>}</block>;</class>
+    <comment type="line">// A reporter that sets it preferences to test that multireporter,</comment>
+    <comment type="line">// properly sets up its own preferences</comment>
+    <class>class <name>PreferenceReporter</name> <super_list>: <super><specifier>public</specifier> <name><name>Catch</name><operator>::</operator><name>StreamingReporterBase</name></name></super></super_list> <block>{<private type="default">
+    </private><public>public:
+        <constructor><name>PreferenceReporter</name><parameter_list>( <parameter><decl><type><name>bool</name></type> <name>redirectStdout</name></decl></parameter>,
+                            <parameter><decl><type><name>bool</name></type> <name>reportAllAssertions</name></decl></parameter>,
+                            <parameter><decl><type><name><name>Catch</name><operator>::</operator><name>ReporterConfig</name></name><modifier>&amp;&amp;</modifier></type> <name>config</name></decl></parameter> )</parameter_list><member_init_list>:
+            <call><name>StreamingReporterBase</name><argument_list>( <argument><expr><call><name>CATCH_MOVE</name><argument_list>(<argument><expr><name>config</name></expr></argument>)</argument_list></call></expr></argument> )</argument_list></call> </member_init_list><block>{<block_content>
+            <expr_stmt><expr><name><name>m_preferences</name><operator>.</operator><name>shouldRedirectStdOut</name></name> <operator>=</operator> <name>redirectStdout</name></expr>;</expr_stmt>
+            <expr_stmt><expr><name><name>m_preferences</name><operator>.</operator><name>shouldReportAllAssertions</name></name> <operator>=</operator> <name>reportAllAssertions</name></expr>;</expr_stmt>
+        </block_content>}</block></constructor>
+    </public>}</block>;</class>
+}</block></namespace> <comment type="line">// namespace</comment>
+
+<macro><name>TEST_CASE</name><argument_list>(<argument><literal type="string">"Multireporter updates ReporterPreferences properly"</literal></argument>,
+          <argument><literal type="string">"[reporters][multi-reporter]"</literal></argument>)</argument_list></macro> <block>{<block_content>
+
+    <decl_stmt><decl><type><name><name>Catch</name><operator>::</operator><name>Config</name></name></type> <name>config</name><argument_list>( <argument><expr><call><name><name>Catch</name><operator>::</operator><name>ConfigData</name></name><argument_list>{}</argument_list></call></expr></argument> )</argument_list></decl>;</decl_stmt>
+    <decl_stmt><decl><type><name><name>Catch</name><operator>::</operator><name>MultiReporter</name></name></type> <name>multiReporter</name><argument_list>( <argument><expr><operator>&amp;</operator><name>config</name></expr></argument> )</argument_list></decl>;</decl_stmt>
+
+    <comment type="line">// Post init defaults</comment>
+    <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name><name>multiReporter</name><operator>.</operator><name>getPreferences</name></name><argument_list>()</argument_list></call><operator>.</operator><name>shouldRedirectStdOut</name> <operator>==</operator> <literal type="boolean">false</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name><name>multiReporter</name><operator>.</operator><name>getPreferences</name></name><argument_list>()</argument_list></call><operator>.</operator><name>shouldReportAllAssertions</name> <operator>==</operator> <literal type="boolean">false</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+
+    <macro><name>SECTION</name><argument_list>( <argument><literal type="string">"Adding listeners"</literal></argument> )</argument_list></macro> <block>{<block_content>
+        <expr_stmt><expr><call><name><name>multiReporter</name><operator>.</operator><name>addListener</name></name><argument_list>(
+            <argument><expr><call><name><name>Catch</name><operator>::</operator><name>Detail</name><operator>::</operator><name>make_unique</name><argument_list type="generic">&lt;<argument><expr><name>PreferenceListener</name></expr></argument>&gt;</argument_list></name><argument_list>(
+                <argument><expr><literal type="boolean">true</literal></expr></argument>, <argument><expr><literal type="boolean">false</literal></expr></argument>, <argument><expr><operator>&amp;</operator><name>config</name></expr></argument> )</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name><name>multiReporter</name><operator>.</operator><name>getPreferences</name></name><argument_list>()</argument_list></call><operator>.</operator><name>shouldRedirectStdOut</name> <operator>==</operator> <literal type="boolean">true</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name><name>multiReporter</name><operator>.</operator><name>getPreferences</name></name><argument_list>()</argument_list></call><operator>.</operator><name>shouldReportAllAssertions</name> <operator>==</operator> <literal type="boolean">false</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+
+        <expr_stmt><expr><call><name><name>multiReporter</name><operator>.</operator><name>addListener</name></name><argument_list>(
+            <argument><expr><call><name><name>Catch</name><operator>::</operator><name>Detail</name><operator>::</operator><name>make_unique</name><argument_list type="generic">&lt;<argument><expr><name>PreferenceListener</name></expr></argument>&gt;</argument_list></name><argument_list>(
+                <argument><expr><literal type="boolean">false</literal></expr></argument>, <argument><expr><literal type="boolean">true</literal></expr></argument>, <argument><expr><operator>&amp;</operator><name>config</name></expr></argument> )</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name><name>multiReporter</name><operator>.</operator><name>getPreferences</name></name><argument_list>()</argument_list></call><operator>.</operator><name>shouldRedirectStdOut</name> <operator>==</operator> <literal type="boolean">true</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name><name>multiReporter</name><operator>.</operator><name>getPreferences</name></name><argument_list>()</argument_list></call><operator>.</operator><name>shouldReportAllAssertions</name> <operator>==</operator> <literal type="boolean">true</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+
+        <expr_stmt><expr><call><name><name>multiReporter</name><operator>.</operator><name>addListener</name></name><argument_list>(
+            <argument><expr><call><name><name>Catch</name><operator>::</operator><name>Detail</name><operator>::</operator><name>make_unique</name><argument_list type="generic">&lt;<argument><expr><name>PreferenceListener</name></expr></argument>&gt;</argument_list></name><argument_list>(
+                <argument><expr><literal type="boolean">false</literal></expr></argument>, <argument><expr><literal type="boolean">false</literal></expr></argument>, <argument><expr><operator>&amp;</operator><name>config</name></expr></argument> )</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name><name>multiReporter</name><operator>.</operator><name>getPreferences</name></name><argument_list>()</argument_list></call><operator>.</operator><name>shouldRedirectStdOut</name> <operator>==</operator> <literal type="boolean">true</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name><name>multiReporter</name><operator>.</operator><name>getPreferences</name></name><argument_list>()</argument_list></call><operator>.</operator><name>shouldReportAllAssertions</name> <operator>==</operator> <literal type="boolean">true</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block>
+    <macro><name>SECTION</name><argument_list>( <argument><literal type="string">"Adding reporters"</literal></argument> )</argument_list></macro> <block>{<block_content>
+        <expr_stmt><expr><call><name><name>multiReporter</name><operator>.</operator><name>addReporter</name></name><argument_list>(
+            <argument><expr><call><name><name>Catch</name><operator>::</operator><name>Detail</name><operator>::</operator><name>make_unique</name><argument_list type="generic">&lt;<argument><expr><name>PreferenceReporter</name></expr></argument>&gt;</argument_list></name><argument_list>(
+                <argument><expr><literal type="boolean">true</literal></expr></argument>, <argument><expr><literal type="boolean">false</literal></expr></argument>, <argument><expr><call><name>makeDummyRepConfig</name><argument_list>(<argument><expr><name>config</name></expr></argument>)</argument_list></call></expr></argument> )</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name><name>multiReporter</name><operator>.</operator><name>getPreferences</name></name><argument_list>()</argument_list></call><operator>.</operator><name>shouldRedirectStdOut</name> <operator>==</operator> <literal type="boolean">true</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name><name>multiReporter</name><operator>.</operator><name>getPreferences</name></name><argument_list>()</argument_list></call><operator>.</operator><name>shouldReportAllAssertions</name> <operator>==</operator> <literal type="boolean">false</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+
+        <expr_stmt><expr><call><name><name>multiReporter</name><operator>.</operator><name>addReporter</name></name><argument_list>(
+            <argument><expr><call><name><name>Catch</name><operator>::</operator><name>Detail</name><operator>::</operator><name>make_unique</name><argument_list type="generic">&lt;<argument><expr><name>PreferenceReporter</name></expr></argument>&gt;</argument_list></name><argument_list>(
+                <argument><expr><literal type="boolean">false</literal></expr></argument>, <argument><expr><literal type="boolean">true</literal></expr></argument>, <argument><expr><call><name>makeDummyRepConfig</name><argument_list>( <argument><expr><name>config</name></expr></argument> )</argument_list></call></expr></argument> )</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name><name>multiReporter</name><operator>.</operator><name>getPreferences</name></name><argument_list>()</argument_list></call><operator>.</operator><name>shouldRedirectStdOut</name> <operator>==</operator> <literal type="boolean">true</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name><name>multiReporter</name><operator>.</operator><name>getPreferences</name></name><argument_list>()</argument_list></call><operator>.</operator><name>shouldReportAllAssertions</name> <operator>==</operator> <literal type="boolean">true</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+
+        <expr_stmt><expr><call><name><name>multiReporter</name><operator>.</operator><name>addReporter</name></name><argument_list>(
+            <argument><expr><call><name><name>Catch</name><operator>::</operator><name>Detail</name><operator>::</operator><name>make_unique</name><argument_list type="generic">&lt;<argument><expr><name>PreferenceReporter</name></expr></argument>&gt;</argument_list></name><argument_list>(
+                <argument><expr><literal type="boolean">false</literal></expr></argument>, <argument><expr><literal type="boolean">false</literal></expr></argument>, <argument><expr><call><name>makeDummyRepConfig</name><argument_list>( <argument><expr><name>config</name></expr></argument> )</argument_list></call></expr></argument> )</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name><name>multiReporter</name><operator>.</operator><name>getPreferences</name></name><argument_list>()</argument_list></call><operator>.</operator><name>shouldRedirectStdOut</name> <operator>==</operator> <literal type="boolean">true</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name><name>multiReporter</name><operator>.</operator><name>getPreferences</name></name><argument_list>()</argument_list></call><operator>.</operator><name>shouldReportAllAssertions</name> <operator>==</operator> <literal type="boolean">true</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block>
+</block_content>}</block>
+
+<namespace>namespace <block>{
+    <class>class <name>TestReporterFactory</name> <super_list>: <super><specifier>public</specifier> <name><name>Catch</name><operator>::</operator><name>IReporterFactory</name></name></super></super_list> <block>{<private type="default">
+        <function><type><name><name>Catch</name><operator>::</operator><name>IEventListenerPtr</name></name></type> <name>create</name><parameter_list>( <parameter><decl><type><name><name>Catch</name><operator>::</operator><name>ReporterConfig</name></name><modifier>&amp;&amp;</modifier></type></decl></parameter> )</parameter_list> <specifier>const</specifier> <specifier>override</specifier> <block>{<block_content>
+            <expr_stmt><expr><call><name>CATCH_INTERNAL_ERROR</name><argument_list>(
+                <argument><expr><literal type="string">"This factory should never create a reporter"</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        </block_content>}</block></function>
+        <function><type><name><name>std</name><operator>::</operator><name>string</name></name></type> <name>getDescription</name><parameter_list>()</parameter_list> <specifier>const</specifier> <specifier>override</specifier> <block>{<block_content>
+            <return>return <expr><literal type="string">"Fake test factory"</literal></expr>;</return>
+        </block_content>}</block></function>
+    </private>}</block>;</class>
+}</block></namespace>
+
+<macro><name>TEST_CASE</name><argument_list>(<argument><literal type="string">"Registering reporter with '::' in name fails"</literal></argument>,
+          <argument><literal type="string">"[reporters][registration]"</literal></argument>)</argument_list></macro> <block>{<block_content>
+    <decl_stmt><decl><type><name><name>Catch</name><operator>::</operator><name>ReporterRegistry</name></name></type> <name>registry</name></decl>;</decl_stmt>
+
+    <expr_stmt><expr><call><name>REQUIRE_THROWS_WITH</name><argument_list>( <argument><expr><call><name><name>registry</name><operator>.</operator><name>registerReporter</name></name><argument_list>(
+        <argument><expr><literal type="string">"with::doublecolons"</literal></expr></argument>,
+        <argument><expr><call><name><name>Catch</name><operator>::</operator><name>Detail</name><operator>::</operator><name>make_unique</name><argument_list type="generic">&lt;<argument><expr><name>TestReporterFactory</name></expr></argument>&gt;</argument_list></name><argument_list>()</argument_list></call></expr></argument> )</argument_list></call></expr></argument>,
+        <argument><expr><literal type="string">"'::' is not allowed in reporter name: 'with::doublecolons'"</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+</block_content>}</block>
+
+<macro><name>TEST_CASE</name><argument_list>(<argument><literal type="string">"Registering multiple reporters with the same name fails"</literal></argument>,
+          <argument><literal type="string">"[reporters][registration][approvals]"</literal></argument>)</argument_list></macro> <block>{<block_content>
+    <decl_stmt><decl><type><name><name>Catch</name><operator>::</operator><name>ReporterRegistry</name></name></type> <name>registry</name></decl>;</decl_stmt>
+
+    <expr_stmt><expr><call><name><name>registry</name><operator>.</operator><name>registerReporter</name></name><argument_list>(
+        <argument><expr><literal type="string">"some-reporter-name"</literal></expr></argument>,
+        <argument><expr><call><name><name>Catch</name><operator>::</operator><name>Detail</name><operator>::</operator><name>make_unique</name><argument_list type="generic">&lt;<argument><expr><name>TestReporterFactory</name></expr></argument>&gt;</argument_list></name><argument_list>()</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+
+    <expr_stmt><expr><call><name>REQUIRE_THROWS_WITH</name><argument_list>(
+        <argument><expr><call><name><name>registry</name><operator>.</operator><name>registerReporter</name></name><argument_list>(
+            <argument><expr><literal type="string">"some-reporter-name"</literal></expr></argument>,
+            <argument><expr><call><name><name>Catch</name><operator>::</operator><name>Detail</name><operator>::</operator><name>make_unique</name><argument_list type="generic">&lt;<argument><expr><name>TestReporterFactory</name></expr></argument>&gt;</argument_list></name><argument_list>()</argument_list></call></expr></argument> )</argument_list></call></expr></argument>,
+        <argument><expr><literal type="string">"reporter using 'some-reporter-name' as name was already registered"</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+</block_content>}</block></block></namespace>
+</unit>

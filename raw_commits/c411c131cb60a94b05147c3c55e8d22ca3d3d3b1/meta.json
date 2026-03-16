@@ -1,0 +1,8 @@
+{
+  "commit_id": "c411c131cb60a94b05147c3c55e8d22ca3d3d3b1",
+  "parent_id": "091595780e4f330f1fd74e9d8caf5d509d195491",
+  "message": "Move crtdbg.h include outside namespace",
+  "changed_files": [
+    "include/internal/catch_leak_detector.cpp"
+  ]
+}

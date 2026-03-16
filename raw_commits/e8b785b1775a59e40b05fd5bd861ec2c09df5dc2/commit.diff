@@ -1,0 +1,13 @@
+diff --git a/include/internal/catch_result_builder.cpp b/include/internal/catch_result_builder.cpp
+index c5ea8119..8cc624c7 100644
+--- a/include/internal/catch_result_builder.cpp
++++ b/include/internal/catch_result_builder.cpp
+@@ -157,7 +157,7 @@ namespace Catch {
+         AssertionResultData data = m_data;
+ 
+         if(m_usedStream)
+-            data.message = m_stream().oss.str();
++            data.message = s_stream().oss.str();
+         data.decomposedExpression = &expr; // for lazy reconstruction
+         return AssertionResult( m_assertionInfo, data );
+     }

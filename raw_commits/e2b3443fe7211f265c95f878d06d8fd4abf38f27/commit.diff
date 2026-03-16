@@ -1,0 +1,13 @@
+diff --git a/include/internal/catch_assertionresult.cpp b/include/internal/catch_assertionresult.cpp
+index 5da1cfdf..a116bffa 100644
+--- a/include/internal/catch_assertionresult.cpp
++++ b/include/internal/catch_assertionresult.cpp
+@@ -61,7 +61,7 @@ namespace Catch {
+ 
+     std::string AssertionResult::getExpressionInMacro() const {
+         std::string expr;
+-        if( m_info.macroName[0] == 0 )
++        if( m_info.macroName.empty() )
+             expr = static_cast<std::string>(m_info.capturedExpression);
+         else {
+             expr.reserve( m_info.macroName.size() + m_info.capturedExpression.size() + 4 );

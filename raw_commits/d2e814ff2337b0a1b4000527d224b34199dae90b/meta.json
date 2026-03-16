@@ -1,0 +1,8 @@
+{
+  "commit_id": "d2e814ff2337b0a1b4000527d224b34199dae90b",
+  "parent_id": "f75a511b5c329f3bdbf759764620b923ef4267d0",
+  "message": "Tagged a C++11 specific test with [c++11] to exclude from approval tests (for now)",
+  "changed_files": [
+    "projects/SelfTest/ApproxTests.cpp"
+  ]
+}

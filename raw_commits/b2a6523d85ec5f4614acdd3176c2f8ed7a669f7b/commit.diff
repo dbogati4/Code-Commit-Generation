@@ -1,0 +1,13 @@
+diff --git a/tests/SelfTest/IntrospectiveTests/String.tests.cpp b/tests/SelfTest/IntrospectiveTests/String.tests.cpp
+index b7f4a2dd..5255804f 100644
+--- a/tests/SelfTest/IntrospectiveTests/String.tests.cpp
++++ b/tests/SelfTest/IntrospectiveTests/String.tests.cpp
+@@ -130,7 +130,7 @@ TEST_CASE("StringRef at compilation time", "[Strings][StringRef][constexpr]") {
+     //  * substr
+     using Catch::StringRef;
+     SECTION("Simple constructors") {
+-        constexpr StringRef empty;
++        constexpr StringRef empty{};
+         STATIC_REQUIRE(empty.size() == 0);
+         STATIC_REQUIRE(empty.begin() == empty.end());
+ 

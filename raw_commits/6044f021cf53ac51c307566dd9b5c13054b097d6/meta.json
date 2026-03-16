@@ -1,0 +1,8 @@
+{
+  "commit_id": "6044f021cf53ac51c307566dd9b5c13054b097d6",
+  "parent_id": "5d7883b551670e28d15697eed4411574aa7e313a",
+  "message": "Don't reseed std::srand when resetting rng state",
+  "changed_files": [
+    "src/catch2/internal/catch_run_context.cpp"
+  ]
+}

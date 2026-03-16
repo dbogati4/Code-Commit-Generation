@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" xmlns:diff="http://www.srcML.org/srcDiff" revision="1.0.0" language="C++" filename="C:\Users\saile\AppData\Local\Temp\catch2_100_z8gzpiwf\c4d1aa90337300a8c7646b3f28b0a6783eec5a8f\include_internal_catch_message_cpp\include_internal_catch_message_cpp.old|C:\Users\saile\AppData\Local\Temp\catch2_100_z8gzpiwf\c4d1aa90337300a8c7646b3f28b0a6783eec5a8f\include_internal_catch_message_cpp\include_internal_catch_message_cpp.new"><comment type="block">/*
+ *  Created by Phil Nash on 1/2/2013.
+ *  Copyright 2013 Two Blue Cubes Ltd. All rights reserved.
+ *
+ *  Distributed under the Boost Software License, Version 1.0. (See accompanying
+ *  file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
+ */</comment>
+
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">"catch_message.h"</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">"catch_interfaces_capture.h"</cpp:file></cpp:include>
+
+<namespace>namespace <name>Catch</name> <block>{
+
+    <constructor><name><name>MessageInfo</name><operator>::</operator><name>MessageInfo</name></name><parameter_list>(   <parameter><decl><type><name><name>std</name><operator>::</operator><name>string</name></name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>_macroName</name></decl></parameter>,
+                                <parameter><decl><type><name>SourceLineInfo</name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>_lineInfo</name></decl></parameter>,
+                                <parameter><decl><type><name><name>ResultWas</name><operator>::</operator><name>OfType</name></name></type> <name>_type</name></decl></parameter> )</parameter_list>
+    <member_init_list>:   <call><name>macroName</name><argument_list>( <argument><expr><name>_macroName</name></expr></argument> )</argument_list></call>,
+        <call><name>lineInfo</name><argument_list>( <argument><expr><name>_lineInfo</name></expr></argument> )</argument_list></call>,
+        <call><name>type</name><argument_list>( <argument><expr><name>_type</name></expr></argument> )</argument_list></call>,
+        <call><name>sequence</name><argument_list>( <argument><expr><operator>++</operator><name>globalCount</name></expr></argument> )</argument_list></call>
+    </member_init_list><block>{<block_content/>}</block></constructor>
+
+    <function type="operator"><type><name>bool</name></type> <name><name>MessageInfo</name><operator>::</operator><name>operator<name>==</name></name></name><parameter_list>( <parameter><decl><type><name>MessageInfo</name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>other</name></decl></parameter> )</parameter_list> <specifier>const</specifier> <block>{<block_content>
+        <return>return <expr><name>sequence</name> <operator>==</operator> <name><name>other</name><operator>.</operator><name>sequence</name></name></expr>;</return>
+    </block_content>}</block></function>
+
+    <function type="operator"><type><name>bool</name></type> <name><name>MessageInfo</name><operator>::</operator><name>operator<name>&lt;</name></name></name><parameter_list>( <parameter><decl><type><name>MessageInfo</name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>other</name></decl></parameter> )</parameter_list> <specifier>const</specifier> <block>{<block_content>
+        <return>return <expr><name>sequence</name> <operator>&lt;</operator> <name><name>other</name><operator>.</operator><name>sequence</name></name></expr>;</return>
+    </block_content>}</block></function>
+
+    <comment type="line">// This may need protecting if threading support is added</comment>
+    <decl_stmt><decl><type><name>unsigned</name> <name>int</name></type> <name><name>MessageInfo</name><operator>::</operator><name>globalCount</name></name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</decl_stmt>
+
+
+    <comment type="line" format="doxygen">////////////////////////////////////////////////////////////////////////////</comment>
+
+    <constructor><name><name>Catch</name><operator>::</operator><name>MessageBuilder</name><operator>::</operator><name>MessageBuilder</name></name><parameter_list>( <parameter><decl><type><name><name>std</name><operator>::</operator><name>string</name></name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>macroName</name></decl></parameter>,
+                                           <parameter><decl><type><name>SourceLineInfo</name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>lineInfo</name></decl></parameter>,
+                                           <parameter><decl><type><name><name>ResultWas</name><operator>::</operator><name>OfType</name></name></type> <name>type</name></decl></parameter> )</parameter_list>
+        <member_init_list>:<call><name>m_info</name><argument_list>(<argument><expr><name>macroName</name></expr></argument>, <argument><expr><name>lineInfo</name></expr></argument>, <argument><expr><name>type</name></expr></argument>)</argument_list></call> </member_init_list><block>{<block_content/>}</block></constructor>
+
+    <comment type="line" format="doxygen">////////////////////////////////////////////////////////////////////////////</comment>
+
+
+    <constructor><name><name>ScopedMessage</name><operator>::</operator><name>ScopedMessage</name></name><parameter_list>( <parameter><decl><type><name>MessageBuilder</name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>builder</name></decl></parameter> )</parameter_list>
+    <member_init_list>: <call><name>m_info</name><argument_list>( <argument><expr><name><name>builder</name><operator>.</operator><name>m_info</name></name></expr></argument> )</argument_list></call>
+    </member_init_list><block>{<block_content>
+        <expr_stmt><expr><name><name>m_info</name><operator>.</operator><name>message</name></name> <operator>=</operator> <call><name><name>builder</name><operator>.</operator><name>m_stream</name><operator>.</operator><name>str</name></name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name>getResultCapture</name><argument_list>()</argument_list></call><operator>.</operator><call><name>pushScopedMessage</name><argument_list>( <argument><expr><name>m_info</name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block></constructor>
+
+<diff:insert xmlns:diff="http://www.srcML.org/srcDiff"><cpp:if xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">if</cpp:directive><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><expr><call><name>defined</name><argument_list>(<argument><expr><name>_MSC_VER</name></expr></argument>)</argument_list></call></expr></cpp:if><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+</diff:ws><cpp:pragma xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">pragma</cpp:directive><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><name>warning</name><name>(</name><name>push</name><name>)</name></cpp:pragma><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+</diff:ws><cpp:pragma xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">pragma</cpp:directive><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><name>warning</name><name>(</name><name>disable</name><name>:</name><name>4996</name><name>)</name></cpp:pragma><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><comment type="line">//<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>std::uncaught_exception<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>is<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>deprecated<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>in<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>C++17</comment><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+</diff:ws><cpp:endif xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">endif</cpp:directive></cpp:endif><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+</diff:ws></diff:insert>    <destructor><name><name>ScopedMessage</name><operator>::</operator><name>~ScopedMessage</name></name><parameter_list>()</parameter_list> <block>{<block_content>
+        <if_stmt><if>if <condition>( <expr><operator>!</operator><call><name><name>std</name><operator>::</operator><name>uncaught_exception</name></name><argument_list>()</argument_list></call></expr> )</condition><block>{<block_content>
+            <expr_stmt><expr><call><name>getResultCapture</name><argument_list>()</argument_list></call><operator>.</operator><call><name>popScopedMessage</name><argument_list>(<argument><expr><name>m_info</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        </block_content>}</block></if></if_stmt>
+    </block_content>}</block></destructor>
+<diff:insert xmlns:diff="http://www.srcML.org/srcDiff"><cpp:if xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">if</cpp:directive><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><expr><call><name>defined</name><argument_list>(<argument><expr><name>_MSC_VER</name></expr></argument>)</argument_list></call></expr></cpp:if><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+</diff:ws><cpp:pragma xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">pragma</cpp:directive><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><name>warning</name><name>(</name><name>pop</name><name>)</name></cpp:pragma><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+</diff:ws><cpp:endif xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">endif</cpp:directive></cpp:endif></diff:insert>
+
+<diff:insert xmlns:diff="http://www.srcML.org/srcDiff"><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+</diff:ws></diff:insert>}</block></namespace> <comment type="line">// end namespace Catch</comment>
+</unit>

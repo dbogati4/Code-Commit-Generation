@@ -1,0 +1,9 @@
+{
+  "commit_id": "fb2e4fbe413824a5cad4101c0e94cb10b7828f0d",
+  "parent_id": "78a9518a2847f82cb65124d65eaf0b0be8d90cdc",
+  "message": "Improve performance of writing JSON values",
+  "changed_files": [
+    "src/catch2/internal/catch_jsonwriter.cpp",
+    "tests/SelfTest/IntrospectiveTests/Json.tests.cpp"
+  ]
+}

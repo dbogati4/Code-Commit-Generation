@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" xmlns:diff="http://www.srcML.org/srcDiff" revision="1.0.0" language="C++" filename="C:\Users\saile\AppData\Local\Temp\catch2_100_z8gzpiwf\71fce429afcebba7c32b6c46aced1013c6df9c0b\projects_SelfTest_IntrospectiveTests_String_tests_cpp\projects_SelfTest_IntrospectiveTests_String_tests_cpp.old|C:\Users\saile\AppData\Local\Temp\catch2_100_z8gzpiwf\71fce429afcebba7c32b6c46aced1013c6df9c0b\projects_SelfTest_IntrospectiveTests_String_tests_cpp\projects_SelfTest_IntrospectiveTests_String_tests_cpp.new"><cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">"internal/catch_stringref.h"</cpp:file></cpp:include>
+
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">"catch.hpp"</cpp:file></cpp:include>
+
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;cstring&gt;</cpp:file></cpp:include>
+
+<namespace>namespace <name>Catch</name> <block>{
+
+    <comment type="line">// Implementation of test accessors</comment>
+    <struct>struct <name>StringRefTestAccess</name> <block>{<public type="default">
+        <function><type><specifier>static</specifier> <name>auto</name></type> <name>isOwned</name><parameter_list>( <parameter><decl><type><name>StringRef</name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>stringRef</name></decl></parameter> )</parameter_list> -&gt; <type><name>bool</name></type> <block>{<block_content>
+            <return>return <expr><call><name><name>stringRef</name><operator>.</operator><name>isOwned</name></name><argument_list>()</argument_list></call></expr>;</return>
+        </block_content>}</block></function>
+        <function><type><specifier>static</specifier> <name>auto</name></type> <name>isSubstring</name><parameter_list>( <parameter><decl><type><name>StringRef</name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>stringRef</name></decl></parameter> )</parameter_list> -&gt; <type><name>bool</name></type> <block>{<block_content>
+            <return>return <expr><call><name><name>stringRef</name><operator>.</operator><name>isSubstring</name></name><argument_list>()</argument_list></call></expr>;</return>
+        </block_content>}</block></function>
+    </public>}</block>;</struct>
+
+
+    <namespace>namespace <block>{
+    <function><type><name>auto</name></type> <name>isOwned</name><parameter_list>( <parameter><decl><type><name>StringRef</name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>stringRef</name></decl></parameter> )</parameter_list> -&gt; <type><name>bool</name></type> <block>{<block_content>
+        <return>return <expr><call><name><name>StringRefTestAccess</name><operator>::</operator><name>isOwned</name></name><argument_list>( <argument><expr><name>stringRef</name></expr></argument> )</argument_list></call></expr>;</return>
+    </block_content>}</block></function>
+    <function><type><name>auto</name></type> <name>isSubstring</name><parameter_list>( <parameter><decl><type><name>StringRef</name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>stringRef</name></decl></parameter> )</parameter_list> -&gt; <type><name>bool</name></type> <block>{<block_content>
+        <return>return <expr><call><name><name>StringRefTestAccess</name><operator>::</operator><name>isSubstring</name></name><argument_list>( <argument><expr><name>stringRef</name></expr></argument> )</argument_list></call></expr>;</return>
+    </block_content>}</block></function>
+    }</block></namespace> <comment type="line">// end anonymous namespace</comment>
+
+}</block></namespace> <comment type="line">// namespace Catch</comment>
+
+<macro><name>TEST_CASE</name><argument_list>( <argument><literal type="string">"StringRef"</literal></argument>, <argument><literal type="string">"[Strings][StringRef]"</literal></argument> )</argument_list></macro> <block>{<block_content>
+
+    <using>using <name><name>Catch</name><operator>::</operator><name>StringRef</name></name>;</using>
+    <using>using <name><name>Catch</name><operator>::</operator><name>isOwned</name></name>;</using> <using>using <name><name>Catch</name><operator>::</operator><name>isSubstring</name></name>;</using>
+
+    <macro><name>SECTION</name><argument_list>( <argument><literal type="string">"Empty string"</literal></argument> )</argument_list></macro> <block>{<block_content>
+        <decl_stmt><decl><type><name>StringRef</name></type> <name>empty</name></decl>;</decl_stmt>
+        <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name><name>empty</name><operator>.</operator><name>empty</name></name><argument_list>()</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name><name>empty</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call> <operator>==</operator> <literal type="number">0</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name><name>std</name><operator>::</operator><name>strcmp</name></name><argument_list>( <argument><expr><call><name><name>empty</name><operator>.</operator><name>c_str</name></name><argument_list>()</argument_list></call></expr></argument>, <argument><expr><literal type="string">""</literal></expr></argument> )</argument_list></call> <operator>==</operator> <literal type="number">0</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block>
+
+    <macro><name>SECTION</name><argument_list>( <argument><literal type="string">"From string literal"</literal></argument> )</argument_list></macro> <block>{<block_content>
+        <decl_stmt><decl><type><name>StringRef</name></type> <name>s</name> <init>= <expr><literal type="string">"hello"</literal></expr></init></decl>;</decl_stmt>
+        <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name><name>s</name><operator>.</operator><name>empty</name></name><argument_list>()</argument_list></call> <operator>==</operator> <literal type="boolean">false</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name><name>s</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call> <operator>==</operator> <literal type="number">5</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name>isSubstring</name><argument_list>( <argument><expr><name>s</name></expr></argument> )</argument_list></call> <operator>==</operator> <literal type="boolean">false</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+
+        <decl_stmt><decl><type><name>auto</name></type> <name>rawChars</name> <init>= <expr><call><name><name>s</name><operator>.</operator><name>currentData</name></name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+        <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name><name>std</name><operator>::</operator><name>strcmp</name></name><argument_list>( <argument><expr><name>rawChars</name></expr></argument>, <argument><expr><literal type="string">"hello"</literal></expr></argument> )</argument_list></call> <operator>==</operator> <literal type="number">0</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+
+        <macro><name>SECTION</name><argument_list>( <argument><literal type="string">"c_str() does not cause copy"</literal></argument> )</argument_list></macro> <block>{<block_content>
+            <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name>isOwned</name><argument_list>( <argument><expr><name>s</name></expr></argument> )</argument_list></call> <operator>==</operator> <literal type="boolean">false</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+
+            <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name><name>s</name><operator>.</operator><name>c_str</name></name><argument_list>()</argument_list></call> <operator>==</operator> <name>rawChars</name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+
+            <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name>isOwned</name><argument_list>( <argument><expr><name>s</name></expr></argument> )</argument_list></call> <operator>==</operator> <literal type="boolean">false</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        </block_content>}</block>
+    </block_content>}</block>
+    <macro><name>SECTION</name><argument_list>( <argument><literal type="string">"From sub-string"</literal></argument> )</argument_list></macro> <block>{<block_content>
+        <decl_stmt><decl><type><name>StringRef</name></type> <name>original</name> <init>= <expr><call><name>StringRef</name><argument_list>( <argument><expr><literal type="string">"original string"</literal></expr></argument> )</argument_list></call><operator>.</operator><call><name>substr</name><argument_list>(<argument><expr><literal type="number">0</literal></expr></argument>, <argument><expr><literal type="number">8</literal></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+        <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><name>original</name> <operator>==</operator> <literal type="string">"original"</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name>isSubstring</name><argument_list>( <argument><expr><name>original</name></expr></argument> )</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name>isOwned</name><argument_list>( <argument><expr><name>original</name></expr></argument> )</argument_list></call> <operator>==</operator> <literal type="boolean">false</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+
+        <expr_stmt><expr><call><name><name>original</name><operator>.</operator><name>c_str</name></name><argument_list>()</argument_list></call></expr>;</expr_stmt> <comment type="line">// Forces it to take ownership</comment>
+
+        <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name>isSubstring</name><argument_list>( <argument><expr><name>original</name></expr></argument> )</argument_list></call> <operator>==</operator> <literal type="boolean">false</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name>isOwned</name><argument_list>( <argument><expr><name>original</name></expr></argument> )</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block>
+
+
+    <macro><name>SECTION</name><argument_list>( <argument><literal type="string">"Substrings"</literal></argument> )</argument_list></macro> <block>{<block_content>
+        <decl_stmt><decl><type><name>StringRef</name></type> <name>s</name> <init>= <expr><literal type="string">"hello world!"</literal></expr></init></decl>;</decl_stmt>
+        <decl_stmt><decl><type><name>StringRef</name></type> <name>ss</name> <init>= <expr><call><name><name>s</name><operator>.</operator><name>substr</name></name><argument_list>(<argument><expr><literal type="number">0</literal></expr></argument>, <argument><expr><literal type="number">5</literal></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+
+        <macro><name>SECTION</name><argument_list>( <argument><literal type="string">"zero-based substring"</literal></argument> )</argument_list></macro> <block>{<block_content>
+            <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name><name>ss</name><operator>.</operator><name>empty</name></name><argument_list>()</argument_list></call> <operator>==</operator> <literal type="boolean">false</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+            <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name><name>ss</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call> <operator>==</operator> <literal type="number">5</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+            <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name><name>std</name><operator>::</operator><name>strcmp</name></name><argument_list>( <argument><expr><call><name><name>ss</name><operator>.</operator><name>c_str</name></name><argument_list>()</argument_list></call></expr></argument>, <argument><expr><literal type="string">"hello"</literal></expr></argument> )</argument_list></call> <operator>==</operator> <literal type="number">0</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+            <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><name>ss</name> <operator>==</operator> <literal type="string">"hello"</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        </block_content>}</block>
+        <macro><name>SECTION</name><argument_list>( <argument><literal type="string">"c_str() causes copy"</literal></argument> )</argument_list></macro> <block>{<block_content>
+            <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name>isSubstring</name><argument_list>( <argument><expr><name>ss</name></expr></argument> )</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+            <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name>isOwned</name><argument_list>( <argument><expr><name>ss</name></expr></argument> )</argument_list></call> <operator>==</operator> <literal type="boolean">false</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+
+            <decl_stmt><decl><type><name>auto</name></type> <name>rawChars</name> <init>= <expr><call><name><name>ss</name><operator>.</operator><name>currentData</name></name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+            <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><name>rawChars</name> <operator>==</operator> <call><name><name>s</name><operator>.</operator><name>currentData</name></name><argument_list>()</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt> <comment type="line">// same pointer value</comment>
+            <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name><name>ss</name><operator>.</operator><name>c_str</name></name><argument_list>()</argument_list></call> <operator>!=</operator> <name>rawChars</name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+
+            <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name>isSubstring</name><argument_list>( <argument><expr><name>ss</name></expr></argument> )</argument_list></call> <operator>==</operator> <literal type="boolean">false</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+            <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name>isOwned</name><argument_list>( <argument><expr><name>ss</name></expr></argument> )</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+
+            <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name><name>ss</name><operator>.</operator><name>currentData</name></name><argument_list>()</argument_list></call> <operator>!=</operator> <call><name><name>s</name><operator>.</operator><name>currentData</name></name><argument_list>()</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt> <comment type="line">// different pointer value</comment>
+
+            <macro><name>SECTION</name><argument_list>( <argument><literal type="string">"Self-assignment after substring"</literal></argument> )</argument_list></macro> <block>{<block_content>
+                <expr_stmt><expr><name>ss</name> <operator>=</operator> <diff:insert xmlns:diff="http://www.srcML.org/srcDiff"><operator>*</operator><operator>&amp;</operator></diff:insert><name>ss</name></expr>;</expr_stmt><diff:insert xmlns:diff="http://www.srcML.org/srcDiff"><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><comment type="line">//<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>the<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>*&amp;<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>are<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>there<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>to<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>suppress<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>warnings<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>(see:<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>"Improvements<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>to<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>Clang's<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>diagnostics"<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>in<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>https://rev.ng/gitlab/revng-bar-2019/clang/raw/master/docs/ReleaseNotes.rst)</comment></diff:insert>
+                <expr_stmt><expr><call><name>REQUIRE</name><argument_list>(<argument><expr><call><name>isOwned</name><argument_list>(<argument><expr><name>ss</name></expr></argument>)</argument_list></call> <operator>==</operator> <literal type="boolean">true</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+            </block_content>}</block>
+        </block_content>}</block>
+
+        <macro><name>SECTION</name><argument_list>( <argument><literal type="string">"non-zero-based substring"</literal></argument>)</argument_list></macro> <block>{<block_content>
+            <expr_stmt><expr><name>ss</name> <operator>=</operator> <call><name><name>s</name><operator>.</operator><name>substr</name></name><argument_list>( <argument><expr><literal type="number">6</literal></expr></argument>, <argument><expr><literal type="number">6</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+            <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name><name>ss</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call> <operator>==</operator> <literal type="number">6</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+            <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name><name>std</name><operator>::</operator><name>strcmp</name></name><argument_list>( <argument><expr><call><name><name>ss</name><operator>.</operator><name>c_str</name></name><argument_list>()</argument_list></call></expr></argument>, <argument><expr><literal type="string">"world!"</literal></expr></argument> )</argument_list></call> <operator>==</operator> <literal type="number">0</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        </block_content>}</block>
+
+        <macro><name>SECTION</name><argument_list>( <argument><literal type="string">"Pointer values of full refs should match"</literal></argument> )</argument_list></macro> <block>{<block_content>
+            <decl_stmt><decl><type><name>StringRef</name></type> <name>s2</name> <init>= <expr><name>s</name></expr></init></decl>;</decl_stmt>
+            <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name><name>s</name><operator>.</operator><name>c_str</name></name><argument_list>()</argument_list></call> <operator>==</operator> <call><name><name>s2</name><operator>.</operator><name>c_str</name></name><argument_list>()</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        </block_content>}</block>
+
+        <macro><name>SECTION</name><argument_list>( <argument><literal type="string">"Pointer values of substring refs should not match"</literal></argument> )</argument_list></macro> <block>{<block_content>
+            <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name><name>s</name><operator>.</operator><name>c_str</name></name><argument_list>()</argument_list></call> <operator>!=</operator> <call><name><name>ss</name><operator>.</operator><name>c_str</name></name><argument_list>()</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        </block_content>}</block>
+    </block_content>}</block>
+
+    <macro><name>SECTION</name><argument_list>( <argument><literal type="string">"Comparisons"</literal></argument> )</argument_list></macro> <block>{<block_content>
+        <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name>StringRef</name><argument_list>(<argument><expr><literal type="string">"hello"</literal></expr></argument>)</argument_list></call> <operator>==</operator> <call><name>StringRef</name><argument_list>(<argument><expr><literal type="string">"hello"</literal></expr></argument>)</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name>StringRef</name><argument_list>(<argument><expr><literal type="string">"hello"</literal></expr></argument>)</argument_list></call> <operator>!=</operator> <call><name>StringRef</name><argument_list>(<argument><expr><literal type="string">"cello"</literal></expr></argument>)</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block>
+
+    <macro><name>SECTION</name><argument_list>( <argument><literal type="string">"from std::string"</literal></argument> )</argument_list></macro> <block>{<block_content>
+        <decl_stmt><decl><type><name><name>std</name><operator>::</operator><name>string</name></name></type> <name>stdStr</name> <init>= <expr><literal type="string">"a standard string"</literal></expr></init></decl>;</decl_stmt>
+
+        <macro><name>SECTION</name><argument_list>( <argument><literal type="string">"implicitly constructed"</literal></argument> )</argument_list></macro> <block>{<block_content>
+            <decl_stmt><decl><type><name>StringRef</name></type> <name>sr</name> <init>= <expr><name>stdStr</name></expr></init></decl>;</decl_stmt>
+            <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><name>sr</name> <operator>==</operator> <literal type="string">"a standard string"</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+            <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name><name>sr</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call> <operator>==</operator> <call><name><name>stdStr</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        </block_content>}</block>
+        <macro><name>SECTION</name><argument_list>( <argument><literal type="string">"explicitly constructed"</literal></argument> )</argument_list></macro> <block>{<block_content>
+            <function_decl><type><name>StringRef</name></type> <name>sr</name><parameter_list>( <parameter><decl><type><name>stdStr</name></type></decl></parameter> )</parameter_list>;</function_decl>
+            <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><name>sr</name> <operator>==</operator> <literal type="string">"a standard string"</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+            <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name><name>sr</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call> <operator>==</operator> <call><name><name>stdStr</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        </block_content>}</block>
+        <macro><name>SECTION</name><argument_list>( <argument><literal type="string">"assigned"</literal></argument> )</argument_list></macro> <block>{<block_content>
+            <decl_stmt><decl><type><name>StringRef</name></type> <name>sr</name></decl>;</decl_stmt>
+            <expr_stmt><expr><name>sr</name> <operator>=</operator> <name>stdStr</name></expr>;</expr_stmt>
+            <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><name>sr</name> <operator>==</operator> <literal type="string">"a standard string"</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+            <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name><name>sr</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call> <operator>==</operator> <call><name><name>stdStr</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        </block_content>}</block>
+    </block_content>}</block>
+
+    <macro><name>SECTION</name><argument_list>( <argument><literal type="string">"to std::string"</literal></argument> )</argument_list></macro> <block>{<block_content>
+        <decl_stmt><decl><type><name>StringRef</name></type> <name>sr</name> <init>= <expr><literal type="string">"a stringref"</literal></expr></init></decl>;</decl_stmt>
+
+        <macro><name>SECTION</name><argument_list>( <argument><literal type="string">"implicitly constructed"</literal></argument> )</argument_list></macro> <block>{<block_content>
+            <decl_stmt><decl><type><name><name>std</name><operator>::</operator><name>string</name></name></type> <name>stdStr</name> <init>= <expr><name>sr</name></expr></init></decl>;</decl_stmt>
+            <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><name>stdStr</name> <operator>==</operator> <literal type="string">"a stringref"</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+            <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name><name>stdStr</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call> <operator>==</operator> <call><name><name>sr</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        </block_content>}</block>
+        <macro><name>SECTION</name><argument_list>( <argument><literal type="string">"explicitly constructed"</literal></argument> )</argument_list></macro> <block>{<block_content>
+            <function_decl><type><name><name>std</name><operator>::</operator><name>string</name></name></type> <name>stdStr</name><parameter_list>( <parameter><decl><type><name>sr</name></type></decl></parameter> )</parameter_list>;</function_decl>
+            <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><name>stdStr</name> <operator>==</operator> <literal type="string">"a stringref"</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+            <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name><name>stdStr</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call> <operator>==</operator> <call><name><name>sr</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        </block_content>}</block>
+        <macro><name>SECTION</name><argument_list>( <argument><literal type="string">"assigned"</literal></argument> )</argument_list></macro> <block>{<block_content>
+            <decl_stmt><decl><type><name><name>std</name><operator>::</operator><name>string</name></name></type> <name>stdStr</name></decl>;</decl_stmt>
+            <expr_stmt><expr><name>stdStr</name> <operator>=</operator> <name>sr</name></expr>;</expr_stmt>
+            <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><name>stdStr</name> <operator>==</operator> <literal type="string">"a stringref"</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+            <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name><name>stdStr</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call> <operator>==</operator> <call><name><name>sr</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        </block_content>}</block>
+    </block_content>}</block>
+
+    <macro><name>SECTION</name><argument_list>( <argument><literal type="string">"Counting utf-8 codepoints"</literal></argument> )</argument_list></macro> <block>{<block_content>
+        <decl_stmt><decl><type><name>StringRef</name></type> <name>ascii</name> <init>= <expr><literal type="string">"just a plain old boring ascii string..."</literal></expr></init></decl>;</decl_stmt>
+        <expr_stmt><expr><call><name>REQUIRE</name><argument_list>(<argument><expr><call><name><name>ascii</name><operator>.</operator><name>numberOfCharacters</name></name><argument_list>()</argument_list></call> <operator>==</operator> <call><name><name>ascii</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+
+        <decl_stmt><decl><type><name>StringRef</name></type> <name>simpleu8</name> <init>= <expr><literal type="string">u8"Trocha ÄeÅ¡tiny nikoho nezabila"</literal></expr></init></decl>;</decl_stmt>
+        <expr_stmt><expr><call><name>REQUIRE</name><argument_list>(<argument><expr><call><name><name>simpleu8</name><operator>.</operator><name>numberOfCharacters</name></name><argument_list>()</argument_list></call> <operator>==</operator> <literal type="number">30</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+
+        <decl_stmt><decl><type><name>StringRef</name></type> <name>emojis</name> <init>= <expr><literal type="string">u8"Here be ð¾"</literal></expr></init></decl>;</decl_stmt>
+        <expr_stmt><expr><call><name>REQUIRE</name><argument_list>(<argument><expr><call><name><name>emojis</name><operator>.</operator><name>numberOfCharacters</name></name><argument_list>()</argument_list></call> <operator>==</operator> <literal type="number">9</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block>
+
+</block_content>}</block>
+
+<macro><name>TEST_CASE</name><argument_list>( <argument><literal type="string">"replaceInPlace"</literal></argument>, <argument><literal type="string">"[Strings][StringManip]"</literal></argument> )</argument_list></macro> <block>{<block_content>
+    <decl_stmt><decl><type><name><name>std</name><operator>::</operator><name>string</name></name></type> <name>letters</name> <init>= <expr><literal type="string">"abcdefcg"</literal></expr></init></decl>;</decl_stmt>
+    <macro><name>SECTION</name><argument_list>( <argument><literal type="string">"replace single char"</literal></argument> )</argument_list></macro> <block>{<block_content>
+        <expr_stmt><expr><call><name>CHECK</name><argument_list>( <argument><expr><call><name><name>Catch</name><operator>::</operator><name>replaceInPlace</name></name><argument_list>( <argument><expr><name>letters</name></expr></argument>, <argument><expr><literal type="string">"b"</literal></expr></argument>, <argument><expr><literal type="string">"z"</literal></expr></argument> )</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name>CHECK</name><argument_list>( <argument><expr><name>letters</name> <operator>==</operator> <literal type="string">"azcdefcg"</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block>
+    <macro><name>SECTION</name><argument_list>( <argument><literal type="string">"replace two chars"</literal></argument> )</argument_list></macro> <block>{<block_content>
+        <expr_stmt><expr><call><name>CHECK</name><argument_list>( <argument><expr><call><name><name>Catch</name><operator>::</operator><name>replaceInPlace</name></name><argument_list>( <argument><expr><name>letters</name></expr></argument>, <argument><expr><literal type="string">"c"</literal></expr></argument>, <argument><expr><literal type="string">"z"</literal></expr></argument> )</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name>CHECK</name><argument_list>( <argument><expr><name>letters</name> <operator>==</operator> <literal type="string">"abzdefzg"</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block>
+    <macro><name>SECTION</name><argument_list>( <argument><literal type="string">"replace first char"</literal></argument> )</argument_list></macro> <block>{<block_content>
+        <expr_stmt><expr><call><name>CHECK</name><argument_list>( <argument><expr><call><name><name>Catch</name><operator>::</operator><name>replaceInPlace</name></name><argument_list>( <argument><expr><name>letters</name></expr></argument>, <argument><expr><literal type="string">"a"</literal></expr></argument>, <argument><expr><literal type="string">"z"</literal></expr></argument> )</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name>CHECK</name><argument_list>( <argument><expr><name>letters</name> <operator>==</operator> <literal type="string">"zbcdefcg"</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block>
+    <macro><name>SECTION</name><argument_list>( <argument><literal type="string">"replace last char"</literal></argument> )</argument_list></macro> <block>{<block_content>
+        <expr_stmt><expr><call><name>CHECK</name><argument_list>( <argument><expr><call><name><name>Catch</name><operator>::</operator><name>replaceInPlace</name></name><argument_list>( <argument><expr><name>letters</name></expr></argument>, <argument><expr><literal type="string">"g"</literal></expr></argument>, <argument><expr><literal type="string">"z"</literal></expr></argument> )</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name>CHECK</name><argument_list>( <argument><expr><name>letters</name> <operator>==</operator> <literal type="string">"abcdefcz"</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block>
+    <macro><name>SECTION</name><argument_list>( <argument><literal type="string">"replace all chars"</literal></argument> )</argument_list></macro> <block>{<block_content>
+        <expr_stmt><expr><call><name>CHECK</name><argument_list>( <argument><expr><call><name><name>Catch</name><operator>::</operator><name>replaceInPlace</name></name><argument_list>( <argument><expr><name>letters</name></expr></argument>, <argument><expr><name>letters</name></expr></argument>, <argument><expr><literal type="string">"replaced"</literal></expr></argument> )</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name>CHECK</name><argument_list>( <argument><expr><name>letters</name> <operator>==</operator> <literal type="string">"replaced"</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block>
+    <macro><name>SECTION</name><argument_list>( <argument><literal type="string">"replace no chars"</literal></argument> )</argument_list></macro> <block>{<block_content>
+        <expr_stmt><expr><call><name>CHECK_FALSE</name><argument_list>( <argument><expr><call><name><name>Catch</name><operator>::</operator><name>replaceInPlace</name></name><argument_list>( <argument><expr><name>letters</name></expr></argument>, <argument><expr><literal type="string">"x"</literal></expr></argument>, <argument><expr><literal type="string">"z"</literal></expr></argument> )</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name>CHECK</name><argument_list>( <argument><expr><name>letters</name> <operator>==</operator> <name>letters</name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block>
+    <macro><name>SECTION</name><argument_list>( <argument><literal type="string">"escape '"</literal></argument> )</argument_list></macro> <block>{<block_content>
+        <decl_stmt><decl><type><name><name>std</name><operator>::</operator><name>string</name></name></type> <name>s</name> <init>= <expr><literal type="string">"didn't"</literal></expr></init></decl>;</decl_stmt>
+        <expr_stmt><expr><call><name>CHECK</name><argument_list>( <argument><expr><call><name><name>Catch</name><operator>::</operator><name>replaceInPlace</name></name><argument_list>( <argument><expr><name>s</name></expr></argument>, <argument><expr><literal type="string">"'"</literal></expr></argument>, <argument><expr><literal type="string">"|'"</literal></expr></argument> )</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name>CHECK</name><argument_list>( <argument><expr><name>s</name> <operator>==</operator> <literal type="string">"didn|'t"</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block>
+</block_content>}</block>
+
+<macro><name>TEST_CASE</name><argument_list>( <argument><literal type="string">"splitString"</literal></argument>, <argument><literal type="string">"[Strings]"</literal></argument> )</argument_list></macro> <block>{<block_content>
+    <using>using <namespace>namespace <name><name>Catch</name><operator>::</operator><name>Matchers</name></name>;</namespace></using>
+    <using>using <name><name>Catch</name><operator>::</operator><name>splitStringRef</name></name>;</using>
+    <using>using <name><name>Catch</name><operator>::</operator><name>StringRef</name></name>;</using>
+
+    <expr_stmt><expr><call><name>CHECK_THAT</name><argument_list>( <argument><expr><call><name>splitStringRef</name><argument_list>(<argument><expr><literal type="string">""</literal></expr></argument>, <argument><expr><literal type="char">','</literal></expr></argument> )</argument_list></call></expr></argument>, <argument><expr><call><name>Equals</name><argument_list>(<argument><expr><call><name><name>std</name><operator>::</operator><name>vector</name><argument_list type="generic">&lt;<argument><expr><name>StringRef</name></expr></argument>&gt;</argument_list></name><argument_list>()</argument_list></call></expr></argument> )</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>CHECK_THAT</name><argument_list>( <argument><expr><call><name>splitStringRef</name><argument_list>(<argument><expr><literal type="string">"abc"</literal></expr></argument>, <argument><expr><literal type="char">','</literal></expr></argument> )</argument_list></call></expr></argument>, <argument><expr><call><name>Equals</name><argument_list>(<argument><expr><call><name><name>std</name><operator>::</operator><name>vector</name><argument_list type="generic">&lt;<argument><expr><name>StringRef</name></expr></argument>&gt;</argument_list></name><argument_list>{<argument><expr><literal type="string">"abc"</literal></expr></argument>}</argument_list></call></expr></argument> )</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>CHECK_THAT</name><argument_list>( <argument><expr><call><name>splitStringRef</name><argument_list>(<argument><expr><literal type="string">"abc,def"</literal></expr></argument>, <argument><expr><literal type="char">','</literal></expr></argument> )</argument_list></call></expr></argument>, <argument><expr><call><name>Equals</name><argument_list>(<argument><expr><call><name><name>std</name><operator>::</operator><name>vector</name><argument_list type="generic">&lt;<argument><expr><name>StringRef</name></expr></argument>&gt;</argument_list></name><argument_list>{<argument><expr><literal type="string">"abc"</literal></expr></argument>, <argument><expr><literal type="string">"def"</literal></expr></argument>}</argument_list></call></expr></argument> )</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+</block_content>}</block>
+
+
+</unit>

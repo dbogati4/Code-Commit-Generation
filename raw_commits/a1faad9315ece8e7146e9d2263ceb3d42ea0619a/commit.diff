@@ -1,0 +1,13 @@
+diff --git a/src/catch2/internal/catch_commandline.cpp b/src/catch2/internal/catch_commandline.cpp
+index db903507..88454c0a 100644
+--- a/src/catch2/internal/catch_commandline.cpp
++++ b/src/catch2/internal/catch_commandline.cpp
+@@ -265,7 +265,7 @@ namespace Catch {
+                 ( "list all listeners" )
+             | Opt( setTestOrder, "decl|lex|rand" )
+                 ["--order"]
+-                ( "test case order (defaults to decl)" )
++                ( "test case order (defaults to rand)" )
+             | Opt( setRngSeed, "'time'|'random-device'|number" )
+                 ["--rng-seed"]
+                 ( "set a specific seed for random numbers" )

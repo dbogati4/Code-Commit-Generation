@@ -1,0 +1,8 @@
+{
+  "commit_id": "efcb76874e75c267e0b88163897d51996a9e0974",
+  "parent_id": "895b8af6bd70b1d56554f34ef55d6de8c306e917",
+  "message": "Store only lineinfo if m_lastAssertionInfo is going to be reset",
+  "changed_files": [
+    "src/catch2/internal/catch_run_context.cpp"
+  ]
+}

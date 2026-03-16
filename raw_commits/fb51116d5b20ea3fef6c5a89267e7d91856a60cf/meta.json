@@ -1,0 +1,8 @@
+{
+  "commit_id": "fb51116d5b20ea3fef6c5a89267e7d91856a60cf",
+  "parent_id": "ed6ac8a629f9a4206575be784c1e340da2a94855",
+  "message": "Avoid useless FDuration cast in benchmark analysis (#2823)",
+  "changed_files": [
+    "src/catch2/benchmark/detail/catch_analyse.cpp"
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "commit_id": "f1361ef6243ec88038a6b4f013c405f2df3df376",
+  "parent_id": "d1e7544e9f8b233af8ffd37df9bee12492215aff",
+  "message": "Refactor how the RNG seed is parsed when handling cmdline",
+  "changed_files": [
+    "src/catch2/internal/catch_commandline.cpp",
+    "tests/SelfTest/IntrospectiveTests/CmdLine.tests.cpp"
+  ]
+}

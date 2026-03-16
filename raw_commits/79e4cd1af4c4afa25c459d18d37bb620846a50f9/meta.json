@@ -1,0 +1,14 @@
+{
+  "commit_id": "79e4cd1af4c4afa25c459d18d37bb620846a50f9",
+  "parent_id": "635db2785fc081e576e92e3f166504ccd7e6efd8",
+  "message": "Cleanup summary comments in ExtraTests",
+  "changed_files": [
+    "tests/ExtraTests/X01-PrefixedMacros.cpp",
+    "tests/ExtraTests/X02-DisabledMacros.cpp",
+    "tests/ExtraTests/X10-FallbackStringifier.cpp",
+    "tests/ExtraTests/X11-DisableStringification.cpp",
+    "tests/ExtraTests/X12-CustomDebugBreakMacro.cpp",
+    "tests/ExtraTests/X90-WindowsHeaderInclusion.cpp",
+    "tests/ExtraTests/X91-AmalgamatedCatch.cpp"
+  ]
+}

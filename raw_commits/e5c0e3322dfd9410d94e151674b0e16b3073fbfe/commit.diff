@@ -1,0 +1,22 @@
+diff --git a/include/internal/catch_debug_console.cpp b/include/internal/catch_debug_console.cpp
+index 5d25f651..26751c7e 100644
+--- a/include/internal/catch_debug_console.cpp
++++ b/include/internal/catch_debug_console.cpp
+@@ -11,7 +11,16 @@
+ #include "catch_platform.h"
+ #include "catch_windows_h_proxy.h"
+ 
+-#ifdef CATCH_PLATFORM_WINDOWS
++#if defined(__ANDROID__)
++#include <android/log.h>
++
++    namespace Catch {
++        void writeToDebugConsole( std::string const& text ) {
++            __android_log_print( ANDROID_LOG_DEBUG, "Catch", text.c_str() );
++        }
++    }
++
++#elif defined(CATCH_PLATFORM_WINDOWS)
+ 
+     namespace Catch {
+         void writeToDebugConsole( std::string const& text ) {

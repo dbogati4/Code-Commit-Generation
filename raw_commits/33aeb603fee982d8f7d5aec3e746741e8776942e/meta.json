@@ -1,0 +1,9 @@
+{
+  "commit_id": "33aeb603fee982d8f7d5aec3e746741e8776942e",
+  "parent_id": "fc3d11b1d1090a5bcbcc9e410a460f9bf6a1f474",
+  "message": "Add check for registering multiple reporters under same name",
+  "changed_files": [
+    "src/catch2/internal/catch_reporter_registry.cpp",
+    "tests/SelfTest/IntrospectiveTests/Reporters.tests.cpp"
+  ]
+}

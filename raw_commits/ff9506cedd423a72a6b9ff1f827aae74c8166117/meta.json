@@ -1,0 +1,8 @@
+{
+  "commit_id": "ff9506cedd423a72a6b9ff1f827aae74c8166117",
+  "parent_id": "0c13d021da4ff937a33279207fb57e000781d86c",
+  "message": "Only test SEH handling with MSVC",
+  "changed_files": [
+    "tests/SelfTest/UsageTests/Misc.tests.cpp"
+  ]
+}

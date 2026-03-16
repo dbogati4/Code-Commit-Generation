@@ -1,0 +1,8 @@
+{
+  "commit_id": "0b42ada60d702568b0191c16761b5fbed8cfbab7",
+  "parent_id": "c424ca47f9211eb4c6b43df8838e1332d073ecd6",
+  "message": "Coverage helper now passes-on test return value",
+  "changed_files": [
+    "misc/coverage-helper.cpp"
+  ]
+}

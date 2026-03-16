@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" xmlns:diff="http://www.srcML.org/srcDiff" revision="1.0.0" language="C++" filename="C:\Users\saile\AppData\Local\Temp\catch2_100_z8gzpiwf\8c078997155a86b45fc2dcf66c571461ebf51348\projects_SelfTest_ApproxTests_cpp\projects_SelfTest_ApproxTests_cpp.old|C:\Users\saile\AppData\Local\Temp\catch2_100_z8gzpiwf\8c078997155a86b45fc2dcf66c571461ebf51348\projects_SelfTest_ApproxTests_cpp\projects_SelfTest_ApproxTests_cpp.new"><comment type="block">/*
+ *  Created by Phil on 28/04/2011.
+ *  Copyright 2011 Two Blue Cubes Ltd. All rights reserved.
+ *
+ *  Distributed under the Boost Software License, Version 1.0. (See accompanying
+ *  file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
+ */</comment>
+
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">"catch.hpp"</cpp:file></cpp:include>
+
+<comment type="line" format="doxygen">///////////////////////////////////////////////////////////////////////////////</comment>
+<macro><name>TEST_CASE</name>
+<argument_list>(
+    <argument><literal type="string">"Some simple comparisons between doubles"</literal></argument>,
+    <argument><literal type="string">"[Approx]"</literal></argument>
+)</argument_list></macro>
+<block>{<block_content>
+    <decl_stmt><decl><type><name>double</name></type> <name>d</name> <init>= <expr><literal type="number">1.23</literal></expr></init></decl>;</decl_stmt>
+
+    <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><name>d</name> <operator>==</operator> <call><name>Approx</name><argument_list>( <argument><expr><literal type="number">1.23</literal></expr></argument> )</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><name>d</name> <operator>!=</operator> <call><name>Approx</name><argument_list>( <argument><expr><literal type="number">1.22</literal></expr></argument> )</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><name>d</name> <operator>!=</operator> <call><name>Approx</name><argument_list>( <argument><expr><literal type="number">1.24</literal></expr></argument> )</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+
+    <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name>Approx</name><argument_list>( <argument><expr><name>d</name></expr></argument> )</argument_list></call> <operator>==</operator> <literal type="number">1.23</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name>Approx</name><argument_list>( <argument><expr><name>d</name></expr></argument> )</argument_list></call> <operator>!=</operator> <literal type="number">1.22</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name>Approx</name><argument_list>( <argument><expr><name>d</name></expr></argument> )</argument_list></call> <operator>!=</operator> <literal type="number">1.24</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+</block_content>}</block>
+
+<comment type="line" format="doxygen">///////////////////////////////////////////////////////////////////////////////</comment>
+<macro><name>TEST_CASE</name>
+<argument_list>(
+    <argument><literal type="string">"Approximate comparisons with different epsilons"</literal></argument>,
+    <argument><literal type="string">"[Approx]"</literal></argument>
+ )</argument_list></macro>
+<block>{<block_content>
+    <decl_stmt><decl><type><name>double</name></type> <name>d</name> <init>= <expr><literal type="number">1.23</literal></expr></init></decl>;</decl_stmt>
+
+    <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><name>d</name> <operator>!=</operator> <call><name>Approx</name><argument_list>( <argument><expr><literal type="number">1.231</literal></expr></argument> )</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><name>d</name> <operator>==</operator> <call><name>Approx</name><argument_list>( <argument><expr><literal type="number">1.231</literal></expr></argument> )</argument_list></call><operator>.</operator><call><name>epsilon</name><argument_list>( <argument><expr><literal type="number">0.1</literal></expr></argument> )</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+</block_content>}</block>
+
+<comment type="line" format="doxygen">///////////////////////////////////////////////////////////////////////////////</comment>
+<macro><name>TEST_CASE</name>
+<argument_list>(
+ <argument><literal type="string">"Less-than inequalities with different epsilons"</literal></argument>,
+ <argument><literal type="string">"[Approx]"</literal></argument>
+)</argument_list></macro>
+<block>{<block_content>
+  <decl_stmt><decl><type><name>double</name></type> <name>d</name> <init>= <expr><literal type="number">1.23</literal></expr></init></decl>;</decl_stmt>
+
+  <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><name>d</name> <operator>&lt;=</operator> <call><name>Approx</name><argument_list>( <argument><expr><literal type="number">1.24</literal></expr></argument> )</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+  <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><name>d</name> <operator>&lt;=</operator> <call><name>Approx</name><argument_list>( <argument><expr><literal type="number">1.23</literal></expr></argument> )</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+  <expr_stmt><expr><call><name>REQUIRE_FALSE</name><argument_list>( <argument><expr><name>d</name> <operator>&lt;=</operator> <call><name>Approx</name><argument_list>( <argument><expr><literal type="number">1.22</literal></expr></argument> )</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+  <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><name>d</name> <operator>&lt;=</operator> <call><name>Approx</name><argument_list>( <argument><expr><literal type="number">1.22</literal></expr></argument> )</argument_list></call><operator>.</operator><call><name>epsilon</name><argument_list>(<argument><expr><literal type="number">0.1</literal></expr></argument>)</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+</block_content>}</block>
+
+<comment type="line" format="doxygen">///////////////////////////////////////////////////////////////////////////////</comment>
+<macro><name>TEST_CASE</name>
+<argument_list>(
+ <argument><literal type="string">"Greater-than inequalities with different epsilons"</literal></argument>,
+ <argument><literal type="string">"[Approx]"</literal></argument>
+)</argument_list></macro>
+<block>{<block_content>
+  <decl_stmt><decl><type><name>double</name></type> <name>d</name> <init>= <expr><literal type="number">1.23</literal></expr></init></decl>;</decl_stmt>
+
+  <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><name>d</name> <operator>&gt;=</operator> <call><name>Approx</name><argument_list>( <argument><expr><literal type="number">1.22</literal></expr></argument> )</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+  <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><name>d</name> <operator>&gt;=</operator> <call><name>Approx</name><argument_list>( <argument><expr><literal type="number">1.23</literal></expr></argument> )</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+  <expr_stmt><expr><call><name>REQUIRE_FALSE</name><argument_list>( <argument><expr><name>d</name> <operator>&gt;=</operator> <call><name>Approx</name><argument_list>( <argument><expr><literal type="number">1.24</literal></expr></argument> )</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+  <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><name>d</name> <operator>&gt;=</operator> <call><name>Approx</name><argument_list>( <argument><expr><literal type="number">1.24</literal></expr></argument> )</argument_list></call><operator>.</operator><call><name>epsilon</name><argument_list>(<argument><expr><literal type="number">0.1</literal></expr></argument>)</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+</block_content>}</block>
+
+<comment type="line" format="doxygen">///////////////////////////////////////////////////////////////////////////////</comment>
+<macro><name>TEST_CASE</name>
+<argument_list>(
+    <argument><literal type="string">"Approximate comparisons with floats"</literal></argument>,
+    <argument><literal type="string">"[Approx]"</literal></argument>
+)</argument_list></macro>
+<block>{<block_content>
+    <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><literal type="number">1.23f</literal> <operator>==</operator> <call><name>Approx</name><argument_list>( <argument><expr><literal type="number">1.23f</literal></expr></argument> )</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><literal type="number">0.0f</literal> <operator>==</operator> <call><name>Approx</name><argument_list>( <argument><expr><literal type="number">0.0f</literal></expr></argument> )</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+</block_content>}</block>
+
+<comment type="line" format="doxygen">///////////////////////////////////////////////////////////////////////////////</comment>
+<macro><name>TEST_CASE</name>
+<argument_list>(
+    <argument><literal type="string">"Approximate comparisons with ints"</literal></argument>,
+    <argument><literal type="string">"[Approx]"</literal></argument>
+)</argument_list></macro>
+<block>{<block_content>
+    <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><literal type="number">1</literal> <operator>==</operator> <call><name>Approx</name><argument_list>( <argument><expr><literal type="number">1</literal></expr></argument> )</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><literal type="number">0</literal> <operator>==</operator> <call><name>Approx</name><argument_list>( <argument><expr><literal type="number">0</literal></expr></argument> )</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+</block_content>}</block>
+
+<comment type="line" format="doxygen">///////////////////////////////////////////////////////////////////////////////</comment>
+<macro><name>TEST_CASE</name>
+<argument_list>(
+    <argument><literal type="string">"Approximate comparisons with mixed numeric types"</literal></argument>,
+    <argument><literal type="string">"[Approx]"</literal></argument>
+)</argument_list></macro>
+<block>{<block_content>
+    <decl_stmt><decl><type><specifier>const</specifier> <name>double</name></type> <name>dZero</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</decl_stmt>
+    <decl_stmt><decl><type><specifier>const</specifier> <name>double</name></type> <name>dSmall</name> <init>= <expr><literal type="number">0.00001</literal></expr></init></decl>;</decl_stmt>
+    <decl_stmt><decl><type><specifier>const</specifier> <name>double</name></type> <name>dMedium</name> <init>= <expr><literal type="number">1.234</literal></expr></init></decl>;</decl_stmt>
+
+    <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><literal type="number">1.0f</literal> <operator>==</operator> <call><name>Approx</name><argument_list>( <argument><expr><literal type="number">1</literal></expr></argument> )</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><literal type="number">0</literal> <operator>==</operator> <call><name>Approx</name><argument_list>( <argument><expr><name>dZero</name></expr></argument>)</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><literal type="number">0</literal> <operator>==</operator> <call><name>Approx</name><argument_list>( <argument><expr><name>dSmall</name></expr></argument> )</argument_list></call><operator>.</operator><call><name>epsilon</name><argument_list>( <argument><expr><literal type="number">0.001</literal></expr></argument> )</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><literal type="number">1.234f</literal> <operator>==</operator> <call><name>Approx</name><argument_list>( <argument><expr><name>dMedium</name></expr></argument> )</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><name>dMedium</name> <operator>==</operator> <call><name>Approx</name><argument_list>( <argument><expr><literal type="number">1.234f</literal></expr></argument> )</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+</block_content>}</block>
+
+<comment type="line" format="doxygen">///////////////////////////////////////////////////////////////////////////////</comment>
+<macro><name>TEST_CASE</name>
+<argument_list>(
+    <argument><literal type="string">"Use a custom approx"</literal></argument>,
+    <argument><literal type="string">"[Approx][custom]"</literal></argument>
+)</argument_list></macro>
+<block>{<block_content>
+    <decl_stmt><decl><type><name>double</name></type> <name>d</name> <init>= <expr><literal type="number">1.23</literal></expr></init></decl>;</decl_stmt>
+
+    <decl_stmt><decl><type><name>Approx</name></type> <name>approx</name> <init>= <expr><call><name><name>Approx</name><operator>::</operator><name>custom</name></name><argument_list>()</argument_list></call><operator>.</operator><call><name>epsilon</name><argument_list>( <argument><expr><literal type="number">0.005</literal></expr></argument> )</argument_list></call></expr></init></decl>;</decl_stmt>
+
+    <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><name>d</name> <operator>==</operator> <call><name>approx</name><argument_list>( <argument><expr><literal type="number">1.23</literal></expr></argument> )</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><name>d</name> <operator>==</operator> <call><name>approx</name><argument_list>( <argument><expr><literal type="number">1.22</literal></expr></argument> )</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><name>d</name> <operator>==</operator> <call><name>approx</name><argument_list>( <argument><expr><literal type="number">1.24</literal></expr></argument> )</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><name>d</name> <operator>!=</operator> <call><name>approx</name><argument_list>( <argument><expr><literal type="number">1.25</literal></expr></argument> )</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+
+    <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name>approx</name><argument_list>( <argument><expr><name>d</name></expr></argument> )</argument_list></call> <operator>==</operator> <literal type="number">1.23</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name>approx</name><argument_list>( <argument><expr><name>d</name></expr></argument> )</argument_list></call> <operator>==</operator> <literal type="number">1.22</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name>approx</name><argument_list>( <argument><expr><name>d</name></expr></argument> )</argument_list></call> <operator>==</operator> <literal type="number">1.24</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name>approx</name><argument_list>( <argument><expr><name>d</name></expr></argument> )</argument_list></call> <operator>!=</operator> <literal type="number">1.25</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+</block_content>}</block>
+
+<function><type><specifier>inline</specifier> <name>double</name></type> <name>divide</name><parameter_list>( <parameter><decl><type><name>double</name></type> <name>a</name></decl></parameter>, <parameter><decl><type><name>double</name></type> <name>b</name></decl></parameter> )</parameter_list> <block>{<block_content>
+    <return>return <expr><name>a</name><operator>/</operator><name>b</name></expr>;</return>
+</block_content>}</block></function>
+
+<macro><name>TEST_CASE</name><argument_list>( <argument><literal type="string">"Approximate PI"</literal></argument>, <argument><literal type="string">"[Approx][PI]"</literal></argument> )</argument_list></macro>
+<block>{<block_content>
+    <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name>divide</name><argument_list>( <argument><expr><literal type="number">22</literal></expr></argument>, <argument><expr><literal type="number">7</literal></expr></argument> )</argument_list></call> <operator>==</operator> <call><name>Approx</name><argument_list>( <argument><expr><literal type="number">3.141</literal></expr></argument> )</argument_list></call><operator>.</operator><call><name>epsilon</name><argument_list>( <argument><expr><literal type="number">0.001</literal></expr></argument> )</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name>divide</name><argument_list>( <argument><expr><literal type="number">22</literal></expr></argument>, <argument><expr><literal type="number">7</literal></expr></argument> )</argument_list></call> <operator>!=</operator> <call><name>Approx</name><argument_list>( <argument><expr><literal type="number">3.141</literal></expr></argument> )</argument_list></call><operator>.</operator><call><name>epsilon</name><argument_list>( <argument><expr><literal type="number">0.0001</literal></expr></argument> )</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+</block_content>}</block>
+
+<diff:insert xmlns:diff="http://www.srcML.org/srcDiff"><comment type="line" format="doxygen">///////////////////////////////////////////////////////////////////////////////</comment><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+
+</diff:ws><macro><name>TEST_CASE</name><argument_list>(<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><argument><literal type="string">"Absolute<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>margin"</literal></argument>,<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><argument><literal type="string">"[Approx]"</literal></argument><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>)</argument_list></macro><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><block>{<block_content><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+    </diff:ws><expr_stmt><expr><call><name>REQUIRE</name><argument_list>(<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><argument><expr><literal type="number">104.0</literal><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><operator>!=</operator><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><call><name>Approx</name><argument_list>(<argument><expr><literal type="number">100.0</literal></expr></argument>)</argument_list></call></expr></argument><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>)</argument_list></call></expr>;</expr_stmt><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+    </diff:ws><expr_stmt><expr><call><name>REQUIRE</name><argument_list>(<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><argument><expr><literal type="number">104.0</literal><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><operator>==</operator><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><call><name>Approx</name><argument_list>(<argument><expr><literal type="number">100.0</literal></expr></argument>)</argument_list></call><operator>.</operator><call><name>margin</name><argument_list>(<argument><expr><literal type="number">5</literal></expr></argument>)</argument_list></call></expr></argument><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>)</argument_list></call></expr>;</expr_stmt><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+    </diff:ws><expr_stmt><expr><call><name>REQUIRE</name><argument_list>(<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><argument><expr><literal type="number">104.0</literal><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><operator>!=</operator><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><call><name>Approx</name><argument_list>(<argument><expr><literal type="number">100.0</literal></expr></argument>)</argument_list></call><operator>.</operator><call><name>margin</name><argument_list>(<argument><expr><literal type="number">3</literal></expr></argument>)</argument_list></call></expr></argument><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>)</argument_list></call></expr>;</expr_stmt><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+    </diff:ws><expr_stmt><expr><call><name>REQUIRE</name><argument_list>(<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><argument><expr><literal type="number">100.3</literal><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><operator>!=</operator><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><call><name>Approx</name><argument_list>(<argument><expr><literal type="number">100.0</literal></expr></argument>)</argument_list></call></expr></argument><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>)</argument_list></call></expr>;</expr_stmt><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+    </diff:ws><expr_stmt><expr><call><name>REQUIRE</name><argument_list>(<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><argument><expr><literal type="number">100.3</literal><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><operator>==</operator><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><call><name>Approx</name><argument_list>(<argument><expr><literal type="number">100.0</literal></expr></argument>)</argument_list></call><operator>.</operator><call><name>margin</name><argument_list>(<argument><expr><literal type="number">0.5</literal></expr></argument>)</argument_list></call></expr></argument><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>)</argument_list></call></expr>;</expr_stmt><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+</diff:ws></block_content>}</block><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+
+</diff:ws></diff:insert><comment type="line" format="doxygen">////////////////////////////////////////////////////////////////////////////////</comment>
+
+<cpp:if xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">if</cpp:directive> <expr><call><name>defined</name><argument_list>(<argument><expr><name>CATCH_CONFIG_CPP11_TYPE_TRAITS</name></expr></argument>)</argument_list></call></expr></cpp:if>
+<class>class <name>StrongDoubleTypedef</name>
+<block>{<private type="default">
+  <decl_stmt><decl><type><name>double</name></type> <name>d_</name> <init>= <expr><literal type="number">0.0</literal></expr></init></decl>;</decl_stmt>
+
+  </private><public>public:
+    <constructor><specifier>explicit</specifier> <name>StrongDoubleTypedef</name><parameter_list>(<parameter><decl><type><name>double</name></type> <name>d</name></decl></parameter>)</parameter_list> <member_init_list>: <call><name>d_</name><argument_list>(<argument><expr><name>d</name></expr></argument>)</argument_list></call> </member_init_list><block>{<block_content/>}</block></constructor>
+    <function type="operator"><type><specifier>explicit</specifier></type> <name>operator <name>double</name></name><parameter_list>()</parameter_list> <specifier>const</specifier> <block>{<block_content> <return>return <expr><name>d_</name></expr>;</return> </block_content>}</block></function>
+</public>}</block>;</class>
+
+<function type="operator"><type><specifier>inline</specifier> <name><name>std</name><operator>::</operator><name>ostream</name></name><modifier>&amp;</modifier></type> <name>operator<name>&lt;&lt;</name></name><parameter_list>( <parameter><decl><type><name><name>std</name><operator>::</operator><name>ostream</name></name><modifier>&amp;</modifier></type> <name>os</name></decl></parameter>, <parameter><decl><type><name>StrongDoubleTypedef</name></type> <name>td</name></decl></parameter> )</parameter_list> <block>{<block_content>
+    <return>return <expr><name>os</name> <operator>&lt;&lt;</operator> <literal type="string">"StrongDoubleTypedef("</literal> <operator>&lt;&lt;</operator> <cast type="static">static_cast<argument_list type="generic">&lt;<argument><expr><name>double</name></expr></argument>&gt;</argument_list><argument_list>(<argument><expr><name>td</name></expr></argument>)</argument_list></cast> <operator>&lt;&lt;</operator> <literal type="string">")"</literal></expr>;</return>
+</block_content>}</block></function>
+
+<macro><name>TEST_CASE</name>
+<argument_list>(
+ <argument><literal type="string">"Comparison with explicitly convertible types"</literal></argument>,
+ <argument><literal type="string">"[Approx][c++11]"</literal></argument>
+)</argument_list></macro>
+<block>{<block_content>
+  <decl_stmt><decl><type><name>StrongDoubleTypedef</name></type> <name>td</name><argument_list>(<argument><expr><literal type="number">10.0</literal></expr></argument>)</argument_list></decl>;</decl_stmt>
+
+  <expr_stmt><expr><call><name>REQUIRE</name><argument_list>(<argument><expr><name>td</name> <operator>==</operator> <call><name>Approx</name><argument_list>(<argument><expr><literal type="number">10.0</literal></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+  <expr_stmt><expr><call><name>REQUIRE</name><argument_list>(<argument><expr><call><name>Approx</name><argument_list>(<argument><expr><literal type="number">10.0</literal></expr></argument>)</argument_list></call> <operator>==</operator> <name>td</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+
+  <expr_stmt><expr><call><name>REQUIRE</name><argument_list>(<argument><expr><name>td</name> <operator>!=</operator> <call><name>Approx</name><argument_list>(<argument><expr><literal type="number">11.0</literal></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+  <expr_stmt><expr><call><name>REQUIRE</name><argument_list>(<argument><expr><call><name>Approx</name><argument_list>(<argument><expr><literal type="number">11.0</literal></expr></argument>)</argument_list></call> <operator>!=</operator> <name>td</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+
+  <expr_stmt><expr><call><name>REQUIRE</name><argument_list>(<argument><expr><name>td</name> <operator>&lt;=</operator> <call><name>Approx</name><argument_list>(<argument><expr><literal type="number">10.0</literal></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+  <expr_stmt><expr><call><name>REQUIRE</name><argument_list>(<argument><expr><name>td</name> <operator>&lt;=</operator> <call><name>Approx</name><argument_list>(<argument><expr><literal type="number">11.0</literal></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+  <expr_stmt><expr><call><name>REQUIRE</name><argument_list>(<argument><expr><call><name>Approx</name><argument_list>(<argument><expr><literal type="number">10.0</literal></expr></argument>)</argument_list></call> <operator>&lt;=</operator> <name>td</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+  <expr_stmt><expr><call><name>REQUIRE</name><argument_list>(<argument><expr><call><name>Approx</name><argument_list>(<argument><expr><literal type="number">9.0</literal></expr></argument>)</argument_list></call> <operator>&lt;=</operator> <name>td</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+
+  <expr_stmt><expr><call><name>REQUIRE</name><argument_list>(<argument><expr><name>td</name> <operator>&gt;=</operator> <call><name>Approx</name><argument_list>(<argument><expr><literal type="number">9.0</literal></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+  <expr_stmt><expr><call><name>REQUIRE</name><argument_list>(<argument><expr><name>td</name> <operator>&gt;=</operator> <call><name>Approx</name><argument_list>(<argument><expr><literal type="number">10.0</literal></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+  <expr_stmt><expr><call><name>REQUIRE</name><argument_list>(<argument><expr><call><name>Approx</name><argument_list>(<argument><expr><literal type="number">10.0</literal></expr></argument>)</argument_list></call> <operator>&gt;=</operator> <name>td</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+  <expr_stmt><expr><call><name>REQUIRE</name><argument_list>(<argument><expr><call><name>Approx</name><argument_list>(<argument><expr><literal type="number">11.0</literal></expr></argument>)</argument_list></call> <operator>&gt;=</operator> <name>td</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+
+</block_content>}</block>
+<cpp:endif xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">endif</cpp:directive></cpp:endif>
+
+<comment type="line" format="doxygen">////////////////////////////////////////////////////////////////////////////////</comment>
+</unit>

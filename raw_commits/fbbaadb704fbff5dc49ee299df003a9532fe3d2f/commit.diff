@@ -1,0 +1,13 @@
+diff --git a/include/internal/catch_enum_values_registry.cpp b/include/internal/catch_enum_values_registry.cpp
+index 9e6f2ecb..de8181fd 100644
+--- a/include/internal/catch_enum_values_registry.cpp
++++ b/include/internal/catch_enum_values_registry.cpp
+@@ -36,7 +36,7 @@ namespace Catch {
+                 if( valueToName.first == value )
+                     return valueToName.second;
+             }
+-            return "{** unexpected enum value **}";
++            return "{** unexpected enum value **}"_sr;
+         }
+ 
+         std::unique_ptr<EnumInfo> makeEnumInfo( StringRef enumName, StringRef allValueNames, std::vector<int> const& values ) {

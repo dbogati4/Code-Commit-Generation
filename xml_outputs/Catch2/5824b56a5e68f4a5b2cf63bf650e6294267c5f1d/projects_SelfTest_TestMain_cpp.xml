@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" xmlns:diff="http://www.srcML.org/srcDiff" revision="1.0.0" language="C++" filename="C:\Users\saile\AppData\Local\Temp\catch2_100_z8gzpiwf\5824b56a5e68f4a5b2cf63bf650e6294267c5f1d\projects_SelfTest_TestMain_cpp\projects_SelfTest_TestMain_cpp.old|C:\Users\saile\AppData\Local\Temp\catch2_100_z8gzpiwf\5824b56a5e68f4a5b2cf63bf650e6294267c5f1d\projects_SelfTest_TestMain_cpp\projects_SelfTest_TestMain_cpp.new"><comment type="block">/*
+ *  Created by Phil on 22/10/2010.
+ *  Copyright 2010 Two Blue Cubes Ltd
+ *
+ *  Distributed under the Boost Software License, Version 1.0. (See accompanying
+ *  file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
+ */</comment>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">"catch_self_test.hpp"</cpp:file></cpp:include>
+
+<macro><name>TEST_CASE</name><argument_list>( <argument><literal type="string">"selftest/main"</literal></argument>, <argument><literal type="string">"Runs all Catch self tests and checks their results"</literal></argument> )</argument_list></macro> <block>{<block_content>
+    <using>using <namespace>namespace <name>Catch</name>;</namespace></using>
+    
+    <comment type="line" format="doxygen">///////////////////////////////////////////////////////////////////////////</comment>
+    <macro><name>SECTION</name><argument_list>(    <argument><literal type="string">"selftest/expected result"</literal></argument>,
+                <argument><literal type="string">"Tests do what they claim"</literal></argument> )</argument_list></macro> <block>{<block_content>
+                
+        <macro><name>SECTION</name><argument_list>(    <argument><literal type="string">"selftest/expected result/failing tests"</literal></argument>, 
+                    <argument><literal type="string">"Tests in the 'failing' branch fail"</literal></argument> )</argument_list></macro> <block>{<block_content>
+            <expr_stmt><expr><call><name><name>MetaTestRunner</name><operator>::</operator><name>runMatching</name></name><argument_list>( <argument><expr><literal type="string">"./failing/*"</literal></expr></argument>,  <argument><expr><name><name>MetaTestRunner</name><operator>::</operator><name>Expected</name><operator>::</operator><name>ToFail</name></name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        </block_content>}</block>
+        
+        <macro><name>SECTION</name><argument_list>(    <argument><literal type="string">"selftest/expected result/succeeding tests"</literal></argument>, 
+                    <argument><literal type="string">"Tests in the 'succeeding' branch succeed"</literal></argument> )</argument_list></macro> <block>{<block_content>
+            <expr_stmt><expr><call><name><name>MetaTestRunner</name><operator>::</operator><name>runMatching</name></name><argument_list>( <argument><expr><literal type="string">"./succeeding/*"</literal></expr></argument>,  <argument><expr><name><name>MetaTestRunner</name><operator>::</operator><name>Expected</name><operator>::</operator><name>ToSucceed</name></name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        </block_content>}</block>
+    </block_content>}</block>
+
+    <comment type="line" format="doxygen">///////////////////////////////////////////////////////////////////////////</comment>
+    <macro><name>SECTION</name><argument_list>(    <argument><literal type="string">"selftest/test counts"</literal></argument>, 
+                <argument><literal type="string">"Number of test cases that run is fixed"</literal></argument> )</argument_list></macro> <block>{<block_content>
+        <decl_stmt><decl><type><name>EmbeddedRunner</name></type> <name>runner</name></decl>;</decl_stmt>
+        
+        <macro><name>SECTION</name><argument_list>(    <argument><literal type="string">"selftest/test counts/succeeding tests"</literal></argument>, 
+                    <argument><literal type="string">"Number of 'succeeding' tests is fixed"</literal></argument> )</argument_list></macro> <block>{<block_content>
+            <expr_stmt><expr><call><name><name>runner</name><operator>.</operator><name>runMatching</name></name><argument_list>( <argument><expr><literal type="string">"./succeeding/*"</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+            <expr_stmt><expr><call><name>CHECK</name><argument_list>( <argument><expr><call><name><name>runner</name><operator>.</operator><name>getTotals</name></name><argument_list>()</argument_list></call><operator>.</operator><name><name>assertions</name><operator>.</operator><name>passed</name></name> <operator>==</operator> <literal type="number"><diff:delete type="replace" xmlns:diff="http://www.srcML.org/srcDiff">277</diff:delete><diff:insert type="replace" xmlns:diff="http://www.srcML.org/srcDiff">283</diff:insert></literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+            <expr_stmt><expr><call><name>CHECK</name><argument_list>( <argument><expr><call><name><name>runner</name><operator>.</operator><name>getTotals</name></name><argument_list>()</argument_list></call><operator>.</operator><name><name>assertions</name><operator>.</operator><name>failed</name></name> <operator>==</operator> <literal type="number">0</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        </block_content>}</block>
+
+        <macro><name>SECTION</name><argument_list>(    <argument><literal type="string">"selftest/test counts/failing tests"</literal></argument>, 
+                    <argument><literal type="string">"Number of 'failing' tests is fixed"</literal></argument> )</argument_list></macro> <block>{<block_content>
+            <expr_stmt><expr><call><name><name>runner</name><operator>.</operator><name>runMatching</name></name><argument_list>( <argument><expr><literal type="string">"./failing/*"</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>        
+            <expr_stmt><expr><call><name>CHECK</name><argument_list>( <argument><expr><call><name><name>runner</name><operator>.</operator><name>getTotals</name></name><argument_list>()</argument_list></call><operator>.</operator><name><name>assertions</name><operator>.</operator><name>passed</name></name> <operator>==</operator> <literal type="number">0</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+            <expr_stmt><expr><call><name>CHECK</name><argument_list>( <argument><expr><call><name><name>runner</name><operator>.</operator><name>getTotals</name></name><argument_list>()</argument_list></call><operator>.</operator><name><name>assertions</name><operator>.</operator><name>failed</name></name> <operator>==</operator> <literal type="number">72</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        </block_content>}</block>
+    </block_content>}</block>
+</block_content>}</block>
+
+<macro><name>TEST_CASE</name><argument_list>( <argument><literal type="string">"meta/Misc/Sections"</literal></argument>, <argument><literal type="string">"looped tests"</literal></argument> )</argument_list></macro> <block>{<block_content>
+    <decl_stmt><decl><type><name><name>Catch</name><operator>::</operator><name>EmbeddedRunner</name></name></type> <name>runner</name></decl>;</decl_stmt>
+    
+    <expr_stmt><expr><call><name><name>runner</name><operator>.</operator><name>runMatching</name></name><argument_list>( <argument><expr><literal type="string">"./mixed/Misc/Sections/nested2"</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>CHECK</name><argument_list>( <argument><expr><call><name><name>runner</name><operator>.</operator><name>getTotals</name></name><argument_list>()</argument_list></call><operator>.</operator><name><name>assertions</name><operator>.</operator><name>passed</name></name> <operator>==</operator> <literal type="number">2</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>CHECK</name><argument_list>( <argument><expr><call><name><name>runner</name><operator>.</operator><name>getTotals</name></name><argument_list>()</argument_list></call><operator>.</operator><name><name>assertions</name><operator>.</operator><name>failed</name></name> <operator>==</operator> <literal type="number">1</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+</block_content>}</block>
+
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">"../../include/internal/catch_commandline.hpp"</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">"../../include/reporters/catch_reporter_basic.hpp"</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">"../../include/reporters/catch_reporter_xml.hpp"</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">"../../include/reporters/catch_reporter_junit.hpp"</cpp:file></cpp:include>
+
+<decl_stmt><decl><template>template<parameter_list>&lt;<parameter><type><name>size_t</name></type> <name>size</name></parameter>&gt;</parameter_list></template>
+<type><name>bool</name></type> <name>parseIntoConfig</name><argument_list>( <argument><expr><specifier>const</specifier> <name>char</name> <operator>*</operator> <operator>(</operator><operator>&amp;</operator><name>argv</name><operator>)</operator><index>[<expr><name>size</name></expr>]</index></expr></argument>, <argument><expr><name><name>Catch</name><operator>::</operator><name>Config</name></name><operator>&amp;</operator> <name>config</name></expr></argument> )</argument_list> <argument_list>{
+    return <argument><expr><call><name><name>Catch</name><operator>::</operator><name>parseIntoConfig</name></name><argument_list>( <argument><expr><call><name><name>Catch</name><operator>::</operator><name>CommandParser</name></name><argument_list>( <argument><expr><name>size</name></expr></argument>, <argument><expr><name>argv</name></expr></argument> )</argument_list></call></expr></argument>, <argument><expr><name>config</name></expr></argument> )</argument_list></call></expr></argument>;
+}</argument_list>
+
+<name>TEST_CASE</name><argument_list>( <argument><expr><literal type="string">"selftest/parser"</literal></expr></argument>, <argument><expr><literal type="string">""</literal></expr></argument> )</argument_list> <argument_list>{
+
+    <argument><expr><macro><name>SECTION</name><argument_list>( <argument><literal type="string">"default"</literal></argument>, <argument><literal type="string">""</literal></argument> )</argument_list></macro> <block>{
+        <expr><specifier>const</specifier> <name>char</name><operator>*</operator> <name><name>argv</name><index>[]</index></name> <operator>=</operator> <block>{ <expr><literal type="string">"test"</literal></expr> }</block></expr>;
+        <expr><name><name>Catch</name><operator>::</operator><name>Config</name></name> <name>config</name></expr>;
+        <expr><call><name>CHECK</name><argument_list>( <argument><expr><call><name>parseIntoConfig</name><argument_list>( <argument><expr><name>argv</name></expr></argument>, <argument><expr><name>config</name></expr></argument> )</argument_list></call></expr></argument> )</argument_list></call></expr>;
+        
+        <expr><call><name>CHECK</name><argument_list>( <argument><expr><call><name><name>config</name><operator>.</operator><name>getTestSpecs</name></name><argument_list>()</argument_list></call><operator>.</operator><call><name>empty</name><argument_list>()</argument_list></call></expr></argument> )</argument_list></call></expr>;
+        <expr><call><name>CHECK</name><argument_list>( <argument><expr><call><name><name>config</name><operator>.</operator><name>shouldDebugBreak</name></name><argument_list>()</argument_list></call> <operator>==</operator> <literal type="boolean">false</literal></expr></argument> )</argument_list></call></expr>;
+        <expr><call><name>CHECK</name><argument_list>( <argument><expr><call><name><name>config</name><operator>.</operator><name>showHelp</name></name><argument_list>()</argument_list></call> <operator>==</operator> <literal type="boolean">false</literal></expr></argument> )</argument_list></call></expr>;
+        <expr><call><name>CHECK</name><argument_list>( <argument><expr><call><name><name>config</name><operator>.</operator><name>getCutoff</name></name><argument_list>()</argument_list></call> <operator>==</operator> <operator>-</operator><literal type="number">1</literal></expr></argument> )</argument_list></call></expr>;
+        <expr><call><name>CHECK</name><argument_list>( <argument><expr><cast type="dynamic">dynamic_cast<argument_list type="generic">&lt;<argument><expr><name><name>Catch</name><operator>::</operator><name>BasicReporter</name></name><operator>*</operator></expr></argument>&gt;</argument_list><argument_list>( <argument><expr><call><name><name>config</name><operator>.</operator><name>getReporter</name></name><argument_list>()</argument_list></call><operator>.</operator><call><name>get</name><argument_list>()</argument_list></call></expr></argument> )</argument_list></cast></expr></argument> )</argument_list></call></expr>;
+    }</block>
+    
+    <macro><name>SECTION</name><argument_list>( <argument><literal type="string">"test lists"</literal></argument>, <argument><literal type="string">""</literal></argument> )</argument_list></macro> <block>{
+        <macro><name>SECTION</name><argument_list>( <argument><literal type="string">"-t/1"</literal></argument>, <argument><literal type="string">"Specify one test case using -t"</literal></argument> )</argument_list></macro> <expr><block>{
+            <expr><specifier>const</specifier> <name>char</name><operator>*</operator> <name><name>argv</name><index>[]</index></name> <operator>=</operator> <block>{ <expr><literal type="string">"test"</literal></expr>, <expr><literal type="string">"-t"</literal></expr>, <expr><literal type="string">"test1"</literal></expr> }</block></expr>;
+            <expr><name><name>Catch</name><operator>::</operator><name>Config</name></name> <name>config</name></expr>;
+            <expr><call><name>CHECK</name><argument_list>( <argument><expr><call><name>parseIntoConfig</name><argument_list>( <argument><expr><name>argv</name></expr></argument>, <argument><expr><name>config</name></expr></argument> )</argument_list></call></expr></argument> )</argument_list></call></expr>;
+            
+            <expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name><name>config</name><operator>.</operator><name>getTestSpecs</name></name><argument_list>()</argument_list></call><operator>.</operator><call><name>size</name><argument_list>()</argument_list></call> <operator>==</operator> <literal type="number">1</literal></expr></argument> )</argument_list></call></expr>;
+            <expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name><name>config</name><operator>.</operator><name>getTestSpecs</name></name><argument_list>()</argument_list></call><index>[<expr><literal type="number">0</literal></expr>]</index> <operator>==</operator> <literal type="string">"test1"</literal></expr></argument> )</argument_list></call></expr>;
+        }</block>
+
+        <macro><name>SECTION</name><argument_list>( <argument><literal type="string">"--test/1"</literal></argument>, <argument><literal type="string">"Specify one test case using --test"</literal></argument> )</argument_list></macro> <block>{
+            <expr><specifier>const</specifier> <name>char</name><operator>*</operator> <name><name>argv</name><index>[]</index></name> <operator>=</operator> <block>{ <expr><literal type="string">"test"</literal></expr>, <expr><literal type="string">"--test"</literal></expr>, <expr><literal type="string">"test1"</literal></expr> }</block></expr>;
+            <expr><name><name>Catch</name><operator>::</operator><name>Config</name></name> <name>config</name></expr>;
+            <expr><call><name>CHECK</name><argument_list>( <argument><expr><call><name>parseIntoConfig</name><argument_list>( <argument><expr><name>argv</name></expr></argument>, <argument><expr><name>config</name></expr></argument> )</argument_list></call></expr></argument> )</argument_list></call></expr>;
+            
+            <expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name><name>config</name><operator>.</operator><name>getTestSpecs</name></name><argument_list>()</argument_list></call><operator>.</operator><call><name>size</name><argument_list>()</argument_list></call> <operator>==</operator> <literal type="number">1</literal></expr></argument> )</argument_list></call></expr>;
+            <expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name><name>config</name><operator>.</operator><name>getTestSpecs</name></name><argument_list>()</argument_list></call><index>[<expr><literal type="number">0</literal></expr>]</index> <operator>==</operator> <literal type="string">"test1"</literal></expr></argument> )</argument_list></call></expr>;
+        }</block>
+
+        <macro><name>SECTION</name><argument_list>( <argument><literal type="string">"-t/2"</literal></argument>, <argument><literal type="string">"Specify two test cases using -t"</literal></argument> )</argument_list></macro> <block>{
+            <expr><specifier>const</specifier> <name>char</name><operator>*</operator> <name><name>argv</name><index>[]</index></name> <operator>=</operator> <block>{ <expr><literal type="string">"test"</literal></expr>, <expr><literal type="string">"-t"</literal></expr>, <expr><literal type="string">"test1"</literal></expr>, <expr><literal type="string">"test2"</literal></expr> }</block></expr>;
+            <expr><name><name>Catch</name><operator>::</operator><name>Config</name></name> <name>config</name></expr>;
+            <expr><call><name>CHECK</name><argument_list>( <argument><expr><call><name>parseIntoConfig</name><argument_list>( <argument><expr><name>argv</name></expr></argument>, <argument><expr><name>config</name></expr></argument> )</argument_list></call></expr></argument> )</argument_list></call></expr>;
+
+            <expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name><name>config</name><operator>.</operator><name>getTestSpecs</name></name><argument_list>()</argument_list></call><operator>.</operator><call><name>size</name><argument_list>()</argument_list></call> <operator>==</operator> <literal type="number">2</literal></expr></argument> )</argument_list></call></expr>;
+            <expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name><name>config</name><operator>.</operator><name>getTestSpecs</name></name><argument_list>()</argument_list></call><index>[<expr><literal type="number">0</literal></expr>]</index> <operator>==</operator> <literal type="string">"test1"</literal></expr></argument> )</argument_list></call></expr>;
+            <expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name><name>config</name><operator>.</operator><name>getTestSpecs</name></name><argument_list>()</argument_list></call><index>[<expr><literal type="number">1</literal></expr>]</index> <operator>==</operator> <literal type="string">"test2"</literal></expr></argument> )</argument_list></call></expr>;
+        }</block>
+
+        <macro><name>SECTION</name><argument_list>( <argument><literal type="string">"-t/0"</literal></argument>, <argument><literal type="string">"When no test names are supplied it is an error"</literal></argument> )</argument_list></macro> <block>{
+            <expr><specifier>const</specifier> <name>char</name><operator>*</operator> <name><name>argv</name><index>[]</index></name> <operator>=</operator> <block>{ <expr><literal type="string">"test"</literal></expr>, <expr><literal type="string">"-t"</literal></expr> }</block></expr>;
+            <expr><name><name>Catch</name><operator>::</operator><name>Config</name></name> <name>config</name></expr>;
+            <expr><call><name>CHECK</name><argument_list>( <argument><expr><call><name>parseIntoConfig</name><argument_list>( <argument><expr><name>argv</name></expr></argument>, <argument><expr><name>config</name></expr></argument> )</argument_list></call> <operator>==</operator> <literal type="boolean">false</literal></expr></argument> )</argument_list></call></expr>;
+            
+            <expr><call><name>REQUIRE_THAT</name><argument_list>( <argument><expr><call><name><name>config</name><operator>.</operator><name>getMessage</name></name><argument_list>()</argument_list></call></expr></argument>, <argument><expr><call><name>Contains</name><argument_list>( <argument><expr><literal type="string">"at least one"</literal></expr></argument> )</argument_list></call></expr></argument> )</argument_list></call></expr>;
+        }</block></expr>
+    }</block>
+    
+    <macro><name>SECTION</name><argument_list>( <argument><literal type="string">"reporter"</literal></argument>, <argument><literal type="string">""</literal></argument> )</argument_list></macro> <block>{
+        <macro><name>SECTION</name><argument_list>( <argument><literal type="string">"-r/basic"</literal></argument>, <argument><literal type="string">""</literal></argument> )</argument_list></macro> <expr><block>{
+            <expr><specifier>const</specifier> <name>char</name><operator>*</operator> <name><name>argv</name><index>[]</index></name> <operator>=</operator> <block>{ <expr><literal type="string">"test"</literal></expr>, <expr><literal type="string">"-reporter"</literal></expr>, <expr><literal type="string">"basic"</literal></expr> }</block></expr>;
+            <expr><name><name>Catch</name><operator>::</operator><name>Config</name></name> <name>config</name></expr>;
+            <expr><call><name>CHECK</name><argument_list>( <argument><expr><call><name>parseIntoConfig</name><argument_list>( <argument><expr><name>argv</name></expr></argument>, <argument><expr><name>config</name></expr></argument> )</argument_list></call></expr></argument> )</argument_list></call></expr>;
+            
+            <expr><call><name>REQUIRE</name><argument_list>( <argument><expr><cast type="dynamic">dynamic_cast<argument_list type="generic">&lt;<argument><expr><name><name>Catch</name><operator>::</operator><name>BasicReporter</name></name><operator>*</operator></expr></argument>&gt;</argument_list><argument_list>( <argument><expr><call><name><name>config</name><operator>.</operator><name>getReporter</name></name><argument_list>()</argument_list></call><operator>.</operator><call><name>get</name><argument_list>()</argument_list></call></expr></argument> )</argument_list></cast></expr></argument> )</argument_list></call></expr>;
+        }</block>
+        <macro><name>SECTION</name><argument_list>( <argument><literal type="string">"-r/xml"</literal></argument>, <argument><literal type="string">""</literal></argument> )</argument_list></macro> <block>{
+            <expr><specifier>const</specifier> <name>char</name><operator>*</operator> <name><name>argv</name><index>[]</index></name> <operator>=</operator> <block>{ <expr><literal type="string">"test"</literal></expr>, <expr><literal type="string">"-r"</literal></expr>, <expr><literal type="string">"xml"</literal></expr> }</block></expr>;
+            <expr><name><name>Catch</name><operator>::</operator><name>Config</name></name> <name>config</name></expr>;
+            <expr><call><name>CHECK</name><argument_list>( <argument><expr><call><name>parseIntoConfig</name><argument_list>( <argument><expr><name>argv</name></expr></argument>, <argument><expr><name>config</name></expr></argument> )</argument_list></call></expr></argument> )</argument_list></call></expr>;
+            
+            <expr><call><name>REQUIRE</name><argument_list>( <argument><expr><cast type="dynamic">dynamic_cast<argument_list type="generic">&lt;<argument><expr><name><name>Catch</name><operator>::</operator><name>XmlReporter</name></name><operator>*</operator></expr></argument>&gt;</argument_list><argument_list>( <argument><expr><call><name><name>config</name><operator>.</operator><name>getReporter</name></name><argument_list>()</argument_list></call><operator>.</operator><call><name>get</name><argument_list>()</argument_list></call></expr></argument> )</argument_list></cast></expr></argument> )</argument_list></call></expr>;
+        }</block>
+        <macro><name>SECTION</name><argument_list>( <argument><literal type="string">"-r/junit"</literal></argument>, <argument><literal type="string">""</literal></argument> )</argument_list></macro> <block>{
+            <expr><specifier>const</specifier> <name>char</name><operator>*</operator> <name><name>argv</name><index>[]</index></name> <operator>=</operator> <block>{ <expr><literal type="string">"test"</literal></expr>, <expr><literal type="string">"-r"</literal></expr>, <expr><literal type="string">"junit"</literal></expr> }</block></expr>;
+            <expr><name><name>Catch</name><operator>::</operator><name>Config</name></name> <name>config</name></expr>;
+            <expr><call><name>CHECK</name><argument_list>( <argument><expr><call><name>parseIntoConfig</name><argument_list>( <argument><expr><name>argv</name></expr></argument>, <argument><expr><name>config</name></expr></argument> )</argument_list></call></expr></argument> )</argument_list></call></expr>;
+            
+            <expr><call><name>REQUIRE</name><argument_list>( <argument><expr><cast type="dynamic">dynamic_cast<argument_list type="generic">&lt;<argument><expr><name><name>Catch</name><operator>::</operator><name>JunitReporter</name></name><operator>*</operator></expr></argument>&gt;</argument_list><argument_list>( <argument><expr><call><name><name>config</name><operator>.</operator><name>getReporter</name></name><argument_list>()</argument_list></call><operator>.</operator><call><name>get</name><argument_list>()</argument_list></call></expr></argument> )</argument_list></cast></expr></argument> )</argument_list></call></expr>;
+        }</block>
+        <macro><name>SECTION</name><argument_list>( <argument><literal type="string">"-r/error"</literal></argument>, <argument><literal type="string">"reporter config only accepts one argument"</literal></argument> )</argument_list></macro> <block>{
+            <expr><specifier>const</specifier> <name>char</name><operator>*</operator> <name><name>argv</name><index>[]</index></name> <operator>=</operator> <block>{ <expr><literal type="string">"test"</literal></expr>, <expr><literal type="string">"-r"</literal></expr>, <expr><literal type="string">"one"</literal></expr>, <expr><literal type="string">"two"</literal></expr> }</block></expr>;
+            <expr><name><name>Catch</name><operator>::</operator><name>Config</name></name> <name>config</name></expr>;
+            <expr><call><name>CHECK</name><argument_list>( <argument><expr><call><name>parseIntoConfig</name><argument_list>( <argument><expr><name>argv</name></expr></argument>, <argument><expr><name>config</name></expr></argument> )</argument_list></call> <operator>==</operator> <literal type="boolean">false</literal></expr></argument> )</argument_list></call></expr>;
+            
+            <expr><call><name>REQUIRE_THAT</name><argument_list>( <argument><expr><call><name><name>config</name><operator>.</operator><name>getMessage</name></name><argument_list>()</argument_list></call></expr></argument>, <argument><expr><call><name>Contains</name><argument_list>( <argument><expr><literal type="string">"one argument"</literal></expr></argument> )</argument_list></call></expr></argument> )</argument_list></call></expr>;
+        }</block></expr>
+    }</block>
+    
+    <macro><name>SECTION</name><argument_list>( <argument><literal type="string">"debugger"</literal></argument>, <argument><literal type="string">""</literal></argument> )</argument_list></macro> <block>{
+        <macro><name>SECTION</name><argument_list>( <argument><literal type="string">"-b"</literal></argument>, <argument><literal type="string">""</literal></argument> )</argument_list></macro> <expr><block>{
+            <expr><specifier>const</specifier> <name>char</name><operator>*</operator> <name><name>argv</name><index>[]</index></name> <operator>=</operator> <block>{ <expr><literal type="string">"test"</literal></expr>, <expr><literal type="string">"-b"</literal></expr> }</block></expr>;
+            <expr><name><name>Catch</name><operator>::</operator><name>Config</name></name> <name>config</name></expr>;
+            <expr><call><name>CHECK</name><argument_list>( <argument><expr><call><name>parseIntoConfig</name><argument_list>( <argument><expr><name>argv</name></expr></argument>, <argument><expr><name>config</name></expr></argument> )</argument_list></call></expr></argument> )</argument_list></call></expr>;
+            
+            <expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name><name>config</name><operator>.</operator><name>shouldDebugBreak</name></name><argument_list>()</argument_list></call> <operator>==</operator> <literal type="boolean">true</literal></expr></argument> )</argument_list></call></expr>;
+        }</block>
+        <macro><name>SECTION</name><argument_list>( <argument><literal type="string">"--break"</literal></argument>, <argument><literal type="string">""</literal></argument> )</argument_list></macro> <block>{
+            <expr><specifier>const</specifier> <name>char</name><operator>*</operator> <name><name>argv</name><index>[]</index></name> <operator>=</operator> <block>{ <expr><literal type="string">"test"</literal></expr>, <expr><literal type="string">"--break"</literal></expr> }</block></expr>;
+            <expr><name><name>Catch</name><operator>::</operator><name>Config</name></name> <name>config</name></expr>;
+            <expr><call><name>CHECK</name><argument_list>( <argument><expr><call><name>parseIntoConfig</name><argument_list>( <argument><expr><name>argv</name></expr></argument>, <argument><expr><name>config</name></expr></argument> )</argument_list></call></expr></argument> )</argument_list></call></expr>;
+            
+            <expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name><name>config</name><operator>.</operator><name>shouldDebugBreak</name></name><argument_list>()</argument_list></call></expr></argument> )</argument_list></call></expr>;
+        }</block>
+        <macro><name>SECTION</name><argument_list>( <argument><literal type="string">"-b"</literal></argument>, <argument><literal type="string">"break option has no arguments"</literal></argument> )</argument_list></macro> <block>{
+            <expr><specifier>const</specifier> <name>char</name><operator>*</operator> <name><name>argv</name><index>[]</index></name> <operator>=</operator> <block>{ <expr><literal type="string">"test"</literal></expr>, <expr><literal type="string">"-b"</literal></expr>, <expr><literal type="string">"unexpected"</literal></expr> }</block></expr>;
+            <expr><name><name>Catch</name><operator>::</operator><name>Config</name></name> <name>config</name></expr>;
+            <expr><call><name>CHECK</name><argument_list>( <argument><expr><call><name>parseIntoConfig</name><argument_list>( <argument><expr><name>argv</name></expr></argument>, <argument><expr><name>config</name></expr></argument> )</argument_list></call> <operator>==</operator> <literal type="boolean">false</literal></expr></argument> )</argument_list></call></expr>;
+            
+            <expr><call><name>REQUIRE_THAT</name><argument_list>( <argument><expr><call><name><name>config</name><operator>.</operator><name>getMessage</name></name><argument_list>()</argument_list></call></expr></argument>, <argument><expr><call><name>Contains</name><argument_list>( <argument><expr><literal type="string">"not accept"</literal></expr></argument> )</argument_list></call></expr></argument> )</argument_list></call></expr>;
+        }</block></expr>
+    }</block>
+    
+    <macro><name>SECTION</name><argument_list>( <argument><literal type="string">"help"</literal></argument>, <argument><literal type="string">""</literal></argument> )</argument_list></macro> <block>{
+        <macro><name>SECTION</name><argument_list>( <argument><literal type="string">"-h"</literal></argument>, <argument><literal type="string">""</literal></argument> )</argument_list></macro> <expr><block>{
+            <expr><specifier>const</specifier> <name>char</name><operator>*</operator> <name><name>argv</name><index>[]</index></name> <operator>=</operator> <block>{ <expr><literal type="string">"test"</literal></expr>, <expr><literal type="string">"-h"</literal></expr> }</block></expr>;
+            <expr><name><name>Catch</name><operator>::</operator><name>Config</name></name> <name>config</name></expr>;
+            <expr><call><name>CHECK</name><argument_list>( <argument><expr><call><name>parseIntoConfig</name><argument_list>( <argument><expr><name>argv</name></expr></argument>, <argument><expr><name>config</name></expr></argument> )</argument_list></call></expr></argument> )</argument_list></call></expr>;
+
+            <expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name><name>config</name><operator>.</operator><name>showHelp</name></name><argument_list>()</argument_list></call></expr></argument> )</argument_list></call></expr>;
+        }</block>
+        <macro><name>SECTION</name><argument_list>( <argument><literal type="string">"-?"</literal></argument>, <argument><literal type="string">""</literal></argument> )</argument_list></macro> <block>{
+            <expr><specifier>const</specifier> <name>char</name><operator>*</operator> <name><name>argv</name><index>[]</index></name> <operator>=</operator> <block>{ <expr><literal type="string">"test"</literal></expr>, <expr><literal type="string">"-?"</literal></expr> }</block></expr>;
+            <expr><name><name>Catch</name><operator>::</operator><name>Config</name></name> <name>config</name></expr>;
+            <expr><call><name>CHECK</name><argument_list>( <argument><expr><call><name>parseIntoConfig</name><argument_list>( <argument><expr><name>argv</name></expr></argument>, <argument><expr><name>config</name></expr></argument> )</argument_list></call></expr></argument> )</argument_list></call></expr>;
+
+            <expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name><name>config</name><operator>.</operator><name>showHelp</name></name><argument_list>()</argument_list></call></expr></argument> )</argument_list></call></expr>;
+        }</block>
+        <macro><name>SECTION</name><argument_list>( <argument><literal type="string">"--help"</literal></argument>, <argument><literal type="string">""</literal></argument> )</argument_list></macro> <block>{
+            <expr><specifier>const</specifier> <name>char</name><operator>*</operator> <name><name>argv</name><index>[]</index></name> <operator>=</operator> <block>{ <expr><literal type="string">"test"</literal></expr>, <expr><literal type="string">"--help"</literal></expr> }</block></expr>;
+            <expr><name><name>Catch</name><operator>::</operator><name>Config</name></name> <name>config</name></expr>;
+            <expr><call><name>CHECK</name><argument_list>( <argument><expr><call><name>parseIntoConfig</name><argument_list>( <argument><expr><name>argv</name></expr></argument>, <argument><expr><name>config</name></expr></argument> )</argument_list></call></expr></argument> )</argument_list></call></expr>;
+
+            <expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name><name>config</name><operator>.</operator><name>showHelp</name></name><argument_list>()</argument_list></call></expr></argument> )</argument_list></call></expr>;
+        }</block>
+        <macro><name>SECTION</name><argument_list>( <argument><literal type="string">"-h"</literal></argument>, <argument><literal type="string">"help option has no arguments"</literal></argument> )</argument_list></macro> <block>{
+            <expr><specifier>const</specifier> <name>char</name><operator>*</operator> <name><name>argv</name><index>[]</index></name> <operator>=</operator> <block>{ <expr><literal type="string">"test"</literal></expr>, <expr><literal type="string">"-h"</literal></expr>, <expr><literal type="string">"unexpected"</literal></expr> }</block></expr>;
+            <expr><name><name>Catch</name><operator>::</operator><name>Config</name></name> <name>config</name></expr>;
+            <expr><call><name>CHECK</name><argument_list>( <argument><expr><call><name>parseIntoConfig</name><argument_list>( <argument><expr><name>argv</name></expr></argument>, <argument><expr><name>config</name></expr></argument> )</argument_list></call> <operator>==</operator> <literal type="boolean">false</literal></expr></argument> )</argument_list></call></expr>;
+            
+            <expr><call><name>REQUIRE_THAT</name><argument_list>( <argument><expr><call><name><name>config</name><operator>.</operator><name>getMessage</name></name><argument_list>()</argument_list></call></expr></argument>, <argument><expr><call><name>Contains</name><argument_list>( <argument><expr><literal type="string">"not accept"</literal></expr></argument> )</argument_list></call></expr></argument> )</argument_list></call></expr>;
+        }</block></expr>
+    }</block>
+    
+    <macro><name>SECTION</name><argument_list>( <argument><literal type="string">"abort"</literal></argument>, <argument><literal type="string">""</literal></argument> )</argument_list></macro> <block>{
+        <macro><name>SECTION</name><argument_list>( <argument><literal type="string">"-a"</literal></argument>, <argument><literal type="string">""</literal></argument> )</argument_list></macro> <expr><block>{
+            <expr><specifier>const</specifier> <name>char</name><operator>*</operator> <name><name>argv</name><index>[]</index></name> <operator>=</operator> <block>{ <expr><literal type="string">"test"</literal></expr>, <expr><literal type="string">"-a"</literal></expr> }</block></expr>;
+            <expr><name><name>Catch</name><operator>::</operator><name>Config</name></name> <name>config</name></expr>;
+            <expr><call><name>CHECK</name><argument_list>( <argument><expr><call><name>parseIntoConfig</name><argument_list>( <argument><expr><name>argv</name></expr></argument>, <argument><expr><name>config</name></expr></argument> )</argument_list></call></expr></argument> )</argument_list></call></expr>;
+
+            <expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name><name>config</name><operator>.</operator><name>getCutoff</name></name><argument_list>()</argument_list></call> <operator>==</operator> <literal type="number">1</literal></expr></argument> )</argument_list></call></expr>;
+        }</block>
+        <macro><name>SECTION</name><argument_list>( <argument><literal type="string">"-a/2"</literal></argument>, <argument><literal type="string">""</literal></argument> )</argument_list></macro> <block>{
+            <expr><specifier>const</specifier> <name>char</name><operator>*</operator> <name><name>argv</name><index>[]</index></name> <operator>=</operator> <block>{ <expr><literal type="string">"test"</literal></expr>, <expr><literal type="string">"-a"</literal></expr>, <expr><literal type="string">"2"</literal></expr> }</block></expr>;
+            <expr><name><name>Catch</name><operator>::</operator><name>Config</name></name> <name>config</name></expr>;
+            <expr><call><name>CHECK</name><argument_list>( <argument><expr><call><name>parseIntoConfig</name><argument_list>( <argument><expr><name>argv</name></expr></argument>, <argument><expr><name>config</name></expr></argument> )</argument_list></call></expr></argument> )</argument_list></call></expr>;
+
+            <expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name><name>config</name><operator>.</operator><name>getCutoff</name></name><argument_list>()</argument_list></call> <operator>==</operator> <literal type="number">2</literal></expr></argument> )</argument_list></call></expr>;
+        }</block>
+        <macro><name>SECTION</name><argument_list>( <argument><literal type="string">"-a/error"</literal></argument>, <argument><literal type="string">"cutoff only takes one argument"</literal></argument> )</argument_list></macro> <block>{
+            <expr><specifier>const</specifier> <name>char</name><operator>*</operator> <name><name>argv</name><index>[]</index></name> <operator>=</operator> <block>{ <expr><literal type="string">"test"</literal></expr>, <expr><literal type="string">"-a"</literal></expr>, <expr><literal type="string">"1"</literal></expr>, <expr><literal type="string">"2"</literal></expr> }</block></expr>;
+            <expr><name><name>Catch</name><operator>::</operator><name>Config</name></name> <name>config</name></expr>;
+            <expr><call><name>CHECK</name><argument_list>( <argument><expr><call><name>parseIntoConfig</name><argument_list>( <argument><expr><name>argv</name></expr></argument>, <argument><expr><name>config</name></expr></argument> )</argument_list></call> <operator>==</operator> <literal type="boolean">false</literal></expr></argument> )</argument_list></call></expr>;
+
+            <expr><call><name>REQUIRE_THAT</name><argument_list>( <argument><expr><call><name><name>config</name><operator>.</operator><name>getMessage</name></name><argument_list>()</argument_list></call></expr></argument>, <argument><expr><call><name>Contains</name><argument_list>( <argument><expr><literal type="string">"accepts"</literal></expr></argument> )</argument_list></call></expr></argument> )</argument_list></call></expr>;
+        }</block></expr>
+    }</block>
+    <macro><name>SECTION</name><argument_list>( <argument><literal type="string">"combinations"</literal></argument>, <argument><literal type="string">""</literal></argument> )</argument_list></macro> <block>{
+        <macro><name>SECTION</name><argument_list>( <argument><literal type="string">"-a -b"</literal></argument>, <argument><literal type="string">""</literal></argument> )</argument_list></macro> <expr><block>{
+            <expr><specifier>const</specifier> <name>char</name><operator>*</operator> <name><name>argv</name><index>[]</index></name> <operator>=</operator> <block>{ <expr><literal type="string">"test"</literal></expr>, <expr><literal type="string">"-a"</literal></expr>, <expr><literal type="string">"-b"</literal></expr> }</block></expr>;
+            <expr><name><name>Catch</name><operator>::</operator><name>Config</name></name> <name>config</name></expr>;
+            <expr><call><name>CHECK</name><argument_list>( <argument><expr><call><name>parseIntoConfig</name><argument_list>( <argument><expr><name>argv</name></expr></argument>, <argument><expr><name>config</name></expr></argument> )</argument_list></call></expr></argument> )</argument_list></call></expr>;
+
+            <expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name><name>config</name><operator>.</operator><name>getCutoff</name></name><argument_list>()</argument_list></call> <operator>==</operator> <literal type="number">1</literal></expr></argument> )</argument_list></call></expr>;
+            <expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name><name>config</name><operator>.</operator><name>shouldDebugBreak</name></name><argument_list>()</argument_list></call></expr></argument> )</argument_list></call></expr>;
+        }</block></expr>
+    }</block></expr></argument>
+    
+}</argument_list></decl></decl_stmt>
+</unit>

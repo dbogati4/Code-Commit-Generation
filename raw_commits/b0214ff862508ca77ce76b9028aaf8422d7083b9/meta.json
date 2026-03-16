@@ -1,0 +1,8 @@
+{
+  "commit_id": "b0214ff862508ca77ce76b9028aaf8422d7083b9",
+  "parent_id": "2454cfffb7eda9d0952b6b1b0f827c7cad232dd5",
+  "message": "Make experimental capture work on Windows with read-write temp file behavior",
+  "changed_files": [
+    "src/catch2/internal/catch_output_redirect.cpp"
+  ]
+}

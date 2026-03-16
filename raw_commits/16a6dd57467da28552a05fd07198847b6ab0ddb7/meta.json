@@ -1,0 +1,8 @@
+{
+  "commit_id": "16a6dd57467da28552a05fd07198847b6ab0ddb7",
+  "parent_id": "3455e55538f8650627244edd08139ce698166094",
+  "message": "Added note about ! operator",
+  "changed_files": [
+    "Test/ConditionTests.cpp"
+  ]
+}

@@ -1,0 +1,8 @@
+{
+  "commit_id": "820b1f12bf04a5df1ac86893cecee67dcfb4a607",
+  "parent_id": "6070745cab45a0f2284c56d5e2a1eed444447f88",
+  "message": "static constexpr: storage class first",
+  "changed_files": [
+    "include/internal/catch_fatal_condition.cpp"
+  ]
+}

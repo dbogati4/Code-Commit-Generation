@@ -1,0 +1,8 @@
+{
+  "commit_id": "21c97f2fad9ab9c979b7d1065253bbb4b172b6dc",
+  "parent_id": "5b1a6ae00ad66f9c99573cde9e38a4560d89e416",
+  "message": "Use snprintf instead of sprintf (#2111)",
+  "changed_files": [
+    "src/catch2/reporters/catch_reporter_combined_tu.cpp"
+  ]
+}

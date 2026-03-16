@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" xmlns:diff="http://www.srcML.org/srcDiff" revision="1.0.0" language="C++" filename="C:\Users\saile\AppData\Local\Temp\catch2_100_z8gzpiwf\dff7513b289f823fec91010f8898b8a01f7dcd12\tests_SelfTest_IntrospectiveTests_Details_tests_cpp\tests_SelfTest_IntrospectiveTests_Details_tests_cpp.old|C:\Users\saile\AppData\Local\Temp\catch2_100_z8gzpiwf\dff7513b289f823fec91010f8898b8a01f7dcd12\tests_SelfTest_IntrospectiveTests_Details_tests_cpp\tests_SelfTest_IntrospectiveTests_Details_tests_cpp.new">
+<comment type="line">//              Copyright Catch2 Authors</comment>
+<comment type="line">// Distributed under the Boost Software License, Version 1.0.</comment>
+<comment type="line">//   (See accompanying file LICENSE.txt or copy at</comment>
+<comment type="line">//        https://www.boost.org/LICENSE_1_0.txt)</comment>
+
+<comment type="line">// SPDX-License-Identifier: BSL-1.0</comment>
+
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;catch2/catch_test_macros.hpp&gt;</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;catch2/internal/catch_enforce.hpp&gt;</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;catch2/internal/catch_case_insensitive_comparisons.hpp&gt;</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;catch2/internal/catch_optional.hpp&gt;</cpp:file></cpp:include>
+
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;helpers/type_with_lit_0_comparisons.hpp&gt;</cpp:file></cpp:include>
+
+<cpp:if xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">if</cpp:directive> <expr><call><name>defined</name><argument_list>(<argument><expr><name>_MSC_VER</name></expr></argument>)</argument_list></call></expr></cpp:if>
+<cpp:pragma xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">pragma</cpp:directive> <name>warning</name><name>(</name><name>push</name><name>)</name></cpp:pragma>
+<cpp:pragma xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">pragma</cpp:directive> <name>warning</name><name>(</name><name>disable</name><name>:</name><name>4702</name><name>)</name></cpp:pragma> <comment type="line">// unreachable code in the macro expansions</comment>
+<cpp:endif xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">endif</cpp:directive></cpp:endif>
+
+<macro><name>TEST_CASE</name><argument_list>(<argument><literal type="string">"Check that our error handling macros throw the right exceptions"</literal></argument>, <argument><literal type="string">"[!throws][internals][approvals]"</literal></argument>)</argument_list></macro> <block>{<block_content>
+    <expr_stmt><expr><call><name>REQUIRE_THROWS_AS</name><argument_list>(<argument><expr><call><name>CATCH_INTERNAL_ERROR</name><argument_list>(<argument><expr><literal type="string">""</literal></expr></argument>)</argument_list></call></expr></argument>, <argument><expr><name><name>std</name><operator>::</operator><name>logic_error</name></name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>REQUIRE_THROWS_AS</name><argument_list>(<argument><expr><call><name>CATCH_ERROR</name><argument_list>(<argument><expr><literal type="string">""</literal></expr></argument>)</argument_list></call></expr></argument>, <argument><expr><name><name>std</name><operator>::</operator><name>domain_error</name></name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>REQUIRE_THROWS_AS</name><argument_list>(<argument><expr><call><name>CATCH_RUNTIME_ERROR</name><argument_list>(<argument><expr><literal type="string">""</literal></expr></argument>)</argument_list></call></expr></argument>, <argument><expr><name><name>std</name><operator>::</operator><name>runtime_error</name></name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>REQUIRE_THROWS_AS</name><argument_list>(<argument><expr><call><lambda><capture>[]</capture><parameter_list>()</parameter_list><block>{<block_content><expr_stmt><expr><call><name>CATCH_ENFORCE</name><argument_list>(<argument><expr><literal type="boolean">false</literal></expr></argument>, <argument><expr><literal type="string">""</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt></block_content>}</block></lambda><argument_list>()</argument_list></call></expr></argument>, <argument><expr><name><name>std</name><operator>::</operator><name>domain_error</name></name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>REQUIRE_NOTHROW</name><argument_list>(<argument><expr><call><lambda><capture>[]</capture><parameter_list>()</parameter_list><block>{<block_content><expr_stmt><expr><call><name>CATCH_ENFORCE</name><argument_list>(<argument><expr><literal type="boolean">true</literal></expr></argument>, <argument><expr><literal type="string">""</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt></block_content>}</block></lambda><argument_list>()</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+</block_content>}</block>
+
+<cpp:if xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">if</cpp:directive> <expr><call><name>defined</name><argument_list>(<argument><expr><name>_MSC_VER</name></expr></argument>)</argument_list></call></expr></cpp:if>
+<cpp:pragma xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">pragma</cpp:directive> <name>warning</name><name>(</name><name>pop</name><name>)</name></cpp:pragma> <comment type="line">// unreachable code in the macro expansions</comment>
+<cpp:endif xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">endif</cpp:directive></cpp:endif>
+
+<macro><name>TEST_CASE</name><argument_list>(<argument><literal type="string">"CaseInsensitiveLess is case insensitive"</literal></argument>, <argument><literal type="string">"[comparisons][string-case]"</literal></argument>)</argument_list></macro> <block>{<block_content>
+    <decl_stmt><decl><type><name><name>Catch</name><operator>::</operator><name>Detail</name><operator>::</operator><name>CaseInsensitiveLess</name></name></type> <name>lt</name></decl>;</decl_stmt>
+    <macro><name>SECTION</name><argument_list>( <argument><literal type="string">"Degenerate cases"</literal></argument> )</argument_list></macro> <block>{<block_content>
+        <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name>lt</name><argument_list>( <argument><expr><literal type="string">""</literal></expr></argument>, <argument><expr><literal type="string">"a"</literal></expr></argument> )</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name>REQUIRE_FALSE</name><argument_list>( <argument><expr><call><name>lt</name><argument_list>( <argument><expr><literal type="string">"a"</literal></expr></argument>, <argument><expr><literal type="string">"a"</literal></expr></argument> )</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name>REQUIRE_FALSE</name><argument_list>( <argument><expr><call><name>lt</name><argument_list>( <argument><expr><literal type="string">""</literal></expr></argument>, <argument><expr><literal type="string">""</literal></expr></argument> )</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block>
+    <macro><name>SECTION</name><argument_list>(<argument><literal type="string">"Plain comparisons"</literal></argument>)</argument_list></macro> <block>{<block_content>
+        <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name>lt</name><argument_list>( <argument><expr><literal type="string">"a"</literal></expr></argument>, <argument><expr><literal type="string">"b"</literal></expr></argument> )</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name>lt</name><argument_list>( <argument><expr><literal type="string">"a"</literal></expr></argument>, <argument><expr><literal type="string">"B"</literal></expr></argument> )</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name>lt</name><argument_list>( <argument><expr><literal type="string">"A"</literal></expr></argument>, <argument><expr><literal type="string">"b"</literal></expr></argument> )</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name>lt</name><argument_list>( <argument><expr><literal type="string">"A"</literal></expr></argument>, <argument><expr><literal type="string">"B"</literal></expr></argument> )</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block>
+</block_content>}</block>
+
+<macro><name>TEST_CASE</name><argument_list>( <argument><literal type="string">"CaseInsensitiveEqualsTo is case insensitive"</literal></argument>,
+           <argument><literal type="string">"[comparisons][string-case]"</literal></argument> )</argument_list></macro> <block>{<block_content>
+    <decl_stmt><decl><type><name><name>Catch</name><operator>::</operator><name>Detail</name><operator>::</operator><name>CaseInsensitiveEqualTo</name></name></type> <name>eq</name></decl>;</decl_stmt>
+    <macro><name>SECTION</name><argument_list>( <argument><literal type="string">"Degenerate cases"</literal></argument> )</argument_list></macro> <block>{<block_content>
+        <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name>eq</name><argument_list>( <argument><expr><literal type="string">""</literal></expr></argument>, <argument><expr><literal type="string">""</literal></expr></argument> )</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name>REQUIRE_FALSE</name><argument_list>( <argument><expr><call><name>eq</name><argument_list>( <argument><expr><literal type="string">""</literal></expr></argument>, <argument><expr><literal type="string">"a"</literal></expr></argument> )</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block>
+    <macro><name>SECTION</name><argument_list>( <argument><literal type="string">"Plain comparisons"</literal></argument> )</argument_list></macro> <block>{<block_content>
+        <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name>eq</name><argument_list>( <argument><expr><literal type="string">"a"</literal></expr></argument>, <argument><expr><literal type="string">"a"</literal></expr></argument> )</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name>eq</name><argument_list>( <argument><expr><literal type="string">"a"</literal></expr></argument>, <argument><expr><literal type="string">"A"</literal></expr></argument> )</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name>eq</name><argument_list>( <argument><expr><literal type="string">"A"</literal></expr></argument>, <argument><expr><literal type="string">"a"</literal></expr></argument> )</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name>eq</name><argument_list>( <argument><expr><literal type="string">"A"</literal></expr></argument>, <argument><expr><literal type="string">"A"</literal></expr></argument> )</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name>REQUIRE_FALSE</name><argument_list>( <argument><expr><call><name>eq</name><argument_list>( <argument><expr><literal type="string">"a"</literal></expr></argument>, <argument><expr><literal type="string">"b"</literal></expr></argument> )</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name>REQUIRE_FALSE</name><argument_list>( <argument><expr><call><name>eq</name><argument_list>( <argument><expr><literal type="string">"a"</literal></expr></argument>, <argument><expr><literal type="string">"B"</literal></expr></argument> )</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block>
+</block_content>}</block>
+
+<macro><name>TEST_CASE</name><argument_list>(<argument><literal type="string">"Optional comparison ops"</literal></argument>, <argument><literal type="string">"[optional][approvals]"</literal></argument>)</argument_list></macro> <block>{<block_content>
+    <using>using <name><name>Catch</name><operator>::</operator><name>Optional</name></name>;</using>
+
+    <decl_stmt><decl><type><name><name>Optional</name><argument_list type="generic">&lt;<argument><expr><name>int</name></expr></argument>&gt;</argument_list></name></type> <name>a</name></decl>, <decl><type ref="prev"/><name>b</name></decl>;</decl_stmt>
+
+    <macro><name>SECTION</name><argument_list>( <argument><literal type="string">"Empty optionals are equal"</literal></argument> )</argument_list></macro> <block>{<block_content>
+        <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><name>a</name> <operator>==</operator> <name>b</name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name>REQUIRE_FALSE</name><argument_list>( <argument><expr><name>a</name> <operator>!=</operator> <name>b</name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block>
+    <macro><name>SECTION</name><argument_list>( <argument><literal type="string">"Empty and non-empty optionals are never equal"</literal></argument> )</argument_list></macro> <block>{<block_content>
+        <expr_stmt><expr><name>a</name> <operator>=</operator> <literal type="number">1</literal></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name>REQUIRE_FALSE</name><argument_list>( <argument><expr><name>a</name> <operator>==</operator> <name>b</name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><name>a</name> <operator>!=</operator> <name>b</name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block>
+    <macro><name>SECTION</name><argument_list>(
+        <argument><literal type="string">"non-empty optionals are equal if the contained elements are equal"</literal></argument>)</argument_list></macro> <block>{<block_content>
+        <expr_stmt><expr><name>a</name> <operator>=</operator> <literal type="number">1</literal></expr>;</expr_stmt>
+        <expr_stmt><expr><name>b</name> <operator>=</operator> <literal type="number">2</literal></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><name>a</name> <operator>!=</operator> <name>b</name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name>REQUIRE_FALSE</name><argument_list>( <argument><expr><name>a</name> <operator>==</operator> <name>b</name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+
+        <expr_stmt><expr><name>a</name> <operator>=</operator> <literal type="number">2</literal></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><name>a</name> <operator>==</operator> <name>b</name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name>REQUIRE_FALSE</name><argument_list>( <argument><expr><name>a</name> <operator>!=</operator> <name>b</name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block>
+</block_content>}</block>
+
+<namespace>namespace <block>{
+    <struct>struct <name>MoveChecker</name> <block>{<public type="default">
+        <decl_stmt><decl><type><name>bool</name></type> <name>has_moved</name> <init>= <expr><literal type="boolean">false</literal></expr></init></decl>;</decl_stmt>
+        <constructor_decl><name>MoveChecker</name><parameter_list>()</parameter_list> = <specifier>default</specifier>;</constructor_decl>
+        <constructor_decl><name>MoveChecker</name><parameter_list>( <parameter><decl><type><name>MoveChecker</name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>rhs</name></decl></parameter> )</parameter_list> = <specifier>default</specifier>;</constructor_decl>
+        <function_decl type="operator"><type><name>MoveChecker</name><modifier>&amp;</modifier></type> <name>operator<name>=</name></name><parameter_list>( <parameter><decl><type><name>MoveChecker</name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>rhs</name></decl></parameter> )</parameter_list> = <specifier>default</specifier>;</function_decl>
+        <constructor><name>MoveChecker</name><parameter_list>( <parameter><decl><type><name>MoveChecker</name><modifier>&amp;&amp;</modifier></type> <name>rhs</name></decl></parameter> )</parameter_list> <diff:insert xmlns:diff="http://www.srcML.org/srcDiff"><noexcept>noexcept</noexcept><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws></diff:insert><block>{<block_content> <expr_stmt><expr><name><name>rhs</name><operator>.</operator><name>has_moved</name></name> <operator>=</operator> <literal type="boolean">true</literal></expr>;</expr_stmt> </block_content>}</block></constructor>
+        <function type="operator"><type><name>MoveChecker</name><modifier>&amp;</modifier></type> <name>operator<name>=</name></name><parameter_list>( <parameter><decl><type><name>MoveChecker</name><modifier>&amp;&amp;</modifier></type> <name>rhs</name></decl></parameter> )</parameter_list> <diff:insert xmlns:diff="http://www.srcML.org/srcDiff"><noexcept>noexcept</noexcept><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws></diff:insert><block>{<block_content>
+            <expr_stmt><expr><name><name>rhs</name><operator>.</operator><name>has_moved</name></name> <operator>=</operator> <literal type="boolean">true</literal></expr>;</expr_stmt>
+            <return>return <expr><operator>*</operator><name>this</name></expr>;</return>
+        </block_content>}</block></function>
+    </public>}</block>;</struct>
+}</block></namespace>
+
+<macro><name>TEST_CASE</name><argument_list>( <argument><literal type="string">"Optional supports move ops"</literal></argument>, <argument><literal type="string">"[optional][approvals]"</literal></argument> )</argument_list></macro> <block>{<block_content>
+    <using>using <name><name>Catch</name><operator>::</operator><name>Optional</name></name>;</using>
+    <decl_stmt><decl><type><name>MoveChecker</name></type> <name>a</name></decl>;</decl_stmt>
+    <function_decl><type><name><name>Optional</name><argument_list type="generic">&lt;<argument><expr><name>MoveChecker</name></expr></argument>&gt;</argument_list></name></type> <name>opt_A</name><parameter_list>( <parameter><decl><type><name>a</name></type></decl></parameter> )</parameter_list>;</function_decl>
+    <expr_stmt><expr><call><name>REQUIRE_FALSE</name><argument_list>( <argument><expr><name><name>a</name><operator>.</operator><name>has_moved</name></name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>REQUIRE_FALSE</name><argument_list>( <argument><expr><name><name>opt_A</name><operator>-&gt;</operator><name>has_moved</name></name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+
+    <macro><name>SECTION</name><argument_list>( <argument><literal type="string">"Move construction from element"</literal></argument> )</argument_list></macro> <block>{<block_content>
+        <decl_stmt><decl><type><name><name>Optional</name><argument_list type="generic">&lt;<argument><expr><name>MoveChecker</name></expr></argument>&gt;</argument_list></name></type> <name>opt_B</name><argument_list>( <argument><expr><call><name>CATCH_MOVE</name><argument_list>( <argument><expr><name>a</name></expr></argument> )</argument_list></call></expr></argument> )</argument_list></decl>;</decl_stmt>
+        <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><name><name>a</name><operator>.</operator><name>has_moved</name></name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block>
+    <macro><name>SECTION</name><argument_list>( <argument><literal type="string">"Move assignment from element"</literal></argument> )</argument_list></macro> <block>{<block_content>
+        <expr_stmt><expr><name>opt_A</name> <operator>=</operator> <call><name>CATCH_MOVE</name><argument_list>( <argument><expr><name>a</name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><name><name>a</name><operator>.</operator><name>has_moved</name></name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block>
+    <macro><name>SECTION</name><argument_list>( <argument><literal type="string">"Move construction from optional"</literal></argument> )</argument_list></macro> <block>{<block_content>
+        <decl_stmt><decl><type><name><name>Optional</name><argument_list type="generic">&lt;<argument><expr><name>MoveChecker</name></expr></argument>&gt;</argument_list></name></type> <name>opt_B</name><argument_list>( <argument><expr><call><name>CATCH_MOVE</name><argument_list>( <argument><expr><name>opt_A</name></expr></argument> )</argument_list></call></expr></argument> )</argument_list></decl>;</decl_stmt>
+        <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><name><name>opt_A</name><operator>-&gt;</operator><name>has_moved</name></name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block>
+    <macro><name>SECTION</name><argument_list>( <argument><literal type="string">"Move assignment from optional"</literal></argument> )</argument_list></macro> <block>{<block_content>
+        <function_decl><type><name><name>Optional</name><argument_list type="generic">&lt;<argument><expr><name>MoveChecker</name></expr></argument>&gt;</argument_list></name></type> <name>opt_B</name><parameter_list>( <parameter><decl><type><name>opt_A</name></type></decl></parameter> )</parameter_list>;</function_decl>
+        <expr_stmt><expr><call><name>REQUIRE_FALSE</name><argument_list>( <argument><expr><name><name>opt_A</name><operator>-&gt;</operator><name>has_moved</name></name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><name>opt_B</name> <operator>=</operator> <call><name>CATCH_MOVE</name><argument_list>( <argument><expr><name>opt_A</name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><name><name>opt_A</name><operator>-&gt;</operator><name>has_moved</name></name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block>
+</block_content>}</block>
+
+<macro><name>TEST_CASE</name><argument_list>( <argument><literal type="string">"Decomposer checks that the argument is 0 when handling "</literal>
+           <literal type="string">"only-0-comparable types"</literal></argument>,
+           <argument><literal type="string">"[decomposition][approvals]"</literal></argument> )</argument_list></macro> <block>{<block_content>
+    <decl_stmt><decl><type><name>TypeWithLit0Comparisons</name></type> <name>t</name><argument_list>{}</argument_list></decl>;</decl_stmt>
+
+    <decl_stmt><decl><type><name>CATCH_INTERNAL_START_WARNINGS_SUPPRESSION</name>
+    <name>CATCH_INTERNAL_SUPPRESS_PARENTHESES_WARNINGS</name></type>
+
+    <name>REQUIRE_THROWS</name><argument_list>( <argument><expr><call><name><name>Catch</name><operator>::</operator><name>Decomposer</name></name><argument_list>{}</argument_list></call> <operator>&lt;=</operator> <name>t</name> <operator>==</operator> <literal type="number">42</literal></expr></argument> )</argument_list></decl>;</decl_stmt>
+    <expr_stmt><expr><call><name>REQUIRE_THROWS</name><argument_list>( <argument><expr><call><name><name>Catch</name><operator>::</operator><name>Decomposer</name></name><argument_list>{}</argument_list></call> <operator>&lt;=</operator> <literal type="number">42</literal> <operator>==</operator> <name>t</name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>REQUIRE_NOTHROW</name><argument_list>( <argument><expr><call><name><name>Catch</name><operator>::</operator><name>Decomposer</name></name><argument_list>{}</argument_list></call> <operator>&lt;=</operator> <name>t</name> <operator>==</operator> <literal type="number">0</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>REQUIRE_NOTHROW</name><argument_list>( <argument><expr><call><name><name>Catch</name><operator>::</operator><name>Decomposer</name></name><argument_list>{}</argument_list></call> <operator>&lt;=</operator> <literal type="number">0</literal> <operator>==</operator> <name>t</name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+
+    <expr_stmt><expr><call><name>REQUIRE_THROWS</name><argument_list>( <argument><expr><call><name><name>Catch</name><operator>::</operator><name>Decomposer</name></name><argument_list>{}</argument_list></call> <operator>&lt;=</operator> <name>t</name> <operator>!=</operator> <literal type="number">42</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>REQUIRE_THROWS</name><argument_list>( <argument><expr><call><name><name>Catch</name><operator>::</operator><name>Decomposer</name></name><argument_list>{}</argument_list></call> <operator>&lt;=</operator> <literal type="number">42</literal> <operator>!=</operator> <name>t</name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>REQUIRE_NOTHROW</name><argument_list>( <argument><expr><call><name><name>Catch</name><operator>::</operator><name>Decomposer</name></name><argument_list>{}</argument_list></call> <operator>&lt;=</operator> <name>t</name> <operator>!=</operator> <literal type="number">0</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>REQUIRE_NOTHROW</name><argument_list>( <argument><expr><call><name><name>Catch</name><operator>::</operator><name>Decomposer</name></name><argument_list>{}</argument_list></call> <operator>&lt;=</operator> <literal type="number">0</literal> <operator>!=</operator> <name>t</name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+
+    <expr_stmt><expr><call><name>REQUIRE_THROWS</name><argument_list>( <argument><expr><call><name><name>Catch</name><operator>::</operator><name>Decomposer</name></name><argument_list>{}</argument_list></call> <operator>&lt;=</operator> <name>t</name> <operator>&lt;</operator> <literal type="number">42</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>REQUIRE_THROWS</name><argument_list>( <argument><expr><call><name><name>Catch</name><operator>::</operator><name>Decomposer</name></name><argument_list>{}</argument_list></call> <operator>&lt;=</operator> <literal type="number">42</literal> <operator>&lt;</operator> <name>t</name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>REQUIRE_NOTHROW</name><argument_list>( <argument><expr><call><name><name>Catch</name><operator>::</operator><name>Decomposer</name></name><argument_list>{}</argument_list></call> <operator>&lt;=</operator> <name>t</name> <operator>&lt;</operator> <literal type="number">0</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>REQUIRE_NOTHROW</name><argument_list>( <argument><expr><call><name><name>Catch</name><operator>::</operator><name>Decomposer</name></name><argument_list>{}</argument_list></call> <operator>&lt;=</operator> <literal type="number">0</literal> <operator>&lt;</operator> <name>t</name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+
+    <expr_stmt><expr><call><name>REQUIRE_THROWS</name><argument_list>( <argument><expr><call><name><name>Catch</name><operator>::</operator><name>Decomposer</name></name><argument_list>{}</argument_list></call> <operator>&lt;=</operator> <name>t</name> <operator>&lt;=</operator> <literal type="number">42</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>REQUIRE_THROWS</name><argument_list>( <argument><expr><call><name><name>Catch</name><operator>::</operator><name>Decomposer</name></name><argument_list>{}</argument_list></call> <operator>&lt;=</operator> <literal type="number">42</literal> <operator>&lt;=</operator> <name>t</name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>REQUIRE_NOTHROW</name><argument_list>( <argument><expr><call><name><name>Catch</name><operator>::</operator><name>Decomposer</name></name><argument_list>{}</argument_list></call> <operator>&lt;=</operator> <name>t</name> <operator>&lt;=</operator> <literal type="number">0</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>REQUIRE_NOTHROW</name><argument_list>( <argument><expr><call><name><name>Catch</name><operator>::</operator><name>Decomposer</name></name><argument_list>{}</argument_list></call> <operator>&lt;=</operator> <literal type="number">0</literal> <operator>&lt;=</operator> <name>t</name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+
+    <expr_stmt><expr><call><name>REQUIRE_THROWS</name><argument_list>( <argument><expr><call><name><name>Catch</name><operator>::</operator><name>Decomposer</name></name><argument_list>{}</argument_list></call> <operator>&lt;=</operator> <name>t</name> <operator>&gt;</operator> <literal type="number">42</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>REQUIRE_THROWS</name><argument_list>( <argument><expr><call><name><name>Catch</name><operator>::</operator><name>Decomposer</name></name><argument_list>{}</argument_list></call> <operator>&lt;=</operator> <literal type="number">42</literal> <operator>&gt;</operator> <name>t</name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>REQUIRE_NOTHROW</name><argument_list>( <argument><expr><call><name><name>Catch</name><operator>::</operator><name>Decomposer</name></name><argument_list>{}</argument_list></call> <operator>&lt;=</operator> <name>t</name> <operator>&gt;</operator> <literal type="number">0</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>REQUIRE_NOTHROW</name><argument_list>( <argument><expr><call><name><name>Catch</name><operator>::</operator><name>Decomposer</name></name><argument_list>{}</argument_list></call> <operator>&lt;=</operator> <literal type="number">0</literal> <operator>&gt;</operator> <name>t</name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+
+    <expr_stmt><expr><call><name>REQUIRE_THROWS</name><argument_list>( <argument><expr><call><name><name>Catch</name><operator>::</operator><name>Decomposer</name></name><argument_list>{}</argument_list></call> <operator>&lt;=</operator> <name>t</name> <operator>&gt;=</operator> <literal type="number">42</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>REQUIRE_THROWS</name><argument_list>( <argument><expr><call><name><name>Catch</name><operator>::</operator><name>Decomposer</name></name><argument_list>{}</argument_list></call> <operator>&lt;=</operator> <literal type="number">42</literal> <operator>&gt;=</operator> <name>t</name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>REQUIRE_NOTHROW</name><argument_list>( <argument><expr><call><name><name>Catch</name><operator>::</operator><name>Decomposer</name></name><argument_list>{}</argument_list></call> <operator>&lt;=</operator> <name>t</name> <operator>&gt;=</operator> <literal type="number">0</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>REQUIRE_NOTHROW</name><argument_list>( <argument><expr><call><name><name>Catch</name><operator>::</operator><name>Decomposer</name></name><argument_list>{}</argument_list></call> <operator>&lt;=</operator> <literal type="number">0</literal> <operator>&gt;=</operator> <name>t</name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+
+    <expr_stmt><expr><name>CATCH_INTERNAL_STOP_WARNINGS_SUPPRESSION</name></expr></expr_stmt>
+</block_content>}</block>
+</unit>

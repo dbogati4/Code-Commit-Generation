@@ -1,0 +1,23 @@
+diff --git a/include/internal/catch_stringref.cpp b/include/internal/catch_stringref.cpp
+index e209cf39..60a522ec 100644
+--- a/include/internal/catch_stringref.cpp
++++ b/include/internal/catch_stringref.cpp
+@@ -20,11 +20,14 @@
+ 
+ 
+ namespace Catch {
++     namespace {
+ 
+-    auto getEmptyStringRef() -> StringRef {
+-        static StringRef s_emptyStringRef("");
+-        return s_emptyStringRef;
+-    }
++     auto getEmptyStringRef() -> StringRef {
++         static StringRef s_emptyStringRef("");
++         return s_emptyStringRef;
++     }
++
++     }
+ 
+     StringRef::StringRef() noexcept
+     :   StringRef( getEmptyStringRef() )

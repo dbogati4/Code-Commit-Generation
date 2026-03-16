@@ -1,0 +1,133 @@
+diff --git a/tests/ExtraTests/X01-PrefixedMacros.cpp b/tests/ExtraTests/X01-PrefixedMacros.cpp
+index cccf0aae..ff6e8cbe 100644
+--- a/tests/ExtraTests/X01-PrefixedMacros.cpp
++++ b/tests/ExtraTests/X01-PrefixedMacros.cpp
+@@ -6,10 +6,13 @@
+ 
+ // SPDX-License-Identifier: BSL-1.0
+ 
+-// X01-DisableStringification.cpp
+-// Test that Catch's prefixed macros compile and run properly.
+-// This won't provide full coverage, but it might be worth checking
+-// the other branch as well
++/**\file
++ * Test that Catch's prefixed macros compile and run properly.
++ *
++ * We intentionally do not provide full coverage of all macros, but we
++ * test a smattering and can add other ones as they have regressions.
++ */
++
+ 
+ #include <catch2/catch_test_macros.hpp>
+ #include <catch2/matchers/catch_matchers_predicate.hpp>
+diff --git a/tests/ExtraTests/X02-DisabledMacros.cpp b/tests/ExtraTests/X02-DisabledMacros.cpp
+index dac8960e..e870a692 100644
+--- a/tests/ExtraTests/X02-DisabledMacros.cpp
++++ b/tests/ExtraTests/X02-DisabledMacros.cpp
+@@ -6,9 +6,11 @@
+ 
+ // SPDX-License-Identifier: BSL-1.0
+ 
+-// X02-DisabledMacros.cpp
+-// Test that CATCH_CONFIG_DISABLE turns off TEST_CASE autoregistration
+-// and expressions in assertion macros are not run.
++/**\file
++ * Test that CATCH_CONFIG_DISABLE turns off TEST_CASE autoregistration
++ * and expressions in assertion macros are not run.
++ */
++
+ 
+ #include <catch2/catch_test_macros.hpp>
+ #include <catch2/benchmark/catch_benchmark.hpp>
+diff --git a/tests/ExtraTests/X10-FallbackStringifier.cpp b/tests/ExtraTests/X10-FallbackStringifier.cpp
+index e4ff0a3c..61ad62ea 100644
+--- a/tests/ExtraTests/X10-FallbackStringifier.cpp
++++ b/tests/ExtraTests/X10-FallbackStringifier.cpp
+@@ -6,8 +6,13 @@
+ 
+ // SPDX-License-Identifier: BSL-1.0
+ 
+-// X10-FallbackStringifier.cpp
+-// Test that defining fallbackStringifier compiles
++/**\file
++ * Test that the user can define custom fallbackStringifier 
++ *
++ * This is done by defining a custom fallback stringifier that prints
++ * out a specific string, and then asserting (to cause stringification)
++ * over a type without stringification support.
++ */
+ 
+ #include <string>
+ 
+diff --git a/tests/ExtraTests/X11-DisableStringification.cpp b/tests/ExtraTests/X11-DisableStringification.cpp
+index 65e2d274..97dcea7b 100644
+--- a/tests/ExtraTests/X11-DisableStringification.cpp
++++ b/tests/ExtraTests/X11-DisableStringification.cpp
+@@ -6,11 +6,13 @@
+ 
+ // SPDX-License-Identifier: BSL-1.0
+ 
+-// X11-DisableStringification.cpp
+-// Test that stringification of original expression can be disabled
+-// this is a workaround for VS 2017 issue with Raw String literal
+-// and preprocessor token pasting. In other words, hopefully this test
+-// will be deleted soon :-)
++/**\file
++ * Test that stringification of original expression can be disabled.
++ *
++ * This is a workaround for VS 2017, 2019 issue with Raw String literals
++ * and preprocessor token pasting.
++ */
++
+ 
+ #include <catch2/catch_test_macros.hpp>
+ 
+diff --git a/tests/ExtraTests/X12-CustomDebugBreakMacro.cpp b/tests/ExtraTests/X12-CustomDebugBreakMacro.cpp
+index f9f9f4f3..e52c1c2b 100644
+--- a/tests/ExtraTests/X12-CustomDebugBreakMacro.cpp
++++ b/tests/ExtraTests/X12-CustomDebugBreakMacro.cpp
+@@ -6,8 +6,9 @@
+ 
+ // SPDX-License-Identifier: BSL-1.0
+ 
+-// X12-CustomDebugBreakMacro.cpp
+-// Test that user-defined `CATCH_BREAK_INTO_DEBUGGER` is respected and used.
++/**\file
++ * Test that user-defined `CATCH_BREAK_INTO_DEBUGGER` is respected and used.
++ */
+ 
+ #include <iostream>
+ 
+diff --git a/tests/ExtraTests/X90-WindowsHeaderInclusion.cpp b/tests/ExtraTests/X90-WindowsHeaderInclusion.cpp
+index 93442d34..739b34d4 100644
+--- a/tests/ExtraTests/X90-WindowsHeaderInclusion.cpp
++++ b/tests/ExtraTests/X90-WindowsHeaderInclusion.cpp
+@@ -6,10 +6,12 @@
+ 
+ // SPDX-License-Identifier: BSL-1.0
+ 
+-// X90-WindowsHeaderInclusion.cpp
+-// Test that the Catch2 header compiles even after including windows.h
+-// without defining NOMINMAX first. As an FYI, if you do that, you are
+-// wrong.
++/**\file
++ * Test that the Catch2 header compiles even after including windows.h
++ * without defining NOMINMAX first.
++ *
++ * As an FYI, if you do that, you are wrong.
++ */
+ 
+ #include <windows.h>
+ #include <catch2/catch_test_macros.hpp>
+diff --git a/tests/ExtraTests/X91-AmalgamatedCatch.cpp b/tests/ExtraTests/X91-AmalgamatedCatch.cpp
+index 547eb3b8..d77f55d5 100644
+--- a/tests/ExtraTests/X91-AmalgamatedCatch.cpp
++++ b/tests/ExtraTests/X91-AmalgamatedCatch.cpp
+@@ -7,7 +7,6 @@
+ // SPDX-License-Identifier: BSL-1.0
+ 
+ /**\file
+- *
+  * This file serves as a simple compilation test against the amalgamated
+  * version of Catch2.
+  */

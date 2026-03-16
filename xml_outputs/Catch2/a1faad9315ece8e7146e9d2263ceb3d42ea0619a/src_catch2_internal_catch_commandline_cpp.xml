@@ -1,0 +1,319 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" xmlns:diff="http://www.srcML.org/srcDiff" revision="1.0.0" language="C++" filename="C:\Users\saile\AppData\Local\Temp\catch2_100_z8gzpiwf\a1faad9315ece8e7146e9d2263ceb3d42ea0619a\src_catch2_internal_catch_commandline_cpp\src_catch2_internal_catch_commandline_cpp.old|C:\Users\saile\AppData\Local\Temp\catch2_100_z8gzpiwf\a1faad9315ece8e7146e9d2263ceb3d42ea0619a\src_catch2_internal_catch_commandline_cpp\src_catch2_internal_catch_commandline_cpp.new">
+<comment type="line">//              Copyright Catch2 Authors</comment>
+<comment type="line">// Distributed under the Boost Software License, Version 1.0.</comment>
+<comment type="line">//   (See accompanying file LICENSE.txt or copy at</comment>
+<comment type="line">//        https://www.boost.org/LICENSE_1_0.txt)</comment>
+
+<comment type="line">// SPDX-License-Identifier: BSL-1.0</comment>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;catch2/internal/catch_commandline.hpp&gt;</cpp:file></cpp:include>
+
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;catch2/catch_config.hpp&gt;</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;catch2/internal/catch_string_manip.hpp&gt;</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;catch2/interfaces/catch_interfaces_config.hpp&gt;</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;catch2/interfaces/catch_interfaces_registry_hub.hpp&gt;</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;catch2/internal/catch_reporter_registry.hpp&gt;</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;catch2/internal/catch_console_colour.hpp&gt;</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;catch2/internal/catch_parse_numbers.hpp&gt;</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;catch2/internal/catch_reporter_spec_parser.hpp&gt;</cpp:file></cpp:include>
+
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;fstream&gt;</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;string&gt;</cpp:file></cpp:include>
+
+<namespace>namespace <name>Catch</name> <block>{
+
+    <function><type><name><name>Clara</name><operator>::</operator><name>Parser</name></name></type> <name>makeCommandLineParser</name><parameter_list>( <parameter><decl><type><name>ConfigData</name><modifier>&amp;</modifier></type> <name>config</name></decl></parameter> )</parameter_list> <block>{<block_content>
+
+        <using>using <namespace>namespace <name>Clara</name>;</namespace></using>
+
+        <decl_stmt><decl><type><specifier>auto</specifier> <specifier>const</specifier></type> <name>setWarning</name> <init>= <expr><lambda><capture>[<argument><modifier>&amp;</modifier></argument>]</capture><parameter_list>( <parameter><decl><type><name><name>std</name><operator>::</operator><name>string</name></name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>warning</name></decl></parameter> )</parameter_list> <block>{<block_content>
+            <if_stmt><if>if <condition>( <expr><name>warning</name> <operator>==</operator> <literal type="string">"NoAssertions"</literal></expr> )</condition> <block>{<block_content>
+                <expr_stmt><expr><name><name>config</name><operator>.</operator><name>warnings</name></name> <operator>=</operator> <cast type="static">static_cast<argument_list type="generic">&lt;<argument><expr><name><name>WarnAbout</name><operator>::</operator><name>What</name></name></expr></argument>&gt;</argument_list><argument_list>(<argument><expr><name><name>config</name><operator>.</operator><name>warnings</name></name> <operator>|</operator> <name><name>WarnAbout</name><operator>::</operator><name>NoAssertions</name></name></expr></argument>)</argument_list></cast></expr>;</expr_stmt>
+                <return>return <expr><call><name><name>ParserResult</name><operator>::</operator><name>ok</name></name><argument_list>( <argument><expr><name><name>ParseResultType</name><operator>::</operator><name>Matched</name></name></expr></argument> )</argument_list></call></expr>;</return>
+            </block_content>}</block></if> <if type="elseif">else if <condition>( <expr><name>warning</name> <operator>==</operator> <literal type="string">"UnmatchedTestSpec"</literal></expr> )</condition> <block>{<block_content>
+                <expr_stmt><expr><name><name>config</name><operator>.</operator><name>warnings</name></name> <operator>=</operator> <cast type="static">static_cast<argument_list type="generic">&lt;<argument><expr><name><name>WarnAbout</name><operator>::</operator><name>What</name></name></expr></argument>&gt;</argument_list><argument_list>(<argument><expr><name><name>config</name><operator>.</operator><name>warnings</name></name> <operator>|</operator> <name><name>WarnAbout</name><operator>::</operator><name>UnmatchedTestSpec</name></name></expr></argument>)</argument_list></cast></expr>;</expr_stmt>
+                <return>return <expr><call><name><name>ParserResult</name><operator>::</operator><name>ok</name></name><argument_list>( <argument><expr><name><name>ParseResultType</name><operator>::</operator><name>Matched</name></name></expr></argument> )</argument_list></call></expr>;</return>
+            </block_content>}</block></if></if_stmt>
+
+            <return>return <expr><call><name><name>ParserResult</name> <operator>::</operator><name>runtimeError</name></name><argument_list>(
+                <argument><expr><literal type="string">"Unrecognised warning option: '"</literal> <operator>+</operator> <name>warning</name> <operator>+</operator> <literal type="char">'\''</literal></expr></argument> )</argument_list></call></expr>;</return>
+        </block_content>}</block></lambda></expr></init></decl>;</decl_stmt>
+        <decl_stmt><decl><type><specifier>auto</specifier> <specifier>const</specifier></type> <name>loadTestNamesFromFile</name> <init>= <expr><lambda><capture>[<argument><modifier>&amp;</modifier></argument>]</capture><parameter_list>( <parameter><decl><type><name><name>std</name><operator>::</operator><name>string</name></name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>filename</name></decl></parameter> )</parameter_list> <block>{<block_content>
+                <decl_stmt><decl><type><name><name>std</name><operator>::</operator><name>ifstream</name></name></type> <name>f</name><argument_list>( <argument><expr><call><name><name>filename</name><operator>.</operator><name>c_str</name></name><argument_list>()</argument_list></call></expr></argument> )</argument_list></decl>;</decl_stmt>
+                <if_stmt><if>if<condition>( <expr><operator>!</operator><call><name><name>f</name><operator>.</operator><name>is_open</name></name><argument_list>()</argument_list></call></expr> )</condition><block type="pseudo"><block_content>
+                    <return>return <expr><call><name><name>ParserResult</name><operator>::</operator><name>runtimeError</name></name><argument_list>( <argument><expr><literal type="string">"Unable to load input file: '"</literal> <operator>+</operator> <name>filename</name> <operator>+</operator> <literal type="char">'\''</literal></expr></argument> )</argument_list></call></expr>;</return></block_content></block></if></if_stmt>
+
+                <decl_stmt><decl><type><name><name>std</name><operator>::</operator><name>string</name></name></type> <name>line</name></decl>;</decl_stmt>
+                <while>while<condition>( <expr><call><name><name>std</name><operator>::</operator><name>getline</name></name><argument_list>( <argument><expr><name>f</name></expr></argument>, <argument><expr><name>line</name></expr></argument> )</argument_list></call></expr> )</condition> <block>{<block_content>
+                    <expr_stmt><expr><name>line</name> <operator>=</operator> <call><name>trim</name><argument_list>(<argument><expr><name>line</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+                    <if_stmt><if>if<condition>( <expr><operator>!</operator><call><name><name>line</name><operator>.</operator><name>empty</name></name><argument_list>()</argument_list></call> <operator>&amp;&amp;</operator> <operator>!</operator><call><name>startsWith</name><argument_list>( <argument><expr><name>line</name></expr></argument>, <argument><expr><literal type="char">'#'</literal></expr></argument> )</argument_list></call></expr> )</condition> <block>{<block_content>
+                        <if_stmt><if>if<condition>( <expr><operator>!</operator><call><name>startsWith</name><argument_list>( <argument><expr><name>line</name></expr></argument>, <argument><expr><literal type="char">'"'</literal></expr></argument> )</argument_list></call></expr> )</condition><block type="pseudo"><block_content>
+                            <expr_stmt><expr><name>line</name> <operator>=</operator> <literal type="char">'"'</literal> <operator>+</operator> <call><name>CATCH_MOVE</name><argument_list>(<argument><expr><name>line</name></expr></argument>)</argument_list></call> <operator>+</operator> <literal type="char">'"'</literal></expr>;</expr_stmt></block_content></block></if></if_stmt>
+                        <expr_stmt><expr><call><name><name>config</name><operator>.</operator><name>testsOrTags</name><operator>.</operator><name>push_back</name></name><argument_list>( <argument><expr><name>line</name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+                        <expr_stmt><expr><call><name><name>config</name><operator>.</operator><name>testsOrTags</name><operator>.</operator><name>emplace_back</name></name><argument_list>( <argument><expr><literal type="string">","</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+                    </block_content>}</block></if></if_stmt>
+                </block_content>}</block></while>
+                <comment type="line">//Remove comma in the end</comment>
+                <if_stmt><if>if<condition>(<expr><operator>!</operator><call><name><name>config</name><operator>.</operator><name>testsOrTags</name><operator>.</operator><name>empty</name></name><argument_list>()</argument_list></call></expr>)</condition><block type="pseudo"><block_content>
+                    <expr_stmt><expr><call><name><name>config</name><operator>.</operator><name>testsOrTags</name><operator>.</operator><name>erase</name></name><argument_list>( <argument><expr><call><name><name>config</name><operator>.</operator><name>testsOrTags</name><operator>.</operator><name>end</name></name><argument_list>()</argument_list></call><operator>-</operator><literal type="number">1</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt></block_content></block></if></if_stmt>
+
+                <return>return <expr><call><name><name>ParserResult</name><operator>::</operator><name>ok</name></name><argument_list>( <argument><expr><name><name>ParseResultType</name><operator>::</operator><name>Matched</name></name></expr></argument> )</argument_list></call></expr>;</return>
+            </block_content>}</block></lambda></expr></init></decl>;</decl_stmt>
+        <decl_stmt><decl><type><specifier>auto</specifier> <specifier>const</specifier></type> <name>setTestOrder</name> <init>= <expr><lambda><capture>[<argument><modifier>&amp;</modifier></argument>]</capture><parameter_list>( <parameter><decl><type><name><name>std</name><operator>::</operator><name>string</name></name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>order</name></decl></parameter> )</parameter_list> <block>{<block_content>
+                <if_stmt><if>if<condition>( <expr><call><name>startsWith</name><argument_list>( <argument><expr><literal type="string">"declared"</literal></expr></argument>, <argument><expr><name>order</name></expr></argument> )</argument_list></call></expr> )</condition><block type="pseudo"><block_content>
+                    <expr_stmt><expr><name><name>config</name><operator>.</operator><name>runOrder</name></name> <operator>=</operator> <name><name>TestRunOrder</name><operator>::</operator><name>Declared</name></name></expr>;</expr_stmt></block_content></block></if>
+                <if type="elseif">else if<condition>( <expr><call><name>startsWith</name><argument_list>( <argument><expr><literal type="string">"lexical"</literal></expr></argument>, <argument><expr><name>order</name></expr></argument> )</argument_list></call></expr> )</condition><block type="pseudo"><block_content>
+                    <expr_stmt><expr><name><name>config</name><operator>.</operator><name>runOrder</name></name> <operator>=</operator> <name><name>TestRunOrder</name><operator>::</operator><name>LexicographicallySorted</name></name></expr>;</expr_stmt></block_content></block></if>
+                <if type="elseif">else if<condition>( <expr><call><name>startsWith</name><argument_list>( <argument><expr><literal type="string">"random"</literal></expr></argument>, <argument><expr><name>order</name></expr></argument> )</argument_list></call></expr> )</condition><block type="pseudo"><block_content>
+                    <expr_stmt><expr><name><name>config</name><operator>.</operator><name>runOrder</name></name> <operator>=</operator> <name><name>TestRunOrder</name><operator>::</operator><name>Randomized</name></name></expr>;</expr_stmt></block_content></block></if>
+                <else>else<block type="pseudo"><block_content>
+                    <return>return <expr><call><name><name>ParserResult</name><operator>::</operator><name>runtimeError</name></name><argument_list>( <argument><expr><literal type="string">"Unrecognised ordering: '"</literal> <operator>+</operator> <name>order</name> <operator>+</operator> <literal type="char">'\''</literal></expr></argument> )</argument_list></call></expr>;</return></block_content></block></else></if_stmt>
+                <return>return <expr><call><name><name>ParserResult</name><operator>::</operator><name>ok</name></name><argument_list>( <argument><expr><name><name>ParseResultType</name><operator>::</operator><name>Matched</name></name></expr></argument> )</argument_list></call></expr>;</return>
+            </block_content>}</block></lambda></expr></init></decl>;</decl_stmt>
+        <decl_stmt><decl><type><specifier>auto</specifier> <specifier>const</specifier></type> <name>setRngSeed</name> <init>= <expr><lambda><capture>[<argument><modifier>&amp;</modifier></argument>]</capture><parameter_list>( <parameter><decl><type><name><name>std</name><operator>::</operator><name>string</name></name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>seed</name></decl></parameter> )</parameter_list> <block>{<block_content>
+                <if_stmt><if>if<condition>( <expr><name>seed</name> <operator>==</operator> <literal type="string">"time"</literal></expr> )</condition> <block>{<block_content>
+                    <expr_stmt><expr><name><name>config</name><operator>.</operator><name>rngSeed</name></name> <operator>=</operator> <call><name>generateRandomSeed</name><argument_list>(<argument><expr><name><name>GenerateFrom</name><operator>::</operator><name>Time</name></name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+                    <return>return <expr><call><name><name>ParserResult</name><operator>::</operator><name>ok</name></name><argument_list>(<argument><expr><name><name>ParseResultType</name><operator>::</operator><name>Matched</name></name></expr></argument>)</argument_list></call></expr>;</return>
+                </block_content>}</block></if> <if type="elseif">else if <condition>(<expr><name>seed</name> <operator>==</operator> <literal type="string">"random-device"</literal></expr>)</condition> <block>{<block_content>
+                    <expr_stmt><expr><name><name>config</name><operator>.</operator><name>rngSeed</name></name> <operator>=</operator> <call><name>generateRandomSeed</name><argument_list>(<argument><expr><name><name>GenerateFrom</name><operator>::</operator><name>RandomDevice</name></name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+                    <return>return <expr><call><name><name>ParserResult</name><operator>::</operator><name>ok</name></name><argument_list>(<argument><expr><name><name>ParseResultType</name><operator>::</operator><name>Matched</name></name></expr></argument>)</argument_list></call></expr>;</return>
+                </block_content>}</block></if></if_stmt>
+
+                <comment type="line">// TODO: ideally we should be parsing uint32_t directly</comment>
+                <comment type="line">//       fix this later when we add new parse overload</comment>
+                <decl_stmt><decl><type><name>auto</name></type> <name>parsedSeed</name> <init>= <expr><call><name>parseUInt</name><argument_list>( <argument><expr><name>seed</name></expr></argument>, <argument><expr><literal type="number">0</literal></expr></argument> )</argument_list></call></expr></init></decl>;</decl_stmt>
+                <if_stmt><if>if <condition>( <expr><operator>!</operator><name>parsedSeed</name></expr> )</condition> <block>{<block_content>
+                    <return>return <expr><call><name><name>ParserResult</name><operator>::</operator><name>runtimeError</name></name><argument_list>( <argument><expr><literal type="string">"Could not parse '"</literal> <operator>+</operator> <name>seed</name> <operator>+</operator> <literal type="string">"' as seed"</literal></expr></argument> )</argument_list></call></expr>;</return>
+                </block_content>}</block></if></if_stmt>
+                <expr_stmt><expr><name><name>config</name><operator>.</operator><name>rngSeed</name></name> <operator>=</operator> <operator>*</operator><name>parsedSeed</name></expr>;</expr_stmt>
+                <return>return <expr><call><name><name>ParserResult</name><operator>::</operator><name>ok</name></name><argument_list>( <argument><expr><name><name>ParseResultType</name><operator>::</operator><name>Matched</name></name></expr></argument> )</argument_list></call></expr>;</return>
+            </block_content>}</block></lambda></expr></init></decl>;</decl_stmt>
+        <decl_stmt><decl><type><specifier>auto</specifier> <specifier>const</specifier></type> <name>setDefaultColourMode</name> <init>= <expr><lambda><capture>[<argument><modifier>&amp;</modifier></argument>]</capture><parameter_list>( <parameter><decl><type><name><name>std</name><operator>::</operator><name>string</name></name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>colourMode</name></decl></parameter> )</parameter_list> <block>{<block_content>
+            <decl_stmt><decl><type><name><name>Optional</name><argument_list type="generic">&lt;<argument><expr><name>ColourMode</name></expr></argument>&gt;</argument_list></name></type> <name>maybeMode</name> <init>= <expr><call><name><name>Catch</name><operator>::</operator><name>Detail</name><operator>::</operator><name>stringToColourMode</name></name><argument_list>(<argument><expr><call><name>toLower</name><argument_list>( <argument><expr><name>colourMode</name></expr></argument> )</argument_list></call></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+            <if_stmt><if>if <condition>( <expr><operator>!</operator><name>maybeMode</name></expr> )</condition> <block>{<block_content>
+                <return>return <expr><call><name><name>ParserResult</name><operator>::</operator><name>runtimeError</name></name><argument_list>(
+                    <argument><expr><literal type="string">"colour mode must be one of: default, ansi, win32, "</literal>
+                    <literal type="string">"or none. '"</literal> <operator>+</operator>
+                    <name>colourMode</name> <operator>+</operator> <literal type="string">"' is not recognised"</literal></expr></argument> )</argument_list></call></expr>;</return>
+            </block_content>}</block></if></if_stmt>
+            <decl_stmt><decl><type><name>auto</name></type> <name>mode</name> <init>= <expr><operator>*</operator><name>maybeMode</name></expr></init></decl>;</decl_stmt>
+            <if_stmt><if>if <condition>( <expr><operator>!</operator><call><name>isColourImplAvailable</name><argument_list>( <argument><expr><name>mode</name></expr></argument> )</argument_list></call></expr> )</condition> <block>{<block_content>
+                <return>return <expr><call><name><name>ParserResult</name><operator>::</operator><name>runtimeError</name></name><argument_list>(
+                    <argument><expr><literal type="string">"colour mode '"</literal> <operator>+</operator> <name>colourMode</name> <operator>+</operator>
+                    <literal type="string">"' is not supported in this binary"</literal></expr></argument> )</argument_list></call></expr>;</return>
+            </block_content>}</block></if></if_stmt>
+            <expr_stmt><expr><name><name>config</name><operator>.</operator><name>defaultColourMode</name></name> <operator>=</operator> <name>mode</name></expr>;</expr_stmt>
+            <return>return <expr><call><name><name>ParserResult</name><operator>::</operator><name>ok</name></name><argument_list>( <argument><expr><name><name>ParseResultType</name><operator>::</operator><name>Matched</name></name></expr></argument> )</argument_list></call></expr>;</return>
+        </block_content>}</block></lambda></expr></init></decl>;</decl_stmt>
+        <decl_stmt><decl><type><specifier>auto</specifier> <specifier>const</specifier></type> <name>setWaitForKeypress</name> <init>= <expr><lambda><capture>[<argument><modifier>&amp;</modifier></argument>]</capture><parameter_list>( <parameter><decl><type><name><name>std</name><operator>::</operator><name>string</name></name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>keypress</name></decl></parameter> )</parameter_list> <block>{<block_content>
+                <decl_stmt><decl><type><name>auto</name></type> <name>keypressLc</name> <init>= <expr><call><name>toLower</name><argument_list>( <argument><expr><name>keypress</name></expr></argument> )</argument_list></call></expr></init></decl>;</decl_stmt>
+                <if_stmt><if>if <condition>(<expr><name>keypressLc</name> <operator>==</operator> <literal type="string">"never"</literal></expr>)</condition><block type="pseudo"><block_content>
+                    <expr_stmt><expr><name><name>config</name><operator>.</operator><name>waitForKeypress</name></name> <operator>=</operator> <name><name>WaitForKeypress</name><operator>::</operator><name>Never</name></name></expr>;</expr_stmt></block_content></block></if>
+                <if type="elseif">else if<condition>( <expr><name>keypressLc</name> <operator>==</operator> <literal type="string">"start"</literal></expr> )</condition><block type="pseudo"><block_content>
+                    <expr_stmt><expr><name><name>config</name><operator>.</operator><name>waitForKeypress</name></name> <operator>=</operator> <name><name>WaitForKeypress</name><operator>::</operator><name>BeforeStart</name></name></expr>;</expr_stmt></block_content></block></if>
+                <if type="elseif">else if<condition>( <expr><name>keypressLc</name> <operator>==</operator> <literal type="string">"exit"</literal></expr> )</condition><block type="pseudo"><block_content>
+                    <expr_stmt><expr><name><name>config</name><operator>.</operator><name>waitForKeypress</name></name> <operator>=</operator> <name><name>WaitForKeypress</name><operator>::</operator><name>BeforeExit</name></name></expr>;</expr_stmt></block_content></block></if>
+                <if type="elseif">else if<condition>( <expr><name>keypressLc</name> <operator>==</operator> <literal type="string">"both"</literal></expr> )</condition><block type="pseudo"><block_content>
+                    <expr_stmt><expr><name><name>config</name><operator>.</operator><name>waitForKeypress</name></name> <operator>=</operator> <name><name>WaitForKeypress</name><operator>::</operator><name>BeforeStartAndExit</name></name></expr>;</expr_stmt></block_content></block></if>
+                <else>else<block type="pseudo"><block_content>
+                    <return>return <expr><call><name><name>ParserResult</name><operator>::</operator><name>runtimeError</name></name><argument_list>( <argument><expr><literal type="string">"keypress argument must be one of: never, start, exit or both. '"</literal> <operator>+</operator> <name>keypress</name> <operator>+</operator> <literal type="string">"' not recognised"</literal></expr></argument> )</argument_list></call></expr>;</return></block_content></block></else></if_stmt>
+            <return>return <expr><call><name><name>ParserResult</name><operator>::</operator><name>ok</name></name><argument_list>( <argument><expr><name><name>ParseResultType</name><operator>::</operator><name>Matched</name></name></expr></argument> )</argument_list></call></expr>;</return>
+            </block_content>}</block></lambda></expr></init></decl>;</decl_stmt>
+        <decl_stmt><decl><type><specifier>auto</specifier> <specifier>const</specifier></type> <name>setVerbosity</name> <init>= <expr><lambda><capture>[<argument><modifier>&amp;</modifier></argument>]</capture><parameter_list>( <parameter><decl><type><name><name>std</name><operator>::</operator><name>string</name></name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>verbosity</name></decl></parameter> )</parameter_list> <block>{<block_content>
+            <decl_stmt><decl><type><name>auto</name></type> <name>lcVerbosity</name> <init>= <expr><call><name>toLower</name><argument_list>( <argument><expr><name>verbosity</name></expr></argument> )</argument_list></call></expr></init></decl>;</decl_stmt>
+            <if_stmt><if>if<condition>( <expr><name>lcVerbosity</name> <operator>==</operator> <literal type="string">"quiet"</literal></expr> )</condition><block type="pseudo"><block_content>
+                <expr_stmt><expr><name><name>config</name><operator>.</operator><name>verbosity</name></name> <operator>=</operator> <name><name>Verbosity</name><operator>::</operator><name>Quiet</name></name></expr>;</expr_stmt></block_content></block></if>
+            <if type="elseif">else if<condition>( <expr><name>lcVerbosity</name> <operator>==</operator> <literal type="string">"normal"</literal></expr> )</condition><block type="pseudo"><block_content>
+                <expr_stmt><expr><name><name>config</name><operator>.</operator><name>verbosity</name></name> <operator>=</operator> <name><name>Verbosity</name><operator>::</operator><name>Normal</name></name></expr>;</expr_stmt></block_content></block></if>
+            <if type="elseif">else if<condition>( <expr><name>lcVerbosity</name> <operator>==</operator> <literal type="string">"high"</literal></expr> )</condition><block type="pseudo"><block_content>
+                <expr_stmt><expr><name><name>config</name><operator>.</operator><name>verbosity</name></name> <operator>=</operator> <name><name>Verbosity</name><operator>::</operator><name>High</name></name></expr>;</expr_stmt></block_content></block></if>
+            <else>else<block type="pseudo"><block_content>
+                <return>return <expr><call><name><name>ParserResult</name><operator>::</operator><name>runtimeError</name></name><argument_list>( <argument><expr><literal type="string">"Unrecognised verbosity, '"</literal> <operator>+</operator> <name>verbosity</name> <operator>+</operator> <literal type="char">'\''</literal></expr></argument> )</argument_list></call></expr>;</return></block_content></block></else></if_stmt>
+            <return>return <expr><call><name><name>ParserResult</name><operator>::</operator><name>ok</name></name><argument_list>( <argument><expr><name><name>ParseResultType</name><operator>::</operator><name>Matched</name></name></expr></argument> )</argument_list></call></expr>;</return>
+        </block_content>}</block></lambda></expr></init></decl>;</decl_stmt>
+        <decl_stmt><decl><type><specifier>auto</specifier> <specifier>const</specifier></type> <name>setReporter</name> <init>= <expr><lambda><capture>[<argument><modifier>&amp;</modifier></argument>]</capture><parameter_list>( <parameter><decl><type><name><name>std</name><operator>::</operator><name>string</name></name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>userReporterSpec</name></decl></parameter> )</parameter_list> <block>{<block_content>
+            <if_stmt><if>if <condition>( <expr><call><name><name>userReporterSpec</name><operator>.</operator><name>empty</name></name><argument_list>()</argument_list></call></expr> )</condition> <block>{<block_content>
+                <return>return <expr><call><name><name>ParserResult</name><operator>::</operator><name>runtimeError</name></name><argument_list>( <argument><expr><literal type="string">"Received empty reporter spec."</literal></expr></argument> )</argument_list></call></expr>;</return>
+            </block_content>}</block></if></if_stmt>
+
+            <decl_stmt><decl><type><name><name>Optional</name><argument_list type="generic">&lt;<argument><expr><name>ReporterSpec</name></expr></argument>&gt;</argument_list></name></type> <name>parsed</name> <init>=
+                <expr><call><name>parseReporterSpec</name><argument_list>( <argument><expr><name>userReporterSpec</name></expr></argument> )</argument_list></call></expr></init></decl>;</decl_stmt>
+            <if_stmt><if>if <condition>( <expr><operator>!</operator><name>parsed</name></expr> )</condition> <block>{<block_content>
+                <return>return <expr><call><name><name>ParserResult</name><operator>::</operator><name>runtimeError</name></name><argument_list>(
+                    <argument><expr><literal type="string">"Could not parse reporter spec '"</literal> <operator>+</operator> <name>userReporterSpec</name> <operator>+</operator>
+                    <literal type="string">"'"</literal></expr></argument> )</argument_list></call></expr>;</return>
+            </block_content>}</block></if></if_stmt>
+
+            <decl_stmt><decl><type><specifier>auto</specifier> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>reporterSpec</name> <init>= <expr><operator>*</operator><name>parsed</name></expr></init></decl>;</decl_stmt>
+
+            <decl_stmt><decl><type><specifier>auto</specifier> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>factories</name> <init>=
+                <expr><call><name>getRegistryHub</name><argument_list>()</argument_list></call><operator>.</operator><call><name>getReporterRegistry</name><argument_list>()</argument_list></call><operator>.</operator><call><name>getFactories</name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+            <decl_stmt><decl><type><name>auto</name></type> <name>result</name> <init>= <expr><call><name><name>factories</name><operator>.</operator><name>find</name></name><argument_list>( <argument><expr><call><name><name>reporterSpec</name><operator>.</operator><name>name</name></name><argument_list>()</argument_list></call></expr></argument> )</argument_list></call></expr></init></decl>;</decl_stmt>
+
+            <if_stmt><if>if <condition>( <expr><name>result</name> <operator>==</operator> <call><name><name>factories</name><operator>.</operator><name>end</name></name><argument_list>()</argument_list></call></expr> )</condition> <block>{<block_content>
+                <return>return <expr><call><name><name>ParserResult</name><operator>::</operator><name>runtimeError</name></name><argument_list>(
+                    <argument><expr><literal type="string">"Unrecognized reporter, '"</literal> <operator>+</operator> <call><name><name>reporterSpec</name><operator>.</operator><name>name</name></name><argument_list>()</argument_list></call> <operator>+</operator>
+                    <literal type="string">"'. Check available with --list-reporters"</literal></expr></argument> )</argument_list></call></expr>;</return>
+            </block_content>}</block></if></if_stmt>
+
+
+            <decl_stmt><decl><type><specifier>const</specifier> <name>bool</name></type> <name>hadOutputFile</name> <init>= <expr><call><name><name>reporterSpec</name><operator>.</operator><name>outputFile</name></name><argument_list>()</argument_list></call><operator>.</operator><call><name>some</name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+            <expr_stmt><expr><call><name><name>config</name><operator>.</operator><name>reporterSpecifications</name><operator>.</operator><name>push_back</name></name><argument_list>( <argument><expr><call><name>CATCH_MOVE</name><argument_list>( <argument><expr><operator>*</operator><name>parsed</name></expr></argument> )</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+            <comment type="line">// It would be enough to check this only once at the very end, but</comment>
+            <comment type="line">// there is  not a place where we could call this check, so do it</comment>
+            <comment type="line">// every time it could fail. For valid inputs, this is still called</comment>
+            <comment type="line">// at most once.</comment>
+            <if_stmt><if>if <condition>(<expr><operator>!</operator><name>hadOutputFile</name></expr>)</condition> <block>{<block_content>
+                <decl_stmt><decl><type><name>int</name></type> <name>n_reporters_without_file</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</decl_stmt>
+                <for>for <control>(<init><decl><type><specifier>auto</specifier> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>spec</name> <range>: <expr><name><name>config</name><operator>.</operator><name>reporterSpecifications</name></name></expr></range></decl></init>)</control> <block>{<block_content>
+                    <if_stmt><if>if <condition>(<expr><call><name><name>spec</name><operator>.</operator><name>outputFile</name></name><argument_list>()</argument_list></call><operator>.</operator><call><name>none</name><argument_list>()</argument_list></call></expr>)</condition> <block>{<block_content>
+                        <expr_stmt><expr><name>n_reporters_without_file</name><operator>++</operator></expr>;</expr_stmt>
+                    </block_content>}</block></if></if_stmt>
+                </block_content>}</block></for>
+                <if_stmt><if>if <condition>(<expr><name>n_reporters_without_file</name> <operator>&gt;</operator> <literal type="number">1</literal></expr>)</condition> <block>{<block_content>
+                    <return>return <expr><call><name><name>ParserResult</name><operator>::</operator><name>runtimeError</name></name><argument_list>( <argument><expr><literal type="string">"Only one reporter may have unspecified output file."</literal></expr></argument> )</argument_list></call></expr>;</return>
+                </block_content>}</block></if></if_stmt>
+            </block_content>}</block></if></if_stmt>
+
+            <return>return <expr><call><name><name>ParserResult</name><operator>::</operator><name>ok</name></name><argument_list>( <argument><expr><name><name>ParseResultType</name><operator>::</operator><name>Matched</name></name></expr></argument> )</argument_list></call></expr>;</return>
+        </block_content>}</block></lambda></expr></init></decl>;</decl_stmt>
+        <decl_stmt><decl><type><specifier>auto</specifier> <specifier>const</specifier></type> <name>setShardCount</name> <init>= <expr><lambda><capture>[<argument><modifier>&amp;</modifier></argument>]</capture><parameter_list>( <parameter><decl><type><name><name>std</name><operator>::</operator><name>string</name></name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>shardCount</name></decl></parameter> )</parameter_list> <block>{<block_content>
+            <decl_stmt><decl><type><name>auto</name></type> <name>parsedCount</name> <init>= <expr><call><name>parseUInt</name><argument_list>( <argument><expr><name>shardCount</name></expr></argument> )</argument_list></call></expr></init></decl>;</decl_stmt>
+            <if_stmt><if>if <condition>( <expr><operator>!</operator><name>parsedCount</name></expr> )</condition> <block>{<block_content>
+                <return>return <expr><call><name><name>ParserResult</name><operator>::</operator><name>runtimeError</name></name><argument_list>(
+                    <argument><expr><literal type="string">"Could not parse '"</literal> <operator>+</operator> <name>shardCount</name> <operator>+</operator> <literal type="string">"' as shard count"</literal></expr></argument> )</argument_list></call></expr>;</return>
+            </block_content>}</block></if></if_stmt>
+            <if_stmt><if>if <condition>( <expr><operator>*</operator><name>parsedCount</name> <operator>==</operator> <literal type="number">0</literal></expr> )</condition> <block>{<block_content>
+                <return>return <expr><call><name><name>ParserResult</name><operator>::</operator><name>runtimeError</name></name><argument_list>(
+                    <argument><expr><literal type="string">"Shard count must be positive"</literal></expr></argument> )</argument_list></call></expr>;</return>
+            </block_content>}</block></if></if_stmt>
+            <expr_stmt><expr><name><name>config</name><operator>.</operator><name>shardCount</name></name> <operator>=</operator> <operator>*</operator><name>parsedCount</name></expr>;</expr_stmt>
+            <return>return <expr><call><name><name>ParserResult</name><operator>::</operator><name>ok</name></name><argument_list>( <argument><expr><name><name>ParseResultType</name><operator>::</operator><name>Matched</name></name></expr></argument> )</argument_list></call></expr>;</return>
+        </block_content>}</block></lambda></expr></init></decl>;</decl_stmt>
+
+        <decl_stmt><decl><type><specifier>auto</specifier> <specifier>const</specifier></type> <name>setShardIndex</name> <init>= <expr><lambda><capture>[<argument><modifier>&amp;</modifier></argument>]</capture><parameter_list>(<parameter><decl><type><name><name>std</name><operator>::</operator><name>string</name></name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>shardIndex</name></decl></parameter>)</parameter_list> <block>{<block_content>
+            <decl_stmt><decl><type><name>auto</name></type> <name>parsedIndex</name> <init>= <expr><call><name>parseUInt</name><argument_list>( <argument><expr><name>shardIndex</name></expr></argument> )</argument_list></call></expr></init></decl>;</decl_stmt>
+            <if_stmt><if>if <condition>( <expr><operator>!</operator><name>parsedIndex</name></expr> )</condition> <block>{<block_content>
+                <return>return <expr><call><name><name>ParserResult</name><operator>::</operator><name>runtimeError</name></name><argument_list>(
+                    <argument><expr><literal type="string">"Could not parse '"</literal> <operator>+</operator> <name>shardIndex</name> <operator>+</operator> <literal type="string">"' as shard index"</literal></expr></argument> )</argument_list></call></expr>;</return>
+            </block_content>}</block></if></if_stmt>
+            <expr_stmt><expr><name><name>config</name><operator>.</operator><name>shardIndex</name></name> <operator>=</operator> <operator>*</operator><name>parsedIndex</name></expr>;</expr_stmt>
+            <return>return <expr><call><name><name>ParserResult</name><operator>::</operator><name>ok</name></name><argument_list>( <argument><expr><name><name>ParseResultType</name><operator>::</operator><name>Matched</name></name></expr></argument> )</argument_list></call></expr>;</return>
+        </block_content>}</block></lambda></expr></init></decl>;</decl_stmt>
+
+        <decl_stmt><decl><type><name>auto</name></type> <name>cli</name>
+            <init>= <expr><call><name>ExeName</name><argument_list>( <argument><expr><name><name>config</name><operator>.</operator><name>processName</name></name></expr></argument> )</argument_list></call>
+            <operator>|</operator> <call><name>Help</name><argument_list>( <argument><expr><name><name>config</name><operator>.</operator><name>showHelp</name></name></expr></argument> )</argument_list></call>
+            <operator>|</operator> <call><name>Opt</name><argument_list>( <argument><expr><name><name>config</name><operator>.</operator><name>showSuccessfulTests</name></name></expr></argument> )</argument_list></call>
+                <index>[<expr><literal type="string">"-s"</literal></expr>]</index><index>[<expr><literal type="string">"--success"</literal></expr>]</index>
+                <operator>(</operator> <literal type="string">"include successful tests in output"</literal> <operator>)</operator>
+            <operator>|</operator> <call><name>Opt</name><argument_list>( <argument><expr><name><name>config</name><operator>.</operator><name>shouldDebugBreak</name></name></expr></argument> )</argument_list></call>
+                <index>[<expr><literal type="string">"-b"</literal></expr>]</index><index>[<expr><literal type="string">"--break"</literal></expr>]</index>
+                <operator>(</operator> <literal type="string">"break into debugger on failure"</literal> <operator>)</operator>
+            <operator>|</operator> <call><name>Opt</name><argument_list>( <argument><expr><name><name>config</name><operator>.</operator><name>noThrow</name></name></expr></argument> )</argument_list></call>
+                <index>[<expr><literal type="string">"-e"</literal></expr>]</index><index>[<expr><literal type="string">"--nothrow"</literal></expr>]</index>
+                <operator>(</operator> <literal type="string">"skip exception tests"</literal> <operator>)</operator>
+            <operator>|</operator> <call><name>Opt</name><argument_list>( <argument><expr><name><name>config</name><operator>.</operator><name>showInvisibles</name></name></expr></argument> )</argument_list></call>
+                <index>[<expr><literal type="string">"-i"</literal></expr>]</index><index>[<expr><literal type="string">"--invisibles"</literal></expr>]</index>
+                <operator>(</operator> <literal type="string">"show invisibles (tabs, newlines)"</literal> <operator>)</operator>
+            <operator>|</operator> <call><name>Opt</name><argument_list>( <argument><expr><name><name>config</name><operator>.</operator><name>defaultOutputFilename</name></name></expr></argument>, <argument><expr><literal type="string">"filename"</literal></expr></argument> )</argument_list></call>
+                <index>[<expr><literal type="string">"-o"</literal></expr>]</index><index>[<expr><literal type="string">"--out"</literal></expr>]</index>
+                <operator>(</operator> <literal type="string">"default output filename"</literal> <operator>)</operator>
+            <operator>|</operator> <call><name>Opt</name><argument_list>( <argument><expr><name>accept_many</name></expr></argument>, <argument><expr><name>setReporter</name></expr></argument>, <argument><expr><literal type="string">"name[::key=value]*"</literal></expr></argument> )</argument_list></call>
+                <index>[<expr><literal type="string">"-r"</literal></expr>]</index><index>[<expr><literal type="string">"--reporter"</literal></expr>]</index>
+                <operator>(</operator> <literal type="string">"reporter to use (defaults to console)"</literal> <operator>)</operator>
+            <operator>|</operator> <call><name>Opt</name><argument_list>( <argument><expr><name><name>config</name><operator>.</operator><name>name</name></name></expr></argument>, <argument><expr><literal type="string">"name"</literal></expr></argument> )</argument_list></call>
+                <index>[<expr><literal type="string">"-n"</literal></expr>]</index><index>[<expr><literal type="string">"--name"</literal></expr>]</index>
+                <operator>(</operator> <literal type="string">"suite name"</literal> <operator>)</operator>
+            <operator>|</operator> <call><name>Opt</name><argument_list>( <argument><expr><lambda><capture>[<argument><modifier>&amp;</modifier></argument>]</capture><parameter_list>( <parameter><decl><type><name>bool</name></type></decl></parameter> )</parameter_list><block>{<block_content> <expr_stmt><expr><name><name>config</name><operator>.</operator><name>abortAfter</name></name> <operator>=</operator> <literal type="number">1</literal></expr>;</expr_stmt> </block_content>}</block></lambda></expr></argument> )</argument_list></call>
+                <index>[<expr><literal type="string">"-a"</literal></expr>]</index><index>[<expr><literal type="string">"--abort"</literal></expr>]</index>
+                <operator>(</operator> <literal type="string">"abort at first failure"</literal> <operator>)</operator>
+            <operator>|</operator> <call><name>Opt</name><argument_list>( <argument><expr><lambda><capture>[<argument><modifier>&amp;</modifier></argument>]</capture><parameter_list>( <parameter><decl><type><name>int</name></type> <name>x</name></decl></parameter> )</parameter_list><block>{<block_content> <expr_stmt><expr><name><name>config</name><operator>.</operator><name>abortAfter</name></name> <operator>=</operator> <name>x</name></expr>;</expr_stmt> </block_content>}</block></lambda></expr></argument>, <argument><expr><literal type="string">"no. failures"</literal></expr></argument> )</argument_list></call>
+                <index>[<expr><literal type="string">"-x"</literal></expr>]</index><index>[<expr><literal type="string">"--abortx"</literal></expr>]</index>
+                <operator>(</operator> <literal type="string">"abort after x failures"</literal> <operator>)</operator>
+            <operator>|</operator> <call><name>Opt</name><argument_list>( <argument><expr><name>accept_many</name></expr></argument>, <argument><expr><name>setWarning</name></expr></argument>, <argument><expr><literal type="string">"warning name"</literal></expr></argument> )</argument_list></call>
+                <index>[<expr><literal type="string">"-w"</literal></expr>]</index><index>[<expr><literal type="string">"--warn"</literal></expr>]</index>
+                <operator>(</operator> <literal type="string">"enable warnings"</literal> <operator>)</operator>
+            <operator>|</operator> <call><name>Opt</name><argument_list>( <argument><expr><lambda><capture>[<argument><modifier>&amp;</modifier></argument>]</capture><parameter_list>( <parameter><decl><type><name>bool</name></type> <name>flag</name></decl></parameter> )</parameter_list> <block>{<block_content> <expr_stmt><expr><name><name>config</name><operator>.</operator><name>showDurations</name></name> <operator>=</operator> <ternary><condition><expr><name>flag</name></expr> ?</condition><then> <expr><name><name>ShowDurations</name><operator>::</operator><name>Always</name></name></expr> </then><else>: <expr><name><name>ShowDurations</name><operator>::</operator><name>Never</name></name></expr></else></ternary></expr>;</expr_stmt> </block_content>}</block></lambda></expr></argument>, <argument><expr><literal type="string">"yes|no"</literal></expr></argument> )</argument_list></call>
+                <index>[<expr><literal type="string">"-d"</literal></expr>]</index><index>[<expr><literal type="string">"--durations"</literal></expr>]</index>
+                <operator>(</operator> <literal type="string">"show test durations"</literal> <operator>)</operator>
+            <operator>|</operator> <call><name>Opt</name><argument_list>( <argument><expr><name><name>config</name><operator>.</operator><name>minDuration</name></name></expr></argument>, <argument><expr><literal type="string">"seconds"</literal></expr></argument> )</argument_list></call>
+                <index>[<expr><literal type="string">"-D"</literal></expr>]</index><index>[<expr><literal type="string">"--min-duration"</literal></expr>]</index>
+                <operator>(</operator> <literal type="string">"show test durations for tests taking at least the given number of seconds"</literal> <operator>)</operator>
+            <operator>|</operator> <call><name>Opt</name><argument_list>( <argument><expr><name>loadTestNamesFromFile</name></expr></argument>, <argument><expr><literal type="string">"filename"</literal></expr></argument> )</argument_list></call>
+                <index>[<expr><literal type="string">"-f"</literal></expr>]</index><index>[<expr><literal type="string">"--input-file"</literal></expr>]</index>
+                <operator>(</operator> <literal type="string">"load test names to run from a file"</literal> <operator>)</operator>
+            <operator>|</operator> <call><name>Opt</name><argument_list>( <argument><expr><name><name>config</name><operator>.</operator><name>filenamesAsTags</name></name></expr></argument> )</argument_list></call>
+                <index>[<expr><literal type="string">"-#"</literal></expr>]</index><index>[<expr><literal type="string">"--filenames-as-tags"</literal></expr>]</index>
+                <operator>(</operator> <literal type="string">"adds a tag for the filename"</literal> <operator>)</operator>
+            <operator>|</operator> <call><name>Opt</name><argument_list>( <argument><expr><name><name>config</name><operator>.</operator><name>sectionsToRun</name></name></expr></argument>, <argument><expr><literal type="string">"section name"</literal></expr></argument> )</argument_list></call>
+                <index>[<expr><literal type="string">"-c"</literal></expr>]</index><index>[<expr><literal type="string">"--section"</literal></expr>]</index>
+                <operator>(</operator> <literal type="string">"specify section to run"</literal> <operator>)</operator>
+            <operator>|</operator> <call><name>Opt</name><argument_list>( <argument><expr><name>setVerbosity</name></expr></argument>, <argument><expr><literal type="string">"quiet|normal|high"</literal></expr></argument> )</argument_list></call>
+                <index>[<expr><literal type="string">"-v"</literal></expr>]</index><index>[<expr><literal type="string">"--verbosity"</literal></expr>]</index>
+                <operator>(</operator> <literal type="string">"set output verbosity"</literal> <operator>)</operator>
+            <operator>|</operator> <call><name>Opt</name><argument_list>( <argument><expr><name><name>config</name><operator>.</operator><name>listTests</name></name></expr></argument> )</argument_list></call>
+                <index>[<expr><literal type="string">"--list-tests"</literal></expr>]</index>
+                <operator>(</operator> <literal type="string">"list all/matching test cases"</literal> <operator>)</operator>
+            <operator>|</operator> <call><name>Opt</name><argument_list>( <argument><expr><name><name>config</name><operator>.</operator><name>listTags</name></name></expr></argument> )</argument_list></call>
+                <index>[<expr><literal type="string">"--list-tags"</literal></expr>]</index>
+                <operator>(</operator> <literal type="string">"list all/matching tags"</literal> <operator>)</operator>
+            <operator>|</operator> <call><name>Opt</name><argument_list>( <argument><expr><name><name>config</name><operator>.</operator><name>listReporters</name></name></expr></argument> )</argument_list></call>
+                <index>[<expr><literal type="string">"--list-reporters"</literal></expr>]</index>
+                <operator>(</operator> <literal type="string">"list all available reporters"</literal> <operator>)</operator>
+            <operator>|</operator> <call><name>Opt</name><argument_list>( <argument><expr><name><name>config</name><operator>.</operator><name>listListeners</name></name></expr></argument> )</argument_list></call>
+                <index>[<expr><literal type="string">"--list-listeners"</literal></expr>]</index>
+                <operator>(</operator> <literal type="string">"list all listeners"</literal> <operator>)</operator>
+            <operator>|</operator> <call><name>Opt</name><argument_list>( <argument><expr><name>setTestOrder</name></expr></argument>, <argument><expr><literal type="string">"decl|lex|rand"</literal></expr></argument> )</argument_list></call>
+                <index>[<expr><literal type="string">"--order"</literal></expr>]</index>
+                <operator>(</operator> <literal type="string">"test case order (defaults to <diff:delete type="replace" xmlns:diff="http://www.srcML.org/srcDiff">decl</diff:delete><diff:insert type="replace" xmlns:diff="http://www.srcML.org/srcDiff">rand</diff:insert>)"</literal> <operator>)</operator>
+            <operator>|</operator> <call><name>Opt</name><argument_list>( <argument><expr><name>setRngSeed</name></expr></argument>, <argument><expr><literal type="string">"'time'|'random-device'|number"</literal></expr></argument> )</argument_list></call>
+                <index>[<expr><literal type="string">"--rng-seed"</literal></expr>]</index>
+                <operator>(</operator> <literal type="string">"set a specific seed for random numbers"</literal> <operator>)</operator>
+            <operator>|</operator> <call><name>Opt</name><argument_list>( <argument><expr><name>setDefaultColourMode</name></expr></argument>, <argument><expr><literal type="string">"ansi|win32|none|default"</literal></expr></argument> )</argument_list></call>
+                <index>[<expr><literal type="string">"--colour-mode"</literal></expr>]</index>
+                <operator>(</operator> <literal type="string">"what color mode should be used as default"</literal> <operator>)</operator>
+            <operator>|</operator> <call><name>Opt</name><argument_list>( <argument><expr><name><name>config</name><operator>.</operator><name>libIdentify</name></name></expr></argument> )</argument_list></call>
+                <index>[<expr><literal type="string">"--libidentify"</literal></expr>]</index>
+                <operator>(</operator> <literal type="string">"report name and version according to libidentify standard"</literal> <operator>)</operator>
+            <operator>|</operator> <call><name>Opt</name><argument_list>( <argument><expr><name>setWaitForKeypress</name></expr></argument>, <argument><expr><literal type="string">"never|start|exit|both"</literal></expr></argument> )</argument_list></call>
+                <index>[<expr><literal type="string">"--wait-for-keypress"</literal></expr>]</index>
+                <operator>(</operator> <literal type="string">"waits for a keypress before exiting"</literal> <operator>)</operator>
+            <operator>|</operator> <call><name>Opt</name><argument_list>( <argument><expr><name><name>config</name><operator>.</operator><name>skipBenchmarks</name></name></expr></argument>)</argument_list></call>
+                <index>[<expr><literal type="string">"--skip-benchmarks"</literal></expr>]</index>
+                <operator>(</operator> <literal type="string">"disable running benchmarks"</literal><operator>)</operator>
+            <operator>|</operator> <call><name>Opt</name><argument_list>( <argument><expr><name><name>config</name><operator>.</operator><name>benchmarkSamples</name></name></expr></argument>, <argument><expr><literal type="string">"samples"</literal></expr></argument> )</argument_list></call>
+                <index>[<expr><literal type="string">"--benchmark-samples"</literal></expr>]</index>
+                <operator>(</operator> <literal type="string">"number of samples to collect (default: 100)"</literal> <operator>)</operator>
+            <operator>|</operator> <call><name>Opt</name><argument_list>( <argument><expr><name><name>config</name><operator>.</operator><name>benchmarkResamples</name></name></expr></argument>, <argument><expr><literal type="string">"resamples"</literal></expr></argument> )</argument_list></call>
+                <index>[<expr><literal type="string">"--benchmark-resamples"</literal></expr>]</index>
+                <operator>(</operator> <literal type="string">"number of resamples for the bootstrap (default: 100000)"</literal> <operator>)</operator>
+            <operator>|</operator> <call><name>Opt</name><argument_list>( <argument><expr><name><name>config</name><operator>.</operator><name>benchmarkConfidenceInterval</name></name></expr></argument>, <argument><expr><literal type="string">"confidence interval"</literal></expr></argument> )</argument_list></call>
+                <index>[<expr><literal type="string">"--benchmark-confidence-interval"</literal></expr>]</index>
+                <operator>(</operator> <literal type="string">"confidence interval for the bootstrap (between 0 and 1, default: 0.95)"</literal> <operator>)</operator>
+            <operator>|</operator> <call><name>Opt</name><argument_list>( <argument><expr><name><name>config</name><operator>.</operator><name>benchmarkNoAnalysis</name></name></expr></argument> )</argument_list></call>
+                <index>[<expr><literal type="string">"--benchmark-no-analysis"</literal></expr>]</index>
+                <operator>(</operator> <literal type="string">"perform only measurements; do not perform any analysis"</literal> <operator>)</operator>
+            <operator>|</operator> <call><name>Opt</name><argument_list>( <argument><expr><name><name>config</name><operator>.</operator><name>benchmarkWarmupTime</name></name></expr></argument>, <argument><expr><literal type="string">"benchmarkWarmupTime"</literal></expr></argument> )</argument_list></call>
+                <index>[<expr><literal type="string">"--benchmark-warmup-time"</literal></expr>]</index>
+                <operator>(</operator> <literal type="string">"amount of time in milliseconds spent on warming up each test (default: 100)"</literal> <operator>)</operator>
+            <operator>|</operator> <call><name>Opt</name><argument_list>( <argument><expr><name>setShardCount</name></expr></argument>, <argument><expr><literal type="string">"shard count"</literal></expr></argument> )</argument_list></call>
+                <index>[<expr><literal type="string">"--shard-count"</literal></expr>]</index>
+                <operator>(</operator> <literal type="string">"split the tests to execute into this many groups"</literal> <operator>)</operator>
+            <operator>|</operator> <call><name>Opt</name><argument_list>( <argument><expr><name>setShardIndex</name></expr></argument>, <argument><expr><literal type="string">"shard index"</literal></expr></argument> )</argument_list></call>
+                <index>[<expr><literal type="string">"--shard-index"</literal></expr>]</index>
+                <operator>(</operator> <literal type="string">"index of the group of tests to execute (see --shard-count)"</literal> <operator>)</operator>
+            <operator>|</operator> <call><name>Opt</name><argument_list>( <argument><expr><name><name>config</name><operator>.</operator><name>allowZeroTests</name></name></expr></argument> )</argument_list></call>
+                <index>[<expr><literal type="string">"--allow-running-no-tests"</literal></expr>]</index>
+                <operator>(</operator> <literal type="string">"Treat 'No tests run' as a success"</literal> <operator>)</operator>
+            <operator>|</operator> <call><name>Opt</name><argument_list>( <argument><expr><name><name>config</name><operator>.</operator><name>prematureExitGuardFilePath</name></name></expr></argument>, <argument><expr><literal type="string">"path"</literal></expr></argument> )</argument_list></call>
+                <index>[<expr><literal type="string">"--premature-exit-guard-file"</literal></expr>]</index>
+                <operator>(</operator> <literal type="string">"create a file before running tests and delete it during clean exit"</literal> <operator>)</operator>
+            <operator>|</operator> <call><call><name>Arg</name><argument_list>( <argument><expr><name><name>config</name><operator>.</operator><name>testsOrTags</name></name></expr></argument>, <argument><expr><literal type="string">"test name|pattern|tags"</literal></expr></argument> )</argument_list></call>
+                <argument_list>( <argument><expr><literal type="string">"which test or tests to use"</literal></expr></argument> )</argument_list></call></expr></init></decl>;</decl_stmt>
+
+        <return>return <expr><name>cli</name></expr>;</return>
+    </block_content>}</block></function>
+
+}</block></namespace> <comment type="line">// end namespace Catch</comment>
+</unit>

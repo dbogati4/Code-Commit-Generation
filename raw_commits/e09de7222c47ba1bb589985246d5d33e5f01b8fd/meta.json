@@ -1,0 +1,8 @@
+{
+  "commit_id": "e09de7222c47ba1bb589985246d5d33e5f01b8fd",
+  "parent_id": "a64ff326bfa6c72e83bfec0b47cf04ad9f4a5cc0",
+  "message": "Small cleanup in XML reporter",
+  "changed_files": [
+    "src/catch2/reporters/catch_reporter_xml.cpp"
+  ]
+}

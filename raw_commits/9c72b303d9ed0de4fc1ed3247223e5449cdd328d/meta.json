@@ -1,0 +1,8 @@
+{
+  "commit_id": "9c72b303d9ed0de4fc1ed3247223e5449cdd328d",
+  "parent_id": "6044f021cf53ac51c307566dd9b5c13054b097d6",
+  "message": "Reseed global rng instance unconditionally",
+  "changed_files": [
+    "src/catch2/internal/catch_run_context.cpp"
+  ]
+}

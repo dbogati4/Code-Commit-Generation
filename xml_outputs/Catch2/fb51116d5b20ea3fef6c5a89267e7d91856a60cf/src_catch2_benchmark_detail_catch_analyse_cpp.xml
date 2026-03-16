@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" xmlns:diff="http://www.srcML.org/srcDiff" revision="1.0.0" language="C++" filename="C:\Users\saile\AppData\Local\Temp\catch2_100_z8gzpiwf\fb51116d5b20ea3fef6c5a89267e7d91856a60cf\src_catch2_benchmark_detail_catch_analyse_cpp\src_catch2_benchmark_detail_catch_analyse_cpp.old|C:\Users\saile\AppData\Local\Temp\catch2_100_z8gzpiwf\fb51116d5b20ea3fef6c5a89267e7d91856a60cf\src_catch2_benchmark_detail_catch_analyse_cpp\src_catch2_benchmark_detail_catch_analyse_cpp.new">
+<comment type="line">//              Copyright Catch2 Authors</comment>
+<comment type="line">// Distributed under the Boost Software License, Version 1.0.</comment>
+<comment type="line">//   (See accompanying file LICENSE.txt or copy at</comment>
+<comment type="line">//        https://www.boost.org/LICENSE_1_0.txt)</comment>
+
+<comment type="line">// SPDX-License-Identifier: BSL-1.0</comment>
+<comment type="line">// Adapted from donated nonius code.</comment>
+
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;catch2/benchmark/detail/catch_analyse.hpp&gt;</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;catch2/benchmark/catch_clock.hpp&gt;</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;catch2/benchmark/catch_sample_analysis.hpp&gt;</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;catch2/benchmark/detail/catch_stats.hpp&gt;</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;catch2/interfaces/catch_interfaces_config.hpp&gt;</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;catch2/internal/catch_move_and_forward.hpp&gt;</cpp:file></cpp:include>
+
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;vector&gt;</cpp:file></cpp:include>
+
+<namespace>namespace <name>Catch</name> <block>{
+    <namespace>namespace <name>Benchmark</name> <block>{
+        <namespace>namespace <name>Detail</name> <block>{
+            <function><type><name>SampleAnalysis</name></type> <name>analyse</name><parameter_list>(<parameter><decl><type><specifier>const</specifier> <name>IConfig</name> <modifier>&amp;</modifier></type><name>cfg</name></decl></parameter>, <parameter><decl><type><name>FDuration</name><modifier>*</modifier></type> <name>first</name></decl></parameter>, <parameter><decl><type><name>FDuration</name><modifier>*</modifier></type> <name>last</name></decl></parameter>)</parameter_list> <block>{<block_content>
+                <if_stmt><if>if <condition>(<expr><operator>!</operator><call><name><name>cfg</name><operator>.</operator><name>benchmarkNoAnalysis</name></name><argument_list>()</argument_list></call></expr>)</condition> <block>{<block_content>
+                    <decl_stmt><decl><type><name><name>std</name><operator>::</operator><name>vector</name><argument_list type="generic">&lt;<argument><expr><name>double</name></expr></argument>&gt;</argument_list></name></type> <name>samples</name></decl>;</decl_stmt>
+                    <expr_stmt><expr><call><name><name>samples</name><operator>.</operator><name>reserve</name></name><argument_list>(<argument><expr><cast type="static">static_cast<argument_list type="generic">&lt;<argument><expr><name>size_t</name></expr></argument>&gt;</argument_list><argument_list>(<argument><expr><name>last</name> <operator>-</operator> <name>first</name></expr></argument>)</argument_list></cast></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+                    <for>for <control>(<init><decl><type><name>auto</name></type> <name>current</name> <init>= <expr><name>first</name></expr></init></decl>;</init> <condition><expr><name>current</name> <operator>!=</operator> <name>last</name></expr>;</condition> <incr><expr><operator>++</operator><name>current</name></expr></incr>)</control> <block>{<block_content>
+                        <expr_stmt><expr><call><name><name>samples</name><operator>.</operator><name>push_back</name></name><argument_list>( <argument><expr><call><name><name>current</name><operator>-&gt;</operator><name>count</name></name><argument_list>()</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+                    </block_content>}</block></for>
+
+                    <decl_stmt><decl><type><name>auto</name></type> <name>analysis</name> <init>= <expr><call><name><name>Catch</name><operator>::</operator><name>Benchmark</name><operator>::</operator><name>Detail</name><operator>::</operator><name>analyse_samples</name></name><argument_list>(
+                        <argument><expr><call><name><name>cfg</name><operator>.</operator><name>benchmarkConfidenceInterval</name></name><argument_list>()</argument_list></call></expr></argument>,
+                        <argument><expr><call><name><name>cfg</name><operator>.</operator><name>benchmarkResamples</name></name><argument_list>()</argument_list></call></expr></argument>,
+                        <argument><expr><call><name><name>samples</name><operator>.</operator><name>data</name></name><argument_list>()</argument_list></call></expr></argument>,
+                        <argument><expr><call><name><name>samples</name><operator>.</operator><name>data</name></name><argument_list>()</argument_list></call> <operator>+</operator> <call><name><name>samples</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call></expr></argument> )</argument_list></call></expr></init></decl>;</decl_stmt>
+                    <decl_stmt><decl><type><name>auto</name></type> <name>outliers</name> <init>= <expr><call><name><name>Catch</name><operator>::</operator><name>Benchmark</name><operator>::</operator><name>Detail</name><operator>::</operator><name>classify_outliers</name></name><argument_list>(
+                        <argument><expr><call><name><name>samples</name><operator>.</operator><name>data</name></name><argument_list>()</argument_list></call></expr></argument>, <argument><expr><call><name><name>samples</name><operator>.</operator><name>data</name></name><argument_list>()</argument_list></call> <operator>+</operator> <call><name><name>samples</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call></expr></argument> )</argument_list></call></expr></init></decl>;</decl_stmt>
+
+                    <decl_stmt><decl><type><name>auto</name></type> <name>wrap_estimate</name> <init>= <expr><lambda><capture>[]</capture><parameter_list>(<parameter><decl><type><name><name>Estimate</name><argument_list type="generic">&lt;<argument><expr><name>double</name></expr></argument>&gt;</argument_list></name></type> <name>e</name></decl></parameter>)</parameter_list> <block>{<block_content>
+                        <return>return <expr><call><name><name>Estimate</name><argument_list type="generic">&lt;<argument><expr><name>FDuration</name></expr></argument>&gt;</argument_list></name> <argument_list>{
+                            <argument><expr><call><name>FDuration</name><argument_list>(<argument><expr><name><name>e</name><operator>.</operator><name>point</name></name></expr></argument>)</argument_list></call></expr></argument>,
+                                <argument><expr><call><name>FDuration</name><argument_list>(<argument><expr><name><name>e</name><operator>.</operator><name>lower_bound</name></name></expr></argument>)</argument_list></call></expr></argument>,
+                                <argument><expr><call><name>FDuration</name><argument_list>(<argument><expr><name><name>e</name><operator>.</operator><name>upper_bound</name></name></expr></argument>)</argument_list></call></expr></argument>,
+                                <argument><expr><name><name>e</name><operator>.</operator><name>confidence_interval</name></name></expr></argument>,
+                        }</argument_list></call></expr>;</return>
+                    </block_content>}</block></lambda></expr></init></decl>;</decl_stmt>
+                    <decl_stmt><decl><type><name><name>std</name><operator>::</operator><name>vector</name><argument_list type="generic">&lt;<argument><expr><name>FDuration</name></expr></argument>&gt;</argument_list></name></type> <name>samples2</name></decl>;</decl_stmt>
+                    <expr_stmt><expr><call><name><name>samples2</name><operator>.</operator><name>reserve</name></name><argument_list>(<argument><expr><call><name><name>samples</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+                    <for>for <control>(<init><decl><type><name>auto</name></type> <name>s</name> <range>: <expr><name>samples</name></expr></range></decl></init>)</control> <block>{<block_content>
+                        <expr_stmt><expr><call><name><name>samples2</name><operator>.</operator><name>push_back</name></name><argument_list>( <argument><expr><call><name>FDuration</name><argument_list>( <argument><expr><name>s</name></expr></argument> )</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+                    </block_content>}</block></for>
+
+                    <return>return <expr><block>{
+                        <expr><call><name>CATCH_MOVE</name><argument_list>(<argument><expr><name>samples2</name></expr></argument>)</argument_list></call></expr>,
+                        <expr><call><name>wrap_estimate</name><argument_list>(<argument><expr><name><name>analysis</name><operator>.</operator><name>mean</name></name></expr></argument>)</argument_list></call></expr>,
+                        <expr><call><name>wrap_estimate</name><argument_list>(<argument><expr><name><name>analysis</name><operator>.</operator><name>standard_deviation</name></name></expr></argument>)</argument_list></call></expr>,
+                        <expr><name>outliers</name></expr>,
+                        <expr><name><name>analysis</name><operator>.</operator><name>outlier_variance</name></name></expr>,
+                    }</block></expr>;</return>
+                </block_content>}</block></if> <else>else <block>{<block_content>
+                    <decl_stmt><decl><type><name><name>std</name><operator>::</operator><name>vector</name><argument_list type="generic">&lt;<argument><expr><name>FDuration</name></expr></argument>&gt;</argument_list></name></type> <name>samples</name></decl>;</decl_stmt>
+                    <expr_stmt><expr><call><name><name>samples</name><operator>.</operator><name>reserve</name></name><argument_list>(<argument><expr><cast type="static">static_cast<argument_list type="generic">&lt;<argument><expr><name>size_t</name></expr></argument>&gt;</argument_list><argument_list>(<argument><expr><name>last</name> <operator>-</operator> <name>first</name></expr></argument>)</argument_list></cast></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+
+                    <decl_stmt><decl><type><name>FDuration</name></type> <name>mean</name> <init>= <expr><call><name>FDuration</name><argument_list>(<argument><expr><literal type="number">0</literal></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+                    <decl_stmt><decl><type><name>int</name></type> <name>i</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</decl_stmt>
+                    <for>for <control>(<init><decl><type><name>auto</name></type> <name>it</name> <init>= <expr><name>first</name></expr></init></decl>;</init> <condition><expr><name>it</name> <operator>&lt;</operator> <name>last</name></expr>;</condition> <incr><expr><operator>++</operator><name>it</name></expr><operator>,</operator> <expr><operator>++</operator><name>i</name></expr></incr>)</control> <block>{<block_content>
+                        <expr_stmt><expr><call><name><name>samples</name><operator>.</operator><name>push_back</name></name><argument_list>(<argument><diff:delete xmlns:diff="http://www.srcML.org/srcDiff"><expr><call><name>FDuration</name><argument_list>(<argument><diff:common xmlns:diff="http://www.srcML.org/srcDiff"><expr><operator>*</operator><name>it</name></expr></diff:common></argument>)</argument_list></call></expr></diff:delete></argument>)</argument_list></call></expr>;</expr_stmt>
+                        <expr_stmt><expr><name>mean</name> <operator>+=</operator> <diff:delete xmlns:diff="http://www.srcML.org/srcDiff"><call><name>FDuration</name><argument_list>(<argument><expr><diff:common xmlns:diff="http://www.srcML.org/srcDiff"><operator>*</operator><name>it</name></diff:common></expr></argument>)</argument_list></call></diff:delete></expr>;</expr_stmt>
+                    </block_content>}</block></for>
+                    <expr_stmt><expr><name>mean</name> <operator>/=</operator> <name>i</name></expr>;</expr_stmt>
+
+                    <return>return <expr><call><name>SampleAnalysis</name><argument_list>{
+                        <argument><expr><call><name>CATCH_MOVE</name><argument_list>(<argument><expr><name>samples</name></expr></argument>)</argument_list></call></expr></argument>,
+                        <argument><expr><call><name><name>Estimate</name><argument_list type="generic">&lt;<argument><expr><name>FDuration</name></expr></argument>&gt;</argument_list></name><argument_list>{ <argument><expr><name>mean</name></expr></argument>, <argument><expr><name>mean</name></expr></argument>, <argument><expr><name>mean</name></expr></argument>, <argument><expr><literal type="number">0.0</literal></expr></argument> }</argument_list></call></expr></argument>,
+                        <argument><expr><call><name><name>Estimate</name><argument_list type="generic">&lt;<argument><expr><name>FDuration</name></expr></argument>&gt;</argument_list></name><argument_list>{ <argument><expr><call><name>FDuration</name><argument_list>( <argument><expr><literal type="number">0</literal></expr></argument> )</argument_list></call></expr></argument>,
+                                             <argument><expr><call><name>FDuration</name><argument_list>( <argument><expr><literal type="number">0</literal></expr></argument> )</argument_list></call></expr></argument>,
+                                             <argument><expr><call><name>FDuration</name><argument_list>( <argument><expr><literal type="number">0</literal></expr></argument> )</argument_list></call></expr></argument>,
+                                             <argument><expr><literal type="number">0.0</literal></expr></argument> }</argument_list></call></expr></argument>,
+                        <argument><expr><call><name>OutlierClassification</name><argument_list>{}</argument_list></call></expr></argument>,
+                        <argument><expr><literal type="number">0.0</literal></expr></argument>
+                    }</argument_list></call></expr>;</return>
+                </block_content>}</block></else></if_stmt>
+            </block_content>}</block></function>
+        }</block></namespace> <comment type="line">// namespace Detail</comment>
+    }</block></namespace> <comment type="line">// namespace Benchmark</comment>
+}</block></namespace> <comment type="line">// namespace Catch</comment>
+</unit>

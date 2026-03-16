@@ -1,0 +1,8 @@
+{
+  "commit_id": "931441251e8975a0e67dd94fa369cf310ac54602",
+  "parent_id": "ea1f32626180242ad31a6ca12e74d05ac5166a46",
+  "message": "Add an early bailout out of benchmark timer calibration",
+  "changed_files": [
+    "include/internal/catch_timer.cpp"
+  ]
+}

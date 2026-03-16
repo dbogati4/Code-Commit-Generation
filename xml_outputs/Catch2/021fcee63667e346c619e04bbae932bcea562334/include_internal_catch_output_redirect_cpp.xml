@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" xmlns:diff="http://www.srcML.org/srcDiff" revision="1.0.0" language="C++" filename="C:\Users\saile\AppData\Local\Temp\catch2_100_z8gzpiwf\021fcee63667e346c619e04bbae932bcea562334\include_internal_catch_output_redirect_cpp\include_internal_catch_output_redirect_cpp.old|C:\Users\saile\AppData\Local\Temp\catch2_100_z8gzpiwf\021fcee63667e346c619e04bbae932bcea562334\include_internal_catch_output_redirect_cpp\include_internal_catch_output_redirect_cpp.new"><comment type="block">/*
+ *  Created by Martin on 28/04/2018.
+ *
+ *  Distributed under the Boost Software License, Version 1.0. (See accompanying
+ *  file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
+ */</comment>
+
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">"catch_output_redirect.h"</cpp:file></cpp:include>
+
+
+
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;cstdio&gt;</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;cstring&gt;</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;fstream&gt;</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;sstream&gt;</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;stdexcept&gt;</cpp:file></cpp:include>
+
+<cpp:if xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">if</cpp:directive> <expr><call><name>defined</name><argument_list>(<argument><expr><name>_MSC_VER</name></expr></argument>)</argument_list></call></expr></cpp:if>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;io.h&gt;</cpp:file></cpp:include>      <comment type="line">//_dup and _dup2</comment>
+<cpp:define xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">define</cpp:directive> <cpp:macro xmlns:cpp="http://www.srcML.org/srcML/cpp"><name>dup</name></cpp:macro> <cpp:value xmlns:cpp="http://www.srcML.org/srcML/cpp">_dup</cpp:value></cpp:define>
+<cpp:define xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">define</cpp:directive> <cpp:macro xmlns:cpp="http://www.srcML.org/srcML/cpp"><name>dup2</name></cpp:macro> <cpp:value xmlns:cpp="http://www.srcML.org/srcML/cpp">_dup2</cpp:value></cpp:define>
+<cpp:define xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">define</cpp:directive> <cpp:macro xmlns:cpp="http://www.srcML.org/srcML/cpp"><name>fileno</name></cpp:macro> <cpp:value xmlns:cpp="http://www.srcML.org/srcML/cpp">_fileno</cpp:value></cpp:define>
+<cpp:else xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">else</cpp:directive></cpp:else>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;unistd.h&gt;</cpp:file></cpp:include>  <comment type="line">// dup and dup2</comment>
+<cpp:endif xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">endif</cpp:directive></cpp:endif>
+
+<namespace>namespace <name>Catch</name> <block>{
+
+    <constructor><name><name>RedirectedStream</name><operator>::</operator><name>RedirectedStream</name></name><parameter_list>( <parameter><decl><type><name><name>std</name><operator>::</operator><name>ostream</name></name><modifier>&amp;</modifier></type> <name>originalStream</name></decl></parameter>, <parameter><decl><type><name><name>std</name><operator>::</operator><name>ostream</name></name><modifier>&amp;</modifier></type> <name>redirectionStream</name></decl></parameter> )</parameter_list>
+    <member_init_list>:   <call><name>m_originalStream</name><argument_list>( <argument><expr><name>originalStream</name></expr></argument> )</argument_list></call>,
+        <call><name>m_redirectionStream</name><argument_list>( <argument><expr><name>redirectionStream</name></expr></argument> )</argument_list></call>,
+        <call><name>m_prevBuf</name><argument_list>( <argument><expr><call><name><name>m_originalStream</name><operator>.</operator><name>rdbuf</name></name><argument_list>()</argument_list></call></expr></argument> )</argument_list></call>
+    </member_init_list><block>{<block_content>
+        <expr_stmt><expr><call><name><name>m_originalStream</name><operator>.</operator><name>rdbuf</name></name><argument_list>( <argument><expr><call><name><name>m_redirectionStream</name><operator>.</operator><name>rdbuf</name></name><argument_list>()</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block></constructor>
+
+    <destructor><name><name>RedirectedStream</name><operator>::</operator><name>~RedirectedStream</name></name><parameter_list>()</parameter_list> <block>{<block_content>
+        <expr_stmt><expr><call><name><name>m_originalStream</name><operator>.</operator><name>rdbuf</name></name><argument_list>( <argument><expr><name>m_prevBuf</name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block></destructor>
+
+    <constructor><name><name>RedirectedStdOut</name><operator>::</operator><name>RedirectedStdOut</name></name><parameter_list>()</parameter_list> <member_init_list>: <call><name>m_cout</name><argument_list>( <argument><expr><call><name><name>Catch</name><operator>::</operator><name>cout</name></name><argument_list>()</argument_list></call></expr></argument>, <argument><expr><call><name><name>m_rss</name><operator>.</operator><name>get</name></name><argument_list>()</argument_list></call></expr></argument> )</argument_list></call> </member_init_list><block>{<block_content/>}</block></constructor>
+    <function><type><name>auto</name></type> <name><name>RedirectedStdOut</name><operator>::</operator><name>str</name></name><parameter_list>()</parameter_list> <specifier>const</specifier> -&gt; <type><name><name>std</name><operator>::</operator><name>string</name></name></type> <block>{<block_content> <return>return <expr><call><name><name>m_rss</name><operator>.</operator><name>str</name></name><argument_list>()</argument_list></call></expr>;</return> </block_content>}</block></function>
+
+    <constructor><name><name>RedirectedStdErr</name><operator>::</operator><name>RedirectedStdErr</name></name><parameter_list>()</parameter_list>
+    <member_init_list>:   <call><name>m_cerr</name><argument_list>( <argument><expr><call><name><name>Catch</name><operator>::</operator><name>cerr</name></name><argument_list>()</argument_list></call></expr></argument>, <argument><expr><call><name><name>m_rss</name><operator>.</operator><name>get</name></name><argument_list>()</argument_list></call></expr></argument> )</argument_list></call>,
+        <call><name>m_clog</name><argument_list>( <argument><expr><call><name><name>Catch</name><operator>::</operator><name>clog</name></name><argument_list>()</argument_list></call></expr></argument>, <argument><expr><call><name><name>m_rss</name><operator>.</operator><name>get</name></name><argument_list>()</argument_list></call></expr></argument> )</argument_list></call>
+    </member_init_list><block>{<block_content/>}</block></constructor>
+    <function><type><name>auto</name></type> <name><name>RedirectedStdErr</name><operator>::</operator><name>str</name></name><parameter_list>()</parameter_list> <specifier>const</specifier> -&gt; <type><name><name>std</name><operator>::</operator><name>string</name></name></type> <block>{<block_content> <return>return <expr><call><name><name>m_rss</name><operator>.</operator><name>str</name></name><argument_list>()</argument_list></call></expr>;</return> </block_content>}</block></function>
+
+
+
+<cpp:if xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">if</cpp:directive> <expr><call><name>defined</name><argument_list>(<argument><expr><name><diff:delete type="replace" xmlns:diff="http://www.srcML.org/srcDiff">CATCH_PLATFORM_WINDOWS</diff:delete><diff:insert type="replace" xmlns:diff="http://www.srcML.org/srcDiff">_MSC_VER</diff:insert></name></expr></argument>)</argument_list></call></expr></cpp:if>
+    <constructor><name><name>TempFile</name><operator>::</operator><name>TempFile</name></name><parameter_list>()</parameter_list> <block>{<block_content>
+        <if_stmt><if>if <condition>(<expr><call><name>tmpnam_s</name><argument_list>(<argument><expr><name>m_buffer</name></expr></argument>)</argument_list></call></expr>)</condition> <block>{<block_content>
+            <throw>throw <expr><call><name><name>std</name><operator>::</operator><name>runtime_error</name></name><argument_list>(<argument><expr><literal type="string">"Could not get a temp filename"</literal></expr></argument>)</argument_list></call></expr>;</throw>
+        </block_content>}</block></if></if_stmt>
+        <if_stmt><if>if <condition>(<expr><call><name>fopen_s</name><argument_list>(<argument><expr><operator>&amp;</operator><name>m_file</name></expr></argument>, <argument><expr><name>m_buffer</name></expr></argument>, <argument><expr><literal type="string">"w"</literal></expr></argument>)</argument_list></call></expr>)</condition> <block>{<block_content>
+            <decl_stmt><decl><type><name>char</name></type> <name><name>buffer</name><index>[<expr><literal type="number">100</literal></expr>]</index></name></decl>;</decl_stmt>
+            <if_stmt><if>if <condition>(<expr><call><name>strerror_s</name><argument_list>(<argument><expr><name>buffer</name></expr></argument>, <argument><expr><name>errno</name></expr></argument>)</argument_list></call></expr>)</condition> <block>{<block_content>
+                <throw>throw <expr><call><name><name>std</name><operator>::</operator><name>runtime_error</name></name><argument_list>(<argument><expr><literal type="string">"Could not translate errno to string"</literal></expr></argument>)</argument_list></call></expr>;</throw>
+            </block_content>}</block></if></if_stmt>
+            <throw>throw <expr><call><name><name>std</name><operator>::</operator><name>runtime_error</name></name><argument_list>(<argument><expr><literal type="string">"Could not open the temp file: "</literal> <operator>+</operator> <call><name><name>std</name><operator>::</operator><name>string</name></name><argument_list>(<argument><expr><name>m_buffer</name></expr></argument>)</argument_list></call> <operator>+</operator> <name>buffer</name></expr></argument>)</argument_list></call></expr>;</throw>
+        </block_content>}</block></if></if_stmt>
+    </block_content>}</block></constructor>
+<cpp:else xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">else</cpp:directive></cpp:else>
+    <constructor><name><name>TempFile</name><operator>::</operator><name>TempFile</name></name><parameter_list>()</parameter_list> <block>{<block_content>
+        <expr_stmt><expr><name>m_file</name> <operator>=</operator> <call><name><name>std</name><operator>::</operator><name>tmpfile</name></name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+        <if_stmt><if>if <condition>(<expr><operator>!</operator><name>m_file</name></expr>)</condition> <block>{<block_content>
+            <throw>throw <expr><call><name><name>std</name><operator>::</operator><name>runtime_error</name></name><argument_list>(<argument><expr><literal type="string">"Could not create a temp file."</literal></expr></argument>)</argument_list></call></expr>;</throw>
+        </block_content>}</block></if></if_stmt>
+    </block_content>}</block></constructor>
+
+<cpp:endif xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">endif</cpp:directive></cpp:endif>
+
+    <destructor><name><name>TempFile</name><operator>::</operator><name>~TempFile</name></name><parameter_list>()</parameter_list> <block>{<block_content>
+         <comment type="line">// TBD: What to do about errors here?</comment>
+         <expr_stmt><expr><call><name><name>std</name><operator>::</operator><name>fclose</name></name><argument_list>(<argument><expr><name>m_file</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+         <comment type="line">// We manually create the file on Windows only, on Linux</comment>
+         <comment type="line">// it will be autodeleted</comment>
+<cpp:if xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">if</cpp:directive> <expr><call><name>defined</name><argument_list>(<argument><expr><name><diff:delete type="replace" xmlns:diff="http://www.srcML.org/srcDiff">CATCH_PLATFORM_WINDOWS</diff:delete><diff:insert type="replace" xmlns:diff="http://www.srcML.org/srcDiff">_MSC_VER</diff:insert></name></expr></argument>)</argument_list></call></expr></cpp:if>
+         <expr_stmt><expr><call><name><name>std</name><operator>::</operator><name>remove</name></name><argument_list>(<argument><expr><name>m_buffer</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+<cpp:endif xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">endif</cpp:directive></cpp:endif>
+    </block_content>}</block></destructor>
+
+
+    <function><type><name>FILE</name><modifier>*</modifier></type> <name><name>TempFile</name><operator>::</operator><name>getFile</name></name><parameter_list>()</parameter_list> <block>{<block_content>
+        <return>return <expr><name>m_file</name></expr>;</return>
+    </block_content>}</block></function>
+
+    <function><type><name><name>std</name><operator>::</operator><name>string</name></name></type> <name><name>TempFile</name><operator>::</operator><name>getContents</name></name><parameter_list>()</parameter_list> <block>{<block_content>
+        <decl_stmt><decl><type><name><name>std</name><operator>::</operator><name>stringstream</name></name></type> <name>sstr</name></decl>;</decl_stmt>
+        <decl_stmt><decl><type><name>char</name></type> <name><name>buffer</name><index>[<expr><literal type="number">100</literal></expr>]</index></name> <init>= <expr><block>{}</block></expr></init></decl>;</decl_stmt>
+        <expr_stmt><expr><call><name><name>std</name><operator>::</operator><name>rewind</name></name><argument_list>(<argument><expr><name>m_file</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        <while>while <condition>(<expr><call><name><name>std</name><operator>::</operator><name>fgets</name></name><argument_list>(<argument><expr><name>buffer</name></expr></argument>, <argument><expr><sizeof>sizeof<argument_list>(<argument><expr><name>buffer</name></expr></argument>)</argument_list></sizeof></expr></argument>, <argument><expr><name>m_file</name></expr></argument>)</argument_list></call></expr>)</condition> <block>{<block_content>
+            <expr_stmt><expr><name>sstr</name> <operator>&lt;&lt;</operator> <name>buffer</name></expr>;</expr_stmt>
+        </block_content>}</block></while>
+        <return>return <expr><call><name><name>sstr</name><operator>.</operator><name>str</name></name><argument_list>()</argument_list></call></expr>;</return>
+    </block_content>}</block></function>
+
+    <constructor><name><name>OutputRedirect</name><operator>::</operator><name>OutputRedirect</name></name><parameter_list>(<parameter><decl><type><name><name>std</name><operator>::</operator><name>string</name></name><modifier>&amp;</modifier></type> <name>stdout_dest</name></decl></parameter>, <parameter><decl><type><name><name>std</name><operator>::</operator><name>string</name></name><modifier>&amp;</modifier></type> <name>stderr_dest</name></decl></parameter>)</parameter_list> <member_init_list>:
+        <call><name>m_originalStdout</name><argument_list>(<argument><expr><call><name>dup</name><argument_list>(<argument><expr><literal type="number">1</literal></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call>,
+        <call><name>m_originalStderr</name><argument_list>(<argument><expr><call><name>dup</name><argument_list>(<argument><expr><literal type="number">2</literal></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call>,
+        <call><name>m_stdoutDest</name><argument_list>(<argument><expr><name>stdout_dest</name></expr></argument>)</argument_list></call>,
+        <call><name>m_stderrDest</name><argument_list>(<argument><expr><name>stderr_dest</name></expr></argument>)</argument_list></call> </member_init_list><block>{<block_content>
+        <expr_stmt><expr><call><name>dup2</name><argument_list>(<argument><expr><call><name>fileno</name><argument_list>(<argument><expr><call><name><name>m_stdoutFile</name><operator>.</operator><name>getFile</name></name><argument_list>()</argument_list></call></expr></argument>)</argument_list></call></expr></argument>, <argument><expr><literal type="number">1</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name>dup2</name><argument_list>(<argument><expr><call><name>fileno</name><argument_list>(<argument><expr><call><name><name>m_stderrFile</name><operator>.</operator><name>getFile</name></name><argument_list>()</argument_list></call></expr></argument>)</argument_list></call></expr></argument>, <argument><expr><literal type="number">2</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block></constructor>
+
+    <destructor><name><name>OutputRedirect</name><operator>::</operator><name>~OutputRedirect</name></name><parameter_list>()</parameter_list> <block>{<block_content>
+        <expr_stmt><expr><call><name><name>Catch</name><operator>::</operator><name>cout</name></name><argument_list>()</argument_list></call> <operator>&lt;&lt;</operator> <name><name>std</name><operator>::</operator><name>flush</name></name></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name>fflush</name><argument_list>(<argument><expr><name>stdout</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        <comment type="line">// Since we support overriding these streams, we flush cerr</comment>
+        <comment type="line">// even though std::cerr is unbuffered</comment>
+        <expr_stmt><expr><call><name><name>Catch</name><operator>::</operator><name>cerr</name></name><argument_list>()</argument_list></call> <operator>&lt;&lt;</operator> <name><name>std</name><operator>::</operator><name>flush</name></name></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name><name>Catch</name><operator>::</operator><name>clog</name></name><argument_list>()</argument_list></call> <operator>&lt;&lt;</operator> <name><name>std</name><operator>::</operator><name>flush</name></name></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name>fflush</name><argument_list>(<argument><expr><name>stderr</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+
+        <expr_stmt><expr><call><name>dup2</name><argument_list>(<argument><expr><name>m_originalStdout</name></expr></argument>, <argument><expr><literal type="number">1</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name>dup2</name><argument_list>(<argument><expr><name>m_originalStderr</name></expr></argument>, <argument><expr><literal type="number">2</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+
+        <expr_stmt><expr><name>m_stdoutDest</name> <operator>+=</operator> <call><name><name>m_stdoutFile</name><operator>.</operator><name>getContents</name></name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><name>m_stderrDest</name> <operator>+=</operator> <call><name><name>m_stderrFile</name><operator>.</operator><name>getContents</name></name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block></destructor>
+
+
+}</block></namespace> <comment type="line">// namespace Catch</comment>
+
+<cpp:if xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">if</cpp:directive> <expr><call><name>defined</name><argument_list>(<argument><expr><name><diff:delete type="replace" xmlns:diff="http://www.srcML.org/srcDiff">CATCH_PLATFORM_WINDOWS</diff:delete><diff:insert type="replace" xmlns:diff="http://www.srcML.org/srcDiff">_MSC_VER</diff:insert></name></expr></argument>)</argument_list></call></expr></cpp:if>
+<cpp:undef xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">undef</cpp:directive> <name>dup</name></cpp:undef>
+<cpp:undef xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">undef</cpp:directive> <name>dup2</name></cpp:undef>
+<cpp:undef xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">undef</cpp:directive> <name>fileno</name></cpp:undef>
+<cpp:endif xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">endif</cpp:directive></cpp:endif>
+</unit>

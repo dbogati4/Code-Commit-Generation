@@ -1,0 +1,8 @@
+{
+  "commit_id": "b3cf1bfb5d2476b1793c9ebc845803d60ce34171",
+  "parent_id": "73b93ce6bc1310f9e759f023da74805d311162e5",
+  "message": "Avoid unused variable warning in GeneratorsImpl tests",
+  "changed_files": [
+    "tests/SelfTest/IntrospectiveTests/GeneratorsImpl.tests.cpp"
+  ]
+}

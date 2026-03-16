@@ -1,0 +1,8 @@
+{
+  "commit_id": "30cb460d426c426e86b1196ec91ed4ecb3f71da0",
+  "parent_id": "3dde25be7d05ae63569557b2c92cc19f813a82d5",
+  "message": "Clara: added test for positional arg",
+  "changed_files": [
+    "projects/SelfTest/CmdLineTests.cpp"
+  ]
+}

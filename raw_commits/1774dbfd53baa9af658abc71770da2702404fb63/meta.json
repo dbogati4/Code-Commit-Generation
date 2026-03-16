@@ -1,0 +1,8 @@
+{
+  "commit_id": "1774dbfd53baa9af658abc71770da2702404fb63",
+  "parent_id": "cb07ff9a7eaf586bfcd74337373192733090675d",
+  "message": "Make it clearer that the JSON reporter is WIP",
+  "changed_files": [
+    "src/catch2/reporters/catch_reporter_json.cpp"
+  ]
+}

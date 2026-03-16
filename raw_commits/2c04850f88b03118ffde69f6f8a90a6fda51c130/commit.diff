@@ -1,0 +1,16 @@
+diff --git a/src/catch2/reporters/catch_reporter_compact.cpp b/src/catch2/reporters/catch_reporter_compact.cpp
+index a323e1fd..880a6c87 100644
+--- a/src/catch2/reporters/catch_reporter_compact.cpp
++++ b/src/catch2/reporters/catch_reporter_compact.cpp
+@@ -19,9 +19,9 @@
+ namespace {
+ 
+     // Colour::LightGrey
+-    Catch::Colour::Code dimColour() { return Catch::Colour::FileName; }
++    constexpr Catch::Colour::Code dimColour() { return Catch::Colour::FileName; }
+ 
+-    Catch::StringRef bothOrAll( std::size_t count ) {
++    constexpr Catch::StringRef bothOrAll( std::size_t count ) {
+         switch (count) {
+         case 1:
+             return Catch::StringRef{};

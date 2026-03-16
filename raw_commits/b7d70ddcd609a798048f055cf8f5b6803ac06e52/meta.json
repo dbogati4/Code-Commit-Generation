@@ -1,0 +1,9 @@
+{
+  "commit_id": "b7d70ddcd609a798048f055cf8f5b6803ac06e52",
+  "parent_id": "a6f22c51699b78116cac54a4ac95bbed710efbd4",
+  "message": "Ensure we always read 32 bit seed from std::random_device",
+  "changed_files": [
+    "src/catch2/benchmark/detail/catch_stats.cpp",
+    "src/catch2/internal/catch_random_seed_generation.cpp"
+  ]
+}

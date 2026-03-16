@@ -1,0 +1,8 @@
+{
+  "commit_id": "71fce429afcebba7c32b6c46aced1013c6df9c0b",
+  "parent_id": "d13e0945983e296388bb0f8293454206fdfd13b6",
+  "message": "Fix clang warning on self-assignment",
+  "changed_files": [
+    "projects/SelfTest/IntrospectiveTests/String.tests.cpp"
+  ]
+}

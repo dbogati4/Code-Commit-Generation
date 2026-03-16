@@ -1,0 +1,8 @@
+{
+  "commit_id": "8c078997155a86b45fc2dcf66c571461ebf51348",
+  "parent_id": "d5c623b3b69d9ecbd9bc6d48d5be4ded5a216770",
+  "message": "Added tests for using margin with Approx.",
+  "changed_files": [
+    "projects/SelfTest/ApproxTests.cpp"
+  ]
+}

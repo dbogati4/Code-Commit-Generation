@@ -1,0 +1,14 @@
+diff --git a/include/internal/catch_session.cpp b/include/internal/catch_session.cpp
+index 38b74ef7..5aee5d99 100644
+--- a/include/internal/catch_session.cpp
++++ b/include/internal/catch_session.cpp
+@@ -134,6 +134,9 @@ namespace Catch {
+ #if !defined(CATCH_CONFIG_DISABLE_EXCEPTIONS)
+         const auto& exceptions = getRegistryHub().getStartupExceptionRegistry().getExceptions();
+         if ( !exceptions.empty() ) {
++            config();
++            getCurrentMutableContext().setConfig(m_config);
++
+             m_startupExceptions = true;
+             Colour colourGuard( Colour::Red );
+             Catch::cerr() << "Errors occurred during startup!" << '\n';

@@ -1,0 +1,8 @@
+{
+  "commit_id": "0b523db6b9276a1792d0723df440c393a843349c",
+  "parent_id": "b8515929b87b471dff0675b450423c17b40c42a2",
+  "message": "Converted all new part tracking tests/ sections to non variadic form",
+  "changed_files": [
+    "projects/SelfTest/PartTrackerTests.cpp"
+  ]
+}

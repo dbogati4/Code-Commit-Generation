@@ -1,0 +1,8 @@
+{
+  "commit_id": "5d7883b551670e28d15697eed4411574aa7e313a",
+  "parent_id": "04a54b0e87294cc154a03ef579c982f67735ccbc",
+  "message": "Remove leftover comment in tests",
+  "changed_files": [
+    "tests/SelfTest/IntrospectiveTests/GeneratorsImpl.tests.cpp"
+  ]
+}

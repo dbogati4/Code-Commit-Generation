@@ -1,0 +1,8 @@
+{
+  "commit_id": "3b0f8c7ff0df4ee3f713d9a0899d6d670c85cc82",
+  "parent_id": "2840ce1e708eb0f3e18ee6fcdd36014beaf7ae10",
+  "message": "Replace a TODO comment in examples",
+  "changed_files": [
+    "examples/301-Gen-MapTypeConversion.cpp"
+  ]
+}

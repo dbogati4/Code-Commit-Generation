@@ -1,0 +1,50 @@
+diff --git a/tests/SelfTest/IntrospectiveTests/Details.tests.cpp b/tests/SelfTest/IntrospectiveTests/Details.tests.cpp
+index 80eb647b..d7175756 100644
+--- a/tests/SelfTest/IntrospectiveTests/Details.tests.cpp
++++ b/tests/SelfTest/IntrospectiveTests/Details.tests.cpp
+@@ -95,8 +95,8 @@ namespace {
+         MoveChecker() = default;
+         MoveChecker( MoveChecker const& rhs ) = default;
+         MoveChecker& operator=( MoveChecker const& rhs ) = default;
+-        MoveChecker( MoveChecker&& rhs ) { rhs.has_moved = true; }
+-        MoveChecker& operator=( MoveChecker&& rhs ) {
++        MoveChecker( MoveChecker&& rhs ) noexcept { rhs.has_moved = true; }
++        MoveChecker& operator=( MoveChecker&& rhs ) noexcept {
+             rhs.has_moved = true;
+             return *this;
+         }
+diff --git a/tests/SelfTest/IntrospectiveTests/Reporters.tests.cpp b/tests/SelfTest/IntrospectiveTests/Reporters.tests.cpp
+index b74580c6..1568c951 100644
+--- a/tests/SelfTest/IntrospectiveTests/Reporters.tests.cpp
++++ b/tests/SelfTest/IntrospectiveTests/Reporters.tests.cpp
+@@ -163,7 +163,7 @@ namespace {
+                       std::vector<std::string>& recorder,
+                       Catch::IConfig const* config ):
+             EventListenerBase( config ),
+-            m_witness( witness ),
++            m_witness( CATCH_MOVE(witness) ),
+             m_recorder( recorder )
+         {}
+ 
+@@ -181,7 +181,7 @@ namespace {
+                       std::vector<std::string>& recorder,
+                       Catch::ReporterConfig&& config ):
+             StreamingReporterBase( CATCH_MOVE(config) ),
+-            m_witness( witness ),
++            m_witness( CATCH_MOVE(witness) ),
+             m_recorder( recorder )
+         {}
+ 
+diff --git a/tests/SelfTest/UsageTests/Matchers.tests.cpp b/tests/SelfTest/UsageTests/Matchers.tests.cpp
+index a40908d7..74bedf5e 100644
+--- a/tests/SelfTest/UsageTests/Matchers.tests.cpp
++++ b/tests/SelfTest/UsageTests/Matchers.tests.cpp
+@@ -890,7 +890,7 @@ struct MatcherA : Catch::Matchers::MatcherGenericBase {
+         return "equals: (int) 1 or (string) \"1\"";
+     }
+     bool match( int i ) const { return i == 1; }
+-    bool match( std::string s ) const { return s == "1"; }
++    bool match( std::string const& s ) const { return s == "1"; }
+ };
+ 
+ struct MatcherB : Catch::Matchers::MatcherGenericBase {

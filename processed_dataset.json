@@ -1,0 +1,1018 @@
+[
+  {
+    "commit_id": "f7e7fa0983e83b922cb6336ff3a55d33b2873943",
+    "repo": "Catch2",
+    "diff": "diff --git a/src/catch2/internal/catch_reusable_string_stream.cpp b/src/catch2/internal/catch_reusable_string_stream.cpp\nindex a2dd5a63..875da4da 100644\n--- a/src/catch2/internal/catch_reusable_string_stream.cpp\n+++ b/src/catch2/internal/catch_reusable_string_stream.cpp\n@@ -12,6 +12,7 @@\n \n #include <cstdio>\n #include <sstream>\n+#include <tuple>\n #include <vector>\n \n namespace Catch {\n@@ -23,16 +24,16 @@ namespace Catch {\n         std::ostringstream m_referenceStream; // Used for copy state/ flags from\n         Detail::Mutex m_mutex;\n \n-        auto add() -> std::size_t {\n+        auto add() -> std::pair<std::size_t, std::ostringstream*> {\n             Detail::LockGuard _( m_mutex );\n             if( m_unused.empty() ) {\n                 m_streams.push_back( Detail::make_unique<std::ostringstream>() );\n-                return m_streams.size()-1;\n+                return { m_streams.size()-1, m_streams.back().get() };\n             }\n             else {\n                 auto index = m_unused.back();\n                 m_unused.pop_back();\n-                return index;\n+                return { index, m_streams[index].get() };\n             }\n         }\n \n@@ -46,10 +47,10 @@ namespace Catch {\n         }\n     };\n \n-    ReusableStringStream::ReusableStringStream()\n-    :   m_index( Singleton<StringStreams>::getMutable().add() ),\n-        m_oss( Singleton<StringStreams>::getMutable().m_streams[m_index].get() )\n-    {}\n+    ReusableStringStream::ReusableStringStream() {\n+        std::tie( m_index, m_oss ) =\n+            Singleton<StringStreams>::getMutable().add();\n+    }\n \n     ReusableStringStream::~ReusableStringStream() {\n         static_cast<std::ostringstream*>( m_oss )->str(\"\");\n",
+    "commit_message": "Fix ReusableStringStream to access the container under the lock (#3031)",
+    "xml_files": [
+      {
+        "file_name": "src_catch2_internal_catch_reusable_string_stream_cpp",
+        "xml_path": "xml_outputs/Catch2/f7e7fa0983e83b922cb6336ff3a55d33b2873943/src_catch2_internal_catch_reusable_string_stream_cpp.xml"
+      }
+    ]
+  },
+  {
+    "commit_id": "d134b0cae3033c4ddc027fae6f76c66e8b0a6a73",
+    "repo": "Catch2",
+    "diff": "diff --git a/src/catch2/internal/catch_random_number_generator.cpp b/src/catch2/internal/catch_random_number_generator.cpp\nindex c88cd8f2..e46b5fd3 100644\n--- a/src/catch2/internal/catch_random_number_generator.cpp\n+++ b/src/catch2/internal/catch_random_number_generator.cpp\n@@ -7,6 +7,12 @@\n // SPDX-License-Identifier: BSL-1.0\n #include <catch2/internal/catch_random_number_generator.hpp>\n \n+#if defined( __clang__ )\n+#    define CATCH2_CLANG_NO_SANITIZE_INTEGER \\\n+        __attribute__( ( no_sanitize( \"unsigned-integer-overflow\" ) ) )\n+#else\n+#    define CATCH2_CLANG_NO_SANITIZE_INTEGER\n+#endif\n namespace Catch {\n \n namespace {\n@@ -16,6 +22,7 @@ namespace {\n #pragma warning(disable:4146) // we negate uint32 during the rotate\n #endif\n         // Safe rotr implementation thanks to John Regehr\n+        CATCH2_CLANG_NO_SANITIZE_INTEGER\n         uint32_t rotate_right(uint32_t val, uint32_t count) {\n             const uint32_t mask = 31;\n             count &= mask;\n@@ -49,6 +56,7 @@ namespace {\n         }\n     }\n \n+    CATCH2_CLANG_NO_SANITIZE_INTEGER\n     SimplePcg32::result_type SimplePcg32::operator()() {\n         // prepare the output value\n         const uint32_t xorshifted = static_cast<uint32_t>(((m_state >> 18u) ^ m_state) >> 27u);\n",
+    "commit_message": "clang: do not issue bogus warnings about integer manipulation in hash functions with fsanitize=undefined/integer (#2965)",
+    "xml_files": [
+      {
+        "file_name": "src_catch2_internal_catch_random_number_generator_cpp",
+        "xml_path": "xml_outputs/Catch2/d134b0cae3033c4ddc027fae6f76c66e8b0a6a73/src_catch2_internal_catch_random_number_generator_cpp.xml"
+      }
+    ]
+  },
+  {
+    "commit_id": "0b2af562710d1bac7fd32ca3f05bf1d713bb97e4",
+    "repo": "Catch2",
+    "diff": "diff --git a/src/catch2/benchmark/detail/catch_stats.cpp b/src/catch2/benchmark/detail/catch_stats.cpp\nindex e6de359c..2a5a2e03 100644\n--- a/src/catch2/benchmark/detail/catch_stats.cpp\n+++ b/src/catch2/benchmark/detail/catch_stats.cpp\n@@ -178,7 +178,7 @@ namespace Catch {\n                                              double diff = b - m;\n                                              return a + diff * diff;\n                                          } ) /\n-                        ( last - first );\n+                        static_cast<double>( last - first );\n                     return std::sqrt( variance );\n                 }\n \n@@ -213,7 +213,7 @@ namespace Catch {\n                                               double* first,\n                                               double* last ) {\n                 auto count = last - first;\n-                double idx = (count - 1) * k / static_cast<double>(q);\n+                double idx = static_cast<double>((count - 1) * k) / static_cast<double>(q);\n                 int j = static_cast<int>(idx);\n                 double g = idx - j;\n                 std::nth_element(first, first + j, last);\n@@ -316,10 +316,10 @@ namespace Catch {\n \n                 double accel = sum_cubes / ( 6 * std::pow( sum_squares, 1.5 ) );\n                 long n = static_cast<long>( resample.size() );\n-                double prob_n =\n+                double prob_n = static_cast<double>(\n                     std::count_if( resample.begin(),\n                                    resample.end(),\n-                                   [point]( double x ) { return x < point; } ) /\n+                                   [point]( double x ) { return x < point; } )) /\n                     static_cast<double>( n );\n                 // degenerate case with uniform samples\n                 if ( Catch::Detail::directCompare( prob_n, 0. ) ) {\ndiff --git a/src/catch2/catch_timer.cpp b/src/catch2/catch_timer.cpp\nindex 51396654..efdd8b7d 100644\n--- a/src/catch2/catch_timer.cpp\n+++ b/src/catch2/catch_timer.cpp\n@@ -30,7 +30,7 @@ namespace Catch {\n         return static_cast<unsigned int>(getElapsedMicroseconds()/1000);\n     }\n     auto Timer::getElapsedSeconds() const -> double {\n-        return getElapsedMicroseconds()/1000000.0;\n+        return static_cast<double>(getElapsedMicroseconds())/1000000.0;\n     }\n \n \ndiff --git a/src/catch2/internal/catch_random_number_generator.cpp b/src/catch2/internal/catch_random_number_generator.cpp\nindex 6a79dff3..c88cd8f2 100644\n--- a/src/catch2/internal/catch_random_number_generator.cpp\n+++ b/src/catch2/internal/catch_random_number_generator.cpp\n@@ -52,7 +52,7 @@ namespace {\n     SimplePcg32::result_type SimplePcg32::operator()() {\n         // prepare the output value\n         const uint32_t xorshifted = static_cast<uint32_t>(((m_state >> 18u) ^ m_state) >> 27u);\n-        const auto output = rotate_right(xorshifted, m_state >> 59u);\n+        const auto output = rotate_right(xorshifted, static_cast<uint32_t>(m_state >> 59u));\n \n         // advance state\n         m_state = m_state * 6364136223846793005ULL + s_inc;\n",
+    "commit_message": "Explicitly cast values of different types",
+    "xml_files": [
+      {
+        "file_name": "src_catch2_catch_timer_cpp",
+        "xml_path": "xml_outputs/Catch2/0b2af562710d1bac7fd32ca3f05bf1d713bb97e4/src_catch2_catch_timer_cpp.xml"
+      },
+      {
+        "file_name": "src_catch2_internal_catch_random_number_generator_cpp",
+        "xml_path": "xml_outputs/Catch2/0b2af562710d1bac7fd32ca3f05bf1d713bb97e4/src_catch2_internal_catch_random_number_generator_cpp.xml"
+      }
+    ]
+  },
+  {
+    "commit_id": "7a89b7573749846654575fec0580e105a27c54cf",
+    "repo": "Catch2",
+    "diff": "diff --git a/src/catch2/catch_timer.cpp b/src/catch2/catch_timer.cpp\nindex d75ea70c..51396654 100644\n--- a/src/catch2/catch_timer.cpp\n+++ b/src/catch2/catch_timer.cpp\n@@ -13,7 +13,7 @@ namespace Catch {\n \n     namespace {\n         static auto getCurrentNanosecondsSinceEpoch() -> uint64_t {\n-            return std::chrono::duration_cast<std::chrono::nanoseconds>(std::chrono::high_resolution_clock::now().time_since_epoch()).count();\n+            return std::chrono::duration_cast<std::chrono::nanoseconds>(std::chrono::steady_clock::now().time_since_epoch()).count();\n         }\n     } // end unnamed namespace\n \n",
+    "commit_message": "Use steady_clock in the timer",
+    "xml_files": [
+      {
+        "file_name": "src_catch2_catch_timer_cpp",
+        "xml_path": "xml_outputs/Catch2/7a89b7573749846654575fec0580e105a27c54cf/src_catch2_catch_timer_cpp.xml"
+      }
+    ]
+  },
+  {
+    "commit_id": "fb51116d5b20ea3fef6c5a89267e7d91856a60cf",
+    "repo": "Catch2",
+    "diff": "diff --git a/src/catch2/benchmark/detail/catch_analyse.cpp b/src/catch2/benchmark/detail/catch_analyse.cpp\nindex 7d27daf1..14d7f450 100644\n--- a/src/catch2/benchmark/detail/catch_analyse.cpp\n+++ b/src/catch2/benchmark/detail/catch_analyse.cpp\n@@ -63,8 +63,8 @@ namespace Catch {\n                     FDuration mean = FDuration(0);\n                     int i = 0;\n                     for (auto it = first; it < last; ++it, ++i) {\n-                        samples.push_back(FDuration(*it));\n-                        mean += FDuration(*it);\n+                        samples.push_back(*it);\n+                        mean += *it;\n                     }\n                     mean /= i;\n \n",
+    "commit_message": "Avoid useless FDuration cast in benchmark analysis (#2823)",
+    "xml_files": [
+      {
+        "file_name": "src_catch2_benchmark_detail_catch_analyse_cpp",
+        "xml_path": "xml_outputs/Catch2/fb51116d5b20ea3fef6c5a89267e7d91856a60cf/src_catch2_benchmark_detail_catch_analyse_cpp.xml"
+      }
+    ]
+  },
+  {
+    "commit_id": "f476bcb633b24870b7c0414b0caeb9e192f485e4",
+    "repo": "Catch2",
+    "diff": "diff --git a/src/catch2/catch_approx.cpp b/src/catch2/catch_approx.cpp\nindex 9ad4ce3e..08c6799b 100644\n--- a/src/catch2/catch_approx.cpp\n+++ b/src/catch2/catch_approx.cpp\n@@ -25,7 +25,7 @@ bool marginComparison(double lhs, double rhs, double margin) {\n namespace Catch {\n \n     Approx::Approx ( double value )\n-    :   m_epsilon( std::numeric_limits<float>::epsilon()*100. ),\n+    :   m_epsilon( static_cast<double>(std::numeric_limits<float>::epsilon())*100. ),\n         m_margin( 0.0 ),\n         m_scale( 0.0 ),\n         m_value( value )\n",
+    "commit_message": "fix double promotion in catch_approx.cpp",
+    "xml_files": [
+      {
+        "file_name": "src_catch2_catch_approx_cpp",
+        "xml_path": "xml_outputs/Catch2/f476bcb633b24870b7c0414b0caeb9e192f485e4/src_catch2_catch_approx_cpp.xml"
+      }
+    ]
+  },
+  {
+    "commit_id": "b7d70ddcd609a798048f055cf8f5b6803ac06e52",
+    "repo": "Catch2",
+    "diff": "diff --git a/src/catch2/benchmark/detail/catch_stats.cpp b/src/catch2/benchmark/detail/catch_stats.cpp\nindex a56edfc0..2dd2d864 100644\n--- a/src/catch2/benchmark/detail/catch_stats.cpp\n+++ b/src/catch2/benchmark/detail/catch_stats.cpp\n@@ -355,8 +355,6 @@ namespace Catch {\n                                                unsigned int n_resamples,\n                                                double* first,\n                                                double* last) {\n-                auto n = static_cast<int>(last - first); // seriously, one can't use integral types without hell in C++\n-\n                 auto mean = &Detail::mean;\n                 auto stddev = &standard_deviation;\n \n@@ -389,6 +387,7 @@ namespace Catch {\n                 auto stddev_estimate = Estimate(stddev);\n #endif // CATCH_USE_ASYNC\n \n+                auto n = static_cast<int>(last - first); // seriously, one can't use integral types without hell in C++\n                 double outlier_variance = Detail::outlier_variance(mean_estimate, stddev_estimate, n);\n \n                 return { mean_estimate, stddev_estimate, outlier_variance };\ndiff --git a/src/catch2/internal/catch_random_seed_generation.cpp b/src/catch2/internal/catch_random_seed_generation.cpp\nindex 40c468cb..fdc3fa19 100644\n--- a/src/catch2/internal/catch_random_seed_generation.cpp\n+++ b/src/catch2/internal/catch_random_seed_generation.cpp\n@@ -9,6 +9,7 @@\n #include <catch2/internal/catch_random_seed_generation.hpp>\n \n #include <catch2/internal/catch_enforce.hpp>\n+#include <catch2/internal/catch_random_integer_helpers.hpp>\n \n #include <ctime>\n #include <random>\n@@ -21,10 +22,10 @@ namespace Catch {\n             return static_cast<std::uint32_t>( std::time( nullptr ) );\n \n         case GenerateFrom::Default:\n-        case GenerateFrom::RandomDevice:\n-            // In theory, a platform could have random_device that returns just\n-            // 16 bits. That is still some randomness, so we don't care too much\n-            return static_cast<std::uint32_t>( std::random_device{}() );\n+        case GenerateFrom::RandomDevice: {\n+            std::random_device rd;\n+            return Detail::fillBitsFrom<std::uint32_t>( rd );\n+        }\n \n         default:\n             CATCH_ERROR(\"Unknown generation method\");\n",
+    "commit_message": "Ensure we always read 32 bit seed from std::random_device",
+    "xml_files": [
+      {
+        "file_name": "src_catch2_internal_catch_random_seed_generation_cpp",
+        "xml_path": "xml_outputs/Catch2/b7d70ddcd609a798048f055cf8f5b6803ac06e52/src_catch2_internal_catch_random_seed_generation_cpp.xml"
+      }
+    ]
+  },
+  {
+    "commit_id": "6ebc013b8cfe438a3a397817ad662db34a978238",
+    "repo": "Catch2",
+    "diff": "diff --git a/src/catch2/catch_approx.cpp b/src/catch2/catch_approx.cpp\nindex 407586d1..9ad4ce3e 100644\n--- a/src/catch2/catch_approx.cpp\n+++ b/src/catch2/catch_approx.cpp\n@@ -70,10 +70,10 @@ namespace Catch {\n     }\n \n namespace literals {\n-    Approx operator \"\" _a(long double val) {\n+    Approx operator \"\"_a(long double val) {\n         return Approx(val);\n     }\n-    Approx operator \"\" _a(unsigned long long val) {\n+    Approx operator \"\"_a(unsigned long long val) {\n         return Approx(val);\n     }\n } // end namespace literals\ndiff --git a/tests/SelfTest/IntrospectiveTests/String.tests.cpp b/tests/SelfTest/IntrospectiveTests/String.tests.cpp\nindex 7a0b3b4a..43c58b49 100644\n--- a/tests/SelfTest/IntrospectiveTests/String.tests.cpp\n+++ b/tests/SelfTest/IntrospectiveTests/String.tests.cpp\n@@ -177,7 +177,7 @@ TEST_CASE(\"StringRef at compilation time\", \"[Strings][StringRef][constexpr]\") {\n         STATIC_REQUIRE_FALSE(sr1.empty());\n         STATIC_REQUIRE(sr1.size() == 3);\n \n-        using Catch::operator\"\" _sr;\n+        using Catch::operator\"\"_sr;\n         constexpr auto sr2 = \"\"_sr;\n         STATIC_REQUIRE(sr2.empty());\n         STATIC_REQUIRE(sr2.size() == 0);\n",
+    "commit_message": "Fix UDL definitions for C++23",
+    "xml_files": [
+      {
+        "file_name": "src_catch2_catch_approx_cpp",
+        "xml_path": "xml_outputs/Catch2/6ebc013b8cfe438a3a397817ad662db34a978238/src_catch2_catch_approx_cpp.xml"
+      }
+    ]
+  },
+  {
+    "commit_id": "ed4acded380ac5408acf9fa518984cbe1bbe25bd",
+    "repo": "Catch2",
+    "diff": "diff --git a/src/catch2/internal/catch_exception_translator_registry.cpp b/src/catch2/internal/catch_exception_translator_registry.cpp\nindex f3d47c0c..103fc9ae 100644\n--- a/src/catch2/internal/catch_exception_translator_registry.cpp\n+++ b/src/catch2/internal/catch_exception_translator_registry.cpp\n@@ -15,6 +15,7 @@\n \n namespace Catch {\n \n+#if !defined(CATCH_CONFIG_DISABLE_EXCEPTIONS)\n     namespace {\n         static std::string tryTranslators(\n             std::vector<\n@@ -28,6 +29,7 @@ namespace Catch {\n         }\n \n     }\n+#endif //!defined(CATCH_CONFIG_DISABLE_EXCEPTIONS)\n \n     ExceptionTranslatorRegistry::~ExceptionTranslatorRegistry() {\n     }\n",
+    "commit_message": "Don't define tryTranslators function if exception are disabled",
+    "xml_files": [
+      {
+        "file_name": "src_catch2_internal_catch_exception_translator_registry_cpp",
+        "xml_path": "xml_outputs/Catch2/ed4acded380ac5408acf9fa518984cbe1bbe25bd/src_catch2_internal_catch_exception_translator_registry_cpp.xml"
+      }
+    ]
+  },
+  {
+    "commit_id": "683c85772f65a8779e3baf45d3402098db58bb8d",
+    "repo": "Catch2",
+    "diff": "diff --git a/tests/ExtraTests/X20-AssertionStartingEventGoesBeforeAssertionIsEvaluated.cpp b/tests/ExtraTests/X20-AssertionStartingEventGoesBeforeAssertionIsEvaluated.cpp\nindex ef5b46b9..6f44bf69 100644\n--- a/tests/ExtraTests/X20-AssertionStartingEventGoesBeforeAssertionIsEvaluated.cpp\n+++ b/tests/ExtraTests/X20-AssertionStartingEventGoesBeforeAssertionIsEvaluated.cpp\n@@ -7,11 +7,10 @@\n // SPDX-License-Identifier: BSL-1.0\n \n /**\\file\n- * TODO: FIXES Registers custom reporter that reports testCase* events\n+ * Registers an event listener to increments counter of assertionStarting events.\n  *\n- * The resulting executable can then be used by an external Python script\n- * to verify that testCase{Starting,Ended} and testCasePartial{Starting,Ended}\n- * events are properly nested.\n+ * Different assertion macros then check that the counter is at expected\n+ * value when they are evaluated.\n  */\n \n #include <catch2/catch_test_macros.hpp>\n@@ -23,9 +22,6 @@ namespace {\n \n     static size_t assertion_starting_events_seen = 0;\n \n-    // TODO: custom matcher to check that \"assertion_starting_events_seen\" has\n-    // the right number of checks\n-\n     class AssertionStartingListener : public Catch::EventListenerBase {\n     public:\n         AssertionStartingListener( Catch::IConfig const* config ):\n",
+    "commit_message": "Clean up explanation in tests",
+    "xml_files": [
+      {
+        "file_name": "tests_ExtraTests_X20-AssertionStartingEventGoesBeforeAssertionIsEvaluated_cpp",
+        "xml_path": "xml_outputs/Catch2/683c85772f65a8779e3baf45d3402098db58bb8d/tests_ExtraTests_X20-AssertionStartingEventGoesBeforeAssertionIsEvaluated_cpp.xml"
+      }
+    ]
+  },
+  {
+    "commit_id": "1b049bdba40582d7c9c8f6e650496f701841b26d",
+    "repo": "Catch2",
+    "diff": "diff --git a/tests/TestScripts/DiscoverTests/register-tests.cpp b/tests/TestScripts/DiscoverTests/register-tests.cpp\nindex 21238d59..aa603df1 100644\n--- a/tests/TestScripts/DiscoverTests/register-tests.cpp\n+++ b/tests/TestScripts/DiscoverTests/register-tests.cpp\n@@ -10,3 +10,7 @@\n \n TEST_CASE(\"@Script[C:\\\\EPM1A]=x;\\\"SCALA_ZERO:\\\"\", \"[script regressions]\"){}\n TEST_CASE(\"Some test\") {}\n+TEST_CASE( \"Let's have a test case with a long name. Longer. No, even longer. \"\n+           \"Really looooooooooooong. Even longer than that. Multiple lines \"\n+           \"worth of test name. Yep, like this.\" ) {}\n+TEST_CASE( \"And now a test case with weird tags.\", \"[tl;dr][tl;dw][foo,bar]\" ) {}\n",
+    "commit_message": "2 more TEST_CASEs to DiscoverTests/register-tests.cpp",
+    "xml_files": [
+      {
+        "file_name": "tests_TestScripts_DiscoverTests_register-tests_cpp",
+        "xml_path": "xml_outputs/Catch2/1b049bdba40582d7c9c8f6e650496f701841b26d/tests_TestScripts_DiscoverTests_register-tests_cpp.xml"
+      }
+    ]
+  },
+  {
+    "commit_id": "0477326ad908d1c96dd3118b54fccc95e5628ef8",
+    "repo": "Catch2",
+    "diff": "diff --git a/src/catch2/internal/catch_section.cpp b/src/catch2/internal/catch_section.cpp\nindex ab9284c7..061732b1 100644\n--- a/src/catch2/internal/catch_section.cpp\n+++ b/src/catch2/internal/catch_section.cpp\n@@ -26,7 +26,7 @@ namespace Catch {\n     Section::Section( SourceLineInfo const& _lineInfo,\n                       StringRef _name,\n                       const char* const ):\n-        m_info( { \"invalid\", static_cast<std::size_t>(-1) }, \"\" ),\n+        m_info( { \"invalid\", static_cast<std::size_t>( -1 ) }, std::string{} ),\n         m_sectionIncluded(\n             getResultCapture().sectionStarted( _name, _lineInfo, m_assertions ) ) {\n         // We delay initialization the SectionInfo member until we know\n",
+    "commit_message": "Directly construct empty string for invalid SectionInfo",
+    "xml_files": [
+      {
+        "file_name": "src_catch2_internal_catch_section_cpp",
+        "xml_path": "xml_outputs/Catch2/0477326ad908d1c96dd3118b54fccc95e5628ef8/src_catch2_internal_catch_section_cpp.xml"
+      }
+    ]
+  },
+  {
+    "commit_id": "d58491c85a534a9348634ac3e4eb384df22f4d71",
+    "repo": "Catch2",
+    "diff": "diff --git a/src/catch2/internal/catch_section.cpp b/src/catch2/internal/catch_section.cpp\nindex ca2e5d8c..63b4abd3 100644\n--- a/src/catch2/internal/catch_section.cpp\n+++ b/src/catch2/internal/catch_section.cpp\n@@ -25,7 +25,7 @@ namespace Catch {\n \n     Section::~Section() {\n         if( m_sectionIncluded ) {\n-            SectionEndInfo endInfo{ m_info, m_assertions, m_timer.getElapsedSeconds() };\n+            SectionEndInfo endInfo{ CATCH_MOVE(m_info), m_assertions, m_timer.getElapsedSeconds() };\n             if( uncaught_exceptions() )\n                 getResultCapture().sectionEndedEarly( endInfo );\n             else\n",
+    "commit_message": "Move sectionInfo into sectionEndInfo when SECTION ends",
+    "xml_files": [
+      {
+        "file_name": "src_catch2_internal_catch_section_cpp",
+        "xml_path": "xml_outputs/Catch2/d58491c85a534a9348634ac3e4eb384df22f4d71/src_catch2_internal_catch_section_cpp.xml"
+      }
+    ]
+  },
+  {
+    "commit_id": "e3fc97dffbad63f49a90e5ae688b0ce0c282e8c2",
+    "repo": "Catch2",
+    "diff": "diff --git a/src/catch2/internal/catch_parse_numbers.cpp b/src/catch2/internal/catch_parse_numbers.cpp\nindex 390b8c87..d949ac19 100644\n--- a/src/catch2/internal/catch_parse_numbers.cpp\n+++ b/src/catch2/internal/catch_parse_numbers.cpp\n@@ -6,12 +6,12 @@\n \n // SPDX-License-Identifier: BSL-1.0\n \n-#include <catch2/internal/catch_parse_numbers.hpp>\n-\n #include <catch2/internal/catch_compiler_capabilities.hpp>\n+#include <catch2/internal/catch_parse_numbers.hpp>\n #include <catch2/internal/catch_string_manip.hpp>\n \n #include <limits>\n+#include <stdexcept>\n \n namespace Catch {\n \n@@ -39,11 +39,14 @@ namespace Catch {\n                 return {};\n             }\n             return static_cast<unsigned int>(ret);\n-        } CATCH_CATCH_ANON( std::exception const& ) {\n-            // There was a larger issue with the input, e.g. the parsed\n-            // number would be too large to fit within ull.\n-            return {};\n         }\n+        CATCH_CATCH_ANON( std::invalid_argument const& ) {\n+            // no conversion could be performed\n+        }\n+        CATCH_CATCH_ANON( std::out_of_range const& ) {\n+            // the input does not fit into an unsigned long long\n+        }\n+        return {};\n     }\n \n } // namespace Catch\n",
+    "commit_message": "fix compiler warning in parseUint and catch only relevant exceptions (#2572)",
+    "xml_files": [
+      {
+        "file_name": "src_catch2_internal_catch_parse_numbers_cpp",
+        "xml_path": "xml_outputs/Catch2/e3fc97dffbad63f49a90e5ae688b0ce0c282e8c2/src_catch2_internal_catch_parse_numbers_cpp.xml"
+      }
+    ]
+  },
+  {
+    "commit_id": "b3dbd83da2f793a8630647e0053b6613ba5fb874",
+    "repo": "Catch2",
+    "diff": "diff --git a/tests/SelfTest/UsageTests/Decomposition.tests.cpp b/tests/SelfTest/UsageTests/Decomposition.tests.cpp\nindex 44efa234..e92f7406 100644\n--- a/tests/SelfTest/UsageTests/Decomposition.tests.cpp\n+++ b/tests/SelfTest/UsageTests/Decomposition.tests.cpp\n@@ -34,6 +34,8 @@ TEST_CASE( \"Reconstruction should be based on stringification: #914\" , \"[Decompo\n \n TEST_CASE(\"#1005: Comparing pointer to int and long (NULL can be either on various systems)\", \"[Decomposition][approvals]\") {\n     FILE* fptr = nullptr;\n-    REQUIRE(fptr == 0);\n-    REQUIRE(fptr == 0l);\n+    REQUIRE( fptr == 0 );\n+    REQUIRE_FALSE( fptr != 0 );\n+    REQUIRE( fptr == 0l );\n+    REQUIRE_FALSE( fptr != 0l );\n }\n",
+    "commit_message": "Add test for comparing pointers to NULL with !=",
+    "xml_files": [
+      {
+        "file_name": "tests_SelfTest_UsageTests_Decomposition_tests_cpp",
+        "xml_path": "xml_outputs/Catch2/b3dbd83da2f793a8630647e0053b6613ba5fb874/tests_SelfTest_UsageTests_Decomposition_tests_cpp.xml"
+      }
+    ]
+  },
+  {
+    "commit_id": "33aeb603fee982d8f7d5aec3e746741e8776942e",
+    "repo": "Catch2",
+    "diff": "diff --git a/src/catch2/internal/catch_reporter_registry.cpp b/src/catch2/internal/catch_reporter_registry.cpp\nindex c4aef822..01b6b3a0 100644\n--- a/src/catch2/internal/catch_reporter_registry.cpp\n+++ b/src/catch2/internal/catch_reporter_registry.cpp\n@@ -47,7 +47,8 @@ namespace Catch {\n     void ReporterRegistry::registerReporter( std::string const& name, IReporterFactoryPtr factory ) {\n         CATCH_ENFORCE( name.find( \"::\" ) == name.npos,\n                        \"'::' is not allowed in reporter name: '\" + name + '\\'' );\n-        m_factories.emplace(name, CATCH_MOVE(factory));\n+        auto ret = m_factories.emplace(name, CATCH_MOVE(factory));\n+        CATCH_ENFORCE( ret.second, \"reporter using '\" + name + \"' as name was already registered\" );\n     }\n     void ReporterRegistry::registerListener(\n         Detail::unique_ptr<EventListenerFactory> factory ) {\ndiff --git a/tests/SelfTest/IntrospectiveTests/Reporters.tests.cpp b/tests/SelfTest/IntrospectiveTests/Reporters.tests.cpp\nindex 5dde7038..97d1ad25 100644\n--- a/tests/SelfTest/IntrospectiveTests/Reporters.tests.cpp\n+++ b/tests/SelfTest/IntrospectiveTests/Reporters.tests.cpp\n@@ -312,3 +312,18 @@ TEST_CASE(\"Registering reporter with '::' in name fails\",\n         Catch::Detail::make_unique<TestReporterFactory>() ),\n         \"'::' is not allowed in reporter name: 'with::doublecolons'\" );\n }\n+\n+TEST_CASE(\"Registering multiple reporters with the same name fails\",\n+          \"[reporters][registration][approvals]\") {\n+    Catch::ReporterRegistry registry;\n+\n+    registry.registerReporter(\n+        \"some-reporter-name\",\n+        Catch::Detail::make_unique<TestReporterFactory>() );\n+\n+    REQUIRE_THROWS_WITH(\n+        registry.registerReporter(\n+            \"some-reporter-name\",\n+            Catch::Detail::make_unique<TestReporterFactory>() ),\n+        \"reporter using 'some-reporter-name' as name was already registered\" );\n+}\n",
+    "commit_message": "Add check for registering multiple reporters under same name",
+    "xml_files": [
+      {
+        "file_name": "src_catch2_internal_catch_reporter_registry_cpp",
+        "xml_path": "xml_outputs/Catch2/33aeb603fee982d8f7d5aec3e746741e8776942e/src_catch2_internal_catch_reporter_registry_cpp.xml"
+      }
+    ]
+  },
+  {
+    "commit_id": "07cdef2096ad38ec386ee5e4d7705978038dc651",
+    "repo": "Catch2",
+    "diff": "diff --git a/tests/SelfTest/IntrospectiveTests/Clara.tests.cpp b/tests/SelfTest/IntrospectiveTests/Clara.tests.cpp\nindex f6110a7b..2cbf05b8 100644\n--- a/tests/SelfTest/IntrospectiveTests/Clara.tests.cpp\n+++ b/tests/SelfTest/IntrospectiveTests/Clara.tests.cpp\n@@ -52,12 +52,11 @@ TEST_CASE(\"Clara::Arg supports single-arg parse the way Opt does\", \"[clara][arg]\n }\n \n TEST_CASE(\"Clara::Opt supports accept-many lambdas\", \"[clara][opt]\") {\n-    std::string name;\n     using namespace Catch::Clara;\n     std::vector<std::string> res;\n     const auto push_to_res = [&](std::string const& s) {\n         res.push_back(s);\n-        return ParserResult::ok();\n+        return ParserResult::ok( ParseResultType::Matched );\n     };\n \n     SECTION(\"Parsing fails on multiple options without accept_many\") {\n",
+    "commit_message": "Fix uninit memory in Clara tests",
+    "xml_files": [
+      {
+        "file_name": "tests_SelfTest_IntrospectiveTests_Clara_tests_cpp",
+        "xml_path": "xml_outputs/Catch2/07cdef2096ad38ec386ee5e4d7705978038dc651/tests_SelfTest_IntrospectiveTests_Clara_tests_cpp.xml"
+      }
+    ]
+  },
+  {
+    "commit_id": "79e4cd1af4c4afa25c459d18d37bb620846a50f9",
+    "repo": "Catch2",
+    "diff": "diff --git a/tests/ExtraTests/X01-PrefixedMacros.cpp b/tests/ExtraTests/X01-PrefixedMacros.cpp\nindex cccf0aae..ff6e8cbe 100644\n--- a/tests/ExtraTests/X01-PrefixedMacros.cpp\n+++ b/tests/ExtraTests/X01-PrefixedMacros.cpp\n@@ -6,10 +6,13 @@\n \n // SPDX-License-Identifier: BSL-1.0\n \n-// X01-DisableStringification.cpp\n-// Test that Catch's prefixed macros compile and run properly.\n-// This won't provide full coverage, but it might be worth checking\n-// the other branch as well\n+/**\\file\n+ * Test that Catch's prefixed macros compile and run properly.\n+ *\n+ * We intentionally do not provide full coverage of all macros, but we\n+ * test a smattering and can add other ones as they have regressions.\n+ */\n+\n \n #include <catch2/catch_test_macros.hpp>\n #include <catch2/matchers/catch_matchers_predicate.hpp>\ndiff --git a/tests/ExtraTests/X02-DisabledMacros.cpp b/tests/ExtraTests/X02-DisabledMacros.cpp\nindex dac8960e..e870a692 100644\n--- a/tests/ExtraTests/X02-DisabledMacros.cpp\n+++ b/tests/ExtraTests/X02-DisabledMacros.cpp\n@@ -6,9 +6,11 @@\n \n // SPDX-License-Identifier: BSL-1.0\n \n-// X02-DisabledMacros.cpp\n-// Test that CATCH_CONFIG_DISABLE turns off TEST_CASE autoregistration\n-// and expressions in assertion macros are not run.\n+/**\\file\n+ * Test that CATCH_CONFIG_DISABLE turns off TEST_CASE autoregistration\n+ * and expressions in assertion macros are not run.\n+ */\n+\n \n #include <catch2/catch_test_macros.hpp>\n #include <catch2/benchmark/catch_benchmark.hpp>\ndiff --git a/tests/ExtraTests/X10-FallbackStringifier.cpp b/tests/ExtraTests/X10-FallbackStringifier.cpp\nindex e4ff0a3c..61ad62ea 100644\n--- a/tests/ExtraTests/X10-FallbackStringifier.cpp\n+++ b/tests/ExtraTests/X10-FallbackStringifier.cpp\n@@ -6,8 +6,13 @@\n \n // SPDX-License-Identifier: BSL-1.0\n \n-// X10-FallbackStringifier.cpp\n-// Test that defining fallbackStringifier compiles\n+/**\\file\n+ * Test that the user can define custom fallbackStringifier \n+ *\n+ * This is done by defining a custom fallback stringifier that prints\n+ * out a specific string, and then asserting (to cause stringification)\n+ * over a type without stringification support.\n+ */\n \n #include <string>\n \ndiff --git a/tests/ExtraTests/X11-DisableStringification.cpp b/tests/ExtraTests/X11-DisableStringification.cpp\nindex 65e2d274..97dcea7b 100644\n--- a/tests/ExtraTests/X11-DisableStringification.cpp\n+++ b/tests/ExtraTests/X11-DisableStringification.cpp\n@@ -6,11 +6,13 @@\n \n // SPDX-License-Identifier: BSL-1.0\n \n-// X11-DisableStringification.cpp\n-// Test that stringification of original expression can be disabled\n-// this is a workaround for VS 2017 issue with Raw String literal\n-// and preprocessor token pasting. In other words, hopefully this test\n-// will be deleted soon :-)\n+/**\\file\n+ * Test that stringification of original expression can be disabled.\n+ *\n+ * This is a workaround for VS 2017, 2019 issue with Raw String literals\n+ * and preprocessor token pasting.\n+ */\n+\n \n #include <catch2/catch_test_macros.hpp>\n \ndiff --git a/tests/ExtraTests/X12-CustomDebugBreakMacro.cpp b/tests/ExtraTests/X12-CustomDebugBreakMacro.cpp\nindex f9f9f4f3..e52c1c2b 100644\n--- a/tests/ExtraTests/X12-CustomDebugBreakMacro.cpp\n+++ b/tests/ExtraTests/X12-CustomDebugBreakMacro.cpp\n@@ -6,8 +6,9 @@\n \n // SPDX-License-Identifier: BSL-1.0\n \n-// X12-CustomDebugBreakMacro.cpp\n-// Test that user-defined `CATCH_BREAK_INTO_DEBUGGER` is respected and used.\n+/**\\file\n+ * Test that user-defined `CATCH_BREAK_INTO_DEBUGGER` is respected and used.\n+ */\n \n #include <iostream>\n \ndiff --git a/tests/ExtraTests/X90-WindowsHeaderInclusion.cpp b/tests/ExtraTests/X90-WindowsHeaderInclusion.cpp\nindex 93442d34..739b34d4 100644\n--- a/tests/ExtraTests/X90-WindowsHeaderInclusion.cpp\n+++ b/tests/ExtraTests/X90-WindowsHeaderInclusion.cpp\n@@ -6,10 +6,12 @@\n \n // SPDX-License-Identifier: BSL-1.0\n \n-// X90-WindowsHeaderInclusion.cpp\n-// Test that the Catch2 header compiles even after including windows.h\n-// without defining NOMINMAX first. As an FYI, if you do that, you are\n-// wrong.\n+/**\\file\n+ * Test that the Catch2 header compiles even after including windows.h\n+ * without defining NOMINMAX first.\n+ *\n+ * As an FYI, if you do that, you are wrong.\n+ */\n \n #include <windows.h>\n #include <catch2/catch_test_macros.hpp>\ndiff --git a/tests/ExtraTests/X91-AmalgamatedCatch.cpp b/tests/ExtraTests/X91-AmalgamatedCatch.cpp\nindex 547eb3b8..d77f55d5 100644\n--- a/tests/ExtraTests/X91-AmalgamatedCatch.cpp\n+++ b/tests/ExtraTests/X91-AmalgamatedCatch.cpp\n@@ -7,7 +7,6 @@\n // SPDX-License-Identifier: BSL-1.0\n \n /**\\file\n- *\n  * This file serves as a simple compilation test against the amalgamated\n  * version of Catch2.\n  */\n",
+    "commit_message": "Cleanup summary comments in ExtraTests",
+    "xml_files": [
+      {
+        "file_name": "tests_ExtraTests_X02-DisabledMacros_cpp",
+        "xml_path": "xml_outputs/Catch2/79e4cd1af4c4afa25c459d18d37bb620846a50f9/tests_ExtraTests_X02-DisabledMacros_cpp.xml"
+      },
+      {
+        "file_name": "tests_ExtraTests_X10-FallbackStringifier_cpp",
+        "xml_path": "xml_outputs/Catch2/79e4cd1af4c4afa25c459d18d37bb620846a50f9/tests_ExtraTests_X10-FallbackStringifier_cpp.xml"
+      },
+      {
+        "file_name": "tests_ExtraTests_X11-DisableStringification_cpp",
+        "xml_path": "xml_outputs/Catch2/79e4cd1af4c4afa25c459d18d37bb620846a50f9/tests_ExtraTests_X11-DisableStringification_cpp.xml"
+      },
+      {
+        "file_name": "tests_ExtraTests_X12-CustomDebugBreakMacro_cpp",
+        "xml_path": "xml_outputs/Catch2/79e4cd1af4c4afa25c459d18d37bb620846a50f9/tests_ExtraTests_X12-CustomDebugBreakMacro_cpp.xml"
+      },
+      {
+        "file_name": "tests_ExtraTests_X90-WindowsHeaderInclusion_cpp",
+        "xml_path": "xml_outputs/Catch2/79e4cd1af4c4afa25c459d18d37bb620846a50f9/tests_ExtraTests_X90-WindowsHeaderInclusion_cpp.xml"
+      },
+      {
+        "file_name": "tests_ExtraTests_X91-AmalgamatedCatch_cpp",
+        "xml_path": "xml_outputs/Catch2/79e4cd1af4c4afa25c459d18d37bb620846a50f9/tests_ExtraTests_X91-AmalgamatedCatch_cpp.xml"
+      }
+    ]
+  },
+  {
+    "commit_id": "635db2785fc081e576e92e3f166504ccd7e6efd8",
+    "repo": "Catch2",
+    "diff": "diff --git a/tests/ExtraTests/X01-PrefixedMacros.cpp b/tests/ExtraTests/X01-PrefixedMacros.cpp\nindex 9110bbba..cccf0aae 100644\n--- a/tests/ExtraTests/X01-PrefixedMacros.cpp\n+++ b/tests/ExtraTests/X01-PrefixedMacros.cpp\n@@ -1,3 +1,11 @@\n+\n+//              Copyright Catch2 Authors\n+// Distributed under the Boost Software License, Version 1.0.\n+//   (See accompanying file LICENSE_1_0.txt or copy at\n+//        https://www.boost.org/LICENSE_1_0.txt)\n+\n+// SPDX-License-Identifier: BSL-1.0\n+\n // X01-DisableStringification.cpp\n // Test that Catch's prefixed macros compile and run properly.\n // This won't provide full coverage, but it might be worth checking\ndiff --git a/tests/ExtraTests/X02-DisabledMacros.cpp b/tests/ExtraTests/X02-DisabledMacros.cpp\nindex 44007364..dac8960e 100644\n--- a/tests/ExtraTests/X02-DisabledMacros.cpp\n+++ b/tests/ExtraTests/X02-DisabledMacros.cpp\n@@ -1,3 +1,11 @@\n+\n+//              Copyright Catch2 Authors\n+// Distributed under the Boost Software License, Version 1.0.\n+//   (See accompanying file LICENSE_1_0.txt or copy at\n+//        https://www.boost.org/LICENSE_1_0.txt)\n+\n+// SPDX-License-Identifier: BSL-1.0\n+\n // X02-DisabledMacros.cpp\n // Test that CATCH_CONFIG_DISABLE turns off TEST_CASE autoregistration\n // and expressions in assertion macros are not run.\ndiff --git a/tests/ExtraTests/X03-DisabledExceptions-DefaultHandler.cpp b/tests/ExtraTests/X03-DisabledExceptions-DefaultHandler.cpp\nindex fefbae0d..74b651c7 100644\n--- a/tests/ExtraTests/X03-DisabledExceptions-DefaultHandler.cpp\n+++ b/tests/ExtraTests/X03-DisabledExceptions-DefaultHandler.cpp\n@@ -1,3 +1,11 @@\n+\n+//              Copyright Catch2 Authors\n+// Distributed under the Boost Software License, Version 1.0.\n+//   (See accompanying file LICENSE_1_0.txt or copy at\n+//        https://www.boost.org/LICENSE_1_0.txt)\n+\n+// SPDX-License-Identifier: BSL-1.0\n+\n #include <catch2/catch_test_macros.hpp>\n #include <catch2/benchmark/catch_benchmark.hpp>\n #include <catch2/matchers/catch_matchers.hpp>\ndiff --git a/tests/ExtraTests/X04-DisabledExceptions-CustomHandler.cpp b/tests/ExtraTests/X04-DisabledExceptions-CustomHandler.cpp\nindex ae698165..b506d8b8 100644\n--- a/tests/ExtraTests/X04-DisabledExceptions-CustomHandler.cpp\n+++ b/tests/ExtraTests/X04-DisabledExceptions-CustomHandler.cpp\n@@ -1,3 +1,11 @@\n+\n+//              Copyright Catch2 Authors\n+// Distributed under the Boost Software License, Version 1.0.\n+//   (See accompanying file LICENSE_1_0.txt or copy at\n+//        https://www.boost.org/LICENSE_1_0.txt)\n+\n+// SPDX-License-Identifier: BSL-1.0\n+\n #include <catch2/catch_test_macros.hpp>\n \n namespace Catch {\ndiff --git a/tests/ExtraTests/X10-FallbackStringifier.cpp b/tests/ExtraTests/X10-FallbackStringifier.cpp\nindex af31047b..e4ff0a3c 100644\n--- a/tests/ExtraTests/X10-FallbackStringifier.cpp\n+++ b/tests/ExtraTests/X10-FallbackStringifier.cpp\n@@ -1,3 +1,11 @@\n+\n+//              Copyright Catch2 Authors\n+// Distributed under the Boost Software License, Version 1.0.\n+//   (See accompanying file LICENSE_1_0.txt or copy at\n+//        https://www.boost.org/LICENSE_1_0.txt)\n+\n+// SPDX-License-Identifier: BSL-1.0\n+\n // X10-FallbackStringifier.cpp\n // Test that defining fallbackStringifier compiles\n \ndiff --git a/tests/ExtraTests/X11-DisableStringification.cpp b/tests/ExtraTests/X11-DisableStringification.cpp\nindex b127d246..65e2d274 100644\n--- a/tests/ExtraTests/X11-DisableStringification.cpp\n+++ b/tests/ExtraTests/X11-DisableStringification.cpp\n@@ -1,3 +1,11 @@\n+\n+//              Copyright Catch2 Authors\n+// Distributed under the Boost Software License, Version 1.0.\n+//   (See accompanying file LICENSE_1_0.txt or copy at\n+//        https://www.boost.org/LICENSE_1_0.txt)\n+\n+// SPDX-License-Identifier: BSL-1.0\n+\n // X11-DisableStringification.cpp\n // Test that stringification of original expression can be disabled\n // this is a workaround for VS 2017 issue with Raw String literal\ndiff --git a/tests/ExtraTests/X12-CustomDebugBreakMacro.cpp b/tests/ExtraTests/X12-CustomDebugBreakMacro.cpp\nindex 25ab4a0e..f9f9f4f3 100644\n--- a/tests/ExtraTests/X12-CustomDebugBreakMacro.cpp\n+++ b/tests/ExtraTests/X12-CustomDebugBreakMacro.cpp\n@@ -1,3 +1,11 @@\n+\n+//              Copyright Catch2 Authors\n+// Distributed under the Boost Software License, Version 1.0.\n+//   (See accompanying file LICENSE_1_0.txt or copy at\n+//        https://www.boost.org/LICENSE_1_0.txt)\n+\n+// SPDX-License-Identifier: BSL-1.0\n+\n // X12-CustomDebugBreakMacro.cpp\n // Test that user-defined `CATCH_BREAK_INTO_DEBUGGER` is respected and used.\n \ndiff --git a/tests/ExtraTests/X90-WindowsHeaderInclusion.cpp b/tests/ExtraTests/X90-WindowsHeaderInclusion.cpp\nindex 307e877f..93442d34 100644\n--- a/tests/ExtraTests/X90-WindowsHeaderInclusion.cpp\n+++ b/tests/ExtraTests/X90-WindowsHeaderInclusion.cpp\n@@ -1,3 +1,11 @@\n+\n+//              Copyright Catch2 Authors\n+// Distributed under the Boost Software License, Version 1.0.\n+//   (See accompanying file LICENSE_1_0.txt or copy at\n+//        https://www.boost.org/LICENSE_1_0.txt)\n+\n+// SPDX-License-Identifier: BSL-1.0\n+\n // X90-WindowsHeaderInclusion.cpp\n // Test that the Catch2 header compiles even after including windows.h\n // without defining NOMINMAX first. As an FYI, if you do that, you are\ndiff --git a/tests/ExtraTests/X91-AmalgamatedCatch.cpp b/tests/ExtraTests/X91-AmalgamatedCatch.cpp\nindex e3b31f9b..547eb3b8 100644\n--- a/tests/ExtraTests/X91-AmalgamatedCatch.cpp\n+++ b/tests/ExtraTests/X91-AmalgamatedCatch.cpp\n@@ -1,3 +1,11 @@\n+\n+//              Copyright Catch2 Authors\n+// Distributed under the Boost Software License, Version 1.0.\n+//   (See accompanying file LICENSE_1_0.txt or copy at\n+//        https://www.boost.org/LICENSE_1_0.txt)\n+\n+// SPDX-License-Identifier: BSL-1.0\n+\n /**\\file\n  *\n  * This file serves as a simple compilation test against the amalgamated\n",
+    "commit_message": "Use the new licence header in ExtraTests's cpp files",
+    "xml_files": [
+      {
+        "file_name": "tests_ExtraTests_X01-PrefixedMacros_cpp",
+        "xml_path": "xml_outputs/Catch2/635db2785fc081e576e92e3f166504ccd7e6efd8/tests_ExtraTests_X01-PrefixedMacros_cpp.xml"
+      },
+      {
+        "file_name": "tests_ExtraTests_X02-DisabledMacros_cpp",
+        "xml_path": "xml_outputs/Catch2/635db2785fc081e576e92e3f166504ccd7e6efd8/tests_ExtraTests_X02-DisabledMacros_cpp.xml"
+      },
+      {
+        "file_name": "tests_ExtraTests_X03-DisabledExceptions-DefaultHandler_cpp",
+        "xml_path": "xml_outputs/Catch2/635db2785fc081e576e92e3f166504ccd7e6efd8/tests_ExtraTests_X03-DisabledExceptions-DefaultHandler_cpp.xml"
+      },
+      {
+        "file_name": "tests_ExtraTests_X04-DisabledExceptions-CustomHandler_cpp",
+        "xml_path": "xml_outputs/Catch2/635db2785fc081e576e92e3f166504ccd7e6efd8/tests_ExtraTests_X04-DisabledExceptions-CustomHandler_cpp.xml"
+      },
+      {
+        "file_name": "tests_ExtraTests_X10-FallbackStringifier_cpp",
+        "xml_path": "xml_outputs/Catch2/635db2785fc081e576e92e3f166504ccd7e6efd8/tests_ExtraTests_X10-FallbackStringifier_cpp.xml"
+      },
+      {
+        "file_name": "tests_ExtraTests_X11-DisableStringification_cpp",
+        "xml_path": "xml_outputs/Catch2/635db2785fc081e576e92e3f166504ccd7e6efd8/tests_ExtraTests_X11-DisableStringification_cpp.xml"
+      },
+      {
+        "file_name": "tests_ExtraTests_X12-CustomDebugBreakMacro_cpp",
+        "xml_path": "xml_outputs/Catch2/635db2785fc081e576e92e3f166504ccd7e6efd8/tests_ExtraTests_X12-CustomDebugBreakMacro_cpp.xml"
+      },
+      {
+        "file_name": "tests_ExtraTests_X90-WindowsHeaderInclusion_cpp",
+        "xml_path": "xml_outputs/Catch2/635db2785fc081e576e92e3f166504ccd7e6efd8/tests_ExtraTests_X90-WindowsHeaderInclusion_cpp.xml"
+      },
+      {
+        "file_name": "tests_ExtraTests_X91-AmalgamatedCatch_cpp",
+        "xml_path": "xml_outputs/Catch2/635db2785fc081e576e92e3f166504ccd7e6efd8/tests_ExtraTests_X91-AmalgamatedCatch_cpp.xml"
+      }
+    ]
+  },
+  {
+    "commit_id": "f83332d89b4cad0e6e1583caf6cd3d6b34c41136",
+    "repo": "Catch2",
+    "diff": "diff --git a/tests/SelfTest/IntrospectiveTests/CmdLine.tests.cpp b/tests/SelfTest/IntrospectiveTests/CmdLine.tests.cpp\nindex 53fc08b8..b4ec826b 100644\n--- a/tests/SelfTest/IntrospectiveTests/CmdLine.tests.cpp\n+++ b/tests/SelfTest/IntrospectiveTests/CmdLine.tests.cpp\n@@ -1,7 +1,10 @@\n-/*\n- *  Distributed under the Boost Software License, Version 1.0. (See accompanying\n- *  file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)\n- */\n+\n+//              Copyright Catch2 Authors\n+// Distributed under the Boost Software License, Version 1.0.\n+//   (See accompanying file LICENSE_1_0.txt or copy at\n+//        https://www.boost.org/LICENSE_1_0.txt)\n+\n+// SPDX-License-Identifier: BSL-1.0\n \n #include <catch2/catch_config.hpp>\n #include <catch2/catch_approx.hpp>\ndiff --git a/tests/SelfTest/IntrospectiveTests/Details.tests.cpp b/tests/SelfTest/IntrospectiveTests/Details.tests.cpp\nindex ca72d733..987910a9 100644\n--- a/tests/SelfTest/IntrospectiveTests/Details.tests.cpp\n+++ b/tests/SelfTest/IntrospectiveTests/Details.tests.cpp\n@@ -1,7 +1,10 @@\n-/*\n- *  Distributed under the Boost Software License, Version 1.0. (See accompanying\n- *  file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)\n- */\n+\n+//              Copyright Catch2 Authors\n+// Distributed under the Boost Software License, Version 1.0.\n+//   (See accompanying file LICENSE_1_0.txt or copy at\n+//        https://www.boost.org/LICENSE_1_0.txt)\n+\n+// SPDX-License-Identifier: BSL-1.0\n \n #include <catch2/catch_test_macros.hpp>\n #include <catch2/internal/catch_enforce.hpp>\ndiff --git a/tests/SelfTest/IntrospectiveTests/FloatingPoint.tests.cpp b/tests/SelfTest/IntrospectiveTests/FloatingPoint.tests.cpp\nindex 7a1ca110..242a8967 100644\n--- a/tests/SelfTest/IntrospectiveTests/FloatingPoint.tests.cpp\n+++ b/tests/SelfTest/IntrospectiveTests/FloatingPoint.tests.cpp\n@@ -1,3 +1,11 @@\n+\n+//              Copyright Catch2 Authors\n+// Distributed under the Boost Software License, Version 1.0.\n+//   (See accompanying file LICENSE_1_0.txt or copy at\n+//        https://www.boost.org/LICENSE_1_0.txt)\n+\n+// SPDX-License-Identifier: BSL-1.0\n+\n #include <catch2/catch_test_macros.hpp>\n #include <catch2/catch_template_test_macros.hpp>\n #include <catch2/internal/catch_floating_point_helpers.hpp>\ndiff --git a/tests/SelfTest/IntrospectiveTests/GeneratorsImpl.tests.cpp b/tests/SelfTest/IntrospectiveTests/GeneratorsImpl.tests.cpp\nindex ac60525e..b25de054 100644\n--- a/tests/SelfTest/IntrospectiveTests/GeneratorsImpl.tests.cpp\n+++ b/tests/SelfTest/IntrospectiveTests/GeneratorsImpl.tests.cpp\n@@ -1,3 +1,11 @@\n+\n+//              Copyright Catch2 Authors\n+// Distributed under the Boost Software License, Version 1.0.\n+//   (See accompanying file LICENSE_1_0.txt or copy at\n+//        https://www.boost.org/LICENSE_1_0.txt)\n+\n+// SPDX-License-Identifier: BSL-1.0\n+\n #include <catch2/catch_approx.hpp>\n #include <catch2/catch_test_macros.hpp>\n #include <catch2/generators/catch_generator_exception.hpp>\ndiff --git a/tests/SelfTest/IntrospectiveTests/InternalBenchmark.tests.cpp b/tests/SelfTest/IntrospectiveTests/InternalBenchmark.tests.cpp\nindex 19fa8f95..ead52356 100644\n--- a/tests/SelfTest/IntrospectiveTests/InternalBenchmark.tests.cpp\n+++ b/tests/SelfTest/IntrospectiveTests/InternalBenchmark.tests.cpp\n@@ -1,10 +1,11 @@\n-/*\n- *  Created by Joachim on 16/04/2019.\n- *  Adapted from donated nonius code.\n- *\n- *  Distributed under the Boost Software License, Version 1.0. (See accompanying\n- *  file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)\n- */\n+\n+//              Copyright Catch2 Authors\n+// Distributed under the Boost Software License, Version 1.0.\n+//   (See accompanying file LICENSE_1_0.txt or copy at\n+//        https://www.boost.org/LICENSE_1_0.txt)\n+\n+// SPDX-License-Identifier: BSL-1.0\n+// Adapted from donated nonius code.\n \n #include <catch2/catch_test_macros.hpp>\n #include <catch2/catch_approx.hpp>\ndiff --git a/tests/SelfTest/IntrospectiveTests/PartTracker.tests.cpp b/tests/SelfTest/IntrospectiveTests/PartTracker.tests.cpp\nindex c56adc5e..025a2860 100644\n--- a/tests/SelfTest/IntrospectiveTests/PartTracker.tests.cpp\n+++ b/tests/SelfTest/IntrospectiveTests/PartTracker.tests.cpp\n@@ -1,7 +1,10 @@\n-/*\n- *  Distributed under the Boost Software License, Version 1.0. (See accompanying\n- *  file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)\n- */\n+\n+//              Copyright Catch2 Authors\n+// Distributed under the Boost Software License, Version 1.0.\n+//   (See accompanying file LICENSE_1_0.txt or copy at\n+//        https://www.boost.org/LICENSE_1_0.txt)\n+\n+// SPDX-License-Identifier: BSL-1.0\n \n #include <catch2/catch_test_macros.hpp>\n #include <catch2/generators/catch_generators.hpp>\ndiff --git a/tests/SelfTest/IntrospectiveTests/RandomNumberGeneration.tests.cpp b/tests/SelfTest/IntrospectiveTests/RandomNumberGeneration.tests.cpp\nindex d4a36547..b79b372e 100644\n--- a/tests/SelfTest/IntrospectiveTests/RandomNumberGeneration.tests.cpp\n+++ b/tests/SelfTest/IntrospectiveTests/RandomNumberGeneration.tests.cpp\n@@ -1,7 +1,10 @@\n-/*\n- *  Distributed under the Boost Software License, Version 1.0. (See accompanying\n- *  file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)\n- */\n+\n+//              Copyright Catch2 Authors\n+// Distributed under the Boost Software License, Version 1.0.\n+//   (See accompanying file LICENSE_1_0.txt or copy at\n+//        https://www.boost.org/LICENSE_1_0.txt)\n+\n+// SPDX-License-Identifier: BSL-1.0\n \n #include <catch2/catch_test_macros.hpp>\n #include <catch2/internal/catch_random_number_generator.hpp>\ndiff --git a/tests/SelfTest/IntrospectiveTests/Sharding.tests.cpp b/tests/SelfTest/IntrospectiveTests/Sharding.tests.cpp\nindex 9ef80d23..ec316347 100644\n--- a/tests/SelfTest/IntrospectiveTests/Sharding.tests.cpp\n+++ b/tests/SelfTest/IntrospectiveTests/Sharding.tests.cpp\n@@ -1,7 +1,11 @@\n-/*\n- *  Distributed under the Boost Software License, Version 1.0. (See accompanying\n- *  file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)\n- */\n+\n+//              Copyright Catch2 Authors\n+// Distributed under the Boost Software License, Version 1.0.\n+//   (See accompanying file LICENSE_1_0.txt or copy at\n+//        https://www.boost.org/LICENSE_1_0.txt)\n+\n+// SPDX-License-Identifier: BSL-1.0\n+\n #include <catch2/catch_test_macros.hpp>\n #include <catch2/generators/catch_generators_all.hpp>\n \ndiff --git a/tests/SelfTest/IntrospectiveTests/String.tests.cpp b/tests/SelfTest/IntrospectiveTests/String.tests.cpp\nindex 6245ca77..08f7dc2c 100644\n--- a/tests/SelfTest/IntrospectiveTests/String.tests.cpp\n+++ b/tests/SelfTest/IntrospectiveTests/String.tests.cpp\n@@ -1,3 +1,11 @@\n+\n+//              Copyright Catch2 Authors\n+// Distributed under the Boost Software License, Version 1.0.\n+//   (See accompanying file LICENSE_1_0.txt or copy at\n+//        https://www.boost.org/LICENSE_1_0.txt)\n+\n+// SPDX-License-Identifier: BSL-1.0\n+\n #include <catch2/catch_test_macros.hpp>\n #include <catch2/internal/catch_stringref.hpp>\n \ndiff --git a/tests/SelfTest/IntrospectiveTests/StringManip.tests.cpp b/tests/SelfTest/IntrospectiveTests/StringManip.tests.cpp\nindex ad274939..8cd995cc 100644\n--- a/tests/SelfTest/IntrospectiveTests/StringManip.tests.cpp\n+++ b/tests/SelfTest/IntrospectiveTests/StringManip.tests.cpp\n@@ -1,3 +1,11 @@\n+\n+//              Copyright Catch2 Authors\n+// Distributed under the Boost Software License, Version 1.0.\n+//   (See accompanying file LICENSE_1_0.txt or copy at\n+//        https://www.boost.org/LICENSE_1_0.txt)\n+\n+// SPDX-License-Identifier: BSL-1.0\n+\n #include <catch2/catch_test_macros.hpp>\n #include <catch2/matchers/catch_matchers_vector.hpp>\n #include <catch2/internal/catch_string_manip.hpp>\ndiff --git a/tests/SelfTest/IntrospectiveTests/Tag.tests.cpp b/tests/SelfTest/IntrospectiveTests/Tag.tests.cpp\nindex b8d751cb..d87f966b 100644\n--- a/tests/SelfTest/IntrospectiveTests/Tag.tests.cpp\n+++ b/tests/SelfTest/IntrospectiveTests/Tag.tests.cpp\n@@ -1,7 +1,10 @@\n-/*\n- *  Distributed under the Boost Software License, Version 1.0. (See accompanying\n- *  file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)\n- */\n+\n+//              Copyright Catch2 Authors\n+// Distributed under the Boost Software License, Version 1.0.\n+//   (See accompanying file LICENSE_1_0.txt or copy at\n+//        https://www.boost.org/LICENSE_1_0.txt)\n+\n+// SPDX-License-Identifier: BSL-1.0\n \n #include <catch2/matchers/catch_matchers_string.hpp>\n #include <catch2/matchers/catch_matchers_vector.hpp>\ndiff --git a/tests/SelfTest/IntrospectiveTests/ToString.tests.cpp b/tests/SelfTest/IntrospectiveTests/ToString.tests.cpp\nindex c0415dc3..63f072dd 100644\n--- a/tests/SelfTest/IntrospectiveTests/ToString.tests.cpp\n+++ b/tests/SelfTest/IntrospectiveTests/ToString.tests.cpp\n@@ -1,3 +1,11 @@\n+\n+//              Copyright Catch2 Authors\n+// Distributed under the Boost Software License, Version 1.0.\n+//   (See accompanying file LICENSE_1_0.txt or copy at\n+//        https://www.boost.org/LICENSE_1_0.txt)\n+\n+// SPDX-License-Identifier: BSL-1.0\n+\n #include <catch2/internal/catch_enum_values_registry.hpp>\n #include <catch2/matchers/catch_matchers_vector.hpp>\n #include <catch2/catch_test_macros.hpp>\ndiff --git a/tests/SelfTest/IntrospectiveTests/UniquePtr.tests.cpp b/tests/SelfTest/IntrospectiveTests/UniquePtr.tests.cpp\nindex d461232d..40c9886c 100644\n--- a/tests/SelfTest/IntrospectiveTests/UniquePtr.tests.cpp\n+++ b/tests/SelfTest/IntrospectiveTests/UniquePtr.tests.cpp\n@@ -1,3 +1,11 @@\n+\n+//              Copyright Catch2 Authors\n+// Distributed under the Boost Software License, Version 1.0.\n+//   (See accompanying file LICENSE_1_0.txt or copy at\n+//        https://www.boost.org/LICENSE_1_0.txt)\n+\n+// SPDX-License-Identifier: BSL-1.0\n+\n #include <catch2/catch_test_macros.hpp>\n #include <catch2/internal/catch_unique_ptr.hpp>\n \ndiff --git a/tests/SelfTest/IntrospectiveTests/Xml.tests.cpp b/tests/SelfTest/IntrospectiveTests/Xml.tests.cpp\nindex 4659dc52..678d8c87 100644\n--- a/tests/SelfTest/IntrospectiveTests/Xml.tests.cpp\n+++ b/tests/SelfTest/IntrospectiveTests/Xml.tests.cpp\n@@ -1,3 +1,11 @@\n+\n+//              Copyright Catch2 Authors\n+// Distributed under the Boost Software License, Version 1.0.\n+//   (See accompanying file LICENSE_1_0.txt or copy at\n+//        https://www.boost.org/LICENSE_1_0.txt)\n+\n+// SPDX-License-Identifier: BSL-1.0\n+\n #include <catch2/catch_test_macros.hpp>\n #include <catch2/internal/catch_xmlwriter.hpp>\n \ndiff --git a/tests/SelfTest/TimingTests/Sleep.tests.cpp b/tests/SelfTest/TimingTests/Sleep.tests.cpp\nindex 1c82e0e9..bfb222d0 100644\n--- a/tests/SelfTest/TimingTests/Sleep.tests.cpp\n+++ b/tests/SelfTest/TimingTests/Sleep.tests.cpp\n@@ -1,9 +1,10 @@\n-/*\n- *  Copyright 2011 Two Blue Cubes Ltd. All rights reserved.\n- *\n- *  Distributed under the Boost Software License, Version 1.0. (See accompanying\n- *  file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)\n- */\n+\n+//              Copyright Catch2 Authors\n+// Distributed under the Boost Software License, Version 1.0.\n+//   (See accompanying file LICENSE_1_0.txt or copy at\n+//        https://www.boost.org/LICENSE_1_0.txt)\n+\n+// SPDX-License-Identifier: BSL-1.0\n \n #include <catch2/catch_test_macros.hpp>\n \ndiff --git a/tests/SelfTest/UsageTests/Approx.tests.cpp b/tests/SelfTest/UsageTests/Approx.tests.cpp\nindex 1ae5fe04..853227a2 100644\n--- a/tests/SelfTest/UsageTests/Approx.tests.cpp\n+++ b/tests/SelfTest/UsageTests/Approx.tests.cpp\n@@ -1,10 +1,10 @@\n-/*\n- *  Created by Phil on 28/04/2011.\n- *  Copyright 2011 Two Blue Cubes Ltd. All rights reserved.\n- *\n- *  Distributed under the Boost Software License, Version 1.0. (See accompanying\n- *  file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)\n- */\n+\n+//              Copyright Catch2 Authors\n+// Distributed under the Boost Software License, Version 1.0.\n+//   (See accompanying file LICENSE_1_0.txt or copy at\n+//        https://www.boost.org/LICENSE_1_0.txt)\n+\n+// SPDX-License-Identifier: BSL-1.0\n \n #include <catch2/catch_test_macros.hpp>\n #include <catch2/catch_approx.hpp>\ndiff --git a/tests/SelfTest/UsageTests/BDD.tests.cpp b/tests/SelfTest/UsageTests/BDD.tests.cpp\nindex eba58d38..b128196c 100644\n--- a/tests/SelfTest/UsageTests/BDD.tests.cpp\n+++ b/tests/SelfTest/UsageTests/BDD.tests.cpp\n@@ -1,7 +1,10 @@\n-/*\n- *  Distributed under the Boost Software License, Version 1.0. (See accompanying\n- *  file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)\n- */\n+\n+//              Copyright Catch2 Authors\n+// Distributed under the Boost Software License, Version 1.0.\n+//   (See accompanying file LICENSE_1_0.txt or copy at\n+//        https://www.boost.org/LICENSE_1_0.txt)\n+\n+// SPDX-License-Identifier: BSL-1.0\n \n #include <catch2/catch_test_macros.hpp>\n \ndiff --git a/tests/SelfTest/UsageTests/Benchmark.tests.cpp b/tests/SelfTest/UsageTests/Benchmark.tests.cpp\nindex b2d41cf2..14b00107 100644\n--- a/tests/SelfTest/UsageTests/Benchmark.tests.cpp\n+++ b/tests/SelfTest/UsageTests/Benchmark.tests.cpp\n@@ -1,3 +1,12 @@\n+\n+//              Copyright Catch2 Authors\n+// Distributed under the Boost Software License, Version 1.0.\n+//   (See accompanying file LICENSE_1_0.txt or copy at\n+//        https://www.boost.org/LICENSE_1_0.txt)\n+\n+// SPDX-License-Identifier: BSL-1.0\n+// Adapted from donated nonius code.\n+\n #include <catch2/catch_test_macros.hpp>\n #include <catch2/benchmark/catch_benchmark.hpp>\n #include <catch2/benchmark/catch_constructor.hpp>\ndiff --git a/tests/SelfTest/UsageTests/Class.tests.cpp b/tests/SelfTest/UsageTests/Class.tests.cpp\nindex 94e83051..128f8711 100644\n--- a/tests/SelfTest/UsageTests/Class.tests.cpp\n+++ b/tests/SelfTest/UsageTests/Class.tests.cpp\n@@ -1,7 +1,10 @@\n-/*\n- *  Distributed under the Boost Software License, Version 1.0. (See accompanying\n- *  file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)\n- */\n+\n+//              Copyright Catch2 Authors\n+// Distributed under the Boost Software License, Version 1.0.\n+//   (See accompanying file LICENSE_1_0.txt or copy at\n+//        https://www.boost.org/LICENSE_1_0.txt)\n+\n+// SPDX-License-Identifier: BSL-1.0\n \n #include <catch2/catch_test_macros.hpp>\n #include <catch2/catch_template_test_macros.hpp>\ndiff --git a/tests/SelfTest/UsageTests/Compilation.tests.cpp b/tests/SelfTest/UsageTests/Compilation.tests.cpp\nindex 866644e3..d45f8e6c 100644\n--- a/tests/SelfTest/UsageTests/Compilation.tests.cpp\n+++ b/tests/SelfTest/UsageTests/Compilation.tests.cpp\n@@ -1,7 +1,10 @@\n-/*\n- *  Distributed under the Boost Software License, Version 1.0. (See accompanying\n- *  file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)\n- */\n+\n+//              Copyright Catch2 Authors\n+// Distributed under the Boost Software License, Version 1.0.\n+//   (See accompanying file LICENSE_1_0.txt or copy at\n+//        https://www.boost.org/LICENSE_1_0.txt)\n+\n+// SPDX-License-Identifier: BSL-1.0\n \n #include <type_traits>\n \ndiff --git a/tests/SelfTest/UsageTests/Condition.tests.cpp b/tests/SelfTest/UsageTests/Condition.tests.cpp\nindex 916e98f1..198b4cdb 100644\n--- a/tests/SelfTest/UsageTests/Condition.tests.cpp\n+++ b/tests/SelfTest/UsageTests/Condition.tests.cpp\n@@ -1,7 +1,11 @@\n-/*\n- *  Distributed under the Boost Software License, Version 1.0. (See accompanying\n- *  file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)\n- */\n+\n+//              Copyright Catch2 Authors\n+// Distributed under the Boost Software License, Version 1.0.\n+//   (See accompanying file LICENSE_1_0.txt or copy at\n+//        https://www.boost.org/LICENSE_1_0.txt)\n+\n+// SPDX-License-Identifier: BSL-1.0\n+\n #ifdef __clang__\n #   pragma clang diagnostic push\n #   pragma clang diagnostic ignored \"-Wpadded\"\ndiff --git a/tests/SelfTest/UsageTests/Decomposition.tests.cpp b/tests/SelfTest/UsageTests/Decomposition.tests.cpp\nindex 1ad5b796..0a169831 100644\n--- a/tests/SelfTest/UsageTests/Decomposition.tests.cpp\n+++ b/tests/SelfTest/UsageTests/Decomposition.tests.cpp\n@@ -1,7 +1,10 @@\n-/*\n- *  Distributed under the Boost Software License, Version 1.0. (See accompanying\n- *  file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)\n- */\n+\n+//              Copyright Catch2 Authors\n+// Distributed under the Boost Software License, Version 1.0.\n+//   (See accompanying file LICENSE_1_0.txt or copy at\n+//        https://www.boost.org/LICENSE_1_0.txt)\n+\n+// SPDX-License-Identifier: BSL-1.0\n \n #include <iostream>\n #include <cstdio>\ndiff --git a/tests/SelfTest/UsageTests/EnumToString.tests.cpp b/tests/SelfTest/UsageTests/EnumToString.tests.cpp\nindex 2a6731cb..77ec5171 100644\n--- a/tests/SelfTest/UsageTests/EnumToString.tests.cpp\n+++ b/tests/SelfTest/UsageTests/EnumToString.tests.cpp\n@@ -1,3 +1,11 @@\n+\n+//              Copyright Catch2 Authors\n+// Distributed under the Boost Software License, Version 1.0.\n+//   (See accompanying file LICENSE_1_0.txt or copy at\n+//        https://www.boost.org/LICENSE_1_0.txt)\n+\n+// SPDX-License-Identifier: BSL-1.0\n+\n #include <catch2/catch_test_macros.hpp>\n #include <catch2/internal/catch_enum_values_registry.hpp>\n \ndiff --git a/tests/SelfTest/UsageTests/Exception.tests.cpp b/tests/SelfTest/UsageTests/Exception.tests.cpp\nindex 9b4ea030..9b6d2a58 100644\n--- a/tests/SelfTest/UsageTests/Exception.tests.cpp\n+++ b/tests/SelfTest/UsageTests/Exception.tests.cpp\n@@ -1,7 +1,10 @@\n-/*\n- *  Distributed under the Boost Software License, Version 1.0. (See accompanying\n- *  file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)\n- */\n+\n+//              Copyright Catch2 Authors\n+// Distributed under the Boost Software License, Version 1.0.\n+//   (See accompanying file LICENSE_1_0.txt or copy at\n+//        https://www.boost.org/LICENSE_1_0.txt)\n+\n+// SPDX-License-Identifier: BSL-1.0\n \n #include <catch2/catch_test_macros.hpp>\n #include <catch2/catch_translate_exception.hpp>\ndiff --git a/tests/SelfTest/UsageTests/Generators.tests.cpp b/tests/SelfTest/UsageTests/Generators.tests.cpp\nindex b2154a1a..5b205c85 100644\n--- a/tests/SelfTest/UsageTests/Generators.tests.cpp\n+++ b/tests/SelfTest/UsageTests/Generators.tests.cpp\n@@ -1,3 +1,11 @@\n+\n+//              Copyright Catch2 Authors\n+// Distributed under the Boost Software License, Version 1.0.\n+//   (See accompanying file LICENSE_1_0.txt or copy at\n+//        https://www.boost.org/LICENSE_1_0.txt)\n+\n+// SPDX-License-Identifier: BSL-1.0\n+\n #include <catch2/catch_test_macros.hpp>\n #include <catch2/generators/catch_generator_exception.hpp>\n #include <catch2/generators/catch_generators_adapters.hpp>\ndiff --git a/tests/SelfTest/UsageTests/Matchers.tests.cpp b/tests/SelfTest/UsageTests/Matchers.tests.cpp\nindex 75578d68..afb12495 100644\n--- a/tests/SelfTest/UsageTests/Matchers.tests.cpp\n+++ b/tests/SelfTest/UsageTests/Matchers.tests.cpp\n@@ -1,7 +1,10 @@\n-/*\n- *  Distributed under the Boost Software License, Version 1.0. (See accompanying\n- *  file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)\n- */\n+\n+//              Copyright Catch2 Authors\n+// Distributed under the Boost Software License, Version 1.0.\n+//   (See accompanying file LICENSE_1_0.txt or copy at\n+//        https://www.boost.org/LICENSE_1_0.txt)\n+\n+// SPDX-License-Identifier: BSL-1.0\n \n #include <catch2/catch_test_macros.hpp>\n #include <catch2/catch_template_test_macros.hpp>\ndiff --git a/tests/SelfTest/UsageTests/MatchersRanges.tests.cpp b/tests/SelfTest/UsageTests/MatchersRanges.tests.cpp\nindex 912b5cdb..f384a9c9 100644\n--- a/tests/SelfTest/UsageTests/MatchersRanges.tests.cpp\n+++ b/tests/SelfTest/UsageTests/MatchersRanges.tests.cpp\n@@ -1,5 +1,10 @@\n-// Distributed under the Boost Software License, Version 1.0. (See accompanying\n-// file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)\n+\n+//              Copyright Catch2 Authors\n+// Distributed under the Boost Software License, Version 1.0.\n+//   (See accompanying file LICENSE_1_0.txt or copy at\n+//        https://www.boost.org/LICENSE_1_0.txt)\n+\n+// SPDX-License-Identifier: BSL-1.0\n \n #include <catch2/catch_test_macros.hpp>\n #include <catch2/matchers/catch_matchers_container_properties.hpp>\ndiff --git a/tests/SelfTest/UsageTests/Message.tests.cpp b/tests/SelfTest/UsageTests/Message.tests.cpp\nindex 97ac4abd..2ec71b49 100644\n--- a/tests/SelfTest/UsageTests/Message.tests.cpp\n+++ b/tests/SelfTest/UsageTests/Message.tests.cpp\n@@ -1,7 +1,10 @@\n-/*\n- *  Distributed under the Boost Software License, Version 1.0. (See accompanying\n- *  file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)\n- */\n+\n+//              Copyright Catch2 Authors\n+// Distributed under the Boost Software License, Version 1.0.\n+//   (See accompanying file LICENSE_1_0.txt or copy at\n+//        https://www.boost.org/LICENSE_1_0.txt)\n+\n+// SPDX-License-Identifier: BSL-1.0\n \n #include <catch2/catch_test_macros.hpp>\n #include <iostream>\ndiff --git a/tests/SelfTest/UsageTests/Misc.tests.cpp b/tests/SelfTest/UsageTests/Misc.tests.cpp\nindex f1f7db03..cf608dd9 100644\n--- a/tests/SelfTest/UsageTests/Misc.tests.cpp\n+++ b/tests/SelfTest/UsageTests/Misc.tests.cpp\n@@ -1,7 +1,10 @@\n-/*\n- *  Distributed under the Boost Software License, Version 1.0. (See accompanying\n- *  file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)\n- */\n+\n+//              Copyright Catch2 Authors\n+// Distributed under the Boost Software License, Version 1.0.\n+//   (See accompanying file LICENSE_1_0.txt or copy at\n+//        https://www.boost.org/LICENSE_1_0.txt)\n+\n+// SPDX-License-Identifier: BSL-1.0\n \n #include <catch2/catch_test_macros.hpp>\n #include <catch2/catch_template_test_macros.hpp>\ndiff --git a/tests/SelfTest/UsageTests/ToStringByte.tests.cpp b/tests/SelfTest/UsageTests/ToStringByte.tests.cpp\nindex ceb94e22..e5e12468 100644\n--- a/tests/SelfTest/UsageTests/ToStringByte.tests.cpp\n+++ b/tests/SelfTest/UsageTests/ToStringByte.tests.cpp\n@@ -1,3 +1,11 @@\n+\n+//              Copyright Catch2 Authors\n+// Distributed under the Boost Software License, Version 1.0.\n+//   (See accompanying file LICENSE_1_0.txt or copy at\n+//        https://www.boost.org/LICENSE_1_0.txt)\n+\n+// SPDX-License-Identifier: BSL-1.0\n+\n #include <catch2/catch_test_macros.hpp>\n \n #if defined(CATCH_CONFIG_CPP17_BYTE)\ndiff --git a/tests/SelfTest/UsageTests/ToStringChrono.tests.cpp b/tests/SelfTest/UsageTests/ToStringChrono.tests.cpp\nindex 27a3dc3d..22c31c68 100644\n--- a/tests/SelfTest/UsageTests/ToStringChrono.tests.cpp\n+++ b/tests/SelfTest/UsageTests/ToStringChrono.tests.cpp\n@@ -1,3 +1,11 @@\n+\n+//              Copyright Catch2 Authors\n+// Distributed under the Boost Software License, Version 1.0.\n+//   (See accompanying file LICENSE_1_0.txt or copy at\n+//        https://www.boost.org/LICENSE_1_0.txt)\n+\n+// SPDX-License-Identifier: BSL-1.0\n+\n #include <catch2/catch_test_macros.hpp>\n \n #include <chrono>\ndiff --git a/tests/SelfTest/UsageTests/ToStringGeneral.tests.cpp b/tests/SelfTest/UsageTests/ToStringGeneral.tests.cpp\nindex c738b32c..b8f383b1 100644\n--- a/tests/SelfTest/UsageTests/ToStringGeneral.tests.cpp\n+++ b/tests/SelfTest/UsageTests/ToStringGeneral.tests.cpp\n@@ -1,7 +1,10 @@\n-/*\n- *  Distributed under the Boost Software License, Version 1.0. (See accompanying\n- *  file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)\n- */\n+\n+//              Copyright Catch2 Authors\n+// Distributed under the Boost Software License, Version 1.0.\n+//   (See accompanying file LICENSE_1_0.txt or copy at\n+//        https://www.boost.org/LICENSE_1_0.txt)\n+\n+// SPDX-License-Identifier: BSL-1.0\n \n #define CATCH_CONFIG_ENABLE_PAIR_STRINGMAKER\n #include <catch2/catch_test_macros.hpp>\ndiff --git a/tests/SelfTest/UsageTests/ToStringOptional.tests.cpp b/tests/SelfTest/UsageTests/ToStringOptional.tests.cpp\nindex 2b7ac3ec..bc2d2561 100644\n--- a/tests/SelfTest/UsageTests/ToStringOptional.tests.cpp\n+++ b/tests/SelfTest/UsageTests/ToStringOptional.tests.cpp\n@@ -1,3 +1,11 @@\n+\n+//              Copyright Catch2 Authors\n+// Distributed under the Boost Software License, Version 1.0.\n+//   (See accompanying file LICENSE_1_0.txt or copy at\n+//        https://www.boost.org/LICENSE_1_0.txt)\n+\n+// SPDX-License-Identifier: BSL-1.0\n+\n #define CATCH_CONFIG_ENABLE_OPTIONAL_STRINGMAKER\n #include <catch2/catch_test_macros.hpp>\n \ndiff --git a/tests/SelfTest/UsageTests/ToStringPair.tests.cpp b/tests/SelfTest/UsageTests/ToStringPair.tests.cpp\nindex 3b8608aa..4bf592a4 100644\n--- a/tests/SelfTest/UsageTests/ToStringPair.tests.cpp\n+++ b/tests/SelfTest/UsageTests/ToStringPair.tests.cpp\n@@ -1,3 +1,11 @@\n+\n+//              Copyright Catch2 Authors\n+// Distributed under the Boost Software License, Version 1.0.\n+//   (See accompanying file LICENSE_1_0.txt or copy at\n+//        https://www.boost.org/LICENSE_1_0.txt)\n+\n+// SPDX-License-Identifier: BSL-1.0\n+\n #define CATCH_CONFIG_ENABLE_PAIR_STRINGMAKER\n #include <catch2/catch_test_macros.hpp>\n \ndiff --git a/tests/SelfTest/UsageTests/ToStringTuple.tests.cpp b/tests/SelfTest/UsageTests/ToStringTuple.tests.cpp\nindex 3912285b..415cbf83 100644\n--- a/tests/SelfTest/UsageTests/ToStringTuple.tests.cpp\n+++ b/tests/SelfTest/UsageTests/ToStringTuple.tests.cpp\n@@ -1,3 +1,11 @@\n+\n+//              Copyright Catch2 Authors\n+// Distributed under the Boost Software License, Version 1.0.\n+//   (See accompanying file LICENSE_1_0.txt or copy at\n+//        https://www.boost.org/LICENSE_1_0.txt)\n+\n+// SPDX-License-Identifier: BSL-1.0\n+\n #define CATCH_CONFIG_ENABLE_TUPLE_STRINGMAKER\n #include <catch2/catch_test_macros.hpp>\n \ndiff --git a/tests/SelfTest/UsageTests/ToStringVariant.tests.cpp b/tests/SelfTest/UsageTests/ToStringVariant.tests.cpp\nindex de9748cd..e67a7a2c 100644\n--- a/tests/SelfTest/UsageTests/ToStringVariant.tests.cpp\n+++ b/tests/SelfTest/UsageTests/ToStringVariant.tests.cpp\n@@ -1,3 +1,11 @@\n+\n+//              Copyright Catch2 Authors\n+// Distributed under the Boost Software License, Version 1.0.\n+//   (See accompanying file LICENSE_1_0.txt or copy at\n+//        https://www.boost.org/LICENSE_1_0.txt)\n+\n+// SPDX-License-Identifier: BSL-1.0\n+\n #define CATCH_CONFIG_ENABLE_VARIANT_STRINGMAKER\n #include <catch2/catch_test_macros.hpp>\n \ndiff --git a/tests/SelfTest/UsageTests/ToStringVector.tests.cpp b/tests/SelfTest/UsageTests/ToStringVector.tests.cpp\nindex 96c67672..a5ccbfa7 100644\n--- a/tests/SelfTest/UsageTests/ToStringVector.tests.cpp\n+++ b/tests/SelfTest/UsageTests/ToStringVector.tests.cpp\n@@ -1,3 +1,11 @@\n+\n+//              Copyright Catch2 Authors\n+// Distributed under the Boost Software License, Version 1.0.\n+//   (See accompanying file LICENSE_1_0.txt or copy at\n+//        https://www.boost.org/LICENSE_1_0.txt)\n+\n+// SPDX-License-Identifier: BSL-1.0\n+\n #include <catch2/catch_test_macros.hpp>\n #include <vector>\n #include <array>\ndiff --git a/tests/SelfTest/UsageTests/ToStringWhich.tests.cpp b/tests/SelfTest/UsageTests/ToStringWhich.tests.cpp\nindex 7af8cc5b..7069734f 100644\n--- a/tests/SelfTest/UsageTests/ToStringWhich.tests.cpp\n+++ b/tests/SelfTest/UsageTests/ToStringWhich.tests.cpp\n@@ -1,7 +1,10 @@\n-/*\n- * Demonstrate which version of toString/StringMaker is being used\n- * for various types\n- */\n+\n+//              Copyright Catch2 Authors\n+// Distributed under the Boost Software License, Version 1.0.\n+//   (See accompanying file LICENSE_1_0.txt or copy at\n+//        https://www.boost.org/LICENSE_1_0.txt)\n+\n+// SPDX-License-Identifier: BSL-1.0\n \n #include <catch2/catch_test_macros.hpp>\n \ndiff --git a/tests/SelfTest/UsageTests/Tricky.tests.cpp b/tests/SelfTest/UsageTests/Tricky.tests.cpp\nindex 03f15032..bcfa7e69 100644\n--- a/tests/SelfTest/UsageTests/Tricky.tests.cpp\n+++ b/tests/SelfTest/UsageTests/Tricky.tests.cpp\n@@ -1,7 +1,10 @@\n-/*\n- *  Distributed under the Boost Software License, Version 1.0. (See accompanying\n- *  file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)\n- */\n+\n+//              Copyright Catch2 Authors\n+// Distributed under the Boost Software License, Version 1.0.\n+//   (See accompanying file LICENSE_1_0.txt or copy at\n+//        https://www.boost.org/LICENSE_1_0.txt)\n+\n+// SPDX-License-Identifier: BSL-1.0\n \n #ifdef __clang__\n #pragma clang diagnostic ignored \"-Wpadded\"\ndiff --git a/tests/SelfTest/UsageTests/VariadicMacros.tests.cpp b/tests/SelfTest/UsageTests/VariadicMacros.tests.cpp\nindex c8754dee..7bc3920e 100644\n--- a/tests/SelfTest/UsageTests/VariadicMacros.tests.cpp\n+++ b/tests/SelfTest/UsageTests/VariadicMacros.tests.cpp\n@@ -1,7 +1,10 @@\n-/*\n- *  Distributed under the Boost Software License, Version 1.0. (See accompanying\n- *  file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)\n- */\n+\n+//              Copyright Catch2 Authors\n+// Distributed under the Boost Software License, Version 1.0.\n+//   (See accompanying file LICENSE_1_0.txt or copy at\n+//        https://www.boost.org/LICENSE_1_0.txt)\n+\n+// SPDX-License-Identifier: BSL-1.0\n \n #include <catch2/catch_test_macros.hpp>\n \n",
+    "commit_message": "Use the new licence header in SelfTest's cpp files",
+    "xml_files": [
+      {
+        "file_name": "tests_SelfTest_IntrospectiveTests_Details_tests_cpp",
+        "xml_path": "xml_outputs/Catch2/f83332d89b4cad0e6e1583caf6cd3d6b34c41136/tests_SelfTest_IntrospectiveTests_Details_tests_cpp.xml"
+      },
+      {
+        "file_name": "tests_SelfTest_IntrospectiveTests_FloatingPoint_tests_cpp",
+        "xml_path": "xml_outputs/Catch2/f83332d89b4cad0e6e1583caf6cd3d6b34c41136/tests_SelfTest_IntrospectiveTests_FloatingPoint_tests_cpp.xml"
+      },
+      {
+        "file_name": "tests_SelfTest_IntrospectiveTests_RandomNumberGeneration_tests_cpp",
+        "xml_path": "xml_outputs/Catch2/f83332d89b4cad0e6e1583caf6cd3d6b34c41136/tests_SelfTest_IntrospectiveTests_RandomNumberGeneration_tests_cpp.xml"
+      },
+      {
+        "file_name": "tests_SelfTest_IntrospectiveTests_Sharding_tests_cpp",
+        "xml_path": "xml_outputs/Catch2/f83332d89b4cad0e6e1583caf6cd3d6b34c41136/tests_SelfTest_IntrospectiveTests_Sharding_tests_cpp.xml"
+      },
+      {
+        "file_name": "tests_SelfTest_IntrospectiveTests_StringManip_tests_cpp",
+        "xml_path": "xml_outputs/Catch2/f83332d89b4cad0e6e1583caf6cd3d6b34c41136/tests_SelfTest_IntrospectiveTests_StringManip_tests_cpp.xml"
+      },
+      {
+        "file_name": "tests_SelfTest_IntrospectiveTests_ToString_tests_cpp",
+        "xml_path": "xml_outputs/Catch2/f83332d89b4cad0e6e1583caf6cd3d6b34c41136/tests_SelfTest_IntrospectiveTests_ToString_tests_cpp.xml"
+      },
+      {
+        "file_name": "tests_SelfTest_TimingTests_Sleep_tests_cpp",
+        "xml_path": "xml_outputs/Catch2/f83332d89b4cad0e6e1583caf6cd3d6b34c41136/tests_SelfTest_TimingTests_Sleep_tests_cpp.xml"
+      },
+      {
+        "file_name": "tests_SelfTest_UsageTests_Decomposition_tests_cpp",
+        "xml_path": "xml_outputs/Catch2/f83332d89b4cad0e6e1583caf6cd3d6b34c41136/tests_SelfTest_UsageTests_Decomposition_tests_cpp.xml"
+      },
+      {
+        "file_name": "tests_SelfTest_UsageTests_ToStringByte_tests_cpp",
+        "xml_path": "xml_outputs/Catch2/f83332d89b4cad0e6e1583caf6cd3d6b34c41136/tests_SelfTest_UsageTests_ToStringByte_tests_cpp.xml"
+      },
+      {
+        "file_name": "tests_SelfTest_UsageTests_ToStringChrono_tests_cpp",
+        "xml_path": "xml_outputs/Catch2/f83332d89b4cad0e6e1583caf6cd3d6b34c41136/tests_SelfTest_UsageTests_ToStringChrono_tests_cpp.xml"
+      },
+      {
+        "file_name": "tests_SelfTest_UsageTests_ToStringOptional_tests_cpp",
+        "xml_path": "xml_outputs/Catch2/f83332d89b4cad0e6e1583caf6cd3d6b34c41136/tests_SelfTest_UsageTests_ToStringOptional_tests_cpp.xml"
+      },
+      {
+        "file_name": "tests_SelfTest_UsageTests_ToStringPair_tests_cpp",
+        "xml_path": "xml_outputs/Catch2/f83332d89b4cad0e6e1583caf6cd3d6b34c41136/tests_SelfTest_UsageTests_ToStringPair_tests_cpp.xml"
+      },
+      {
+        "file_name": "tests_SelfTest_UsageTests_ToStringTuple_tests_cpp",
+        "xml_path": "xml_outputs/Catch2/f83332d89b4cad0e6e1583caf6cd3d6b34c41136/tests_SelfTest_UsageTests_ToStringTuple_tests_cpp.xml"
+      },
+      {
+        "file_name": "tests_SelfTest_UsageTests_ToStringVector_tests_cpp",
+        "xml_path": "xml_outputs/Catch2/f83332d89b4cad0e6e1583caf6cd3d6b34c41136/tests_SelfTest_UsageTests_ToStringVector_tests_cpp.xml"
+      },
+      {
+        "file_name": "tests_SelfTest_UsageTests_VariadicMacros_tests_cpp",
+        "xml_path": "xml_outputs/Catch2/f83332d89b4cad0e6e1583caf6cd3d6b34c41136/tests_SelfTest_UsageTests_VariadicMacros_tests_cpp.xml"
+      }
+    ]
+  },
+  {
+    "commit_id": "88b28ab5926e341a57305a62339507a4189343ca",
+    "repo": "Catch2",
+    "diff": "diff --git a/tests/ExtraTests/X03-DisabledExceptions-DefaultHandler.cpp b/tests/ExtraTests/X03-DisabledExceptions-DefaultHandler.cpp\nindex c981fa0b..fefbae0d 100644\n--- a/tests/ExtraTests/X03-DisabledExceptions-DefaultHandler.cpp\n+++ b/tests/ExtraTests/X03-DisabledExceptions-DefaultHandler.cpp\n@@ -1,4 +1,7 @@\n #include <catch2/catch_test_macros.hpp>\n+#include <catch2/benchmark/catch_benchmark.hpp>\n+#include <catch2/matchers/catch_matchers.hpp>\n+#include <catch2/matchers/catch_matchers_predicate.hpp>\n \n TEST_CASE(\"Tests that run\") {\n     // All of these should be run and be reported\n@@ -20,3 +23,9 @@ TEST_CASE(\"Tests that abort\") {\n     // We should not get here, because the test above aborts\n     REQUIRE(1 != 4);\n }\n+\n+TEST_CASE( \"Misc. macros to check that they compile without exceptions\" ) {\n+    BENCHMARK( \"simple benchmark\" ) { return 1 * 2 + 3; };\n+    REQUIRE_THAT( 1,\n+                  Catch::Matchers::Predicate<int>( []( int i ) { return i == 1; } ) );\n+}\n",
+    "commit_message": "Extra compilation checks for compiling without exceptions",
+    "xml_files": [
+      {
+        "file_name": "tests_ExtraTests_X03-DisabledExceptions-DefaultHandler_cpp",
+        "xml_path": "xml_outputs/Catch2/88b28ab5926e341a57305a62339507a4189343ca/tests_ExtraTests_X03-DisabledExceptions-DefaultHandler_cpp.xml"
+      }
+    ]
+  },
+  {
+    "commit_id": "ef3374ed813590525527f229994b58c094e9c12e",
+    "repo": "Catch2",
+    "diff": "diff --git a/tests/ExtraTests/X02-DisabledMacros.cpp b/tests/ExtraTests/X02-DisabledMacros.cpp\nindex 5a756d70..44007364 100644\n--- a/tests/ExtraTests/X02-DisabledMacros.cpp\n+++ b/tests/ExtraTests/X02-DisabledMacros.cpp\n@@ -3,6 +3,9 @@\n // and expressions in assertion macros are not run.\n \n #include <catch2/catch_test_macros.hpp>\n+#include <catch2/benchmark/catch_benchmark.hpp>\n+#include <catch2/matchers/catch_matchers.hpp>\n+#include <catch2/matchers/catch_matchers_predicate.hpp>\n \n #include <iostream>\n \n@@ -30,12 +33,18 @@ foo f;\n \n // This test should not be run, because it won't be registered\n TEST_CASE( \"Disabled Macros\" ) {\n+    CHECK( 1 == 2 );\n+    REQUIRE( 1 == 2 );\n     std::cout << \"This should not happen\\n\";\n     FAIL();\n \n     // Test that static assertions don't fire when macros are disabled\n     STATIC_CHECK( 0 == 1 );\n     STATIC_REQUIRE( !true );\n+\n+    REQUIRE_THAT( 1,\n+                  Catch::Matchers::Predicate( []( int ) { return false; } ) );\n+    BENCHMARK( \"Disabled benchmark\" ) { REQUIRE( 1 == 2 ); };\n }\n \n #if defined(__clang__)\n",
+    "commit_message": "Add more macros to the DisabledMacros test",
+    "xml_files": [
+      {
+        "file_name": "tests_ExtraTests_X02-DisabledMacros_cpp",
+        "xml_path": "xml_outputs/Catch2/ef3374ed813590525527f229994b58c094e9c12e/tests_ExtraTests_X02-DisabledMacros_cpp.xml"
+      }
+    ]
+  },
+  {
+    "commit_id": "72a09de2369b1d48954c2e8aa4c001b46c2e34c0",
+    "repo": "Catch2",
+    "diff": "diff --git a/tests/SelfTest/IntrospectiveTests/Details.tests.cpp b/tests/SelfTest/IntrospectiveTests/Details.tests.cpp\nindex 38adcbac..ca72d733 100644\n--- a/tests/SelfTest/IntrospectiveTests/Details.tests.cpp\n+++ b/tests/SelfTest/IntrospectiveTests/Details.tests.cpp\n@@ -6,6 +6,7 @@\n #include <catch2/catch_test_macros.hpp>\n #include <catch2/internal/catch_enforce.hpp>\n #include <catch2/internal/catch_case_insensitive_comparisons.hpp>\n+#include <catch2/internal/catch_optional.hpp>\n \n #if defined(_MSC_VER)\n #pragma warning(push)\n@@ -55,3 +56,30 @@ TEST_CASE( \"CaseInsensitiveEqualsTo is case insensitive\",\n         REQUIRE_FALSE( eq( \"a\", \"B\" ) );\n     }\n }\n+\n+TEST_CASE(\"Optional comparison ops\", \"[optional][approvals]\") {\n+    using Catch::Optional;\n+\n+    Optional<int> a, b;\n+\n+    SECTION( \"Empty optionals are equal\" ) {\n+        REQUIRE( a == b );\n+        REQUIRE_FALSE( a != b );\n+    }\n+    SECTION( \"Empty and non-empty optionals are never equal\" ) {\n+        a = 1;\n+        REQUIRE_FALSE( a == b );\n+        REQUIRE( a != b );\n+    }\n+    SECTION(\n+        \"non-empty optionals are equal if the contained elements are equal\") {\n+        a = 1;\n+        b = 2;\n+        REQUIRE( a != b );\n+        REQUIRE_FALSE( a == b );\n+\n+        a = 2;\n+        REQUIRE( a == b );\n+        REQUIRE_FALSE( a != b );\n+    }\n+}\n",
+    "commit_message": "Add tests for Optional's op== and !=",
+    "xml_files": [
+      {
+        "file_name": "tests_SelfTest_IntrospectiveTests_Details_tests_cpp",
+        "xml_path": "xml_outputs/Catch2/72a09de2369b1d48954c2e8aa4c001b46c2e34c0/tests_SelfTest_IntrospectiveTests_Details_tests_cpp.xml"
+      }
+    ]
+  },
+  {
+    "commit_id": "c49faa62dd0bdc4f71412c63ef161b7231ae2ab4",
+    "repo": "Catch2",
+    "diff": "diff --git a/src/catch2/internal/catch_main.cpp b/src/catch2/internal/catch_main.cpp\nindex ed89ab6e..f523bbfa 100644\n--- a/src/catch2/internal/catch_main.cpp\n+++ b/src/catch2/internal/catch_main.cpp\n@@ -18,6 +18,9 @@ namespace Catch {\n     CATCH_INTERNAL_STOP_WARNINGS_SUPPRESSION\n }\n \n+// Allow users of amalgamated .cpp file to remove our main and provide their own.\n+#if !defined(CATCH_AMALGAMATED_CUSTOM_MAIN)\n+\n #if defined(CATCH_CONFIG_WCHAR) && defined(CATCH_PLATFORM_WINDOWS) && defined(_UNICODE) && !defined(DO_NOT_USE_WMAIN)\n // Standard C/C++ Win32 Unicode wmain entry point\n extern \"C\" int __cdecl wmain (int argc, wchar_t * argv[], wchar_t * []) {\n@@ -32,3 +35,5 @@ int main (int argc, char * argv[]) {\n \n     return Catch::Session().run( argc, argv );\n }\n+\n+#endif // !defined(CATCH_AMALGAMATED_CUSTOM_MAIN\n",
+    "commit_message": "Let users of amalgamated distribution override the default main",
+    "xml_files": [
+      {
+        "file_name": "src_catch2_internal_catch_main_cpp",
+        "xml_path": "xml_outputs/Catch2/c49faa62dd0bdc4f71412c63ef161b7231ae2ab4/src_catch2_internal_catch_main_cpp.xml"
+      }
+    ]
+  },
+  {
+    "commit_id": "4d9bfb2951769dc2ba200b99bcd3891d02a028bd",
+    "repo": "Catch2",
+    "diff": "diff --git a/src/catch2/catch_approx.cpp b/src/catch2/catch_approx.cpp\nindex 3dfebf46..50cb75c3 100644\n--- a/src/catch2/catch_approx.cpp\n+++ b/src/catch2/catch_approx.cpp\n@@ -24,7 +24,7 @@ bool marginComparison(double lhs, double rhs, double margin) {\n namespace Catch {\n \n     Approx::Approx ( double value )\n-    :   m_epsilon( std::numeric_limits<float>::epsilon()*100 ),\n+    :   m_epsilon( std::numeric_limits<float>::epsilon()*100. ),\n         m_margin( 0.0 ),\n         m_scale( 0.0 ),\n         m_value( value )\n",
+    "commit_message": "Avoid static analysis warning in Approx",
+    "xml_files": [
+      {
+        "file_name": "src_catch2_catch_approx_cpp",
+        "xml_path": "xml_outputs/Catch2/4d9bfb2951769dc2ba200b99bcd3891d02a028bd/src_catch2_catch_approx_cpp.xml"
+      }
+    ]
+  },
+  {
+    "commit_id": "07018e2fba61234b54dfd2633c2501a911938614",
+    "repo": "Catch2",
+    "diff": "diff --git a/src/catch2/internal/catch_main.cpp b/src/catch2/internal/catch_main.cpp\nindex 940ac3bc..ed89ab6e 100644\n--- a/src/catch2/internal/catch_main.cpp\n+++ b/src/catch2/internal/catch_main.cpp\n@@ -20,7 +20,7 @@ namespace Catch {\n \n #if defined(CATCH_CONFIG_WCHAR) && defined(CATCH_PLATFORM_WINDOWS) && defined(_UNICODE) && !defined(DO_NOT_USE_WMAIN)\n // Standard C/C++ Win32 Unicode wmain entry point\n-extern \"C\" int wmain (int argc, wchar_t * argv[], wchar_t * []) {\n+extern \"C\" int __cdecl wmain (int argc, wchar_t * argv[], wchar_t * []) {\n #else\n // Standard C/C++ main entry point\n int main (int argc, char * argv[]) {\n",
+    "commit_message": "Force __cdecl calling convention for wmain",
+    "xml_files": [
+      {
+        "file_name": "src_catch2_internal_catch_main_cpp",
+        "xml_path": "xml_outputs/Catch2/07018e2fba61234b54dfd2633c2501a911938614/src_catch2_internal_catch_main_cpp.xml"
+      }
+    ]
+  },
+  {
+    "commit_id": "5f6990d74695bf5452d9d5870cf5760628497114",
+    "repo": "Catch2",
+    "diff": "diff --git a/src/catch2/internal/catch_section.cpp b/src/catch2/internal/catch_section.cpp\nindex 3652daf0..52361584 100644\n--- a/src/catch2/internal/catch_section.cpp\n+++ b/src/catch2/internal/catch_section.cpp\n@@ -16,7 +16,11 @@ namespace Catch {\n     :   m_info( info ),\n         m_sectionIncluded( getResultCapture().sectionStarted( m_info, m_assertions ) )\n     {\n-        m_timer.start();\n+        // Non-\"included\" sections will not use the timing information\n+        // anyway, so don't bother with the potential syscall.\n+        if (m_sectionIncluded) {\n+            m_timer.start();\n+        }\n     }\n \n     Section::~Section() {\n",
+    "commit_message": "Only start Section's timer if the duration will be used",
+    "xml_files": [
+      {
+        "file_name": "src_catch2_internal_catch_section_cpp",
+        "xml_path": "xml_outputs/Catch2/5f6990d74695bf5452d9d5870cf5760628497114/src_catch2_internal_catch_section_cpp.xml"
+      }
+    ]
+  },
+  {
+    "commit_id": "3b0f8c7ff0df4ee3f713d9a0899d6d670c85cc82",
+    "repo": "Catch2",
+    "diff": "diff --git a/examples/301-Gen-MapTypeConversion.cpp b/examples/301-Gen-MapTypeConversion.cpp\nindex 6d81ce6d..ba55f65f 100644\n--- a/examples/301-Gen-MapTypeConversion.cpp\n+++ b/examples/301-Gen-MapTypeConversion.cpp\n@@ -1,6 +1,9 @@\n // 301-Gen-MapTypeConversion.cpp\n // Shows how to use map to modify generator's return type.\n \n+// Specifically we wrap a std::string returning generator with a generator\n+// that converts the strings using stoi, so the returned type is actually\n+// an int.\n \n #include <catch2/catch_test_macros.hpp>\n #include <catch2/generators/catch_generators_adapters.hpp>\n",
+    "commit_message": "Replace a TODO comment in examples",
+    "xml_files": [
+      {
+        "file_name": "examples_301-Gen-MapTypeConversion_cpp",
+        "xml_path": "xml_outputs/Catch2/3b0f8c7ff0df4ee3f713d9a0899d6d670c85cc82/examples_301-Gen-MapTypeConversion_cpp.xml"
+      }
+    ]
+  },
+  {
+    "commit_id": "eef6c9b79b43a4f5a902813093266f5a8633eb60",
+    "repo": "Catch2",
+    "diff": "diff --git a/src/catch2/internal/catch_decomposer.cpp b/src/catch2/internal/catch_decomposer.cpp\nindex d227c534..e1018cd6 100644\n--- a/src/catch2/internal/catch_decomposer.cpp\n+++ b/src/catch2/internal/catch_decomposer.cpp\n@@ -12,13 +12,13 @@\n namespace Catch {\n \n     ITransientExpression::~ITransientExpression() = default;\n-    \n+\n     void formatReconstructedExpression( std::ostream &os, std::string const& lhs, StringRef op, std::string const& rhs ) {\n         if( lhs.size() + rhs.size() < 40 &&\n                 lhs.find('\\n') == std::string::npos &&\n                 rhs.find('\\n') == std::string::npos )\n-            os << lhs << \" \" << op << \" \" << rhs;\n+            os << lhs << ' ' << op << ' ' << rhs;\n         else\n-            os << lhs << \"\\n\" << op << \"\\n\" << rhs;\n+            os << lhs << '\\n' << op << '\\n' << rhs;\n     }\n }\n",
+    "commit_message": "Microopt: stream single char instead of single char string",
+    "xml_files": [
+      {
+        "file_name": "src_catch2_internal_catch_decomposer_cpp",
+        "xml_path": "xml_outputs/Catch2/eef6c9b79b43a4f5a902813093266f5a8633eb60/src_catch2_internal_catch_decomposer_cpp.xml"
+      }
+    ]
+  },
+  {
+    "commit_id": "d1ffaf55a1653575a5a24da738ee777cdb85626f",
+    "repo": "Catch2",
+    "diff": "diff --git a/examples/010-TestCase.cpp b/examples/010-TestCase.cpp\nindex f8af548a..9c676f82 100644\n--- a/examples/010-TestCase.cpp\n+++ b/examples/010-TestCase.cpp\n@@ -6,7 +6,7 @@\n // And write tests in the same file:\n #include <catch2/catch.hpp>\n \n-int Factorial( int number ) {\n+static int Factorial( int number ) {\n    return number <= 1 ? number : Factorial( number - 1 ) * number;  // fail\n // return number <= 1 ? 1      : Factorial( number - 1 ) * number;  // pass\n }\ndiff --git a/examples/020-TestCase-2.cpp b/examples/020-TestCase-2.cpp\nindex 08b313e0..43c0aee0 100644\n--- a/examples/020-TestCase-2.cpp\n+++ b/examples/020-TestCase-2.cpp\n@@ -4,7 +4,7 @@\n \n #include <catch2/catch.hpp>\n \n-int Factorial( int number ) {\n+static int Factorial( int number ) {\n    return number <= 1 ? number : Factorial( number - 1 ) * number;  // fail\n // return number <= 1 ? 1      : Factorial( number - 1 ) * number;  // pass\n }\ndiff --git a/examples/030-Asn-Require-Check.cpp b/examples/030-Asn-Require-Check.cpp\nindex f814a1b3..84935bbc 100644\n--- a/examples/030-Asn-Require-Check.cpp\n+++ b/examples/030-Asn-Require-Check.cpp\n@@ -12,7 +12,7 @@\n \n #include <catch2/catch.hpp>\n \n-std::string one() {\n+static std::string one() {\n     return \"1\";\n }\n \ndiff --git a/examples/210-Evt-EventListeners.cpp b/examples/210-Evt-EventListeners.cpp\nindex 0e03902e..e3395828 100644\n--- a/examples/210-Evt-EventListeners.cpp\n+++ b/examples/210-Evt-EventListeners.cpp\n@@ -19,6 +19,8 @@\n // 1. Printing of listener data:\n //\n \n+\n+namespace {\n std::string ws(int const level) {\n     return std::string( 2 * level, ' ' );\n }\n@@ -34,7 +36,6 @@ std::ostream& operator<<( std::ostream& os, std::vector<T> const& v ) {\n         os << x << \", \";\n     return os << \"}\";\n }\n-\n // struct SourceLineInfo {\n //     char const* file;\n //     std::size_t line;\n@@ -281,8 +282,8 @@ void print( std::ostream& os, int const level, std::string const& title, Catch::\n     print( os, level+1 , \"- getSourceInfo(): \", info.getSourceInfo() );\n     os << ws(level+1) << \"- getTestMacroName(): '\"  << info.getTestMacroName() << \"'\\n\";\n \n-//    print( os, level+1 , \"- *** m_info (AssertionInfo)\", info.m_info );\n-//    print( os, level+1 , \"- *** m_resultData (AssertionResultData)\", info.m_resultData );\n+    print( os, level+1 , \"- *** m_info (AssertionInfo)\", info.m_info );\n+    print( os, level+1 , \"- *** m_resultData (AssertionResultData)\", info.m_resultData );\n }\n \n // struct AssertionStats {\n@@ -305,6 +306,7 @@ void print( std::ostream& os, int const level, std::string const& title, Catch::\n char const * dashed_line =\n     \"--------------------------------------------------------------------------\";\n \n+\n struct MyListener : Catch::TestEventListenerBase {\n \n     using TestEventListenerBase::TestEventListenerBase; // inherit constructor\n@@ -375,6 +377,8 @@ struct MyListener : Catch::TestEventListenerBase {\n     }\n };\n \n+} // end anonymous namespace\n+\n CATCH_REGISTER_LISTENER( MyListener )\n \n // Get rid of Wweak-tables\ndiff --git a/examples/300-Gen-OwnGenerator.cpp b/examples/300-Gen-OwnGenerator.cpp\nindex 0cb80c2f..ec98a048 100644\n--- a/examples/300-Gen-OwnGenerator.cpp\n+++ b/examples/300-Gen-OwnGenerator.cpp\n@@ -10,6 +10,8 @@\n \n #include <random>\n \n+namespace {\n+\n // This class shows how to implement a simple generator for Catch tests\n class RandomIntGenerator : public Catch::Generators::IGenerator<int> {\n     std::minstd_rand m_rand;\n@@ -45,6 +47,8 @@ Catch::Generators::GeneratorWrapper<int> random(int low, int high) {\n     );\n }\n \n+} // end anonymous namespaces\n+\n // The two sections in this test case are equivalent, but the first one\n // is much more readable/nicer to use\n TEST_CASE(\"Generating random ints\", \"[example][generator]\") {\ndiff --git a/examples/301-Gen-MapTypeConversion.cpp b/examples/301-Gen-MapTypeConversion.cpp\nindex 56434a0d..425da347 100644\n--- a/examples/301-Gen-MapTypeConversion.cpp\n+++ b/examples/301-Gen-MapTypeConversion.cpp\n@@ -8,6 +8,8 @@\n #include <string>\n #include <sstream>\n \n+namespace {\n+\n // Returns a line from a stream. You could have it e.g. read lines from\n // a file, but to avoid problems with paths in examples, we will use\n // a fixed stringstream.\n@@ -42,6 +44,7 @@ Catch::Generators::GeneratorWrapper<std::string> lines(std::string /* ignored fo\n     );\n }\n \n+} // end anonymous namespace\n \n \n TEST_CASE(\"filter can convert types inside the generator expression\", \"[example][generator]\") {\ndiff --git a/tests/ExtraTests/X01-PrefixedMacros.cpp b/tests/ExtraTests/X01-PrefixedMacros.cpp\nindex 683b86ed..89f128b7 100644\n--- a/tests/ExtraTests/X01-PrefixedMacros.cpp\n+++ b/tests/ExtraTests/X01-PrefixedMacros.cpp\n@@ -11,11 +11,13 @@\n #include <type_traits>\n #include <stdexcept>\n \n-[[noreturn]]\n-void this_throws() {\n-    throw std::runtime_error(\"Some msg\");\n+namespace {\n+    [[noreturn]]\n+    void this_throws() {\n+        throw std::runtime_error(\"Some msg\");\n+    }\n+    void this_doesnt_throw() {}\n }\n-void this_doesnt_throw() {}\n \n CATCH_TEST_CASE(\"PrefixedMacros\") {\n     using namespace Catch::Matchers;\ndiff --git a/tests/ExtraTests/X11-DisableStringification.cpp b/tests/ExtraTests/X11-DisableStringification.cpp\nindex 79d4f6b4..0d84771d 100644\n--- a/tests/ExtraTests/X11-DisableStringification.cpp\n+++ b/tests/ExtraTests/X11-DisableStringification.cpp\n@@ -7,9 +7,11 @@\n #include <catch2/catch_default_main.hpp>\n #include <catch2/catch_test_macros.hpp>\n \n-struct Hidden {};\n+namespace {\n+    struct Hidden {};\n \n-bool operator==(Hidden, Hidden) { return true; }\n+    bool operator==(Hidden, Hidden) { return true; }\n+}\n \n TEST_CASE(\"DisableStringification\") {\n     REQUIRE( Hidden{} == Hidden{} );\n",
+    "commit_message": "Fix warnings in ExtraTests and Examples",
+    "xml_files": [
+      {
+        "file_name": "examples_010-TestCase_cpp",
+        "xml_path": "xml_outputs/Catch2/d1ffaf55a1653575a5a24da738ee777cdb85626f/examples_010-TestCase_cpp.xml"
+      },
+      {
+        "file_name": "examples_020-TestCase-2_cpp",
+        "xml_path": "xml_outputs/Catch2/d1ffaf55a1653575a5a24da738ee777cdb85626f/examples_020-TestCase-2_cpp.xml"
+      },
+      {
+        "file_name": "examples_030-Asn-Require-Check_cpp",
+        "xml_path": "xml_outputs/Catch2/d1ffaf55a1653575a5a24da738ee777cdb85626f/examples_030-Asn-Require-Check_cpp.xml"
+      },
+      {
+        "file_name": "examples_301-Gen-MapTypeConversion_cpp",
+        "xml_path": "xml_outputs/Catch2/d1ffaf55a1653575a5a24da738ee777cdb85626f/examples_301-Gen-MapTypeConversion_cpp.xml"
+      },
+      {
+        "file_name": "tests_ExtraTests_X01-PrefixedMacros_cpp",
+        "xml_path": "xml_outputs/Catch2/d1ffaf55a1653575a5a24da738ee777cdb85626f/tests_ExtraTests_X01-PrefixedMacros_cpp.xml"
+      },
+      {
+        "file_name": "tests_ExtraTests_X11-DisableStringification_cpp",
+        "xml_path": "xml_outputs/Catch2/d1ffaf55a1653575a5a24da738ee777cdb85626f/tests_ExtraTests_X11-DisableStringification_cpp.xml"
+      }
+    ]
+  },
+  {
+    "commit_id": "04f18d996ba7d71fda1d28662e2413c06c5e5a49",
+    "repo": "Catch2",
+    "diff": "diff --git a/src/catch2/benchmark/detail/catch_complete_invoke.cpp b/src/catch2/benchmark/detail/catch_complete_invoke.cpp\nindex c074f7a3..8fd43d12 100644\n--- a/src/catch2/benchmark/detail/catch_complete_invoke.cpp\n+++ b/src/catch2/benchmark/detail/catch_complete_invoke.cpp\n@@ -8,7 +8,10 @@\n namespace Catch {\n     namespace Benchmark {\n         namespace Detail {\n+            CATCH_INTERNAL_START_WARNINGS_SUPPRESSION\n+            CATCH_INTERNAL_SUPPRESS_GLOBALS_WARNINGS\n             const std::string benchmarkErrorMsg = \"a benchmark failed to run successfully\";\n+            CATCH_INTERNAL_STOP_WARNINGS_SUPPRESSION\n         } // namespace Detail\n     } // namespace Benchmark\n } // namespace Catch\n",
+    "commit_message": "Suppress global constructor warning in benchmarking",
+    "xml_files": [
+      {
+        "file_name": "src_catch2_benchmark_detail_catch_complete_invoke_cpp",
+        "xml_path": "xml_outputs/Catch2/04f18d996ba7d71fda1d28662e2413c06c5e5a49/src_catch2_benchmark_detail_catch_complete_invoke_cpp.xml"
+      }
+    ]
+  },
+  {
+    "commit_id": "17281c09c3f6ea3a04adfc12a651bcd97bcdc496",
+    "repo": "Catch2",
+    "diff": "diff --git a/examples/100-Fix-Section.cpp b/examples/100-Fix-Section.cpp\nindex d0b9f2da..6ec5ee80 100644\n--- a/examples/100-Fix-Section.cpp\n+++ b/examples/100-Fix-Section.cpp\n@@ -6,7 +6,8 @@\n \n // main() provided in 000-CatchMain.cpp\n \n-#include <catch2/catch.hpp>\n+#include <catch2/catch_test_macros.hpp>\n+#include <vector>\n \n TEST_CASE( \"vectors can be sized and resized\", \"[vector]\" ) {\n \ndiff --git a/examples/110-Fix-ClassFixture.cpp b/examples/110-Fix-ClassFixture.cpp\nindex e42fd175..38617a3b 100644\n--- a/examples/110-Fix-ClassFixture.cpp\n+++ b/examples/110-Fix-ClassFixture.cpp\n@@ -6,7 +6,7 @@\n \n // main() provided in 000-CatchMain.cpp\n \n-#include <catch2/catch.hpp>\n+#include <catch2/catch_test_macros.hpp>\n \n class DBConnection\n {\ndiff --git a/examples/210-Evt-EventListeners.cpp b/examples/210-Evt-EventListeners.cpp\nindex f9113197..4b9d6519 100644\n--- a/examples/210-Evt-EventListeners.cpp\n+++ b/examples/210-Evt-EventListeners.cpp\n@@ -10,7 +10,9 @@\n // Let Catch provide the required interfaces:\n #define CATCH_CONFIG_EXTERNAL_INTERFACES\n \n-#include <catch2/catch.hpp>\n+#include <catch2/catch_test_macros.hpp>\n+#include <catch2/reporters/catch_reporter_bases.hpp>\n+#include <catch2/catch_reporter_registrars.hpp>\n #include <iostream>\n \n // -----------------------------------------------------------------------\n@@ -306,7 +308,7 @@ char const * dashed_line =\n struct MyListener : Catch::TestEventListenerBase {\n \n     using TestEventListenerBase::TestEventListenerBase; // inherit constructor\n-    \n+\n     // Get rid of Wweak-tables\n     ~MyListener();\n \ndiff --git a/examples/231-Cfg-OutputStreams.cpp b/examples/231-Cfg-OutputStreams.cpp\nindex 8753fcf6..2e92ec80 100644\n--- a/examples/231-Cfg-OutputStreams.cpp\n+++ b/examples/231-Cfg-OutputStreams.cpp\n@@ -8,7 +8,7 @@\n \n #include <catch2/catch_default_main.hpp>\n \n-#include <catch2/catch.hpp>\n+#include <catch2/catch_test_macros.hpp>\n \n #include <sstream>\n #include <cstdio>\ndiff --git a/examples/300-Gen-OwnGenerator.cpp b/examples/300-Gen-OwnGenerator.cpp\nindex c8b6a65d..427d7b24 100644\n--- a/examples/300-Gen-OwnGenerator.cpp\n+++ b/examples/300-Gen-OwnGenerator.cpp\n@@ -4,7 +4,9 @@\n // Specifically we will implement a random number generator for integers\n // It will have infinite capacity and settable lower/upper bound\n \n-#include <catch2/catch.hpp>\n+#include <catch2/catch_test_macros.hpp>\n+#include <catch2/catch_generators.hpp>\n+#include <catch2/catch_generators_generic.hpp>\n \n #include <random>\n \ndiff --git a/examples/301-Gen-MapTypeConversion.cpp b/examples/301-Gen-MapTypeConversion.cpp\nindex 88772971..dee50822 100644\n--- a/examples/301-Gen-MapTypeConversion.cpp\n+++ b/examples/301-Gen-MapTypeConversion.cpp\n@@ -1,9 +1,9 @@\n // 301-Gen-MapTypeConversion.cpp\n // Shows how to use map to modify generator's return type.\n \n-// TODO\n \n-#include <catch2/catch.hpp>\n+#include <catch2/catch_test_macros.hpp>\n+#include <catch2/catch_generators_generic.hpp>\n \n #include <string>\n #include <sstream>\n@@ -23,7 +23,7 @@ public:\n     }\n \n     std::string const& get() const override;\n-    \n+\n     bool next() override {\n         return !!std::getline(m_stream, m_line);\n     }\n@@ -49,7 +49,7 @@ Catch::Generators::GeneratorWrapper<std::string> lines(std::string /* ignored fo\n TEST_CASE(\"filter can convert types inside the generator expression\", \"[example][generator]\") {\n     auto num = GENERATE(map<int>([](std::string const& line) { return std::stoi(line); },\n                                  lines(\"fake-file\")));\n-                                 \n+\n     REQUIRE(num > 0);\n }\n \ndiff --git a/examples/310-Gen-VariablesInGenerators.cpp b/examples/310-Gen-VariablesInGenerators.cpp\nindex 422815d2..3fb089e8 100644\n--- a/examples/310-Gen-VariablesInGenerators.cpp\n+++ b/examples/310-Gen-VariablesInGenerators.cpp\n@@ -6,7 +6,9 @@\n // _WILL_ outlive the variables -- thus they should be either captured\n // by value directly, or copied by the generators during construction.\n \n-#include <catch2/catch.hpp>\n+#include <catch2/catch_test_macros.hpp>\n+#include <catch2/catch_generators_generic.hpp>\n+#include <catch2/catch_generators_specific.hpp>\n \n TEST_CASE(\"Generate random doubles across different ranges\",\n           \"[generator][example][advanced]\") {\ndiff --git a/examples/311-Gen-CustomCapture.cpp b/examples/311-Gen-CustomCapture.cpp\nindex da6d686f..35de7afc 100644\n--- a/examples/311-Gen-CustomCapture.cpp\n+++ b/examples/311-Gen-CustomCapture.cpp\n@@ -9,7 +9,9 @@\n // per-variable custom capture list, this example shows how to achieve\n // that.\n \n-#include <catch2/catch.hpp>\n+#include <catch2/catch_test_macros.hpp>\n+#include <catch2/catch_generators_generic.hpp>\n+#include <catch2/catch_generators_specific.hpp>\n \n TEST_CASE(\"Generate random doubles across different ranges\",\n           \"[generator][example][advanced]\") {\n@@ -23,7 +25,7 @@ TEST_CASE(\"Generate random doubles across different ranges\",\n     }));\n \n     auto r2(r1);\n-    \n+\n     // This will take r1 by reference and r2 by value.\n     // Note that there are no advantages for doing so in this example,\n     // it is done only for expository purposes.\n",
+    "commit_message": "Convert examples to piecemeal includes",
+    "xml_files": [
+      {
+        "file_name": "examples_100-Fix-Section_cpp",
+        "xml_path": "xml_outputs/Catch2/17281c09c3f6ea3a04adfc12a651bcd97bcdc496/examples_100-Fix-Section_cpp.xml"
+      },
+      {
+        "file_name": "examples_110-Fix-ClassFixture_cpp",
+        "xml_path": "xml_outputs/Catch2/17281c09c3f6ea3a04adfc12a651bcd97bcdc496/examples_110-Fix-ClassFixture_cpp.xml"
+      },
+      {
+        "file_name": "examples_231-Cfg-OutputStreams_cpp",
+        "xml_path": "xml_outputs/Catch2/17281c09c3f6ea3a04adfc12a651bcd97bcdc496/examples_231-Cfg-OutputStreams_cpp.xml"
+      },
+      {
+        "file_name": "examples_300-Gen-OwnGenerator_cpp",
+        "xml_path": "xml_outputs/Catch2/17281c09c3f6ea3a04adfc12a651bcd97bcdc496/examples_300-Gen-OwnGenerator_cpp.xml"
+      },
+      {
+        "file_name": "examples_301-Gen-MapTypeConversion_cpp",
+        "xml_path": "xml_outputs/Catch2/17281c09c3f6ea3a04adfc12a651bcd97bcdc496/examples_301-Gen-MapTypeConversion_cpp.xml"
+      },
+      {
+        "file_name": "examples_310-Gen-VariablesInGenerators_cpp",
+        "xml_path": "xml_outputs/Catch2/17281c09c3f6ea3a04adfc12a651bcd97bcdc496/examples_310-Gen-VariablesInGenerators_cpp.xml"
+      },
+      {
+        "file_name": "examples_311-Gen-CustomCapture_cpp",
+        "xml_path": "xml_outputs/Catch2/17281c09c3f6ea3a04adfc12a651bcd97bcdc496/examples_311-Gen-CustomCapture_cpp.xml"
+      }
+    ]
+  },
+  {
+    "commit_id": "e2b3443fe7211f265c95f878d06d8fd4abf38f27",
+    "repo": "Catch2",
+    "diff": "diff --git a/include/internal/catch_assertionresult.cpp b/include/internal/catch_assertionresult.cpp\nindex 5da1cfdf..a116bffa 100644\n--- a/include/internal/catch_assertionresult.cpp\n+++ b/include/internal/catch_assertionresult.cpp\n@@ -61,7 +61,7 @@ namespace Catch {\n \n     std::string AssertionResult::getExpressionInMacro() const {\n         std::string expr;\n-        if( m_info.macroName[0] == 0 )\n+        if( m_info.macroName.empty() )\n             expr = static_cast<std::string>(m_info.capturedExpression);\n         else {\n             expr.reserve( m_info.macroName.size() + m_info.capturedExpression.size() + 4 );\n",
+    "commit_message": "Do not blindly access empty StringRefs",
+    "xml_files": [
+      {
+        "file_name": "include_internal_catch_assertionresult_cpp",
+        "xml_path": "xml_outputs/Catch2/e2b3443fe7211f265c95f878d06d8fd4abf38f27/include_internal_catch_assertionresult_cpp.xml"
+      }
+    ]
+  },
+  {
+    "commit_id": "14362533bb50596049f1b46bcc6d333208576a87",
+    "repo": "Catch2",
+    "diff": "diff --git a/include/internal/catch_assertionresult.cpp b/include/internal/catch_assertionresult.cpp\nindex 4ce07187..8f505d04 100644\n--- a/include/internal/catch_assertionresult.cpp\n+++ b/include/internal/catch_assertionresult.cpp\n@@ -45,7 +45,7 @@ namespace Catch {\n     }\n \n     bool AssertionResult::hasExpression() const {\n-        return m_info.capturedExpression[0] != 0;\n+        return !m_info.capturedExpression.empty();\n     }\n \n     bool AssertionResult::hasMessage() const {\n",
+    "commit_message": "Check for empty expression properly",
+    "xml_files": [
+      {
+        "file_name": "include_internal_catch_assertionresult_cpp",
+        "xml_path": "xml_outputs/Catch2/14362533bb50596049f1b46bcc6d333208576a87/include_internal_catch_assertionresult_cpp.xml"
+      }
+    ]
+  },
+  {
+    "commit_id": "a5bb3e3d911e5c43feb359f47848b7630d623338",
+    "repo": "Catch2",
+    "diff": "diff --git a/include/internal/catch_interfaces_config.cpp b/include/internal/catch_interfaces_config.cpp\nindex b6f5daa2..6617da69 100644\n--- a/include/internal/catch_interfaces_config.cpp\n+++ b/include/internal/catch_interfaces_config.cpp\n@@ -1,4 +1,4 @@\n-#include \"internal/catch_interfaces_config.h\"\n+#include \"catch_interfaces_config.h\"\n \n namespace Catch {\n     IConfig::~IConfig() = default;\ndiff --git a/include/internal/catch_interfaces_exception.cpp b/include/internal/catch_interfaces_exception.cpp\nindex 8494a2cc..705d8c87 100644\n--- a/include/internal/catch_interfaces_exception.cpp\n+++ b/include/internal/catch_interfaces_exception.cpp\n@@ -1,4 +1,4 @@\n-#include \"internal/catch_interfaces_exception.h\"\n+#include \"catch_interfaces_exception.h\"\n \n namespace Catch {\n     IExceptionTranslator::~IExceptionTranslator() = default;\ndiff --git a/include/internal/catch_interfaces_registry_hub.cpp b/include/internal/catch_interfaces_registry_hub.cpp\nindex bd5b8082..7a22d649 100644\n--- a/include/internal/catch_interfaces_registry_hub.cpp\n+++ b/include/internal/catch_interfaces_registry_hub.cpp\n@@ -1,4 +1,4 @@\n-#include \"internal/catch_interfaces_registry_hub.h\"\n+#include \"catch_interfaces_registry_hub.h\"\n \n namespace Catch {\n     IRegistryHub::~IRegistryHub() = default;\ndiff --git a/include/internal/catch_interfaces_runner.cpp b/include/internal/catch_interfaces_runner.cpp\nindex 2b052eb8..8d419a14 100644\n--- a/include/internal/catch_interfaces_runner.cpp\n+++ b/include/internal/catch_interfaces_runner.cpp\n@@ -1,4 +1,4 @@\n-#include \"internal/catch_interfaces_runner.h\"\n+#include \"catch_interfaces_runner.h\"\n \n namespace Catch {\n     IRunner::~IRunner() = default;\ndiff --git a/include/internal/catch_interfaces_testcase.cpp b/include/internal/catch_interfaces_testcase.cpp\nindex 35c3db08..9b35e034 100644\n--- a/include/internal/catch_interfaces_testcase.cpp\n+++ b/include/internal/catch_interfaces_testcase.cpp\n@@ -1,4 +1,4 @@\n-#include \"internal/catch_interfaces_testcase.h\"\n+#include \"catch_interfaces_testcase.h\"\n \n namespace Catch {\n     ITestInvoker::~ITestInvoker() = default;\ndiff --git a/include/reporters/catch_reporter_compact.cpp b/include/reporters/catch_reporter_compact.cpp\nindex 6101d6c5..017f521f 100644\n--- a/include/reporters/catch_reporter_compact.cpp\n+++ b/include/reporters/catch_reporter_compact.cpp\n@@ -8,7 +8,7 @@\n #include \"catch_reporter_compact.h\"\n \n #include \"../internal/catch_reporter_registrars.hpp\"\n-#include \"internal/catch_console_colour.h\"\n+#include \"../internal/catch_console_colour.h\"\n \n namespace {\n \ndiff --git a/include/reporters/catch_reporter_console.cpp b/include/reporters/catch_reporter_console.cpp\nindex 12092907..e38e34cf 100644\n--- a/include/reporters/catch_reporter_console.cpp\n+++ b/include/reporters/catch_reporter_console.cpp\n@@ -9,7 +9,7 @@\n #include \"catch_reporter_console.h\"\n \n #include \"../internal/catch_reporter_registrars.hpp\"\n-#include \"internal/catch_console_colour.h\"\n+#include \"../internal/catch_console_colour.h\"\n #include \"../internal/catch_version.h\"\n #include \"../internal/catch_text.h\"\n #include \"../internal/catch_stringref.h\"\n",
+    "commit_message": "Small updates to include directives (#1726)",
+    "xml_files": [
+      {
+        "file_name": "include_internal_catch_interfaces_config_cpp",
+        "xml_path": "xml_outputs/Catch2/a5bb3e3d911e5c43feb359f47848b7630d623338/include_internal_catch_interfaces_config_cpp.xml"
+      },
+      {
+        "file_name": "include_internal_catch_interfaces_exception_cpp",
+        "xml_path": "xml_outputs/Catch2/a5bb3e3d911e5c43feb359f47848b7630d623338/include_internal_catch_interfaces_exception_cpp.xml"
+      },
+      {
+        "file_name": "include_internal_catch_interfaces_registry_hub_cpp",
+        "xml_path": "xml_outputs/Catch2/a5bb3e3d911e5c43feb359f47848b7630d623338/include_internal_catch_interfaces_registry_hub_cpp.xml"
+      },
+      {
+        "file_name": "include_internal_catch_interfaces_runner_cpp",
+        "xml_path": "xml_outputs/Catch2/a5bb3e3d911e5c43feb359f47848b7630d623338/include_internal_catch_interfaces_runner_cpp.xml"
+      },
+      {
+        "file_name": "include_internal_catch_interfaces_testcase_cpp",
+        "xml_path": "xml_outputs/Catch2/a5bb3e3d911e5c43feb359f47848b7630d623338/include_internal_catch_interfaces_testcase_cpp.xml"
+      }
+    ]
+  },
+  {
+    "commit_id": "fbbaadb704fbff5dc49ee299df003a9532fe3d2f",
+    "repo": "Catch2",
+    "diff": "diff --git a/include/internal/catch_enum_values_registry.cpp b/include/internal/catch_enum_values_registry.cpp\nindex 9e6f2ecb..de8181fd 100644\n--- a/include/internal/catch_enum_values_registry.cpp\n+++ b/include/internal/catch_enum_values_registry.cpp\n@@ -36,7 +36,7 @@ namespace Catch {\n                 if( valueToName.first == value )\n                     return valueToName.second;\n             }\n-            return \"{** unexpected enum value **}\";\n+            return \"{** unexpected enum value **}\"_sr;\n         }\n \n         std::unique_ptr<EnumInfo> makeEnumInfo( StringRef enumName, StringRef allValueNames, std::vector<int> const& values ) {\n",
+    "commit_message": "Use StringRef literal for unknown enum values instead of string lit",
+    "xml_files": [
+      {
+        "file_name": "include_internal_catch_enum_values_registry_cpp",
+        "xml_path": "xml_outputs/Catch2/fbbaadb704fbff5dc49ee299df003a9532fe3d2f/include_internal_catch_enum_values_registry_cpp.xml"
+      }
+    ]
+  },
+  {
+    "commit_id": "46a70071a7c0cee6faba60016fbc6e1b3afb043a",
+    "repo": "Catch2",
+    "diff": "diff --git a/include/internal/catch_debug_console.cpp b/include/internal/catch_debug_console.cpp\nindex 26751c7e..5a99d422 100644\n--- a/include/internal/catch_debug_console.cpp\n+++ b/include/internal/catch_debug_console.cpp\n@@ -16,7 +16,7 @@\n \n     namespace Catch {\n         void writeToDebugConsole( std::string const& text ) {\n-            __android_log_print( ANDROID_LOG_DEBUG, \"Catch\", text.c_str() );\n+            __android_log_write( ANDROID_LOG_DEBUG, \"Catch\", text.c_str() );\n         }\n     }\n \n",
+    "commit_message": "Use __android_log_write instead of __android_log_print",
+    "xml_files": [
+      {
+        "file_name": "include_internal_catch_debug_console_cpp",
+        "xml_path": "xml_outputs/Catch2/46a70071a7c0cee6faba60016fbc6e1b3afb043a/include_internal_catch_debug_console_cpp.xml"
+      }
+    ]
+  },
+  {
+    "commit_id": "e5c0e3322dfd9410d94e151674b0e16b3073fbfe",
+    "repo": "Catch2",
+    "diff": "diff --git a/include/internal/catch_debug_console.cpp b/include/internal/catch_debug_console.cpp\nindex 5d25f651..26751c7e 100644\n--- a/include/internal/catch_debug_console.cpp\n+++ b/include/internal/catch_debug_console.cpp\n@@ -11,7 +11,16 @@\n #include \"catch_platform.h\"\n #include \"catch_windows_h_proxy.h\"\n \n-#ifdef CATCH_PLATFORM_WINDOWS\n+#if defined(__ANDROID__)\n+#include <android/log.h>\n+\n+    namespace Catch {\n+        void writeToDebugConsole( std::string const& text ) {\n+            __android_log_print( ANDROID_LOG_DEBUG, \"Catch\", text.c_str() );\n+        }\n+    }\n+\n+#elif defined(CATCH_PLATFORM_WINDOWS)\n \n     namespace Catch {\n         void writeToDebugConsole( std::string const& text ) {\n",
+    "commit_message": "Add Android implementation of writeToDebugConsole that prints to Logcat (#1710)",
+    "xml_files": [
+      {
+        "file_name": "include_internal_catch_debug_console_cpp",
+        "xml_path": "xml_outputs/Catch2/e5c0e3322dfd9410d94e151674b0e16b3073fbfe/include_internal_catch_debug_console_cpp.xml"
+      }
+    ]
+  },
+  {
+    "commit_id": "f45bb0035103aa676ab362c893675c462342de24",
+    "repo": "Catch2",
+    "diff": "diff --git a/projects/ExtraTests/X01-PrefixedMacros.cpp b/projects/ExtraTests/X01-PrefixedMacros.cpp\nindex 7671cbc4..3d2ab9c1 100644\n--- a/projects/ExtraTests/X01-PrefixedMacros.cpp\n+++ b/projects/ExtraTests/X01-PrefixedMacros.cpp\n@@ -48,6 +48,7 @@ CATCH_TEST_CASE(\"PrefixedMacros\") {\n     CATCH_CHECK_THAT(\"bdef\", Equals(\"bdef\"));\n \n     CATCH_INFO( \"some info\" );\n+    CATCH_UNSCOPED_INFO( \"some info\" );\n     CATCH_WARN( \"some warn\" );\n     CATCH_SECTION(\"some section\") {\n         int i = 1;\n",
+    "commit_message": "Add failing test for CATCH_UNSCOPED_CAPTURE",
+    "xml_files": [
+      {
+        "file_name": "projects_ExtraTests_X01-PrefixedMacros_cpp",
+        "xml_path": "xml_outputs/Catch2/f45bb0035103aa676ab362c893675c462342de24/projects_ExtraTests_X01-PrefixedMacros_cpp.xml"
+      }
+    ]
+  },
+  {
+    "commit_id": "d6fce7bf34cfeb34cdb6c3a69bb454aee98a4547",
+    "repo": "Catch2",
+    "diff": "diff --git a/include/internal/catch_approx.cpp b/include/internal/catch_approx.cpp\nindex a7d7111c..da7e4020 100644\n--- a/include/internal/catch_approx.cpp\n+++ b/include/internal/catch_approx.cpp\n@@ -55,18 +55,18 @@ namespace Detail {\n         return marginComparison(m_value, other, m_margin) || marginComparison(m_value, other, m_epsilon * (m_scale + std::fabs(m_value)));\n     }\n \n-    void Approx::setMargin(double margin) {\n-        CATCH_ENFORCE(margin >= 0,\n-            \"Invalid Approx::margin: \" << margin << '.'\n+    void Approx::setMargin(double newMargin) {\n+        CATCH_ENFORCE(newMargin >= 0,\n+            \"Invalid Approx::margin: \" << newMargin << '.'\n             << \" Approx::Margin has to be non-negative.\");\n-        m_margin = margin;\n+        m_margin = newMargin;\n     }\n \n-    void Approx::setEpsilon(double epsilon) {\n-        CATCH_ENFORCE(epsilon >= 0 && epsilon <= 1.0,\n-            \"Invalid Approx::epsilon: \" << epsilon << '.'\n+    void Approx::setEpsilon(double newEpsilon) {\n+        CATCH_ENFORCE(newEpsilon >= 0 && newEpsilon <= 1.0,\n+            \"Invalid Approx::epsilon: \" << newEpsilon << '.'\n             << \" Approx::epsilon has to be in [0, 1]\");\n-        m_epsilon = epsilon;\n+        m_epsilon = newEpsilon;\n     }\n \n } // end namespace Detail\ndiff --git a/projects/SelfTest/UsageTests/Message.tests.cpp b/projects/SelfTest/UsageTests/Message.tests.cpp\nindex 50992ceb..ccb7ac2f 100644\n--- a/projects/SelfTest/UsageTests/Message.tests.cpp\n+++ b/projects/SelfTest/UsageTests/Message.tests.cpp\n@@ -227,9 +227,9 @@ TEST_CASE( \"CAPTURE can deal with complex expressions\", \"[messages][capture]\" )\n \n template <typename T1, typename T2>\n struct helper_1436 {\n-    helper_1436(T1 t1, T2 t2):\n-        t1{ t1 },\n-        t2{ t2 }\n+    helper_1436(T1 t1_, T2 t2_):\n+        t1{ t1_ },\n+        t2{ t2_ }\n     {}\n     T1 t1;\n     T2 t2;\n",
+    "commit_message": "Fix warnings generated with -Wshadow",
+    "xml_files": [
+      {
+        "file_name": "include_internal_catch_approx_cpp",
+        "xml_path": "xml_outputs/Catch2/d6fce7bf34cfeb34cdb6c3a69bb454aee98a4547/include_internal_catch_approx_cpp.xml"
+      }
+    ]
+  },
+  {
+    "commit_id": "e99f1efd2899441429da55ba717b8abd20c2b53b",
+    "repo": "Catch2",
+    "diff": "diff --git a/include/internal/catch_config.cpp b/include/internal/catch_config.cpp\nindex e8ad2a81..d9ee9182 100644\n--- a/include/internal/catch_config.cpp\n+++ b/include/internal/catch_config.cpp\n@@ -16,10 +16,7 @@ namespace Catch {\n         m_stream( openStream() )\n     {\n         TestSpecParser parser(ITagAliasRegistry::get());\n-        if (data.testsOrTags.empty()) {\n-            parser.parse(\"~[.]\"); // All not hidden tests\n-        }\n-        else {\n+        if (!data.testsOrTags.empty()) {\n             m_hasTestFilters = true;\n             for( auto const& testOrTags : data.testsOrTags )\n                 parser.parse( testOrTags );\ndiff --git a/include/internal/catch_session.cpp b/include/internal/catch_session.cpp\nindex a5907e97..38b74ef7 100644\n--- a/include/internal/catch_session.cpp\n+++ b/include/internal/catch_session.cpp\n@@ -72,7 +72,10 @@ namespace Catch {\n \n             auto const& allTestCases = getAllTestCasesSorted(*config);\n             for (auto const& testCase : allTestCases) {\n-                if (!context.aborting() && matchTest(testCase, testSpec, *config))\n+                bool matching = (!testSpec.hasFilters() && !testCase.isHidden()) ||\n+                                 (testSpec.hasFilters() && matchTest(testCase, testSpec, *config));\n+\n+                if (!context.aborting() && matching)\n                     totals += context.runTest(testCase);\n                 else\n                     context.reporter().skipTest(testCase);\ndiff --git a/include/internal/catch_test_case_registry_impl.cpp b/include/internal/catch_test_case_registry_impl.cpp\nindex a6b7f570..a85d0edf 100644\n--- a/include/internal/catch_test_case_registry_impl.cpp\n+++ b/include/internal/catch_test_case_registry_impl.cpp\n@@ -54,9 +54,12 @@ namespace Catch {\n     std::vector<TestCase> filterTests( std::vector<TestCase> const& testCases, TestSpec const& testSpec, IConfig const& config ) {\n         std::vector<TestCase> filtered;\n         filtered.reserve( testCases.size() );\n-        for( auto const& testCase : testCases )\n-            if( matchTest( testCase, testSpec, config ) )\n-                filtered.push_back( testCase );\n+        for (auto const& testCase : testCases) {\n+            if ((!testSpec.hasFilters() && !testCase.isHidden()) ||\n+                (testSpec.hasFilters() && matchTest(testCase, testSpec, config))) {\n+                filtered.push_back(testCase);\n+            }\n+        }\n         return filtered;\n     }\n     std::vector<TestCase> const& getAllTestCasesSorted( IConfig const& config ) {\n",
+    "commit_message": "Avoid adding a default test spec when none was provided",
+    "xml_files": [
+      {
+        "file_name": "include_internal_catch_config_cpp",
+        "xml_path": "xml_outputs/Catch2/e99f1efd2899441429da55ba717b8abd20c2b53b/include_internal_catch_config_cpp.xml"
+      }
+    ]
+  },
+  {
+    "commit_id": "711d750ca7f6f7c5500acee0f5ca22247133d101",
+    "repo": "Catch2",
+    "diff": "diff --git a/include/reporters/catch_reporter_bases.cpp b/include/reporters/catch_reporter_bases.cpp\nindex fa441ee5..ce3553ed 100644\n--- a/include/reporters/catch_reporter_bases.cpp\n+++ b/include/reporters/catch_reporter_bases.cpp\n@@ -36,7 +36,7 @@ namespace Catch {\n #ifdef _MSC_VER\n         sprintf_s(buffer, \"%.3f\", duration);\n #else\n-        sprintf(buffer, \"%.3f\", duration);\n+        std::sprintf(buffer, \"%.3f\", duration);\n #endif\n         return std::string(buffer);\n     }\n",
+    "commit_message": "use \"std\" namespace for \"sprintf\"",
+    "xml_files": [
+      {
+        "file_name": "include_reporters_catch_reporter_bases_cpp",
+        "xml_path": "xml_outputs/Catch2/711d750ca7f6f7c5500acee0f5ca22247133d101/include_reporters_catch_reporter_bases_cpp.xml"
+      }
+    ]
+  },
+  {
+    "commit_id": "61f4c7ab857e9143ca380bcd0b0552e2fa6e1d9d",
+    "repo": "Catch2",
+    "diff": "diff --git a/projects/SelfTest/UsageTests/ToStringVariant.tests.cpp b/projects/SelfTest/UsageTests/ToStringVariant.tests.cpp\nindex 86475bd8..60b3f903 100644\n--- a/projects/SelfTest/UsageTests/ToStringVariant.tests.cpp\n+++ b/projects/SelfTest/UsageTests/ToStringVariant.tests.cpp\n@@ -65,10 +65,6 @@ TEST_CASE( \"variant<variant<float, int>, string>\", \"[toString][variant][approval\n     CHECK( \"0\" == ::Catch::Detail::stringify(type{0}) );\n     CHECK( \"\\\"foo\\\"\" == ::Catch::Detail::stringify(type{\"foo\"}) );\n \n-    struct sample {\n-        operator int() const { throw 42; }\n-    };\n-\n     SECTION(\"valueless nested variant\") {\n         type value = inner{0.5f};\n         REQUIRE( std::holds_alternative<inner>(value) );\n",
+    "commit_message": "Remove unused type from tests",
+    "xml_files": [
+      {
+        "file_name": "projects_SelfTest_UsageTests_ToStringVariant_tests_cpp",
+        "xml_path": "xml_outputs/Catch2/61f4c7ab857e9143ca380bcd0b0552e2fa6e1d9d/projects_SelfTest_UsageTests_ToStringVariant_tests_cpp.xml"
+      }
+    ]
+  },
+  {
+    "commit_id": "9bc15939a5cf7f0f6702bff218401acdc3b5d353",
+    "repo": "Catch2",
+    "diff": "diff --git a/include/internal/catch_exception_translator_registry.cpp b/include/internal/catch_exception_translator_registry.cpp\nindex b836cd9c..cef36e51 100644\n--- a/include/internal/catch_exception_translator_registry.cpp\n+++ b/include/internal/catch_exception_translator_registry.cpp\n@@ -67,17 +67,23 @@ namespace Catch {\n         }\n     }\n \n+    std::string ExceptionTranslatorRegistry::tryTranslators() const {\n+        if (m_translators.empty()) {\n+            std::rethrow_exception(std::current_exception());\n+        } else {\n+            return m_translators[0]->translate(m_translators.begin() + 1, m_translators.end());\n+        }\n+    }\n+\n #else // ^^ Exceptions are enabled // Exceptions are disabled vv\n     std::string ExceptionTranslatorRegistry::translateActiveException() const {\n         CATCH_INTERNAL_ERROR(\"Attempted to translate active exception under CATCH_CONFIG_DISABLE_EXCEPTIONS!\");\n     }\n-#endif\n-\n \n     std::string ExceptionTranslatorRegistry::tryTranslators() const {\n-        if( m_translators.empty() )\n-            std::rethrow_exception(std::current_exception());\n-        else\n-            return m_translators[0]->translate( m_translators.begin()+1, m_translators.end() );\n+        CATCH_INTERNAL_ERROR(\"Attempted to use exception translators under CATCH_CONFIG_DISABLE_EXCEPTIONS!\");\n     }\n+#endif\n+\n+\n }\n",
+    "commit_message": "Don't use exception-related std:: functions with -fno-exceptions",
+    "xml_files": [
+      {
+        "file_name": "include_internal_catch_exception_translator_registry_cpp",
+        "xml_path": "xml_outputs/Catch2/9bc15939a5cf7f0f6702bff218401acdc3b5d353/include_internal_catch_exception_translator_registry_cpp.xml"
+      }
+    ]
+  },
+  {
+    "commit_id": "b8553d62a3a98ac9d358d20b48cf99f775291557",
+    "repo": "Catch2",
+    "diff": "diff --git a/include/internal/catch_assertionhandler.cpp b/include/internal/catch_assertionhandler.cpp\nindex dd488c9c..28768077 100644\n--- a/include/internal/catch_assertionhandler.cpp\n+++ b/include/internal/catch_assertionhandler.cpp\n@@ -18,9 +18,11 @@\n \n namespace Catch {\n \n-    inline auto operator <<( std::ostream& os, ITransientExpression const& expr ) -> std::ostream& {\n-        expr.streamReconstructedExpression( os );\n-        return os;\n+    namespace {\n+        auto operator <<( std::ostream& os, ITransientExpression const& expr ) -> std::ostream& {\n+            expr.streamReconstructedExpression( os );\n+            return os;\n+        }\n     }\n \n     LazyExpression::LazyExpression( bool isNegated )\ndiff --git a/include/internal/catch_string_manip.cpp b/include/internal/catch_string_manip.cpp\nindex 68f54e01..904d1013 100644\n--- a/include/internal/catch_string_manip.cpp\n+++ b/include/internal/catch_string_manip.cpp\n@@ -14,6 +14,12 @@\n \n namespace Catch {\n \n+    namespace {\n+        char toLowerCh(char c) {\n+            return static_cast<char>( std::tolower( c ) );\n+        }\n+    }\n+\n     bool startsWith( std::string const& s, std::string const& prefix ) {\n         return s.size() >= prefix.size() && std::equal(prefix.begin(), prefix.end(), s.begin());\n     }\n@@ -29,9 +35,6 @@ namespace Catch {\n     bool contains( std::string const& s, std::string const& infix ) {\n         return s.find( infix ) != std::string::npos;\n     }\n-    inline char toLowerCh(char c) {\n-        return static_cast<char>( std::tolower( c ) );\n-    }\n     void toLowerInPlace( std::string& s ) {\n         std::transform( s.begin(), s.end(), s.begin(), toLowerCh );\n     }\ndiff --git a/include/internal/catch_test_case_info.cpp b/include/internal/catch_test_case_info.cpp\nindex 3fe5389e..536462d1 100644\n--- a/include/internal/catch_test_case_info.cpp\n+++ b/include/internal/catch_test_case_info.cpp\n@@ -19,31 +19,33 @@\n \n namespace Catch {\n \n-    inline TestCaseInfo::SpecialProperties parseSpecialTag( std::string const& tag ) {\n-        if( startsWith( tag, '.' ) ||\n-            tag == \"!hide\" )\n-            return TestCaseInfo::IsHidden;\n-        else if( tag == \"!throws\" )\n-            return TestCaseInfo::Throws;\n-        else if( tag == \"!shouldfail\" )\n-            return TestCaseInfo::ShouldFail;\n-        else if( tag == \"!mayfail\" )\n-            return TestCaseInfo::MayFail;\n-        else if( tag == \"!nonportable\" )\n-            return TestCaseInfo::NonPortable;\n-        else if( tag == \"!benchmark\" )\n-            return static_cast<TestCaseInfo::SpecialProperties>( TestCaseInfo::Benchmark | TestCaseInfo::IsHidden );\n-        else\n-            return TestCaseInfo::None;\n-    }\n-    inline bool isReservedTag( std::string const& tag ) {\n-        return parseSpecialTag( tag ) == TestCaseInfo::None && tag.size() > 0 && !std::isalnum( static_cast<unsigned char>(tag[0]) );\n-    }\n-    inline void enforceNotReservedTag( std::string const& tag, SourceLineInfo const& _lineInfo ) {\n-        CATCH_ENFORCE( !isReservedTag(tag),\n-                      \"Tag name: [\" << tag << \"] is not allowed.\\n\"\n-                      << \"Tag names starting with non alpha-numeric characters are reserved\\n\"\n-                      << _lineInfo );\n+    namespace {\n+        TestCaseInfo::SpecialProperties parseSpecialTag( std::string const& tag ) {\n+            if( startsWith( tag, '.' ) ||\n+                tag == \"!hide\" )\n+                return TestCaseInfo::IsHidden;\n+            else if( tag == \"!throws\" )\n+                return TestCaseInfo::Throws;\n+            else if( tag == \"!shouldfail\" )\n+                return TestCaseInfo::ShouldFail;\n+            else if( tag == \"!mayfail\" )\n+                return TestCaseInfo::MayFail;\n+            else if( tag == \"!nonportable\" )\n+                return TestCaseInfo::NonPortable;\n+            else if( tag == \"!benchmark\" )\n+                return static_cast<TestCaseInfo::SpecialProperties>( TestCaseInfo::Benchmark | TestCaseInfo::IsHidden );\n+            else\n+                return TestCaseInfo::None;\n+        }\n+        bool isReservedTag( std::string const& tag ) {\n+            return parseSpecialTag( tag ) == TestCaseInfo::None && tag.size() > 0 && !std::isalnum( static_cast<unsigned char>(tag[0]) );\n+        }\n+        void enforceNotReservedTag( std::string const& tag, SourceLineInfo const& _lineInfo ) {\n+            CATCH_ENFORCE( !isReservedTag(tag),\n+                          \"Tag name: [\" << tag << \"] is not allowed.\\n\"\n+                          << \"Tag names starting with non alpha-numeric characters are reserved\\n\"\n+                          << _lineInfo );\n+        }\n     }\n \n     TestCase makeTestCase(  ITestInvoker* _testCase,\ndiff --git a/include/internal/catch_timer.cpp b/include/internal/catch_timer.cpp\nindex 12c04865..d52c0085 100644\n--- a/include/internal/catch_timer.cpp\n+++ b/include/internal/catch_timer.cpp\n@@ -18,34 +18,36 @@ namespace Catch {\n         return std::chrono::duration_cast<std::chrono::nanoseconds>( std::chrono::high_resolution_clock::now().time_since_epoch() ).count();\n     }\n \n-    inline auto estimateClockResolution() -> uint64_t {\n-        uint64_t sum = 0;\n-        static const uint64_t iterations = 1000000;\n+    namespace {\n+        auto estimateClockResolution() -> uint64_t {\n+            uint64_t sum = 0;\n+            static const uint64_t iterations = 1000000;\n \n-        auto startTime = getCurrentNanosecondsSinceEpoch();\n+            auto startTime = getCurrentNanosecondsSinceEpoch();\n \n-        for( std::size_t i = 0; i < iterations; ++i ) {\n+            for( std::size_t i = 0; i < iterations; ++i ) {\n \n-            uint64_t ticks;\n-            uint64_t baseTicks = getCurrentNanosecondsSinceEpoch();\n-            do {\n-                ticks = getCurrentNanosecondsSinceEpoch();\n-            } while( ticks == baseTicks );\n+                uint64_t ticks;\n+                uint64_t baseTicks = getCurrentNanosecondsSinceEpoch();\n+                do {\n+                    ticks = getCurrentNanosecondsSinceEpoch();\n+                } while( ticks == baseTicks );\n \n-            auto delta = ticks - baseTicks;\n-            sum += delta;\n+                auto delta = ticks - baseTicks;\n+                sum += delta;\n \n-            // If we have been calibrating for over 3 seconds -- the clock\n-            // is terrible and we should move on.\n-            // TBD: How to signal that the measured resolution is probably wrong?\n-            if (ticks > startTime + 3 * nanosecondsInSecond) {\n-                return sum / i;\n+                // If we have been calibrating for over 3 seconds -- the clock\n+                // is terrible and we should move on.\n+                // TBD: How to signal that the measured resolution is probably wrong?\n+                if (ticks > startTime + 3 * nanosecondsInSecond) {\n+                    return sum / i;\n+                }\n             }\n-        }\n \n-        // We're just taking the mean, here. To do better we could take the std. dev and exclude outliers\n-        // - and potentially do more iterations if there's a high variance.\n-        return sum/iterations;\n+            // We're just taking the mean, here. To do better we could take the std. dev and exclude outliers\n+            // - and potentially do more iterations if there's a high variance.\n+            return sum/iterations;\n+        }\n     }\n     auto getEstimatedClockResolution() -> uint64_t {\n         static auto s_resolution = estimateClockResolution();\n",
+    "commit_message": "Moved inline functions in cpp files into anon namespaces",
+    "xml_files": [
+      {
+        "file_name": "include_internal_catch_string_manip_cpp",
+        "xml_path": "xml_outputs/Catch2/b8553d62a3a98ac9d358d20b48cf99f775291557/include_internal_catch_string_manip_cpp.xml"
+      }
+    ]
+  },
+  {
+    "commit_id": "931441251e8975a0e67dd94fa369cf310ac54602",
+    "repo": "Catch2",
+    "diff": "diff --git a/include/internal/catch_timer.cpp b/include/internal/catch_timer.cpp\nindex b9ae6887..6786efb0 100644\n--- a/include/internal/catch_timer.cpp\n+++ b/include/internal/catch_timer.cpp\n@@ -10,6 +10,8 @@\n \n #include <chrono>\n \n+static const uint64_t nanosecondsInSecond = 1000000000;\n+\n namespace Catch {\n \n     auto getCurrentNanosecondsSinceEpoch() -> uint64_t {\n@@ -20,17 +22,25 @@ namespace Catch {\n         uint64_t sum = 0;\n         static const uint64_t iterations = 1000000;\n \n+        auto startTime = getCurrentNanosecondsSinceEpoch();\n+\n         for( std::size_t i = 0; i < iterations; ++i ) {\n \n             uint64_t ticks;\n             uint64_t baseTicks = getCurrentNanosecondsSinceEpoch();\n             do {\n                 ticks = getCurrentNanosecondsSinceEpoch();\n-            }\n-            while( ticks == baseTicks );\n+            } while( ticks == baseTicks );\n \n             auto delta = ticks - baseTicks;\n             sum += delta;\n+\n+            // If we have been calibrating for over 3 seconds -- the clock\n+            // is terrible and we should move on.\n+            // TBD: How to signal that the measured resolution is probably wrong?\n+            if (ticks > startTime + 3 * nanosecondsInSecond) {\n+                return sum / i;\n+            }\n         }\n \n         // We're just taking the mean, here. To do better we could take the std. dev and exclude outliers\n",
+    "commit_message": "Add an early bailout out of benchmark timer calibration",
+    "xml_files": [
+      {
+        "file_name": "include_internal_catch_timer_cpp",
+        "xml_path": "xml_outputs/Catch2/931441251e8975a0e67dd94fa369cf310ac54602/include_internal_catch_timer_cpp.xml"
+      }
+    ]
+  },
+  {
+    "commit_id": "a1aefce6e45f30d292dc82a8e1b16c025219985c",
+    "repo": "Catch2",
+    "diff": "diff --git a/include/internal/catch_exception_translator_registry.cpp b/include/internal/catch_exception_translator_registry.cpp\nindex 77f74a88..78b9c573 100644\n--- a/include/internal/catch_exception_translator_registry.cpp\n+++ b/include/internal/catch_exception_translator_registry.cpp\n@@ -33,6 +33,17 @@ namespace Catch {\n                 return Catch::Detail::stringify( [exception description] );\n             }\n #else\n+            // Compiling a mixed mode project with MSVC means that CLR\n+            // exceptions will be caught in (...) as well. However, these\n+            // do not fill-in std::current_exception and thus lead to crash\n+            // when attempting rethrow.\n+            // /EHa switch also causes structured exceptions to be caught\n+            // here, but they fill-in current_exception properly, so\n+            // at worst the output should be a little weird, instead of\n+            // causing a crash.\n+            if (std::current_exception() == nullptr) {\n+                return \"Non C++ exception. Possibly a CLR exception.\";\n+            }\n             return tryTranslators();\n #endif\n         }\n",
+    "commit_message": "Guard against CLR exceptions when translating exceptions",
+    "xml_files": [
+      {
+        "file_name": "include_internal_catch_exception_translator_registry_cpp",
+        "xml_path": "xml_outputs/Catch2/a1aefce6e45f30d292dc82a8e1b16c025219985c/include_internal_catch_exception_translator_registry_cpp.xml"
+      }
+    ]
+  },
+  {
+    "commit_id": "347be871265c7780bc2573e838a41a767c6e1f67",
+    "repo": "Catch2",
+    "diff": "diff --git a/include/internal/catch_timer.cpp b/include/internal/catch_timer.cpp\nindex 0057cc39..b9ae6887 100644\n--- a/include/internal/catch_timer.cpp\n+++ b/include/internal/catch_timer.cpp\n@@ -9,7 +9,6 @@\n #include \"catch_timer.h\"\n \n #include <chrono>\n-#include <iostream>\n \n namespace Catch {\n \n",
+    "commit_message": "Removed debug code accidentally left in previous commit",
+    "xml_files": [
+      {
+        "file_name": "include_internal_catch_timer_cpp",
+        "xml_path": "xml_outputs/Catch2/347be871265c7780bc2573e838a41a767c6e1f67/include_internal_catch_timer_cpp.xml"
+      }
+    ]
+  },
+  {
+    "commit_id": "c4d1aa90337300a8c7646b3f28b0a6783eec5a8f",
+    "repo": "Catch2",
+    "diff": "diff --git a/include/internal/catch_message.cpp b/include/internal/catch_message.cpp\nindex a66c5271..513c1776 100644\n--- a/include/internal/catch_message.cpp\n+++ b/include/internal/catch_message.cpp\n@@ -49,11 +49,18 @@ namespace Catch {\n         getResultCapture().pushScopedMessage( m_info );\n     }\n \n+#if defined(_MSC_VER)\n+#pragma warning(push)\n+#pragma warning(disable:4996) // std::uncaught_exception is deprecated in C++17\n+#endif\n     ScopedMessage::~ScopedMessage() {\n         if ( !std::uncaught_exception() ){\n             getResultCapture().popScopedMessage(m_info);\n         }\n     }\n+#if defined(_MSC_VER)\n+#pragma warning(pop)\n+#endif\n \n \n } // end namespace Catch\n",
+    "commit_message": "Fix std::uncaught_exception deprecation warning in ~ScopedMessage",
+    "xml_files": [
+      {
+        "file_name": "include_internal_catch_message_cpp",
+        "xml_path": "xml_outputs/Catch2/c4d1aa90337300a8c7646b3f28b0a6783eec5a8f/include_internal_catch_message_cpp.xml"
+      }
+    ]
+  },
+  {
+    "commit_id": "c411c131cb60a94b05147c3c55e8d22ca3d3d3b1",
+    "repo": "Catch2",
+    "diff": "diff --git a/include/internal/catch_leak_detector.cpp b/include/internal/catch_leak_detector.cpp\nindex 32109310..36aba6ab 100644\n--- a/include/internal/catch_leak_detector.cpp\n+++ b/include/internal/catch_leak_detector.cpp\n@@ -8,11 +8,11 @@\n  #include \"catch_leak_detector.h\"\n \n \n-namespace Catch {\n-\n #ifdef CATCH_CONFIG_WINDOWS_CRTDBG\n #include <crtdbg.h>\n \n+namespace Catch {\n+\n \tLeakDetector::LeakDetector() {\n \t\tint flag = _CrtSetDbgFlag(_CRTDBG_REPORT_FLAG);\n \t\tflag |= _CRTDBG_LEAK_CHECK_DF;\n@@ -23,11 +23,10 @@ namespace Catch {\n \t\t// Change this to leaking allocation's number to break there\n \t\t_CrtSetBreakAlloc(-1);\n \t}\n+}\n \n #else\n \n-    LeakDetector::LeakDetector(){}\n+    Catch::LeakDetector::LeakDetector() {}\n \n #endif\n-\n-}\n",
+    "commit_message": "Move crtdbg.h include outside namespace",
+    "xml_files": [
+      {
+        "file_name": "include_internal_catch_leak_detector_cpp",
+        "xml_path": "xml_outputs/Catch2/c411c131cb60a94b05147c3c55e8d22ca3d3d3b1/include_internal_catch_leak_detector_cpp.xml"
+      }
+    ]
+  },
+  {
+    "commit_id": "a06b6dc3ea58167e8ebd4cb8ebaa1391d6027a4d",
+    "repo": "Catch2",
+    "diff": "diff --git a/include/internal/catch_assertionresult.cpp b/include/internal/catch_assertionresult.cpp\nindex 44151043..ec32c664 100644\n--- a/include/internal/catch_assertionresult.cpp\n+++ b/include/internal/catch_assertionresult.cpp\n@@ -54,7 +54,7 @@ namespace Catch {\n \n     std::string AssertionResult::getExpression() const {\n         if( isFalseTest( m_info.resultDisposition ) )\n-            return \"!(\" + std::string(m_info.capturedExpression) + \")\";\n+            return \"!(\" + m_info.capturedExpression + \")\";\n         else\n             return m_info.capturedExpression;\n     }\n@@ -65,9 +65,9 @@ namespace Catch {\n             expr = m_info.capturedExpression;\n         else {\n             expr.reserve( m_info.macroName.size() + m_info.capturedExpression.size() + 4 );\n-            expr += m_info.macroName;\n+            expr += m_info.macroName.c_str();\n             expr += \"( \";\n-            expr += m_info.capturedExpression;\n+            expr += m_info.capturedExpression.c_str();\n             expr += \" )\";\n         }\n         return expr;\n",
+    "commit_message": "Remove pointless StringRef -> std::string conversions",
+    "xml_files": [
+      {
+        "file_name": "include_internal_catch_assertionresult_cpp",
+        "xml_path": "xml_outputs/Catch2/a06b6dc3ea58167e8ebd4cb8ebaa1391d6027a4d/include_internal_catch_assertionresult_cpp.xml"
+      }
+    ]
+  },
+  {
+    "commit_id": "b9ff7ec301a6b47cb02a0021b1ab773226fbf17b",
+    "repo": "Catch2",
+    "diff": "diff --git a/include/internal/catch_exception_translator_registry.cpp b/include/internal/catch_exception_translator_registry.cpp\nindex 98b92316..ce45194b 100644\n--- a/include/internal/catch_exception_translator_registry.cpp\n+++ b/include/internal/catch_exception_translator_registry.cpp\n@@ -30,7 +30,7 @@ namespace Catch {\n                 return tryTranslators();\n             }\n             @catch (NSException *exception) {\n-                return Catch::toString( [exception description] );\n+                return Catch::Detail::stringify( [exception description] );\n             }\n #else\n             return tryTranslators();\ndiff --git a/include/reporters/catch_reporter_console.cpp b/include/reporters/catch_reporter_console.cpp\nindex 12ba72ec..31a46bd9 100644\n--- a/include/reporters/catch_reporter_console.cpp\n+++ b/include/reporters/catch_reporter_console.cpp\n@@ -17,178 +17,178 @@\n #include <cfloat>\n #include <cstdio>\n \n-namespace {\n-    std::size_t makeRatio( std::size_t number, std::size_t total ) {\n-        std::size_t ratio = total > 0 ? CATCH_CONFIG_CONSOLE_WIDTH * number/ total : 0;\n-        return ( ratio == 0 && number > 0 ) ? 1 : ratio;\n-    }\n-\n-    std::size_t& findMax( std::size_t& i, std::size_t& j, std::size_t& k ) {\n-        if( i > j && i > k )\n-            return i;\n-        else if( j > k )\n-            return j;\n-        else\n-            return k;\n-    }\n-\n-    struct ColumnInfo {\n-        enum Justification { Left, Right };\n-        std::string name;\n-        int width;\n-        Justification justification;\n-    };\n-    struct ColumnBreak {};\n-    struct RowBreak {};\n-\n-    class TablePrinter {\n-        std::ostream& m_os;\n-        std::vector<ColumnInfo> m_columnInfos;\n-        std::ostringstream m_oss;\n-        int m_currentColumn = -1;\n-        bool m_isOpen = false;\n-\n-    public:\n-        TablePrinter( std::ostream& os, std::vector<ColumnInfo> const& columnInfos )\n-        :   m_os( os ),\n-            m_columnInfos( columnInfos )\n-        {}\n+namespace Catch {\n \n-        auto columnInfos() const -> std::vector<ColumnInfo> const& {\n-            return m_columnInfos;\n+    namespace {\n+        std::size_t makeRatio( std::size_t number, std::size_t total ) {\n+            std::size_t ratio = total > 0 ? CATCH_CONFIG_CONSOLE_WIDTH * number/ total : 0;\n+            return ( ratio == 0 && number > 0 ) ? 1 : ratio;\n         }\n \n-        void open() {\n-            if( !m_isOpen ) {\n-                m_isOpen = true;\n-                *this << RowBreak();\n-                for( auto const& info : m_columnInfos )\n-                    *this << info.name << ColumnBreak();\n-                *this << RowBreak();\n-                m_os << Catch::getLineOfChars<'-'>() << \"\\n\";\n-            }\n-        }\n-        void close() {\n-            if( m_isOpen ) {\n-                *this << RowBreak();\n-                m_os << std::endl;\n-                m_isOpen = false;\n-            }\n+        std::size_t& findMax( std::size_t& i, std::size_t& j, std::size_t& k ) {\n+            if( i > j && i > k )\n+                return i;\n+            else if( j > k )\n+                return j;\n+            else\n+                return k;\n         }\n \n-        template<typename T>\n-        friend TablePrinter& operator << ( TablePrinter& tp, T const& value ) {\n-            tp.m_oss << value;\n-            return tp;\n-        }\n+        struct ColumnInfo {\n+            enum Justification { Left, Right };\n+            std::string name;\n+            int width;\n+            Justification justification;\n+        };\n+        struct ColumnBreak {};\n+        struct RowBreak {};\n \n-        friend TablePrinter& operator << ( TablePrinter& tp, ColumnBreak ) {\n-            auto colStr = tp.m_oss.str();\n-            // This takes account of utf8 encodings\n-            auto strSize = Catch::StringRef( colStr ).numberOfCharacters();\n-            tp.m_oss.str(\"\");\n-            tp.open();\n-            if( tp.m_currentColumn == static_cast<int>(tp.m_columnInfos.size()-1) ) {\n-                tp.m_currentColumn = -1;\n-                tp.m_os << \"\\n\";\n-            }\n-            tp.m_currentColumn++;\n-\n-            auto colInfo = tp.m_columnInfos[tp.m_currentColumn];\n-            auto padding = ( strSize+2 < static_cast<std::size_t>( colInfo.width ) )\n-                ? std::string( colInfo.width-(strSize+2), ' ' )\n-                : std::string();\n-            if( colInfo.justification == ColumnInfo::Left )\n-                tp.m_os << colStr << padding << \" \";\n-            else\n-                tp.m_os << padding << colStr << \" \";\n-            return tp;\n-        }\n+        class TablePrinter {\n+            std::ostream& m_os;\n+            std::vector<ColumnInfo> m_columnInfos;\n+            std::ostringstream m_oss;\n+            int m_currentColumn = -1;\n+            bool m_isOpen = false;\n+\n+        public:\n+            TablePrinter( std::ostream& os, std::vector<ColumnInfo> const& columnInfos )\n+            :   m_os( os ),\n+                m_columnInfos( columnInfos )\n+            {}\n \n-        friend TablePrinter& operator << ( TablePrinter& tp, RowBreak ) {\n-            if( tp.m_currentColumn > 0 ) {\n-                tp.m_os << \"\\n\";\n-                tp.m_currentColumn = -1;\n+            auto columnInfos() const -> std::vector<ColumnInfo> const& {\n+                return m_columnInfos;\n             }\n-            return tp;\n-        }\n-    };\n \n-    class Duration {\n-        enum class Unit {\n-            Auto,\n-            Nanoseconds,\n-            Microseconds,\n-            Milliseconds,\n-            Seconds,\n-            Minutes\n-        };\n-        static const uint64_t s_nanosecondsInAMicrosecond = 1000;\n-        static const uint64_t s_nanosecondsInAMillisecond = 1000*s_nanosecondsInAMicrosecond;\n-        static const uint64_t s_nanosecondsInASecond = 1000*s_nanosecondsInAMillisecond;\n-        static const uint64_t s_nanosecondsInAMinute = 60*s_nanosecondsInASecond;\n-\n-        uint64_t m_inNanoseconds;\n-        Unit m_units;\n-\n-    public:\n-        Duration( uint64_t inNanoseconds, Unit units = Unit::Auto )\n-        :   m_inNanoseconds( inNanoseconds ),\n-            m_units( units )\n-        {\n-            if( m_units == Unit::Auto ) {\n-                if( m_inNanoseconds < s_nanosecondsInAMicrosecond )\n-                    m_units = Unit::Nanoseconds;\n-                else if( m_inNanoseconds < s_nanosecondsInAMillisecond )\n-                    m_units = Unit::Microseconds;\n-                else if( m_inNanoseconds < s_nanosecondsInASecond )\n-                    m_units = Unit::Milliseconds;\n-                else if( m_inNanoseconds < s_nanosecondsInAMinute )\n-                    m_units = Unit::Seconds;\n-                else\n-                    m_units = Unit::Minutes;\n+            void open() {\n+                if( !m_isOpen ) {\n+                    m_isOpen = true;\n+                    *this << RowBreak();\n+                    for( auto const& info : m_columnInfos )\n+                        *this << info.name << ColumnBreak();\n+                    *this << RowBreak();\n+                    m_os << Catch::getLineOfChars<'-'>() << \"\\n\";\n+                }\n+            }\n+            void close() {\n+                if( m_isOpen ) {\n+                    *this << RowBreak();\n+                    m_os << std::endl;\n+                    m_isOpen = false;\n+                }\n             }\n \n-        }\n+            template<typename T>\n+            friend TablePrinter& operator << ( TablePrinter& tp, T const& value ) {\n+                tp.m_oss << value;\n+                return tp;\n+            }\n \n-        auto value() const -> double {\n-            switch( m_units ) {\n-                case Unit::Microseconds:\n-                    return m_inNanoseconds / static_cast<double>( s_nanosecondsInAMicrosecond );\n-                case Unit::Milliseconds:\n-                    return m_inNanoseconds / static_cast<double>( s_nanosecondsInAMillisecond );\n-                case Unit::Seconds:\n-                    return m_inNanoseconds / static_cast<double>( s_nanosecondsInASecond );\n-                case Unit::Minutes:\n-                    return m_inNanoseconds / static_cast<double>( s_nanosecondsInAMinute );\n-                default:\n-                    return static_cast<double>( m_inNanoseconds );\n+            friend TablePrinter& operator << ( TablePrinter& tp, ColumnBreak ) {\n+                auto colStr = tp.m_oss.str();\n+                // This takes account of utf8 encodings\n+                auto strSize = Catch::StringRef( colStr ).numberOfCharacters();\n+                tp.m_oss.str(\"\");\n+                tp.open();\n+                if( tp.m_currentColumn == static_cast<int>(tp.m_columnInfos.size()-1) ) {\n+                    tp.m_currentColumn = -1;\n+                    tp.m_os << \"\\n\";\n+                }\n+                tp.m_currentColumn++;\n+\n+                auto colInfo = tp.m_columnInfos[tp.m_currentColumn];\n+                auto padding = ( strSize+2 < static_cast<std::size_t>( colInfo.width ) )\n+                    ? std::string( colInfo.width-(strSize+2), ' ' )\n+                    : std::string();\n+                if( colInfo.justification == ColumnInfo::Left )\n+                    tp.m_os << colStr << padding << \" \";\n+                else\n+                    tp.m_os << padding << colStr << \" \";\n+                return tp;\n             }\n-        }\n-        auto unitsAsString() const -> std::string {\n-            switch( m_units ) {\n-                case Unit::Nanoseconds:\n-                    return \"ns\";\n-                case Unit::Microseconds:\n-                    return \"µs\";\n-                case Unit::Milliseconds:\n-                    return \"ms\";\n-                case Unit::Seconds:\n-                    return \"s\";\n-                case Unit::Minutes:\n-                    return \"m\";\n-                default:\n-                    return \"** internal error **\";\n+\n+            friend TablePrinter& operator << ( TablePrinter& tp, RowBreak ) {\n+                if( tp.m_currentColumn > 0 ) {\n+                    tp.m_os << \"\\n\";\n+                    tp.m_currentColumn = -1;\n+                }\n+                return tp;\n             }\n+        };\n \n-        }\n-        friend auto operator << ( std::ostream& os, Duration const& duration ) -> std::ostream& {\n-            return os << duration.value() << \" \" << duration.unitsAsString();\n-        }\n-    };\n-}\n+        class Duration {\n+            enum class Unit {\n+                Auto,\n+                Nanoseconds,\n+                Microseconds,\n+                Milliseconds,\n+                Seconds,\n+                Minutes\n+            };\n+            static const uint64_t s_nanosecondsInAMicrosecond = 1000;\n+            static const uint64_t s_nanosecondsInAMillisecond = 1000*s_nanosecondsInAMicrosecond;\n+            static const uint64_t s_nanosecondsInASecond = 1000*s_nanosecondsInAMillisecond;\n+            static const uint64_t s_nanosecondsInAMinute = 60*s_nanosecondsInASecond;\n+\n+            uint64_t m_inNanoseconds;\n+            Unit m_units;\n \n-namespace Catch {\n+        public:\n+            Duration( uint64_t inNanoseconds, Unit units = Unit::Auto )\n+            :   m_inNanoseconds( inNanoseconds ),\n+                m_units( units )\n+            {\n+                if( m_units == Unit::Auto ) {\n+                    if( m_inNanoseconds < s_nanosecondsInAMicrosecond )\n+                        m_units = Unit::Nanoseconds;\n+                    else if( m_inNanoseconds < s_nanosecondsInAMillisecond )\n+                        m_units = Unit::Microseconds;\n+                    else if( m_inNanoseconds < s_nanosecondsInASecond )\n+                        m_units = Unit::Milliseconds;\n+                    else if( m_inNanoseconds < s_nanosecondsInAMinute )\n+                        m_units = Unit::Seconds;\n+                    else\n+                        m_units = Unit::Minutes;\n+                }\n+\n+            }\n+\n+            auto value() const -> double {\n+                switch( m_units ) {\n+                    case Unit::Microseconds:\n+                        return m_inNanoseconds / static_cast<double>( s_nanosecondsInAMicrosecond );\n+                    case Unit::Milliseconds:\n+                        return m_inNanoseconds / static_cast<double>( s_nanosecondsInAMillisecond );\n+                    case Unit::Seconds:\n+                        return m_inNanoseconds / static_cast<double>( s_nanosecondsInASecond );\n+                    case Unit::Minutes:\n+                        return m_inNanoseconds / static_cast<double>( s_nanosecondsInAMinute );\n+                    default:\n+                        return static_cast<double>( m_inNanoseconds );\n+                }\n+            }\n+            auto unitsAsString() const -> std::string {\n+                switch( m_units ) {\n+                    case Unit::Nanoseconds:\n+                        return \"ns\";\n+                    case Unit::Microseconds:\n+                        return \"µs\";\n+                    case Unit::Milliseconds:\n+                        return \"ms\";\n+                    case Unit::Seconds:\n+                        return \"s\";\n+                    case Unit::Minutes:\n+                        return \"m\";\n+                    default:\n+                        return \"** internal error **\";\n+                }\n+\n+            }\n+            friend auto operator << ( std::ostream& os, Duration const& duration ) -> std::ostream& {\n+                return os << duration.value() << \" \" << duration.unitsAsString();\n+            }\n+        };\n+    } // end anon namespace\n \n     struct ConsoleReporter : StreamingReporterBase<ConsoleReporter> {\n         TablePrinter m_tablePrinter;\n",
+    "commit_message": "Fixed issues for ObjC use (see #1011)",
+    "xml_files": [
+      {
+        "file_name": "include_internal_catch_exception_translator_registry_cpp",
+        "xml_path": "xml_outputs/Catch2/b9ff7ec301a6b47cb02a0021b1ab773226fbf17b/include_internal_catch_exception_translator_registry_cpp.xml"
+      }
+    ]
+  },
+  {
+    "commit_id": "be067bce37f669d022bc6843a2fbe00a4446462e",
+    "repo": "Catch2",
+    "diff": "diff --git a/include/reporters/catch_reporter_multi.cpp b/include/reporters/catch_reporter_multi.cpp\nindex b21672c3..017b628d 100644\n--- a/include/reporters/catch_reporter_multi.cpp\n+++ b/include/reporters/catch_reporter_multi.cpp\n@@ -7,7 +7,7 @@\n  */\n \n  #include \"catch_reporter_multi.h\"\n- \n+\n namespace Catch {\n \n     void MultipleReporters::add( IStreamingReporterPtr&& reporter ) {\n@@ -19,10 +19,10 @@ namespace Catch {\n     }\n \n     std::set<Verbosity> MultipleReporters::getSupportedVerbosities() {\n-        return { };\n+        return std::set<Verbosity>{ };\n     }\n \n-    \n+\n     void MultipleReporters::noMatchingTestCases( std::string const& spec ) {\n         for( auto const& reporter : m_reporters )\n             reporter->noMatchingTestCases( spec );\n",
+    "commit_message": "Explicit ctor used to fix compilation failures caused by copy initialization.",
+    "xml_files": [
+      {
+        "file_name": "include_reporters_catch_reporter_multi_cpp",
+        "xml_path": "xml_outputs/Catch2/be067bce37f669d022bc6843a2fbe00a4446462e/include_reporters_catch_reporter_multi_cpp.xml"
+      }
+    ]
+  },
+  {
+    "commit_id": "0545de0a31c0691f978f858f3b5b875c6469fb35",
+    "repo": "Catch2",
+    "diff": "diff --git a/include/internal/catch_capture_matchers.cpp b/include/internal/catch_capture_matchers.cpp\nindex 8c30a154..758177e9 100644\n--- a/include/internal/catch_capture_matchers.cpp\n+++ b/include/internal/catch_capture_matchers.cpp\n@@ -16,7 +16,8 @@ namespace Catch {\n     // There is another overload, in catch_assertinhandler.h/.cpp, that only takes a string and infers\n     // the Equals matcher (so the header does not mention matchers)\n     void handleExceptionMatchExpr( AssertionHandler& handler, StringMatcher const& matcher, StringRef matcherString  ) {\n-        MatchExpr<std::string, StringMatcher const&> expr( Catch::translateActiveException(), matcher, matcherString );\n+        std::string exceptionMessage = Catch::translateActiveException();\n+        MatchExpr<std::string, StringMatcher const&> expr( exceptionMessage, matcher, matcherString );\n         handler.handle( expr );\n     }\n \n",
+    "commit_message": "Hold translated exception in local string while matching",
+    "xml_files": [
+      {
+        "file_name": "include_internal_catch_capture_matchers_cpp",
+        "xml_path": "xml_outputs/Catch2/0545de0a31c0691f978f858f3b5b875c6469fb35/include_internal_catch_capture_matchers_cpp.xml"
+      }
+    ]
+  },
+  {
+    "commit_id": "d7f754dc4934efb898e6d70e66d19302cf9a5a4b",
+    "repo": "Catch2",
+    "diff": "diff --git a/projects/SelfTest/CompilationTests.cpp b/projects/SelfTest/CompilationTests.cpp\nindex 3298c79e..e6c31f65 100644\n--- a/projects/SelfTest/CompilationTests.cpp\n+++ b/projects/SelfTest/CompilationTests.cpp\n@@ -41,7 +41,7 @@ bool templated_tests(T t) {\n     REQUIRE(a == t);\n     CHECK(a == t);\n     REQUIRE_THROWS(throws_int(true));\n-    CHECK_THROWS_AS(throws_int(true), const int&);\n+    CHECK_THROWS_AS(throws_int(true), int);\n     REQUIRE_NOTHROW(throws_int(false));\n     REQUIRE_THAT(\"aaa\", Catch::EndsWith(\"aaa\"));\n     return true;\ndiff --git a/projects/SelfTest/MatchersTests.cpp b/projects/SelfTest/MatchersTests.cpp\nindex 5984eb3a..a4f8a45f 100644\n--- a/projects/SelfTest/MatchersTests.cpp\n+++ b/projects/SelfTest/MatchersTests.cpp\n@@ -205,21 +205,21 @@ public:\n \n \n TEST_CASE( \"Exception matchers that succeed\", \"[matchers][exceptions][!throws]\" ) {\n-    CHECK_THROWS_MATCHES(throws(1), SpecialException const&, ExceptionMatcher{ 1 });\n-    REQUIRE_THROWS_MATCHES(throws(2), SpecialException const&, ExceptionMatcher{ 2 });\n+    CHECK_THROWS_MATCHES(throws(1), SpecialException, ExceptionMatcher{ 1 });\n+    REQUIRE_THROWS_MATCHES(throws(2), SpecialException, ExceptionMatcher{ 2 });\n }\n \n TEST_CASE(\"Exception matchers that fail\", \"[matchers][exceptions][!throws][.failing]\") {\n     SECTION(\"No exception\") {\n-        CHECK_THROWS_MATCHES(doesNotThrow(), SpecialException const&, ExceptionMatcher{ 1 });\n-        REQUIRE_THROWS_MATCHES(doesNotThrow(), SpecialException const&, ExceptionMatcher{ 1 });\n+        CHECK_THROWS_MATCHES(doesNotThrow(), SpecialException, ExceptionMatcher{ 1 });\n+        REQUIRE_THROWS_MATCHES(doesNotThrow(), SpecialException, ExceptionMatcher{ 1 });\n     }\n     SECTION(\"Type mismatch\") {\n-        CHECK_THROWS_MATCHES(throwsAsInt(1), SpecialException const&, ExceptionMatcher{ 1 });\n-        REQUIRE_THROWS_MATCHES(throwsAsInt(1), SpecialException const&, ExceptionMatcher{ 1 });\n+        CHECK_THROWS_MATCHES(throwsAsInt(1), SpecialException, ExceptionMatcher{ 1 });\n+        REQUIRE_THROWS_MATCHES(throwsAsInt(1), SpecialException, ExceptionMatcher{ 1 });\n     }\n     SECTION(\"Contents are wrong\") {\n-        CHECK_THROWS_MATCHES(throws(3), SpecialException const&, ExceptionMatcher{ 1 });\n-        REQUIRE_THROWS_MATCHES(throws(4), SpecialException const&, ExceptionMatcher{ 1 });\n+        CHECK_THROWS_MATCHES(throws(3), SpecialException, ExceptionMatcher{ 1 });\n+        REQUIRE_THROWS_MATCHES(throws(4), SpecialException, ExceptionMatcher{ 1 });\n     }\n }\n",
+    "commit_message": "Fix SelfTest compilation after _THROWS_ assertion change",
+    "xml_files": [
+      {
+        "file_name": "projects_SelfTest_CompilationTests_cpp",
+        "xml_path": "xml_outputs/Catch2/d7f754dc4934efb898e6d70e66d19302cf9a5a4b/projects_SelfTest_CompilationTests_cpp.xml"
+      }
+    ]
+  },
+  {
+    "commit_id": "f9ce8fd03b4fc99121262e5b55465332b8c1957a",
+    "repo": "Catch2",
+    "diff": "diff --git a/projects/SelfTest/String.tests.cpp b/projects/SelfTest/String.tests.cpp\nindex ccd90964..c27b7508 100644\n--- a/projects/SelfTest/String.tests.cpp\n+++ b/projects/SelfTest/String.tests.cpp\n@@ -2,6 +2,8 @@\n \n #include \"catch.hpp\"\n \n+#include <cstring>\n+\n TEST_CASE( \"String\", \"[Strings]\" ) {\n     using Catch::String;\n     \ndiff --git a/projects/SelfTest/StringRef.tests.cpp b/projects/SelfTest/StringRef.tests.cpp\nindex e5da3f2a..4ebaa878 100644\n--- a/projects/SelfTest/StringRef.tests.cpp\n+++ b/projects/SelfTest/StringRef.tests.cpp\n@@ -3,6 +3,8 @@\n \n #include \"catch.hpp\"\n \n+#include <cstring>\n+\n namespace Catch {\n \n     // Implementation of test accessors\n",
+    "commit_message": "Added some missing cstring includes",
+    "xml_files": [
+      {
+        "file_name": "projects_SelfTest_String_tests_cpp",
+        "xml_path": "xml_outputs/Catch2/f9ce8fd03b4fc99121262e5b55465332b8c1957a/projects_SelfTest_String_tests_cpp.xml"
+      }
+    ]
+  },
+  {
+    "commit_id": "b459bb4c431670cb3031a68f4b3cf79f631d0c48",
+    "repo": "Catch2",
+    "diff": "diff --git a/projects/SelfTest/CompilationTests.cpp b/projects/SelfTest/CompilationTests.cpp\nindex 06d361fb..3298c79e 100644\n--- a/projects/SelfTest/CompilationTests.cpp\n+++ b/projects/SelfTest/CompilationTests.cpp\n@@ -55,6 +55,11 @@ TEST_CASE(\"#833\") {\n #pragma clang diagnostic push\n #pragma clang diagnostic ignored \"-Wunused-function\"\n #endif\n+#ifdef __GNUC__\n+// Note that because -~GCC~-, this warning cannot be silenced temporarily, by pushing diagnostic stack...\n+// Luckily it is firing in test files and thus can be silenced for the whole file, without losing much.\n+#pragma GCC diagnostic ignored \"-Wunused-function\"\n+#endif\n \n // Test containing example where original stream insertable check breaks compilation\n namespace {\n",
+    "commit_message": "Silence GCC's Wunused-function firing in compilation tests",
+    "xml_files": [
+      {
+        "file_name": "projects_SelfTest_CompilationTests_cpp",
+        "xml_path": "xml_outputs/Catch2/b459bb4c431670cb3031a68f4b3cf79f631d0c48/projects_SelfTest_CompilationTests_cpp.xml"
+      }
+    ]
+  },
+  {
+    "commit_id": "b245eaa7d1f0043026a1e50631db12ca6804b0e2",
+    "repo": "Catch2",
+    "diff": "diff --git a/projects/SelfTest/ToStringTuple.cpp b/projects/SelfTest/ToStringTuple.cpp\nindex 86f68d37..9c855715 100644\n--- a/projects/SelfTest/ToStringTuple.cpp\n+++ b/projects/SelfTest/ToStringTuple.cpp\n@@ -21,7 +21,7 @@ TEST_CASE( \"tuple<float,int>\", \"[toString][tuple][c++11][.]\" )\n {\n     typedef std::tuple<float,int> type;\n     CHECK( \"1.2f\" == Catch::toString(float(1.2)) );\n-    CHECK( \"{ 1.2f, 0 }\" == Catch::toString(type{1.2,0}) );\n+    CHECK( \"{ 1.2f, 0 }\" == Catch::toString(type{1.2f,0}) );\n }\n \n TEST_CASE( \"tuple<string,string>\", \"[toString][tuple][c++11][.]\" )\n",
+    "commit_message": "Fix double-to-float conversion warning in tests",
+    "xml_files": [
+      {
+        "file_name": "projects_SelfTest_ToStringTuple_cpp",
+        "xml_path": "xml_outputs/Catch2/b245eaa7d1f0043026a1e50631db12ca6804b0e2/projects_SelfTest_ToStringTuple_cpp.xml"
+      }
+    ]
+  },
+  {
+    "commit_id": "51107d7cbdd3a148298ac9f3fc02db3bd5fa513f",
+    "repo": "Catch2",
+    "diff": "diff --git a/projects/Benchmark/BenchMain.cpp b/projects/Benchmark/BenchMain.cpp\nindex 0c7c351f..32ef4ed9 100644\n--- a/projects/Benchmark/BenchMain.cpp\n+++ b/projects/Benchmark/BenchMain.cpp\n@@ -1,2 +1,9 @@\n+/*\n+ *  Created by Martin on 16/01/2017.\n+ *\n+ *  Distributed under the Boost Software License, Version 1.0. (See accompanying\n+ *  file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)\n+ */\n+\n #define CATCH_CONFIG_MAIN\n #include \"catch.hpp\"\ndiff --git a/projects/Benchmark/StringificationBench.cpp b/projects/Benchmark/StringificationBench.cpp\nindex 4c81a577..1c14939b 100644\n--- a/projects/Benchmark/StringificationBench.cpp\n+++ b/projects/Benchmark/StringificationBench.cpp\n@@ -1,3 +1,10 @@\n+/*\n+ *  Created by Martin on 16/01/2017.\n+ *\n+ *  Distributed under the Boost Software License, Version 1.0. (See accompanying\n+ *  file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)\n+ */\n+\n #include \"catch.hpp\"\n \n #include <vector>\n",
+    "commit_message": "Added copyright headers to benchmark files.",
+    "xml_files": [
+      {
+        "file_name": "projects_Benchmark_BenchMain_cpp",
+        "xml_path": "xml_outputs/Catch2/51107d7cbdd3a148298ac9f3fc02db3bd5fa513f/projects_Benchmark_BenchMain_cpp.xml"
+      },
+      {
+        "file_name": "projects_Benchmark_StringificationBench_cpp",
+        "xml_path": "xml_outputs/Catch2/51107d7cbdd3a148298ac9f3fc02db3bd5fa513f/projects_Benchmark_StringificationBench_cpp.xml"
+      }
+    ]
+  },
+  {
+    "commit_id": "f559a51926c6590db94029fd116e5cec6088d41f",
+    "repo": "Catch2",
+    "diff": "diff --git a/projects/SelfTest/ToStringTuple.cpp b/projects/SelfTest/ToStringTuple.cpp\nindex 46aa314b..012ee665 100644\n--- a/projects/SelfTest/ToStringTuple.cpp\n+++ b/projects/SelfTest/ToStringTuple.cpp\n@@ -33,7 +33,7 @@ TEST_CASE( \"tuple<string,string>\", \"[toString][tuple]\" )\n TEST_CASE( \"tuple<tuple<int>,tuple<>,float>\", \"[toString][tuple]\" )\n {\n     typedef std::tuple<std::tuple<int>,std::tuple<>,float> type;\n-    type value { {42}, {}, 1.2f };\n+    type value { std::tuple<int>{42}, {}, 1.2f };\n     CHECK( \"{ { 42 }, { }, 1.2f }\" == Catch::toString(value) );\n }\n \n",
+    "commit_message": "ToStringTuple - gcc doesn't like tuple init_list ctor",
+    "xml_files": [
+      {
+        "file_name": "projects_SelfTest_ToStringTuple_cpp",
+        "xml_path": "xml_outputs/Catch2/f559a51926c6590db94029fd116e5cec6088d41f/projects_SelfTest_ToStringTuple_cpp.xml"
+      }
+    ]
+  },
+  {
+    "commit_id": "d0df295c25e1967b9bf94cf234a47a80c47b0369",
+    "repo": "Catch2",
+    "diff": "diff --git a/projects/XCode4/CatchSelfTest/CatchSelfTest/BDDTests.cpp b/projects/XCode4/CatchSelfTest/CatchSelfTest/BDDTests.cpp\nindex 900fb8ee..161d8b09 100644\n--- a/projects/XCode4/CatchSelfTest/CatchSelfTest/BDDTests.cpp\n+++ b/projects/XCode4/CatchSelfTest/CatchSelfTest/BDDTests.cpp\n@@ -25,3 +25,37 @@ SCENARIO( \"Do that thing with the thing\", \"[Tags]\" ) {\n         }\n     }\n }\n+\n+SCENARIO( \"Vector resizing affects size and capacity\", \"[vector][bdd][size][capacity]\" ) {\n+    GIVEN( \"an empty vector\" ) {\n+        std::vector<int> v;\n+        REQUIRE( v.size() == 0 );\n+        \n+        WHEN( \"it is made larger\" ) {\n+            v.resize( 10 );\n+            THEN( \"the size and capacity go up\" ) {\n+                REQUIRE( v.size() == 10 );\n+                REQUIRE( v.capacity() >= 10 );\n+                \n+                AND_WHEN( \"it is made smaller again\" ) {\n+                    v.resize( 5 );\n+                    THEN( \"the size goes down but the capacity stays the same\" ) {\n+                        REQUIRE( v.size() == 5 );\n+                        REQUIRE( v.capacity() >= 10 );\n+                    }\n+                }\n+            }\n+        }\n+        \n+        WHEN( \"we reserve more space\" ) {\n+            v.reserve( 10 );\n+            THEN( \"The capacity is increased but the size remains the same\" ) {\n+                REQUIRE( v.capacity() >= 10 );\n+                REQUIRE( v.size() == 0 );\n+            }\n+        }\n+    }\n+}\n+\n+SCENARIO( \"This is a really long scenario name to see how the list command deals with wrapping\", \"[very long tags][lots][long][tags][verbose]\" ) {\n+}\n",
+    "commit_message": "Added vector resizing example to BDD tests",
+    "xml_files": [
+      {
+        "file_name": "projects_XCode4_CatchSelfTest_CatchSelfTest_BDDTests_cpp",
+        "xml_path": "xml_outputs/Catch2/d0df295c25e1967b9bf94cf234a47a80c47b0369/projects_XCode4_CatchSelfTest_CatchSelfTest_BDDTests_cpp.xml"
+      }
+    ]
+  },
+  {
+    "commit_id": "56a02eede506eb3a01315123686749b97c1097e2",
+    "repo": "Catch2",
+    "diff": "diff --git a/projects/SelfTest/MiscTests.cpp b/projects/SelfTest/MiscTests.cpp\nindex 622a30fb..957578fd 100644\n--- a/projects/SelfTest/MiscTests.cpp\n+++ b/projects/SelfTest/MiscTests.cpp\n@@ -175,3 +175,13 @@ TEST_CASE( \"./manual/onechar\", \"send a single char to INFO\" )\n     INFO(3);\n     REQUIRE(false);    \n }\n+\n+TEST_CASE(\"./succeeding/atomic if\", \"\")\n+{\n+    size_t x = 0;\n+    \n+    if( x )\n+        REQUIRE(x > 0);\n+    else\n+        REQUIRE(x == 0);\n+}\ndiff --git a/projects/SelfTest/TestMain.cpp b/projects/SelfTest/TestMain.cpp\nindex 44d56745..c9a1e458 100644\n--- a/projects/SelfTest/TestMain.cpp\n+++ b/projects/SelfTest/TestMain.cpp\n@@ -43,7 +43,7 @@ TEST_CASE( \"selftest/main\", \"Runs all Catch self tests and checks their results\"\n                     \"Number of 'succeeding' tests is fixed\" )\n         {\n             runner.runMatching( \"./succeeding/*\" );\n-            CHECK( runner.getTotals().assertions.passed == 267 );\n+            CHECK( runner.getTotals().assertions.passed == 268 );\n             CHECK( runner.getTotals().assertions.failed == 0 );\n         }\n \n",
+    "commit_message": "Added test for previous change",
+    "xml_files": [
+      {
+        "file_name": "projects_SelfTest_TestMain_cpp",
+        "xml_path": "xml_outputs/Catch2/56a02eede506eb3a01315123686749b97c1097e2/projects_SelfTest_TestMain_cpp.xml"
+      }
+    ]
+  },
+  {
+    "commit_id": "0653f4880ba6353b0cf9444930e9101337b6fd4a",
+    "repo": "Catch2",
+    "diff": "diff --git a/projects/SelfTest/ConditionTests.cpp b/projects/SelfTest/ConditionTests.cpp\nindex 91d9f627..e03b8d05 100644\n--- a/projects/SelfTest/ConditionTests.cpp\n+++ b/projects/SelfTest/ConditionTests.cpp\n@@ -241,6 +241,8 @@ TEST_CASE(  \"./succeeding/conditions/not\",\n {\n     bool falseValue = false;\n     \n+    REQUIRE( false == false );\n+    REQUIRE( true == true );\n     REQUIRE( !false );\n     REQUIRE_FALSE( false );\n \n@@ -256,6 +258,8 @@ TEST_CASE(  \"./failing/conditions/not\",\n {\n     bool trueValue = true;\n     \n+    CHECK( false != false );\n+    CHECK( true != true );\n     CHECK( !true );\n     CHECK_FALSE( true );\n     \ndiff --git a/projects/SelfTest/TestMain.cpp b/projects/SelfTest/TestMain.cpp\nindex 8355c2f7..4bab286f 100644\n--- a/projects/SelfTest/TestMain.cpp\n+++ b/projects/SelfTest/TestMain.cpp\n@@ -47,7 +47,7 @@ TEST_CASE( \"selftest/main\", \"Runs all Catch self tests and checks their results\"\n                     \"Number of 'succeeding' tests is fixed\" )\n         {\n             runner.runMatching( \"./succeeding/*\" );\n-            CHECK( runner.getSuccessCount() == 257 );\n+            CHECK( runner.getSuccessCount() == 259 );\n             CHECK( runner.getFailureCount() == 0 );\n         }\n \n@@ -56,7 +56,7 @@ TEST_CASE( \"selftest/main\", \"Runs all Catch self tests and checks their results\"\n         {\n             runner.runMatching( \"./failing/*\" );        \n             CHECK( runner.getSuccessCount() == 0 );\n-            CHECK( runner.getFailureCount() == 60 );\n+            CHECK( runner.getFailureCount() == 62 );\n         }\n     }\n }\n",
+    "commit_message": "Added tests for true == true etc",
+    "xml_files": [
+      {
+        "file_name": "projects_SelfTest_TestMain_cpp",
+        "xml_path": "xml_outputs/Catch2/0653f4880ba6353b0cf9444930e9101337b6fd4a/projects_SelfTest_TestMain_cpp.xml"
+      }
+    ]
+  },
+  {
+    "commit_id": "d474d8dcd8653836b05b206b139150b1f6da0c4b",
+    "repo": "Catch2",
+    "diff": "diff --git a/projects/SelfTest/TestMain.cpp b/projects/SelfTest/TestMain.cpp\nindex c87e2ec9..8355c2f7 100644\n--- a/projects/SelfTest/TestMain.cpp\n+++ b/projects/SelfTest/TestMain.cpp\n@@ -47,7 +47,7 @@ TEST_CASE( \"selftest/main\", \"Runs all Catch self tests and checks their results\"\n                     \"Number of 'succeeding' tests is fixed\" )\n         {\n             runner.runMatching( \"./succeeding/*\" );\n-            CHECK( runner.getSuccessCount() == 249 );\n+            CHECK( runner.getSuccessCount() == 257 );\n             CHECK( runner.getFailureCount() == 0 );\n         }\n \n",
+    "commit_message": "Updated test count check to include recently added tests",
+    "xml_files": [
+      {
+        "file_name": "projects_SelfTest_TestMain_cpp",
+        "xml_path": "xml_outputs/Catch2/d474d8dcd8653836b05b206b139150b1f6da0c4b/projects_SelfTest_TestMain_cpp.xml"
+      }
+    ]
+  },
+  {
+    "commit_id": "02c877f91644e498ce0c9c257823e63a1154c652",
+    "repo": "Catch2",
+    "diff": "diff --git a/Test/TestMain.cpp b/Test/TestMain.cpp\nindex 1771757c..e8a25452 100644\n--- a/Test/TestMain.cpp\n+++ b/Test/TestMain.cpp\n@@ -50,7 +50,7 @@ TEST_CASE( \"selftest/main\", \"Runs all Catch self tests and checks their results\"\n                     \"Number of 'succeeding' tests is fixed\" )\n         {\n             runner.runMatching( \"./succeeding/*\" );\n-            CHECK( runner.getSuccessCount() == 224 );\n+            CHECK( runner.getSuccessCount() == 223 );\n             CHECK( runner.getFailureCount() == 0 );\n         }\n \n@@ -59,7 +59,7 @@ TEST_CASE( \"selftest/main\", \"Runs all Catch self tests and checks their results\"\n         {\n             runner.runMatching( \"./failing/*\" );        \n             CHECK( runner.getSuccessCount() == 0 );\n-            CHECK( runner.getFailureCount() == 55 );\n+            CHECK( runner.getFailureCount() == 60 );\n         }\n     }\n }\n",
+    "commit_message": "Updated self test with current test counts",
+    "xml_files": [
+      {
+        "file_name": "Test_TestMain_cpp",
+        "xml_path": "xml_outputs/Catch2/02c877f91644e498ce0c9c257823e63a1154c652/Test_TestMain_cpp.xml"
+      }
+    ]
+  },
+  {
+    "commit_id": "5cab62bc82f9f9f2197891c970a8b0f4b8bb57a4",
+    "repo": "Catch2",
+    "diff": "diff --git a/Test/TestMain.cpp b/Test/TestMain.cpp\nindex ebabb8d9..21bce21b 100644\n--- a/Test/TestMain.cpp\n+++ b/Test/TestMain.cpp\n@@ -44,7 +44,7 @@ TEST_CASE( \"selftest/main\", \"Runs all Catch self tests and checks their results\"\n                     \"Number of 'succeeding' tests is fixed\" )\n         {\n             runner.runMatching( \"./succeeding/*\" );\n-            CHECK( runner.getSuccessCount() == 213 );\n+            CHECK( runner.getSuccessCount() == 285 );\n             CHECK( runner.getFailureCount() == 0 );\n         }\n \n@@ -53,7 +53,7 @@ TEST_CASE( \"selftest/main\", \"Runs all Catch self tests and checks their results\"\n         {\n             runner.runMatching( \"./failing/*\" );        \n             CHECK( runner.getSuccessCount() == 0 );\n-            CHECK( runner.getFailureCount() == 55 );\n+            CHECK( runner.getFailureCount() == 127 );\n         }\n     }\n }\n",
+    "commit_message": "Updated test counts following addition of more test cases",
+    "xml_files": [
+      {
+        "file_name": "Test_TestMain_cpp",
+        "xml_path": "xml_outputs/Catch2/5cab62bc82f9f9f2197891c970a8b0f4b8bb57a4/Test_TestMain_cpp.xml"
+      }
+    ]
+  },
+  {
+    "commit_id": "36ff7ba720e1bb301d19747349a06134f62bfe0d",
+    "repo": "Catch2",
+    "diff": "diff --git a/Test/ClassTests.cpp b/Test/ClassTests.cpp\nindex f37f7565..c4be09c2 100644\n--- a/Test/ClassTests.cpp\n+++ b/Test/ClassTests.cpp\n@@ -51,7 +51,7 @@ TEST_CASE_METHOD( Fixture, \"succeeding/Fixture/succeedingCase\", \"A method based\n     REQUIRE( m_a == 1 );        \n }\n \n-TEST_CASE_METHOD( Fixture, \"succeeding/Fixture/failingCase\", \"A method based test run that fails\" )\n+TEST_CASE_METHOD( Fixture, \"failing/Fixture/failingCase\", \"A method based test run that fails\" )\n {   \n     REQUIRE( m_a == 2 );        \n }\ndiff --git a/Test/MessageTests.cpp b/Test/MessageTests.cpp\nindex 1e8e6be8..ca58c5e7 100644\n--- a/Test/MessageTests.cpp\n+++ b/Test/MessageTests.cpp\n@@ -26,7 +26,7 @@ TEST_CASE( \"failing/message/info/1\", \"INFO gets logged on failure\" )\n     REQUIRE( a == 1 );\n }\n \n-TEST_CASE( \"failing/message/info/2\", \"INFO gets logged on failure\" )\n+TEST_CASE( \"mixed/message/info/2\", \"INFO gets logged on failure\" )\n {\n     INFO( \"this message should be logged\" );\n     int a = 2;\ndiff --git a/Test/MiscTests.cpp b/Test/MiscTests.cpp\nindex d87dd5d4..1639a9ab 100644\n--- a/Test/MiscTests.cpp\n+++ b/Test/MiscTests.cpp\n@@ -36,7 +36,7 @@ TEST_CASE( \"succeeding/Misc/Sections/nested\", \"nested SECTION tests\" )\n     \n     SECTION( \"s1\", \"doesn't equal\" )\n     {\n-        REQUIRE( a != b );\n+        REQUIRE( a != b ) \"a should not equal b\";\n         REQUIRE( b != a );\n \n         SECTION( \"s2\", \"not equal\" )\n@@ -46,9 +46,35 @@ TEST_CASE( \"succeeding/Misc/Sections/nested\", \"nested SECTION tests\" )\n     }\n }\n \n+TEST_CASE( \"mixed/Misc/Sections/loops\", \"looped SECTION tests\" )\n+{\n+    int a = 1;\n+    \n+    for( int b = 0; b < 10; ++b )\n+    {\n+        std::ostringstream oss;\n+        oss << \"b is currently: \" << b;\n+        SECTION( \"s1\", oss.str() )\n+        {\n+            CHECK( b > a );            \n+        }\n+    }\n+}\n+\n+TEST_CASE( \"mixed/Misc/loops\", \"looped tests\" )\n+{\n+    static const int fib[]  = { 1, 1, 2, 3, 5, 8, 13, 21 };\n+    \n+    for( size_t i=0; i < sizeof(fib)/sizeof(int); ++i )\n+    {\n+        INFO( \"Testing if fib[\" << i << \"] (\" << fib[i] << \") is even\" );\n+        CHECK( ( fib[i] % 2 ) == 0 );                \n+    }\n+}\n+\n TEST_CASE( \"succeeding/Misc/stdout,stderr\", \"Sends stuff to stdout and stderr\" )\n {\n     std::cout << \"Some information\";\n     \n     std::cerr << \"An error\";\n-}\n\\ No newline at end of file\n+}\ndiff --git a/Test/TestMain.cpp b/Test/TestMain.cpp\nindex dd7eb367..7d8c1d5c 100644\n--- a/Test/TestMain.cpp\n+++ b/Test/TestMain.cpp\n@@ -26,10 +26,11 @@ int main (int argc, char * const argv[])\n     std::ostringstream ossSucceeding;\n     std::ostringstream ossFailing;\n \n-    ReporterConfig reporterConfig( ReporterConfig::Include::SuccessfulResults );\n-    BasicReporter reporter (reporterConfig );\n-\n-    Runner runner( &reporter );\n+    RunnerConfig config;\n+    ReporterConfig& reporterConfig = config.getReporterConfig();\n+    config.setReporter( new BasicReporter(reporterConfig ) );\n+    reporterConfig.setIncludeWhat( ReporterConfig::Include::SuccessfulResults );\n+    Runner runner( config );\n \n     reporterConfig.setStreamBuf( ossSucceeding.rdbuf() );\n     runner.runMatching( \"succeeding/*\" );\n@@ -61,7 +62,7 @@ int main (int argc, char * const argv[])\n \n     if( result == 0 )\n     {\n-        const size_t expectedTestCaseCount = 102; // !TBD factor this out\n+        const size_t expectedTestCaseCount = 106; // !TBD factor this out\n         size_t testCaseCount = runner.getSuccessCount() + runner.getFailureCount();\n         std::cout << \"All \" << testCaseCount << \" tests completed successfully\" << std::endl;\n         if( testCaseCount != expectedTestCaseCount )\n",
+    "commit_message": "Fixes to the self test",
+    "xml_files": [
+      {
+        "file_name": "Test_ClassTests_cpp",
+        "xml_path": "xml_outputs/Catch2/36ff7ba720e1bb301d19747349a06134f62bfe0d/Test_ClassTests_cpp.xml"
+      },
+      {
+        "file_name": "Test_MessageTests_cpp",
+        "xml_path": "xml_outputs/Catch2/36ff7ba720e1bb301d19747349a06134f62bfe0d/Test_MessageTests_cpp.xml"
+      },
+      {
+        "file_name": "Test_MiscTests_cpp",
+        "xml_path": "xml_outputs/Catch2/36ff7ba720e1bb301d19747349a06134f62bfe0d/Test_MiscTests_cpp.xml"
+      },
+      {
+        "file_name": "Test_TestMain_cpp",
+        "xml_path": "xml_outputs/Catch2/36ff7ba720e1bb301d19747349a06134f62bfe0d/Test_TestMain_cpp.xml"
+      }
+    ]
+  },
+  {
+    "commit_id": "5cf94a80434ef1df9c5d6f52ca9385bee017a8ba",
+    "repo": "Catch2",
+    "diff": "diff --git a/Test/main.cpp b/Test/main.cpp\nindex ee0806e2..5477f96d 100644\n--- a/Test/main.cpp\n+++ b/Test/main.cpp\n@@ -17,6 +17,10 @@\n int main (int argc, char * const argv[])\n {\n     using namespace Catch;\n+    \n+    bool showAllResults = false;\n+    if( argc > 1 && ( std::string( argv[1] ) == \"-s\" || std::string( argv[1] ) == \"--success\" ) )\n+        showAllResults = true;\n         \n     ReporterConfig reporterConfig( ReporterConfig::Include::SuccessfulResults );\n     BasicReporter reporter (reporterConfig );\n@@ -39,11 +43,19 @@ int main (int argc, char * const argv[])\n         std::cerr << \"Some tests that should have succeeded failed:\\n\\n\" << succeedingResults;\n         result = 1;\n     }\n+    else if( showAllResults )\n+    {\n+        std::cout << succeedingResults << \"\\n\\n\";\n+    }\n     if( failingResults.find( \"succeeded\" ) != std::string::npos )\n     {\n         std::cerr << \"Some tests that should have failed succeeded:\\n\\n\" << failingResults;\n         result = 1;\n     }\n+    else if( showAllResults )\n+    {\n+        std::cout << failingResults << \"\\n\\n\";\n+    }\n     \n     if( result == 0 )\n     {\n",
+    "commit_message": "Allow -s to be used to show successful results in test harness",
+    "xml_files": [
+      {
+        "file_name": "Test_main_cpp",
+        "xml_path": "xml_outputs/Catch2/5cf94a80434ef1df9c5d6f52ca9385bee017a8ba/Test_main_cpp.xml"
+      }
+    ]
+  },
+  {
+    "commit_id": "c435f4c42bc2e404523998d3a43133371954d2a8",
+    "repo": "Catch2",
+    "diff": "diff --git a/Test/TrickyTests.cpp b/Test/TrickyTests.cpp\nindex 9cb544ad..08074dd7 100644\n--- a/Test/TrickyTests.cpp\n+++ b/Test/TrickyTests.cpp\n@@ -39,5 +39,5 @@ TEST_CASE( \"succeeding/Tricky/complex lhs\", \"Where the LHS is not a simple value\n     int b = 2;\n \n     // This only captures part of the expression, but issues a warning about the rest\n-    EXPECT( a == 2 || b == 1 );\n+    EXPECT( a == 2 || b == 2 );\n }\n\\ No newline at end of file\n",
+    "commit_message": "Test cases all succeed again",
+    "xml_files": [
+      {
+        "file_name": "Test_TrickyTests_cpp",
+        "xml_path": "xml_outputs/Catch2/c435f4c42bc2e404523998d3a43133371954d2a8/Test_TrickyTests_cpp.xml"
+      }
+    ]
+  }
+]

@@ -1,0 +1,8 @@
+{
+  "commit_id": "8851e779cf43e206c8eeb24229e26d8f6608e3cf",
+  "parent_id": "2d4f8ac8e625cd70eb3b3eae873914382a5348c7",
+  "message": "console colour: fix unintended colouring of user's stderr on POSIX",
+  "changed_files": [
+    "src/catch2/internal/catch_console_colour.cpp"
+  ]
+}

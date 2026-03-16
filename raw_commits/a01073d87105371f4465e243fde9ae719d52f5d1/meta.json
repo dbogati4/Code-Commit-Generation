@@ -1,0 +1,8 @@
+{
+  "commit_id": "a01073d87105371f4465e243fde9ae719d52f5d1",
+  "parent_id": "02839ba9344814af70a6a435807fc7e23b3aa6c1",
+  "message": "Write single characters directly instead of as C-strings in Sonarqube",
+  "changed_files": [
+    "src/catch2/reporters/catch_reporter_sonarqube.cpp"
+  ]
+}

@@ -1,0 +1,12 @@
+diff --git a/projects/SelfTest/UsageTests/Approx.tests.cpp b/projects/SelfTest/UsageTests/Approx.tests.cpp
+index b51e3ccb..4029223a 100644
+--- a/projects/SelfTest/UsageTests/Approx.tests.cpp
++++ b/projects/SelfTest/UsageTests/Approx.tests.cpp
+@@ -185,6 +185,7 @@ TEST_CASE("Assorted miscellaneous tests", "[Approx][approvals]") {
+     REQUIRE(INFINITY == Approx(INFINITY));
+     REQUIRE(-INFINITY != Approx(INFINITY));
+     REQUIRE(1 != Approx(INFINITY));
++    REQUIRE(INFINITY != Approx(1));
+     REQUIRE(NAN != Approx(NAN));
+     REQUIRE_FALSE(NAN == Approx(NAN));
+ }

@@ -1,0 +1,8 @@
+{
+  "commit_id": "e680c4b9fb1d699bfad239e42ce7643d7cf00371",
+  "parent_id": "f1e14a1168fc31718362e34d075cb0e3298dc671",
+  "message": "fix SEGFAULT during construction of Session",
+  "changed_files": [
+    "include/internal/catch_session.cpp"
+  ]
+}

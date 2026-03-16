@@ -1,0 +1,16 @@
+{
+  "commit_id": "635db2785fc081e576e92e3f166504ccd7e6efd8",
+  "parent_id": "51888d360ab6c21a704d0ba9c66da1b55751940a",
+  "message": "Use the new licence header in ExtraTests's cpp files",
+  "changed_files": [
+    "tests/ExtraTests/X01-PrefixedMacros.cpp",
+    "tests/ExtraTests/X02-DisabledMacros.cpp",
+    "tests/ExtraTests/X03-DisabledExceptions-DefaultHandler.cpp",
+    "tests/ExtraTests/X04-DisabledExceptions-CustomHandler.cpp",
+    "tests/ExtraTests/X10-FallbackStringifier.cpp",
+    "tests/ExtraTests/X11-DisableStringification.cpp",
+    "tests/ExtraTests/X12-CustomDebugBreakMacro.cpp",
+    "tests/ExtraTests/X90-WindowsHeaderInclusion.cpp",
+    "tests/ExtraTests/X91-AmalgamatedCatch.cpp"
+  ]
+}

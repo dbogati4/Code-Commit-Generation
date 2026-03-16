@@ -1,0 +1,8 @@
+{
+  "commit_id": "de06340e7d2862bbdb55796f86a2090e915f9c19",
+  "parent_id": "4dd6e81d0f4b6f88058e7b71f3f672aa478161ef",
+  "message": "Abort when total assertions failed is greater than or equal to configured value",
+  "changed_files": [
+    "include/internal/catch_run_context.cpp"
+  ]
+}

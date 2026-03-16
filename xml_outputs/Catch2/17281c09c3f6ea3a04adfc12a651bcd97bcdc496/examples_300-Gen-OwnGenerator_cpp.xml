@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" xmlns:diff="http://www.srcML.org/srcDiff" revision="1.0.0" language="C++" filename="C:\Users\saile\AppData\Local\Temp\catch2_100_z8gzpiwf\17281c09c3f6ea3a04adfc12a651bcd97bcdc496\examples_300-Gen-OwnGenerator_cpp\examples_300-Gen-OwnGenerator_cpp.old|C:\Users\saile\AppData\Local\Temp\catch2_100_z8gzpiwf\17281c09c3f6ea3a04adfc12a651bcd97bcdc496\examples_300-Gen-OwnGenerator_cpp\examples_300-Gen-OwnGenerator_cpp.new"><comment type="line">// 300-Gen-OwnGenerator.cpp</comment>
+<comment type="line">// Shows how to define a custom generator.</comment>
+
+<comment type="line">// Specifically we will implement a random number generator for integers</comment>
+<comment type="line">// It will have infinite capacity and settable lower/upper bound</comment>
+
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;<diff:delete type="replace" xmlns:diff="http://www.srcML.org/srcDiff">catch2/catch.hpp</diff:delete><diff:insert type="replace" xmlns:diff="http://www.srcML.org/srcDiff">catch2/catch_test_macros.hpp</diff:insert>&gt;</cpp:file></cpp:include>
+<diff:insert xmlns:diff="http://www.srcML.org/srcDiff"><cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;catch2/catch_generators.hpp&gt;</cpp:file></cpp:include><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+</diff:ws><cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;catch2/catch_generators_generic.hpp&gt;</cpp:file></cpp:include></diff:insert>
+<diff:insert xmlns:diff="http://www.srcML.org/srcDiff"><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+</diff:ws></diff:insert><cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;random&gt;</cpp:file></cpp:include>
+
+<comment type="line">// This class shows how to implement a simple generator for Catch tests</comment>
+<class>class <name>RandomIntGenerator</name> <super_list>: <super><specifier>public</specifier> <name><name>Catch</name><operator>::</operator><name>Generators</name><operator>::</operator><name>IGenerator</name><argument_list type="generic">&lt;<argument><expr><name>int</name></expr></argument>&gt;</argument_list></name></super></super_list> <block>{<private type="default">
+    <decl_stmt><decl><type><name><name>std</name><operator>::</operator><name>minstd_rand</name></name></type> <name>m_rand</name></decl>;</decl_stmt>
+    <decl_stmt><decl><type><name><name>std</name><operator>::</operator><name>uniform_int_distribution</name><argument_list type="generic">&lt;&gt;</argument_list></name></type> <name>m_dist</name></decl>;</decl_stmt>
+    <decl_stmt><decl><type><name>int</name></type> <name>current_number</name></decl>;</decl_stmt>
+</private><public>public:
+
+    <constructor><name>RandomIntGenerator</name><parameter_list>(<parameter><decl><type><name>int</name></type> <name>low</name></decl></parameter>, <parameter><decl><type><name>int</name></type> <name>high</name></decl></parameter>)</parameter_list><member_init_list>:
+        <call><name>m_rand</name><argument_list>(<argument><expr><call><call><name><name>std</name><operator>::</operator><name>random_device</name></name><argument_list>{}</argument_list></call></call><operator>(</operator><operator>)</operator></expr></argument>)</argument_list></call>,
+        <call><name>m_dist</name><argument_list>(<argument><expr><name>low</name></expr></argument>, <argument><expr><name>high</name></expr></argument>)</argument_list></call>
+    </member_init_list><block>{<block_content>
+        <expr_stmt><expr><cast type="static">static_cast<argument_list type="generic">&lt;<argument><expr><name>void</name></expr></argument>&gt;</argument_list><argument_list>(<argument><expr><call><name>next</name><argument_list>()</argument_list></call></expr></argument>)</argument_list></cast></expr>;</expr_stmt>
+    </block_content>}</block></constructor>
+
+    <function_decl><type><name>int</name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>get</name><parameter_list>()</parameter_list> <specifier>const</specifier> <specifier>override</specifier>;</function_decl>
+    <function><type><name>bool</name></type> <name>next</name><parameter_list>()</parameter_list> <specifier>override</specifier> <block>{<block_content>
+        <expr_stmt><expr><name>current_number</name> <operator>=</operator> <call><name>m_dist</name><argument_list>(<argument><expr><name>m_rand</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        <return>return <expr><literal type="boolean">true</literal></expr>;</return>
+    </block_content>}</block></function>
+</public>}</block>;</class>
+
+<comment type="line">// Avoids -Wweak-vtables</comment>
+<function><type><name>int</name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name><name>RandomIntGenerator</name><operator>::</operator><name>get</name></name><parameter_list>()</parameter_list> <specifier>const</specifier> <block>{<block_content>
+    <return>return <expr><name>current_number</name></expr>;</return>
+</block_content>}</block></function>
+
+<comment type="line">// This helper function provides a nicer UX when instantiating the generator</comment>
+<comment type="line">// Notice that it returns an instance of GeneratorWrapper&lt;int&gt;, which</comment>
+<comment type="line">// is a value-wrapper around std::unique_ptr&lt;IGenerator&lt;int&gt;&gt;.</comment>
+<function><type><name><name>Catch</name><operator>::</operator><name>Generators</name><operator>::</operator><name>GeneratorWrapper</name><argument_list type="generic">&lt;<argument><expr><name>int</name></expr></argument>&gt;</argument_list></name></type> <name>random</name><parameter_list>(<parameter><decl><type><name>int</name></type> <name>low</name></decl></parameter>, <parameter><decl><type><name>int</name></type> <name>high</name></decl></parameter>)</parameter_list> <block>{<block_content>
+    <return>return <expr><call><name><name>Catch</name><operator>::</operator><name>Generators</name><operator>::</operator><name>GeneratorWrapper</name><argument_list type="generic">&lt;<argument><expr><name>int</name></expr></argument>&gt;</argument_list></name><argument_list>(<argument><expr><call><name><name>std</name><operator>::</operator><name>unique_ptr</name><argument_list type="generic">&lt;<argument><expr><name><name>Catch</name><operator>::</operator><name>Generators</name><operator>::</operator><name>IGenerator</name><argument_list type="generic">&lt;<argument><expr><name>int</name></expr></argument>&gt;</argument_list></name></expr></argument>&gt;</argument_list></name><argument_list>(<argument><expr><operator>new</operator> <call><name>RandomIntGenerator</name><argument_list>(<argument><expr><name>low</name></expr></argument>, <argument><expr><name>high</name></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr>;</return>
+</block_content>}</block></function>
+
+<comment type="line">// The two sections in this test case are equivalent, but the first one</comment>
+<comment type="line">// is much more readable/nicer to use</comment>
+<macro><name>TEST_CASE</name><argument_list>(<argument><literal type="string">"Generating random ints"</literal></argument>, <argument><literal type="string">"[example][generator]"</literal></argument>)</argument_list></macro> <block>{<block_content>
+    <macro><name>SECTION</name><argument_list>(<argument><literal type="string">"Nice UX"</literal></argument>)</argument_list></macro> <block>{<block_content>
+        <decl_stmt><decl><type><name>auto</name></type> <name>i</name> <init>= <expr><call><name>GENERATE</name><argument_list>(<argument><expr><call><name>take</name><argument_list>(<argument><expr><literal type="number">100</literal></expr></argument>, <argument><expr><call><name>random</name><argument_list>(<argument><expr><operator>-</operator><literal type="number">100</literal></expr></argument>, <argument><expr><literal type="number">100</literal></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+        <expr_stmt><expr><call><name>REQUIRE</name><argument_list>(<argument><expr><name>i</name> <operator>&gt;=</operator> <operator>-</operator><literal type="number">100</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name>REQUIRE</name><argument_list>(<argument><expr><name>i</name> <operator>&lt;=</operator> <literal type="number">100</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block>
+    <macro><name>SECTION</name><argument_list>(<argument><literal type="string">"Creating the random generator directly"</literal></argument>)</argument_list></macro> <block>{<block_content>
+        <decl_stmt><decl><type><name>auto</name></type> <name>i</name> <init>= <expr><call><name>GENERATE</name><argument_list>(<argument><expr><call><name>take</name><argument_list>(<argument><expr><literal type="number">100</literal></expr></argument>, <argument><expr><call><name><name>GeneratorWrapper</name><argument_list type="generic">&lt;<argument><expr><name>int</name></expr></argument>&gt;</argument_list></name><argument_list>(<argument><expr><call><name><name>std</name><operator>::</operator><name>unique_ptr</name><argument_list type="generic">&lt;<argument><expr><name><name>IGenerator</name><argument_list type="generic">&lt;<argument><expr><name>int</name></expr></argument>&gt;</argument_list></name></expr></argument>&gt;</argument_list></name><argument_list>(<argument><expr><operator>new</operator> <call><name>RandomIntGenerator</name><argument_list>(<argument><expr><operator>-</operator><literal type="number">100</literal></expr></argument>, <argument><expr><literal type="number">100</literal></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+        <expr_stmt><expr><call><name>REQUIRE</name><argument_list>(<argument><expr><name>i</name> <operator>&gt;=</operator> <operator>-</operator><literal type="number">100</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name>REQUIRE</name><argument_list>(<argument><expr><name>i</name> <operator>&lt;=</operator> <literal type="number">100</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block>
+</block_content>}</block>
+
+<comment type="line">// Compiling and running this file will result in 400 successful assertions</comment>
+</unit>

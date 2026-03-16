@@ -1,0 +1,13 @@
+diff --git a/projects/SelfTest/TestMain.cpp b/projects/SelfTest/TestMain.cpp
+index c87e2ec9..8355c2f7 100644
+--- a/projects/SelfTest/TestMain.cpp
++++ b/projects/SelfTest/TestMain.cpp
+@@ -47,7 +47,7 @@ TEST_CASE( "selftest/main", "Runs all Catch self tests and checks their results"
+                     "Number of 'succeeding' tests is fixed" )
+         {
+             runner.runMatching( "./succeeding/*" );
+-            CHECK( runner.getSuccessCount() == 249 );
++            CHECK( runner.getSuccessCount() == 257 );
+             CHECK( runner.getFailureCount() == 0 );
+         }
+ 

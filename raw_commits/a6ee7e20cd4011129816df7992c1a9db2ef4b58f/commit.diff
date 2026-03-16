@@ -1,0 +1,13 @@
+diff --git a/src/catch2/internal/catch_console_colour.cpp b/src/catch2/internal/catch_console_colour.cpp
+index b19e01ec..142de9e6 100644
+--- a/src/catch2/internal/catch_console_colour.cpp
++++ b/src/catch2/internal/catch_console_colour.cpp
+@@ -161,7 +161,7 @@ namespace {
+ #endif // Windows/ ANSI/ None
+ 
+ 
+-#if defined( CATCH_PLATFORM_LINUX ) || defined( CATCH_PLATFORM_MAC )
++#if defined( CATCH_PLATFORM_LINUX ) || defined( CATCH_PLATFORM_MAC ) || defined( __GLIBC__ )
+ #    define CATCH_INTERNAL_HAS_ISATTY
+ #    include <unistd.h>
+ #endif

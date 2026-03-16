@@ -1,0 +1,8 @@
+{
+  "commit_id": "3d9e7db2e0fff8fc2edcf59d24351f3937e3ac62",
+  "parent_id": "cf55cfd76f0088a61088169508cc1d014f323875",
+  "message": "Fix infinite loop in compact reporter printer",
+  "changed_files": [
+    "include/reporters/catch_reporter_compact.cpp"
+  ]
+}

@@ -1,0 +1,24 @@
+diff --git a/src/catch2/reporters/catch_reporter_console.cpp b/src/catch2/reporters/catch_reporter_console.cpp
+index 2924c920..5e64e75d 100644
+--- a/src/catch2/reporters/catch_reporter_console.cpp
++++ b/src/catch2/reporters/catch_reporter_console.cpp
+@@ -10,7 +10,6 @@
+ 
+ #include <catch2/interfaces/catch_interfaces_config.hpp>
+ #include <catch2/catch_test_spec.hpp>
+-#include <catch2/catch_reporter_registrars.hpp>
+ #include <catch2/internal/catch_console_colour.hpp>
+ #include <catch2/internal/catch_string_manip.hpp>
+ #include <catch2/catch_version.hpp>
+diff --git a/src/catch2/reporters/catch_reporter_junit.cpp b/src/catch2/reporters/catch_reporter_junit.cpp
+index 3b8e2e9a..ff679e71 100644
+--- a/src/catch2/reporters/catch_reporter_junit.cpp
++++ b/src/catch2/reporters/catch_reporter_junit.cpp
+@@ -12,7 +12,6 @@
+ 
+ #include <catch2/catch_tostring.hpp>
+ #include <catch2/internal/catch_string_manip.hpp>
+-#include <catch2/catch_reporter_registrars.hpp>
+ #include <catch2/internal/catch_textflow.hpp>
+ #include <catch2/interfaces/catch_interfaces_config.hpp>
+ #include <catch2/catch_test_case_info.hpp>

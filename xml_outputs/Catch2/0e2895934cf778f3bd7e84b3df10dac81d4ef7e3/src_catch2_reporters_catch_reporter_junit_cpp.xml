@@ -1,0 +1,279 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" xmlns:diff="http://www.srcML.org/srcDiff" revision="1.0.0" language="C++" filename="C:\Users\saile\AppData\Local\Temp\catch2_100_z8gzpiwf\0e2895934cf778f3bd7e84b3df10dac81d4ef7e3\src_catch2_reporters_catch_reporter_junit_cpp\src_catch2_reporters_catch_reporter_junit_cpp.old|C:\Users\saile\AppData\Local\Temp\catch2_100_z8gzpiwf\0e2895934cf778f3bd7e84b3df10dac81d4ef7e3\src_catch2_reporters_catch_reporter_junit_cpp\src_catch2_reporters_catch_reporter_junit_cpp.new">
+<comment type="line">//              Copyright Catch2 Authors</comment>
+<comment type="line">// Distributed under the Boost Software License, Version 1.0.</comment>
+<comment type="line">//   (See accompanying file LICENSE_1_0.txt or copy at</comment>
+<comment type="line">//        https://www.boost.org/LICENSE_1_0.txt)</comment>
+
+<comment type="line">// SPDX-License-Identifier: BSL-1.0</comment>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;catch2/reporters/catch_reporter_junit.hpp&gt;</cpp:file></cpp:include>
+
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;catch2/reporters/catch_reporter_helpers.hpp&gt;</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;catch2/catch_tostring.hpp&gt;</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;catch2/internal/catch_string_manip.hpp&gt;</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;catch2/internal/catch_textflow.hpp&gt;</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;catch2/interfaces/catch_interfaces_config.hpp&gt;</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;catch2/catch_test_case_info.hpp&gt;</cpp:file></cpp:include>
+
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;cassert&gt;</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;ctime&gt;</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;algorithm&gt;</cpp:file></cpp:include>
+
+<namespace>namespace <name>Catch</name> <block>{
+
+    <namespace>namespace <block>{
+        <function><type><name><name>std</name><operator>::</operator><name>string</name></name></type> <name>getCurrentTimestamp</name><parameter_list>()</parameter_list> <block>{<block_content>
+            <decl_stmt><decl><type><name>time_t</name></type> <name>rawtime</name></decl>;</decl_stmt>
+            <expr_stmt><expr><call><name><name>std</name><operator>::</operator><name>time</name></name><argument_list>(<argument><expr><operator>&amp;</operator><name>rawtime</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+
+            <decl_stmt><decl><type><name><name>std</name><operator>::</operator><name>tm</name></name></type> <name>timeInfo</name> <init>= <expr><block>{}</block></expr></init></decl>;</decl_stmt>
+<cpp:if xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">if</cpp:directive> <expr><call><name>defined</name> <argument_list>(<argument><expr><name>_MSC_VER</name></expr></argument>)</argument_list></call> <operator>||</operator> <call><name>defined</name> <argument_list>(<argument><expr><name>__MINGW32__</name></expr></argument>)</argument_list></call></expr></cpp:if>
+            <expr_stmt><expr><call><name>gmtime_s</name><argument_list>(<argument><expr><operator>&amp;</operator><name>timeInfo</name></expr></argument>, <argument><expr><operator>&amp;</operator><name>rawtime</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+<cpp:else xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">else</cpp:directive></cpp:else>
+            <expr_stmt><expr><call><name>gmtime_r</name><argument_list>(<argument><expr><operator>&amp;</operator><name>rawtime</name></expr></argument>, <argument><expr><operator>&amp;</operator><name>timeInfo</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+<cpp:endif xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">endif</cpp:directive></cpp:endif>
+
+            <decl_stmt><decl><type><specifier>auto</specifier> <specifier>const</specifier></type> <name>timeStampSize</name> <init>= <expr><sizeof>sizeof<argument_list>(<argument><expr><literal type="string">"2017-01-16T17:06:45Z"</literal></expr></argument>)</argument_list></sizeof></expr></init></decl>;</decl_stmt>
+            <decl_stmt><decl><type><name>char</name></type> <name><name>timeStamp</name><index>[<expr><name>timeStampSize</name></expr>]</index></name></decl>;</decl_stmt>
+            <decl_stmt><decl><type><specifier>const</specifier> <name>char</name> <modifier>*</modifier> <specifier>const</specifier></type> <name>fmt</name> <init>= <expr><literal type="string">"%Y-%m-%dT%H:%M:%SZ"</literal></expr></init></decl>;</decl_stmt>
+
+            <expr_stmt><expr><call><name><name>std</name><operator>::</operator><name>strftime</name></name><argument_list>(<argument><expr><name>timeStamp</name></expr></argument>, <argument><expr><name>timeStampSize</name></expr></argument>, <argument><expr><name>fmt</name></expr></argument>, <argument><expr><operator>&amp;</operator><name>timeInfo</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+
+            <return>return <expr><call><name><name>std</name><operator>::</operator><name>string</name></name><argument_list>(<argument><expr><name>timeStamp</name></expr></argument><diff:insert xmlns:diff="http://www.srcML.org/srcDiff">,<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><argument><expr><name>timeStampSize</name><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><operator>-</operator><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><literal type="number">1</literal></expr></argument></diff:insert>)</argument_list></call></expr>;</return>
+        </block_content>}</block></function>
+
+        <function><type><name><name>std</name><operator>::</operator><name>string</name></name></type> <name>fileNameTag</name><parameter_list>(<parameter><decl><type><name><name>std</name><operator>::</operator><name>vector</name><argument_list type="generic">&lt;<argument><expr><name>Tag</name></expr></argument>&gt;</argument_list></name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>tags</name></decl></parameter>)</parameter_list> <block>{<block_content>
+            <decl_stmt><decl><type><name>auto</name></type> <name>it</name> <init>= <expr><call><name><name>std</name><operator>::</operator><name>find_if</name></name><argument_list>(<argument><expr><call><name>begin</name><argument_list>(<argument><expr><name>tags</name></expr></argument>)</argument_list></call></expr></argument>,
+                                   <argument><expr><call><name>end</name><argument_list>(<argument><expr><name>tags</name></expr></argument>)</argument_list></call></expr></argument>,
+                                   <argument><expr><lambda><capture>[]</capture> <parameter_list>(<parameter><decl><type><name>Tag</name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>tag</name></decl></parameter>)</parameter_list> <block>{<block_content>
+                                       <return>return <expr><call><name><name>tag</name><operator>.</operator><name>original</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call> <operator>&gt;</operator> <literal type="number">0</literal>
+                                           <operator>&amp;&amp;</operator> <name><name>tag</name><operator>.</operator><name>original</name><index>[<expr><literal type="number">0</literal></expr>]</index></name> <operator>==</operator> <literal type="char">'#'</literal></expr>;</return> </block_content>}</block></lambda></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+            <if_stmt><if>if <condition>(<expr><name>it</name> <operator>!=</operator> <call><name><name>tags</name><operator>.</operator><name>end</name></name><argument_list>()</argument_list></call></expr>)</condition> <block>{<block_content>
+                <return>return <expr><cast type="static">static_cast<argument_list type="generic">&lt;<argument><expr><name><name>std</name><operator>::</operator><name>string</name></name></expr></argument>&gt;</argument_list><argument_list>(
+                    <argument><expr><call><name><name>it</name><operator>-&gt;</operator><name>original</name><operator>.</operator><name>substr</name></name><argument_list>(<argument><expr><literal type="number">1</literal></expr></argument>, <argument><expr><call><name><name>it</name><operator>-&gt;</operator><name>original</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call> <operator>-</operator> <literal type="number">1</literal></expr></argument>)</argument_list></call></expr></argument>
+                )</argument_list></cast></expr>;</return>
+            </block_content>}</block></if></if_stmt>
+            <return>return <expr><call><name><name>std</name><operator>::</operator><name>string</name></name><argument_list>()</argument_list></call></expr>;</return>
+        </block_content>}</block></function>
+    }</block></namespace> <comment type="line">// anonymous namespace</comment>
+
+    <constructor><name><name>JunitReporter</name><operator>::</operator><name>JunitReporter</name></name><parameter_list>( <parameter><decl><type><name>ReporterConfig</name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>_config</name></decl></parameter> )</parameter_list>
+        <member_init_list>:   <call><name>CumulativeReporterBase</name><argument_list>( <argument><expr><name>_config</name></expr></argument> )</argument_list></call>,
+            <call><name>xml</name><argument_list>( <argument><expr><call><name><name>_config</name><operator>.</operator><name>stream</name></name><argument_list>()</argument_list></call></expr></argument> )</argument_list></call>
+        </member_init_list><block>{<block_content>
+            <expr_stmt><expr><name><name>m_preferences</name><operator>.</operator><name>shouldRedirectStdOut</name></name> <operator>=</operator> <literal type="boolean">true</literal></expr>;</expr_stmt>
+            <expr_stmt><expr><name><name>m_preferences</name><operator>.</operator><name>shouldReportAllAssertions</name></name> <operator>=</operator> <literal type="boolean">true</literal></expr>;</expr_stmt>
+        </block_content>}</block></constructor>
+
+    <destructor><name><name>JunitReporter</name><operator>::</operator><name>~JunitReporter</name></name><parameter_list>()</parameter_list> <block>{<block_content/>}</block></destructor>
+
+    <function><type><name><name>std</name><operator>::</operator><name>string</name></name></type> <name><name>JunitReporter</name><operator>::</operator><name>getDescription</name></name><parameter_list>()</parameter_list> <block>{<block_content>
+        <return>return <expr><literal type="string">"Reports test results in an XML format that looks like Ant's junitreport target"</literal></expr>;</return>
+    </block_content>}</block></function>
+
+    <function><type><name>void</name></type> <name><name>JunitReporter</name><operator>::</operator><name>noMatchingTestCases</name></name><parameter_list>( <parameter><decl><type><name><name>std</name><operator>::</operator><name>string</name></name> <specifier>const</specifier><modifier>&amp;</modifier></type></decl></parameter> <comment type="block">/*spec*/</comment> )</parameter_list> <block>{<block_content/>}</block></function>
+
+    <function><type><name>void</name></type> <name><name>JunitReporter</name><operator>::</operator><name>testRunStarting</name></name><parameter_list>( <parameter><decl><type><name>TestRunInfo</name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>runInfo</name></decl></parameter> )</parameter_list>  <block>{<block_content>
+        <expr_stmt><expr><call><name><name>CumulativeReporterBase</name><operator>::</operator><name>testRunStarting</name></name><argument_list>( <argument><expr><name>runInfo</name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name><name>xml</name><operator>.</operator><name>startElement</name></name><argument_list>( <argument><expr><literal type="string">"testsuites"</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block></function>
+
+    <function><type><name>void</name></type> <name><name>JunitReporter</name><operator>::</operator><name>testGroupStarting</name></name><parameter_list>( <parameter><decl><type><name>GroupInfo</name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>groupInfo</name></decl></parameter> )</parameter_list> <block>{<block_content>
+        <expr_stmt><expr><call><name><name>suiteTimer</name><operator>.</operator><name>start</name></name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name><name>stdOutForSuite</name><operator>.</operator><name>clear</name></name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name><name>stdErrForSuite</name><operator>.</operator><name>clear</name></name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><name>unexpectedExceptions</name> <operator>=</operator> <literal type="number">0</literal></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name><name>CumulativeReporterBase</name><operator>::</operator><name>testGroupStarting</name></name><argument_list>( <argument><expr><name>groupInfo</name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block></function>
+
+    <function><type><name>void</name></type> <name><name>JunitReporter</name><operator>::</operator><name>testCaseStarting</name></name><parameter_list>( <parameter><decl><type><name>TestCaseInfo</name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>testCaseInfo</name></decl></parameter> )</parameter_list> <block>{<block_content>
+        <expr_stmt><expr><name>m_okToFail</name> <operator>=</operator> <call><name><name>testCaseInfo</name><operator>.</operator><name>okToFail</name></name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block></function>
+
+    <function><type><name>bool</name></type> <name><name>JunitReporter</name><operator>::</operator><name>assertionEnded</name></name><parameter_list>( <parameter><decl><type><name>AssertionStats</name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>assertionStats</name></decl></parameter> )</parameter_list> <block>{<block_content>
+        <if_stmt><if>if<condition>( <expr><call><name><name>assertionStats</name><operator>.</operator><name>assertionResult</name><operator>.</operator><name>getResultType</name></name><argument_list>()</argument_list></call> <operator>==</operator> <name><name>ResultWas</name><operator>::</operator><name>ThrewException</name></name> <operator>&amp;&amp;</operator> <operator>!</operator><name>m_okToFail</name></expr> )</condition><block type="pseudo"><block_content>
+            <expr_stmt><expr><name>unexpectedExceptions</name><operator>++</operator></expr>;</expr_stmt></block_content></block></if></if_stmt>
+        <return>return <expr><call><name><name>CumulativeReporterBase</name><operator>::</operator><name>assertionEnded</name></name><argument_list>( <argument><expr><name>assertionStats</name></expr></argument> )</argument_list></call></expr>;</return>
+    </block_content>}</block></function>
+
+    <function><type><name>void</name></type> <name><name>JunitReporter</name><operator>::</operator><name>testCaseEnded</name></name><parameter_list>( <parameter><decl><type><name>TestCaseStats</name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>testCaseStats</name></decl></parameter> )</parameter_list> <block>{<block_content>
+        <expr_stmt><expr><name>stdOutForSuite</name> <operator>+=</operator> <name><name>testCaseStats</name><operator>.</operator><name>stdOut</name></name></expr>;</expr_stmt>
+        <expr_stmt><expr><name>stdErrForSuite</name> <operator>+=</operator> <name><name>testCaseStats</name><operator>.</operator><name>stdErr</name></name></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name><name>CumulativeReporterBase</name><operator>::</operator><name>testCaseEnded</name></name><argument_list>( <argument><expr><name>testCaseStats</name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block></function>
+
+    <function><type><name>void</name></type> <name><name>JunitReporter</name><operator>::</operator><name>testGroupEnded</name></name><parameter_list>( <parameter><decl><type><name>TestGroupStats</name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>testGroupStats</name></decl></parameter> )</parameter_list> <block>{<block_content>
+        <decl_stmt><decl><type><name>double</name></type> <name>suiteTime</name> <init>= <expr><call><name><name>suiteTimer</name><operator>.</operator><name>getElapsedSeconds</name></name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+        <expr_stmt><expr><call><name><name>CumulativeReporterBase</name><operator>::</operator><name>testGroupEnded</name></name><argument_list>( <argument><expr><name>testGroupStats</name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name>writeGroup</name><argument_list>( <argument><expr><operator>*</operator><call><name><name>m_testGroups</name><operator>.</operator><name>back</name></name><argument_list>()</argument_list></call></expr></argument>, <argument><expr><name>suiteTime</name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block></function>
+
+    <function><type><name>void</name></type> <name><name>JunitReporter</name><operator>::</operator><name>testRunEndedCumulative</name></name><parameter_list>()</parameter_list> <block>{<block_content>
+        <expr_stmt><expr><call><name><name>xml</name><operator>.</operator><name>endElement</name></name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block></function>
+
+    <function><type><name>void</name></type> <name><name>JunitReporter</name><operator>::</operator><name>writeGroup</name></name><parameter_list>( <parameter><decl><type><name>TestGroupNode</name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>groupNode</name></decl></parameter>, <parameter><decl><type><name>double</name></type> <name>suiteTime</name></decl></parameter> )</parameter_list> <block>{<block_content>
+        <decl_stmt><decl><type><name><name>XmlWriter</name><operator>::</operator><name>ScopedElement</name></name></type> <name>e</name> <init>= <expr><call><name><name>xml</name><operator>.</operator><name>scopedElement</name></name><argument_list>( <argument><expr><literal type="string">"testsuite"</literal></expr></argument> )</argument_list></call></expr></init></decl>;</decl_stmt>
+
+        <decl_stmt><decl><type><name>TestGroupStats</name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>stats</name> <init>= <expr><name><name>groupNode</name><operator>.</operator><name>value</name></name></expr></init></decl>;</decl_stmt>
+        <expr_stmt><expr><call><name><name>xml</name><operator>.</operator><name>writeAttribute</name></name><argument_list>( <argument><expr><literal type="string">"name"</literal><name>_sr</name></expr></argument>, <argument><expr><name><name>stats</name><operator>.</operator><name>groupInfo</name><operator>.</operator><name>name</name></name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name><name>xml</name><operator>.</operator><name>writeAttribute</name></name><argument_list>( <argument><expr><literal type="string">"errors"</literal><name>_sr</name></expr></argument>, <argument><expr><name>unexpectedExceptions</name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name><name>xml</name><operator>.</operator><name>writeAttribute</name></name><argument_list>( <argument><expr><literal type="string">"failures"</literal><name>_sr</name></expr></argument>, <argument><expr><name><name>stats</name><operator>.</operator><name>totals</name><operator>.</operator><name>assertions</name><operator>.</operator><name>failed</name></name><operator>-</operator><name>unexpectedExceptions</name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name><name>xml</name><operator>.</operator><name>writeAttribute</name></name><argument_list>( <argument><expr><literal type="string">"tests"</literal><name>_sr</name></expr></argument>, <argument><expr><call><name><name>stats</name><operator>.</operator><name>totals</name><operator>.</operator><name>assertions</name><operator>.</operator><name>total</name></name><argument_list>()</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name><name>xml</name><operator>.</operator><name>writeAttribute</name></name><argument_list>( <argument><expr><literal type="string">"hostname"</literal><name>_sr</name></expr></argument>, <argument><expr><literal type="string">"tbd"</literal><name>_sr</name></expr></argument> )</argument_list></call></expr>;</expr_stmt> <comment type="line">// !TBD</comment>
+        <if_stmt><if>if<condition>( <expr><call><name><name>m_config</name><operator>-&gt;</operator><name>showDurations</name></name><argument_list>()</argument_list></call> <operator>==</operator> <name><name>ShowDurations</name><operator>::</operator><name>Never</name></name></expr> )</condition><block type="pseudo"><block_content>
+            <expr_stmt><expr><call><name><name>xml</name><operator>.</operator><name>writeAttribute</name></name><argument_list>( <argument><expr><literal type="string">"time"</literal><name>_sr</name></expr></argument>, <argument><expr><literal type="string">""</literal><name>_sr</name></expr></argument> )</argument_list></call></expr>;</expr_stmt></block_content></block></if>
+        <else>else<block type="pseudo"><block_content>
+            <expr_stmt><expr><call><name><name>xml</name><operator>.</operator><name>writeAttribute</name></name><argument_list>( <argument><expr><literal type="string">"time"</literal><name>_sr</name></expr></argument>, <argument><expr><name>suiteTime</name></expr></argument> )</argument_list></call></expr>;</expr_stmt></block_content></block></else></if_stmt>
+        <expr_stmt><expr><call><name><name>xml</name><operator>.</operator><name>writeAttribute</name></name><argument_list>( <argument><expr><literal type="string">"timestamp"</literal><name>_sr</name></expr></argument>, <argument><expr><call><name>getCurrentTimestamp</name><argument_list>()</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+
+        <comment type="line">// Write properties if there are any</comment>
+        <if_stmt><if>if <condition>(<expr><call><name><name>m_config</name><operator>-&gt;</operator><name>hasTestFilters</name></name><argument_list>()</argument_list></call> <operator>||</operator> <call><name><name>m_config</name><operator>-&gt;</operator><name>rngSeed</name></name><argument_list>()</argument_list></call> <operator>!=</operator> <literal type="number">0</literal></expr>)</condition> <block>{<block_content>
+            <decl_stmt><decl><type><name>auto</name></type> <name>properties</name> <init>= <expr><call><name><name>xml</name><operator>.</operator><name>scopedElement</name></name><argument_list>(<argument><expr><literal type="string">"properties"</literal></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+            <if_stmt><if>if <condition>(<expr><call><name><name>m_config</name><operator>-&gt;</operator><name>hasTestFilters</name></name><argument_list>()</argument_list></call></expr>)</condition> <block>{<block_content>
+                <expr_stmt><expr><call><name><name>xml</name><operator>.</operator><name>scopedElement</name></name><argument_list>(<argument><expr><literal type="string">"property"</literal></expr></argument>)</argument_list></call>
+                    <operator>.</operator><call><name>writeAttribute</name><argument_list>(<argument><expr><literal type="string">"name"</literal><name>_sr</name></expr></argument>, <argument><expr><literal type="string">"filters"</literal><name>_sr</name></expr></argument>)</argument_list></call>
+                    <operator>.</operator><call><name>writeAttribute</name><argument_list>(<argument><expr><literal type="string">"value"</literal><name>_sr</name></expr></argument>, <argument><expr><call><name>serializeFilters</name><argument_list>(<argument><expr><call><name><name>m_config</name><operator>-&gt;</operator><name>getTestsOrTags</name></name><argument_list>()</argument_list></call></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+            </block_content>}</block></if></if_stmt>
+            <if_stmt><if>if <condition>(<expr><call><name><name>m_config</name><operator>-&gt;</operator><name>rngSeed</name></name><argument_list>()</argument_list></call> <operator>!=</operator> <literal type="number">0</literal></expr>)</condition> <block>{<block_content>
+                <expr_stmt><expr><call><name><name>xml</name><operator>.</operator><name>scopedElement</name></name><argument_list>(<argument><expr><literal type="string">"property"</literal></expr></argument>)</argument_list></call>
+                    <operator>.</operator><call><name>writeAttribute</name><argument_list>(<argument><expr><literal type="string">"name"</literal><name>_sr</name></expr></argument>, <argument><expr><literal type="string">"random-seed"</literal><name>_sr</name></expr></argument>)</argument_list></call>
+                    <operator>.</operator><call><name>writeAttribute</name><argument_list>(<argument><expr><literal type="string">"value"</literal><name>_sr</name></expr></argument>, <argument><expr><call><name><name>m_config</name><operator>-&gt;</operator><name>rngSeed</name></name><argument_list>()</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+            </block_content>}</block></if></if_stmt>
+        </block_content>}</block></if></if_stmt>
+
+        <comment type="line">// Write test cases</comment>
+        <for>for<control>( <init><decl><type><specifier>auto</specifier> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>child</name> <range>: <expr><name><name>groupNode</name><operator>.</operator><name>children</name></name></expr></range></decl></init> )</control><block type="pseudo"><block_content>
+            <expr_stmt><expr><call><name>writeTestCase</name><argument_list>( <argument><expr><operator>*</operator><name>child</name></expr></argument> )</argument_list></call></expr>;</expr_stmt></block_content></block></for>
+
+        <expr_stmt><expr><call><name><name>xml</name><operator>.</operator><name>scopedElement</name></name><argument_list>( <argument><expr><literal type="string">"system-out"</literal></expr></argument> )</argument_list></call><operator>.</operator><call><name>writeText</name><argument_list>( <argument><expr><call><name>trim</name><argument_list>( <argument><expr><name>stdOutForSuite</name></expr></argument> )</argument_list></call></expr></argument>, <argument><expr><name><name>XmlFormatting</name><operator>::</operator><name>Newline</name></name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name><name>xml</name><operator>.</operator><name>scopedElement</name></name><argument_list>( <argument><expr><literal type="string">"system-err"</literal></expr></argument> )</argument_list></call><operator>.</operator><call><name>writeText</name><argument_list>( <argument><expr><call><name>trim</name><argument_list>( <argument><expr><name>stdErrForSuite</name></expr></argument> )</argument_list></call></expr></argument>, <argument><expr><name><name>XmlFormatting</name><operator>::</operator><name>Newline</name></name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block></function>
+
+    <function><type><name>void</name></type> <name><name>JunitReporter</name><operator>::</operator><name>writeTestCase</name></name><parameter_list>( <parameter><decl><type><name>TestCaseNode</name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>testCaseNode</name></decl></parameter> )</parameter_list> <block>{<block_content>
+        <decl_stmt><decl><type><name>TestCaseStats</name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>stats</name> <init>= <expr><name><name>testCaseNode</name><operator>.</operator><name>value</name></name></expr></init></decl>;</decl_stmt>
+
+        <comment type="line">// All test cases have exactly one section - which represents the</comment>
+        <comment type="line">// test case itself. That section may have 0-n nested sections</comment>
+        <expr_stmt><expr><call><name>assert</name><argument_list>( <argument><expr><call><name><name>testCaseNode</name><operator>.</operator><name>children</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call> <operator>==</operator> <literal type="number">1</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        <decl_stmt><decl><type><name>SectionNode</name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>rootSection</name> <init>= <expr><operator>*</operator><call><name><name>testCaseNode</name><operator>.</operator><name>children</name><operator>.</operator><name>front</name></name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+
+        <decl_stmt><decl><type><name><name>std</name><operator>::</operator><name>string</name></name></type> <name>className</name> <init>= <expr><name><name>stats</name><operator>.</operator><name>testInfo</name><operator>-&gt;</operator><name>className</name></name></expr></init></decl>;</decl_stmt>
+
+        <if_stmt><if>if<condition>( <expr><call><name><name>className</name><operator>.</operator><name>empty</name></name><argument_list>()</argument_list></call></expr> )</condition> <block>{<block_content>
+            <expr_stmt><expr><name>className</name> <operator>=</operator> <call><name>fileNameTag</name><argument_list>(<argument><expr><name><name>stats</name><operator>.</operator><name>testInfo</name><operator>-&gt;</operator><name>tags</name></name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+            <if_stmt><if>if <condition>( <expr><call><name><name>className</name><operator>.</operator><name>empty</name></name><argument_list>()</argument_list></call></expr> )</condition><block type="pseudo"><block_content>
+                <expr_stmt><expr><name>className</name> <operator>=</operator> <literal type="string">"global"</literal></expr>;</expr_stmt></block_content></block></if></if_stmt>
+        </block_content>}</block></if></if_stmt>
+
+        <if_stmt><if>if <condition>( <expr><operator>!</operator><call><name><name>m_config</name><operator>-&gt;</operator><name>name</name></name><argument_list>()</argument_list></call><operator>.</operator><call><name>empty</name><argument_list>()</argument_list></call></expr> )</condition><block type="pseudo"><block_content>
+            <expr_stmt><expr><name>className</name> <operator>=</operator> <call><name><name>m_config</name><operator>-&gt;</operator><name>name</name></name><argument_list>()</argument_list></call> <operator>+</operator> <literal type="string">"."</literal> <operator>+</operator> <name>className</name></expr>;</expr_stmt></block_content></block></if></if_stmt>
+
+        <expr_stmt><expr><call><name>writeSection</name><argument_list>( <argument><expr><name>className</name></expr></argument>, <argument><expr><literal type="string">""</literal></expr></argument>, <argument><expr><name>rootSection</name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block></function>
+
+    <function><type><name>void</name></type> <name><name>JunitReporter</name><operator>::</operator><name>writeSection</name></name><parameter_list>(  <parameter><decl><type><name><name>std</name><operator>::</operator><name>string</name></name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>className</name></decl></parameter>,
+                        <parameter><decl><type><name><name>std</name><operator>::</operator><name>string</name></name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>rootName</name></decl></parameter>,
+                        <parameter><decl><type><name>SectionNode</name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>sectionNode</name></decl></parameter> )</parameter_list> <block>{<block_content>
+        <decl_stmt><decl><type><name><name>std</name><operator>::</operator><name>string</name></name></type> <name>name</name> <init>= <expr><call><name>trim</name><argument_list>( <argument><expr><name><name>sectionNode</name><operator>.</operator><name>stats</name><operator>.</operator><name>sectionInfo</name><operator>.</operator><name>name</name></name></expr></argument> )</argument_list></call></expr></init></decl>;</decl_stmt>
+        <if_stmt><if>if<condition>( <expr><operator>!</operator><call><name><name>rootName</name><operator>.</operator><name>empty</name></name><argument_list>()</argument_list></call></expr> )</condition><block type="pseudo"><block_content>
+            <expr_stmt><expr><name>name</name> <operator>=</operator> <name>rootName</name> <operator>+</operator> <literal type="char">'/'</literal> <operator>+</operator> <name>name</name></expr>;</expr_stmt></block_content></block></if></if_stmt>
+
+        <if_stmt><if>if<condition>( <expr><operator>!</operator><call><name><name>sectionNode</name><operator>.</operator><name>assertions</name><operator>.</operator><name>empty</name></name><argument_list>()</argument_list></call> <operator>||</operator>
+            <operator>!</operator><call><name><name>sectionNode</name><operator>.</operator><name>stdOut</name><operator>.</operator><name>empty</name></name><argument_list>()</argument_list></call> <operator>||</operator>
+            <operator>!</operator><call><name><name>sectionNode</name><operator>.</operator><name>stdErr</name><operator>.</operator><name>empty</name></name><argument_list>()</argument_list></call></expr> )</condition> <block>{<block_content>
+            <decl_stmt><decl><type><name><name>XmlWriter</name><operator>::</operator><name>ScopedElement</name></name></type> <name>e</name> <init>= <expr><call><name><name>xml</name><operator>.</operator><name>scopedElement</name></name><argument_list>( <argument><expr><literal type="string">"testcase"</literal></expr></argument> )</argument_list></call></expr></init></decl>;</decl_stmt>
+            <if_stmt><if>if<condition>( <expr><call><name><name>className</name><operator>.</operator><name>empty</name></name><argument_list>()</argument_list></call></expr> )</condition> <block>{<block_content>
+                <expr_stmt><expr><call><name><name>xml</name><operator>.</operator><name>writeAttribute</name></name><argument_list>( <argument><expr><literal type="string">"classname"</literal><name>_sr</name></expr></argument>, <argument><expr><name>name</name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+                <expr_stmt><expr><call><name><name>xml</name><operator>.</operator><name>writeAttribute</name></name><argument_list>( <argument><expr><literal type="string">"name"</literal><name>_sr</name></expr></argument>, <argument><expr><literal type="string">"root"</literal><name>_sr</name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+            </block_content>}</block></if>
+            <else>else <block>{<block_content>
+                <expr_stmt><expr><call><name><name>xml</name><operator>.</operator><name>writeAttribute</name></name><argument_list>( <argument><expr><literal type="string">"classname"</literal><name>_sr</name></expr></argument>, <argument><expr><name>className</name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+                <expr_stmt><expr><call><name><name>xml</name><operator>.</operator><name>writeAttribute</name></name><argument_list>( <argument><expr><literal type="string">"name"</literal><name>_sr</name></expr></argument>, <argument><expr><name>name</name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+            </block_content>}</block></else></if_stmt>
+            <expr_stmt><expr><call><name><name>xml</name><operator>.</operator><name>writeAttribute</name></name><argument_list>( <argument><expr><literal type="string">"time"</literal><name>_sr</name></expr></argument>, <argument><expr><call><name><operator>::</operator><name>Catch</name><operator>::</operator><name>Detail</name><operator>::</operator><name>stringify</name></name><argument_list>( <argument><expr><name><name>sectionNode</name><operator>.</operator><name>stats</name><operator>.</operator><name>durationInSeconds</name></name></expr></argument> )</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+            <comment type="line">// This is not ideal, but it should be enough to mimic gtest's</comment>
+            <comment type="line">// junit output.</comment>
+            <comment type="line">// Ideally the JUnit reporter would also handle `skipTest`</comment>
+            <comment type="line">// events and write those out appropriately.</comment>
+            <expr_stmt><expr><call><name><name>xml</name><operator>.</operator><name>writeAttribute</name></name><argument_list>( <argument><expr><literal type="string">"status"</literal><name>_sr</name></expr></argument>, <argument><expr><literal type="string">"run"</literal><name>_sr</name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+
+            <expr_stmt><expr><call><name>writeAssertions</name><argument_list>( <argument><expr><name>sectionNode</name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+
+            <if_stmt><if>if<condition>( <expr><operator>!</operator><call><name><name>sectionNode</name><operator>.</operator><name>stdOut</name><operator>.</operator><name>empty</name></name><argument_list>()</argument_list></call></expr> )</condition><block type="pseudo"><block_content>
+                <expr_stmt><expr><call><name><name>xml</name><operator>.</operator><name>scopedElement</name></name><argument_list>( <argument><expr><literal type="string">"system-out"</literal></expr></argument> )</argument_list></call><operator>.</operator><call><name>writeText</name><argument_list>( <argument><expr><call><name>trim</name><argument_list>( <argument><expr><name><name>sectionNode</name><operator>.</operator><name>stdOut</name></name></expr></argument> )</argument_list></call></expr></argument>, <argument><expr><name><name>XmlFormatting</name><operator>::</operator><name>Newline</name></name></expr></argument> )</argument_list></call></expr>;</expr_stmt></block_content></block></if></if_stmt>
+            <if_stmt><if>if<condition>( <expr><operator>!</operator><call><name><name>sectionNode</name><operator>.</operator><name>stdErr</name><operator>.</operator><name>empty</name></name><argument_list>()</argument_list></call></expr> )</condition><block type="pseudo"><block_content>
+                <expr_stmt><expr><call><name><name>xml</name><operator>.</operator><name>scopedElement</name></name><argument_list>( <argument><expr><literal type="string">"system-err"</literal></expr></argument> )</argument_list></call><operator>.</operator><call><name>writeText</name><argument_list>( <argument><expr><call><name>trim</name><argument_list>( <argument><expr><name><name>sectionNode</name><operator>.</operator><name>stdErr</name></name></expr></argument> )</argument_list></call></expr></argument>, <argument><expr><name><name>XmlFormatting</name><operator>::</operator><name>Newline</name></name></expr></argument> )</argument_list></call></expr>;</expr_stmt></block_content></block></if></if_stmt>
+        </block_content>}</block></if></if_stmt>
+        <for>for<control>( <init><decl><type><specifier>auto</specifier> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>childNode</name> <range>: <expr><name><name>sectionNode</name><operator>.</operator><name>childSections</name></name></expr></range></decl></init> )</control><block type="pseudo"><block_content>
+            <if_stmt><if>if<condition>( <expr><call><name><name>className</name><operator>.</operator><name>empty</name></name><argument_list>()</argument_list></call></expr> )</condition><block type="pseudo"><block_content>
+                <expr_stmt><expr><call><name>writeSection</name><argument_list>( <argument><expr><name>name</name></expr></argument>, <argument><expr><literal type="string">""</literal></expr></argument>, <argument><expr><operator>*</operator><name>childNode</name></expr></argument> )</argument_list></call></expr>;</expr_stmt></block_content></block></if>
+            <else>else<block type="pseudo"><block_content>
+                <expr_stmt><expr><call><name>writeSection</name><argument_list>( <argument><expr><name>className</name></expr></argument>, <argument><expr><name>name</name></expr></argument>, <argument><expr><operator>*</operator><name>childNode</name></expr></argument> )</argument_list></call></expr>;</expr_stmt></block_content></block></else></if_stmt></block_content></block></for>
+    </block_content>}</block></function>
+
+    <function><type><name>void</name></type> <name><name>JunitReporter</name><operator>::</operator><name>writeAssertions</name></name><parameter_list>( <parameter><decl><type><name>SectionNode</name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>sectionNode</name></decl></parameter> )</parameter_list> <block>{<block_content>
+        <for>for<control>( <init><decl><type><specifier>auto</specifier> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>assertion</name> <range>: <expr><name><name>sectionNode</name><operator>.</operator><name>assertions</name></name></expr></range></decl></init> )</control><block type="pseudo"><block_content>
+            <expr_stmt><expr><call><name>writeAssertion</name><argument_list>( <argument><expr><name>assertion</name></expr></argument> )</argument_list></call></expr>;</expr_stmt></block_content></block></for>
+    </block_content>}</block></function>
+
+    <function><type><name>void</name></type> <name><name>JunitReporter</name><operator>::</operator><name>writeAssertion</name></name><parameter_list>( <parameter><decl><type><name>AssertionStats</name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>stats</name></decl></parameter> )</parameter_list> <block>{<block_content>
+        <decl_stmt><decl><type><name>AssertionResult</name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>result</name> <init>= <expr><name><name>stats</name><operator>.</operator><name>assertionResult</name></name></expr></init></decl>;</decl_stmt>
+        <if_stmt><if>if<condition>( <expr><operator>!</operator><call><name><name>result</name><operator>.</operator><name>isOk</name></name><argument_list>()</argument_list></call></expr> )</condition> <block>{<block_content>
+            <decl_stmt><decl><type><name><name>std</name><operator>::</operator><name>string</name></name></type> <name>elementName</name></decl>;</decl_stmt>
+            <switch>switch<condition>( <expr><call><name><name>result</name><operator>.</operator><name>getResultType</name></name><argument_list>()</argument_list></call></expr> )</condition> <block>{<block_content>
+                <case>case <expr><name><name>ResultWas</name><operator>::</operator><name>ThrewException</name></name></expr>:</case>
+                <case>case <expr><name><name>ResultWas</name><operator>::</operator><name>FatalErrorCondition</name></name></expr>:</case>
+                    <expr_stmt><expr><name>elementName</name> <operator>=</operator> <literal type="string">"error"</literal></expr>;</expr_stmt>
+                    <break>break;</break>
+                <case>case <expr><name><name>ResultWas</name><operator>::</operator><name>ExplicitFailure</name></name></expr>:</case>
+                <case>case <expr><name><name>ResultWas</name><operator>::</operator><name>ExpressionFailed</name></name></expr>:</case>
+                <case>case <expr><name><name>ResultWas</name><operator>::</operator><name>DidntThrowException</name></name></expr>:</case>
+                    <expr_stmt><expr><name>elementName</name> <operator>=</operator> <literal type="string">"failure"</literal></expr>;</expr_stmt>
+                    <break>break;</break>
+
+                <comment type="line">// We should never see these here:</comment>
+                <case>case <expr><name><name>ResultWas</name><operator>::</operator><name>Info</name></name></expr>:</case>
+                <case>case <expr><name><name>ResultWas</name><operator>::</operator><name>Warning</name></name></expr>:</case>
+                <case>case <expr><name><name>ResultWas</name><operator>::</operator><name>Ok</name></name></expr>:</case>
+                <case>case <expr><name><name>ResultWas</name><operator>::</operator><name>Unknown</name></name></expr>:</case>
+                <case>case <expr><name><name>ResultWas</name><operator>::</operator><name>FailureBit</name></name></expr>:</case>
+                <case>case <expr><name><name>ResultWas</name><operator>::</operator><name>Exception</name></name></expr>:</case>
+                    <expr_stmt><expr><name>elementName</name> <operator>=</operator> <literal type="string">"internalError"</literal></expr>;</expr_stmt>
+                    <break>break;</break>
+            </block_content>}</block></switch>
+
+            <decl_stmt><decl><type><name><name>XmlWriter</name><operator>::</operator><name>ScopedElement</name></name></type> <name>e</name> <init>= <expr><call><name><name>xml</name><operator>.</operator><name>scopedElement</name></name><argument_list>( <argument><expr><name>elementName</name></expr></argument> )</argument_list></call></expr></init></decl>;</decl_stmt>
+
+            <expr_stmt><expr><call><name><name>xml</name><operator>.</operator><name>writeAttribute</name></name><argument_list>( <argument><expr><literal type="string">"message"</literal><name>_sr</name></expr></argument>, <argument><expr><call><name><name>result</name><operator>.</operator><name>getExpression</name></name><argument_list>()</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+            <expr_stmt><expr><call><name><name>xml</name><operator>.</operator><name>writeAttribute</name></name><argument_list>( <argument><expr><literal type="string">"type"</literal><name>_sr</name></expr></argument>, <argument><expr><call><name><name>result</name><operator>.</operator><name>getTestMacroName</name></name><argument_list>()</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+
+            <decl_stmt><decl><type><name>ReusableStringStream</name></type> <name>rss</name></decl>;</decl_stmt>
+            <if_stmt><if>if <condition>(<expr><call><name><name>stats</name><operator>.</operator><name>totals</name><operator>.</operator><name>assertions</name><operator>.</operator><name>total</name></name><argument_list>()</argument_list></call> <operator>&gt;</operator> <literal type="number">0</literal></expr>)</condition> <block>{<block_content>
+                <expr_stmt><expr><name>rss</name> <operator>&lt;&lt;</operator> <literal type="string">"FAILED"</literal> <operator>&lt;&lt;</operator> <literal type="string">":\n"</literal></expr>;</expr_stmt>
+                <if_stmt><if>if <condition>(<expr><call><name><name>result</name><operator>.</operator><name>hasExpression</name></name><argument_list>()</argument_list></call></expr>)</condition> <block>{<block_content>
+                    <expr_stmt><expr><name>rss</name> <operator>&lt;&lt;</operator> <literal type="string">"  "</literal></expr>;</expr_stmt>
+                    <expr_stmt><expr><name>rss</name> <operator>&lt;&lt;</operator> <call><name><name>result</name><operator>.</operator><name>getExpressionInMacro</name></name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+                    <expr_stmt><expr><name>rss</name> <operator>&lt;&lt;</operator> <literal type="char">'\n'</literal></expr>;</expr_stmt>
+                </block_content>}</block></if></if_stmt>
+                <if_stmt><if>if <condition>(<expr><call><name><name>result</name><operator>.</operator><name>hasExpandedExpression</name></name><argument_list>()</argument_list></call></expr>)</condition> <block>{<block_content>
+                    <expr_stmt><expr><name>rss</name> <operator>&lt;&lt;</operator> <literal type="string">"with expansion:\n"</literal></expr>;</expr_stmt>
+                    <expr_stmt><expr><name>rss</name> <operator>&lt;&lt;</operator> <call><name><name>TextFlow</name><operator>::</operator><name>Column</name></name><argument_list>(<argument><expr><call><name><name>result</name><operator>.</operator><name>getExpandedExpression</name></name><argument_list>()</argument_list></call></expr></argument>)</argument_list></call><operator>.</operator><call><name>indent</name><argument_list>(<argument><expr><literal type="number">2</literal></expr></argument>)</argument_list></call> <operator>&lt;&lt;</operator> <literal type="char">'\n'</literal></expr>;</expr_stmt>
+                </block_content>}</block></if></if_stmt>
+            </block_content>}</block></if> <else>else <block>{<block_content>
+                <expr_stmt><expr><name>rss</name> <operator>&lt;&lt;</operator> <literal type="char">'\n'</literal></expr>;</expr_stmt>
+            </block_content>}</block></else></if_stmt>
+
+            <if_stmt><if>if<condition>( <expr><operator>!</operator><call><name><name>result</name><operator>.</operator><name>getMessage</name></name><argument_list>()</argument_list></call><operator>.</operator><call><name>empty</name><argument_list>()</argument_list></call></expr> )</condition><block type="pseudo"><block_content>
+                <expr_stmt><expr><name>rss</name> <operator>&lt;&lt;</operator> <call><name><name>result</name><operator>.</operator><name>getMessage</name></name><argument_list>()</argument_list></call> <operator>&lt;&lt;</operator> <literal type="char">'\n'</literal></expr>;</expr_stmt></block_content></block></if></if_stmt>
+            <for>for<control>( <init><decl><type><specifier>auto</specifier> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>msg</name> <range>: <expr><name><name>stats</name><operator>.</operator><name>infoMessages</name></name></expr></range></decl></init> )</control><block type="pseudo"><block_content>
+                <if_stmt><if>if<condition>( <expr><name><name>msg</name><operator>.</operator><name>type</name></name> <operator>==</operator> <name><name>ResultWas</name><operator>::</operator><name>Info</name></name></expr> )</condition><block type="pseudo"><block_content>
+                    <expr_stmt><expr><name>rss</name> <operator>&lt;&lt;</operator> <name><name>msg</name><operator>.</operator><name>message</name></name> <operator>&lt;&lt;</operator> <literal type="char">'\n'</literal></expr>;</expr_stmt></block_content></block></if></if_stmt></block_content></block></for>
+
+            <expr_stmt><expr><name>rss</name> <operator>&lt;&lt;</operator> <literal type="string">"at "</literal> <operator>&lt;&lt;</operator> <call><name><name>result</name><operator>.</operator><name>getSourceInfo</name></name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+            <expr_stmt><expr><call><name><name>xml</name><operator>.</operator><name>writeText</name></name><argument_list>( <argument><expr><call><name><name>rss</name><operator>.</operator><name>str</name></name><argument_list>()</argument_list></call></expr></argument>, <argument><expr><name><name>XmlFormatting</name><operator>::</operator><name>Newline</name></name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        </block_content>}</block></if></if_stmt>
+    </block_content>}</block></function>
+
+}</block></namespace> <comment type="line">// end namespace Catch</comment>
+</unit>

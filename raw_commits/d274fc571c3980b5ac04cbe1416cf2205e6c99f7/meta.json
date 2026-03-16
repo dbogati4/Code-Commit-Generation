@@ -1,0 +1,8 @@
+{
+  "commit_id": "d274fc571c3980b5ac04cbe1416cf2205e6c99f7",
+  "parent_id": "7e15d9b20bc9751e7fa985252fc43a6e8082dad7",
+  "message": "Added noexcept to CustomStdException destructor",
+  "changed_files": [
+    "projects/SelfTest/ExceptionTests.cpp"
+  ]
+}

@@ -1,0 +1,8 @@
+{
+  "commit_id": "cf6dd937ab2ff62d29b34d62411cfd03d3822021",
+  "parent_id": "2ce64d1d8f265bba48f3b7bb2130d0cfbfb51ed4",
+  "message": "Add test for `FatalConditionHandler` and stack unwinding",
+  "changed_files": [
+    "tests/SelfTest/UsageTests/Misc.tests.cpp"
+  ]
+}

@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" xmlns:diff="http://www.srcML.org/srcDiff" revision="1.0.0" language="C++" filename="C:\Users\saile\AppData\Local\Temp\catch2_100_z8gzpiwf\88d7b8da25e9975793099bb4003a6f6729913e70\include_internal_catch_fatal_condition_cpp\include_internal_catch_fatal_condition_cpp.old|C:\Users\saile\AppData\Local\Temp\catch2_100_z8gzpiwf\88d7b8da25e9975793099bb4003a6f6729913e70\include_internal_catch_fatal_condition_cpp\include_internal_catch_fatal_condition_cpp.new"><comment type="block">/*
+ *  Created by Phil on 21/08/2014
+ *  Copyright 2014 Two Blue Cubes Ltd. All rights reserved.
+ *
+ *  Distributed under the Boost Software License, Version 1.0. (See accompanying
+ *  file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
+ *
+ */</comment>
+
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">"catch_fatal_condition.h"</cpp:file></cpp:include>
+
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">"catch_context.h"</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">"catch_interfaces_capture.h"</cpp:file></cpp:include>
+
+<cpp:if xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">if</cpp:directive> <expr><call><name>defined</name><argument_list>(<argument><expr><name>__GNUC__</name></expr></argument>)</argument_list></call></expr></cpp:if>
+<cpp:pragma xmlns:cpp="http://www.srcML.org/srcML/cpp">#    <cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">pragma</cpp:directive> <name>GCC</name> <name>diagnostic</name> <name>push</name></cpp:pragma>
+<cpp:pragma xmlns:cpp="http://www.srcML.org/srcML/cpp">#    <cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">pragma</cpp:directive> <name>GCC</name> <name>diagnostic</name> <name>ignored</name> <cpp:literal xmlns:cpp="http://www.srcML.org/srcML/cpp">"-Wmissing-field-initializers"</cpp:literal></cpp:pragma>
+<cpp:endif xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">endif</cpp:directive></cpp:endif>
+
+<cpp:if xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">if</cpp:directive> <expr><call><name>defined</name><argument_list>( <argument><expr><name>CATCH_CONFIG_WINDOWS_SEH</name></expr></argument> )</argument_list></call> <operator>||</operator> <call><name>defined</name><argument_list>( <argument><expr><name>CATCH_CONFIG_POSIX_SIGNALS</name></expr></argument> )</argument_list></call></expr></cpp:if>
+
+<namespace>namespace <block>{
+    <comment type="line">// Report the error condition</comment>
+    <function><type><name>void</name></type> <name>reportFatal</name><parameter_list>( <parameter><decl><type><name>char</name> <specifier>const</specifier> <modifier>*</modifier> <specifier>const</specifier></type> <name>message</name></decl></parameter> )</parameter_list> <block>{<block_content>
+        <expr_stmt><expr><call><name><name>Catch</name><operator>::</operator><name>getCurrentContext</name></name><argument_list>()</argument_list></call><operator>.</operator><call><name>getResultCapture</name><argument_list>()</argument_list></call><operator>-&gt;</operator><call><name>handleFatalErrorCondition</name><argument_list>( <argument><expr><name>message</name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block></function>
+}</block></namespace>
+
+<cpp:endif xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">endif</cpp:directive></cpp:endif> <comment type="line">// signals/SEH handling</comment>
+
+<cpp:if xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">if</cpp:directive> <expr><call><name>defined</name><argument_list>( <argument><expr><name>CATCH_CONFIG_WINDOWS_SEH</name></expr></argument> )</argument_list></call></expr></cpp:if>
+
+<namespace>namespace <name>Catch</name> <block>{
+    <struct>struct <name>SignalDefs</name> <block>{<public type="default"> <decl_stmt><decl><type><name>DWORD</name></type> <name>id</name></decl>;</decl_stmt> <decl_stmt><decl><type><specifier>const</specifier> <name>char</name><modifier>*</modifier></type> <name>name</name></decl>;</decl_stmt> </public>}</block>;</struct>
+
+    <comment type="line">// There is no 1-1 mapping between signals and windows exceptions.</comment>
+    <comment type="line">// Windows can easily distinguish between SO and SigSegV,</comment>
+    <comment type="line">// but SigInt, SigTerm, etc are handled differently.</comment>
+    <decl_stmt><decl><type><specifier>static</specifier> <name>SignalDefs</name></type> <name><name>signalDefs</name><index>[]</index></name> <init>= <expr><block>{
+        <expr><block>{ <expr><name>EXCEPTION_ILLEGAL_INSTRUCTION</name></expr>,  <expr><literal type="string">"SIGILL - Illegal instruction signal"</literal></expr> }</block></expr>,
+        <expr><block>{ <expr><name>EXCEPTION_STACK_OVERFLOW</name></expr>, <expr><literal type="string">"SIGSEGV - Stack overflow"</literal></expr> }</block></expr>,
+        <expr><block>{ <expr><name>EXCEPTION_ACCESS_VIOLATION</name></expr>, <expr><literal type="string">"SIGSEGV - Segmentation violation signal"</literal></expr> }</block></expr>,
+        <expr><block>{ <expr><name>EXCEPTION_INT_DIVIDE_BY_ZERO</name></expr>, <expr><literal type="string">"Divide by zero error"</literal></expr> }</block></expr>,
+    }</block></expr></init></decl>;</decl_stmt>
+
+    <function><type><name>LONG</name> <name>CALLBACK</name></type> <name><name>FatalConditionHandler</name><operator>::</operator><name>handleVectoredException</name></name><parameter_list>(<parameter><decl><type><name>PEXCEPTION_POINTERS</name></type> <name>ExceptionInfo</name></decl></parameter>)</parameter_list> <block>{<block_content>
+        <for>for <control>(<init><decl><type><specifier>auto</specifier> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>def</name> <range>: <expr><name>signalDefs</name></expr></range></decl></init>)</control> <block>{<block_content>
+            <if_stmt><if>if <condition>(<expr><name><name>ExceptionInfo</name><operator>-&gt;</operator><name>ExceptionRecord</name><operator>-&gt;</operator><name>ExceptionCode</name></name> <operator>==</operator> <name><name>def</name><operator>.</operator><name>id</name></name></expr>)</condition> <block>{<block_content>
+                <expr_stmt><expr><call><name>reportFatal</name><argument_list>(<argument><expr><name><name>def</name><operator>.</operator><name>name</name></name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+            </block_content>}</block></if></if_stmt>
+        </block_content>}</block></for>
+        <comment type="line">// If its not an exception we care about, pass it along.</comment>
+        <comment type="line">// This stops us from eating debugger breaks etc.</comment>
+        <return>return <expr><name>EXCEPTION_CONTINUE_SEARCH</name></expr>;</return>
+    </block_content>}</block></function>
+
+    <constructor><name><name>FatalConditionHandler</name><operator>::</operator><name>FatalConditionHandler</name></name><parameter_list>()</parameter_list> <block>{<block_content>
+        <expr_stmt><expr><name>isSet</name> <operator>=</operator> <literal type="boolean">true</literal></expr>;</expr_stmt>
+        <comment type="line">// 32k seems enough for Catch to handle stack overflow,</comment>
+        <comment type="line">// but the value was found experimentally, so there is no strong guarantee</comment>
+        <expr_stmt><expr><name>guaranteeSize</name> <operator>=</operator> <literal type="number">32</literal> <operator>*</operator> <literal type="number">1024</literal></expr>;</expr_stmt>
+        <expr_stmt><expr><name>exceptionHandlerHandle</name> <operator>=</operator> <literal type="null">nullptr</literal></expr>;</expr_stmt>
+        <comment type="line">// Register as first handler in current chain</comment>
+        <expr_stmt><expr><name>exceptionHandlerHandle</name> <operator>=</operator> <call><name>AddVectoredExceptionHandler</name><argument_list>(<argument><expr><literal type="number">1</literal></expr></argument>, <argument><expr><name>handleVectoredException</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        <comment type="line">// Pass in guarantee size to be filled</comment>
+        <expr_stmt><expr><call><name>SetThreadStackGuarantee</name><argument_list>(<argument><expr><operator>&amp;</operator><name>guaranteeSize</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block></constructor>
+
+    <function><type><name>void</name></type> <name><name>FatalConditionHandler</name><operator>::</operator><name>reset</name></name><parameter_list>()</parameter_list> <block>{<block_content>
+        <if_stmt><if>if <condition>(<expr><name>isSet</name></expr>)</condition> <block>{<block_content>
+            <expr_stmt><expr><call><name>RemoveVectoredExceptionHandler</name><argument_list>(<argument><expr><name>exceptionHandlerHandle</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+            <expr_stmt><expr><call><name>SetThreadStackGuarantee</name><argument_list>(<argument><expr><operator>&amp;</operator><name>guaranteeSize</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+            <expr_stmt><expr><name>exceptionHandlerHandle</name> <operator>=</operator> <literal type="null">nullptr</literal></expr>;</expr_stmt>
+            <expr_stmt><expr><name>isSet</name> <operator>=</operator> <literal type="boolean">false</literal></expr>;</expr_stmt>
+        </block_content>}</block></if></if_stmt>
+    </block_content>}</block></function>
+
+    <destructor><name><name>FatalConditionHandler</name><operator>::</operator><name>~FatalConditionHandler</name></name><parameter_list>()</parameter_list> <block>{<block_content>
+        <expr_stmt><expr><call><name>reset</name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block></destructor>
+
+<decl_stmt><decl><type><name>bool</name></type> <name><name>FatalConditionHandler</name><operator>::</operator><name>isSet</name></name> <init>= <expr><literal type="boolean">false</literal></expr></init></decl>;</decl_stmt>
+<decl_stmt><decl><type><name>ULONG</name></type> <name><name>FatalConditionHandler</name><operator>::</operator><name>guaranteeSize</name></name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</decl_stmt>
+<decl_stmt><decl><type><name>PVOID</name></type> <name><name>FatalConditionHandler</name><operator>::</operator><name>exceptionHandlerHandle</name></name> <init>= <expr><literal type="null">nullptr</literal></expr></init></decl>;</decl_stmt>
+
+
+}</block></namespace> <comment type="line">// namespace Catch</comment>
+
+<cpp:elif xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">elif</cpp:directive> <expr><call><name>defined</name><argument_list>( <argument><expr><name>CATCH_CONFIG_POSIX_SIGNALS</name></expr></argument> )</argument_list></call></expr></cpp:elif>
+
+<namespace>namespace <name>Catch</name> <block>{
+
+    <struct>struct <name>SignalDefs</name> <block>{<public type="default">
+        <decl_stmt><decl><type><name>int</name></type> <name>id</name></decl>;</decl_stmt>
+        <decl_stmt><decl><type><specifier>const</specifier> <name>char</name><modifier>*</modifier></type> <name>name</name></decl>;</decl_stmt>
+    </public>}</block>;</struct>
+<diff:insert xmlns:diff="http://www.srcML.org/srcDiff"><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">    
+    </diff:ws><comment type="line">//<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>32kb<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>for<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>the<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>alternate<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>stack<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>seems<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>to<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>be<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>sufficient.<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>However,<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>this<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>value</comment><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+    </diff:ws><comment type="line">//<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>is<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>experimentally<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>determined,<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>so<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>that's<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>not<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>guaranteed.</comment><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+    </diff:ws><decl_stmt><decl><type><specifier>constexpr</specifier><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><specifier>static</specifier><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><name><name>std</name><operator>::</operator><name>size_t</name></name></type><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><name>sigStackSize</name><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><init>=<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><expr><ternary><condition><expr><literal type="number">32768</literal><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><operator>&gt;=</operator><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><name>MINSIGSTKSZ</name></expr><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>?</condition><then><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><expr><literal type="number">32768</literal></expr><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws></then><else>:<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><expr><name>MINSIGSTKSZ</name></expr></else></ternary></expr></init></decl>;</decl_stmt><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+
+</diff:ws></diff:insert>    <decl_stmt><decl><type><specifier>static</specifier> <name>SignalDefs</name></type> <name><name>signalDefs</name><index>[]</index></name> <init>= <expr><block>{
+        <expr><block>{ <expr><name>SIGINT</name></expr>,  <expr><literal type="string">"SIGINT - Terminal interrupt signal"</literal></expr> }</block></expr>,
+        <expr><block>{ <expr><name>SIGILL</name></expr>,  <expr><literal type="string">"SIGILL - Illegal instruction signal"</literal></expr> }</block></expr>,
+        <expr><block>{ <expr><name>SIGFPE</name></expr>,  <expr><literal type="string">"SIGFPE - Floating point error signal"</literal></expr> }</block></expr>,
+        <expr><block>{ <expr><name>SIGSEGV</name></expr>, <expr><literal type="string">"SIGSEGV - Segmentation violation signal"</literal></expr> }</block></expr>,
+        <expr><block>{ <expr><name>SIGTERM</name></expr>, <expr><literal type="string">"SIGTERM - Termination request signal"</literal></expr> }</block></expr>,
+        <expr><block>{ <expr><name>SIGABRT</name></expr>, <expr><literal type="string">"SIGABRT - Abort (abnormal termination) signal"</literal></expr> }</block></expr>
+    }</block></expr></init></decl>;</decl_stmt>
+
+
+    <function><type><name>void</name></type> <name><name>FatalConditionHandler</name><operator>::</operator><name>handleSignal</name></name><parameter_list>( <parameter><decl><type><name>int</name></type> <name>sig</name></decl></parameter> )</parameter_list> <block>{<block_content>
+        <decl_stmt><decl><type><name>char</name> <specifier>const</specifier> <modifier>*</modifier></type> <name>name</name> <init>= <expr><literal type="string">"&lt;unknown signal&gt;"</literal></expr></init></decl>;</decl_stmt>
+        <for>for <control>(<init><decl><type><specifier>auto</specifier> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>def</name> <range>: <expr><name>signalDefs</name></expr></range></decl></init>)</control> <block>{<block_content>
+            <if_stmt><if>if <condition>(<expr><name>sig</name> <operator>==</operator> <name><name>def</name><operator>.</operator><name>id</name></name></expr>)</condition> <block>{<block_content>
+                <expr_stmt><expr><name>name</name> <operator>=</operator> <name><name>def</name><operator>.</operator><name>name</name></name></expr>;</expr_stmt>
+                <break>break;</break>
+            </block_content>}</block></if></if_stmt>
+        </block_content>}</block></for>
+        <expr_stmt><expr><call><name>reset</name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name>reportFatal</name><argument_list>(<argument><expr><name>name</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name>raise</name><argument_list>( <argument><expr><name>sig</name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block></function>
+
+    <constructor><name><name>FatalConditionHandler</name><operator>::</operator><name>FatalConditionHandler</name></name><parameter_list>()</parameter_list> <block>{<block_content>
+        <expr_stmt><expr><name>isSet</name> <operator>=</operator> <literal type="boolean">true</literal></expr>;</expr_stmt>
+        <decl_stmt><decl><type><name>stack_t</name></type> <name>sigStack</name></decl>;</decl_stmt>
+        <expr_stmt><expr><name><name>sigStack</name><operator>.</operator><name>ss_sp</name></name> <operator>=</operator> <name>altStackMem</name></expr>;</expr_stmt>
+        <expr_stmt><expr><name><name>sigStack</name><operator>.</operator><name>ss_size</name></name> <operator>=</operator> <name><diff:delete type="replace" xmlns:diff="http://www.srcML.org/srcDiff">SIGSTKSZ</diff:delete><diff:insert type="replace" xmlns:diff="http://www.srcML.org/srcDiff">sigStackSize</diff:insert></name></expr>;</expr_stmt>
+        <expr_stmt><expr><name><name>sigStack</name><operator>.</operator><name>ss_flags</name></name> <operator>=</operator> <literal type="number">0</literal></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name>sigaltstack</name><argument_list>(<argument><expr><operator>&amp;</operator><name>sigStack</name></expr></argument>, <argument><expr><operator>&amp;</operator><name>oldSigStack</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        <decl_stmt><decl><type><name><name>struct</name> <name>sigaction</name></name></type> <name>sa</name> <init>= <expr><block>{ }</block></expr></init></decl>;</decl_stmt>
+
+        <expr_stmt><expr><name><name>sa</name><operator>.</operator><name>sa_handler</name></name> <operator>=</operator> <name>handleSignal</name></expr>;</expr_stmt>
+        <expr_stmt><expr><name><name>sa</name><operator>.</operator><name>sa_flags</name></name> <operator>=</operator> <name>SA_ONSTACK</name></expr>;</expr_stmt>
+        <for>for <control>(<init><decl><type><name><name>std</name><operator>::</operator><name>size_t</name></name></type> <name>i</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>i</name> <operator>&lt;</operator> <sizeof>sizeof<argument_list>(<argument><expr><name>signalDefs</name></expr></argument>)</argument_list></sizeof><operator>/</operator><sizeof>sizeof<argument_list>(<argument><expr><name>SignalDefs</name></expr></argument>)</argument_list></sizeof></expr>;</condition> <incr><expr><operator>++</operator><name>i</name></expr></incr>)</control> <block>{<block_content>
+            <expr_stmt><expr><call><name>sigaction</name><argument_list>(<argument><expr><name><name>signalDefs</name><index>[<expr><name>i</name></expr>]</index></name><operator>.</operator><name>id</name></expr></argument>, <argument><expr><operator>&amp;</operator><name>sa</name></expr></argument>, <argument><expr><operator>&amp;</operator><name><name>oldSigActions</name><index>[<expr><name>i</name></expr>]</index></name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        </block_content>}</block></for>
+    </block_content>}</block></constructor>
+
+
+    <destructor><name><name>FatalConditionHandler</name><operator>::</operator><name>~FatalConditionHandler</name></name><parameter_list>()</parameter_list> <block>{<block_content>
+        <expr_stmt><expr><call><name>reset</name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block></destructor>
+
+    <function><type><name>void</name></type> <name><name>FatalConditionHandler</name><operator>::</operator><name>reset</name></name><parameter_list>()</parameter_list> <block>{<block_content>
+        <if_stmt><if>if<condition>( <expr><name>isSet</name></expr> )</condition> <block>{<block_content>
+            <comment type="line">// Set signals back to previous values -- hopefully nobody overwrote them in the meantime</comment>
+            <for>for<control>( <init><decl><type><name><name>std</name><operator>::</operator><name>size_t</name></name></type> <name>i</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>i</name> <operator>&lt;</operator> <sizeof>sizeof<argument_list>(<argument><expr><name>signalDefs</name></expr></argument>)</argument_list></sizeof><operator>/</operator><sizeof>sizeof<argument_list>(<argument><expr><name>SignalDefs</name></expr></argument>)</argument_list></sizeof></expr>;</condition> <incr><expr><operator>++</operator><name>i</name></expr></incr> )</control> <block>{<block_content>
+                <expr_stmt><expr><call><name>sigaction</name><argument_list>(<argument><expr><name><name>signalDefs</name><index>[<expr><name>i</name></expr>]</index></name><operator>.</operator><name>id</name></expr></argument>, <argument><expr><operator>&amp;</operator><name><name>oldSigActions</name><index>[<expr><name>i</name></expr>]</index></name></expr></argument>, <argument><expr><literal type="null">nullptr</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+            </block_content>}</block></for>
+            <comment type="line">// Return the old stack</comment>
+            <expr_stmt><expr><call><name>sigaltstack</name><argument_list>(<argument><expr><operator>&amp;</operator><name>oldSigStack</name></expr></argument>, <argument><expr><literal type="null">nullptr</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+            <expr_stmt><expr><name>isSet</name> <operator>=</operator> <literal type="boolean">false</literal></expr>;</expr_stmt>
+        </block_content>}</block></if></if_stmt>
+    </block_content>}</block></function>
+
+    <decl_stmt><decl><type><name>bool</name></type> <name><name>FatalConditionHandler</name><operator>::</operator><name>isSet</name></name> <init>= <expr><literal type="boolean">false</literal></expr></init></decl>;</decl_stmt>
+    <decl_stmt><decl><type><name><name>struct</name> <name>sigaction</name></name></type> <name><name>FatalConditionHandler</name><operator>::</operator><name>oldSigActions</name><index>[<expr><sizeof>sizeof<argument_list>(<argument><expr><name>signalDefs</name></expr></argument>)</argument_list></sizeof><operator>/</operator><sizeof>sizeof<argument_list>(<argument><expr><name>SignalDefs</name></expr></argument>)</argument_list></sizeof></expr>]</index></name> <init>= <expr><block>{}</block></expr></init></decl>;</decl_stmt>
+    <decl_stmt><decl><type><name>stack_t</name></type> <name><name>FatalConditionHandler</name><operator>::</operator><name>oldSigStack</name></name> <init>= <expr><block>{}</block></expr></init></decl>;</decl_stmt>
+    <decl_stmt><decl><type><name>char</name></type> <name><name>FatalConditionHandler</name><operator>::</operator><name>altStackMem</name><diff:delete type="replace" xmlns:diff="http://www.srcML.org/srcDiff"><index>[<expr><name>SIGSTKSZ</name></expr>]</index></diff:delete><diff:insert type="replace" xmlns:diff="http://www.srcML.org/srcDiff"><index>[<expr><name>sigStackSize</name></expr>]</index></diff:insert></name> <init>= <expr><block>{}</block></expr></init></decl>;</decl_stmt>
+
+
+}</block></namespace> <comment type="line">// namespace Catch</comment>
+
+<cpp:else xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">else</cpp:directive></cpp:else>
+
+<namespace>namespace <name>Catch</name> <block>{
+    <function><type><name>void</name></type> <name><name>FatalConditionHandler</name><operator>::</operator><name>reset</name></name><parameter_list>()</parameter_list> <block>{<block_content/>}</block></function>
+}</block></namespace>
+
+<cpp:endif xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">endif</cpp:directive></cpp:endif> <comment type="line">// signals/SEH handling</comment>
+
+<cpp:if xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">if</cpp:directive> <expr><call><name>defined</name><argument_list>(<argument><expr><name>__GNUC__</name></expr></argument>)</argument_list></call></expr></cpp:if>
+<cpp:pragma xmlns:cpp="http://www.srcML.org/srcML/cpp">#    <cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">pragma</cpp:directive> <name>GCC</name> <name>diagnostic</name> <name>pop</name></cpp:pragma>
+<cpp:endif xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">endif</cpp:directive></cpp:endif>
+</unit>

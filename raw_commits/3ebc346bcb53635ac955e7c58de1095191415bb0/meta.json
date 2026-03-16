@@ -1,0 +1,8 @@
+{
+  "commit_id": "3ebc346bcb53635ac955e7c58de1095191415bb0",
+  "parent_id": "a483b6d7d36457b0931eca85fda1a30a2b56eb4e",
+  "message": "Fix Clang-Tidy's readability-static-accessed-through-instance in tests",
+  "changed_files": [
+    "tests/SelfTest/IntrospectiveTests/ToString.tests.cpp"
+  ]
+}

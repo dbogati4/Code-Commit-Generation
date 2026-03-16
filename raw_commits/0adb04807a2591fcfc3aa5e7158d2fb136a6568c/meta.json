@@ -1,0 +1,8 @@
+{
+  "commit_id": "0adb04807a2591fcfc3aa5e7158d2fb136a6568c",
+  "parent_id": "f80f28e09aa5ea1d0a981c300d21bfe35c037f55",
+  "message": "Change how non-nullness is enforce in StringRef constructor",
+  "changed_files": [
+    "include/internal/catch_stringref.cpp"
+  ]
+}

@@ -1,0 +1,8 @@
+{
+  "commit_id": "8b8e3ee1173e4af40c4e83db6eede9c77450c5d0",
+  "parent_id": "af1ed708e494b33354c8fd2d4e52b7909433dd1b",
+  "message": "Disable C4702 in Exception tests self tests",
+  "changed_files": [
+    "projects/SelfTest/ExceptionTests.cpp"
+  ]
+}

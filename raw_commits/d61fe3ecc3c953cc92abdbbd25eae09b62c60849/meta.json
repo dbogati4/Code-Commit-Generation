@@ -1,0 +1,8 @@
+{
+  "commit_id": "d61fe3ecc3c953cc92abdbbd25eae09b62c60849",
+  "parent_id": "b325c6d81e2abf945529a3baf0619b5a696e464f",
+  "message": "[Issue 2154] Correct error when building with IBM's latest XLC (#2155)",
+  "changed_files": [
+    "src/catch2/matchers/catch_matchers_floating_point.cpp"
+  ]
+}

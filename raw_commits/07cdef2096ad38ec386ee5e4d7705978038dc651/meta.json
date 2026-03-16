@@ -1,0 +1,8 @@
+{
+  "commit_id": "07cdef2096ad38ec386ee5e4d7705978038dc651",
+  "parent_id": "5baa29b6b9405913455ba5f628679575c7b915ee",
+  "message": "Fix uninit memory in Clara tests",
+  "changed_files": [
+    "tests/SelfTest/IntrospectiveTests/Clara.tests.cpp"
+  ]
+}

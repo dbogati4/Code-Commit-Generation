@@ -1,0 +1,8 @@
+{
+  "commit_id": "6badd7d9ed96cad01ef093ff68fc95fea550ba4c",
+  "parent_id": "60cfaa38fbd7a9a0fa2366e70367aef3696efc73",
+  "message": "Switch back to uncolored output after printing filters",
+  "changed_files": [
+    "src/catch2/reporters/catch_reporter_console.cpp"
+  ]
+}

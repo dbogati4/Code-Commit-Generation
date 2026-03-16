@@ -1,0 +1,8 @@
+{
+  "commit_id": "65c9a1d31a338f28ef93cd61c475efc40f6cc42e",
+  "parent_id": "fa31d58934f067c57c2d8647d20c6acbf6d27e2b",
+  "message": "Add test for comparing immovable types",
+  "changed_files": [
+    "tests/SelfTest/UsageTests/Compilation.tests.cpp"
+  ]
+}

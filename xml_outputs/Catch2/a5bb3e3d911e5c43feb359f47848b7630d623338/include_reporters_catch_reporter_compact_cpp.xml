@@ -1,0 +1,295 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" xmlns:diff="http://www.srcML.org/srcDiff" revision="1.0.0" language="C++" filename="C:\Users\saile\AppData\Local\Temp\catch2_100_z8gzpiwf\a5bb3e3d911e5c43feb359f47848b7630d623338\include_reporters_catch_reporter_compact_cpp\include_reporters_catch_reporter_compact_cpp.old|C:\Users\saile\AppData\Local\Temp\catch2_100_z8gzpiwf\a5bb3e3d911e5c43feb359f47848b7630d623338\include_reporters_catch_reporter_compact_cpp\include_reporters_catch_reporter_compact_cpp.new"><comment type="block">/*
+ *  Created by Martin on 2017-11-14.
+ *
+ *  Distributed under the Boost Software License, Version 1.0. (See accompanying
+ *  file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
+ */</comment>
+
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">"catch_reporter_compact.h"</cpp:file></cpp:include>
+
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">"../internal/catch_reporter_registrars.hpp"</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">"<diff:delete type="replace" xmlns:diff="http://www.srcML.org/srcDiff">internal/catch_console_colour.h</diff:delete><diff:insert type="replace" xmlns:diff="http://www.srcML.org/srcDiff">../internal/catch_console_colour.h</diff:insert>"</cpp:file></cpp:include>
+
+<namespace>namespace <block>{
+
+<cpp:ifdef xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">ifdef</cpp:directive> <name>CATCH_PLATFORM_MAC</name></cpp:ifdef>
+    <function><type><specifier>const</specifier> <name>char</name><modifier>*</modifier></type> <name>failedString</name><parameter_list>()</parameter_list> <block>{<block_content> <return>return <expr><literal type="string">"FAILED"</literal></expr>;</return> </block_content>}</block></function>
+    <function><type><specifier>const</specifier> <name>char</name><modifier>*</modifier></type> <name>passedString</name><parameter_list>()</parameter_list> <block>{<block_content> <return>return <expr><literal type="string">"PASSED"</literal></expr>;</return> </block_content>}</block></function>
+<cpp:else xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">else</cpp:directive></cpp:else>
+    <function><type><specifier>const</specifier> <name>char</name><modifier>*</modifier></type> <name>failedString</name><parameter_list>()</parameter_list> <block>{<block_content> <return>return <expr><literal type="string">"failed"</literal></expr>;</return> </block_content>}</block></function>
+    <function><type><specifier>const</specifier> <name>char</name><modifier>*</modifier></type> <name>passedString</name><parameter_list>()</parameter_list> <block>{<block_content> <return>return <expr><literal type="string">"passed"</literal></expr>;</return> </block_content>}</block></function>
+<cpp:endif xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">endif</cpp:directive></cpp:endif>
+
+    <comment type="line">// Colour::LightGrey</comment>
+    <function><type><name><name>Catch</name><operator>::</operator><name>Colour</name><operator>::</operator><name>Code</name></name></type> <name>dimColour</name><parameter_list>()</parameter_list> <block>{<block_content> <return>return <expr><name><name>Catch</name><operator>::</operator><name>Colour</name><operator>::</operator><name>FileName</name></name></expr>;</return> </block_content>}</block></function>
+
+    <function><type><name><name>std</name><operator>::</operator><name>string</name></name></type> <name>bothOrAll</name><parameter_list>( <parameter><decl><type><name><name>std</name><operator>::</operator><name>size_t</name></name></type> <name>count</name></decl></parameter> )</parameter_list> <block>{<block_content>
+        <return>return <expr><ternary><condition><expr><name>count</name> <operator>==</operator> <literal type="number">1</literal></expr> ?</condition><then> <expr><call><name><name>std</name><operator>::</operator><name>string</name></name><argument_list>()</argument_list></call></expr> </then><else>:
+               <expr><ternary><condition><expr><name>count</name> <operator>==</operator> <literal type="number">2</literal></expr> ?</condition><then> <expr><literal type="string">"both "</literal></expr> </then><else>: <expr><literal type="string">"all "</literal></expr></else></ternary></expr></else></ternary></expr> ;</return>
+    </block_content>}</block></function>
+
+}</block></namespace> <comment type="line">// anon namespace</comment>
+
+
+<namespace>namespace <name>Catch</name> <block>{
+<namespace>namespace <block>{
+<comment type="line">// Colour, message variants:</comment>
+<comment type="line">// - white: No tests ran.</comment>
+<comment type="line">// -   red: Failed [both/all] N test cases, failed [both/all] M assertions.</comment>
+<comment type="line">// - white: Passed [both/all] N test cases (no assertions).</comment>
+<comment type="line">// -   red: Failed N tests cases, failed M assertions.</comment>
+<comment type="line">// - green: Passed [both/all] N tests cases with M assertions.</comment>
+<function><type><name>void</name></type> <name>printTotals</name><parameter_list>(<parameter><decl><type><name><name>std</name><operator>::</operator><name>ostream</name></name><modifier>&amp;</modifier></type> <name>out</name></decl></parameter>, <parameter><decl><type><specifier>const</specifier> <name>Totals</name><modifier>&amp;</modifier></type> <name>totals</name></decl></parameter>)</parameter_list> <block>{<block_content>
+    <if_stmt><if>if <condition>(<expr><call><name><name>totals</name><operator>.</operator><name>testCases</name><operator>.</operator><name>total</name></name><argument_list>()</argument_list></call> <operator>==</operator> <literal type="number">0</literal></expr>)</condition> <block>{<block_content>
+        <expr_stmt><expr><name>out</name> <operator>&lt;&lt;</operator> <literal type="string">"No tests ran."</literal></expr>;</expr_stmt>
+    </block_content>}</block></if> <if type="elseif">else if <condition>(<expr><name><name>totals</name><operator>.</operator><name>testCases</name><operator>.</operator><name>failed</name></name> <operator>==</operator> <call><name><name>totals</name><operator>.</operator><name>testCases</name><operator>.</operator><name>total</name></name><argument_list>()</argument_list></call></expr>)</condition> <block>{<block_content>
+        <decl_stmt><decl><type><name>Colour</name></type> <name>colour</name><argument_list>(<argument><expr><name><name>Colour</name><operator>::</operator><name>ResultError</name></name></expr></argument>)</argument_list></decl>;</decl_stmt>
+        <decl_stmt><decl><type><specifier>const</specifier> <name><name>std</name><operator>::</operator><name>string</name></name></type> <name>qualify_assertions_failed</name> <init>=
+            <expr><ternary><condition><expr><name><name>totals</name><operator>.</operator><name>assertions</name><operator>.</operator><name>failed</name></name> <operator>==</operator> <call><name><name>totals</name><operator>.</operator><name>assertions</name><operator>.</operator><name>total</name></name><argument_list>()</argument_list></call></expr> ?</condition><then>
+            <expr><call><name>bothOrAll</name><argument_list>(<argument><expr><name><name>totals</name><operator>.</operator><name>assertions</name><operator>.</operator><name>failed</name></name></expr></argument>)</argument_list></call></expr> </then><else>: <expr><call><name><name>std</name><operator>::</operator><name>string</name></name><argument_list>()</argument_list></call></expr></else></ternary></expr></init></decl>;</decl_stmt>
+        <expr_stmt><expr><name>out</name> <operator>&lt;&lt;</operator>
+            <literal type="string">"Failed "</literal> <operator>&lt;&lt;</operator> <call><name>bothOrAll</name><argument_list>(<argument><expr><name><name>totals</name><operator>.</operator><name>testCases</name><operator>.</operator><name>failed</name></name></expr></argument>)</argument_list></call>
+            <operator>&lt;&lt;</operator> <call><name>pluralise</name><argument_list>(<argument><expr><name><name>totals</name><operator>.</operator><name>testCases</name><operator>.</operator><name>failed</name></name></expr></argument>, <argument><expr><literal type="string">"test case"</literal></expr></argument>)</argument_list></call> <operator>&lt;&lt;</operator> <literal type="string">", "</literal>
+            <literal type="string">"failed "</literal> <operator>&lt;&lt;</operator> <name>qualify_assertions_failed</name> <operator>&lt;&lt;</operator>
+            <call><name>pluralise</name><argument_list>(<argument><expr><name><name>totals</name><operator>.</operator><name>assertions</name><operator>.</operator><name>failed</name></name></expr></argument>, <argument><expr><literal type="string">"assertion"</literal></expr></argument>)</argument_list></call> <operator>&lt;&lt;</operator> <literal type="char">'.'</literal></expr>;</expr_stmt>
+    </block_content>}</block></if> <if type="elseif">else if <condition>(<expr><call><name><name>totals</name><operator>.</operator><name>assertions</name><operator>.</operator><name>total</name></name><argument_list>()</argument_list></call> <operator>==</operator> <literal type="number">0</literal></expr>)</condition> <block>{<block_content>
+        <expr_stmt><expr><name>out</name> <operator>&lt;&lt;</operator>
+            <literal type="string">"Passed "</literal> <operator>&lt;&lt;</operator> <call><name>bothOrAll</name><argument_list>(<argument><expr><call><name><name>totals</name><operator>.</operator><name>testCases</name><operator>.</operator><name>total</name></name><argument_list>()</argument_list></call></expr></argument>)</argument_list></call>
+            <operator>&lt;&lt;</operator> <call><name>pluralise</name><argument_list>(<argument><expr><call><name><name>totals</name><operator>.</operator><name>testCases</name><operator>.</operator><name>total</name></name><argument_list>()</argument_list></call></expr></argument>, <argument><expr><literal type="string">"test case"</literal></expr></argument>)</argument_list></call>
+            <operator>&lt;&lt;</operator> <literal type="string">" (no assertions)."</literal></expr>;</expr_stmt>
+    </block_content>}</block></if> <if type="elseif">else if <condition>(<expr><name><name>totals</name><operator>.</operator><name>assertions</name><operator>.</operator><name>failed</name></name></expr>)</condition> <block>{<block_content>
+        <decl_stmt><decl><type><name>Colour</name></type> <name>colour</name><argument_list>(<argument><expr><name><name>Colour</name><operator>::</operator><name>ResultError</name></name></expr></argument>)</argument_list></decl>;</decl_stmt>
+        <expr_stmt><expr><name>out</name> <operator>&lt;&lt;</operator>
+            <literal type="string">"Failed "</literal> <operator>&lt;&lt;</operator> <call><name>pluralise</name><argument_list>(<argument><expr><name><name>totals</name><operator>.</operator><name>testCases</name><operator>.</operator><name>failed</name></name></expr></argument>, <argument><expr><literal type="string">"test case"</literal></expr></argument>)</argument_list></call> <operator>&lt;&lt;</operator> <literal type="string">", "</literal>
+            <literal type="string">"failed "</literal> <operator>&lt;&lt;</operator> <call><name>pluralise</name><argument_list>(<argument><expr><name><name>totals</name><operator>.</operator><name>assertions</name><operator>.</operator><name>failed</name></name></expr></argument>, <argument><expr><literal type="string">"assertion"</literal></expr></argument>)</argument_list></call> <operator>&lt;&lt;</operator> <literal type="char">'.'</literal></expr>;</expr_stmt>
+    </block_content>}</block></if> <else>else <block>{<block_content>
+        <decl_stmt><decl><type><name>Colour</name></type> <name>colour</name><argument_list>(<argument><expr><name><name>Colour</name><operator>::</operator><name>ResultSuccess</name></name></expr></argument>)</argument_list></decl>;</decl_stmt>
+        <expr_stmt><expr><name>out</name> <operator>&lt;&lt;</operator>
+            <literal type="string">"Passed "</literal> <operator>&lt;&lt;</operator> <call><name>bothOrAll</name><argument_list>(<argument><expr><name><name>totals</name><operator>.</operator><name>testCases</name><operator>.</operator><name>passed</name></name></expr></argument>)</argument_list></call>
+            <operator>&lt;&lt;</operator> <call><name>pluralise</name><argument_list>(<argument><expr><name><name>totals</name><operator>.</operator><name>testCases</name><operator>.</operator><name>passed</name></name></expr></argument>, <argument><expr><literal type="string">"test case"</literal></expr></argument>)</argument_list></call> <operator>&lt;&lt;</operator>
+            <literal type="string">" with "</literal> <operator>&lt;&lt;</operator> <call><name>pluralise</name><argument_list>(<argument><expr><name><name>totals</name><operator>.</operator><name>assertions</name><operator>.</operator><name>passed</name></name></expr></argument>, <argument><expr><literal type="string">"assertion"</literal></expr></argument>)</argument_list></call> <operator>&lt;&lt;</operator> <literal type="char">'.'</literal></expr>;</expr_stmt>
+    </block_content>}</block></else></if_stmt>
+</block_content>}</block></function>
+
+<comment type="line">// Implementation of CompactReporter formatting</comment>
+<class>class <name>AssertionPrinter</name> <block>{<private type="default">
+</private><public>public:
+    <function_decl type="operator"><type><name>AssertionPrinter</name><modifier>&amp;</modifier></type> <name>operator<name>=</name></name> <parameter_list>(<parameter><decl><type><name>AssertionPrinter</name> <specifier>const</specifier><modifier>&amp;</modifier></type></decl></parameter>)</parameter_list> = <specifier>delete</specifier>;</function_decl>
+    <constructor_decl><name>AssertionPrinter</name><parameter_list>(<parameter><decl><type><name>AssertionPrinter</name> <specifier>const</specifier><modifier>&amp;</modifier></type></decl></parameter>)</parameter_list> = <specifier>delete</specifier>;</constructor_decl>
+    <constructor><name>AssertionPrinter</name><parameter_list>(<parameter><decl><type><name><name>std</name><operator>::</operator><name>ostream</name></name><modifier>&amp;</modifier></type> <name>_stream</name></decl></parameter>, <parameter><decl><type><name>AssertionStats</name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>_stats</name></decl></parameter>, <parameter><decl><type><name>bool</name></type> <name>_printInfoMessages</name></decl></parameter>)</parameter_list>
+        <member_init_list>: <call><name>stream</name><argument_list>(<argument><expr><name>_stream</name></expr></argument>)</argument_list></call>
+        , <call><name>result</name><argument_list>(<argument><expr><name><name>_stats</name><operator>.</operator><name>assertionResult</name></name></expr></argument>)</argument_list></call>
+        , <call><name>messages</name><argument_list>(<argument><expr><name><name>_stats</name><operator>.</operator><name>infoMessages</name></name></expr></argument>)</argument_list></call>
+        , <call><name>itMessage</name><argument_list>(<argument><expr><call><name><name>_stats</name><operator>.</operator><name>infoMessages</name><operator>.</operator><name>begin</name></name><argument_list>()</argument_list></call></expr></argument>)</argument_list></call>
+        , <call><name>printInfoMessages</name><argument_list>(<argument><expr><name>_printInfoMessages</name></expr></argument>)</argument_list></call> </member_init_list><block>{<block_content/>}</block></constructor>
+
+    <function><type><name>void</name></type> <name>print</name><parameter_list>()</parameter_list> <block>{<block_content>
+        <expr_stmt><expr><call><name>printSourceInfo</name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+
+        <expr_stmt><expr><name>itMessage</name> <operator>=</operator> <call><name><name>messages</name><operator>.</operator><name>begin</name></name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+
+        <switch>switch <condition>(<expr><call><name><name>result</name><operator>.</operator><name>getResultType</name></name><argument_list>()</argument_list></call></expr>)</condition> <block>{<block_content>
+        <case>case <expr><name><name>ResultWas</name><operator>::</operator><name>Ok</name></name></expr>:</case>
+            <expr_stmt><expr><call><name>printResultType</name><argument_list>(<argument><expr><name><name>Colour</name><operator>::</operator><name>ResultSuccess</name></name></expr></argument>, <argument><expr><call><name>passedString</name><argument_list>()</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+            <expr_stmt><expr><call><name>printOriginalExpression</name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+            <expr_stmt><expr><call><name>printReconstructedExpression</name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+            <if_stmt><if>if <condition>(<expr><operator>!</operator><call><name><name>result</name><operator>.</operator><name>hasExpression</name></name><argument_list>()</argument_list></call></expr>)</condition><block type="pseudo"><block_content>
+                <expr_stmt><expr><call><name>printRemainingMessages</name><argument_list>(<argument><expr><name><name>Colour</name><operator>::</operator><name>None</name></name></expr></argument>)</argument_list></call></expr>;</expr_stmt></block_content></block></if>
+            <else>else<block type="pseudo"><block_content>
+                <expr_stmt><expr><call><name>printRemainingMessages</name><argument_list>()</argument_list></call></expr>;</expr_stmt></block_content></block></else></if_stmt>
+            <break>break;</break>
+        <case>case <expr><name><name>ResultWas</name><operator>::</operator><name>ExpressionFailed</name></name></expr>:</case>
+            <if_stmt><if>if <condition>(<expr><call><name><name>result</name><operator>.</operator><name>isOk</name></name><argument_list>()</argument_list></call></expr>)</condition><block type="pseudo"><block_content>
+                <expr_stmt><expr><call><name>printResultType</name><argument_list>(<argument><expr><name><name>Colour</name><operator>::</operator><name>ResultSuccess</name></name></expr></argument>, <argument><expr><call><name>failedString</name><argument_list>()</argument_list></call> <operator>+</operator> <call><name><name>std</name><operator>::</operator><name>string</name></name><argument_list>(<argument><expr><literal type="string">" - but was ok"</literal></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt></block_content></block></if>
+            <else>else<block type="pseudo"><block_content>
+                <expr_stmt><expr><call><name>printResultType</name><argument_list>(<argument><expr><name><name>Colour</name><operator>::</operator><name>Error</name></name></expr></argument>, <argument><expr><call><name>failedString</name><argument_list>()</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt></block_content></block></else></if_stmt>
+            <expr_stmt><expr><call><name>printOriginalExpression</name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+            <expr_stmt><expr><call><name>printReconstructedExpression</name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+            <expr_stmt><expr><call><name>printRemainingMessages</name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+            <break>break;</break>
+        <case>case <expr><name><name>ResultWas</name><operator>::</operator><name>ThrewException</name></name></expr>:</case>
+            <expr_stmt><expr><call><name>printResultType</name><argument_list>(<argument><expr><name><name>Colour</name><operator>::</operator><name>Error</name></name></expr></argument>, <argument><expr><call><name>failedString</name><argument_list>()</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+            <expr_stmt><expr><call><name>printIssue</name><argument_list>(<argument><expr><literal type="string">"unexpected exception with message:"</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+            <expr_stmt><expr><call><name>printMessage</name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+            <expr_stmt><expr><call><name>printExpressionWas</name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+            <expr_stmt><expr><call><name>printRemainingMessages</name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+            <break>break;</break>
+        <case>case <expr><name><name>ResultWas</name><operator>::</operator><name>FatalErrorCondition</name></name></expr>:</case>
+            <expr_stmt><expr><call><name>printResultType</name><argument_list>(<argument><expr><name><name>Colour</name><operator>::</operator><name>Error</name></name></expr></argument>, <argument><expr><call><name>failedString</name><argument_list>()</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+            <expr_stmt><expr><call><name>printIssue</name><argument_list>(<argument><expr><literal type="string">"fatal error condition with message:"</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+            <expr_stmt><expr><call><name>printMessage</name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+            <expr_stmt><expr><call><name>printExpressionWas</name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+            <expr_stmt><expr><call><name>printRemainingMessages</name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+            <break>break;</break>
+        <case>case <expr><name><name>ResultWas</name><operator>::</operator><name>DidntThrowException</name></name></expr>:</case>
+            <expr_stmt><expr><call><name>printResultType</name><argument_list>(<argument><expr><name><name>Colour</name><operator>::</operator><name>Error</name></name></expr></argument>, <argument><expr><call><name>failedString</name><argument_list>()</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+            <expr_stmt><expr><call><name>printIssue</name><argument_list>(<argument><expr><literal type="string">"expected exception, got none"</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+            <expr_stmt><expr><call><name>printExpressionWas</name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+            <expr_stmt><expr><call><name>printRemainingMessages</name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+            <break>break;</break>
+        <case>case <expr><name><name>ResultWas</name><operator>::</operator><name>Info</name></name></expr>:</case>
+            <expr_stmt><expr><call><name>printResultType</name><argument_list>(<argument><expr><name><name>Colour</name><operator>::</operator><name>None</name></name></expr></argument>, <argument><expr><literal type="string">"info"</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+            <expr_stmt><expr><call><name>printMessage</name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+            <expr_stmt><expr><call><name>printRemainingMessages</name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+            <break>break;</break>
+        <case>case <expr><name><name>ResultWas</name><operator>::</operator><name>Warning</name></name></expr>:</case>
+            <expr_stmt><expr><call><name>printResultType</name><argument_list>(<argument><expr><name><name>Colour</name><operator>::</operator><name>None</name></name></expr></argument>, <argument><expr><literal type="string">"warning"</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+            <expr_stmt><expr><call><name>printMessage</name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+            <expr_stmt><expr><call><name>printRemainingMessages</name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+            <break>break;</break>
+        <case>case <expr><name><name>ResultWas</name><operator>::</operator><name>ExplicitFailure</name></name></expr>:</case>
+            <expr_stmt><expr><call><name>printResultType</name><argument_list>(<argument><expr><name><name>Colour</name><operator>::</operator><name>Error</name></name></expr></argument>, <argument><expr><call><name>failedString</name><argument_list>()</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+            <expr_stmt><expr><call><name>printIssue</name><argument_list>(<argument><expr><literal type="string">"explicitly"</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+            <expr_stmt><expr><call><name>printRemainingMessages</name><argument_list>(<argument><expr><name><name>Colour</name><operator>::</operator><name>None</name></name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+            <break>break;</break>
+            <comment type="line">// These cases are here to prevent compiler warnings</comment>
+        <case>case <expr><name><name>ResultWas</name><operator>::</operator><name>Unknown</name></name></expr>:</case>
+        <case>case <expr><name><name>ResultWas</name><operator>::</operator><name>FailureBit</name></name></expr>:</case>
+        <case>case <expr><name><name>ResultWas</name><operator>::</operator><name>Exception</name></name></expr>:</case>
+            <expr_stmt><expr><call><name>printResultType</name><argument_list>(<argument><expr><name><name>Colour</name><operator>::</operator><name>Error</name></name></expr></argument>, <argument><expr><literal type="string">"** internal error **"</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+            <break>break;</break>
+        </block_content>}</block></switch>
+    </block_content>}</block></function>
+
+</public><private>private:
+    <function><type><name>void</name></type> <name>printSourceInfo</name><parameter_list>()</parameter_list> <specifier>const</specifier> <block>{<block_content>
+        <decl_stmt><decl><type><name>Colour</name></type> <name>colourGuard</name><argument_list>(<argument><expr><name><name>Colour</name><operator>::</operator><name>FileName</name></name></expr></argument>)</argument_list></decl>;</decl_stmt>
+        <expr_stmt><expr><name>stream</name> <operator>&lt;&lt;</operator> <call><name><name>result</name><operator>.</operator><name>getSourceInfo</name></name><argument_list>()</argument_list></call> <operator>&lt;&lt;</operator> <literal type="char">':'</literal></expr>;</expr_stmt>
+    </block_content>}</block></function>
+
+    <function><type><name>void</name></type> <name>printResultType</name><parameter_list>(<parameter><decl><type><name><name>Colour</name><operator>::</operator><name>Code</name></name></type> <name>colour</name></decl></parameter>, <parameter><decl><type><name><name>std</name><operator>::</operator><name>string</name></name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>passOrFail</name></decl></parameter>)</parameter_list> <specifier>const</specifier> <block>{<block_content>
+        <if_stmt><if>if <condition>(<expr><operator>!</operator><call><name><name>passOrFail</name><operator>.</operator><name>empty</name></name><argument_list>()</argument_list></call></expr>)</condition> <block>{<block_content>
+            <block>{<block_content>
+                <decl_stmt><decl><type><name>Colour</name></type> <name>colourGuard</name><argument_list>(<argument><expr><name>colour</name></expr></argument>)</argument_list></decl>;</decl_stmt>
+                <expr_stmt><expr><name>stream</name> <operator>&lt;&lt;</operator> <literal type="char">' '</literal> <operator>&lt;&lt;</operator> <name>passOrFail</name></expr>;</expr_stmt>
+            </block_content>}</block>
+            <expr_stmt><expr><name>stream</name> <operator>&lt;&lt;</operator> <literal type="char">':'</literal></expr>;</expr_stmt>
+        </block_content>}</block></if></if_stmt>
+    </block_content>}</block></function>
+
+    <function><type><name>void</name></type> <name>printIssue</name><parameter_list>(<parameter><decl><type><name><name>std</name><operator>::</operator><name>string</name></name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>issue</name></decl></parameter>)</parameter_list> <specifier>const</specifier> <block>{<block_content>
+        <expr_stmt><expr><name>stream</name> <operator>&lt;&lt;</operator> <literal type="char">' '</literal> <operator>&lt;&lt;</operator> <name>issue</name></expr>;</expr_stmt>
+    </block_content>}</block></function>
+
+    <function><type><name>void</name></type> <name>printExpressionWas</name><parameter_list>()</parameter_list> <block>{<block_content>
+        <if_stmt><if>if <condition>(<expr><call><name><name>result</name><operator>.</operator><name>hasExpression</name></name><argument_list>()</argument_list></call></expr>)</condition> <block>{<block_content>
+            <expr_stmt><expr><name>stream</name> <operator>&lt;&lt;</operator> <literal type="char">';'</literal></expr>;</expr_stmt>
+            <block>{<block_content>
+                <decl_stmt><decl><type><name>Colour</name></type> <name>colour</name><argument_list>(<argument><expr><call><name>dimColour</name><argument_list>()</argument_list></call></expr></argument>)</argument_list></decl>;</decl_stmt>
+                <expr_stmt><expr><name>stream</name> <operator>&lt;&lt;</operator> <literal type="string">" expression was:"</literal></expr>;</expr_stmt>
+            </block_content>}</block>
+            <expr_stmt><expr><call><name>printOriginalExpression</name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+        </block_content>}</block></if></if_stmt>
+    </block_content>}</block></function>
+
+    <function><type><name>void</name></type> <name>printOriginalExpression</name><parameter_list>()</parameter_list> <specifier>const</specifier> <block>{<block_content>
+        <if_stmt><if>if <condition>(<expr><call><name><name>result</name><operator>.</operator><name>hasExpression</name></name><argument_list>()</argument_list></call></expr>)</condition> <block>{<block_content>
+            <expr_stmt><expr><name>stream</name> <operator>&lt;&lt;</operator> <literal type="char">' '</literal> <operator>&lt;&lt;</operator> <call><name><name>result</name><operator>.</operator><name>getExpression</name></name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+        </block_content>}</block></if></if_stmt>
+    </block_content>}</block></function>
+
+    <function><type><name>void</name></type> <name>printReconstructedExpression</name><parameter_list>()</parameter_list> <specifier>const</specifier> <block>{<block_content>
+        <if_stmt><if>if <condition>(<expr><call><name><name>result</name><operator>.</operator><name>hasExpandedExpression</name></name><argument_list>()</argument_list></call></expr>)</condition> <block>{<block_content>
+            <block>{<block_content>
+                <decl_stmt><decl><type><name>Colour</name></type> <name>colour</name><argument_list>(<argument><expr><call><name>dimColour</name><argument_list>()</argument_list></call></expr></argument>)</argument_list></decl>;</decl_stmt>
+                <expr_stmt><expr><name>stream</name> <operator>&lt;&lt;</operator> <literal type="string">" for: "</literal></expr>;</expr_stmt>
+            </block_content>}</block>
+            <expr_stmt><expr><name>stream</name> <operator>&lt;&lt;</operator> <call><name><name>result</name><operator>.</operator><name>getExpandedExpression</name></name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+        </block_content>}</block></if></if_stmt>
+    </block_content>}</block></function>
+
+    <function><type><name>void</name></type> <name>printMessage</name><parameter_list>()</parameter_list> <block>{<block_content>
+        <if_stmt><if>if <condition>(<expr><name>itMessage</name> <operator>!=</operator> <call><name><name>messages</name><operator>.</operator><name>end</name></name><argument_list>()</argument_list></call></expr>)</condition> <block>{<block_content>
+            <expr_stmt><expr><name>stream</name> <operator>&lt;&lt;</operator> <literal type="string">" '"</literal> <operator>&lt;&lt;</operator> <name><name>itMessage</name><operator>-&gt;</operator><name>message</name></name> <operator>&lt;&lt;</operator> <literal type="char">'\''</literal></expr>;</expr_stmt>
+            <expr_stmt><expr><operator>++</operator><name>itMessage</name></expr>;</expr_stmt>
+        </block_content>}</block></if></if_stmt>
+    </block_content>}</block></function>
+
+    <function><type><name>void</name></type> <name>printRemainingMessages</name><parameter_list>(<parameter><decl><type><name><name>Colour</name><operator>::</operator><name>Code</name></name></type> <name>colour</name> <init>= <expr><call><name>dimColour</name><argument_list>()</argument_list></call></expr></init></decl></parameter>)</parameter_list> <block>{<block_content>
+        <if_stmt><if>if <condition>(<expr><name>itMessage</name> <operator>==</operator> <call><name><name>messages</name><operator>.</operator><name>end</name></name><argument_list>()</argument_list></call></expr>)</condition><block type="pseudo"><block_content>
+            <return>return;</return></block_content></block></if></if_stmt>
+
+        <decl_stmt><decl><type><specifier>const</specifier> <specifier>auto</specifier></type> <name>itEnd</name> <init>= <expr><call><name><name>messages</name><operator>.</operator><name>cend</name></name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+        <decl_stmt><decl><type><specifier>const</specifier> <specifier>auto</specifier></type> <name>N</name> <init>= <expr><cast type="static">static_cast<argument_list type="generic">&lt;<argument><expr><name><name>std</name><operator>::</operator><name>size_t</name></name></expr></argument>&gt;</argument_list><argument_list>(<argument><expr><call><name><name>std</name><operator>::</operator><name>distance</name></name><argument_list>(<argument><expr><name>itMessage</name></expr></argument>, <argument><expr><name>itEnd</name></expr></argument>)</argument_list></call></expr></argument>)</argument_list></cast></expr></init></decl>;</decl_stmt>
+
+        <block>{<block_content>
+            <decl_stmt><decl><type><name>Colour</name></type> <name>colourGuard</name><argument_list>(<argument><expr><name>colour</name></expr></argument>)</argument_list></decl>;</decl_stmt>
+            <expr_stmt><expr><name>stream</name> <operator>&lt;&lt;</operator> <literal type="string">" with "</literal> <operator>&lt;&lt;</operator> <call><name>pluralise</name><argument_list>(<argument><expr><name>N</name></expr></argument>, <argument><expr><literal type="string">"message"</literal></expr></argument>)</argument_list></call> <operator>&lt;&lt;</operator> <literal type="char">':'</literal></expr>;</expr_stmt>
+        </block_content>}</block>
+
+        <while>while <condition>(<expr><name>itMessage</name> <operator>!=</operator> <name>itEnd</name></expr>)</condition> <block>{<block_content>
+            <comment type="line">// If this assertion is a warning ignore any INFO messages</comment>
+            <if_stmt><if>if <condition>(<expr><name>printInfoMessages</name> <operator>||</operator> <name><name>itMessage</name><operator>-&gt;</operator><name>type</name></name> <operator>!=</operator> <name><name>ResultWas</name><operator>::</operator><name>Info</name></name></expr>)</condition> <block>{<block_content>
+                <expr_stmt><expr><call><name>printMessage</name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+                <if_stmt><if>if <condition>(<expr><name>itMessage</name> <operator>!=</operator> <name>itEnd</name></expr>)</condition> <block>{<block_content>
+                    <decl_stmt><decl><type><name>Colour</name></type> <name>colourGuard</name><argument_list>(<argument><expr><call><name>dimColour</name><argument_list>()</argument_list></call></expr></argument>)</argument_list></decl>;</decl_stmt>
+                    <expr_stmt><expr><name>stream</name> <operator>&lt;&lt;</operator> <literal type="string">" and"</literal></expr>;</expr_stmt>
+                </block_content>}</block></if></if_stmt>
+                <continue>continue;</continue>
+            </block_content>}</block></if></if_stmt>
+            <expr_stmt><expr><operator>++</operator><name>itMessage</name></expr>;</expr_stmt>
+        </block_content>}</block></while>
+    </block_content>}</block></function>
+
+</private><private>private:
+    <decl_stmt><decl><type><name><name>std</name><operator>::</operator><name>ostream</name></name><modifier>&amp;</modifier></type> <name>stream</name></decl>;</decl_stmt>
+    <decl_stmt><decl><type><name>AssertionResult</name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>result</name></decl>;</decl_stmt>
+    <decl_stmt><decl><type><name><name>std</name><operator>::</operator><name>vector</name><argument_list type="generic">&lt;<argument><expr><name>MessageInfo</name></expr></argument>&gt;</argument_list></name></type> <name>messages</name></decl>;</decl_stmt>
+    <decl_stmt><decl><type><name><name>std</name><operator>::</operator><name>vector</name><argument_list type="generic">&lt;<argument><expr><name>MessageInfo</name></expr></argument>&gt;</argument_list><operator>::</operator><name>const_iterator</name></name></type> <name>itMessage</name></decl>;</decl_stmt>
+    <decl_stmt><decl><type><name>bool</name></type> <name>printInfoMessages</name></decl>;</decl_stmt>
+</private>}</block>;</class>
+
+}</block></namespace> <comment type="line">// anon namespace</comment>
+
+        <function><type><name><name>std</name><operator>::</operator><name>string</name></name></type> <name><name>CompactReporter</name><operator>::</operator><name>getDescription</name></name><parameter_list>()</parameter_list> <block>{<block_content>
+            <return>return <expr><literal type="string">"Reports test results on a single line, suitable for IDEs"</literal></expr>;</return>
+        </block_content>}</block></function>
+
+        <function><type><name>ReporterPreferences</name></type> <name><name>CompactReporter</name><operator>::</operator><name>getPreferences</name></name><parameter_list>()</parameter_list> <specifier>const</specifier> <block>{<block_content>
+            <return>return <expr><name>m_reporterPrefs</name></expr>;</return>
+        </block_content>}</block></function>
+
+        <function><type><name>void</name></type> <name><name>CompactReporter</name><operator>::</operator><name>noMatchingTestCases</name></name><parameter_list>( <parameter><decl><type><name><name>std</name><operator>::</operator><name>string</name></name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>spec</name></decl></parameter> )</parameter_list> <block>{<block_content>
+            <expr_stmt><expr><name>stream</name> <operator>&lt;&lt;</operator> <literal type="string">"No test cases matched '"</literal> <operator>&lt;&lt;</operator> <name>spec</name> <operator>&lt;&lt;</operator> <literal type="char">'\''</literal> <operator>&lt;&lt;</operator> <name><name>std</name><operator>::</operator><name>endl</name></name></expr>;</expr_stmt>
+        </block_content>}</block></function>
+
+        <function><type><name>void</name></type> <name><name>CompactReporter</name><operator>::</operator><name>assertionStarting</name></name><parameter_list>( <parameter><decl><type><name>AssertionInfo</name> <specifier>const</specifier><modifier>&amp;</modifier></type></decl></parameter> )</parameter_list> <block>{<block_content/>}</block></function>
+
+        <function><type><name>bool</name></type> <name><name>CompactReporter</name><operator>::</operator><name>assertionEnded</name></name><parameter_list>( <parameter><decl><type><name>AssertionStats</name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>_assertionStats</name></decl></parameter> )</parameter_list> <block>{<block_content>
+            <decl_stmt><decl><type><name>AssertionResult</name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>result</name> <init>= <expr><name><name>_assertionStats</name><operator>.</operator><name>assertionResult</name></name></expr></init></decl>;</decl_stmt>
+
+            <decl_stmt><decl><type><name>bool</name></type> <name>printInfoMessages</name> <init>= <expr><literal type="boolean">true</literal></expr></init></decl>;</decl_stmt>
+
+            <comment type="line">// Drop out if result was successful and we're not printing those</comment>
+            <if_stmt><if>if<condition>( <expr><operator>!</operator><call><name><name>m_config</name><operator>-&gt;</operator><name>includeSuccessfulResults</name></name><argument_list>()</argument_list></call> <operator>&amp;&amp;</operator> <call><name><name>result</name><operator>.</operator><name>isOk</name></name><argument_list>()</argument_list></call></expr> )</condition> <block>{<block_content>
+                <if_stmt><if>if<condition>( <expr><call><name><name>result</name><operator>.</operator><name>getResultType</name></name><argument_list>()</argument_list></call> <operator>!=</operator> <name><name>ResultWas</name><operator>::</operator><name>Warning</name></name></expr> )</condition><block type="pseudo"><block_content>
+                    <return>return <expr><literal type="boolean">false</literal></expr>;</return></block_content></block></if></if_stmt>
+                <expr_stmt><expr><name>printInfoMessages</name> <operator>=</operator> <literal type="boolean">false</literal></expr>;</expr_stmt>
+            </block_content>}</block></if></if_stmt>
+
+            <decl_stmt><decl><type><name>AssertionPrinter</name></type> <name>printer</name><argument_list>( <argument><expr><name>stream</name></expr></argument>, <argument><expr><name>_assertionStats</name></expr></argument>, <argument><expr><name>printInfoMessages</name></expr></argument> )</argument_list></decl>;</decl_stmt>
+            <expr_stmt><expr><call><name><name>printer</name><operator>.</operator><name>print</name></name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+
+            <expr_stmt><expr><name>stream</name> <operator>&lt;&lt;</operator> <name><name>std</name><operator>::</operator><name>endl</name></name></expr>;</expr_stmt>
+            <return>return <expr><literal type="boolean">true</literal></expr>;</return>
+        </block_content>}</block></function>
+
+        <function><type><name>void</name></type> <name><name>CompactReporter</name><operator>::</operator><name>sectionEnded</name></name><parameter_list>(<parameter><decl><type><name>SectionStats</name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>_sectionStats</name></decl></parameter>)</parameter_list> <block>{<block_content>
+            <if_stmt><if>if <condition>(<expr><call><name><name>m_config</name><operator>-&gt;</operator><name>showDurations</name></name><argument_list>()</argument_list></call> <operator>==</operator> <name><name>ShowDurations</name><operator>::</operator><name>Always</name></name></expr>)</condition> <block>{<block_content>
+                <expr_stmt><expr><name>stream</name> <operator>&lt;&lt;</operator> <call><name>getFormattedDuration</name><argument_list>(<argument><expr><name><name>_sectionStats</name><operator>.</operator><name>durationInSeconds</name></name></expr></argument>)</argument_list></call> <operator>&lt;&lt;</operator> <literal type="string">" s: "</literal> <operator>&lt;&lt;</operator> <name><name>_sectionStats</name><operator>.</operator><name>sectionInfo</name><operator>.</operator><name>name</name></name> <operator>&lt;&lt;</operator> <name><name>std</name><operator>::</operator><name>endl</name></name></expr>;</expr_stmt>
+            </block_content>}</block></if></if_stmt>
+        </block_content>}</block></function>
+
+        <function><type><name>void</name></type> <name><name>CompactReporter</name><operator>::</operator><name>testRunEnded</name></name><parameter_list>( <parameter><decl><type><name>TestRunStats</name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>_testRunStats</name></decl></parameter> )</parameter_list> <block>{<block_content>
+            <expr_stmt><expr><call><name>printTotals</name><argument_list>( <argument><expr><name>stream</name></expr></argument>, <argument><expr><name><name>_testRunStats</name><operator>.</operator><name>totals</name></name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+            <expr_stmt><expr><name>stream</name> <operator>&lt;&lt;</operator> <literal type="char">'\n'</literal> <operator>&lt;&lt;</operator> <name><name>std</name><operator>::</operator><name>endl</name></name></expr>;</expr_stmt>
+            <expr_stmt><expr><call><name><name>StreamingReporterBase</name><operator>::</operator><name>testRunEnded</name></name><argument_list>( <argument><expr><name>_testRunStats</name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        </block_content>}</block></function>
+
+        <destructor><name><name>CompactReporter</name><operator>::</operator><name>~CompactReporter</name></name><parameter_list>()</parameter_list> <block>{<block_content/>}</block></destructor>
+
+    <macro><name>CATCH_REGISTER_REPORTER</name><argument_list>( <argument><literal type="string">"compact"</literal></argument>, <argument>CompactReporter</argument> )</argument_list></macro>
+
+}</block></namespace> <comment type="line">// end namespace Catch</comment>
+</unit>

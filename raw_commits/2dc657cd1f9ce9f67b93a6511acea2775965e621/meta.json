@@ -1,0 +1,8 @@
+{
+  "commit_id": "2dc657cd1f9ce9f67b93a6511acea2775965e621",
+  "parent_id": "cca59235023fa30339086be845d9cd7214ecff91",
+  "message": "Make default colour selection fall-through",
+  "changed_files": [
+    "src/catch2/internal/catch_console_colour.cpp"
+  ]
+}

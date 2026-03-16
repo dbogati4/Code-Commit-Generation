@@ -1,0 +1,9 @@
+{
+  "commit_id": "56a02eede506eb3a01315123686749b97c1097e2",
+  "parent_id": "f52bd35e2f9bf6e2f38a1f2a842319f4362d61bc",
+  "message": "Added test for previous change",
+  "changed_files": [
+    "projects/SelfTest/MiscTests.cpp",
+    "projects/SelfTest/TestMain.cpp"
+  ]
+}

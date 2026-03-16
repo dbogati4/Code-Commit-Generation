@@ -1,0 +1,526 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" xmlns:diff="http://www.srcML.org/srcDiff" revision="1.0.0" language="C++" filename="C:\Users\saile\AppData\Local\Temp\catch2_100_z8gzpiwf\7bb00a42be5195f30b10b944c275c746e446810c\tests_SelfTest_UsageTests_Misc_tests_cpp\tests_SelfTest_UsageTests_Misc_tests_cpp.old|C:\Users\saile\AppData\Local\Temp\catch2_100_z8gzpiwf\7bb00a42be5195f30b10b944c275c746e446810c\tests_SelfTest_UsageTests_Misc_tests_cpp\tests_SelfTest_UsageTests_Misc_tests_cpp.new"><comment type="block">/*
+ *  Distributed under the Boost Software License, Version 1.0. (See accompanying
+ *  file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
+ */</comment>
+
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;catch2/catch_test_macros.hpp&gt;</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;catch2/catch_template_test_macros.hpp&gt;</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;catch2/internal/catch_config_wchar.hpp&gt;</cpp:file></cpp:include>
+
+<cpp:ifdef xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">ifdef</cpp:directive> <name>__clang__</name></cpp:ifdef>
+<cpp:pragma xmlns:cpp="http://www.srcML.org/srcML/cpp">#   <cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">pragma</cpp:directive> <name>clang</name> <name>diagnostic</name> <name>ignored</name> <cpp:literal xmlns:cpp="http://www.srcML.org/srcML/cpp">"-Wc++98-compat"</cpp:literal></cpp:pragma>
+<cpp:pragma xmlns:cpp="http://www.srcML.org/srcML/cpp">#   <cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">pragma</cpp:directive> <name>clang</name> <name>diagnostic</name> <name>ignored</name> <cpp:literal xmlns:cpp="http://www.srcML.org/srcML/cpp">"-Wc++98-compat-pedantic"</cpp:literal></cpp:pragma>
+<cpp:endif xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">endif</cpp:directive></cpp:endif>
+
+
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;iostream&gt;</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;cerrno&gt;</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;limits&gt;</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;array&gt;</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;tuple&gt;</cpp:file></cpp:include>
+
+<namespace>namespace <block>{
+
+    <function><type><specifier>static</specifier> <specifier>const</specifier> <name>char</name><modifier>*</modifier></type> <name>makeString</name><parameter_list>(<parameter><decl><type><name>bool</name></type> <name>makeNull</name></decl></parameter>)</parameter_list> <block>{<block_content>
+        <return>return <expr><ternary><condition><expr><name>makeNull</name></expr> ?</condition><then> <expr><literal type="null">nullptr</literal></expr> </then><else>: <expr><literal type="string">"valid string"</literal></expr></else></ternary></expr>;</return>
+    </block_content>}</block></function>
+    <function><type><specifier>static</specifier> <name>bool</name></type> <name>testCheckedIf</name><parameter_list>(<parameter><decl><type><name>bool</name></type> <name>flag</name></decl></parameter>)</parameter_list> <block>{<block_content>
+        <macro><name>CHECKED_IF</name><argument_list>(<argument>flag</argument>)</argument_list></macro>
+            <return>return <expr><literal type="boolean">true</literal></expr>;</return>
+    <if_stmt><else>else<block type="pseudo"><block_content>
+    <return>return <expr><literal type="boolean">false</literal></expr>;</return></block_content></block></else></if_stmt>
+    </block_content>}</block></function>
+    <function><type><specifier>static</specifier> <name>bool</name></type> <name>testCheckedElse</name><parameter_list>(<parameter><decl><type><name>bool</name></type> <name>flag</name></decl></parameter>)</parameter_list> <block>{<block_content>
+        <macro><name>CHECKED_ELSE</name><argument_list>(<argument>flag</argument>)</argument_list></macro>
+            <return>return <expr><literal type="boolean">false</literal></expr>;</return>
+
+        <return>return <expr><literal type="boolean">true</literal></expr>;</return>
+    </block_content>}</block></function>
+
+    <function><type><specifier>static</specifier> <name>unsigned</name> <name>int</name></type> <name>Factorial</name><parameter_list>(<parameter><decl><type><name>unsigned</name> <name>int</name></type> <name>number</name></decl></parameter>)</parameter_list> <block>{<block_content>
+        <return>return <expr><ternary><condition><expr><name>number</name> <operator>&gt;</operator> <literal type="number">1</literal></expr> ?</condition><then> <expr><call><name>Factorial</name><argument_list>(<argument><expr><name>number</name> <operator>-</operator> <literal type="number">1</literal></expr></argument>)</argument_list></call> <operator>*</operator> <name>number</name></expr> </then><else>: <expr><literal type="number">1</literal></expr></else></ternary></expr>;</return>
+    </block_content>}</block></function>
+
+    <function><type><specifier>static</specifier> <name>int</name></type> <name>f</name><parameter_list>()</parameter_list> <block>{<block_content>
+        <return>return <expr><literal type="number">1</literal></expr>;</return>
+    </block_content>}</block></function>
+
+    <function><type><specifier>static</specifier> <name>void</name></type> <name>manuallyRegisteredTestFunction</name><parameter_list>()</parameter_list> <block>{<block_content>
+        <expr_stmt><expr><call><name>SUCCEED</name><argument_list>(<argument><expr><literal type="string">"was called"</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block></function>
+
+    <struct>struct <name>AutoTestReg</name> <block>{<public type="default">
+        <constructor><name>AutoTestReg</name><parameter_list>()</parameter_list> <block>{<block_content>
+            <expr_stmt><expr><call><name>REGISTER_TEST_CASE</name><argument_list>(<argument><expr><name>manuallyRegisteredTestFunction</name></expr></argument>, <argument><expr><literal type="string">"ManuallyRegistered"</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        </block_content>}</block></constructor>
+    </public>}</block>;</struct>
+
+    <decl_stmt><decl><type><name>CATCH_INTERNAL_START_WARNINGS_SUPPRESSION</name>
+    <name>CATCH_INTERNAL_SUPPRESS_GLOBALS_WARNINGS</name>
+    <specifier>static</specifier> <name>AutoTestReg</name></type> <name>autoTestReg</name></decl>;</decl_stmt>
+    <macro><name>CATCH_INTERNAL_STOP_WARNINGS_SUPPRESSION</name></macro>
+
+        <struct><template>template<parameter_list>&lt;<parameter><type><name>typename</name></type> <name>T</name></parameter>&gt;</parameter_list></template>
+    struct <name>Foo</name> <block>{<public type="default">
+        <function><type><name>size_t</name></type> <name>size</name><parameter_list>()</parameter_list> <block>{<block_content> <return>return <expr><literal type="number">0</literal></expr>;</return> </block_content>}</block></function>
+    </public>}</block>;</struct>
+
+    <struct><template>template<parameter_list>&lt;<parameter><type><name>typename</name></type> <name>T</name></parameter>, <parameter><type><name>size_t</name></type> <name>S</name></parameter>&gt;</parameter_list></template>
+    struct <name>Bar</name> <block>{<public type="default">
+        <function><type><name>size_t</name></type> <name>size</name><parameter_list>()</parameter_list> <block>{<block_content> <return>return <expr><name>S</name></expr>;</return> </block_content>}</block></function>
+    </public>}</block>;</struct>
+
+}</block></namespace>
+
+<macro><name>TEST_CASE</name><argument_list>( <argument><literal type="string">"random SECTION tests"</literal></argument>, <argument><literal type="string">"[.][sections][failing]"</literal></argument> )</argument_list></macro> <block>{<block_content>
+    <decl_stmt><decl><type><name>int</name></type> <name>a</name> <init>= <expr><literal type="number">1</literal></expr></init></decl>;</decl_stmt>
+    <decl_stmt><decl><type><name>int</name></type> <name>b</name> <init>= <expr><literal type="number">2</literal></expr></init></decl>;</decl_stmt>
+
+    <macro><name>SECTION</name><argument_list>( <argument><literal type="string">"doesn't equal"</literal></argument> )</argument_list></macro> <block>{<block_content>
+        <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><name>a</name> <operator>!=</operator> <name>b</name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><name>b</name> <operator>!=</operator> <name>a</name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block>
+
+    <macro><name>SECTION</name><argument_list>( <argument><literal type="string">"not equal"</literal></argument> )</argument_list></macro> <block>{<block_content>
+        <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><name>a</name> <operator>!=</operator> <name>b</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block>
+</block_content>}</block>
+
+<macro><name>TEST_CASE</name><argument_list>( <argument><literal type="string">"nested SECTION tests"</literal></argument>, <argument><literal type="string">"[.][sections][failing]"</literal></argument> )</argument_list></macro> <block>{<block_content>
+    <decl_stmt><decl><type><name>int</name></type> <name>a</name> <init>= <expr><literal type="number">1</literal></expr></init></decl>;</decl_stmt>
+    <decl_stmt><decl><type><name>int</name></type> <name>b</name> <init>= <expr><literal type="number">2</literal></expr></init></decl>;</decl_stmt>
+
+    <macro><name>SECTION</name><argument_list>( <argument><literal type="string">"doesn't equal"</literal></argument> )</argument_list></macro> <block>{<block_content>
+        <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><name>a</name> <operator>!=</operator> <name>b</name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><name>b</name> <operator>!=</operator> <name>a</name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+
+        <macro><name>SECTION</name><argument_list>( <argument><literal type="string">"not equal"</literal></argument> )</argument_list></macro> <block>{<block_content>
+            <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><name>a</name> <operator>!=</operator> <name>b</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        </block_content>}</block>
+    </block_content>}</block>
+</block_content>}</block>
+
+<macro><name>TEST_CASE</name><argument_list>( <argument><literal type="string">"more nested SECTION tests"</literal></argument>, <argument><literal type="string">"[sections][failing][.]"</literal></argument> )</argument_list></macro> <block>{<block_content>
+    <decl_stmt><decl><type><name>int</name></type> <name>a</name> <init>= <expr><literal type="number">1</literal></expr></init></decl>;</decl_stmt>
+    <decl_stmt><decl><type><name>int</name></type> <name>b</name> <init>= <expr><literal type="number">2</literal></expr></init></decl>;</decl_stmt>
+
+    <macro><name>SECTION</name><argument_list>( <argument><literal type="string">"doesn't equal"</literal></argument> )</argument_list></macro> <block>{<block_content>
+        <macro><name>SECTION</name><argument_list>( <argument><literal type="string">"equal"</literal></argument> )</argument_list></macro> <block>{<block_content>
+            <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><name>a</name> <operator>==</operator> <name>b</name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        </block_content>}</block>
+
+        <macro><name>SECTION</name><argument_list>( <argument><literal type="string">"not equal"</literal></argument> )</argument_list></macro> <block>{<block_content>
+            <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><name>a</name> <operator>!=</operator> <name>b</name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        </block_content>}</block>
+        <macro><name>SECTION</name><argument_list>( <argument><literal type="string">"less than"</literal></argument> )</argument_list></macro> <block>{<block_content>
+            <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><name>a</name> <operator>&lt;</operator> <name>b</name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        </block_content>}</block>
+    </block_content>}</block>
+</block_content>}</block>
+
+<macro><name>TEST_CASE</name><argument_list>( <argument><literal type="string">"even more nested SECTION tests"</literal></argument>, <argument><literal type="string">"[sections]"</literal></argument> )</argument_list></macro> <block>{<block_content>
+    <macro><name>SECTION</name><argument_list>( <argument><literal type="string">"c"</literal></argument> )</argument_list></macro> <block>{<block_content>
+        <macro><name>SECTION</name><argument_list>( <argument><literal type="string">"d (leaf)"</literal></argument> )</argument_list></macro> <block>{<block_content>
+            <expr_stmt><expr><call><name>SUCCEED</name><argument_list>()</argument_list></call></expr>;</expr_stmt> <comment type="line">// avoid failing due to no tests</comment>
+        </block_content>}</block>
+
+        <macro><name>SECTION</name><argument_list>( <argument><literal type="string">"e (leaf)"</literal></argument> )</argument_list></macro> <block>{<block_content>
+            <expr_stmt><expr><call><name>SUCCEED</name><argument_list>()</argument_list></call></expr>;</expr_stmt> <comment type="line">// avoid failing due to no tests</comment>
+        </block_content>}</block>
+    </block_content>}</block>
+
+    <macro><name>SECTION</name><argument_list>( <argument><literal type="string">"f (leaf)"</literal></argument> )</argument_list></macro> <block>{<block_content>
+        <expr_stmt><expr><call><name>SUCCEED</name><argument_list>()</argument_list></call></expr>;</expr_stmt> <comment type="line">// avoid failing due to no tests</comment>
+    </block_content>}</block>
+</block_content>}</block>
+
+<macro><name>TEST_CASE</name><argument_list>( <argument><literal type="string">"looped SECTION tests"</literal></argument>, <argument><literal type="string">"[.][failing][sections]"</literal></argument> )</argument_list></macro> <block>{<block_content>
+    <decl_stmt><decl><type><name>int</name></type> <name>a</name> <init>= <expr><literal type="number">1</literal></expr></init></decl>;</decl_stmt>
+
+    <for>for<control>( <init><decl><type><name>int</name></type> <name>b</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>b</name> <operator>&lt;</operator> <literal type="number">10</literal></expr>;</condition> <incr><expr><operator>++</operator><name>b</name></expr></incr> )</control> <block>{<block_content>
+        <macro><name>DYNAMIC_SECTION</name><argument_list>( <argument><literal type="string">"b is currently: "</literal> &lt;&lt; b</argument> )</argument_list></macro> <block>{<block_content>
+            <expr_stmt><expr><call><name>CHECK</name><argument_list>( <argument><expr><name>b</name> <operator>&gt;</operator> <name>a</name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        </block_content>}</block>
+    </block_content>}</block></for>
+</block_content>}</block>
+
+<macro><name>TEST_CASE</name><argument_list>( <argument><literal type="string">"looped tests"</literal></argument>, <argument><literal type="string">"[.][failing]"</literal></argument> )</argument_list></macro> <block>{<block_content>
+    <decl_stmt><decl><type><specifier>static</specifier> <specifier>const</specifier> <name>int</name></type> <name><name>fib</name><index>[]</index></name>  <init>= <expr><block>{ <expr><literal type="number">1</literal></expr>, <expr><literal type="number">1</literal></expr>, <expr><literal type="number">2</literal></expr>, <expr><literal type="number">3</literal></expr>, <expr><literal type="number">5</literal></expr>, <expr><literal type="number">8</literal></expr>, <expr><literal type="number">13</literal></expr>, <expr><literal type="number">21</literal></expr> }</block></expr></init></decl>;</decl_stmt>
+
+    <for>for<control>( <init><decl><type><name><name>std</name><operator>::</operator><name>size_t</name></name></type> <name>i</name><init>=<expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>i</name> <operator>&lt;</operator> <sizeof>sizeof<argument_list>(<argument><expr><name>fib</name></expr></argument>)</argument_list></sizeof><operator>/</operator><sizeof>sizeof<argument_list>(<argument><expr><name>int</name></expr></argument>)</argument_list></sizeof></expr>;</condition> <incr><expr><operator>++</operator><name>i</name></expr></incr> )</control> <block>{<block_content>
+        <expr_stmt><expr><call><name>INFO</name><argument_list>( <argument><expr><literal type="string">"Testing if fib["</literal> <operator>&lt;&lt;</operator> <name>i</name> <operator>&lt;&lt;</operator> <literal type="string">"] ("</literal> <operator>&lt;&lt;</operator> <name><name>fib</name><index>[<expr><name>i</name></expr>]</index></name> <operator>&lt;&lt;</operator> <literal type="string">") is even"</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name>CHECK</name><argument_list>( <argument><expr><operator>(</operator> <name><name>fib</name><index>[<expr><name>i</name></expr>]</index></name> <operator>%</operator> <literal type="number">2</literal> <operator>)</operator> <operator>==</operator> <literal type="number">0</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block></for>
+</block_content>}</block>
+
+<macro><name>TEST_CASE</name><argument_list>( <argument><literal type="string">"Sends stuff to stdout and stderr"</literal></argument>, <argument><literal type="string">"[.]"</literal></argument> )</argument_list></macro> <block>{<block_content>
+    <expr_stmt><expr><name><name>std</name><operator>::</operator><name>cout</name></name> <operator>&lt;&lt;</operator> <literal type="string">"A string sent directly to stdout"</literal> <operator>&lt;&lt;</operator> <name><name>std</name><operator>::</operator><name>endl</name></name></expr>;</expr_stmt>
+    <expr_stmt><expr><name><name>std</name><operator>::</operator><name>cerr</name></name> <operator>&lt;&lt;</operator> <literal type="string">"A string sent directly to stderr"</literal> <operator>&lt;&lt;</operator> <name><name>std</name><operator>::</operator><name>endl</name></name></expr>;</expr_stmt>
+    <expr_stmt><expr><name><name>std</name><operator>::</operator><name>clog</name></name> <operator>&lt;&lt;</operator> <literal type="string">"A string sent to stderr via clog"</literal> <operator>&lt;&lt;</operator> <name><name>std</name><operator>::</operator><name>endl</name></name></expr>;</expr_stmt>
+</block_content>}</block>
+
+<macro><name>TEST_CASE</name><argument_list>( <argument><literal type="string">"null strings"</literal></argument> )</argument_list></macro> <block>{<block_content>
+    <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name>makeString</name><argument_list>( <argument><expr><literal type="boolean">false</literal></expr></argument> )</argument_list></call> <operator>!=</operator> <cast type="static">static_cast<argument_list type="generic">&lt;<argument><expr><name>char</name><operator>*</operator></expr></argument>&gt;</argument_list><argument_list>(<argument><expr><literal type="null">nullptr</literal></expr></argument>)</argument_list></cast></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name>makeString</name><argument_list>( <argument><expr><literal type="boolean">true</literal></expr></argument> )</argument_list></call> <operator>==</operator> <cast type="static">static_cast<argument_list type="generic">&lt;<argument><expr><name>char</name><operator>*</operator></expr></argument>&gt;</argument_list><argument_list>(<argument><expr><literal type="null">nullptr</literal></expr></argument>)</argument_list></cast></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+</block_content>}</block>
+
+<macro><name>TEST_CASE</name><argument_list>( <argument><literal type="string">"checkedIf"</literal></argument> )</argument_list></macro> <block>{<block_content>
+    <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name>testCheckedIf</name><argument_list>( <argument><expr><literal type="boolean">true</literal></expr></argument> )</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+</block_content>}</block>
+
+<macro><name>TEST_CASE</name><argument_list>( <argument><literal type="string">"checkedIf, failing"</literal></argument>, <argument><literal type="string">"[failing][.]"</literal></argument> )</argument_list></macro> <block>{<block_content>
+    <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name>testCheckedIf</name><argument_list>( <argument><expr><literal type="boolean">false</literal></expr></argument> )</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+</block_content>}</block>
+
+<macro><name>TEST_CASE</name><argument_list>( <argument><literal type="string">"checkedElse"</literal></argument> )</argument_list></macro> <block>{<block_content>
+    <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name>testCheckedElse</name><argument_list>( <argument><expr><literal type="boolean">true</literal></expr></argument> )</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+</block_content>}</block>
+
+<macro><name>TEST_CASE</name><argument_list>( <argument><literal type="string">"checkedElse, failing"</literal></argument>, <argument><literal type="string">"[failing][.]"</literal></argument> )</argument_list></macro> <block>{<block_content>
+    <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name>testCheckedElse</name><argument_list>( <argument><expr><literal type="boolean">false</literal></expr></argument> )</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+</block_content>}</block>
+
+<macro><name>TEST_CASE</name><argument_list>(<argument><literal type="string">"Testing checked-if"</literal></argument>, <argument><literal type="string">"[checked-if]"</literal></argument>)</argument_list></macro> <block>{<block_content>
+    <macro><name>CHECKED_IF</name><argument_list>(<argument><literal type="boolean">true</literal></argument>)</argument_list></macro> <block>{<block_content>
+        <expr_stmt><expr><call><name>SUCCEED</name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block>
+    <macro><name>CHECKED_IF</name><argument_list>(<argument><literal type="boolean">false</literal></argument>)</argument_list></macro> <block>{<block_content>
+        <expr_stmt><expr><call><name>FAIL</name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block>
+    <macro><name>CHECKED_ELSE</name><argument_list>(<argument><literal type="boolean">true</literal></argument>)</argument_list></macro> <block>{<block_content>
+        <expr_stmt><expr><call><name>FAIL</name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block>
+    <macro><name>CHECKED_ELSE</name><argument_list>(<argument><literal type="boolean">false</literal></argument>)</argument_list></macro> <block>{<block_content>
+        <expr_stmt><expr><call><name>SUCCEED</name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block>
+</block_content>}</block>
+
+<macro><name>TEST_CASE</name><argument_list>(<argument><literal type="string">"Testing checked-if 2"</literal></argument>, <argument><literal type="string">"[checked-if][!shouldfail]"</literal></argument>)</argument_list></macro> <block>{<block_content>
+    <macro><name>CHECKED_IF</name><argument_list>(<argument><literal type="boolean">true</literal></argument>)</argument_list></macro> <block>{<block_content>
+        <expr_stmt><expr><call><name>FAIL</name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block>
+    <comment type="line">// If the checked if is not entered, this passes and the test</comment>
+    <comment type="line">// fails, because of the [!shouldfail] tag.</comment>
+    <expr_stmt><expr><call><name>SUCCEED</name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+</block_content>}</block>
+
+<macro><name>TEST_CASE</name><argument_list>(<argument><literal type="string">"Testing checked-if 3"</literal></argument>, <argument><literal type="string">"[checked-if][!shouldfail]"</literal></argument>)</argument_list></macro> <block>{<block_content>
+    <macro><name>CHECKED_ELSE</name><argument_list>(<argument><literal type="boolean">false</literal></argument>)</argument_list></macro> <block>{<block_content>
+        <expr_stmt><expr><call><name>FAIL</name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block>
+    <comment type="line">// If the checked false is not entered, this passes and the test</comment>
+    <comment type="line">// fails, because of the [!shouldfail] tag.</comment>
+    <expr_stmt><expr><call><name>SUCCEED</name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+</block_content>}</block>
+
+<macro><name>TEST_CASE</name><argument_list>( <argument><literal type="string">"xmlentitycheck"</literal></argument> )</argument_list></macro> <block>{<block_content>
+    <macro><name>SECTION</name><argument_list>( <argument><literal type="string">"embedded xml: &lt;test&gt;it should be possible to embed xml characters, such as &lt;, \" or &amp;, or even whole &lt;xml&gt;documents&lt;/xml&gt; within an attribute&lt;/test&gt;"</literal></argument> )</argument_list></macro> <block>{<block_content>
+        <expr_stmt><expr><call><name>SUCCEED</name><argument_list>()</argument_list></call></expr>;</expr_stmt> <comment type="line">// We need this here to stop it failing due to no tests</comment>
+    </block_content>}</block>
+    <macro><name>SECTION</name><argument_list>( <argument><literal type="string">"encoded chars: these should all be encoded: &amp;&amp;&amp;\"\"\"&lt;&lt;&lt;&amp;\"&lt;&lt;&amp;\""</literal></argument> )</argument_list></macro> <block>{<block_content>
+        <expr_stmt><expr><call><name>SUCCEED</name><argument_list>()</argument_list></call></expr>;</expr_stmt> <comment type="line">// We need this here to stop it failing due to no tests</comment>
+    </block_content>}</block>
+</block_content>}</block>
+
+<macro><name>TEST_CASE</name><argument_list>( <argument><literal type="string">"send a single char to INFO"</literal></argument>, <argument><literal type="string">"[failing][.]"</literal></argument> )</argument_list></macro> <block>{<block_content>
+    <expr_stmt><expr><call><name>INFO</name><argument_list>(<argument><expr><literal type="number">3</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>REQUIRE</name><argument_list>(<argument><expr><literal type="boolean">false</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+</block_content>}</block>
+
+<macro><name>TEST_CASE</name><argument_list>( <argument><literal type="string">"atomic if"</literal></argument>, <argument><literal type="string">"[failing][0]"</literal></argument>)</argument_list></macro> <block>{<block_content>
+    <decl_stmt><decl><type><name><name>std</name><operator>::</operator><name>size_t</name></name></type> <name>x</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</decl_stmt>
+
+    <if_stmt><if>if<condition>( <expr><name>x</name></expr> )</condition><block type="pseudo"><block_content>
+        <expr_stmt><expr><call><name>REQUIRE</name><argument_list>(<argument><expr><name>x</name> <operator>&gt;</operator> <literal type="number">0</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt></block_content></block></if>
+    <else>else<block type="pseudo"><block_content>
+        <expr_stmt><expr><call><name>REQUIRE</name><argument_list>(<argument><expr><name>x</name> <operator>==</operator> <literal type="number">0</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt></block_content></block></else></if_stmt>
+</block_content>}</block>
+
+
+<macro><name>TEST_CASE</name><argument_list>( <argument><literal type="string">"Factorials are computed"</literal></argument>, <argument><literal type="string">"[factorial]"</literal></argument> )</argument_list></macro> <block>{<block_content>
+  <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name>Factorial</name><argument_list>(<argument><expr><literal type="number">0</literal></expr></argument>)</argument_list></call> <operator>==</operator> <literal type="number">1</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+  <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name>Factorial</name><argument_list>(<argument><expr><literal type="number">1</literal></expr></argument>)</argument_list></call> <operator>==</operator> <literal type="number">1</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+  <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name>Factorial</name><argument_list>(<argument><expr><literal type="number">2</literal></expr></argument>)</argument_list></call> <operator>==</operator> <literal type="number">2</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+  <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name>Factorial</name><argument_list>(<argument><expr><literal type="number">3</literal></expr></argument>)</argument_list></call> <operator>==</operator> <literal type="number">6</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+  <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name>Factorial</name><argument_list>(<argument><expr><literal type="number">10</literal></expr></argument>)</argument_list></call> <operator>==</operator> <literal type="number">3628800</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+</block_content>}</block>
+
+<macro><name>TEST_CASE</name><argument_list>( <argument><literal type="string">"An empty test with no assertions"</literal></argument>, <argument><literal type="string">"[empty]"</literal></argument> )</argument_list></macro> <block>{<block_content/>}</block>
+
+<macro><name>TEST_CASE</name><argument_list>( <argument><literal type="string">"Nice descriptive name"</literal></argument>, <argument><literal type="string">"[tag1][tag2][tag3][.]"</literal></argument> )</argument_list></macro> <block>{<block_content>
+    <expr_stmt><expr><call><name>WARN</name><argument_list>( <argument><expr><literal type="string">"This one ran"</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+</block_content>}</block>
+<macro><name>TEST_CASE</name><argument_list>( <argument><literal type="string">"first tag"</literal></argument>, <argument><literal type="string">"[tag1]"</literal></argument> )</argument_list></macro> <block>{<block_content/>}</block>
+<macro><name>TEST_CASE</name><argument_list>( <argument><literal type="string">"second tag"</literal></argument>, <argument><literal type="string">"[tag2]"</literal></argument> )</argument_list></macro> <block>{<block_content/>}</block>
+
+<diff:delete xmlns:diff="http://www.srcML.org/srcDiff"><comment type="line">//</comment><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+</diff:ws><comment type="line">//TEST_CASE(<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>"spawn<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>a<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>new<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>process",<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>"[.]"<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>)</comment><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+</diff:ws><comment type="line">//{</comment><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+</diff:ws><comment type="line">//<diff:ws xmlns:diff="http://www.srcML.org/srcDiff">    </diff:ws>//<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>!TBD<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>Work<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>in<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>progress</comment><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+</diff:ws><comment type="line">//<diff:ws xmlns:diff="http://www.srcML.org/srcDiff">    </diff:ws>char<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>line[200];</comment><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+</diff:ws><comment type="line">//<diff:ws xmlns:diff="http://www.srcML.org/srcDiff">    </diff:ws>FILE*<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>output<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>=<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>popen("./CatchSelfTest<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>./failing/matchers/StartsWith",<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>"r");</comment><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+</diff:ws><comment type="line">//<diff:ws xmlns:diff="http://www.srcML.org/srcDiff">    </diff:ws>while<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>(<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>fgets(line,<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>199,<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>output)<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>)</comment><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+</diff:ws><comment type="line">//<diff:ws xmlns:diff="http://www.srcML.org/srcDiff">        </diff:ws>std::cout<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>&lt;&lt;<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>line;</comment><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+</diff:ws><comment type="line">//}</comment><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+
+</diff:ws></diff:delete><macro><name>TEST_CASE</name><argument_list>( <argument><literal type="string">"vectors can be sized and resized"</literal></argument>, <argument><literal type="string">"[vector]"</literal></argument> )</argument_list></macro> <block>{<block_content>
+
+    <decl_stmt><decl><type><name><name>std</name><operator>::</operator><name>vector</name><argument_list type="generic">&lt;<argument><expr><name>int</name></expr></argument>&gt;</argument_list></name></type> <name>v</name><argument_list>( <argument><expr><literal type="number">5</literal></expr></argument> )</argument_list></decl>;</decl_stmt>
+
+    <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name><name>v</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call> <operator>==</operator> <literal type="number">5</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name><name>v</name><operator>.</operator><name>capacity</name></name><argument_list>()</argument_list></call> <operator>&gt;=</operator> <literal type="number">5</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+
+    <macro><name>SECTION</name><argument_list>( <argument><literal type="string">"resizing bigger changes size and capacity"</literal></argument> )</argument_list></macro> <block>{<block_content>
+        <expr_stmt><expr><call><name><name>v</name><operator>.</operator><name>resize</name></name><argument_list>( <argument><expr><literal type="number">10</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+
+        <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name><name>v</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call> <operator>==</operator> <literal type="number">10</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name><name>v</name><operator>.</operator><name>capacity</name></name><argument_list>()</argument_list></call> <operator>&gt;=</operator> <literal type="number">10</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block>
+    <macro><name>SECTION</name><argument_list>( <argument><literal type="string">"resizing smaller changes size but not capacity"</literal></argument> )</argument_list></macro> <block>{<block_content>
+        <expr_stmt><expr><call><name><name>v</name><operator>.</operator><name>resize</name></name><argument_list>( <argument><expr><literal type="number">0</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+
+        <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name><name>v</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call> <operator>==</operator> <literal type="number">0</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name><name>v</name><operator>.</operator><name>capacity</name></name><argument_list>()</argument_list></call> <operator>&gt;=</operator> <literal type="number">5</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+
+        <macro><name>SECTION</name><argument_list>( <argument><literal type="string">"We can use the 'swap trick' to reset the capacity"</literal></argument> )</argument_list></macro> <block>{<block_content>
+            <decl_stmt><decl><type><name><name>std</name><operator>::</operator><name>vector</name><argument_list type="generic">&lt;<argument><expr><name>int</name></expr></argument>&gt;</argument_list></name></type> <name>empty</name></decl>;</decl_stmt>
+            <expr_stmt><expr><call><name><name>empty</name><operator>.</operator><name>swap</name></name><argument_list>( <argument><expr><name>v</name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+
+            <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name><name>v</name><operator>.</operator><name>capacity</name></name><argument_list>()</argument_list></call> <operator>==</operator> <literal type="number">0</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        </block_content>}</block>
+    </block_content>}</block>
+    <macro><name>SECTION</name><argument_list>( <argument><literal type="string">"reserving bigger changes capacity but not size"</literal></argument> )</argument_list></macro> <block>{<block_content>
+        <expr_stmt><expr><call><name><name>v</name><operator>.</operator><name>reserve</name></name><argument_list>( <argument><expr><literal type="number">10</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+
+        <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name><name>v</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call> <operator>==</operator> <literal type="number">5</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name><name>v</name><operator>.</operator><name>capacity</name></name><argument_list>()</argument_list></call> <operator>&gt;=</operator> <literal type="number">10</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block>
+    <macro><name>SECTION</name><argument_list>( <argument><literal type="string">"reserving smaller does not change size or capacity"</literal></argument> )</argument_list></macro> <block>{<block_content>
+        <expr_stmt><expr><call><name><name>v</name><operator>.</operator><name>reserve</name></name><argument_list>( <argument><expr><literal type="number">0</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+
+        <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name><name>v</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call> <operator>==</operator> <literal type="number">5</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name><name>v</name><operator>.</operator><name>capacity</name></name><argument_list>()</argument_list></call> <operator>&gt;=</operator> <literal type="number">5</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block>
+</block_content>}</block>
+
+<macro><name>TEMPLATE_TEST_CASE</name><argument_list>( <argument><literal type="string">"TemplateTest: vectors can be sized and resized"</literal></argument>, <argument><literal type="string">"[vector][template]"</literal></argument>, <argument>int</argument>, <argument>float</argument>, <argument>std::string</argument>, <argument>(std::tuple&lt;int,float&gt;)</argument> )</argument_list></macro> <block>{<block_content>
+
+    <decl_stmt><decl><type><name><name>std</name><operator>::</operator><name>vector</name><argument_list type="generic">&lt;<argument><expr><name>TestType</name></expr></argument>&gt;</argument_list></name></type> <name>v</name><argument_list>( <argument><expr><literal type="number">5</literal></expr></argument> )</argument_list></decl>;</decl_stmt>
+
+    <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name><name>v</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call> <operator>==</operator> <literal type="number">5</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name><name>v</name><operator>.</operator><name>capacity</name></name><argument_list>()</argument_list></call> <operator>&gt;=</operator> <literal type="number">5</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+
+    <macro><name>SECTION</name><argument_list>( <argument><literal type="string">"resizing bigger changes size and capacity"</literal></argument> )</argument_list></macro> <block>{<block_content>
+        <expr_stmt><expr><call><name><name>v</name><operator>.</operator><name>resize</name></name><argument_list>( <argument><expr><literal type="number">10</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+
+        <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name><name>v</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call> <operator>==</operator> <literal type="number">10</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name><name>v</name><operator>.</operator><name>capacity</name></name><argument_list>()</argument_list></call> <operator>&gt;=</operator> <literal type="number">10</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block>
+    <macro><name>SECTION</name><argument_list>( <argument><literal type="string">"resizing smaller changes size but not capacity"</literal></argument> )</argument_list></macro> <block>{<block_content>
+        <expr_stmt><expr><call><name><name>v</name><operator>.</operator><name>resize</name></name><argument_list>( <argument><expr><literal type="number">0</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+
+        <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name><name>v</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call> <operator>==</operator> <literal type="number">0</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name><name>v</name><operator>.</operator><name>capacity</name></name><argument_list>()</argument_list></call> <operator>&gt;=</operator> <literal type="number">5</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+
+        <macro><name>SECTION</name><argument_list>( <argument><literal type="string">"We can use the 'swap trick' to reset the capacity"</literal></argument> )</argument_list></macro> <block>{<block_content>
+            <decl_stmt><decl><type><name><name>std</name><operator>::</operator><name>vector</name><argument_list type="generic">&lt;<argument><expr><name>TestType</name></expr></argument>&gt;</argument_list></name></type> <name>empty</name></decl>;</decl_stmt>
+            <expr_stmt><expr><call><name><name>empty</name><operator>.</operator><name>swap</name></name><argument_list>( <argument><expr><name>v</name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+
+            <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name><name>v</name><operator>.</operator><name>capacity</name></name><argument_list>()</argument_list></call> <operator>==</operator> <literal type="number">0</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        </block_content>}</block>
+    </block_content>}</block>
+    <macro><name>SECTION</name><argument_list>( <argument><literal type="string">"reserving bigger changes capacity but not size"</literal></argument> )</argument_list></macro> <block>{<block_content>
+        <expr_stmt><expr><call><name><name>v</name><operator>.</operator><name>reserve</name></name><argument_list>( <argument><expr><literal type="number">10</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+
+        <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name><name>v</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call> <operator>==</operator> <literal type="number">5</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name><name>v</name><operator>.</operator><name>capacity</name></name><argument_list>()</argument_list></call> <operator>&gt;=</operator> <literal type="number">10</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block>
+    <macro><name>SECTION</name><argument_list>( <argument><literal type="string">"reserving smaller does not change size or capacity"</literal></argument> )</argument_list></macro> <block>{<block_content>
+        <expr_stmt><expr><call><name><name>v</name><operator>.</operator><name>reserve</name></name><argument_list>( <argument><expr><literal type="number">0</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+
+        <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name><name>v</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call> <operator>==</operator> <literal type="number">5</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name><name>v</name><operator>.</operator><name>capacity</name></name><argument_list>()</argument_list></call> <operator>&gt;=</operator> <literal type="number">5</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block>
+</block_content>}</block>
+
+<macro><name>TEMPLATE_TEST_CASE_SIG</name><argument_list>(<argument><literal type="string">"TemplateTestSig: vectors can be sized and resized"</literal></argument>, <argument><literal type="string">"[vector][template][nttp]"</literal></argument>, <argument>((typename TestType, int V), TestType, V)</argument>, <argument>(int,<literal type="number">5</literal>)</argument>, <argument>(float,<literal type="number">4</literal>)</argument>, <argument>(std::string,<literal type="number">15</literal>)</argument>, <argument>((std::tuple&lt;int, float&gt;), <literal type="number">6</literal>)</argument>)</argument_list></macro> <block>{<block_content>
+
+    <function_decl><type><name><name>std</name><operator>::</operator><name>vector</name><argument_list type="generic">&lt;<argument><expr><name>TestType</name></expr></argument>&gt;</argument_list></name></type> <name>v</name><parameter_list>(<parameter><decl><type><name>V</name></type></decl></parameter>)</parameter_list>;</function_decl>
+
+    <expr_stmt><expr><call><name>REQUIRE</name><argument_list>(<argument><expr><call><name><name>v</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call> <operator>==</operator> <name>V</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>REQUIRE</name><argument_list>(<argument><expr><call><name><name>v</name><operator>.</operator><name>capacity</name></name><argument_list>()</argument_list></call> <operator>&gt;=</operator> <name>V</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+
+    <macro><name>SECTION</name><argument_list>(<argument><literal type="string">"resizing bigger changes size and capacity"</literal></argument>)</argument_list></macro> <block>{<block_content>
+        <expr_stmt><expr><call><name><name>v</name><operator>.</operator><name>resize</name></name><argument_list>(<argument><expr><literal type="number">2</literal> <operator>*</operator> <name>V</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+
+        <expr_stmt><expr><call><name>REQUIRE</name><argument_list>(<argument><expr><call><name><name>v</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call> <operator>==</operator> <literal type="number">2</literal> <operator>*</operator> <name>V</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name>REQUIRE</name><argument_list>(<argument><expr><call><name><name>v</name><operator>.</operator><name>capacity</name></name><argument_list>()</argument_list></call> <operator>&gt;=</operator> <literal type="number">2</literal> <operator>*</operator> <name>V</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block>
+    <macro><name>SECTION</name><argument_list>(<argument><literal type="string">"resizing smaller changes size but not capacity"</literal></argument>)</argument_list></macro> <block>{<block_content>
+        <expr_stmt><expr><call><name><name>v</name><operator>.</operator><name>resize</name></name><argument_list>(<argument><expr><literal type="number">0</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+
+        <expr_stmt><expr><call><name>REQUIRE</name><argument_list>(<argument><expr><call><name><name>v</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call> <operator>==</operator> <literal type="number">0</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name>REQUIRE</name><argument_list>(<argument><expr><call><name><name>v</name><operator>.</operator><name>capacity</name></name><argument_list>()</argument_list></call> <operator>&gt;=</operator> <name>V</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+
+        <macro><name>SECTION</name><argument_list>(<argument><literal type="string">"We can use the 'swap trick' to reset the capacity"</literal></argument>)</argument_list></macro> <block>{<block_content>
+            <decl_stmt><decl><type><name><name>std</name><operator>::</operator><name>vector</name><argument_list type="generic">&lt;<argument><expr><name>TestType</name></expr></argument>&gt;</argument_list></name></type> <name>empty</name></decl>;</decl_stmt>
+            <expr_stmt><expr><call><name><name>empty</name><operator>.</operator><name>swap</name></name><argument_list>(<argument><expr><name>v</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+
+            <expr_stmt><expr><call><name>REQUIRE</name><argument_list>(<argument><expr><call><name><name>v</name><operator>.</operator><name>capacity</name></name><argument_list>()</argument_list></call> <operator>==</operator> <literal type="number">0</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        </block_content>}</block>
+    </block_content>}</block>
+    <macro><name>SECTION</name><argument_list>(<argument><literal type="string">"reserving bigger changes capacity but not size"</literal></argument>)</argument_list></macro> <block>{<block_content>
+        <expr_stmt><expr><call><name><name>v</name><operator>.</operator><name>reserve</name></name><argument_list>(<argument><expr><literal type="number">2</literal> <operator>*</operator> <name>V</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+
+        <expr_stmt><expr><call><name>REQUIRE</name><argument_list>(<argument><expr><call><name><name>v</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call> <operator>==</operator> <name>V</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name>REQUIRE</name><argument_list>(<argument><expr><call><name><name>v</name><operator>.</operator><name>capacity</name></name><argument_list>()</argument_list></call> <operator>&gt;=</operator> <literal type="number">2</literal> <operator>*</operator> <name>V</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block>
+    <macro><name>SECTION</name><argument_list>(<argument><literal type="string">"reserving smaller does not change size or capacity"</literal></argument>)</argument_list></macro> <block>{<block_content>
+        <expr_stmt><expr><call><name><name>v</name><operator>.</operator><name>reserve</name></name><argument_list>(<argument><expr><literal type="number">0</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+
+        <expr_stmt><expr><call><name>REQUIRE</name><argument_list>(<argument><expr><call><name><name>v</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call> <operator>==</operator> <name>V</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name>REQUIRE</name><argument_list>(<argument><expr><call><name><name>v</name><operator>.</operator><name>capacity</name></name><argument_list>()</argument_list></call> <operator>&gt;=</operator> <name>V</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block>
+</block_content>}</block>
+
+<macro><name>TEMPLATE_PRODUCT_TEST_CASE</name><argument_list>(<argument><literal type="string">"A Template product test case"</literal></argument>, <argument><literal type="string">"[template][product]"</literal></argument>, <argument>(std::vector, Foo)</argument>, <argument>(int, float)</argument>)</argument_list></macro> <block>{<block_content>
+    <decl_stmt><decl><type><name>TestType</name></type> <name>x</name></decl>;</decl_stmt>
+    <expr_stmt><expr><call><name>REQUIRE</name><argument_list>(<argument><expr><call><name><name>x</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call> <operator>==</operator> <literal type="number">0</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+</block_content>}</block>
+
+<macro><name>TEMPLATE_PRODUCT_TEST_CASE_SIG</name><argument_list>(<argument><literal type="string">"A Template product test case with array signature"</literal></argument>, <argument><literal type="string">"[template][product][nttp]"</literal></argument>, <argument>((typename T, size_t S), T, S)</argument>, <argument>(std::array, Bar)</argument>, <argument>((int, <literal type="number">9</literal>), (float, <literal type="number">42</literal>))</argument>)</argument_list></macro> <block>{<block_content>
+    <decl_stmt><decl><type><name>TestType</name></type> <name>x</name></decl>;</decl_stmt>
+    <expr_stmt><expr><call><name>REQUIRE</name><argument_list>(<argument><expr><call><name><name>x</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call> <operator>&gt;</operator> <literal type="number">0</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+</block_content>}</block>
+
+<macro><name>TEMPLATE_PRODUCT_TEST_CASE</name><argument_list>(<argument><literal type="string">"Product with differing arities"</literal></argument>, <argument><literal type="string">"[template][product]"</literal></argument>, <argument>std::tuple</argument>, <argument>(int, (int, double), (int, double, float))</argument>)</argument_list></macro> <block>{<block_content>
+    <expr_stmt><expr><call><name>REQUIRE</name><argument_list>(<argument><expr><name><name>std</name><operator>::</operator><name>tuple_size</name><argument_list type="generic">&lt;<argument><expr><name>TestType</name></expr></argument>&gt;</argument_list><operator>::</operator><name>value</name></name> <operator>&gt;=</operator> <literal type="number">1</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+</block_content>}</block>
+
+<using>using <name>MyTypes</name> <init>= <type><name><name>std</name><operator>::</operator><name>tuple</name><argument_list type="generic">&lt;<argument><expr><name>int</name></expr></argument>, <argument><expr><name>char</name></expr></argument>, <argument><expr><name>float</name></expr></argument>&gt;</argument_list></name></type></init>;</using>
+<macro><name>TEMPLATE_LIST_TEST_CASE</name><argument_list>(<argument><literal type="string">"Template test case with test types specified inside std::tuple"</literal></argument>, <argument><literal type="string">"[template][list]"</literal></argument>, <argument>MyTypes</argument>)</argument_list></macro>
+<block>{<block_content>
+    <expr_stmt><expr><call><name>REQUIRE</name><argument_list>(<argument><expr><sizeof>sizeof<argument_list>(<argument><expr><name>TestType</name></expr></argument>)</argument_list></sizeof> <operator>&gt;</operator> <literal type="number">0</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+</block_content>}</block>
+
+<struct>struct <name>NonDefaultConstructibleType</name> <block>{<public type="default">
+    <constructor_decl><name>NonDefaultConstructibleType</name><parameter_list>()</parameter_list> = <specifier>delete</specifier>;</constructor_decl>
+</public>}</block>;</struct>
+
+<using>using <name>MyNonDefaultConstructibleTypes</name> <init>= <type><name><name>std</name><operator>::</operator><name>tuple</name><argument_list type="generic">&lt;<argument><expr><name>NonDefaultConstructibleType</name></expr></argument>, <argument><expr><name>float</name></expr></argument>&gt;</argument_list></name></type></init>;</using>
+<macro><name>TEMPLATE_LIST_TEST_CASE</name><argument_list>(<argument><literal type="string">"Template test case with test types specified inside non-default-constructible std::tuple"</literal></argument>, <argument><literal type="string">"[template][list]"</literal></argument>, <argument>MyNonDefaultConstructibleTypes</argument>)</argument_list></macro>
+<block>{<block_content>
+    <expr_stmt><expr><call><name>REQUIRE</name><argument_list>(<argument><expr><sizeof>sizeof<argument_list>(<argument><expr><name>TestType</name></expr></argument>)</argument_list></sizeof> <operator>&gt;</operator> <literal type="number">0</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+</block_content>}</block>
+
+<struct>struct <name>NonCopyableAndNonMovableType</name> <block>{<public type="default">
+    <constructor_decl><name>NonCopyableAndNonMovableType</name><parameter_list>()</parameter_list> = <specifier>default</specifier>;</constructor_decl>
+
+    <constructor_decl><name>NonCopyableAndNonMovableType</name><parameter_list>(<parameter><decl><type><name>NonCopyableAndNonMovableType</name> <specifier>const</specifier> <modifier>&amp;</modifier></type></decl></parameter>)</parameter_list> = <specifier>delete</specifier>;</constructor_decl>
+    <constructor_decl><name>NonCopyableAndNonMovableType</name><parameter_list>(<parameter><decl><type><name>NonCopyableAndNonMovableType</name> <modifier>&amp;&amp;</modifier></type></decl></parameter>)</parameter_list> = <specifier>delete</specifier>;</constructor_decl>
+    <function_decl type="operator"><type><name>auto</name></type> <name>operator<name>=</name></name><parameter_list>(<parameter><decl><type><name>NonCopyableAndNonMovableType</name> <specifier>const</specifier> <modifier>&amp;</modifier></type></decl></parameter>)</parameter_list> -&gt; <type><name>NonCopyableAndNonMovableType</name> <modifier>&amp;</modifier></type> = <specifier>delete</specifier>;</function_decl>
+    <function_decl type="operator"><type><name>auto</name></type> <name>operator<name>=</name></name><parameter_list>(<parameter><decl><type><name>NonCopyableAndNonMovableType</name> <modifier>&amp;&amp;</modifier></type></decl></parameter>)</parameter_list> -&gt; <type><name>NonCopyableAndNonMovableType</name> <modifier>&amp;</modifier></type> = <specifier>delete</specifier>;</function_decl>
+</public>}</block>;</struct>
+
+<using>using <name>NonCopyableAndNonMovableTypes</name> <init>= <type><name><name>std</name><operator>::</operator><name>tuple</name><argument_list type="generic">&lt;<argument><expr><name>NonCopyableAndNonMovableType</name></expr></argument>, <argument><expr><name>float</name></expr></argument>&gt;</argument_list></name></type></init>;</using>
+<macro><name>TEMPLATE_LIST_TEST_CASE</name><argument_list>(<argument><literal type="string">"Template test case with test types specified inside non-copyable and non-movable std::tuple"</literal></argument>, <argument><literal type="string">"[template][list]"</literal></argument>, <argument>NonCopyableAndNonMovableTypes</argument>)</argument_list></macro>
+<block>{<block_content>
+    <expr_stmt><expr><call><name>REQUIRE</name><argument_list>(<argument><expr><sizeof>sizeof<argument_list>(<argument><expr><name>TestType</name></expr></argument>)</argument_list></sizeof> <operator>&gt;</operator> <literal type="number">0</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+</block_content>}</block>
+
+<comment type="line">// https://github.com/philsquared/Catch/issues/166</comment>
+<macro><name>TEST_CASE</name><argument_list>(<argument><literal type="string">"A couple of nested sections followed by a failure"</literal></argument>, <argument><literal type="string">"[failing][.]"</literal></argument>)</argument_list></macro> <block>{<block_content>
+    <macro><name>SECTION</name><argument_list>(<argument><literal type="string">"Outer"</literal></argument>)</argument_list></macro>
+        <macro><name>SECTION</name><argument_list>(<argument><literal type="string">"Inner"</literal></argument>)</argument_list></macro>
+            <expr_stmt><expr><call><name>SUCCEED</name><argument_list>(<argument><expr><literal type="string">"that's not flying - that's failing in style"</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+
+    <expr_stmt><expr><call><name>FAIL</name><argument_list>(<argument><expr><literal type="string">"to infinity and beyond"</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+</block_content>}</block>
+
+<macro><name>TEST_CASE</name><argument_list>(<argument><literal type="string">"not allowed"</literal></argument>, <argument><literal type="string">"[!throws]"</literal></argument>)</argument_list></macro> <block>{<block_content>
+    <comment type="line">// This test case should not be included if you run with -e on the command line</comment>
+    <expr_stmt><expr><call><name>SUCCEED</name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+</block_content>}</block>
+
+<comment type="line">//TEST_CASE( "Is big endian" ) {</comment>
+<comment type="line">//    CHECK( Catch::Detail::Endianness::which() == Catch::Detail::Endianness::Little );</comment>
+<comment type="line">//}</comment>
+
+<macro><name>TEST_CASE</name><argument_list>( <argument><literal type="string">"Tabs and newlines show in output"</literal></argument>, <argument><literal type="string">"[.][whitespace][failing]"</literal></argument> )</argument_list></macro> <block>{<block_content>
+
+    <comment type="line">// Based on issue #242</comment>
+    <decl_stmt><decl><type><name><name>std</name><operator>::</operator><name>string</name></name></type> <name>s1</name> <init>= <expr><literal type="string">"if ($b == 10) {\n\t\t$a\t= 20;\n}"</literal></expr></init></decl>;</decl_stmt>
+    <decl_stmt><decl><type><name><name>std</name><operator>::</operator><name>string</name></name></type> <name>s2</name> <init>= <expr><literal type="string">"if ($b == 10) {\n\t$a = 20;\n}\n"</literal></expr></init></decl>;</decl_stmt>
+    <expr_stmt><expr><call><name>CHECK</name><argument_list>( <argument><expr><name>s1</name> <operator>==</operator> <name>s2</name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+</block_content>}</block>
+
+
+<cpp:if xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">if</cpp:directive> <expr><call><name>defined</name><argument_list>(<argument><expr><name>CATCH_CONFIG_WCHAR</name></expr></argument>)</argument_list></call></expr></cpp:if>
+<macro><name>TEST_CASE</name><argument_list>( <argument><literal type="string">"toString on const wchar_t const pointer returns the string contents"</literal></argument>, <argument><literal type="string">"[toString]"</literal></argument> )</argument_list></macro> <block>{<block_content>
+        <decl_stmt><decl><type><specifier>const</specifier> <name>wchar_t</name> <modifier>*</modifier> <specifier>const</specifier></type> <name>s</name> <init>= <expr><literal type="string">L"wide load"</literal></expr></init></decl>;</decl_stmt>
+        <decl_stmt><decl><type><name><name>std</name><operator>::</operator><name>string</name></name></type> <name>result</name> <init>= <expr><call><name><operator>::</operator><name>Catch</name><operator>::</operator><name>Detail</name><operator>::</operator><name>stringify</name></name><argument_list>( <argument><expr><name>s</name></expr></argument> )</argument_list></call></expr></init></decl>;</decl_stmt>
+        <expr_stmt><expr><call><name>CHECK</name><argument_list>( <argument><expr><name>result</name> <operator>==</operator> <literal type="string">"\"wide load\""</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+</block_content>}</block>
+
+<macro><name>TEST_CASE</name><argument_list>( <argument><literal type="string">"toString on const wchar_t pointer returns the string contents"</literal></argument>, <argument><literal type="string">"[toString]"</literal></argument> )</argument_list></macro> <block>{<block_content>
+        <decl_stmt><decl><type><specifier>const</specifier> <name>wchar_t</name> <modifier>*</modifier></type> <name>s</name> <init>= <expr><literal type="string">L"wide load"</literal></expr></init></decl>;</decl_stmt>
+        <decl_stmt><decl><type><name><name>std</name><operator>::</operator><name>string</name></name></type> <name>result</name> <init>= <expr><call><name><operator>::</operator><name>Catch</name><operator>::</operator><name>Detail</name><operator>::</operator><name>stringify</name></name><argument_list>( <argument><expr><name>s</name></expr></argument> )</argument_list></call></expr></init></decl>;</decl_stmt>
+        <expr_stmt><expr><call><name>CHECK</name><argument_list>( <argument><expr><name>result</name> <operator>==</operator> <literal type="string">"\"wide load\""</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+</block_content>}</block>
+
+<macro><name>TEST_CASE</name><argument_list>( <argument><literal type="string">"toString on wchar_t const pointer returns the string contents"</literal></argument>, <argument><literal type="string">"[toString]"</literal></argument> )</argument_list></macro> <block>{<block_content>
+        <decl_stmt><decl><type><specifier>auto</specifier> <specifier>const</specifier></type> <name>s</name> <init>= <expr><cast type="const">const_cast<argument_list type="generic">&lt;<argument><expr><name>wchar_t</name><operator>*</operator></expr></argument>&gt;</argument_list><argument_list>( <argument><expr><literal type="string">L"wide load"</literal></expr></argument> )</argument_list></cast></expr></init></decl>;</decl_stmt>
+        <decl_stmt><decl><type><name><name>std</name><operator>::</operator><name>string</name></name></type> <name>result</name> <init>= <expr><call><name><operator>::</operator><name>Catch</name><operator>::</operator><name>Detail</name><operator>::</operator><name>stringify</name></name><argument_list>( <argument><expr><name>s</name></expr></argument> )</argument_list></call></expr></init></decl>;</decl_stmt>
+        <expr_stmt><expr><call><name>CHECK</name><argument_list>( <argument><expr><name>result</name> <operator>==</operator> <literal type="string">"\"wide load\""</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+</block_content>}</block>
+
+<macro><name>TEST_CASE</name><argument_list>( <argument><literal type="string">"toString on wchar_t returns the string contents"</literal></argument>, <argument><literal type="string">"[toString]"</literal></argument> )</argument_list></macro> <block>{<block_content>
+        <decl_stmt><decl><type><name>auto</name></type> <name>s</name> <init>= <expr><cast type="const">const_cast<argument_list type="generic">&lt;<argument><expr><name>wchar_t</name><operator>*</operator></expr></argument>&gt;</argument_list><argument_list>( <argument><expr><literal type="string">L"wide load"</literal></expr></argument> )</argument_list></cast></expr></init></decl>;</decl_stmt>
+        <decl_stmt><decl><type><name><name>std</name><operator>::</operator><name>string</name></name></type> <name>result</name> <init>= <expr><call><name><operator>::</operator><name>Catch</name><operator>::</operator><name>Detail</name><operator>::</operator><name>stringify</name></name><argument_list>( <argument><expr><name>s</name></expr></argument> )</argument_list></call></expr></init></decl>;</decl_stmt>
+        <expr_stmt><expr><call><name>CHECK</name><argument_list>( <argument><expr><name>result</name> <operator>==</operator> <literal type="string">"\"wide load\""</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+</block_content>}</block>
+<cpp:endif xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">endif</cpp:directive></cpp:endif> <comment type="line">// CATCH_CONFIG_WCHAR</comment>
+
+<macro><name>TEST_CASE</name><argument_list>( <argument><literal type="string">"long long"</literal></argument> )</argument_list></macro> <block>{<block_content>
+    <decl_stmt><decl><type><name>long</name> <name>long</name></type> <name>l</name> <init>= <expr><call><name><name>std</name><operator>::</operator><name>numeric_limits</name><argument_list type="generic">&lt;<argument><expr><name>long</name> <name>long</name></expr></argument>&gt;</argument_list><operator>::</operator><name>max</name></name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+
+    <macro><name>REQUIRE</name><argument_list>( <argument>l == std::numeric_limits&lt;long long&gt;::max()</argument> )</argument_list></macro><empty_stmt>;</empty_stmt>
+</block_content>}</block>
+
+<macro><name>TEST_CASE</name><argument_list>( <argument><literal type="string">"This test 'should' fail but doesn't"</literal></argument>, <argument><literal type="string">"[.][failing][!shouldfail]"</literal></argument> )</argument_list></macro> <block>{<block_content>
+    <expr_stmt><expr><call><name>SUCCEED</name><argument_list>( <argument><expr><literal type="string">"oops!"</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+</block_content>}</block>
+
+<macro><name>TEST_CASE</name><argument_list>( <argument><literal type="string">"# A test name that starts with a #"</literal></argument> )</argument_list></macro> <block>{<block_content>
+    <expr_stmt><expr><call><name>SUCCEED</name><argument_list>( <argument><expr><literal type="string">"yay"</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+</block_content>}</block>
+
+<macro><name>TEST_CASE</name><argument_list>( <argument><literal type="string">"#835 -- errno should not be touched by Catch"</literal></argument>, <argument><literal type="string">"[.][failing][!shouldfail]"</literal></argument> )</argument_list></macro> <block>{<block_content>
+    <expr_stmt><expr><name>errno</name> <operator>=</operator> <literal type="number">1</literal></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>CHECK</name><argument_list>(<argument><expr><call><name>f</name><argument_list>()</argument_list></call> <operator>==</operator> <literal type="number">0</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>REQUIRE</name><argument_list>(<argument><expr><name>errno</name> <operator>==</operator> <literal type="number">1</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt> <comment type="line">// Check that f() doesn't touch errno.</comment>
+</block_content>}</block>
+
+<macro><name>TEST_CASE</name><argument_list>( <argument><literal type="string">"#961 -- Dynamically created sections should all be reported"</literal></argument>, <argument><literal type="string">"[.]"</literal></argument> )</argument_list></macro> <block>{<block_content>
+    <for>for <control>(<init><decl><type><name>char</name></type> <name>i</name> <init>= <expr><literal type="char">'0'</literal></expr></init></decl>;</init> <condition><expr><name>i</name> <operator>&lt;</operator> <literal type="char">'5'</literal></expr>;</condition> <incr><expr><operator>++</operator><name>i</name></expr></incr>)</control> <block>{<block_content>
+        <macro><name>SECTION</name><argument_list>(<argument>std::string(<literal type="string">"Looped section "</literal>) + i</argument>)</argument_list></macro> <block>{<block_content>
+            <expr_stmt><expr><call><name>SUCCEED</name><argument_list>( <argument><expr><literal type="string">"Everything is OK"</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        </block_content>}</block>
+    </block_content>}</block></for>
+</block_content>}</block>
+
+<macro><name>TEST_CASE</name><argument_list>( <argument><literal type="string">"#1175 - Hidden Test"</literal></argument>, <argument><literal type="string">"[.]"</literal></argument> )</argument_list></macro> <block>{<block_content>
+  <comment type="line">// Just for checking that hidden test is not listed by default</comment>
+  <expr_stmt><expr><call><name>SUCCEED</name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+</block_content>}</block>
+
+<macro><name>TEMPLATE_TEST_CASE_SIG</name><argument_list>(<argument><literal type="string">"#1954 - 7 arg template test case sig compiles"</literal></argument>, <argument><literal type="string">"[regression][.compilation]"</literal></argument>,
+                       <argument>((int Tnx, int Tnu, int Tny, int Tph, int Tch, int Tineq, int Teq), Tnx, Tnu, Tny, Tph, Tch, Tineq, Teq)</argument>,
+                       <argument>(<literal type="number">1</literal>, <literal type="number">1</literal>, <literal type="number">1</literal>, <literal type="number">1</literal>, <literal type="number">1</literal>, <literal type="number">0</literal>, <literal type="number">0</literal>)</argument>, <argument>(<literal type="number">5</literal>, <literal type="number">1</literal>, <literal type="number">1</literal>, <literal type="number">1</literal>, <literal type="number">1</literal>, <literal type="number">0</literal>, <literal type="number">0</literal>)</argument>, <argument>(<literal type="number">5</literal>, <literal type="number">3</literal>, <literal type="number">1</literal>, <literal type="number">1</literal>, <literal type="number">1</literal>, <literal type="number">0</literal>, <literal type="number">0</literal>)</argument>)</argument_list></macro> <block>{<block_content>
+    <expr_stmt><expr><call><name>SUCCEED</name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+</block_content>}</block>
+
+<macro><name>TEST_CASE</name><argument_list>(<argument><literal type="string">"Same test name but with different tags is fine"</literal></argument>, <argument><literal type="string">"[.approvals][some-tag]"</literal></argument>)</argument_list></macro> <block>{<block_content/>}</block>
+<macro><name>TEST_CASE</name><argument_list>(<argument><literal type="string">"Same test name but with different tags is fine"</literal></argument>, <argument><literal type="string">"[.approvals][other-tag]"</literal></argument>)</argument_list></macro> <block>{<block_content/>}</block>
+</unit>

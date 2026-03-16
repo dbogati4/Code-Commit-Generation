@@ -1,0 +1,8 @@
+{
+  "commit_id": "021fcee63667e346c619e04bbae932bcea562334",
+  "parent_id": "3a47b8b072d05941a6f0b59b330e98f070519fc0",
+  "message": "Finish fixing invalid compilation using MinGW",
+  "changed_files": [
+    "include/internal/catch_output_redirect.cpp"
+  ]
+}

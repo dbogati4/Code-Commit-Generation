@@ -1,0 +1,812 @@
+2026-03-13 01:15:16,597 - INFO - ============================================================
+2026-03-13 01:15:16,598 - INFO - COMMIT MESSAGE GENERATION SYSTEM
+2026-03-13 01:15:16,598 - INFO - ============================================================
+2026-03-13 01:15:16,599 - INFO - Variants: variant1, variant2, variant3
+2026-03-13 01:15:16,599 - INFO - Models: llama3:8b, mistral:7b-instruct, codeqwen:7b-chat, llama3:70b-instruct
+2026-03-13 01:15:16,626 - INFO - Connected to Ollama
+2026-03-13 01:15:16,626 - INFO - Models: llama3:8b, mistral:7b-instruct, codeqwen:7b-chat, llama3:70b-instruct
+2026-03-13 01:15:16,628 - INFO - Dataset: 2 entries
+2026-03-13 01:15:16,628 - INFO - Running: 3 variant(s), 2 entry(ies)
+2026-03-13 01:15:16,628 - INFO - 
+============================================================
+2026-03-13 01:15:16,629 - INFO - Entry 1/2 | Commit: f7e7fa09...
+2026-03-13 01:15:16,629 - INFO -   variant1:
+2026-03-13 01:15:22,585 - INFO -     llama3:8b: OK
+2026-03-13 01:15:28,089 - INFO -     mistral:7b-instruct: OK
+2026-03-13 01:15:33,380 - INFO -     codeqwen:7b-chat: OK
+2026-03-13 01:16:53,497 - INFO -     llama3:70b-instruct: OK
+2026-03-13 01:16:53,497 - INFO -   variant2:
+2026-03-13 01:17:11,776 - INFO -     llama3:8b: OK
+2026-03-13 01:17:24,756 - INFO -     mistral:7b-instruct: OK
+2026-03-13 01:17:36,199 - INFO -     codeqwen:7b-chat: OK
+2026-03-13 01:20:07,119 - INFO -     llama3:70b-instruct: OK
+2026-03-13 01:20:07,119 - INFO -   variant3:
+2026-03-13 01:20:24,651 - INFO -     llama3:8b: OK
+2026-03-13 01:20:38,181 - INFO -     mistral:7b-instruct: OK
+2026-03-13 01:20:54,277 - INFO -     codeqwen:7b-chat: OK
+2026-03-13 01:23:19,444 - INFO -     llama3:70b-instruct: OK
+2026-03-13 01:23:19,444 - INFO - 
+============================================================
+2026-03-13 01:23:19,444 - INFO - Entry 2/2 | Commit: d134b0ca...
+2026-03-13 01:23:19,444 - INFO -   variant1:
+2026-03-13 01:23:32,325 - INFO -     llama3:8b: OK
+2026-03-13 01:23:40,404 - INFO -     mistral:7b-instruct: OK
+2026-03-13 01:23:47,813 - INFO -     codeqwen:7b-chat: OK
+2026-03-13 01:25:07,038 - INFO -     llama3:70b-instruct: OK
+2026-03-13 01:25:07,038 - INFO -   variant2:
+2026-03-13 01:25:23,916 - INFO -     llama3:8b: OK
+2026-03-13 01:25:36,869 - INFO -     mistral:7b-instruct: OK
+2026-03-13 01:25:48,799 - INFO -     codeqwen:7b-chat: OK
+2026-03-13 01:28:14,696 - INFO -     llama3:70b-instruct: OK
+2026-03-13 01:28:14,696 - INFO -   variant3:
+2026-03-13 01:28:31,583 - INFO -     llama3:8b: OK
+2026-03-13 01:28:44,240 - INFO -     mistral:7b-instruct: OK
+2026-03-13 01:28:55,761 - INFO -     codeqwen:7b-chat: OK
+2026-03-13 01:31:23,151 - INFO -     llama3:70b-instruct: OK
+2026-03-13 01:31:23,152 - INFO - Saved outputs\variant1_output.json
+2026-03-13 01:31:23,153 - INFO - Saved outputs\variant2_output.json
+2026-03-13 01:31:23,154 - INFO - Saved outputs\variant3_output.json
+2026-03-13 01:31:23,155 - INFO - 
+============================================================
+2026-03-13 01:31:23,155 - INFO - Complete!
+2026-03-13 01:31:23,155 - INFO - Results: outputs/
+2026-03-13 01:31:23,155 - INFO - Prompts: prompts/
+2026-03-13 01:35:19,161 - INFO - ============================================================
+2026-03-13 01:35:19,161 - INFO - COMMIT MESSAGE GENERATION SYSTEM
+2026-03-13 01:35:19,162 - INFO - ============================================================
+2026-03-13 01:35:19,162 - INFO - Variants: variant1, variant2, variant3
+2026-03-13 01:35:19,162 - INFO - Models: llama3:8b, mistral:7b-instruct, codeqwen:7b-chat, llama3:70b-instruct
+2026-03-13 01:35:19,162 - INFO - Test: 60 entries
+2026-03-13 01:35:19,194 - INFO - Connected to Ollama
+2026-03-13 01:35:19,194 - INFO - Models: llama3:8b, mistral:7b-instruct, codeqwen:7b-chat, llama3:70b-instruct
+2026-03-13 01:35:19,197 - INFO - Dataset: 69 entries
+2026-03-13 01:35:19,197 - INFO - Running: 3 variant(s), 60 entry(ies)
+2026-03-13 01:35:19,198 - INFO - 
+============================================================
+2026-03-13 01:35:19,198 - INFO - Entry 1/60 | Commit: f7e7fa09...
+2026-03-13 01:35:19,198 - INFO -   variant1:
+2026-03-13 01:35:31,486 - INFO -     llama3:8b: OK
+2026-03-13 01:35:39,245 - INFO -     mistral:7b-instruct: OK
+2026-03-13 01:35:46,821 - INFO -     codeqwen:7b-chat: OK
+2026-03-13 01:37:05,160 - INFO - 
+Stopped by user
+2026-03-13 11:12:55,311 - INFO - ============================================================
+2026-03-13 11:12:55,311 - INFO - COMMIT MESSAGE GENERATION SYSTEM
+2026-03-13 11:12:55,312 - INFO - ============================================================
+2026-03-13 11:12:55,312 - INFO - Variants: variant1, variant2, variant3
+2026-03-13 11:12:55,312 - INFO - Models: llama3:8b, mistral:7b-instruct, codeqwen:7b-chat, llama3:70b-instruct
+2026-03-13 11:12:55,312 - INFO - Test: 60 entries
+2026-03-13 11:12:55,628 - INFO - Connected to Ollama
+2026-03-13 11:12:55,628 - INFO - Models: llama3:8b, mistral:7b-instruct, codeqwen:7b-chat, llama3:70b-instruct
+2026-03-13 11:12:55,646 - INFO - Dataset: 69 entries
+2026-03-13 11:12:55,646 - INFO - Running: 3 variant(s), 60 entry(ies)
+2026-03-13 11:12:55,647 - INFO - 
+============================================================
+2026-03-13 11:12:55,647 - INFO - Entry 1/60 | Commit: f7e7fa09...
+2026-03-13 11:12:55,647 - INFO -   variant1:
+2026-03-13 11:13:03,894 - INFO -     llama3:8b: OK
+2026-03-13 11:13:11,781 - INFO -     mistral:7b-instruct: OK
+2026-03-13 11:13:18,975 - INFO -     codeqwen:7b-chat: OK
+2026-03-13 11:14:38,348 - INFO - 
+Stopped by user
+2026-03-13 11:14:48,937 - INFO - ============================================================
+2026-03-13 11:14:48,938 - INFO - COMMIT MESSAGE GENERATION SYSTEM
+2026-03-13 11:14:48,938 - INFO - ============================================================
+2026-03-13 11:14:48,938 - INFO - Variants: variant1, variant2, variant3
+2026-03-13 11:14:48,939 - INFO - Models: llama3:8b, mistral:7b-instruct, codeqwen:7b-chat, llama3:70b-instruct
+2026-03-13 11:14:48,939 - INFO - Test: 30 entries
+2026-03-13 11:14:48,973 - INFO - Connected to Ollama
+2026-03-13 11:14:48,973 - INFO - Models: llama3:8b, mistral:7b-instruct, codeqwen:7b-chat, llama3:70b-instruct
+2026-03-13 11:14:48,977 - INFO - Dataset: 69 entries
+2026-03-13 11:14:48,977 - INFO - Running: 3 variant(s), 30 entry(ies)
+2026-03-13 11:14:48,978 - INFO - 
+============================================================
+2026-03-13 11:14:48,978 - INFO - Entry 1/30 | Commit: f7e7fa09...
+2026-03-13 11:14:48,978 - INFO -   variant1:
+2026-03-13 11:15:01,599 - INFO -     llama3:8b: OK
+2026-03-13 11:15:09,305 - INFO -     mistral:7b-instruct: OK
+2026-03-13 11:15:16,498 - INFO -     codeqwen:7b-chat: OK
+2026-03-13 11:16:33,203 - INFO -     llama3:70b-instruct: OK
+2026-03-13 11:16:33,203 - INFO -   variant2:
+2026-03-13 11:16:49,194 - INFO -     llama3:8b: OK
+2026-03-13 11:17:02,201 - INFO -     mistral:7b-instruct: OK
+2026-03-13 11:17:13,529 - INFO -     codeqwen:7b-chat: OK
+2026-03-13 11:19:34,592 - INFO -     llama3:70b-instruct: OK
+2026-03-13 11:19:34,593 - INFO -   variant3:
+2026-03-13 11:19:50,580 - INFO -     llama3:8b: OK
+2026-03-13 11:20:02,705 - INFO -     mistral:7b-instruct: OK
+2026-03-13 11:20:23,561 - INFO -     codeqwen:7b-chat: OK
+2026-03-13 11:22:40,789 - INFO -     llama3:70b-instruct: OK
+2026-03-13 11:22:40,790 - INFO - 
+============================================================
+2026-03-13 11:22:40,790 - INFO - Entry 2/30 | Commit: d134b0ca...
+2026-03-13 11:22:40,790 - INFO -   variant1:
+2026-03-13 11:22:52,897 - INFO -     llama3:8b: OK
+2026-03-13 11:23:00,574 - INFO -     mistral:7b-instruct: OK
+2026-03-13 11:23:07,718 - INFO -     codeqwen:7b-chat: OK
+2026-03-13 11:24:21,832 - INFO -     llama3:70b-instruct: OK
+2026-03-13 11:24:21,832 - INFO -   variant2:
+2026-03-13 11:24:38,766 - INFO -     llama3:8b: OK
+2026-03-13 11:24:52,557 - INFO -     mistral:7b-instruct: OK
+2026-03-13 11:25:04,907 - INFO -     codeqwen:7b-chat: OK
+2026-03-13 11:27:14,428 - INFO - 
+Stopped by user
+2026-03-13 11:27:29,040 - INFO - ============================================================
+2026-03-13 11:27:29,041 - INFO - COMMIT MESSAGE GENERATION SYSTEM
+2026-03-13 11:27:29,041 - INFO - ============================================================
+2026-03-13 11:27:29,041 - INFO - Variants: variant1, variant2, variant3
+2026-03-13 11:27:29,042 - INFO - Models: llama3:8b, mistral:7b-instruct, codeqwen:7b-chat, llama3:70b-instruct
+2026-03-13 11:27:29,042 - INFO - Test: 15 entries
+2026-03-13 11:27:29,073 - INFO - Connected to Ollama
+2026-03-13 11:27:29,073 - INFO - Models: llama3:8b, mistral:7b-instruct, codeqwen:7b-chat, llama3:70b-instruct
+2026-03-13 11:27:29,077 - INFO - Dataset: 69 entries
+2026-03-13 11:27:29,077 - INFO - Running: 3 variant(s), 15 entry(ies)
+2026-03-13 11:27:29,077 - INFO - 
+============================================================
+2026-03-13 11:27:29,078 - INFO - Entry 1/15 | Commit: f7e7fa09...
+2026-03-13 11:27:29,078 - INFO -   variant1:
+2026-03-13 11:27:45,998 - INFO -     llama3:8b: OK
+2026-03-13 11:27:53,660 - INFO -     mistral:7b-instruct: OK
+2026-03-13 11:28:00,876 - INFO -     codeqwen:7b-chat: OK
+2026-03-13 11:29:16,686 - INFO -     llama3:70b-instruct: OK
+2026-03-13 11:29:16,687 - INFO -   variant2:
+2026-03-13 11:29:34,367 - INFO -     llama3:8b: OK
+2026-03-13 11:29:47,078 - INFO -     mistral:7b-instruct: OK
+2026-03-13 11:30:00,131 - INFO -     codeqwen:7b-chat: OK
+2026-03-13 11:32:14,736 - INFO -     llama3:70b-instruct: OK
+2026-03-13 11:32:14,737 - INFO -   variant3:
+2026-03-13 11:32:32,203 - INFO -     llama3:8b: OK
+2026-03-13 11:32:44,522 - INFO -     mistral:7b-instruct: OK
+2026-03-13 11:33:22,695 - INFO -     codeqwen:7b-chat: OK
+2026-03-13 11:35:38,994 - INFO -     llama3:70b-instruct: OK
+2026-03-13 11:35:38,994 - INFO - 
+============================================================
+2026-03-13 11:35:38,994 - INFO - Entry 2/15 | Commit: d134b0ca...
+2026-03-13 11:35:38,994 - INFO -   variant1:
+2026-03-13 11:35:50,493 - INFO -     llama3:8b: OK
+2026-03-13 11:35:58,255 - INFO -     mistral:7b-instruct: OK
+2026-03-13 11:36:05,541 - INFO -     codeqwen:7b-chat: OK
+2026-03-13 11:37:19,738 - INFO -     llama3:70b-instruct: OK
+2026-03-13 11:37:19,738 - INFO -   variant2:
+2026-03-13 11:37:38,124 - INFO -     llama3:8b: OK
+2026-03-13 11:37:51,032 - INFO -     mistral:7b-instruct: OK
+2026-03-13 11:38:02,283 - INFO -     codeqwen:7b-chat: OK
+2026-03-13 11:40:18,204 - INFO -     llama3:70b-instruct: OK
+2026-03-13 11:40:18,204 - INFO -   variant3:
+2026-03-13 11:40:36,099 - INFO -     llama3:8b: OK
+2026-03-13 11:40:48,626 - INFO -     mistral:7b-instruct: OK
+2026-03-13 11:40:59,858 - INFO -     codeqwen:7b-chat: OK
+2026-03-13 11:43:13,721 - INFO -     llama3:70b-instruct: OK
+2026-03-13 11:43:13,722 - INFO - 
+============================================================
+2026-03-13 11:43:13,722 - INFO - Entry 3/15 | Commit: 0b2af562...
+2026-03-13 11:43:13,722 - INFO -   variant1:
+2026-03-13 11:43:27,498 - INFO -     llama3:8b: OK
+2026-03-13 11:43:35,950 - INFO -     mistral:7b-instruct: OK
+2026-03-13 11:43:43,610 - INFO -     codeqwen:7b-chat: OK
+2026-03-13 11:45:00,660 - INFO -     llama3:70b-instruct: OK
+2026-03-13 11:45:00,660 - INFO -   variant2:
+2026-03-13 11:45:18,472 - INFO -     llama3:8b: OK
+2026-03-13 11:45:31,624 - INFO -     mistral:7b-instruct: OK
+2026-03-13 11:45:49,262 - INFO -     codeqwen:7b-chat: OK
+2026-03-13 11:47:59,744 - INFO -     llama3:70b-instruct: OK
+2026-03-13 11:47:59,744 - INFO -   variant3:
+2026-03-13 11:48:17,922 - INFO -     llama3:8b: OK
+2026-03-13 11:48:30,287 - INFO -     mistral:7b-instruct: OK
+2026-03-13 11:48:41,673 - INFO -     codeqwen:7b-chat: OK
+2026-03-13 11:50:49,843 - INFO -     llama3:70b-instruct: OK
+2026-03-13 11:50:49,843 - INFO - 
+============================================================
+2026-03-13 11:50:49,844 - INFO - Entry 4/15 | Commit: 7a89b757...
+2026-03-13 11:50:49,844 - INFO -   variant1:
+2026-03-13 11:51:02,104 - INFO -     llama3:8b: OK
+2026-03-13 11:51:09,461 - INFO -     mistral:7b-instruct: OK
+2026-03-13 11:51:16,325 - INFO -     codeqwen:7b-chat: OK
+2026-03-13 11:52:24,383 - INFO -     llama3:70b-instruct: OK
+2026-03-13 11:52:24,384 - INFO -   variant2:
+2026-03-13 11:52:39,249 - INFO -     llama3:8b: OK
+2026-03-13 11:52:49,315 - INFO -     mistral:7b-instruct: OK
+2026-03-13 11:52:59,013 - INFO -     codeqwen:7b-chat: OK
+2026-03-13 11:54:39,955 - INFO -     llama3:70b-instruct: OK
+2026-03-13 11:54:39,956 - INFO -   variant3:
+2026-03-13 11:54:55,319 - INFO -     llama3:8b: OK
+2026-03-13 11:55:05,495 - INFO -     mistral:7b-instruct: OK
+2026-03-13 11:55:14,845 - INFO -     codeqwen:7b-chat: OK
+2026-03-13 11:56:55,239 - INFO -     llama3:70b-instruct: OK
+2026-03-13 11:56:55,240 - INFO - 
+============================================================
+2026-03-13 11:56:55,240 - INFO - Entry 5/15 | Commit: fb51116d...
+2026-03-13 11:56:55,240 - INFO -   variant1:
+2026-03-13 11:57:08,262 - INFO -     llama3:8b: OK
+2026-03-13 11:57:15,754 - INFO -     mistral:7b-instruct: OK
+2026-03-13 11:57:22,639 - INFO -     codeqwen:7b-chat: OK
+2026-03-13 11:58:29,684 - INFO -     llama3:70b-instruct: OK
+2026-03-13 11:58:29,684 - INFO -   variant2:
+2026-03-13 11:58:48,351 - INFO -     llama3:8b: OK
+2026-03-13 11:59:01,489 - INFO -     mistral:7b-instruct: OK
+2026-03-13 11:59:13,064 - INFO -     codeqwen:7b-chat: OK
+2026-03-13 12:01:27,084 - INFO -     llama3:70b-instruct: OK
+2026-03-13 12:01:27,085 - INFO -   variant3:
+2026-03-13 12:01:44,055 - INFO -     llama3:8b: OK
+2026-03-13 12:01:56,352 - INFO -     mistral:7b-instruct: OK
+2026-03-13 12:02:10,975 - INFO -     codeqwen:7b-chat: OK
+2026-03-13 12:04:27,997 - INFO -     llama3:70b-instruct: OK
+2026-03-13 12:04:27,998 - INFO - 
+============================================================
+2026-03-13 12:04:27,998 - INFO - Entry 6/15 | Commit: f476bcb6...
+2026-03-13 12:04:27,999 - INFO -   variant1:
+2026-03-13 12:04:39,317 - INFO -     llama3:8b: OK
+2026-03-13 12:04:46,566 - INFO -     mistral:7b-instruct: OK
+2026-03-13 12:04:53,974 - INFO -     codeqwen:7b-chat: OK
+2026-03-13 12:06:05,856 - INFO -     llama3:70b-instruct: OK
+2026-03-13 12:06:05,856 - INFO -   variant2:
+2026-03-13 12:06:24,666 - INFO -     llama3:8b: OK
+2026-03-13 12:06:37,331 - INFO -     mistral:7b-instruct: OK
+2026-03-13 12:06:48,702 - INFO -     codeqwen:7b-chat: OK
+2026-03-13 12:08:57,804 - INFO -     llama3:70b-instruct: OK
+2026-03-13 12:08:57,804 - INFO -   variant3:
+2026-03-13 12:09:17,451 - INFO -     llama3:8b: OK
+2026-03-13 12:09:29,884 - INFO -     mistral:7b-instruct: OK
+2026-03-13 12:09:42,008 - INFO -     codeqwen:7b-chat: OK
+2026-03-13 12:11:49,632 - INFO -     llama3:70b-instruct: OK
+2026-03-13 12:11:49,632 - INFO - 
+============================================================
+2026-03-13 12:11:49,633 - INFO - Entry 7/15 | Commit: b7d70ddc...
+2026-03-13 12:11:49,633 - INFO -   variant1:
+2026-03-13 12:12:03,643 - INFO -     llama3:8b: OK
+2026-03-13 12:12:11,603 - INFO -     mistral:7b-instruct: OK
+2026-03-13 12:12:18,985 - INFO -     codeqwen:7b-chat: OK
+2026-03-13 12:13:37,431 - INFO -     llama3:70b-instruct: OK
+2026-03-13 12:13:37,431 - INFO -   variant2:
+2026-03-13 12:13:53,473 - INFO -     llama3:8b: OK
+2026-03-13 12:14:05,222 - INFO -     mistral:7b-instruct: OK
+2026-03-13 12:14:16,113 - INFO -     codeqwen:7b-chat: OK
+2026-03-13 12:16:06,831 - INFO -     llama3:70b-instruct: OK
+2026-03-13 12:16:06,831 - INFO -   variant3:
+2026-03-13 12:16:24,334 - INFO -     llama3:8b: OK
+2026-03-13 12:16:36,538 - INFO -     mistral:7b-instruct: OK
+2026-03-13 12:16:47,820 - INFO -     codeqwen:7b-chat: OK
+2026-03-13 12:18:47,178 - INFO -     llama3:70b-instruct: OK
+2026-03-13 12:18:47,179 - INFO - 
+============================================================
+2026-03-13 12:18:47,179 - INFO - Entry 8/15 | Commit: 6ebc013b...
+2026-03-13 12:18:47,179 - INFO -   variant1:
+2026-03-13 12:19:00,143 - INFO -     llama3:8b: OK
+2026-03-13 12:19:07,860 - INFO -     mistral:7b-instruct: OK
+2026-03-13 12:19:15,205 - INFO -     codeqwen:7b-chat: OK
+2026-03-13 12:20:28,989 - INFO -     llama3:70b-instruct: OK
+2026-03-13 12:20:28,989 - INFO -   variant2:
+2026-03-13 12:20:46,023 - INFO -     llama3:8b: OK
+2026-03-13 12:20:58,586 - INFO -     mistral:7b-instruct: OK
+2026-03-13 12:21:09,951 - INFO -     codeqwen:7b-chat: OK
+2026-03-13 12:23:16,009 - INFO -     llama3:70b-instruct: OK
+2026-03-13 12:23:16,009 - INFO -   variant3:
+2026-03-13 12:23:33,905 - INFO -     llama3:8b: OK
+2026-03-13 12:23:46,213 - INFO -     mistral:7b-instruct: OK
+2026-03-13 12:24:05,250 - INFO -     codeqwen:7b-chat: OK
+2026-03-13 12:26:11,531 - INFO -     llama3:70b-instruct: OK
+2026-03-13 12:26:11,531 - INFO - 
+============================================================
+2026-03-13 12:26:11,532 - INFO - Entry 9/15 | Commit: ed4acded...
+2026-03-13 12:26:11,532 - INFO -   variant1:
+2026-03-13 12:26:24,773 - INFO -     llama3:8b: OK
+2026-03-13 12:26:32,064 - INFO -     mistral:7b-instruct: OK
+2026-03-13 12:26:38,993 - INFO -     codeqwen:7b-chat: OK
+2026-03-13 12:27:50,110 - INFO -     llama3:70b-instruct: OK
+2026-03-13 12:27:50,110 - INFO -   variant2:
+2026-03-13 12:28:08,092 - INFO -     llama3:8b: OK
+2026-03-13 12:28:21,119 - INFO -     mistral:7b-instruct: OK
+2026-03-13 12:28:32,577 - INFO -     codeqwen:7b-chat: OK
+2026-03-13 12:30:40,867 - INFO -     llama3:70b-instruct: OK
+2026-03-13 12:30:40,867 - INFO -   variant3:
+2026-03-13 12:30:58,627 - INFO -     llama3:8b: OK
+2026-03-13 12:31:11,032 - INFO -     mistral:7b-instruct: OK
+2026-03-13 12:31:22,746 - INFO -     codeqwen:7b-chat: OK
+2026-03-13 12:33:29,935 - INFO -     llama3:70b-instruct: OK
+2026-03-13 12:33:29,936 - INFO - 
+============================================================
+2026-03-13 12:33:29,936 - INFO - Entry 10/15 | Commit: 683c8577...
+2026-03-13 12:33:29,936 - INFO -   variant1:
+2026-03-13 12:33:43,149 - INFO -     llama3:8b: OK
+2026-03-13 12:33:50,735 - INFO -     mistral:7b-instruct: OK
+2026-03-13 12:33:58,144 - INFO -     codeqwen:7b-chat: OK
+2026-03-13 12:35:11,040 - INFO -     llama3:70b-instruct: OK
+2026-03-13 12:35:11,040 - INFO -   variant2:
+2026-03-13 12:35:27,790 - INFO -     llama3:8b: OK
+2026-03-13 12:35:40,631 - INFO -     mistral:7b-instruct: OK
+2026-03-13 12:35:51,939 - INFO -     codeqwen:7b-chat: OK
+2026-03-13 12:38:08,723 - INFO -     llama3:70b-instruct: OK
+2026-03-13 12:38:08,723 - INFO -   variant3:
+2026-03-13 12:38:24,700 - INFO -     llama3:8b: OK
+2026-03-13 12:38:36,944 - INFO -     mistral:7b-instruct: OK
+2026-03-13 12:38:54,164 - INFO -     codeqwen:7b-chat: OK
+2026-03-13 12:41:09,329 - INFO -     llama3:70b-instruct: OK
+2026-03-13 12:41:09,330 - INFO - 
+============================================================
+2026-03-13 12:41:09,330 - INFO - Entry 11/15 | Commit: 1b049bdb...
+2026-03-13 12:41:09,330 - INFO -   variant1:
+2026-03-13 12:41:21,021 - INFO -     llama3:8b: OK
+2026-03-13 12:41:28,366 - INFO -     mistral:7b-instruct: OK
+2026-03-13 12:41:35,255 - INFO -     codeqwen:7b-chat: OK
+2026-03-13 12:42:44,842 - INFO -     llama3:70b-instruct: OK
+2026-03-13 12:42:44,842 - INFO -   variant2:
+2026-03-13 12:42:59,259 - INFO -     llama3:8b: OK
+2026-03-13 12:43:09,724 - INFO -     mistral:7b-instruct: OK
+2026-03-13 12:43:19,448 - INFO -     codeqwen:7b-chat: OK
+2026-03-13 12:44:59,933 - INFO -     llama3:70b-instruct: OK
+2026-03-13 12:44:59,934 - INFO -   variant3:
+2026-03-13 12:45:13,452 - INFO -     llama3:8b: OK
+2026-03-13 12:45:23,618 - INFO -     mistral:7b-instruct: OK
+2026-03-13 12:45:33,123 - INFO -     codeqwen:7b-chat: OK
+2026-03-13 12:47:17,785 - INFO -     llama3:70b-instruct: OK
+2026-03-13 12:47:17,785 - INFO - 
+============================================================
+2026-03-13 12:47:17,786 - INFO - Entry 12/15 | Commit: 0477326a...
+2026-03-13 12:47:17,786 - INFO -   variant1:
+2026-03-13 12:47:29,822 - INFO -     llama3:8b: OK
+2026-03-13 12:47:37,116 - INFO -     mistral:7b-instruct: OK
+2026-03-13 12:47:44,148 - INFO -     codeqwen:7b-chat: OK
+2026-03-13 12:48:53,355 - INFO -     llama3:70b-instruct: OK
+2026-03-13 12:48:53,355 - INFO -   variant2:
+2026-03-13 12:49:10,487 - INFO -     llama3:8b: OK
+2026-03-13 12:49:22,536 - INFO -     mistral:7b-instruct: OK
+2026-03-13 12:49:33,621 - INFO -     codeqwen:7b-chat: OK
+2026-03-13 12:51:26,792 - INFO -     llama3:70b-instruct: OK
+2026-03-13 12:51:26,793 - INFO -   variant3:
+2026-03-13 12:51:43,395 - INFO -     llama3:8b: OK
+2026-03-13 12:51:55,243 - INFO -     mistral:7b-instruct: OK
+2026-03-13 12:52:06,220 - INFO -     codeqwen:7b-chat: OK
+2026-03-13 12:53:58,342 - INFO -     llama3:70b-instruct: OK
+2026-03-13 12:53:58,342 - INFO - 
+============================================================
+2026-03-13 12:53:58,342 - INFO - Entry 13/15 | Commit: d58491c8...
+2026-03-13 12:53:58,343 - INFO -   variant1:
+2026-03-13 12:54:11,752 - INFO -     llama3:8b: OK
+2026-03-13 12:54:19,047 - INFO -     mistral:7b-instruct: OK
+2026-03-13 12:54:25,916 - INFO -     codeqwen:7b-chat: OK
+2026-03-13 12:55:38,134 - INFO -     llama3:70b-instruct: OK
+2026-03-13 12:55:38,134 - INFO -   variant2:
+2026-03-13 12:55:53,651 - INFO -     llama3:8b: OK
+2026-03-13 12:56:04,002 - INFO -     mistral:7b-instruct: OK
+2026-03-13 12:56:13,613 - INFO -     codeqwen:7b-chat: OK
+2026-03-13 12:57:55,369 - INFO -     llama3:70b-instruct: OK
+2026-03-13 12:57:55,369 - INFO -   variant3:
+2026-03-13 12:58:10,924 - INFO -     llama3:8b: OK
+2026-03-13 12:58:21,267 - INFO -     mistral:7b-instruct: OK
+2026-03-13 12:58:31,329 - INFO -     codeqwen:7b-chat: OK
+2026-03-13 13:00:12,916 - INFO -     llama3:70b-instruct: OK
+2026-03-13 13:00:12,916 - INFO - 
+============================================================
+2026-03-13 13:00:12,916 - INFO - Entry 14/15 | Commit: e3fc97df...
+2026-03-13 13:00:12,916 - INFO -   variant1:
+2026-03-13 13:00:26,482 - INFO -     llama3:8b: OK
+2026-03-13 13:00:34,170 - INFO -     mistral:7b-instruct: OK
+2026-03-13 13:00:41,181 - INFO -     codeqwen:7b-chat: OK
+2026-03-13 13:01:54,414 - INFO -     llama3:70b-instruct: OK
+2026-03-13 13:01:54,414 - INFO -   variant2:
+2026-03-13 13:02:12,481 - INFO -     llama3:8b: OK
+2026-03-13 13:02:25,217 - INFO -     mistral:7b-instruct: OK
+2026-03-13 13:02:40,400 - INFO -     codeqwen:7b-chat: OK
+2026-03-13 13:04:49,561 - INFO -     llama3:70b-instruct: OK
+2026-03-13 13:04:49,561 - INFO -   variant3:
+2026-03-13 13:05:07,812 - INFO -     llama3:8b: OK
+2026-03-13 13:05:20,165 - INFO -     mistral:7b-instruct: OK
+2026-03-13 13:05:31,630 - INFO -     codeqwen:7b-chat: OK
+2026-03-13 13:07:45,194 - INFO -     llama3:70b-instruct: OK
+2026-03-13 13:07:45,195 - INFO - 
+============================================================
+2026-03-13 13:07:45,195 - INFO - Entry 15/15 | Commit: b3dbd83d...
+2026-03-13 13:07:45,195 - INFO -   variant1:
+2026-03-13 13:07:57,055 - INFO -     llama3:8b: OK
+2026-03-13 13:08:04,426 - INFO -     mistral:7b-instruct: OK
+2026-03-13 13:08:11,413 - INFO -     codeqwen:7b-chat: OK
+2026-03-13 13:09:30,813 - INFO -     llama3:70b-instruct: OK
+2026-03-13 13:09:30,814 - INFO -   variant2:
+2026-03-13 13:09:45,544 - INFO -     llama3:8b: OK
+2026-03-13 13:09:56,669 - INFO -     mistral:7b-instruct: OK
+2026-03-13 13:10:06,396 - INFO -     codeqwen:7b-chat: OK
+2026-03-13 13:11:48,381 - INFO -     llama3:70b-instruct: OK
+2026-03-13 13:11:48,381 - INFO -   variant3:
+2026-03-13 13:12:04,390 - INFO -     llama3:8b: OK
+2026-03-13 13:12:15,298 - INFO -     mistral:7b-instruct: OK
+2026-03-13 13:12:25,341 - INFO -     codeqwen:7b-chat: OK
+2026-03-13 13:14:13,145 - INFO -     llama3:70b-instruct: OK
+2026-03-13 13:14:13,147 - INFO - Saved outputs\variant1_output.json
+2026-03-13 13:14:13,148 - INFO - Saved outputs\variant2_output.json
+2026-03-13 13:14:13,150 - INFO - Saved outputs\variant3_output.json
+2026-03-13 13:14:13,150 - INFO - 
+============================================================
+2026-03-13 13:14:13,150 - INFO - Complete!
+2026-03-13 13:14:13,150 - INFO - Results: outputs/
+2026-03-13 13:14:13,151 - INFO - Prompts: prompts/
+2026-03-15 18:27:28,755 - INFO - ============================================================
+2026-03-15 18:27:28,756 - INFO - COMMIT MESSAGE GENERATION SYSTEM
+2026-03-15 18:27:28,756 - INFO - ============================================================
+2026-03-15 18:27:28,756 - INFO - Variants: variant1, variant2, variant3, variant4
+2026-03-15 18:27:28,757 - INFO - Models: llama3:8b, mistral:7b-instruct, codeqwen:7b-chat, llama3:70b-instruct
+2026-03-15 18:27:28,757 - INFO - Test: 15 entries
+2026-03-15 18:27:28,948 - INFO - Connected to Ollama
+2026-03-15 18:27:28,948 - INFO - Models: llama3:8b, mistral:7b-instruct, codeqwen:7b-chat, llama3:70b-instruct
+2026-03-15 18:27:28,951 - INFO - Dataset: 69 entries
+2026-03-15 18:27:28,951 - INFO - Running: 4 variant(s), 15 entry(ies)
+2026-03-15 18:27:28,951 - INFO - 
+============================================================
+2026-03-15 18:27:28,951 - INFO - Entry 1/15 | Commit: f7e7fa09...
+2026-03-15 18:27:28,952 - INFO -   variant1:
+2026-03-15 18:27:36,649 - INFO -     llama3:8b: OK
+2026-03-15 18:27:44,069 - INFO -     mistral:7b-instruct: OK
+2026-03-15 18:27:51,008 - INFO -     codeqwen:7b-chat: OK
+2026-03-15 18:29:09,139 - INFO -     llama3:70b-instruct: OK
+2026-03-15 18:29:09,140 - INFO -   variant2:
+2026-03-15 18:29:26,485 - INFO -     llama3:8b: OK
+2026-03-15 18:29:38,857 - INFO -     mistral:7b-instruct: OK
+2026-03-15 18:29:50,412 - INFO -     codeqwen:7b-chat: OK
+2026-03-15 18:32:01,315 - INFO -     llama3:70b-instruct: OK
+2026-03-15 18:32:01,315 - INFO -   variant3:
+2026-03-15 18:32:18,059 - INFO -     llama3:8b: OK
+2026-03-15 18:32:29,849 - INFO -     mistral:7b-instruct: OK
+2026-03-15 18:32:40,715 - INFO -     codeqwen:7b-chat: OK
+2026-03-15 18:34:45,111 - INFO -     llama3:70b-instruct: OK
+2026-03-15 18:34:45,111 - INFO -   variant4:
+2026-03-15 18:34:59,028 - INFO -     llama3:8b: OK
+2026-03-15 18:35:07,161 - INFO -     mistral:7b-instruct: OK
+2026-03-15 18:35:14,748 - INFO -     codeqwen:7b-chat: OK
+2026-03-15 18:36:34,362 - INFO -     llama3:70b-instruct: OK
+2026-03-15 18:36:34,362 - INFO - 
+============================================================
+2026-03-15 18:36:34,363 - INFO - Entry 2/15 | Commit: d134b0ca...
+2026-03-15 18:36:34,363 - INFO -   variant1:
+2026-03-15 18:36:47,168 - INFO -     llama3:8b: OK
+2026-03-15 18:36:54,477 - INFO -     mistral:7b-instruct: OK
+2026-03-15 18:37:01,241 - INFO -     codeqwen:7b-chat: OK
+2026-03-15 18:38:15,082 - INFO -     llama3:70b-instruct: OK
+2026-03-15 18:38:15,082 - INFO -   variant2:
+2026-03-15 18:38:31,932 - INFO -     llama3:8b: OK
+2026-03-15 18:38:44,791 - INFO -     mistral:7b-instruct: OK
+2026-03-15 18:38:56,259 - INFO -     codeqwen:7b-chat: OK
+2026-03-15 18:41:10,879 - INFO -     llama3:70b-instruct: OK
+2026-03-15 18:41:10,880 - INFO -   variant3:
+2026-03-15 18:41:27,666 - INFO -     llama3:8b: OK
+2026-03-15 18:41:39,413 - INFO -     mistral:7b-instruct: OK
+2026-03-15 18:41:50,472 - INFO -     codeqwen:7b-chat: OK
+2026-03-15 18:43:58,529 - INFO -     llama3:70b-instruct: OK
+2026-03-15 18:43:58,529 - INFO -   variant4:
+2026-03-15 18:44:11,837 - INFO -     llama3:8b: OK
+2026-03-15 18:44:19,566 - INFO -     mistral:7b-instruct: OK
+2026-03-15 18:44:27,004 - INFO -     codeqwen:7b-chat: OK
+2026-03-15 18:45:41,534 - INFO -     llama3:70b-instruct: OK
+2026-03-15 18:45:41,534 - INFO - 
+============================================================
+2026-03-15 18:45:41,535 - INFO - Entry 3/15 | Commit: 0b2af562...
+2026-03-15 18:45:41,535 - INFO -   variant1:
+2026-03-15 18:45:54,659 - INFO -     llama3:8b: OK
+2026-03-15 18:46:02,679 - INFO -     mistral:7b-instruct: OK
+2026-03-15 18:46:10,339 - INFO -     codeqwen:7b-chat: OK
+2026-03-15 18:47:31,705 - INFO -     llama3:70b-instruct: OK
+2026-03-15 18:47:31,705 - INFO -   variant2:
+2026-03-15 18:47:48,991 - INFO -     llama3:8b: OK
+2026-03-15 18:48:01,174 - INFO -     mistral:7b-instruct: OK
+2026-03-15 18:48:13,542 - INFO -     codeqwen:7b-chat: OK
+2026-03-15 18:50:21,345 - INFO -     llama3:70b-instruct: OK
+2026-03-15 18:50:21,345 - INFO -   variant3:
+2026-03-15 18:50:38,065 - INFO -     llama3:8b: OK
+2026-03-15 18:50:49,900 - INFO -     mistral:7b-instruct: OK
+2026-03-15 18:51:00,742 - INFO -     codeqwen:7b-chat: OK
+2026-03-15 18:53:08,819 - INFO -     llama3:70b-instruct: OK
+2026-03-15 18:53:08,820 - INFO -   variant4:
+2026-03-15 18:53:22,344 - INFO -     llama3:8b: OK
+2026-03-15 18:53:30,906 - INFO -     mistral:7b-instruct: OK
+2026-03-15 18:53:56,661 - INFO -     codeqwen:7b-chat: OK
+2026-03-15 18:55:17,943 - INFO -     llama3:70b-instruct: OK
+2026-03-15 18:55:17,943 - INFO - 
+============================================================
+2026-03-15 18:55:17,944 - INFO - Entry 4/15 | Commit: 7a89b757...
+2026-03-15 18:55:17,944 - INFO -   variant1:
+2026-03-15 18:55:30,004 - INFO -     llama3:8b: OK
+2026-03-15 18:55:37,104 - INFO -     mistral:7b-instruct: OK
+2026-03-15 18:55:43,864 - INFO -     codeqwen:7b-chat: OK
+2026-03-15 18:56:48,878 - INFO -     llama3:70b-instruct: OK
+2026-03-15 18:56:48,878 - INFO -   variant2:
+2026-03-15 18:57:03,524 - INFO -     llama3:8b: OK
+2026-03-15 18:57:13,493 - INFO -     mistral:7b-instruct: OK
+2026-03-15 18:57:22,523 - INFO -     codeqwen:7b-chat: OK
+2026-03-15 18:58:58,181 - INFO -     llama3:70b-instruct: OK
+2026-03-15 18:58:58,181 - INFO -   variant3:
+2026-03-15 18:59:12,872 - INFO -     llama3:8b: OK
+2026-03-15 18:59:22,469 - INFO -     mistral:7b-instruct: OK
+2026-03-15 18:59:31,278 - INFO -     codeqwen:7b-chat: OK
+2026-03-15 19:01:06,430 - INFO -     llama3:70b-instruct: OK
+2026-03-15 19:01:06,430 - INFO -   variant4:
+2026-03-15 19:01:19,363 - INFO -     llama3:8b: OK
+2026-03-15 19:01:26,755 - INFO -     mistral:7b-instruct: OK
+2026-03-15 19:01:33,766 - INFO -     codeqwen:7b-chat: OK
+2026-03-15 19:02:46,218 - INFO - 
+Stopped by user
+2026-03-15 19:15:18,052 - INFO - ============================================================
+2026-03-15 19:15:18,053 - INFO - COMMIT MESSAGE GENERATION SYSTEM
+2026-03-15 19:15:18,053 - INFO - ============================================================
+2026-03-15 19:15:18,053 - INFO - Variants: variant1, variant2, variant3
+2026-03-15 19:15:18,053 - INFO - Models: llama3:8b, mistral:7b-instruct, codeqwen:7b-chat, llama3:70b-instruct
+2026-03-15 19:15:18,054 - INFO - Test: 15 entries
+2026-03-15 19:15:18,109 - INFO - Connected to Ollama
+2026-03-15 19:15:18,109 - INFO - Models: llama3:8b, mistral:7b-instruct, codeqwen:7b-chat, llama3:70b-instruct
+2026-03-15 19:15:18,112 - INFO - Dataset: 69 entries
+2026-03-15 19:15:18,112 - INFO - Running: 3 variant(s), 15 entry(ies)
+2026-03-15 19:15:18,112 - INFO - 
+============================================================
+2026-03-15 19:15:18,113 - INFO - Entry 1/15 | Commit: f7e7fa09...
+2026-03-15 19:15:18,113 - INFO -   variant1:
+2026-03-15 19:15:25,266 - INFO -     llama3:8b: OK
+2026-03-15 19:15:32,896 - INFO -     mistral:7b-instruct: OK
+2026-03-15 19:15:39,771 - INFO -     codeqwen:7b-chat: OK
+2026-03-15 19:16:53,786 - INFO -     llama3:70b-instruct: OK
+2026-03-15 19:16:53,787 - INFO -   variant2:
+2026-03-15 19:17:10,443 - INFO -     llama3:8b: OK
+2026-03-15 19:17:22,730 - INFO -     mistral:7b-instruct: OK
+2026-03-15 19:17:33,963 - INFO -     codeqwen:7b-chat: OK
+2026-03-15 19:19:43,650 - INFO -     llama3:70b-instruct: OK
+2026-03-15 19:19:43,650 - INFO -   variant3:
+2026-03-15 19:20:00,023 - INFO -     llama3:8b: OK
+2026-03-15 19:20:12,179 - INFO -     mistral:7b-instruct: OK
+2026-03-15 19:20:25,405 - INFO -     codeqwen:7b-chat: OK
+2026-03-15 19:22:30,189 - INFO -     llama3:70b-instruct: OK
+2026-03-15 19:22:30,189 - INFO - 
+============================================================
+2026-03-15 19:22:30,190 - INFO - Entry 2/15 | Commit: d134b0ca...
+2026-03-15 19:22:30,190 - INFO -   variant1:
+2026-03-15 19:22:42,880 - INFO -     llama3:8b: OK
+2026-03-15 19:22:50,455 - INFO -     mistral:7b-instruct: OK
+2026-03-15 19:22:57,217 - INFO -     codeqwen:7b-chat: OK
+2026-03-15 19:24:11,644 - INFO -     llama3:70b-instruct: OK
+2026-03-15 19:24:11,644 - INFO -   variant2:
+2026-03-15 19:24:29,967 - INFO -     llama3:8b: OK
+2026-03-15 19:24:51,194 - INFO -     mistral:7b-instruct: OK
+2026-03-15 19:25:02,675 - INFO -     codeqwen:7b-chat: OK
+2026-03-15 19:27:10,503 - INFO -     llama3:70b-instruct: OK
+2026-03-15 19:27:10,503 - INFO -   variant3:
+2026-03-15 19:27:45,300 - INFO -     llama3:8b: OK
+2026-03-15 19:27:57,465 - INFO -     mistral:7b-instruct: OK
+2026-03-15 19:28:12,766 - INFO -     codeqwen:7b-chat: OK
+2026-03-15 19:30:17,493 - INFO -     llama3:70b-instruct: OK
+2026-03-15 19:30:17,493 - INFO - 
+============================================================
+2026-03-15 19:30:17,493 - INFO - Entry 3/15 | Commit: 0b2af562...
+2026-03-15 19:30:17,493 - INFO -   variant1:
+2026-03-15 19:30:50,162 - INFO -     llama3:8b: OK
+2026-03-15 19:31:05,121 - INFO -     mistral:7b-instruct: OK
+2026-03-15 19:31:17,980 - INFO -     codeqwen:7b-chat: OK
+2026-03-15 19:32:37,908 - INFO -     llama3:70b-instruct: OK
+2026-03-15 19:32:37,908 - INFO -   variant2:
+2026-03-15 19:32:56,145 - INFO -     llama3:8b: OK
+2026-03-15 19:33:21,120 - INFO -     mistral:7b-instruct: OK
+2026-03-15 19:33:32,044 - INFO -     codeqwen:7b-chat: OK
+2026-03-15 19:35:36,238 - INFO -     llama3:70b-instruct: OK
+2026-03-15 19:35:36,239 - INFO -   variant3:
+2026-03-15 19:35:55,091 - INFO -     llama3:8b: OK
+2026-03-15 19:36:07,694 - INFO -     mistral:7b-instruct: OK
+2026-03-15 19:36:37,530 - INFO -     codeqwen:7b-chat: OK
+2026-03-15 19:38:44,393 - INFO -     llama3:70b-instruct: OK
+2026-03-15 19:38:44,393 - INFO - 
+============================================================
+2026-03-15 19:38:44,394 - INFO - Entry 4/15 | Commit: 7a89b757...
+2026-03-15 19:38:44,394 - INFO -   variant1:
+2026-03-15 19:39:14,700 - INFO -     llama3:8b: OK
+2026-03-15 19:39:22,623 - INFO -     mistral:7b-instruct: OK
+2026-03-15 19:39:29,190 - INFO -     codeqwen:7b-chat: OK
+2026-03-15 19:40:36,897 - INFO -     llama3:70b-instruct: OK
+2026-03-15 19:40:36,897 - INFO -   variant2:
+2026-03-15 19:40:52,929 - INFO -     llama3:8b: OK
+2026-03-15 19:41:03,501 - INFO -     mistral:7b-instruct: OK
+2026-03-15 19:41:12,575 - INFO -     codeqwen:7b-chat: OK
+2026-03-15 19:43:07,616 - INFO -     llama3:70b-instruct: OK
+2026-03-15 19:43:07,616 - INFO -   variant3:
+2026-03-15 19:43:23,190 - INFO -     llama3:8b: OK
+2026-03-15 19:43:33,693 - INFO -     mistral:7b-instruct: OK
+2026-03-15 19:43:42,782 - INFO -     codeqwen:7b-chat: OK
+2026-03-15 19:45:22,883 - INFO -     llama3:70b-instruct: OK
+2026-03-15 19:45:22,883 - INFO - 
+============================================================
+2026-03-15 19:45:22,883 - INFO - Entry 5/15 | Commit: fb51116d...
+2026-03-15 19:45:22,884 - INFO -   variant1:
+2026-03-15 19:45:35,808 - INFO -     llama3:8b: OK
+2026-03-15 19:45:43,592 - INFO -     mistral:7b-instruct: OK
+2026-03-15 19:45:50,345 - INFO -     codeqwen:7b-chat: OK
+2026-03-15 19:47:29,154 - INFO -     llama3:70b-instruct: OK
+2026-03-15 19:47:29,155 - INFO -   variant2:
+2026-03-15 19:47:47,402 - INFO -     llama3:8b: OK
+2026-03-15 19:48:00,418 - INFO -     mistral:7b-instruct: OK
+2026-03-15 19:48:14,852 - INFO -     codeqwen:7b-chat: OK
+2026-03-15 19:50:36,754 - INFO -     llama3:70b-instruct: OK
+2026-03-15 19:50:36,755 - INFO -   variant3:
+2026-03-15 19:50:54,893 - INFO -     llama3:8b: OK
+2026-03-15 19:51:07,564 - INFO -     mistral:7b-instruct: OK
+2026-03-15 19:51:23,132 - INFO -     codeqwen:7b-chat: OK
+2026-03-15 19:53:46,559 - INFO -     llama3:70b-instruct: OK
+2026-03-15 19:53:46,560 - INFO - 
+============================================================
+2026-03-15 19:53:46,560 - INFO - Entry 6/15 | Commit: f476bcb6...
+2026-03-15 19:53:46,560 - INFO -   variant1:
+2026-03-15 19:54:00,533 - INFO -     llama3:8b: OK
+2026-03-15 19:54:08,316 - INFO -     mistral:7b-instruct: OK
+2026-03-15 19:54:14,794 - INFO -     codeqwen:7b-chat: OK
+2026-03-15 19:55:25,028 - INFO -     llama3:70b-instruct: OK
+2026-03-15 19:55:25,029 - INFO -   variant2:
+2026-03-15 19:55:43,497 - INFO -     llama3:8b: OK
+2026-03-15 19:55:56,892 - INFO -     mistral:7b-instruct: OK
+2026-03-15 19:56:07,691 - INFO -     codeqwen:7b-chat: OK
+2026-03-15 19:58:48,561 - INFO -     llama3:70b-instruct: OK
+2026-03-15 19:58:48,562 - INFO -   variant3:
+2026-03-15 19:59:05,936 - INFO -     llama3:8b: OK
+2026-03-15 19:59:18,428 - INFO -     mistral:7b-instruct: OK
+2026-03-15 19:59:29,213 - INFO -     codeqwen:7b-chat: OK
+2026-03-15 20:01:34,887 - INFO -     llama3:70b-instruct: OK
+2026-03-15 20:01:34,887 - INFO - 
+============================================================
+2026-03-15 20:01:34,887 - INFO - Entry 7/15 | Commit: b7d70ddc...
+2026-03-15 20:01:34,888 - INFO -   variant1:
+2026-03-15 20:01:49,327 - INFO -     llama3:8b: OK
+2026-03-15 20:02:12,721 - INFO -     mistral:7b-instruct: OK
+2026-03-15 20:02:20,118 - INFO -     codeqwen:7b-chat: OK
+2026-03-15 20:04:14,879 - INFO -     llama3:70b-instruct: OK
+2026-03-15 20:04:14,880 - INFO -   variant2:
+2026-03-15 20:04:31,534 - INFO -     llama3:8b: OK
+2026-03-15 20:04:58,800 - INFO -     mistral:7b-instruct: OK
+2026-03-15 20:05:11,073 - INFO -     codeqwen:7b-chat: OK
+2026-03-15 20:07:05,228 - INFO -     llama3:70b-instruct: OK
+2026-03-15 20:07:05,229 - INFO -   variant3:
+2026-03-15 20:07:22,619 - INFO -     llama3:8b: OK
+2026-03-15 20:07:42,934 - INFO -     mistral:7b-instruct: OK
+2026-03-15 20:07:53,866 - INFO -     codeqwen:7b-chat: OK
+2026-03-15 20:10:06,447 - INFO -     llama3:70b-instruct: OK
+2026-03-15 20:10:06,448 - INFO - 
+============================================================
+2026-03-15 20:10:06,448 - INFO - Entry 8/15 | Commit: 6ebc013b...
+2026-03-15 20:10:06,448 - INFO -   variant1:
+2026-03-15 20:10:20,766 - INFO -     llama3:8b: OK
+2026-03-15 20:10:29,000 - INFO -     mistral:7b-instruct: OK
+2026-03-15 20:10:35,925 - INFO -     codeqwen:7b-chat: OK
+2026-03-15 20:11:49,221 - INFO -     llama3:70b-instruct: OK
+2026-03-15 20:11:49,222 - INFO -   variant2:
+2026-03-15 20:12:07,946 - INFO -     llama3:8b: OK
+2026-03-15 20:12:36,022 - INFO -     mistral:7b-instruct: OK
+2026-03-15 20:12:47,280 - INFO -     codeqwen:7b-chat: OK
+2026-03-15 20:15:29,213 - INFO -     llama3:70b-instruct: OK
+2026-03-15 20:15:29,213 - INFO -   variant3:
+2026-03-15 20:15:47,130 - INFO -     llama3:8b: OK
+2026-03-15 20:16:00,196 - INFO -     mistral:7b-instruct: OK
+2026-03-15 20:16:16,965 - INFO -     codeqwen:7b-chat: OK
+2026-03-15 20:18:28,658 - INFO -     llama3:70b-instruct: OK
+2026-03-15 20:18:28,658 - INFO - 
+============================================================
+2026-03-15 20:18:28,659 - INFO - Entry 9/15 | Commit: ed4acded...
+2026-03-15 20:18:28,659 - INFO -   variant1:
+2026-03-15 20:18:42,524 - INFO -     llama3:8b: OK
+2026-03-15 20:18:50,657 - INFO -     mistral:7b-instruct: OK
+2026-03-15 20:18:57,163 - INFO -     codeqwen:7b-chat: OK
+2026-03-15 20:20:28,053 - INFO -     llama3:70b-instruct: OK
+2026-03-15 20:20:28,054 - INFO -   variant2:
+2026-03-15 20:20:46,772 - INFO -     llama3:8b: OK
+2026-03-15 20:21:00,047 - INFO -     mistral:7b-instruct: OK
+2026-03-15 20:21:12,524 - INFO -     codeqwen:7b-chat: OK
+2026-03-15 20:23:24,291 - INFO -     llama3:70b-instruct: OK
+2026-03-15 20:23:24,291 - INFO -   variant3:
+2026-03-15 20:23:42,755 - INFO -     llama3:8b: OK
+2026-03-15 20:23:56,389 - INFO -     mistral:7b-instruct: OK
+2026-03-15 20:24:07,597 - INFO -     codeqwen:7b-chat: OK
+2026-03-15 20:26:13,802 - INFO -     llama3:70b-instruct: OK
+2026-03-15 20:26:13,802 - INFO - 
+============================================================
+2026-03-15 20:26:13,802 - INFO - Entry 10/15 | Commit: 683c8577...
+2026-03-15 20:26:13,802 - INFO -   variant1:
+2026-03-15 20:26:27,895 - INFO -     llama3:8b: OK
+2026-03-15 20:26:36,335 - INFO -     mistral:7b-instruct: OK
+2026-03-15 20:26:43,220 - INFO -     codeqwen:7b-chat: OK
+2026-03-15 20:28:20,172 - INFO -     llama3:70b-instruct: OK
+2026-03-15 20:28:20,172 - INFO -   variant2:
+2026-03-15 20:28:38,802 - INFO -     llama3:8b: OK
+2026-03-15 20:28:53,071 - INFO -     mistral:7b-instruct: OK
+2026-03-15 20:29:23,026 - INFO -     codeqwen:7b-chat: OK
+2026-03-15 20:31:28,909 - INFO -     llama3:70b-instruct: OK
+2026-03-15 20:31:28,909 - INFO -   variant3:
+2026-03-15 20:31:47,459 - INFO -     llama3:8b: OK
+2026-03-15 20:32:00,617 - INFO -     mistral:7b-instruct: OK
+2026-03-15 20:32:16,409 - INFO -     codeqwen:7b-chat: OK
+2026-03-15 20:34:25,837 - INFO -     llama3:70b-instruct: OK
+2026-03-15 20:34:25,838 - INFO - 
+============================================================
+2026-03-15 20:34:25,838 - INFO - Entry 11/15 | Commit: 1b049bdb...
+2026-03-15 20:34:25,838 - INFO -   variant1:
+2026-03-15 20:34:39,819 - INFO -     llama3:8b: OK
+2026-03-15 20:34:48,164 - INFO -     mistral:7b-instruct: OK
+2026-03-15 20:34:55,003 - INFO -     codeqwen:7b-chat: OK
+2026-03-15 20:36:07,156 - INFO -     llama3:70b-instruct: OK
+2026-03-15 20:36:07,157 - INFO -   variant2:
+2026-03-15 20:36:23,326 - INFO -     llama3:8b: OK
+2026-03-15 20:36:34,905 - INFO -     mistral:7b-instruct: OK
+2026-03-15 20:36:44,174 - INFO -     codeqwen:7b-chat: OK
+2026-03-15 20:38:25,098 - INFO -     llama3:70b-instruct: OK
+2026-03-15 20:38:25,098 - INFO -   variant3:
+2026-03-15 20:38:41,106 - INFO -     llama3:8b: OK
+2026-03-15 20:38:52,115 - INFO -     mistral:7b-instruct: OK
+2026-03-15 20:39:01,349 - INFO -     codeqwen:7b-chat: OK
+2026-03-15 20:40:45,061 - INFO -     llama3:70b-instruct: OK
+2026-03-15 20:40:45,061 - INFO - 
+============================================================
+2026-03-15 20:40:45,062 - INFO - Entry 12/15 | Commit: 0477326a...
+2026-03-15 20:40:45,062 - INFO -   variant1:
+2026-03-15 20:40:59,098 - INFO -     llama3:8b: OK
+2026-03-15 20:41:07,332 - INFO -     mistral:7b-instruct: OK
+2026-03-15 20:41:14,183 - INFO -     codeqwen:7b-chat: OK
+2026-03-15 20:42:25,146 - INFO -     llama3:70b-instruct: OK
+2026-03-15 20:42:25,147 - INFO -   variant2:
+2026-03-15 20:42:55,122 - INFO -     llama3:8b: OK
+2026-03-15 20:43:07,701 - INFO -     mistral:7b-instruct: OK
+2026-03-15 20:43:18,505 - INFO -     codeqwen:7b-chat: OK
+2026-03-15 20:45:44,228 - INFO -     llama3:70b-instruct: OK
+2026-03-15 20:45:44,228 - INFO -   variant3:
+2026-03-15 20:46:01,549 - INFO -     llama3:8b: OK
+2026-03-15 20:46:14,229 - INFO -     mistral:7b-instruct: OK
+2026-03-15 20:46:24,952 - INFO -     codeqwen:7b-chat: OK
+2026-03-15 20:49:13,127 - INFO -     llama3:70b-instruct: OK
+2026-03-15 20:49:13,127 - INFO - 
+============================================================
+2026-03-15 20:49:13,127 - INFO - Entry 13/15 | Commit: d58491c8...
+2026-03-15 20:49:13,127 - INFO -   variant1:
+2026-03-15 20:49:26,973 - INFO -     llama3:8b: OK
+2026-03-15 20:49:35,182 - INFO -     mistral:7b-instruct: OK
+2026-03-15 20:49:41,963 - INFO -     codeqwen:7b-chat: OK
+2026-03-15 20:50:53,559 - INFO -     llama3:70b-instruct: OK
+2026-03-15 20:50:53,559 - INFO -   variant2:
+2026-03-15 20:51:09,016 - INFO -     llama3:8b: OK
+2026-03-15 20:51:20,051 - INFO -     mistral:7b-instruct: OK
+2026-03-15 20:51:30,790 - INFO -     codeqwen:7b-chat: OK
+2026-03-15 20:53:45,224 - INFO -     llama3:70b-instruct: OK
+2026-03-15 20:53:45,224 - INFO -   variant3:
+2026-03-15 20:54:01,244 - INFO -     llama3:8b: OK
+2026-03-15 20:54:12,318 - INFO -     mistral:7b-instruct: OK
+2026-03-15 20:54:21,789 - INFO -     codeqwen:7b-chat: OK
+2026-03-15 20:56:01,120 - INFO -     llama3:70b-instruct: OK
+2026-03-15 20:56:01,120 - INFO - 
+============================================================
+2026-03-15 20:56:01,121 - INFO - Entry 14/15 | Commit: e3fc97df...
+2026-03-15 20:56:01,121 - INFO -   variant1:
+2026-03-15 20:56:14,967 - INFO -     llama3:8b: OK
+2026-03-15 20:56:23,408 - INFO -     mistral:7b-instruct: OK
+2026-03-15 20:56:44,933 - INFO -     codeqwen:7b-chat: OK
+2026-03-15 20:58:22,461 - INFO -     llama3:70b-instruct: OK
+2026-03-15 20:58:22,461 - INFO -   variant2:
+2026-03-15 20:58:41,083 - INFO -     llama3:8b: OK
+2026-03-15 20:58:54,864 - INFO -     mistral:7b-instruct: OK
+2026-03-15 20:59:10,956 - INFO -     codeqwen:7b-chat: OK
+2026-03-15 21:01:20,568 - INFO -     llama3:70b-instruct: OK
+2026-03-15 21:01:20,569 - INFO -   variant3:
+2026-03-15 21:01:39,047 - INFO -     llama3:8b: OK
+2026-03-15 21:01:51,915 - INFO -     mistral:7b-instruct: OK
+2026-03-15 21:02:07,647 - INFO -     codeqwen:7b-chat: OK
+2026-03-15 21:04:32,654 - INFO -     llama3:70b-instruct: OK
+2026-03-15 21:04:32,654 - INFO - 
+============================================================
+2026-03-15 21:04:32,654 - INFO - Entry 15/15 | Commit: b3dbd83d...
+2026-03-15 21:04:32,655 - INFO -   variant1:
+2026-03-15 21:04:46,419 - INFO -     llama3:8b: OK
+2026-03-15 21:04:54,642 - INFO -     mistral:7b-instruct: OK
+2026-03-15 21:05:01,916 - INFO -     codeqwen:7b-chat: OK
+2026-03-15 21:06:21,228 - INFO -     llama3:70b-instruct: OK
+2026-03-15 21:06:21,228 - INFO -   variant2:
+2026-03-15 21:06:37,142 - INFO -     llama3:8b: OK
+2026-03-15 21:06:49,150 - INFO -     mistral:7b-instruct: OK
+2026-03-15 21:06:59,740 - INFO -     codeqwen:7b-chat: OK
+2026-03-15 21:08:47,706 - INFO -     llama3:70b-instruct: OK
+2026-03-15 21:08:47,707 - INFO -   variant3:
+2026-03-15 21:09:04,140 - INFO -     llama3:8b: OK
+2026-03-15 21:09:15,857 - INFO -     mistral:7b-instruct: OK
+2026-03-15 21:09:39,642 - INFO -     codeqwen:7b-chat: OK
+2026-03-15 21:12:03,703 - INFO -     llama3:70b-instruct: OK
+2026-03-15 21:12:03,706 - INFO - Saved outputs\variant1_output.json
+2026-03-15 21:12:03,708 - INFO - Saved outputs\variant2_output.json
+2026-03-15 21:12:03,710 - INFO - Saved outputs\variant3_output.json
+2026-03-15 21:12:03,710 - INFO - 
+============================================================
+2026-03-15 21:12:03,710 - INFO - Complete!
+2026-03-15 21:12:03,711 - INFO - Results: outputs/
+2026-03-15 21:12:03,711 - INFO - Prompts: prompts/

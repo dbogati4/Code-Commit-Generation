@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" xmlns:diff="http://www.srcML.org/srcDiff" revision="1.0.0" language="C++" filename="C:\Users\saile\AppData\Local\Temp\catch2_100_z8gzpiwf\c435f4c42bc2e404523998d3a43133371954d2a8\Test_TrickyTests_cpp\Test_TrickyTests_cpp.old|C:\Users\saile\AppData\Local\Temp\catch2_100_z8gzpiwf\c435f4c42bc2e404523998d3a43133371954d2a8\Test_TrickyTests_cpp\Test_TrickyTests_cpp.new"><comment type="block">/*
+ *  TrickyTests.cpp
+ *  Catch - Test
+ *
+ *  Created by Phil on 09/11/2010.
+ *  Copyright 2010 Two Blue Cubes Ltd. All rights reserved.
+ *
+ *  Distributed under the Boost Software License, Version 1.0. (See accompanying
+ *  file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
+ *
+ */</comment>
+
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">"catch.hpp"</cpp:file></cpp:include>
+
+<namespace>namespace <name>Catch</name>
+<block>{
+    <function><template>template<parameter_list>&lt;&gt;</parameter_list></template>
+    <type><name><name>std</name><operator>::</operator><name>string</name></name></type> <name><name>toString</name><argument_list type="generic">&lt;<argument><expr><name><name>std</name><operator>::</operator><name>pair</name><argument_list type="generic">&lt;<argument><expr><name>int</name></expr></argument>, <argument><expr><name>int</name></expr></argument>&gt;</argument_list></name></expr></argument> &gt;</argument_list></name><parameter_list>( <parameter><decl><type><specifier>const</specifier> <name><name>std</name><operator>::</operator><name>pair</name><argument_list type="generic">&lt;<argument><expr><name>int</name></expr></argument>, <argument><expr><name>int</name></expr></argument>&gt;</argument_list></name><modifier>&amp;</modifier></type> <name>value</name></decl></parameter> )</parameter_list>
+    <block>{<block_content>
+        <decl_stmt><decl><type><name><name>std</name><operator>::</operator><name>ostringstream</name></name></type> <name>oss</name></decl>;</decl_stmt>
+        <expr_stmt><expr><name>oss</name> <operator>&lt;&lt;</operator> <literal type="string">"std::pair( "</literal> <operator>&lt;&lt;</operator> <name><name>value</name><operator>.</operator><name>first</name></name> <operator>&lt;&lt;</operator> <literal type="string">", "</literal> <operator>&lt;&lt;</operator> <name><name>value</name><operator>.</operator><name>second</name></name> <operator>&lt;&lt;</operator> <literal type="string">" )"</literal></expr>;</expr_stmt>
+        <return>return <expr><call><name><name>oss</name><operator>.</operator><name>str</name></name><argument_list>()</argument_list></call></expr>;</return>
+        
+    </block_content>}</block></function>
+}</block></namespace>
+
+<macro><name>TEST_CASE</name><argument_list>( <argument><literal type="string">"succeeding/Tricky/std::pair"</literal></argument>, <argument><literal type="string">"Parsing a std::pair"</literal></argument> )</argument_list></macro>
+<block>{<block_content>
+    <decl_stmt><decl><type><name><name>std</name><operator>::</operator><name>pair</name><argument_list type="generic">&lt;<argument><expr><name>int</name></expr></argument>, <argument><expr><name>int</name></expr></argument>&gt;</argument_list></name></type> <name>aNicePair</name><argument_list>( <argument><expr><literal type="number">1</literal></expr></argument>, <argument><expr><literal type="number">2</literal></expr></argument> )</argument_list></decl>;</decl_stmt>
+
+    <comment type="line">// !TBD: would be nice if this could compile without the extra parentheses</comment>
+    <expr_stmt><expr><call><name>EXPECT</name><argument_list>( <argument><expr><operator>(</operator><call><name><name>std</name><operator>::</operator><name>pair</name><argument_list type="generic">&lt;<argument><expr><name>int</name></expr></argument>, <argument><expr><name>int</name></expr></argument>&gt;</argument_list></name><argument_list>( <argument><expr><literal type="number">1</literal></expr></argument>, <argument><expr><literal type="number">2</literal></expr></argument> )</argument_list></call><operator>)</operator> <operator>==</operator> <name>aNicePair</name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    
+</block_content>}</block>
+
+<macro><name>TEST_CASE</name><argument_list>( <argument><literal type="string">"succeeding/Tricky/complex lhs"</literal></argument>, <argument><literal type="string">"Where the LHS is not a simple value"</literal></argument> )</argument_list></macro>
+<block>{<block_content>
+    <decl_stmt><decl><type><name>int</name></type> <name>a</name> <init>= <expr><literal type="number">1</literal></expr></init></decl>;</decl_stmt>
+    <decl_stmt><decl><type><name>int</name></type> <name>b</name> <init>= <expr><literal type="number">2</literal></expr></init></decl>;</decl_stmt>
+
+    <comment type="line">// This only captures part of the expression, but issues a warning about the rest</comment>
+    <expr_stmt><expr><call><name>EXPECT</name><argument_list>( <argument><expr><name>a</name> <operator>==</operator> <literal type="number">2</literal> <operator>||</operator> <name>b</name> <operator>==</operator> <literal type="number"><diff:delete type="replace" xmlns:diff="http://www.srcML.org/srcDiff">1</diff:delete><diff:insert type="replace" xmlns:diff="http://www.srcML.org/srcDiff">2</diff:insert></literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+</block_content>}</block></unit>

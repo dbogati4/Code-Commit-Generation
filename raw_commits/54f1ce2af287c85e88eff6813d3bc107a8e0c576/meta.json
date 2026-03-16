@@ -1,0 +1,8 @@
+{
+  "commit_id": "54f1ce2af287c85e88eff6813d3bc107a8e0c576",
+  "parent_id": "0a146e3af7dfa8dd3be2b0e7a9804818076895da",
+  "message": "Don't use console colour if running in XCode",
+  "changed_files": [
+    "include/internal/catch_console_colour.cpp"
+  ]
+}

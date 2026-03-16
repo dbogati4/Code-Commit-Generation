@@ -1,0 +1,8 @@
+{
+  "commit_id": "61f4c7ab857e9143ca380bcd0b0552e2fa6e1d9d",
+  "parent_id": "50fefd059ae03b58aa8a842497c2c2fc7192959f",
+  "message": "Remove unused type from tests",
+  "changed_files": [
+    "projects/SelfTest/UsageTests/ToStringVariant.tests.cpp"
+  ]
+}

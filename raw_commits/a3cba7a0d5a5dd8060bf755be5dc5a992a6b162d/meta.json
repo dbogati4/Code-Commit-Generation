@@ -1,0 +1,8 @@
+{
+  "commit_id": "a3cba7a0d5a5dd8060bf755be5dc5a992a6b162d",
+  "parent_id": "9796846ad02489b05113f815b88226112ae06be8",
+  "message": "Conditionally compile problematic tests under old libstdc++",
+  "changed_files": [
+    "projects/SelfTest/UsageTests/Matchers.tests.cpp"
+  ]
+}

@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" xmlns:diff="http://www.srcML.org/srcDiff" revision="1.0.0" language="C++" filename="C:\Users\saile\AppData\Local\Temp\catch2_100_z8gzpiwf\d218d6f9e27afc718cef196fb63d06ca0ce21873\src_catch2_internal_catch_test_case_tracker_cpp\src_catch2_internal_catch_test_case_tracker_cpp.old|C:\Users\saile\AppData\Local\Temp\catch2_100_z8gzpiwf\d218d6f9e27afc718cef196fb63d06ca0ce21873\src_catch2_internal_catch_test_case_tracker_cpp\src_catch2_internal_catch_test_case_tracker_cpp.new"><comment type="block">/*
+ *  Created by Martin on 19/07/2017
+ *
+ *  Distributed under the Boost Software License, Version 1.0. (See accompanying
+ *  file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
+ */</comment>
+
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;catch2/internal/catch_test_case_tracker.hpp&gt;</cpp:file></cpp:include>
+
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;catch2/internal/catch_enforce.hpp&gt;</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;catch2/internal/catch_string_manip.hpp&gt;</cpp:file></cpp:include>
+
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;algorithm&gt;</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;cassert&gt;</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;memory&gt;</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;sstream&gt;</cpp:file></cpp:include>
+
+<cpp:if xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">if</cpp:directive> <expr><call><name>defined</name><argument_list>(<argument><expr><name>__clang__</name></expr></argument>)</argument_list></call></expr></cpp:if>
+<cpp:pragma xmlns:cpp="http://www.srcML.org/srcML/cpp">#    <cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">pragma</cpp:directive> <name>clang</name> <name>diagnostic</name> <name>push</name></cpp:pragma>
+<cpp:pragma xmlns:cpp="http://www.srcML.org/srcML/cpp">#    <cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">pragma</cpp:directive> <name>clang</name> <name>diagnostic</name> <name>ignored</name> <cpp:literal xmlns:cpp="http://www.srcML.org/srcML/cpp">"-Wexit-time-destructors"</cpp:literal></cpp:pragma>
+<cpp:endif xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">endif</cpp:directive></cpp:endif>
+
+<namespace>namespace <name>Catch</name> <block>{
+<namespace>namespace <name>TestCaseTracking</name> <block>{
+
+    <constructor><name><name>NameAndLocation</name><operator>::</operator><name>NameAndLocation</name></name><parameter_list>( <parameter><decl><type><name><name>std</name><operator>::</operator><name>string</name></name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>_name</name></decl></parameter>, <parameter><decl><type><name>SourceLineInfo</name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>_location</name></decl></parameter> )</parameter_list>
+    <member_init_list>:   <call><name>name</name><argument_list>( <argument><expr><name>_name</name></expr></argument> )</argument_list></call>,
+        <call><name>location</name><argument_list>( <argument><expr><name>_location</name></expr></argument> )</argument_list></call>
+    </member_init_list><block>{<block_content/>}</block></constructor>
+
+
+    <expr_stmt><expr><call><name><name>ITracker</name><operator>::</operator><name>~ITracker</name></name><argument_list>()</argument_list></call> <operator>=</operator> default</expr>;</expr_stmt>
+
+    <function><type><name>void</name></type> <name><name>ITracker</name><operator>::</operator><name>addChild</name></name><parameter_list>( <parameter><decl><type><name>ITrackerPtr</name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>child</name></decl></parameter> )</parameter_list> <block>{<block_content>
+        <expr_stmt><expr><call><name><name>m_children</name><operator>.</operator><name>push_back</name></name><argument_list>( <argument><expr><name>child</name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block></function>
+
+    <function><type><name>ITrackerPtr</name></type> <name><name>ITracker</name><operator>::</operator><name>findChild</name></name><parameter_list>( <parameter><decl><type><name>NameAndLocation</name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>nameAndLocation</name></decl></parameter> )</parameter_list> <block>{<block_content>
+        <decl_stmt><decl><type><name>auto</name></type> <name>it</name> <init>= <expr><call><name><name>std</name><operator>::</operator><name>find_if</name></name><argument_list>(
+            <argument><expr><call><name><name>m_children</name><operator>.</operator><name>begin</name></name><argument_list>()</argument_list></call></expr></argument>,
+            <argument><expr><call><name><name>m_children</name><operator>.</operator><name>end</name></name><argument_list>()</argument_list></call></expr></argument>,
+            <argument><expr><lambda><capture>[<argument><modifier>&amp;</modifier><name>nameAndLocation</name></argument>]</capture><parameter_list>( <parameter><decl><type><name>ITrackerPtr</name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>tracker</name></decl></parameter> )</parameter_list> <block>{<block_content>
+                <return>return <expr><call><name><name>tracker</name><operator>-&gt;</operator><name>nameAndLocation</name></name><argument_list>()</argument_list></call><operator>.</operator><name>location</name> <operator>==</operator>
+                           <name><name>nameAndLocation</name><operator>.</operator><name>location</name></name> <operator>&amp;&amp;</operator>
+                       <call><name><name>tracker</name><operator>-&gt;</operator><name>nameAndLocation</name></name><argument_list>()</argument_list></call><operator>.</operator><name>name</name> <operator>==</operator> <name><name>nameAndLocation</name><operator>.</operator><name>name</name></name></expr>;</return>
+            </block_content>}</block></lambda></expr></argument> )</argument_list></call></expr></init></decl>;</decl_stmt>
+        <return>return <expr><ternary><condition><expr><operator>(</operator> <name>it</name> <operator>!=</operator> <call><name><name>m_children</name><operator>.</operator><name>end</name></name><argument_list>()</argument_list></call> <operator>)</operator></expr> ?</condition><then> <expr><operator>*</operator><name>it</name></expr> </then><else>: <expr><literal type="null">nullptr</literal></expr></else></ternary></expr>;</return>
+    </block_content>}</block></function>
+
+
+
+    <function><type><name>ITracker</name><modifier>&amp;</modifier></type> <name><name>TrackerContext</name><operator>::</operator><name>startRun</name></name><parameter_list>()</parameter_list> <block>{<block_content>
+<diff:insert xmlns:diff="http://www.srcML.org/srcDiff"><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">        </diff:ws><using>using<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><namespace>namespace<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><name><name>std</name><operator>::</operator><name>string_literals</name></name>;</namespace></using><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+</diff:ws></diff:insert>        <expr_stmt><expr><name>m_rootTracker</name> <operator>=</operator> <call><name><name>std</name><operator>::</operator><name>make_shared</name><argument_list type="generic">&lt;<argument><expr><name>SectionTracker</name></expr></argument>&gt;</argument_list></name><argument_list>( <argument><expr><call><name>NameAndLocation</name><argument_list>( <argument><expr><literal type="string">"{root}"</literal><diff:insert xmlns:diff="http://www.srcML.org/srcDiff"><name>s</name></diff:insert></expr></argument>, <argument><expr><name>CATCH_INTERNAL_LINEINFO</name></expr></argument> )</argument_list></call></expr></argument>, <argument><expr><operator>*</operator><name>this</name></expr></argument>, <argument><expr><literal type="null">nullptr</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><name>m_currentTracker</name> <operator>=</operator> <literal type="null">nullptr</literal></expr>;</expr_stmt>
+        <expr_stmt><expr><name>m_runState</name> <operator>=</operator> <name>Executing</name></expr>;</expr_stmt>
+        <return>return <expr><operator>*</operator><name>m_rootTracker</name></expr>;</return>
+    </block_content>}</block></function>
+
+    <function><type><name>void</name></type> <name><name>TrackerContext</name><operator>::</operator><name>endRun</name></name><parameter_list>()</parameter_list> <block>{<block_content>
+        <expr_stmt><expr><call><name><name>m_rootTracker</name><operator>.</operator><name>reset</name></name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><name>m_currentTracker</name> <operator>=</operator> <literal type="null">nullptr</literal></expr>;</expr_stmt>
+        <expr_stmt><expr><name>m_runState</name> <operator>=</operator> <name>NotStarted</name></expr>;</expr_stmt>
+    </block_content>}</block></function>
+
+    <function><type><name>void</name></type> <name><name>TrackerContext</name><operator>::</operator><name>startCycle</name></name><parameter_list>()</parameter_list> <block>{<block_content>
+        <expr_stmt><expr><name>m_currentTracker</name> <operator>=</operator> <call><name><name>m_rootTracker</name><operator>.</operator><name>get</name></name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><name>m_runState</name> <operator>=</operator> <name>Executing</name></expr>;</expr_stmt>
+    </block_content>}</block></function>
+    <function><type><name>void</name></type> <name><name>TrackerContext</name><operator>::</operator><name>completeCycle</name></name><parameter_list>()</parameter_list> <block>{<block_content>
+        <expr_stmt><expr><name>m_runState</name> <operator>=</operator> <name>CompletedCycle</name></expr>;</expr_stmt>
+    </block_content>}</block></function>
+
+    <function><type><name>bool</name></type> <name><name>TrackerContext</name><operator>::</operator><name>completedCycle</name></name><parameter_list>()</parameter_list> <specifier>const</specifier> <block>{<block_content>
+        <return>return <expr><name>m_runState</name> <operator>==</operator> <name>CompletedCycle</name></expr>;</return>
+    </block_content>}</block></function>
+    <function><type><name>ITracker</name><modifier>&amp;</modifier></type> <name><name>TrackerContext</name><operator>::</operator><name>currentTracker</name></name><parameter_list>()</parameter_list> <block>{<block_content>
+        <return>return <expr><operator>*</operator><name>m_currentTracker</name></expr>;</return>
+    </block_content>}</block></function>
+    <function><type><name>void</name></type> <name><name>TrackerContext</name><operator>::</operator><name>setCurrentTracker</name></name><parameter_list>( <parameter><decl><type><name>ITracker</name><modifier>*</modifier></type> <name>tracker</name></decl></parameter> )</parameter_list> <block>{<block_content>
+        <expr_stmt><expr><name>m_currentTracker</name> <operator>=</operator> <name>tracker</name></expr>;</expr_stmt>
+    </block_content>}</block></function>
+
+
+    <constructor><name><name>TrackerBase</name><operator>::</operator><name>TrackerBase</name></name><parameter_list>( <parameter><decl><type><name>NameAndLocation</name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>nameAndLocation</name></decl></parameter>, <parameter><decl><type><name>TrackerContext</name><modifier>&amp;</modifier></type> <name>ctx</name></decl></parameter>, <parameter><decl><type><name>ITracker</name><modifier>*</modifier></type> <name>parent</name></decl></parameter> )</parameter_list><member_init_list>:
+        <call><name>ITracker</name><argument_list>(<argument><expr><name>nameAndLocation</name></expr></argument>)</argument_list></call>,
+        <call><name>m_ctx</name><argument_list>( <argument><expr><name>ctx</name></expr></argument> )</argument_list></call>,
+        <call><name>m_parent</name><argument_list>( <argument><expr><name>parent</name></expr></argument> )</argument_list></call>
+    </member_init_list><block>{<block_content/>}</block></constructor>
+
+    <function><type><name>bool</name></type> <name><name>TrackerBase</name><operator>::</operator><name>isComplete</name></name><parameter_list>()</parameter_list> <specifier>const</specifier> <block>{<block_content>
+        <return>return <expr><name>m_runState</name> <operator>==</operator> <name>CompletedSuccessfully</name> <operator>||</operator> <name>m_runState</name> <operator>==</operator> <name>Failed</name></expr>;</return>
+    </block_content>}</block></function>
+    <function><type><name>bool</name></type> <name><name>TrackerBase</name><operator>::</operator><name>isSuccessfullyCompleted</name></name><parameter_list>()</parameter_list> <specifier>const</specifier> <block>{<block_content>
+        <return>return <expr><name>m_runState</name> <operator>==</operator> <name>CompletedSuccessfully</name></expr>;</return>
+    </block_content>}</block></function>
+    <function><type><name>bool</name></type> <name><name>TrackerBase</name><operator>::</operator><name>isOpen</name></name><parameter_list>()</parameter_list> <specifier>const</specifier> <block>{<block_content>
+        <return>return <expr><name>m_runState</name> <operator>!=</operator> <name>NotStarted</name> <operator>&amp;&amp;</operator> <operator>!</operator><call><name>isComplete</name><argument_list>()</argument_list></call></expr>;</return>
+    </block_content>}</block></function>
+
+    <function><type><name>ITracker</name><modifier>&amp;</modifier></type> <name><name>TrackerBase</name><operator>::</operator><name>parent</name></name><parameter_list>()</parameter_list> <block>{<block_content>
+        <expr_stmt><expr><call><name>assert</name><argument_list>( <argument><expr><name>m_parent</name></expr></argument> )</argument_list></call></expr>;</expr_stmt> <comment type="line">// Should always be non-null except for root</comment>
+        <return>return <expr><operator>*</operator><name>m_parent</name></expr>;</return>
+    </block_content>}</block></function>
+
+    <function><type><name>void</name></type> <name><name>TrackerBase</name><operator>::</operator><name>openChild</name></name><parameter_list>()</parameter_list> <block>{<block_content>
+        <if_stmt><if>if<condition>( <expr><name>m_runState</name> <operator>!=</operator> <name>ExecutingChildren</name></expr> )</condition> <block>{<block_content>
+            <expr_stmt><expr><name>m_runState</name> <operator>=</operator> <name>ExecutingChildren</name></expr>;</expr_stmt>
+            <if_stmt><if>if<condition>( <expr><name>m_parent</name></expr> )</condition><block type="pseudo"><block_content>
+                <expr_stmt><expr><call><name><name>m_parent</name><operator>-&gt;</operator><name>openChild</name></name><argument_list>()</argument_list></call></expr>;</expr_stmt></block_content></block></if></if_stmt>
+        </block_content>}</block></if></if_stmt>
+    </block_content>}</block></function>
+
+    <function><type><name>bool</name></type> <name><name>TrackerBase</name><operator>::</operator><name>isSectionTracker</name></name><parameter_list>()</parameter_list> <specifier>const</specifier> <block>{<block_content> <return>return <expr><literal type="boolean">false</literal></expr>;</return> </block_content>}</block></function>
+    <function><type><name>bool</name></type> <name><name>TrackerBase</name><operator>::</operator><name>isGeneratorTracker</name></name><parameter_list>()</parameter_list> <specifier>const</specifier> <block>{<block_content> <return>return <expr><literal type="boolean">false</literal></expr>;</return> </block_content>}</block></function>
+
+    <function><type><name>void</name></type> <name><name>TrackerBase</name><operator>::</operator><name>open</name></name><parameter_list>()</parameter_list> <block>{<block_content>
+        <expr_stmt><expr><name>m_runState</name> <operator>=</operator> <name>Executing</name></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name>moveToThis</name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+        <if_stmt><if>if<condition>( <expr><name>m_parent</name></expr> )</condition><block type="pseudo"><block_content>
+            <expr_stmt><expr><call><name><name>m_parent</name><operator>-&gt;</operator><name>openChild</name></name><argument_list>()</argument_list></call></expr>;</expr_stmt></block_content></block></if></if_stmt>
+    </block_content>}</block></function>
+
+    <function><type><name>void</name></type> <name><name>TrackerBase</name><operator>::</operator><name>close</name></name><parameter_list>()</parameter_list> <block>{<block_content>
+
+        <comment type="line">// Close any still open children (e.g. generators)</comment>
+        <while>while<condition>( <expr><operator>&amp;</operator><call><name><name>m_ctx</name><operator>.</operator><name>currentTracker</name></name><argument_list>()</argument_list></call> <operator>!=</operator> <name>this</name></expr> )</condition><block type="pseudo"><block_content>
+            <expr_stmt><expr><call><name><name>m_ctx</name><operator>.</operator><name>currentTracker</name></name><argument_list>()</argument_list></call><operator>.</operator><call><name>close</name><argument_list>()</argument_list></call></expr>;</expr_stmt></block_content></block></while>
+
+        <switch>switch<condition>( <expr><name>m_runState</name></expr> )</condition> <block>{<block_content>
+            <case>case <expr><name>NeedsAnotherRun</name></expr>:</case>
+                <break>break;</break>
+
+            <case>case <expr><name>Executing</name></expr>:</case>
+                <expr_stmt><expr><name>m_runState</name> <operator>=</operator> <name>CompletedSuccessfully</name></expr>;</expr_stmt>
+                <break>break;</break>
+            <case>case <expr><name>ExecutingChildren</name></expr>:</case>
+                <if_stmt><if>if<condition>( <expr><call><name><name>std</name><operator>::</operator><name>all_of</name></name><argument_list>(<argument><expr><call><name><name>m_children</name><operator>.</operator><name>begin</name></name><argument_list>()</argument_list></call></expr></argument>, <argument><expr><call><name><name>m_children</name><operator>.</operator><name>end</name></name><argument_list>()</argument_list></call></expr></argument>, <argument><expr><lambda><capture>[]</capture><parameter_list>(<parameter><decl/></parameter></parameter_list>ITrackerPtr <specifier>const</specifier><ref_qualifier>&amp;</ref_qualifier> <name>t</name></lambda></expr></argument>)</argument_list></call></expr></condition><block>{<block_content> <return>return <expr><call><name><name>t</name><operator>-&gt;</operator><name>isComplete</name></name><argument_list>()</argument_list></call></expr>;</return> </block_content>}</block></if></if_stmt>)</block_content></block></switch> )</block_content>
+                    m_runState = CompletedSuccessfully</block>;</function>
+                <break>break;</break>
+
+            <case>case <expr><name>NotStarted</name></expr>:</case>
+            <case>case <expr><name>CompletedSuccessfully</name></expr>:</case>
+            <case>case <expr><name>Failed</name></expr>:</case>
+                <expr_stmt><expr><call><name>CATCH_INTERNAL_ERROR</name><argument_list>( <argument><expr><literal type="string">"Illogical state: "</literal> <operator>&lt;&lt;</operator> <name>m_runState</name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+
+            <default>default:</default>
+                <expr_stmt><expr><call><name>CATCH_INTERNAL_ERROR</name><argument_list>( <argument><expr><literal type="string">"Unknown state: "</literal> <operator>&lt;&lt;</operator> <name>m_runState</name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        }</block></namespace>
+        <expr_stmt><expr><call><name>moveToParent</name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name><name>m_ctx</name><operator>.</operator><name>completeCycle</name></name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+    }</block></namespace>
+    <function><type><name>void</name></type> <name><name>TrackerBase</name><operator>::</operator><name>fail</name></name><parameter_list>()</parameter_list> <block>{<block_content>
+        <expr_stmt><expr><name>m_runState</name> <operator>=</operator> <name>Failed</name></expr>;</expr_stmt>
+        <if_stmt><if>if<condition>( <expr><name>m_parent</name></expr> )</condition><block type="pseudo"><block_content>
+            <expr_stmt><expr><call><name><name>m_parent</name><operator>-&gt;</operator><name>markAsNeedingAnotherRun</name></name><argument_list>()</argument_list></call></expr>;</expr_stmt></block_content></block></if></if_stmt>
+        <expr_stmt><expr><call><name>moveToParent</name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name><name>m_ctx</name><operator>.</operator><name>completeCycle</name></name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block></function>
+    <function><type><name>void</name></type> <name><name>TrackerBase</name><operator>::</operator><name>markAsNeedingAnotherRun</name></name><parameter_list>()</parameter_list> <block>{<block_content>
+        <expr_stmt><expr><name>m_runState</name> <operator>=</operator> <name>NeedsAnotherRun</name></expr>;</expr_stmt>
+    </block_content>}</block></function>
+
+    <function><type><name>void</name></type> <name><name>TrackerBase</name><operator>::</operator><name>moveToParent</name></name><parameter_list>()</parameter_list> <block>{<block_content>
+        <expr_stmt><expr><call><name>assert</name><argument_list>( <argument><expr><name>m_parent</name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name><name>m_ctx</name><operator>.</operator><name>setCurrentTracker</name></name><argument_list>( <argument><expr><name>m_parent</name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block></function>
+    <function><type><name>void</name></type> <name><name>TrackerBase</name><operator>::</operator><name>moveToThis</name></name><parameter_list>()</parameter_list> <block>{<block_content>
+        <expr_stmt><expr><call><name><name>m_ctx</name><operator>.</operator><name>setCurrentTracker</name></name><argument_list>( <argument><expr><name>this</name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block></function>
+
+    <constructor><name><name>SectionTracker</name><operator>::</operator><name>SectionTracker</name></name><parameter_list>( <parameter><decl><type><name>NameAndLocation</name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>nameAndLocation</name></decl></parameter>, <parameter><decl><type><name>TrackerContext</name><modifier>&amp;</modifier></type> <name>ctx</name></decl></parameter>, <parameter><decl><type><name>ITracker</name><modifier>*</modifier></type> <name>parent</name></decl></parameter> )</parameter_list>
+    <member_init_list>:   <call><name>TrackerBase</name><argument_list>( <argument><expr><name>nameAndLocation</name></expr></argument>, <argument><expr><name>ctx</name></expr></argument>, <argument><expr><name>parent</name></expr></argument> )</argument_list></call>,
+        <call><name>m_trimmed_name</name><argument_list>(<argument><expr><call><name>trim</name><argument_list>(<argument><expr><name><name>nameAndLocation</name><operator>.</operator><name>name</name></name></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call>
+    </member_init_list><block>{<block_content>
+        <if_stmt><if>if<condition>( <expr><name>parent</name></expr> )</condition> <block>{<block_content>
+            <while>while<condition>( <expr><operator>!</operator><call><name><name>parent</name><operator>-&gt;</operator><name>isSectionTracker</name></name><argument_list>()</argument_list></call></expr> )</condition><block type="pseudo"><block_content>
+                <expr_stmt><expr><name>parent</name> <operator>=</operator> <operator>&amp;</operator><call><name><name>parent</name><operator>-&gt;</operator><name>parent</name></name><argument_list>()</argument_list></call></expr>;</expr_stmt></block_content></block></while>
+
+            <decl_stmt><decl><type><name>SectionTracker</name><modifier>&amp;</modifier></type> <name>parentSection</name> <init>= <expr><cast type="static">static_cast<argument_list type="generic">&lt;<argument><expr><name>SectionTracker</name><operator>&amp;</operator></expr></argument>&gt;</argument_list><argument_list>( <argument><expr><operator>*</operator><name>parent</name></expr></argument> )</argument_list></cast></expr></init></decl>;</decl_stmt>
+            <expr_stmt><expr><call><name>addNextFilters</name><argument_list>( <argument><expr><name><name>parentSection</name><operator>.</operator><name>m_filters</name></name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        </block_content>}</block></if></if_stmt>
+    </block_content>}</block></constructor>
+
+    <function><type><name>bool</name></type> <name><name>SectionTracker</name><operator>::</operator><name>isComplete</name></name><parameter_list>()</parameter_list> <specifier>const</specifier> <block>{<block_content>
+        <decl_stmt><decl><type><name>bool</name></type> <name>complete</name> <init>= <expr><literal type="boolean">true</literal></expr></init></decl>;</decl_stmt>
+
+        <if_stmt><if>if <condition>(<expr><call><name><name>m_filters</name><operator>.</operator><name>empty</name></name><argument_list>()</argument_list></call>
+            <operator>||</operator> <name><name>m_filters</name><index>[<expr><literal type="number">0</literal></expr>]</index></name> <operator>==</operator> <literal type="string">""</literal>
+            <operator>||</operator> <call><name><name>std</name><operator>::</operator><name>find</name></name><argument_list>(<argument><expr><call><name><name>m_filters</name><operator>.</operator><name>begin</name></name><argument_list>()</argument_list></call></expr></argument>, <argument><expr><call><name><name>m_filters</name><operator>.</operator><name>end</name></name><argument_list>()</argument_list></call></expr></argument>, <argument><expr><name>m_trimmed_name</name></expr></argument>)</argument_list></call> <operator>!=</operator> <call><name><name>m_filters</name><operator>.</operator><name>end</name></name><argument_list>()</argument_list></call></expr>)</condition> <block>{<block_content>
+            <expr_stmt><expr><name>complete</name> <operator>=</operator> <call><name><name>TrackerBase</name><operator>::</operator><name>isComplete</name></name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+        </block_content>}</block></if></if_stmt>
+        <return>return <expr><name>complete</name></expr>;</return>
+    </block_content>}</block></function>
+
+    <function><type><name>bool</name></type> <name><name>SectionTracker</name><operator>::</operator><name>isSectionTracker</name></name><parameter_list>()</parameter_list> <specifier>const</specifier> <block>{<block_content> <return>return <expr><literal type="boolean">true</literal></expr>;</return> </block_content>}</block></function>
+
+    <function><type><name>SectionTracker</name><modifier>&amp;</modifier></type> <name><name>SectionTracker</name><operator>::</operator><name>acquire</name></name><parameter_list>( <parameter><decl><type><name>TrackerContext</name><modifier>&amp;</modifier></type> <name>ctx</name></decl></parameter>, <parameter><decl><type><name>NameAndLocation</name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>nameAndLocation</name></decl></parameter> )</parameter_list> <block>{<block_content>
+        <decl_stmt><decl><type><name><name>std</name><operator>::</operator><name>shared_ptr</name><argument_list type="generic">&lt;<argument><expr><name>SectionTracker</name></expr></argument>&gt;</argument_list></name></type> <name>section</name></decl>;</decl_stmt>
+
+        <decl_stmt><decl><type><name>ITracker</name><modifier>&amp;</modifier></type> <name>currentTracker</name> <init>= <expr><call><name><name>ctx</name><operator>.</operator><name>currentTracker</name></name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+        <if_stmt><if>if<condition>( <decl><type><name>ITrackerPtr</name></type> <name>childTracker</name> <init>= <expr><call><name><name>currentTracker</name><operator>.</operator><name>findChild</name></name><argument_list>( <argument><expr><name>nameAndLocation</name></expr></argument> )</argument_list></call></expr></init></decl> )</condition> <block>{<block_content>
+            <expr_stmt><expr><call><name>assert</name><argument_list>( <argument><expr><name>childTracker</name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+            <expr_stmt><expr><call><name>assert</name><argument_list>( <argument><expr><call><name><name>childTracker</name><operator>-&gt;</operator><name>isSectionTracker</name></name><argument_list>()</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+            <expr_stmt><expr><name>section</name> <operator>=</operator> <call><name><name>std</name><operator>::</operator><name>static_pointer_cast</name><argument_list type="generic">&lt;<argument><expr><name>SectionTracker</name></expr></argument>&gt;</argument_list></name><argument_list>( <argument><expr><name>childTracker</name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        </block_content>}</block></if>
+        <else>else <block>{<block_content>
+            <expr_stmt><expr><name>section</name> <operator>=</operator> <call><name><name>std</name><operator>::</operator><name>make_shared</name><argument_list type="generic">&lt;<argument><expr><name>SectionTracker</name></expr></argument>&gt;</argument_list></name><argument_list>( <argument><expr><name>nameAndLocation</name></expr></argument>, <argument><expr><name>ctx</name></expr></argument>, <argument><expr><operator>&amp;</operator><name>currentTracker</name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+            <expr_stmt><expr><call><name><name>currentTracker</name><operator>.</operator><name>addChild</name></name><argument_list>( <argument><expr><name>section</name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        </block_content>}</block></else></if_stmt>
+        <if_stmt><if>if<condition>( <expr><operator>!</operator><call><name><name>ctx</name><operator>.</operator><name>completedCycle</name></name><argument_list>()</argument_list></call></expr> )</condition><block type="pseudo"><block_content>
+            <expr_stmt><expr><call><name><name>section</name><operator>-&gt;</operator><name>tryOpen</name></name><argument_list>()</argument_list></call></expr>;</expr_stmt></block_content></block></if></if_stmt>
+        <return>return <expr><operator>*</operator><name>section</name></expr>;</return>
+    </block_content>}</block></function>
+
+    <function><type><name>void</name></type> <name><name>SectionTracker</name><operator>::</operator><name>tryOpen</name></name><parameter_list>()</parameter_list> <block>{<block_content>
+        <if_stmt><if>if<condition>( <expr><operator>!</operator><call><name>isComplete</name><argument_list>()</argument_list></call></expr> )</condition><block type="pseudo"><block_content>
+            <expr_stmt><expr><call><name>open</name><argument_list>()</argument_list></call></expr>;</expr_stmt></block_content></block></if></if_stmt>
+    </block_content>}</block></function>
+
+    <function><type><name>void</name></type> <name><name>SectionTracker</name><operator>::</operator><name>addInitialFilters</name></name><parameter_list>( <parameter><decl><type><name><name>std</name><operator>::</operator><name>vector</name><argument_list type="generic">&lt;<argument><expr><name><name>std</name><operator>::</operator><name>string</name></name></expr></argument>&gt;</argument_list></name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>filters</name></decl></parameter> )</parameter_list> <block>{<block_content>
+        <if_stmt><if>if<condition>( <expr><operator>!</operator><call><name><name>filters</name><operator>.</operator><name>empty</name></name><argument_list>()</argument_list></call></expr> )</condition> <block>{<block_content>
+            <expr_stmt><expr><call><name><name>m_filters</name><operator>.</operator><name>reserve</name></name><argument_list>( <argument><expr><call><name><name>m_filters</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call> <operator>+</operator> <call><name><name>filters</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call> <operator>+</operator> <literal type="number">2</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+            <expr_stmt><expr><call><name><name>m_filters</name><operator>.</operator><name>emplace_back</name></name><argument_list>(<argument><expr><literal type="string">""</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt> <comment type="line">// Root - should never be consulted</comment>
+            <expr_stmt><expr><call><name><name>m_filters</name><operator>.</operator><name>emplace_back</name></name><argument_list>(<argument><expr><literal type="string">""</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt> <comment type="line">// Test Case - not a section filter</comment>
+            <expr_stmt><expr><call><name><name>m_filters</name><operator>.</operator><name>insert</name></name><argument_list>( <argument><expr><call><name><name>m_filters</name><operator>.</operator><name>end</name></name><argument_list>()</argument_list></call></expr></argument>, <argument><expr><call><name><name>filters</name><operator>.</operator><name>begin</name></name><argument_list>()</argument_list></call></expr></argument>, <argument><expr><call><name><name>filters</name><operator>.</operator><name>end</name></name><argument_list>()</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        </block_content>}</block></if></if_stmt>
+    </block_content>}</block></function>
+    <function><type><name>void</name></type> <name><name>SectionTracker</name><operator>::</operator><name>addNextFilters</name></name><parameter_list>( <parameter><decl><type><name><name>std</name><operator>::</operator><name>vector</name><argument_list type="generic">&lt;<argument><expr><name><name>std</name><operator>::</operator><name>string</name></name></expr></argument>&gt;</argument_list></name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>filters</name></decl></parameter> )</parameter_list> <block>{<block_content>
+        <if_stmt><if>if<condition>( <expr><call><name><name>filters</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call> <operator>&gt;</operator> <literal type="number">1</literal></expr> )</condition><block type="pseudo"><block_content>
+            <expr_stmt><expr><call><name><name>m_filters</name><operator>.</operator><name>insert</name></name><argument_list>( <argument><expr><call><name><name>m_filters</name><operator>.</operator><name>end</name></name><argument_list>()</argument_list></call></expr></argument>, <argument><expr><call><name><name>filters</name><operator>.</operator><name>begin</name></name><argument_list>()</argument_list></call><operator>+</operator><literal type="number">1</literal></expr></argument>, <argument><expr><call><name><name>filters</name><operator>.</operator><name>end</name></name><argument_list>()</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt></block_content></block></if></if_stmt>
+    </block_content>}</block></function>
+
+} <comment type="line">// namespace TestCaseTracking</comment>
+
+using <expr_stmt><expr><name><name>TestCaseTracking</name><operator>::</operator><name>ITracker</name></name></expr>;</expr_stmt>
+<using>using <name><name>TestCaseTracking</name><operator>::</operator><name>TrackerContext</name></name>;</using>
+<using>using <name><name>TestCaseTracking</name><operator>::</operator><name>SectionTracker</name></name>;</using>
+
+} <comment type="line">// namespace Catch</comment>
+
+<cpp:if xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">if</cpp:directive> <expr><call><name>defined</name><argument_list>(<argument><expr><name>__clang__</name></expr></argument>)</argument_list></call></expr></cpp:if>
+<cpp:pragma xmlns:cpp="http://www.srcML.org/srcML/cpp">#    <cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">pragma</cpp:directive> <name>clang</name> <name>diagnostic</name> <name>pop</name></cpp:pragma>
+<cpp:endif xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">endif</cpp:directive></cpp:endif>
+</unit>

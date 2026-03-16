@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" xmlns:diff="http://www.srcML.org/srcDiff" revision="1.0.0" language="C++" filename="C:\Users\saile\AppData\Local\Temp\catch2_100_z8gzpiwf\5ce355a38c54bbcd486e51ed6f6bb00c46c7540f\include_internal_catch_debugger_cpp\include_internal_catch_debugger_cpp.old|C:\Users\saile\AppData\Local\Temp\catch2_100_z8gzpiwf\5ce355a38c54bbcd486e51ed6f6bb00c46c7540f\include_internal_catch_debugger_cpp\include_internal_catch_debugger_cpp.new"><comment type="block">/*
+ *  Created by Phil on 27/12/2010.
+ *  Copyright 2010 Two Blue Cubes Ltd. All rights reserved.
+ *
+ *  Distributed under the Boost Software License, Version 1.0. (See accompanying
+ *  file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
+ *
+ */</comment>
+
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">"catch_debugger.h"</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">"catch_errno_guard.h"</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">"catch_stream.h"</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">"catch_platform.h"</cpp:file></cpp:include>
+
+<cpp:ifdef xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">ifdef</cpp:directive> <name>CATCH_PLATFORM_MAC</name></cpp:ifdef>
+
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#  <cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;assert.h&gt;</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#  <cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;stdbool.h&gt;</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#  <cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;sys/types.h&gt;</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#  <cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;unistd.h&gt;</cpp:file></cpp:include>
+<diff:delete move="1" xmlns:diff="http://www.srcML.org/srcDiff"><cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<diff:ws xmlns:diff="http://www.srcML.org/srcDiff">  </diff:ws><cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;sys/sysctl.h&gt;</cpp:file></cpp:include></diff:delete><diff:delete xmlns:diff="http://www.srcML.org/srcDiff"><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+</diff:ws></diff:delete><cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#  <cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;cstddef&gt;</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#  <cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;ostream&gt;</cpp:file></cpp:include>
+
+<diff:insert xmlns:diff="http://www.srcML.org/srcDiff"><cpp:ifdef xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">ifdef</cpp:directive><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><name>__apple_build_version__</name></cpp:ifdef><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+    </diff:ws><comment type="line">//<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>These<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>headers<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>will<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>only<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>compile<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>with<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>AppleClang<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>(XCode)</comment><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+    </diff:ws><comment type="line">//<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>For<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>other<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>compilers<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>(Clang,<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>GCC,<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>...<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>)<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>we<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>need<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>to<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>exclude<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>them</comment><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+</diff:ws><diff:insert move="1" xmlns:diff="http://www.srcML.org/srcDiff"><cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<diff:ws xmlns:diff="http://www.srcML.org/srcDiff">  </diff:ws><cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;sys/sysctl.h&gt;</cpp:file></cpp:include></diff:insert><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+</diff:ws><cpp:endif xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">endif</cpp:directive></cpp:endif><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+
+    </diff:ws></diff:insert><namespace>namespace <name>Catch</name> <block>{
+<diff:insert xmlns:diff="http://www.srcML.org/srcDiff"><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">        </diff:ws><cpp:ifdef xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">ifdef</cpp:directive><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><name>__apple_build_version__</name></cpp:ifdef></diff:insert>
+        <comment type="line">// The following function is taken directly from the following technical note:</comment>
+        <comment type="line">// <diff:delete type="replace" xmlns:diff="http://www.srcML.org/srcDiff">http</diff:delete><diff:insert type="replace" xmlns:diff="http://www.srcML.org/srcDiff">https</diff:insert>://developer.apple.com/library/<diff:delete type="replace" xmlns:diff="http://www.srcML.org/srcDiff">mac</diff:delete><diff:insert type="replace" xmlns:diff="http://www.srcML.org/srcDiff">archive</diff:insert>/<diff:delete type="replace" xmlns:diff="http://www.srcML.org/srcDiff">#qa</diff:delete><diff:insert type="replace" xmlns:diff="http://www.srcML.org/srcDiff">qa</diff:insert>/<diff:delete type="replace" xmlns:diff="http://www.srcML.org/srcDiff">qa2004</diff:delete><diff:insert type="replace" xmlns:diff="http://www.srcML.org/srcDiff">qa1361</diff:insert>/<diff:delete type="replace" xmlns:diff="http://www.srcML.org/srcDiff">qa1361.html</diff:delete><diff:insert type="replace" xmlns:diff="http://www.srcML.org/srcDiff">_index.html</diff:insert></comment>
+
+        <comment type="line">// Returns true if the current process is being debugged (either</comment>
+        <comment type="line">// running under the debugger or has a debugger attached post facto).</comment>
+        <function><type><name>bool</name></type> <name>isDebuggerActive</name><parameter_list>()</parameter_list><block>{<block_content>
+<diff:delete xmlns:diff="http://www.srcML.org/srcDiff"><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+</diff:ws></diff:delete>            <decl_stmt><decl><type><name>int</name></type>                 <name><name>mib</name><index>[<expr><literal type="number">4</literal></expr>]</index></name></decl>;</decl_stmt>
+            <decl_stmt><decl><type><name><name>struct</name> <name>kinfo_proc</name></name></type>   <name>info</name></decl>;</decl_stmt>
+            <decl_stmt><decl><type><name><name>std</name><operator>::</operator><name>size_t</name></name></type>         <name>size</name></decl>;</decl_stmt>
+
+            <comment type="line">// Initialize the flags so that, if sysctl fails for some bizarre</comment>
+            <comment type="line">// reason, we get a predictable result.</comment>
+
+            <expr_stmt><expr><name><name>info</name><operator>.</operator><name>kp_proc</name><operator>.</operator><name>p_flag</name></name> <operator>=</operator> <literal type="number">0</literal></expr>;</expr_stmt>
+
+            <comment type="line">// Initialize mib, which tells sysctl the info we want, in this case</comment>
+            <comment type="line">// we're looking for information about a specific process ID.</comment>
+
+            <expr_stmt><expr><name><name>mib</name><index>[<expr><literal type="number">0</literal></expr>]</index></name> <operator>=</operator> <name>CTL_KERN</name></expr>;</expr_stmt>
+            <expr_stmt><expr><name><name>mib</name><index>[<expr><literal type="number">1</literal></expr>]</index></name> <operator>=</operator> <name>KERN_PROC</name></expr>;</expr_stmt>
+            <expr_stmt><expr><name><name>mib</name><index>[<expr><literal type="number">2</literal></expr>]</index></name> <operator>=</operator> <name>KERN_PROC_PID</name></expr>;</expr_stmt>
+            <expr_stmt><expr><name><name>mib</name><index>[<expr><literal type="number">3</literal></expr>]</index></name> <operator>=</operator> <call><name>getpid</name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+
+            <comment type="line">// Call sysctl.</comment>
+
+            <expr_stmt><expr><name>size</name> <operator>=</operator> <sizeof>sizeof<argument_list>(<argument><expr><name>info</name></expr></argument>)</argument_list></sizeof></expr>;</expr_stmt>
+            <if_stmt><if>if<condition>( <expr><call><name>sysctl</name><argument_list>(<argument><expr><name>mib</name></expr></argument>, <argument><expr><sizeof>sizeof<argument_list>(<argument><expr><name>mib</name></expr></argument>)</argument_list></sizeof> <operator>/</operator> <sizeof>sizeof<argument_list>(<argument><expr><operator>*</operator><name>mib</name></expr></argument>)</argument_list></sizeof></expr></argument>, <argument><expr><operator>&amp;</operator><name>info</name></expr></argument>, <argument><expr><operator>&amp;</operator><name>size</name></expr></argument>, <argument><expr><literal type="null">nullptr</literal></expr></argument>, <argument><expr><literal type="number">0</literal></expr></argument>)</argument_list></call> <operator>!=</operator> <literal type="number">0</literal></expr> )</condition> <block>{<block_content>
+                <expr_stmt><expr><call><name><name>Catch</name><operator>::</operator><name>cerr</name></name><argument_list>()</argument_list></call> <operator>&lt;&lt;</operator> <literal type="string">"\n** Call to sysctl failed - unable to determine if debugger is active **\n"</literal> <operator>&lt;&lt;</operator> <name><name>std</name><operator>::</operator><name>endl</name></name></expr>;</expr_stmt>
+                <return>return <expr><literal type="boolean">false</literal></expr>;</return>
+            </block_content>}</block></if></if_stmt>
+
+            <comment type="line">// We're being debugged if the P_TRACED flag is set.</comment>
+
+            <return>return <expr><operator>(</operator> <operator>(</operator><name><name>info</name><operator>.</operator><name>kp_proc</name><operator>.</operator><name>p_flag</name></name> <operator>&amp;</operator> <name>P_TRACED</name><operator>)</operator> <operator>!=</operator> <literal type="number">0</literal> <operator>)</operator></expr>;</return>
+        </block_content>}</block></function>
+<diff:insert xmlns:diff="http://www.srcML.org/srcDiff"><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">        </diff:ws><cpp:else xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">else</cpp:directive></cpp:else><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+        </diff:ws><function><type><name>bool</name></type><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><name>isDebuggerActive</name><parameter_list>()</parameter_list><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><block>{<block_content><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+            </diff:ws><comment type="line">//<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>We<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>need<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>to<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>find<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>another<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>way<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>to<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>determine<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>this<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>for<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>non-appleclang<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>compilers<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>on<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>macOS</comment><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+            </diff:ws><return>return<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><expr><literal type="boolean">false</literal></expr>;</return><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+        </diff:ws></block_content>}</block></function><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+        </diff:ws><cpp:endif xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">endif</cpp:directive></cpp:endif><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+</diff:ws></diff:insert>    }</block></namespace> <comment type="line">// namespace Catch</comment>
+
+<cpp:elif xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">elif</cpp:directive> <expr><call><name>defined</name><argument_list>(<argument><expr><name>CATCH_PLATFORM_LINUX</name></expr></argument>)</argument_list></call></expr></cpp:elif>
+    <cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;fstream&gt;</cpp:file></cpp:include>
+    <cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;string&gt;</cpp:file></cpp:include>
+
+    <namespace>namespace <name>Catch</name><block>{
+        <comment type="line">// The standard POSIX way of detecting a debugger is to attempt to</comment>
+        <comment type="line">// ptrace() the process, but this needs to be done from a child and not</comment>
+        <comment type="line">// this process itself to still allow attaching to this process later</comment>
+        <comment type="line">// if wanted, so is rather heavy. Under Linux we have the PID of the</comment>
+        <comment type="line">// "debugger" (which doesn't need to be gdb, of course, it could also</comment>
+        <comment type="line">// be strace, for example) in /proc/$PID/status, so just get it from</comment>
+        <comment type="line">// there instead.</comment>
+        <function><type><name>bool</name></type> <name>isDebuggerActive</name><parameter_list>()</parameter_list><block>{<block_content>
+            <comment type="line">// Libstdc++ has a bug, where std::ifstream sets errno to 0</comment>
+            <comment type="line">// This way our users can properly assert over errno values</comment>
+            <decl_stmt><decl><type><name>ErrnoGuard</name></type> <name>guard</name></decl>;</decl_stmt>
+            <decl_stmt><decl><type><name><name>std</name><operator>::</operator><name>ifstream</name></name></type> <name>in</name><argument_list>(<argument><expr><literal type="string">"/proc/self/status"</literal></expr></argument>)</argument_list></decl>;</decl_stmt>
+            <for>for<control>( <init><decl><type><name><name>std</name><operator>::</operator><name>string</name></name></type> <name>line</name></decl>;</init> <condition><expr><call><name><name>std</name><operator>::</operator><name>getline</name></name><argument_list>(<argument><expr><name>in</name></expr></argument>, <argument><expr><name>line</name></expr></argument>)</argument_list></call></expr>;</condition> <incr/>)</control> <block>{<block_content>
+                <decl_stmt><decl><type><specifier>static</specifier> <specifier>const</specifier> <name>int</name></type> <name>PREFIX_LEN</name> <init>= <expr><literal type="number">11</literal></expr></init></decl>;</decl_stmt>
+                <if_stmt><if>if<condition>( <expr><call><name><name>line</name><operator>.</operator><name>compare</name></name><argument_list>(<argument><expr><literal type="number">0</literal></expr></argument>, <argument><expr><name>PREFIX_LEN</name></expr></argument>, <argument><expr><literal type="string">"TracerPid:\t"</literal></expr></argument>)</argument_list></call> <operator>==</operator> <literal type="number">0</literal></expr> )</condition> <block>{<block_content>
+                    <comment type="line">// We're traced if the PID is not 0 and no other PID starts</comment>
+                    <comment type="line">// with 0 digit, so it's enough to check for just a single</comment>
+                    <comment type="line">// character.</comment>
+                    <return>return <expr><call><name><name>line</name><operator>.</operator><name>length</name></name><argument_list>()</argument_list></call> <operator>&gt;</operator> <name>PREFIX_LEN</name> <operator>&amp;&amp;</operator> <name><name>line</name><index>[<expr><name>PREFIX_LEN</name></expr>]</index></name> <operator>!=</operator> <literal type="char">'0'</literal></expr>;</return>
+                </block_content>}</block></if></if_stmt>
+            </block_content>}</block></for>
+
+            <return>return <expr><literal type="boolean">false</literal></expr>;</return>
+        </block_content>}</block></function>
+    }</block></namespace> <comment type="line">// namespace Catch</comment>
+<cpp:elif xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">elif</cpp:directive> <expr><call><name>defined</name><argument_list>(<argument><expr><name>_MSC_VER</name></expr></argument>)</argument_list></call></expr></cpp:elif>
+    <extern>extern <literal type="string">"C"</literal> <macro><name>__declspec</name><argument_list>(<argument>dllimport</argument>)</argument_list></macro> <function_decl><type><name>int</name> <name>__stdcall</name></type> <name>IsDebuggerPresent</name><parameter_list>()</parameter_list>;</function_decl></extern>
+    <namespace>namespace <name>Catch</name> <block>{
+        <function><type><name>bool</name></type> <name>isDebuggerActive</name><parameter_list>()</parameter_list> <block>{<block_content>
+            <return>return <expr><call><name>IsDebuggerPresent</name><argument_list>()</argument_list></call> <operator>!=</operator> <literal type="number">0</literal></expr>;</return>
+        </block_content>}</block></function>
+    }</block></namespace>
+<cpp:elif xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">elif</cpp:directive> <expr><call><name>defined</name><argument_list>(<argument><expr><name>__MINGW32__</name></expr></argument>)</argument_list></call></expr></cpp:elif>
+    <extern>extern <literal type="string">"C"</literal> <macro><name>__declspec</name><argument_list>(<argument>dllimport</argument>)</argument_list></macro> <function_decl><type><name>int</name> <name>__stdcall</name></type> <name>IsDebuggerPresent</name><parameter_list>()</parameter_list>;</function_decl></extern>
+    <namespace>namespace <name>Catch</name> <block>{
+        <function><type><name>bool</name></type> <name>isDebuggerActive</name><parameter_list>()</parameter_list> <block>{<block_content>
+            <return>return <expr><call><name>IsDebuggerPresent</name><argument_list>()</argument_list></call> <operator>!=</operator> <literal type="number">0</literal></expr>;</return>
+        </block_content>}</block></function>
+    }</block></namespace>
+<cpp:else xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">else</cpp:directive></cpp:else>
+    <namespace>namespace <name>Catch</name> <block>{
+       <function><type><name>bool</name></type> <name>isDebuggerActive</name><parameter_list>()</parameter_list> <block>{<block_content> <return>return <expr><literal type="boolean">false</literal></expr>;</return> </block_content>}</block></function>
+    }</block></namespace>
+<cpp:endif xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">endif</cpp:directive></cpp:endif> <comment type="line">// Platform</comment>
+</unit>

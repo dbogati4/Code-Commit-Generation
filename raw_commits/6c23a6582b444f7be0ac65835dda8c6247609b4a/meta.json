@@ -1,0 +1,8 @@
+{
+  "commit_id": "6c23a6582b444f7be0ac65835dda8c6247609b4a",
+  "parent_id": "7bcb42496de220428dc346580318c2dbb1ad3e88",
+  "message": "Mark CHECKed-throw test as [failing]",
+  "changed_files": [
+    "projects/SelfTest/ExceptionTests.cpp"
+  ]
+}

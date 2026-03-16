@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" xmlns:diff="http://www.srcML.org/srcDiff" revision="1.0.0" language="C++" filename="C:\Users\saile\AppData\Local\Temp\catch2_100_z8gzpiwf\635db2785fc081e576e92e3f166504ccd7e6efd8\tests_ExtraTests_X91-AmalgamatedCatch_cpp\tests_ExtraTests_X91-AmalgamatedCatch_cpp.old|C:\Users\saile\AppData\Local\Temp\catch2_100_z8gzpiwf\635db2785fc081e576e92e3f166504ccd7e6efd8\tests_ExtraTests_X91-AmalgamatedCatch_cpp\tests_ExtraTests_X91-AmalgamatedCatch_cpp.new"><diff:insert xmlns:diff="http://www.srcML.org/srcDiff"><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+</diff:ws><comment type="line">//<diff:ws xmlns:diff="http://www.srcML.org/srcDiff">              </diff:ws>Copyright<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>Catch2<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>Authors</comment><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+</diff:ws><comment type="line">//<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>Distributed<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>under<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>the<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>Boost<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>Software<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>License,<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>Version<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>1.0.</comment><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+</diff:ws><comment type="line">//<diff:ws xmlns:diff="http://www.srcML.org/srcDiff">   </diff:ws>(See<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>accompanying<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>file<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>LICENSE_1_0.txt<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>or<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>copy<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>at</comment><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+</diff:ws><comment type="line">//<diff:ws xmlns:diff="http://www.srcML.org/srcDiff">        </diff:ws>https://www.boost.org/LICENSE_1_0.txt)</comment><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+
+</diff:ws><comment type="line">//<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>SPDX-License-Identifier:<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>BSL-1.0</comment><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+
+</diff:ws></diff:insert><comment type="block" format="doxygen">/**\file
+ *
+ * This file serves as a simple compilation test against the amalgamated
+ * version of Catch2.
+ */</comment>
+
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">"catch_amalgamated.hpp"</cpp:file></cpp:include>
+
+<macro><name>TEST_CASE</name><argument_list>(<argument><literal type="string">"Just a dummy test"</literal></argument>)</argument_list></macro> <block>{<block_content>
+    <decl_stmt><decl><type><name>auto</name></type> <name>i</name> <init>= <expr><call><name>GENERATE</name><argument_list>(<argument><expr><literal type="number">1</literal></expr></argument>, <argument><expr><literal type="number">2</literal></expr></argument>, <argument><expr><literal type="number">3</literal></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+    <macro><name>SECTION</name><argument_list>(<argument><literal type="string">"a"</literal></argument>)</argument_list></macro> <block>{<block_content>
+        <expr_stmt><expr><call><name>REQUIRE</name><argument_list>(<argument><expr><literal type="number">1</literal> <operator>!=</operator> <literal type="number">4</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block>
+    <macro><name>SECTION</name><argument_list>(<argument><literal type="string">"b"</literal></argument>)</argument_list></macro> <block>{<block_content>
+        <expr_stmt><expr><call><name>CHECK</name><argument_list>(<argument><expr><literal type="number">1</literal> <operator>!=</operator> <literal type="number">5</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block>
+    <expr_stmt><expr><call><name>REQUIRE_THAT</name><argument_list>(<argument><expr><literal type="number">1</literal></expr></argument>,
+                 <argument><expr><call><name><name>Catch</name><operator>::</operator><name>Matchers</name><operator>::</operator><name>Predicate</name><argument_list type="generic">&lt;<argument><expr><name>int</name></expr></argument>&gt;</argument_list></name><argument_list>(<argument><expr><lambda><capture>[]</capture><parameter_list>(<parameter><decl><type><name>int</name></type> <name>i</name></decl></parameter>)</parameter_list> <block>{<block_content>
+                     <return>return <expr><name>i</name> <operator>%</operator> <literal type="number">2</literal> <operator>==</operator> <literal type="number">1</literal></expr>;</return>
+                 </block_content>}</block></lambda></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+</block_content>}</block>
+
+<macro><name>TEMPLATE_TEST_CASE</name><argument_list>(<argument><literal type="string">"Trivial template test case"</literal></argument>, <argument><literal type="string">""</literal></argument>, <argument>char</argument>, <argument>short</argument>)</argument_list></macro> <block>{<block_content>
+    <expr_stmt><expr><call><name>STATIC_REQUIRE</name><argument_list>(<argument><expr><sizeof>sizeof<argument_list>(<argument><expr><name>TestType</name></expr></argument>)</argument_list></sizeof> <operator>&lt;=</operator> <sizeof>sizeof<argument_list>(<argument><expr><name>int</name></expr></argument>)</argument_list></sizeof></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+</block_content>}</block>
+
+<macro><name>TEST_CASE</name><argument_list>(<argument><literal type="string">"Benchmark test"</literal></argument>, <argument><literal type="string">"[!benchmark]"</literal></argument>)</argument_list></macro> <block>{<block_content>
+    <macro><name>BENCHMARK</name><argument_list>(<argument><literal type="string">"Allocation benchmark"</literal></argument>)</argument_list></macro> <block>{<block_content>
+        <return>return <expr><call><name><name>std</name><operator>::</operator><name>vector</name><argument_list type="generic">&lt;<argument><expr><name>int</name></expr></argument>&gt;</argument_list></name><argument_list>(<argument><expr><literal type="number">10</literal></expr></argument>)</argument_list></call></expr>;</return>
+    </block_content>}</block><empty_stmt>;</empty_stmt>
+</block_content>}</block>
+</unit>

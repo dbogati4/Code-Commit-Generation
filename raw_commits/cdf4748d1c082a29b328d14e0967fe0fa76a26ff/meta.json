@@ -1,0 +1,8 @@
+{
+  "commit_id": "cdf4748d1c082a29b328d14e0967fe0fa76a26ff",
+  "parent_id": "520b6dace90223753ad46615db9734089dbbdad3",
+  "message": "Modified hash to make it more independent of the choice of test names.",
+  "changed_files": [
+    "src/catch2/internal/catch_test_case_registry_impl.cpp"
+  ]
+}

@@ -1,0 +1,8 @@
+{
+  "commit_id": "e3fc97dffbad63f49a90e5ae688b0ce0c282e8c2",
+  "parent_id": "9c0533a90504b2b1c308dc7cc77ff194f81046e2",
+  "message": "fix compiler warning in parseUint and catch only relevant exceptions (#2572)",
+  "changed_files": [
+    "src/catch2/internal/catch_parse_numbers.cpp"
+  ]
+}

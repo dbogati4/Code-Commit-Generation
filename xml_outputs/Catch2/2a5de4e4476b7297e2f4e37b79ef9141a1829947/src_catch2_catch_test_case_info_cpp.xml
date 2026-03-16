@@ -1,0 +1,269 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" xmlns:diff="http://www.srcML.org/srcDiff" revision="1.0.0" language="C++" filename="C:\Users\saile\AppData\Local\Temp\catch2_100_z8gzpiwf\2a5de4e4476b7297e2f4e37b79ef9141a1829947\src_catch2_catch_test_case_info_cpp\src_catch2_catch_test_case_info_cpp.old|C:\Users\saile\AppData\Local\Temp\catch2_100_z8gzpiwf\2a5de4e4476b7297e2f4e37b79ef9141a1829947\src_catch2_catch_test_case_info_cpp\src_catch2_catch_test_case_info_cpp.new">
+<comment type="line">//              Copyright Catch2 Authors</comment>
+<comment type="line">// Distributed under the Boost Software License, Version 1.0.</comment>
+<comment type="line">//   (See accompanying file LICENSE.txt or copy at</comment>
+<comment type="line">//        https://www.boost.org/LICENSE_1_0.txt)</comment>
+
+<comment type="line">// SPDX-License-Identifier: BSL-1.0</comment>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;catch2/catch_test_case_info.hpp&gt;</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;catch2/internal/catch_enforce.hpp&gt;</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;catch2/internal/catch_string_manip.hpp&gt;</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;catch2/internal/catch_case_insensitive_comparisons.hpp&gt;</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;catch2/internal/catch_test_registry.hpp&gt;</cpp:file></cpp:include>
+
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;cassert&gt;</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;cctype&gt;</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;algorithm&gt;</cpp:file></cpp:include>
+
+<namespace>namespace <name>Catch</name> <block>{
+
+    <namespace>namespace <block>{
+        <using>using <name>TCP_underlying_type</name> <init>= <type><name>uint8_t</name></type></init>;</using>
+        <assert type="static">static_assert<argument_list>(<argument><expr><sizeof>sizeof<argument_list>(<argument><expr><name>TestCaseProperties</name></expr></argument>)</argument_list></sizeof> <operator>==</operator> <sizeof>sizeof<argument_list>(<argument><expr><name>TCP_underlying_type</name></expr></argument>)</argument_list></sizeof></expr></argument>,
+                      <argument><expr><literal type="string">"The size of the TestCaseProperties is different from the assumed size"</literal></expr></argument>)</argument_list>;</assert>
+
+        <function type="operator"><type><name>TestCaseProperties</name></type> <name>operator<name>|</name></name><parameter_list>(<parameter><decl><type><name>TestCaseProperties</name></type> <name>lhs</name></decl></parameter>, <parameter><decl><type><name>TestCaseProperties</name></type> <name>rhs</name></decl></parameter>)</parameter_list> <block>{<block_content>
+            <return>return <expr><cast type="static">static_cast<argument_list type="generic">&lt;<argument><expr><name>TestCaseProperties</name></expr></argument>&gt;</argument_list><argument_list>(
+                <argument><expr><cast type="static">static_cast<argument_list type="generic">&lt;<argument><expr><name>TCP_underlying_type</name></expr></argument>&gt;</argument_list><argument_list>(<argument><expr><name>lhs</name></expr></argument>)</argument_list></cast> <operator>|</operator> <cast type="static">static_cast<argument_list type="generic">&lt;<argument><expr><name>TCP_underlying_type</name></expr></argument>&gt;</argument_list><argument_list>(<argument><expr><name>rhs</name></expr></argument>)</argument_list></cast></expr></argument>
+            )</argument_list></cast></expr>;</return>
+        </block_content>}</block></function>
+
+        <function type="operator"><type><name>TestCaseProperties</name><modifier>&amp;</modifier></type> <name>operator<name>|=</name></name><parameter_list>(<parameter><decl><type><name>TestCaseProperties</name><modifier>&amp;</modifier></type> <name>lhs</name></decl></parameter>, <parameter><decl><type><name>TestCaseProperties</name></type> <name>rhs</name></decl></parameter>)</parameter_list> <block>{<block_content>
+            <expr_stmt><expr><name>lhs</name> <operator>=</operator> <cast type="static">static_cast<argument_list type="generic">&lt;<argument><expr><name>TestCaseProperties</name></expr></argument>&gt;</argument_list><argument_list>(
+                <argument><expr><cast type="static">static_cast<argument_list type="generic">&lt;<argument><expr><name>TCP_underlying_type</name></expr></argument>&gt;</argument_list><argument_list>(<argument><expr><name>lhs</name></expr></argument>)</argument_list></cast> <operator>|</operator> <cast type="static">static_cast<argument_list type="generic">&lt;<argument><expr><name>TCP_underlying_type</name></expr></argument>&gt;</argument_list><argument_list>(<argument><expr><name>rhs</name></expr></argument>)</argument_list></cast></expr></argument>
+            )</argument_list></cast></expr>;</expr_stmt>
+            <return>return <expr><name>lhs</name></expr>;</return>
+        </block_content>}</block></function>
+
+        <function type="operator"><type><name>TestCaseProperties</name></type> <name>operator<name>&amp;</name></name><parameter_list>(<parameter><decl><type><name>TestCaseProperties</name></type> <name>lhs</name></decl></parameter>, <parameter><decl><type><name>TestCaseProperties</name></type> <name>rhs</name></decl></parameter>)</parameter_list> <block>{<block_content>
+            <return>return <expr><cast type="static">static_cast<argument_list type="generic">&lt;<argument><expr><name>TestCaseProperties</name></expr></argument>&gt;</argument_list><argument_list>(
+                <argument><expr><cast type="static">static_cast<argument_list type="generic">&lt;<argument><expr><name>TCP_underlying_type</name></expr></argument>&gt;</argument_list><argument_list>(<argument><expr><name>lhs</name></expr></argument>)</argument_list></cast> <operator>&amp;</operator> <cast type="static">static_cast<argument_list type="generic">&lt;<argument><expr><name>TCP_underlying_type</name></expr></argument>&gt;</argument_list><argument_list>(<argument><expr><name>rhs</name></expr></argument>)</argument_list></cast></expr></argument>
+            )</argument_list></cast></expr>;</return>
+        </block_content>}</block></function>
+
+        <function><type><name>bool</name></type> <name>applies</name><parameter_list>(<parameter><decl><type><name>TestCaseProperties</name></type> <name>tcp</name></decl></parameter>)</parameter_list> <block>{<block_content>
+            <assert type="static">static_assert<argument_list>(<argument><expr><cast type="static">static_cast<argument_list type="generic">&lt;<argument><expr><name>TCP_underlying_type</name></expr></argument>&gt;</argument_list><argument_list>(<argument><expr><name><name>TestCaseProperties</name><operator>::</operator><name>None</name></name></expr></argument>)</argument_list></cast> <operator>==</operator> <literal type="number">0</literal></expr></argument>,
+                          <argument><expr><literal type="string">"TestCaseProperties::None must be equal to 0"</literal></expr></argument>)</argument_list>;</assert>
+            <return>return <expr><name>tcp</name> <operator>!=</operator> <name><name>TestCaseProperties</name><operator>::</operator><name>None</name></name></expr>;</return>
+        </block_content>}</block></function>
+
+        <function><type><name>TestCaseProperties</name></type> <name>parseSpecialTag</name><parameter_list>( <parameter><decl><type><name>StringRef</name></type> <name>tag</name></decl></parameter> )</parameter_list> <block>{<block_content>
+            <if_stmt><if>if<condition>( <expr><operator>!</operator><call><name><name>tag</name><operator>.</operator><name>empty</name></name><argument_list>()</argument_list></call> <operator>&amp;&amp;</operator> <name><name>tag</name><index>[<expr><literal type="number">0</literal></expr>]</index></name> <operator>==</operator> <literal type="char">'.'</literal></expr> )</condition><block type="pseudo"><block_content>
+                <return>return <expr><name><name>TestCaseProperties</name><operator>::</operator><name>IsHidden</name></name></expr>;</return></block_content></block></if>
+            <if type="elseif">else if<condition>( <expr><name>tag</name> <operator>==</operator> <literal type="string">"!throws"</literal><name>_sr</name></expr> )</condition><block type="pseudo"><block_content>
+                <return>return <expr><name><name>TestCaseProperties</name><operator>::</operator><name>Throws</name></name></expr>;</return></block_content></block></if>
+            <if type="elseif">else if<condition>( <expr><name>tag</name> <operator>==</operator> <literal type="string">"!shouldfail"</literal><name>_sr</name></expr> )</condition><block type="pseudo"><block_content>
+                <return>return <expr><name><name>TestCaseProperties</name><operator>::</operator><name>ShouldFail</name></name></expr>;</return></block_content></block></if>
+            <if type="elseif">else if<condition>( <expr><name>tag</name> <operator>==</operator> <literal type="string">"!mayfail"</literal><name>_sr</name></expr> )</condition><block type="pseudo"><block_content>
+                <return>return <expr><name><name>TestCaseProperties</name><operator>::</operator><name>MayFail</name></name></expr>;</return></block_content></block></if>
+            <if type="elseif">else if<condition>( <expr><name>tag</name> <operator>==</operator> <literal type="string">"!nonportable"</literal><name>_sr</name></expr> )</condition><block type="pseudo"><block_content>
+                <return>return <expr><name><name>TestCaseProperties</name><operator>::</operator><name>NonPortable</name></name></expr>;</return></block_content></block></if>
+            <if type="elseif">else if<condition>( <expr><name>tag</name> <operator>==</operator> <literal type="string">"!benchmark"</literal><name>_sr</name></expr> )</condition><block type="pseudo"><block_content>
+                <return>return <expr><name><name>TestCaseProperties</name><operator>::</operator><name>Benchmark</name></name> <operator>|</operator> <name><name>TestCaseProperties</name><operator>::</operator><name>IsHidden</name></name></expr>;</return></block_content></block></if>
+            <else>else<block type="pseudo"><block_content>
+                <return>return <expr><name><name>TestCaseProperties</name><operator>::</operator><name>None</name></name></expr>;</return></block_content></block></else></if_stmt>
+        </block_content>}</block></function>
+        <function><type><name>bool</name></type> <name>isReservedTag</name><parameter_list>( <parameter><decl><type><name>StringRef</name></type> <name>tag</name></decl></parameter> )</parameter_list> <block>{<block_content>
+            <return>return <expr><call><name>parseSpecialTag</name><argument_list>( <argument><expr><name>tag</name></expr></argument> )</argument_list></call> <operator>==</operator> <name><name>TestCaseProperties</name><operator>::</operator><name>None</name></name>
+                <operator>&amp;&amp;</operator> <call><name><name>tag</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call> <operator>&gt;</operator> <literal type="number">0</literal>
+                <operator>&amp;&amp;</operator> <operator>!</operator><call><name><name>std</name><operator>::</operator><name>isalnum</name></name><argument_list>( <argument><expr><cast type="static">static_cast<argument_list type="generic">&lt;<argument><expr><name>unsigned</name> <name>char</name></expr></argument>&gt;</argument_list><argument_list>(<argument><expr><name><name>tag</name><index>[<expr><literal type="number">0</literal></expr>]</index></name></expr></argument>)</argument_list></cast></expr></argument> )</argument_list></call></expr>;</return>
+        </block_content>}</block></function>
+        <function><type><name>void</name></type> <name>enforceNotReservedTag</name><parameter_list>( <parameter><decl><type><name>StringRef</name></type> <name>tag</name></decl></parameter>, <parameter><decl><type><name>SourceLineInfo</name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>_lineInfo</name></decl></parameter> )</parameter_list> <block>{<block_content>
+            <expr_stmt><expr><call><name>CATCH_ENFORCE</name><argument_list>( <argument><expr><operator>!</operator><call><name>isReservedTag</name><argument_list>(<argument><expr><name>tag</name></expr></argument>)</argument_list></call></expr></argument>,
+                          <argument><expr><literal type="string">"Tag name: ["</literal> <operator>&lt;&lt;</operator> <name>tag</name> <operator>&lt;&lt;</operator> <literal type="string">"] is not allowed.\n"</literal>
+                          <operator>&lt;&lt;</operator> <literal type="string">"Tag names starting with non alphanumeric characters are reserved\n"</literal>
+                          <operator>&lt;&lt;</operator> <name>_lineInfo</name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        </block_content>}</block></function>
+
+        <function><type><name><name>std</name><operator>::</operator><name>string</name></name></type> <name>makeDefaultName</name><parameter_list>()</parameter_list> <block>{<block_content>
+            <decl_stmt><decl><type><specifier>static</specifier> <name>size_t</name></type> <name>counter</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</decl_stmt>
+            <return>return <expr><literal type="string">"Anonymous test case "</literal> <operator>+</operator> <call><name><name>std</name><operator>::</operator><name>to_string</name></name><argument_list>(<argument><expr><operator>++</operator><name>counter</name></expr></argument>)</argument_list></call></expr>;</return>
+        </block_content>}</block></function>
+
+        <function><type><name>StringRef</name></type> <name>extractFilenamePart</name><parameter_list>(<parameter><decl><type><name>StringRef</name></type> <name>filename</name></decl></parameter>)</parameter_list> <block>{<block_content>
+            <decl_stmt><decl><type><name>size_t</name></type> <name>lastDot</name> <init>= <expr><call><name><name>filename</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+            <while>while <condition>(<expr><name>lastDot</name> <operator>&gt;</operator> <literal type="number">0</literal> <operator>&amp;&amp;</operator> <name><name>filename</name><index>[<expr><name>lastDot</name> <operator>-</operator> <literal type="number">1</literal></expr>]</index></name> <operator>!=</operator> <literal type="char">'.'</literal></expr>)</condition> <block>{<block_content>
+                <expr_stmt><expr><operator>--</operator><name>lastDot</name></expr>;</expr_stmt>
+            </block_content>}</block></while>
+<diff:insert xmlns:diff="http://www.srcML.org/srcDiff"><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">            </diff:ws><comment type="line">//<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>In<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>theory<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>we<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>could<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>have<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>filename<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>without<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>any<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>extension<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>in<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>it</comment><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+            </diff:ws><if_stmt><if>if<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><condition>(<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><expr><name>lastDot</name><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><operator>==</operator><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><literal type="number">0</literal></expr><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>)</condition><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><block>{<block_content><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><return>return<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><expr><call><name>StringRef</name><argument_list>()</argument_list></call></expr>;</return><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws></block_content>}</block></if></if_stmt><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+
+</diff:ws></diff:insert>            <expr_stmt><expr><operator>--</operator><name>lastDot</name></expr>;</expr_stmt>
+<diff:delete xmlns:diff="http://www.srcML.org/srcDiff"><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+</diff:ws></diff:delete>            <decl_stmt><decl><type><name>size_t</name></type> <name>nameStart</name> <init>= <expr><name>lastDot</name></expr></init></decl>;</decl_stmt>
+            <while>while <condition>(<expr><name>nameStart</name> <operator>&gt;</operator> <literal type="number">0</literal> <operator>&amp;&amp;</operator> <name><name>filename</name><index>[<expr><name>nameStart</name> <operator>-</operator> <literal type="number">1</literal></expr>]</index></name> <operator>!=</operator> <literal type="char">'/'</literal> <operator>&amp;&amp;</operator> <name><name>filename</name><index>[<expr><name>nameStart</name> <operator>-</operator> <literal type="number">1</literal></expr>]</index></name> <operator>!=</operator> <literal type="char">'\\'</literal></expr>)</condition> <block>{<block_content>
+                <expr_stmt><expr><operator>--</operator><name>nameStart</name></expr>;</expr_stmt>
+            </block_content>}</block></while>
+
+            <return>return <expr><call><name><name>filename</name><operator>.</operator><name>substr</name></name><argument_list>(<argument><expr><name>nameStart</name></expr></argument>, <argument><expr><name>lastDot</name> <operator>-</operator> <name>nameStart</name></expr></argument>)</argument_list></call></expr>;</return>
+        </block_content>}</block></function>
+
+        <comment type="line">// Returns the upper bound on size of extra tags ([#file]+[.])</comment>
+        <function><type><name>size_t</name></type> <name>sizeOfExtraTags</name><parameter_list>(<parameter><decl><type><name>StringRef</name></type> <name>filepath</name></decl></parameter>)</parameter_list> <block>{<block_content>
+            <comment type="line">// [.] is 3, [#] is another 3</comment>
+            <decl_stmt><decl><type><specifier>const</specifier> <name>size_t</name></type> <name>extras</name> <init>= <expr><literal type="number">3</literal> <operator>+</operator> <literal type="number">3</literal></expr></init></decl>;</decl_stmt>
+            <return>return <expr><call><name>extractFilenamePart</name><argument_list>(<argument><expr><name>filepath</name></expr></argument>)</argument_list></call><operator>.</operator><call><name>size</name><argument_list>()</argument_list></call> <operator>+</operator> <name>extras</name></expr>;</return>
+        </block_content>}</block></function>
+    }</block></namespace> <comment type="line">// end unnamed namespace</comment>
+
+    <function type="operator"><type><name>bool</name></type> <name>operator<name>&lt;</name></name><parameter_list>(  <parameter><decl><type><name>Tag</name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>lhs</name></decl></parameter>, <parameter><decl><type><name>Tag</name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>rhs</name></decl></parameter> )</parameter_list> <block>{<block_content>
+        <decl_stmt><decl><type><name><name>Detail</name><operator>::</operator><name>CaseInsensitiveLess</name></name></type> <name>cmp</name></decl>;</decl_stmt>
+        <return>return <expr><call><name>cmp</name><argument_list>( <argument><expr><name><name>lhs</name><operator>.</operator><name>original</name></name></expr></argument>, <argument><expr><name><name>rhs</name><operator>.</operator><name>original</name></name></expr></argument> )</argument_list></call></expr>;</return>
+    </block_content>}</block></function>
+    <function type="operator"><type><name>bool</name></type> <name>operator<name>==</name></name><parameter_list>( <parameter><decl><type><name>Tag</name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>lhs</name></decl></parameter>, <parameter><decl><type><name>Tag</name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>rhs</name></decl></parameter> )</parameter_list> <block>{<block_content>
+        <decl_stmt><decl><type><name><name>Detail</name><operator>::</operator><name>CaseInsensitiveEqualTo</name></name></type> <name>cmp</name></decl>;</decl_stmt>
+        <return>return <expr><call><name>cmp</name><argument_list>( <argument><expr><name><name>lhs</name><operator>.</operator><name>original</name></name></expr></argument>, <argument><expr><name><name>rhs</name><operator>.</operator><name>original</name></name></expr></argument> )</argument_list></call></expr>;</return>
+    </block_content>}</block></function>
+
+    <function><type><name><name>Detail</name><operator>::</operator><name>unique_ptr</name><argument_list type="generic">&lt;<argument><expr><name>TestCaseInfo</name></expr></argument>&gt;</argument_list></name></type>
+        <name>makeTestCaseInfo</name><parameter_list>(<parameter><decl><type><name>StringRef</name></type> <name>_className</name></decl></parameter>,
+                         <parameter><decl><type><name>NameAndTags</name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>nameAndTags</name></decl></parameter>,
+                         <parameter><decl><type><name>SourceLineInfo</name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>_lineInfo</name></decl></parameter> )</parameter_list> <block>{<block_content>
+        <return>return <expr><call><name><name>Detail</name><operator>::</operator><name>make_unique</name><argument_list type="generic">&lt;<argument><expr><name>TestCaseInfo</name></expr></argument>&gt;</argument_list></name><argument_list>(<argument><expr><name>_className</name></expr></argument>, <argument><expr><name>nameAndTags</name></expr></argument>, <argument><expr><name>_lineInfo</name></expr></argument>)</argument_list></call></expr>;</return>
+    </block_content>}</block></function>
+
+    <constructor><name><name>TestCaseInfo</name><operator>::</operator><name>TestCaseInfo</name></name><parameter_list>(<parameter><decl><type><name>StringRef</name></type> <name>_className</name></decl></parameter>,
+                               <parameter><decl><type><name>NameAndTags</name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>_nameAndTags</name></decl></parameter>,
+                               <parameter><decl><type><name>SourceLineInfo</name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>_lineInfo</name></decl></parameter>)</parameter_list><member_init_list>:
+        <call><name>name</name><argument_list>( <argument><expr><ternary><condition><expr><call><name><name>_nameAndTags</name><operator>.</operator><name>name</name><operator>.</operator><name>empty</name></name><argument_list>()</argument_list></call></expr> ?</condition><then> <expr><call><name>makeDefaultName</name><argument_list>()</argument_list></call></expr> </then><else>: <expr><name><name>_nameAndTags</name><operator>.</operator><name>name</name></name></expr></else></ternary></expr></argument> )</argument_list></call>,
+        <call><name>className</name><argument_list>( <argument><expr><name>_className</name></expr></argument> )</argument_list></call>,
+        <call><name>lineInfo</name><argument_list>( <argument><expr><name>_lineInfo</name></expr></argument> )</argument_list></call>
+    </member_init_list><block>{<block_content>
+        <decl_stmt><decl><type><name>StringRef</name></type> <name>originalTags</name> <init>= <expr><name><name>_nameAndTags</name><operator>.</operator><name>tags</name></name></expr></init></decl>;</decl_stmt>
+        <comment type="line">// We need to reserve enough space to store all of the tags</comment>
+        <comment type="line">// (including optional hidden tag and filename tag)</comment>
+        <decl_stmt><decl><type><name>auto</name></type> <name>requiredSize</name> <init>= <expr><call><name><name>originalTags</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call> <operator>+</operator> <call><name>sizeOfExtraTags</name><argument_list>(<argument><expr><name><name>_lineInfo</name><operator>.</operator><name>file</name></name></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+        <expr_stmt><expr><call><name><name>backingTags</name><operator>.</operator><name>reserve</name></name><argument_list>(<argument><expr><name>requiredSize</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+
+        <comment type="line">// We cannot copy the tags directly, as we need to normalize</comment>
+        <comment type="line">// some tags, so that [.foo] is copied as [.][foo].</comment>
+        <decl_stmt><decl><type><name>size_t</name></type> <name>tagStart</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</decl_stmt>
+        <decl_stmt><decl><type><name>size_t</name></type> <name>tagEnd</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</decl_stmt>
+        <decl_stmt><decl><type><name>bool</name></type> <name>inTag</name> <init>= <expr><literal type="boolean">false</literal></expr></init></decl>;</decl_stmt>
+        <for>for <control>(<init><decl><type><name>size_t</name></type> <name>idx</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>idx</name> <operator>&lt;</operator> <call><name><name>originalTags</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call></expr>;</condition> <incr><expr><operator>++</operator><name>idx</name></expr></incr>)</control> <block>{<block_content>
+            <decl_stmt><decl><type><name>auto</name></type> <name>c</name> <init>= <expr><name><name>originalTags</name><index>[<expr><name>idx</name></expr>]</index></name></expr></init></decl>;</decl_stmt>
+            <if_stmt><if>if <condition>(<expr><name>c</name> <operator>==</operator> <literal type="char">'['</literal></expr>)</condition> <block>{<block_content>
+                <expr_stmt><expr><call><name>CATCH_ENFORCE</name><argument_list>(
+                    <argument><expr><operator>!</operator><name>inTag</name></expr></argument>,
+                    <argument><expr><literal type="string">"Found '[' inside a tag while registering test case '"</literal>
+                        <operator>&lt;&lt;</operator> <name><name>_nameAndTags</name><operator>.</operator><name>name</name></name> <operator>&lt;&lt;</operator> <literal type="string">"' at "</literal> <operator>&lt;&lt;</operator> <name>_lineInfo</name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+
+                <expr_stmt><expr><name>inTag</name> <operator>=</operator> <literal type="boolean">true</literal></expr>;</expr_stmt>
+                <expr_stmt><expr><name>tagStart</name> <operator>=</operator> <name>idx</name></expr>;</expr_stmt>
+            </block_content>}</block></if></if_stmt>
+            <if_stmt><if>if <condition>(<expr><name>c</name> <operator>==</operator> <literal type="char">']'</literal></expr>)</condition> <block>{<block_content>
+                <expr_stmt><expr><call><name>CATCH_ENFORCE</name><argument_list>(
+                    <argument><expr><name>inTag</name></expr></argument>,
+                    <argument><expr><literal type="string">"Found unmatched ']' while registering test case '"</literal>
+                        <operator>&lt;&lt;</operator> <name><name>_nameAndTags</name><operator>.</operator><name>name</name></name> <operator>&lt;&lt;</operator> <literal type="string">"' at "</literal> <operator>&lt;&lt;</operator> <name>_lineInfo</name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+
+                <expr_stmt><expr><name>inTag</name> <operator>=</operator> <literal type="boolean">false</literal></expr>;</expr_stmt>
+                <expr_stmt><expr><name>tagEnd</name> <operator>=</operator> <name>idx</name></expr>;</expr_stmt>
+                <expr_stmt><expr><call><name>assert</name><argument_list>(<argument><expr><name>tagStart</name> <operator>&lt;</operator> <name>tagEnd</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+
+                <comment type="line">// We need to check the tag for special meanings, copy</comment>
+                <comment type="line">// it over to backing storage and actually reference the</comment>
+                <comment type="line">// backing storage in the saved tags</comment>
+                <decl_stmt><decl><type><name>StringRef</name></type> <name>tagStr</name> <init>= <expr><call><name><name>originalTags</name><operator>.</operator><name>substr</name></name><argument_list>(<argument><expr><name>tagStart</name><operator>+</operator><literal type="number">1</literal></expr></argument>, <argument><expr><name>tagEnd</name> <operator>-</operator> <name>tagStart</name> <operator>-</operator> <literal type="number">1</literal></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+                <expr_stmt><expr><call><name>CATCH_ENFORCE</name><argument_list>( <argument><expr><operator>!</operator><call><name><name>tagStr</name><operator>.</operator><name>empty</name></name><argument_list>()</argument_list></call></expr></argument>,
+                               <argument><expr><literal type="string">"Found an empty tag while registering test case '"</literal>
+                                   <operator>&lt;&lt;</operator> <name><name>_nameAndTags</name><operator>.</operator><name>name</name></name> <operator>&lt;&lt;</operator> <literal type="string">"' at "</literal>
+                                   <operator>&lt;&lt;</operator> <name>_lineInfo</name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+
+                <expr_stmt><expr><call><name>enforceNotReservedTag</name><argument_list>(<argument><expr><name>tagStr</name></expr></argument>, <argument><expr><name>lineInfo</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+                <expr_stmt><expr><name>properties</name> <operator>|=</operator> <call><name>parseSpecialTag</name><argument_list>(<argument><expr><name>tagStr</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+                <comment type="line">// When copying a tag to the backing storage, we need to</comment>
+                <comment type="line">// check if it is a merged hide tag, such as [.foo], and</comment>
+                <comment type="line">// if it is, we need to handle it as if it was [foo].</comment>
+                <if_stmt><if>if <condition>(<expr><call><name><name>tagStr</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call> <operator>&gt;</operator> <literal type="number">1</literal> <operator>&amp;&amp;</operator> <name><name>tagStr</name><index>[<expr><literal type="number">0</literal></expr>]</index></name> <operator>==</operator> <literal type="char">'.'</literal></expr>)</condition> <block>{<block_content>
+                    <expr_stmt><expr><name>tagStr</name> <operator>=</operator> <call><name><name>tagStr</name><operator>.</operator><name>substr</name></name><argument_list>(<argument><expr><literal type="number">1</literal></expr></argument>, <argument><expr><call><name><name>tagStr</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call> <operator>-</operator> <literal type="number">1</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+                </block_content>}</block></if></if_stmt>
+                <comment type="line">// We skip over dealing with the [.] tag, as we will add</comment>
+                <comment type="line">// it later unconditionally and then sort and unique all</comment>
+                <comment type="line">// the tags.</comment>
+                <expr_stmt><expr><call><name>internalAppendTag</name><argument_list>(<argument><expr><name>tagStr</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+            </block_content>}</block></if></if_stmt>
+        </block_content>}</block></for>
+        <expr_stmt><expr><call><name>CATCH_ENFORCE</name><argument_list>( <argument><expr><operator>!</operator><name>inTag</name></expr></argument>,
+                       <argument><expr><literal type="string">"Found an unclosed tag while registering test case '"</literal>
+                           <operator>&lt;&lt;</operator> <name><name>_nameAndTags</name><operator>.</operator><name>name</name></name> <operator>&lt;&lt;</operator> <literal type="string">"' at "</literal> <operator>&lt;&lt;</operator> <name>_lineInfo</name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+
+
+        <comment type="line">// Add [.] if relevant</comment>
+        <if_stmt><if>if <condition>(<expr><call><name>isHidden</name><argument_list>()</argument_list></call></expr>)</condition> <block>{<block_content>
+            <expr_stmt><expr><call><name>internalAppendTag</name><argument_list>(<argument><expr><literal type="string">"."</literal><name>_sr</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        </block_content>}</block></if></if_stmt>
+
+        <comment type="line">// Sort and prepare tags</comment>
+        <expr_stmt><expr><call><name><name>std</name><operator>::</operator><name>sort</name></name><argument_list>(<argument><expr><call><name>begin</name><argument_list>(<argument><expr><name>tags</name></expr></argument>)</argument_list></call></expr></argument>, <argument><expr><call><name>end</name><argument_list>(<argument><expr><name>tags</name></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name><name>tags</name><operator>.</operator><name>erase</name></name><argument_list>(<argument><expr><call><name><name>std</name><operator>::</operator><name>unique</name></name><argument_list>(<argument><expr><call><name>begin</name><argument_list>(<argument><expr><name>tags</name></expr></argument>)</argument_list></call></expr></argument>, <argument><expr><call><name>end</name><argument_list>(<argument><expr><name>tags</name></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr></argument>,
+                   <argument><expr><call><name>end</name><argument_list>(<argument><expr><name>tags</name></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block></constructor>
+
+    <function><type><name>bool</name></type> <name><name>TestCaseInfo</name><operator>::</operator><name>isHidden</name></name><parameter_list>()</parameter_list> <specifier>const</specifier> <block>{<block_content>
+        <return>return <expr><call><name>applies</name><argument_list>( <argument><expr><name>properties</name> <operator>&amp;</operator> <name><name>TestCaseProperties</name><operator>::</operator><name>IsHidden</name></name></expr></argument> )</argument_list></call></expr>;</return>
+    </block_content>}</block></function>
+    <function><type><name>bool</name></type> <name><name>TestCaseInfo</name><operator>::</operator><name>throws</name></name><parameter_list>()</parameter_list> <specifier>const</specifier> <block>{<block_content>
+        <return>return <expr><call><name>applies</name><argument_list>( <argument><expr><name>properties</name> <operator>&amp;</operator> <name><name>TestCaseProperties</name><operator>::</operator><name>Throws</name></name></expr></argument> )</argument_list></call></expr>;</return>
+    </block_content>}</block></function>
+    <function><type><name>bool</name></type> <name><name>TestCaseInfo</name><operator>::</operator><name>okToFail</name></name><parameter_list>()</parameter_list> <specifier>const</specifier> <block>{<block_content>
+        <return>return <expr><call><name>applies</name><argument_list>( <argument><expr><name>properties</name> <operator>&amp;</operator> <operator>(</operator><name><name>TestCaseProperties</name><operator>::</operator><name>ShouldFail</name></name> <operator>|</operator> <name><name>TestCaseProperties</name><operator>::</operator><name>MayFail</name></name> <operator>)</operator></expr></argument> )</argument_list></call></expr>;</return>
+    </block_content>}</block></function>
+    <function><type><name>bool</name></type> <name><name>TestCaseInfo</name><operator>::</operator><name>expectedToFail</name></name><parameter_list>()</parameter_list> <specifier>const</specifier> <block>{<block_content>
+        <return>return <expr><call><name>applies</name><argument_list>( <argument><expr><name>properties</name> <operator>&amp;</operator> <operator>(</operator><name><name>TestCaseProperties</name><operator>::</operator><name>ShouldFail</name></name><operator>)</operator></expr></argument> )</argument_list></call></expr>;</return>
+    </block_content>}</block></function>
+
+    <function><type><name>void</name></type> <name><name>TestCaseInfo</name><operator>::</operator><name>addFilenameTag</name></name><parameter_list>()</parameter_list> <block>{<block_content>
+        <decl_stmt><decl><type><name><name>std</name><operator>::</operator><name>string</name></name></type> <name>combined</name><argument_list>(<argument><expr><literal type="string">"#"</literal></expr></argument>)</argument_list></decl>;</decl_stmt>
+        <expr_stmt><expr><name>combined</name> <operator>+=</operator> <call><name>extractFilenamePart</name><argument_list>(<argument><expr><name><name>lineInfo</name><operator>.</operator><name>file</name></name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name>internalAppendTag</name><argument_list>(<argument><expr><name>combined</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block></function>
+
+    <function><type><name><name>std</name><operator>::</operator><name>string</name></name></type> <name><name>TestCaseInfo</name><operator>::</operator><name>tagsAsString</name></name><parameter_list>()</parameter_list> <specifier>const</specifier> <block>{<block_content>
+        <decl_stmt><decl><type><name><name>std</name><operator>::</operator><name>string</name></name></type> <name>ret</name></decl>;</decl_stmt>
+        <comment type="line">// '[' and ']' per tag</comment>
+        <decl_stmt><decl><type><name><name>std</name><operator>::</operator><name>size_t</name></name></type> <name>full_size</name> <init>= <expr><literal type="number">2</literal> <operator>*</operator> <call><name><name>tags</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+        <for>for <control>(<init><decl><type><specifier>const</specifier> <specifier>auto</specifier><modifier>&amp;</modifier></type> <name>tag</name> <range>: <expr><name>tags</name></expr></range></decl></init>)</control> <block>{<block_content>
+            <expr_stmt><expr><name>full_size</name> <operator>+=</operator> <call><name><name>tag</name><operator>.</operator><name>original</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+        </block_content>}</block></for>
+        <expr_stmt><expr><call><name><name>ret</name><operator>.</operator><name>reserve</name></name><argument_list>(<argument><expr><name>full_size</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        <for>for <control>(<init><decl><type><specifier>const</specifier> <specifier>auto</specifier><modifier>&amp;</modifier></type> <name>tag</name> <range>: <expr><name>tags</name></expr></range></decl></init>)</control> <block>{<block_content>
+            <expr_stmt><expr><call><name><name>ret</name><operator>.</operator><name>push_back</name></name><argument_list>(<argument><expr><literal type="char">'['</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+            <expr_stmt><expr><name>ret</name> <operator>+=</operator> <name><name>tag</name><operator>.</operator><name>original</name></name></expr>;</expr_stmt>
+            <expr_stmt><expr><call><name><name>ret</name><operator>.</operator><name>push_back</name></name><argument_list>(<argument><expr><literal type="char">']'</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        </block_content>}</block></for>
+
+        <return>return <expr><name>ret</name></expr>;</return>
+    </block_content>}</block></function>
+
+    <function><type><name>void</name></type> <name><name>TestCaseInfo</name><operator>::</operator><name>internalAppendTag</name></name><parameter_list>(<parameter><decl><type><name>StringRef</name></type> <name>tagStr</name></decl></parameter>)</parameter_list> <block>{<block_content>
+        <expr_stmt><expr><name>backingTags</name> <operator>+=</operator> <literal type="char">'['</literal></expr>;</expr_stmt>
+        <decl_stmt><decl><type><specifier>const</specifier> <specifier>auto</specifier></type> <name>backingStart</name> <init>= <expr><call><name><name>backingTags</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+        <expr_stmt><expr><name>backingTags</name> <operator>+=</operator> <name>tagStr</name></expr>;</expr_stmt>
+        <decl_stmt><decl><type><specifier>const</specifier> <specifier>auto</specifier></type> <name>backingEnd</name> <init>= <expr><call><name><name>backingTags</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+        <expr_stmt><expr><name>backingTags</name> <operator>+=</operator> <literal type="char">']'</literal></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name><name>tags</name><operator>.</operator><name>emplace_back</name></name><argument_list>(<argument><expr><call><name>StringRef</name><argument_list>(<argument><expr><call><name><name>backingTags</name><operator>.</operator><name>c_str</name></name><argument_list>()</argument_list></call> <operator>+</operator> <name>backingStart</name></expr></argument>, <argument><expr><name>backingEnd</name> <operator>-</operator> <name>backingStart</name></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block></function>
+
+    <function type="operator"><type><name>bool</name></type> <name>operator<name>&lt;</name></name><parameter_list>( <parameter><decl><type><name>TestCaseInfo</name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>lhs</name></decl></parameter>, <parameter><decl><type><name>TestCaseInfo</name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>rhs</name></decl></parameter> )</parameter_list> <block>{<block_content>
+        <comment type="line">// We want to avoid redoing the string comparisons multiple times,</comment>
+        <comment type="line">// so we store the result of a three-way comparison before using</comment>
+        <comment type="line">// it in the actual comparison logic.</comment>
+        <decl_stmt><decl><type><specifier>const</specifier> <specifier>auto</specifier></type> <name>cmpName</name> <init>= <expr><call><name><name>lhs</name><operator>.</operator><name>name</name><operator>.</operator><name>compare</name></name><argument_list>( <argument><expr><name><name>rhs</name><operator>.</operator><name>name</name></name></expr></argument> )</argument_list></call></expr></init></decl>;</decl_stmt>
+        <if_stmt><if>if <condition>( <expr><name>cmpName</name> <operator>!=</operator> <literal type="number">0</literal></expr> )</condition> <block>{<block_content>
+            <return>return <expr><name>cmpName</name> <operator>&lt;</operator> <literal type="number">0</literal></expr>;</return>
+        </block_content>}</block></if></if_stmt>
+        <decl_stmt><decl><type><specifier>const</specifier> <specifier>auto</specifier></type> <name>cmpClassName</name> <init>= <expr><call><name><name>lhs</name><operator>.</operator><name>className</name><operator>.</operator><name>compare</name></name><argument_list>( <argument><expr><name><name>rhs</name><operator>.</operator><name>className</name></name></expr></argument> )</argument_list></call></expr></init></decl>;</decl_stmt>
+        <if_stmt><if>if <condition>( <expr><name>cmpClassName</name> <operator>!=</operator> <literal type="number">0</literal></expr> )</condition> <block>{<block_content>
+            <return>return <expr><name>cmpClassName</name> <operator>&lt;</operator> <literal type="number">0</literal></expr>;</return>
+        </block_content>}</block></if></if_stmt>
+        <return>return <expr><name><name>lhs</name><operator>.</operator><name>tags</name></name> <operator>&lt;</operator> <name><name>rhs</name><operator>.</operator><name>tags</name></name></expr>;</return>
+    </block_content>}</block></function>
+
+    <function><type><name>TestCaseInfo</name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name><name>TestCaseHandle</name><operator>::</operator><name>getTestCaseInfo</name></name><parameter_list>()</parameter_list> <specifier>const</specifier> <block>{<block_content>
+        <return>return <expr><operator>*</operator><name>m_info</name></expr>;</return>
+    </block_content>}</block></function>
+
+}</block></namespace> <comment type="line">// end namespace Catch</comment>
+</unit>

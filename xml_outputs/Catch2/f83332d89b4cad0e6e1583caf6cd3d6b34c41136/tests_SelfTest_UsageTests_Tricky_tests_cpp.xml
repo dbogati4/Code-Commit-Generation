@@ -1,0 +1,385 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" xmlns:diff="http://www.srcML.org/srcDiff" revision="1.0.0" language="C++" filename="C:\Users\saile\AppData\Local\Temp\catch2_100_z8gzpiwf\f83332d89b4cad0e6e1583caf6cd3d6b34c41136\tests_SelfTest_UsageTests_Tricky_tests_cpp\tests_SelfTest_UsageTests_Tricky_tests_cpp.old|C:\Users\saile\AppData\Local\Temp\catch2_100_z8gzpiwf\f83332d89b4cad0e6e1583caf6cd3d6b34c41136\tests_SelfTest_UsageTests_Tricky_tests_cpp\tests_SelfTest_UsageTests_Tricky_tests_cpp.new"><diff:delete type="replace" xmlns:diff="http://www.srcML.org/srcDiff"><comment type="block">/*<diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+ </diff:ws>*<diff:ws xmlns:diff="http://www.srcML.org/srcDiff">  </diff:ws>Distributed<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>under<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>the<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>Boost<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>Software<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>License,<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>Version<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>1.0.<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>(See<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>accompanying<diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+ </diff:ws>*<diff:ws xmlns:diff="http://www.srcML.org/srcDiff">  </diff:ws>file<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>LICENSE_1_0.txt<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>or<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>copy<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>at<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>http://www.boost.org/LICENSE_1_0.txt)<diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+ </diff:ws>*/</comment></diff:delete><diff:insert type="replace" xmlns:diff="http://www.srcML.org/srcDiff"><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+</diff:ws><comment type="line">//<diff:ws xmlns:diff="http://www.srcML.org/srcDiff">              </diff:ws>Copyright<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>Catch2<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>Authors</comment><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+</diff:ws><comment type="line">//<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>Distributed<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>under<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>the<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>Boost<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>Software<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>License,<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>Version<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>1.0.</comment><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+</diff:ws><comment type="line">//<diff:ws xmlns:diff="http://www.srcML.org/srcDiff">   </diff:ws>(See<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>accompanying<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>file<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>LICENSE_1_0.txt<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>or<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>copy<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>at</comment><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+</diff:ws><comment type="line">//<diff:ws xmlns:diff="http://www.srcML.org/srcDiff">        </diff:ws>https://www.boost.org/LICENSE_1_0.txt)</comment><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+
+</diff:ws><comment type="line">//<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>SPDX-License-Identifier:<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>BSL-1.0</comment></diff:insert>
+
+<cpp:ifdef xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">ifdef</cpp:directive> <name>__clang__</name></cpp:ifdef>
+<cpp:pragma xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">pragma</cpp:directive> <name>clang</name> <name>diagnostic</name> <name>ignored</name> <cpp:literal xmlns:cpp="http://www.srcML.org/srcML/cpp">"-Wpadded"</cpp:literal></cpp:pragma>
+<cpp:endif xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">endif</cpp:directive></cpp:endif>
+
+<cpp:ifdef xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">ifdef</cpp:directive> <name>_MSC_VER</name></cpp:ifdef>
+<cpp:pragma xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">pragma</cpp:directive> <name>warning</name> <name>(</name><name>disable</name> <name>:</name> <name>4702</name><name>)</name></cpp:pragma> <comment type="line">// Disable unreachable code warning for the last test</comment>
+                                 <comment type="line">// that is triggered when compiling as Win32|Release</comment>
+<cpp:endif xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">endif</cpp:directive></cpp:endif>
+
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;catch2/catch_test_macros.hpp&gt;</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;catch2/generators/catch_generators.hpp&gt;</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;catch2/generators/catch_generators_range.hpp&gt;</cpp:file></cpp:include>
+
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;cstdio&gt;</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;sstream&gt;</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;iostream&gt;</cpp:file></cpp:include>
+
+<struct>struct <name>Opaque</name>
+<block>{<public type="default">
+    <decl_stmt><decl><type><name>int</name></type> <name>val</name></decl>;</decl_stmt>
+    <function type="operator"><type><name>bool</name></type> <name>operator <name>==</name></name><parameter_list>( <parameter><decl><type><specifier>const</specifier> <name>Opaque</name><modifier>&amp;</modifier></type> <name>o</name></decl></parameter> )</parameter_list> <specifier>const</specifier>
+    <block>{<block_content>
+        <return>return <expr><name>val</name> <operator>==</operator> <name><name>o</name><operator>.</operator><name>val</name></name></expr>;</return>
+    </block_content>}</block></function>
+</public>}</block>;</struct>
+
+<comment type="line" format="doxygen">///////////////////////////////////////////////////////////////////////////////</comment>
+<macro><name>TEST_CASE</name>
+<argument_list>(
+    <argument><literal type="string">"A failing expression with a non streamable type is still captured"</literal></argument>,
+    <argument><literal type="string">"[Tricky][failing][.]"</literal></argument>
+)</argument_list></macro>
+<block>{<block_content>
+
+    <decl_stmt><decl><type><name>Opaque</name></type> <name>o1</name></decl>, <decl><type ref="prev"/><name>o2</name></decl>;</decl_stmt>
+    <expr_stmt><expr><name><name>o1</name><operator>.</operator><name>val</name></name> <operator>=</operator> <literal type="number">7</literal></expr>;</expr_stmt>
+    <expr_stmt><expr><name><name>o2</name><operator>.</operator><name>val</name></name> <operator>=</operator> <literal type="number">8</literal></expr>;</expr_stmt>
+
+    <expr_stmt><expr><call><name>CHECK</name><argument_list>( <argument><expr><operator>&amp;</operator><name>o1</name> <operator>==</operator> <operator>&amp;</operator><name>o2</name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>CHECK</name><argument_list>( <argument><expr><name>o1</name> <operator>==</operator> <name>o2</name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+</block_content>}</block>
+
+<comment type="line" format="doxygen">///////////////////////////////////////////////////////////////////////////////</comment>
+<macro><name>TEST_CASE</name>
+<argument_list>(
+    <argument><literal type="string">"An expression with side-effects should only be evaluated once"</literal></argument>,
+    <argument><literal type="string">"[Tricky]"</literal></argument>
+)</argument_list></macro>
+<block>{<block_content>
+    <decl_stmt><decl><type><name>int</name></type> <name>i</name> <init>= <expr><literal type="number">7</literal></expr></init></decl>;</decl_stmt>
+
+    <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><name>i</name><operator>++</operator> <operator>==</operator> <literal type="number">7</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><name>i</name><operator>++</operator> <operator>==</operator> <literal type="number">8</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+
+</block_content>}</block>
+
+<namespace>namespace <name>A</name> <block>{
+    <struct>struct <name>X</name>
+    <block>{<public type="default">
+        <constructor><name>X</name><parameter_list>()</parameter_list> <member_init_list>: <call><name>a</name><argument_list>(<argument><expr><literal type="number">4</literal></expr></argument>)</argument_list></call>, <call><name>b</name><argument_list>(<argument><expr><literal type="number">2</literal></expr></argument>)</argument_list></call>, <call><name>c</name><argument_list>(<argument><expr><literal type="number">7</literal></expr></argument>)</argument_list></call> </member_init_list><block>{<block_content/>}</block></constructor>
+        <constructor><name>X</name><parameter_list>(<parameter><decl><type><name>int</name></type> <name>v</name></decl></parameter>)</parameter_list> <member_init_list>: <call><name>a</name><argument_list>(<argument><expr><name>v</name></expr></argument>)</argument_list></call>, <call><name>b</name><argument_list>(<argument><expr><literal type="number">2</literal></expr></argument>)</argument_list></call>, <call><name>c</name><argument_list>(<argument><expr><literal type="number">7</literal></expr></argument>)</argument_list></call> </member_init_list><block>{<block_content/>}</block></constructor>
+        <decl_stmt><decl><type><name>int</name></type> <name>a</name></decl>;</decl_stmt>
+        <decl_stmt><decl><type><name>int</name></type> <name>b</name></decl>;</decl_stmt>
+        <decl_stmt><decl><type><name>int</name></type> <name>c</name></decl>;</decl_stmt>
+    </public>}</block>;</struct>
+}</block></namespace>
+
+<namespace>namespace <name>B</name> <block>{
+    <struct>struct <name>Y</name>
+    <block>{<public type="default">
+        <constructor><name>Y</name><parameter_list>()</parameter_list> <member_init_list>: <call><name>a</name><argument_list>(<argument><expr><literal type="number">4</literal></expr></argument>)</argument_list></call>, <call><name>b</name><argument_list>(<argument><expr><literal type="number">2</literal></expr></argument>)</argument_list></call>, <call><name>c</name><argument_list>(<argument><expr><literal type="number">7</literal></expr></argument>)</argument_list></call> </member_init_list><block>{<block_content/>}</block></constructor>
+        <constructor><name>Y</name><parameter_list>(<parameter><decl><type><name>int</name></type> <name>v</name></decl></parameter>)</parameter_list> <member_init_list>: <call><name>a</name><argument_list>(<argument><expr><name>v</name></expr></argument>)</argument_list></call>, <call><name>b</name><argument_list>(<argument><expr><literal type="number">2</literal></expr></argument>)</argument_list></call>, <call><name>c</name><argument_list>(<argument><expr><literal type="number">7</literal></expr></argument>)</argument_list></call> </member_init_list><block>{<block_content/>}</block></constructor>
+        <decl_stmt><decl><type><name>int</name></type> <name>a</name></decl>;</decl_stmt>
+        <decl_stmt><decl><type><name>int</name></type> <name>b</name></decl>;</decl_stmt>
+        <decl_stmt><decl><type><name>int</name></type> <name>c</name></decl>;</decl_stmt>
+    </public>}</block>;</struct>
+}</block></namespace>
+
+<function type="operator"><type><specifier>inline</specifier> <name>bool</name></type> <name>operator<name>==</name></name><parameter_list>(<parameter><decl><type><specifier>const</specifier> <name><name>A</name><operator>::</operator><name>X</name></name><modifier>&amp;</modifier></type> <name>lhs</name></decl></parameter>, <parameter><decl><type><specifier>const</specifier> <name><name>B</name><operator>::</operator><name>Y</name></name><modifier>&amp;</modifier></type> <name>rhs</name></decl></parameter>)</parameter_list>
+<block>{<block_content>
+    <return>return <expr><operator>(</operator><name><name>lhs</name><operator>.</operator><name>a</name></name> <operator>==</operator> <name><name>rhs</name><operator>.</operator><name>a</name></name><operator>)</operator></expr>;</return>
+</block_content>}</block></function>
+
+<function type="operator"><type><specifier>inline</specifier> <name>bool</name></type> <name>operator<name>==</name></name><parameter_list>(<parameter><decl><type><specifier>const</specifier> <name><name>B</name><operator>::</operator><name>Y</name></name><modifier>&amp;</modifier></type> <name>lhs</name></decl></parameter>, <parameter><decl><type><specifier>const</specifier> <name><name>A</name><operator>::</operator><name>X</name></name><modifier>&amp;</modifier></type> <name>rhs</name></decl></parameter>)</parameter_list>
+<block>{<block_content>
+    <return>return <expr><operator>(</operator><name><name>lhs</name><operator>.</operator><name>a</name></name> <operator>==</operator> <name><name>rhs</name><operator>.</operator><name>a</name></name><operator>)</operator></expr>;</return>
+</block_content>}</block></function>
+
+
+<comment type="line" format="doxygen">///////////////////////////////////////////////////////////////////////////////</comment>
+<comment type="block">/* This, currently, does not compile with LLVM
+TEST_CASE
+(
+    "Operators at different namespace levels not hijacked by Koenig lookup"
+    "[Tricky]"
+)
+{
+    A::X x;
+    B::Y y;
+    REQUIRE( x == y );
+}
+*/</comment>
+
+<namespace>namespace <name>ObjectWithConversions</name>
+<block>{
+    <struct>struct <name>Object</name>
+    <block>{<public type="default">
+        <function type="operator"><type><name>operator <name>unsigned</name></name></type> <name>int</name><parameter_list>()</parameter_list> <specifier>const</specifier> <block>{<block_content><return>return <expr><literal type="number">0xc0000000</literal></expr>;</return></block_content>}</block></function>
+    </public>}</block>;</struct>
+
+    <comment type="line" format="doxygen">///////////////////////////////////////////////////////////////////////////////</comment>
+    <macro><name>TEST_CASE</name>
+    <argument_list>(
+        <argument><literal type="string">"Implicit conversions are supported inside assertion macros"</literal></argument>,
+        <argument><literal type="string">"[Tricky][approvals]"</literal></argument>
+    )</argument_list></macro>
+    <block>{<block_content>
+        <decl_stmt><decl><type><name>Object</name></type> <name>o</name></decl>;</decl_stmt>
+        <expr_stmt><expr><call><name>REQUIRE</name><argument_list>(<argument><expr><literal type="number">0xc0000000</literal> <operator>==</operator> <name>o</name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block>
+}</block></namespace>
+
+<namespace>namespace <name>EnumBitFieldTests</name>
+<block>{
+    <enum>enum <name>Bits</name> : <type><name>uint32_t</name></type> <block>{
+        <decl><name>bit0</name> <init>= <expr><literal type="number">0x0001</literal></expr></init></decl>,
+        <decl><name>bit1</name> <init>= <expr><literal type="number">0x0002</literal></expr></init></decl>,
+        <decl><name>bit2</name> <init>= <expr><literal type="number">0x0004</literal></expr></init></decl>,
+        <decl><name>bit3</name> <init>= <expr><literal type="number">0x0008</literal></expr></init></decl>,
+        <decl><name>bit1and2</name> <init>= <expr><name>bit1</name> <operator>|</operator> <name>bit2</name></expr></init></decl>,
+        <decl><name>bit30</name> <init>= <expr><literal type="number">0x40000000</literal></expr></init></decl>,
+        <decl><name>bit31</name> <init>= <expr><literal type="number">0x80000000</literal></expr></init></decl>,
+        <decl><name>bit30and31</name> <init>= <expr><name>bit30</name> <operator>|</operator> <name>bit31</name></expr></init></decl>
+    }</block>;</enum>
+
+    <macro><name>TEST_CASE</name><argument_list>( <argument><literal type="string">"Test enum bit values"</literal></argument>, <argument><literal type="string">"[Tricky]"</literal></argument> )</argument_list></macro>
+    <block>{<block_content>
+        <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><literal type="number">0xc0000000</literal> <operator>==</operator> <name>bit30and31</name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block>
+}</block></namespace>
+
+<struct>struct <name>Obj</name>
+<block>{<public type="default">
+    <constructor><name>Obj</name><parameter_list>()</parameter_list><member_init_list>:<call><name>prop</name><argument_list>(<argument><expr><operator>&amp;</operator><name>p</name></expr></argument>)</argument_list></call></member_init_list><block>{<block_content/>}</block></constructor>
+
+    <decl_stmt><decl><type><name>int</name></type> <name>p</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</decl_stmt>
+    <decl_stmt><decl><type><name>int</name><modifier>*</modifier></type> <name>prop</name></decl>;</decl_stmt>
+</public>}</block>;</struct>
+
+<macro><name>TEST_CASE</name><argument_list>(<argument><literal type="string">"boolean member"</literal></argument>, <argument><literal type="string">"[Tricky]"</literal></argument>)</argument_list></macro>
+<block>{<block_content>
+    <decl_stmt><decl><type><name>Obj</name></type> <name>obj</name></decl>;</decl_stmt>
+    <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><name><name>obj</name><operator>.</operator><name>prop</name></name> <operator>!=</operator> <literal type="null">nullptr</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+</block_content>}</block>
+
+<comment type="line">// Tests for a problem submitted by Ralph McArdell</comment>
+<comment type="line">//</comment>
+<comment type="line">// The static bool value should not need to be defined outside the</comment>
+<comment type="line">// struct it is declared in - but when evaluating it in a deduced</comment>
+<comment type="line">// context it appears to require the extra definition.</comment>
+<comment type="line">// The issue was fixed by adding bool overloads to bypass the</comment>
+<comment type="line">// templates that were there to deduce it.</comment>
+<struct><template>template <parameter_list>&lt;<parameter><type><name>bool</name></type> <name>B</name></parameter>&gt;</parameter_list></template>
+struct <name>is_true</name>
+<block>{<public type="default">
+    <decl_stmt><decl><type><specifier>static</specifier> <specifier>const</specifier> <name>bool</name></type> <name>value</name> <init>= <expr><name>B</name></expr></init></decl>;</decl_stmt>
+</public>}</block>;</struct>
+
+<macro><name>TEST_CASE</name><argument_list>( <argument><literal type="string">"(unimplemented) static bools can be evaluated"</literal></argument>, <argument><literal type="string">"[Tricky]"</literal></argument> )</argument_list></macro>
+<block>{<block_content>
+    <macro><name>SECTION</name><argument_list>(<argument><literal type="string">"compare to true"</literal></argument>)</argument_list></macro>
+    <block>{<block_content>
+        <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><name><name><name>is_true</name><argument_list type="generic">&lt;<argument><expr><literal type="boolean">true</literal></expr></argument>&gt;</argument_list></name><operator>::</operator><name>value</name></name> <operator>==</operator> <literal type="boolean">true</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><literal type="boolean">true</literal> <operator>==</operator> <name><name><name>is_true</name><argument_list type="generic">&lt;<argument><expr><literal type="boolean">true</literal></expr></argument>&gt;</argument_list></name><operator>::</operator><name>value</name></name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block>
+    <macro><name>SECTION</name><argument_list>(<argument><literal type="string">"compare to false"</literal></argument>)</argument_list></macro>
+    <block>{<block_content>
+        <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><name><name><name>is_true</name><argument_list type="generic">&lt;<argument><expr><literal type="boolean">false</literal></expr></argument>&gt;</argument_list></name><operator>::</operator><name>value</name></name> <operator>==</operator> <literal type="boolean">false</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><literal type="boolean">false</literal> <operator>==</operator> <name><name><name>is_true</name><argument_list type="generic">&lt;<argument><expr><literal type="boolean">false</literal></expr></argument>&gt;</argument_list></name><operator>::</operator><name>value</name></name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block>
+
+    <macro><name>SECTION</name><argument_list>(<argument><literal type="string">"negation"</literal></argument>)</argument_list></macro>
+    <block>{<block_content>
+        <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><operator>!</operator><name><name><name>is_true</name><argument_list type="generic">&lt;<argument><expr><literal type="boolean">false</literal></expr></argument>&gt;</argument_list></name><operator>::</operator><name>value</name></name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block>
+
+    <macro><name>SECTION</name><argument_list>(<argument><literal type="string">"double negation"</literal></argument>)</argument_list></macro>
+    <block>{<block_content>
+        <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><operator>!</operator><operator>!</operator><name><name><name>is_true</name><argument_list type="generic">&lt;<argument><expr><literal type="boolean">true</literal></expr></argument>&gt;</argument_list></name><operator>::</operator><name>value</name></name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block>
+
+    <macro><name>SECTION</name><argument_list>(<argument><literal type="string">"direct"</literal></argument>)</argument_list></macro>
+    <block>{<block_content>
+        <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><name><name><name>is_true</name><argument_list type="generic">&lt;<argument><expr><literal type="boolean">true</literal></expr></argument>&gt;</argument_list></name><operator>::</operator><name>value</name></name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name>REQUIRE_FALSE</name><argument_list>( <argument><expr><name><name><name>is_true</name><argument_list type="generic">&lt;<argument><expr><literal type="boolean">false</literal></expr></argument>&gt;</argument_list></name><operator>::</operator><name>value</name></name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block>
+</block_content>}</block>
+
+<struct>struct <name>Boolable</name>
+<block>{<public type="default">
+    <constructor><specifier>explicit</specifier> <name>Boolable</name><parameter_list>( <parameter><decl><type><name>bool</name></type> <name>value</name></decl></parameter> )</parameter_list> <member_init_list>: <call><name>m_value</name><argument_list>( <argument><expr><name>value</name></expr></argument> )</argument_list></call> </member_init_list><block>{<block_content/>}</block></constructor>
+
+    <function type="operator"><type><specifier>explicit</specifier></type> <name>operator <name>bool</name></name><parameter_list>()</parameter_list> <specifier>const</specifier> <block>{<block_content>
+        <return>return <expr><name>m_value</name></expr>;</return>
+    </block_content>}</block></function>
+
+    <decl_stmt><decl><type><name>bool</name></type> <name>m_value</name></decl>;</decl_stmt>
+</public>}</block>;</struct>
+
+<macro><name>TEST_CASE</name><argument_list>( <argument><literal type="string">"Objects that evaluated in boolean contexts can be checked"</literal></argument>, <argument><literal type="string">"[Tricky][SafeBool]"</literal></argument> )</argument_list></macro>
+<block>{<block_content>
+    <decl_stmt><decl><type><name>Boolable</name></type> <name>True</name><argument_list>( <argument><expr><literal type="boolean">true</literal></expr></argument> )</argument_list></decl>;</decl_stmt>
+    <decl_stmt><decl><type><name>Boolable</name></type> <name>False</name><argument_list>( <argument><expr><literal type="boolean">false</literal></expr></argument> )</argument_list></decl>;</decl_stmt>
+
+    <expr_stmt><expr><call><name>CHECK</name><argument_list>( <argument><expr><name>True</name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>CHECK</name><argument_list>( <argument><expr><operator>!</operator><name>False</name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>CHECK_FALSE</name><argument_list>( <argument><expr><name>False</name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+</block_content>}</block>
+
+<macro><name>TEST_CASE</name><argument_list>( <argument><literal type="string">"Assertions then sections"</literal></argument>, <argument><literal type="string">"[Tricky]"</literal></argument> )</argument_list></macro>
+<block>{<block_content>
+    <comment type="line">// This was causing a failure due to the way the console reporter was handling</comment>
+    <comment type="line">// the current section</comment>
+
+    <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><literal type="boolean">true</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+
+    <macro><name>SECTION</name><argument_list>( <argument><literal type="string">"A section"</literal></argument> )</argument_list></macro>
+    <block>{<block_content>
+        <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><literal type="boolean">true</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+
+        <macro><name>SECTION</name><argument_list>( <argument><literal type="string">"Another section"</literal></argument> )</argument_list></macro>
+        <block>{<block_content>
+            <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><literal type="boolean">true</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        </block_content>}</block>
+        <macro><name>SECTION</name><argument_list>( <argument><literal type="string">"Another other section"</literal></argument> )</argument_list></macro>
+        <block>{<block_content>
+            <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><literal type="boolean">true</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        </block_content>}</block>
+    </block_content>}</block>
+</block_content>}</block>
+
+<struct>struct <name>Awkward</name>
+<block>{<public type="default">
+    <function type="operator"><name>operator <name>int</name></name><parameter_list>()</parameter_list> <specifier>const</specifier> <block>{<block_content> <return>return <expr><literal type="number">7</literal></expr>;</return> </block_content>}</block></function>
+</public>}</block>;</struct>
+
+<macro><name>TEST_CASE</name><argument_list>( <argument><literal type="string">"non streamable - with conv. op"</literal></argument>, <argument><literal type="string">"[Tricky]"</literal></argument> )</argument_list></macro>
+<block>{<block_content>
+    <decl_stmt><decl><type><name>Awkward</name></type> <name>awkward</name></decl>;</decl_stmt>
+    <decl_stmt><decl><type><name><name>std</name><operator>::</operator><name>string</name></name></type> <name>s</name> <init>= <expr><call><name><operator>::</operator><name>Catch</name><operator>::</operator><name>Detail</name><operator>::</operator><name>stringify</name></name><argument_list>( <argument><expr><name>awkward</name></expr></argument> )</argument_list></call></expr></init></decl>;</decl_stmt>
+    <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><name>s</name> <operator>==</operator> <literal type="string">"7"</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+</block_content>}</block>
+
+<function><type><specifier>inline</specifier> <name>void</name></type> <name>foo</name><parameter_list>()</parameter_list> <block>{<block_content/>}</block></function>
+
+<typedef>typedef <function_decl><type><name>void</name></type> (<modifier>*</modifier><name>fooptr_t</name>)<parameter_list>()</parameter_list>;</function_decl></typedef>
+
+<macro><name>TEST_CASE</name><argument_list>( <argument><literal type="string">"Comparing function pointers"</literal></argument>, <argument><literal type="string">"[Tricky][function pointer]"</literal></argument> )</argument_list></macro>
+<block>{<block_content>
+    <comment type="line">// This was giving a warning in VS2010</comment>
+    <comment type="line">// #179</comment>
+    <decl_stmt><decl><type><name>fooptr_t</name></type> <name>a</name> <init>= <expr><name>foo</name></expr></init></decl>;</decl_stmt>
+
+    <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><name>a</name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><name>a</name> <operator>==</operator> <operator>&amp;</operator><name>foo</name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+</block_content>}</block>
+
+<struct>struct <name>S</name>
+<block>{<public type="default">
+    <function><type><name>void</name></type> <name>f</name><parameter_list>()</parameter_list> <block>{<block_content/>}</block></function>
+</public>}</block>;</struct>
+
+
+<macro><name>TEST_CASE</name><argument_list>( <argument><literal type="string">"Comparing member function pointers"</literal></argument>, <argument><literal type="string">"[Tricky][member function pointer][approvals]"</literal></argument> )</argument_list></macro>
+<block>{<block_content>
+    <typedef>typedef <function_decl><type><name>void</name></type> (<name><name>S</name><operator>::</operator><modifier>*</modifier><name>MF</name></name>)<parameter_list>()</parameter_list>;</function_decl></typedef>
+    <decl_stmt><decl><type><name>MF</name></type> <name>m</name> <init>= <expr><operator>&amp;</operator><name><name>S</name><operator>::</operator><name>f</name></name></expr></init></decl>;</decl_stmt>
+
+    <expr_stmt><expr><call><name>CHECK</name><argument_list>( <argument><expr><name>m</name> <operator>==</operator> <operator>&amp;</operator><name><name>S</name><operator>::</operator><name>f</name></name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+</block_content>}</block>
+
+<class>class <name>ClassName</name> <block>{<private type="default"/>}</block>;</class>
+
+<macro><name>TEST_CASE</name><argument_list>( <argument><literal type="string">"pointer to class"</literal></argument>, <argument><literal type="string">"[Tricky]"</literal></argument> )</argument_list></macro>
+<block>{<block_content>
+   <decl_stmt><decl><type><name>ClassName</name> <modifier>*</modifier></type><name>p</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</decl_stmt>
+   <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><name>p</name> <operator>==</operator> <literal type="number">0</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+</block_content>}</block>
+
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;memory&gt;</cpp:file></cpp:include>
+
+<macro><name>TEST_CASE</name><argument_list>( <argument><literal type="string">"null_ptr"</literal></argument>, <argument><literal type="string">"[Tricky]"</literal></argument> )</argument_list></macro>
+<block>{<block_content>
+    <decl_stmt><decl><type><name><name>std</name><operator>::</operator><name>unique_ptr</name><argument_list type="generic">&lt;<argument><expr><name>int</name></expr></argument>&gt;</argument_list></name></type> <name>ptr</name></decl>;</decl_stmt>
+    <expr_stmt><expr><call><name>REQUIRE</name><argument_list>(<argument><expr><call><name><name>ptr</name><operator>.</operator><name>get</name></name><argument_list>()</argument_list></call> <operator>==</operator> <literal type="null">nullptr</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+</block_content>}</block>
+
+<macro><name>TEST_CASE</name><argument_list>( <argument><literal type="string">"X/level/0/a"</literal></argument>, <argument><literal type="string">"[Tricky]"</literal></argument> )</argument_list></macro>      <block>{<block_content> <expr_stmt><expr><call><name>SUCCEED</name><argument_list>(<argument><expr><literal type="string">""</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt> </block_content>}</block>
+<macro><name>TEST_CASE</name><argument_list>( <argument><literal type="string">"X/level/0/b"</literal></argument>, <argument><literal type="string">"[Tricky][fizz]"</literal></argument> )</argument_list></macro><block>{<block_content> <expr_stmt><expr><call><name>SUCCEED</name><argument_list>(<argument><expr><literal type="string">""</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt> </block_content>}</block>
+<macro><name>TEST_CASE</name><argument_list>( <argument><literal type="string">"X/level/1/a"</literal></argument>, <argument><literal type="string">"[Tricky]"</literal></argument> )</argument_list></macro>      <block>{<block_content> <expr_stmt><expr><call><name>SUCCEED</name><argument_list>(<argument><expr><literal type="string">""</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt> </block_content>}</block>
+<macro><name>TEST_CASE</name><argument_list>( <argument><literal type="string">"X/level/1/b"</literal></argument>, <argument><literal type="string">"[Tricky]"</literal></argument> )</argument_list></macro>      <block>{<block_content> <expr_stmt><expr><call><name>SUCCEED</name><argument_list>(<argument><expr><literal type="string">""</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt> </block_content>}</block>
+
+<macro><name>TEST_CASE</name><argument_list>( <argument><literal type="string">"has printf"</literal></argument> )</argument_list></macro> <block>{<block_content>
+
+    <comment type="line">// This can cause problems as, currently, stdout itself is not redirected - only the cout (and cerr) buffer</comment>
+    <expr_stmt><expr><call><name>printf</name><argument_list>( <argument><expr><literal type="string">"loose text artifact\n"</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+</block_content>}</block>
+
+<namespace>namespace <block>{
+    <struct>struct <name>constructor_throws</name> <block>{<public type="default">
+        <constructor><attribute>[[<expr><name>noreturn</name></expr>]]</attribute> <name>constructor_throws</name><parameter_list>()</parameter_list> <block>{<block_content>
+            <throw>throw <expr><literal type="number">1</literal></expr>;</throw>
+        </block_content>}</block></constructor>
+    </public>}</block>;</struct>
+}</block></namespace>
+
+<macro><name>TEST_CASE</name><argument_list>(<argument><literal type="string">"Commas in various macros are allowed"</literal></argument>)</argument_list></macro> <block>{<block_content>
+    <expr_stmt><expr><call><name>REQUIRE_THROWS</name><argument_list>( <argument><expr><call><name><name>std</name><operator>::</operator><name>vector</name><argument_list type="generic">&lt;<argument><expr><name>constructor_throws</name></expr></argument>&gt;</argument_list></name><argument_list>{<argument><expr><call><name>constructor_throws</name><argument_list>{}</argument_list></call></expr></argument>, <argument><expr><macro><name>constructor_throws</name></macro><block>{}</block></expr></argument>}</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>CHECK_THROWS</name><argument_list>( <argument><expr><call><name><name>std</name><operator>::</operator><name>vector</name><argument_list type="generic">&lt;<argument><expr><name>constructor_throws</name></expr></argument>&gt;</argument_list></name><argument_list>{<argument><expr><call><name>constructor_throws</name><argument_list>{}</argument_list></call></expr></argument>, <argument><expr><macro><name>constructor_throws</name></macro><block>{}</block></expr></argument>}</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>REQUIRE_NOTHROW</name><argument_list>( <argument><expr><call><name><name>std</name><operator>::</operator><name>vector</name><argument_list type="generic">&lt;<argument><expr><name>int</name></expr></argument>&gt;</argument_list></name><argument_list>{<argument><expr><literal type="number">1</literal></expr></argument>, <argument><expr><literal type="number">2</literal></expr></argument>, <argument><expr><literal type="number">3</literal></expr></argument>}</argument_list></call> <operator>==</operator> <call><name><name>std</name><operator>::</operator><name>vector</name><argument_list type="generic">&lt;<argument><expr><name>int</name></expr></argument>&gt;</argument_list></name><argument_list>{<argument><expr><literal type="number">1</literal></expr></argument>, <argument><expr><literal type="number">2</literal></expr></argument>, <argument><expr><literal type="number">3</literal></expr></argument>}</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>CHECK_NOTHROW</name><argument_list>( <argument><expr><call><name><name>std</name><operator>::</operator><name>vector</name><argument_list type="generic">&lt;<argument><expr><name>int</name></expr></argument>&gt;</argument_list></name><argument_list>{<argument><expr><literal type="number">1</literal></expr></argument>, <argument><expr><literal type="number">2</literal></expr></argument>, <argument><expr><literal type="number">3</literal></expr></argument>}</argument_list></call> <operator>==</operator> <call><name><name>std</name><operator>::</operator><name>vector</name><argument_list type="generic">&lt;<argument><expr><name>int</name></expr></argument>&gt;</argument_list></name><argument_list>{<argument><expr><literal type="number">1</literal></expr></argument>, <argument><expr><literal type="number">2</literal></expr></argument>, <argument><expr><literal type="number">3</literal></expr></argument>}</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+
+    <expr_stmt><expr><call><name>REQUIRE</name><argument_list>(<argument><expr><call><name><name>std</name><operator>::</operator><name>vector</name><argument_list type="generic">&lt;<argument><expr><name>int</name></expr></argument>&gt;</argument_list></name><argument_list>{<argument><expr><literal type="number">1</literal></expr></argument>, <argument><expr><literal type="number">2</literal></expr></argument>}</argument_list></call> <operator>==</operator> <call><name><name>std</name><operator>::</operator><name>vector</name><argument_list type="generic">&lt;<argument><expr><name>int</name></expr></argument>&gt;</argument_list></name><argument_list>{<argument><expr><literal type="number">1</literal></expr></argument>, <argument><expr><literal type="number">2</literal></expr></argument>}</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>CHECK</name><argument_list>( <argument><expr><call><name><name>std</name><operator>::</operator><name>vector</name><argument_list type="generic">&lt;<argument><expr><name>int</name></expr></argument>&gt;</argument_list></name><argument_list>{<argument><expr><literal type="number">1</literal></expr></argument>, <argument><expr><literal type="number">2</literal></expr></argument>}</argument_list></call> <operator>==</operator> <call><name><name>std</name><operator>::</operator><name>vector</name><argument_list type="generic">&lt;<argument><expr><name>int</name></expr></argument>&gt;</argument_list></name><argument_list>{<argument><expr><literal type="number">1</literal></expr></argument>, <argument><expr><literal type="number">2</literal></expr></argument>}</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>REQUIRE_FALSE</name><argument_list>(<argument><expr><call><name><name>std</name><operator>::</operator><name>vector</name><argument_list type="generic">&lt;<argument><expr><name>int</name></expr></argument>&gt;</argument_list></name><argument_list>{<argument><expr><literal type="number">1</literal></expr></argument>, <argument><expr><literal type="number">2</literal></expr></argument>}</argument_list></call> <operator>==</operator> <call><name><name>std</name><operator>::</operator><name>vector</name><argument_list type="generic">&lt;<argument><expr><name>int</name></expr></argument>&gt;</argument_list></name><argument_list>{<argument><expr><literal type="number">1</literal></expr></argument>, <argument><expr><literal type="number">2</literal></expr></argument>, <argument><expr><literal type="number">3</literal></expr></argument>}</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>CHECK_FALSE</name><argument_list>( <argument><expr><call><name><name>std</name><operator>::</operator><name>vector</name><argument_list type="generic">&lt;<argument><expr><name>int</name></expr></argument>&gt;</argument_list></name><argument_list>{<argument><expr><literal type="number">1</literal></expr></argument>, <argument><expr><literal type="number">2</literal></expr></argument>}</argument_list></call> <operator>==</operator> <call><name><name>std</name><operator>::</operator><name>vector</name><argument_list type="generic">&lt;<argument><expr><name>int</name></expr></argument>&gt;</argument_list></name><argument_list>{<argument><expr><literal type="number">1</literal></expr></argument>, <argument><expr><literal type="number">2</literal></expr></argument>, <argument><expr><literal type="number">3</literal></expr></argument>}</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+
+    <expr_stmt><expr><call><name>CHECK_NOFAIL</name><argument_list>( <argument><expr><call><name><name>std</name><operator>::</operator><name>vector</name><argument_list type="generic">&lt;<argument><expr><name>int</name></expr></argument>&gt;</argument_list></name><argument_list>{<argument><expr><literal type="number">1</literal></expr></argument>, <argument><expr><literal type="number">2</literal></expr></argument>}</argument_list></call> <operator>==</operator> <call><name><name>std</name><operator>::</operator><name>vector</name><argument_list type="generic">&lt;<argument><expr><name>int</name></expr></argument>&gt;</argument_list></name><argument_list>{<argument><expr><literal type="number">1</literal></expr></argument>, <argument><expr><literal type="number">2</literal></expr></argument>}</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    <macro><name>CHECKED_IF</name><argument_list>( <argument>std::vector&lt;int&gt;{<literal type="number">1</literal></argument>, <argument><literal type="number">2</literal>} == std::vector&lt;int&gt;{<literal type="number">1</literal></argument>, <argument><literal type="number">2</literal>}</argument> )</argument_list></macro> <block>{<block_content>
+        <expr_stmt><expr><call><name>REQUIRE</name><argument_list>(<argument><expr><literal type="boolean">true</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block> <macro><name>CHECKED_ELSE</name><argument_list>( <argument>std::vector&lt;int&gt;{<literal type="number">1</literal></argument>, <argument><literal type="number">2</literal>} == std::vector&lt;int&gt;{<literal type="number">1</literal></argument>, <argument><literal type="number">2</literal>}</argument> )</argument_list></macro> <block>{<block_content>
+        <expr_stmt><expr><call><name>CHECK</name><argument_list>(<argument><expr><literal type="boolean">true</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block>
+</block_content>}</block>
+
+<macro><name>TEST_CASE</name><argument_list>( <argument><literal type="string">"non-copyable objects"</literal></argument>, <argument><literal type="string">"[.][failing]"</literal></argument> )</argument_list></macro> <block>{<block_content>
+    <comment type="line">// Thanks to Agustin BergÃ© (@k-ballo on the cpplang Slack) for raising this</comment>
+    <decl_stmt><decl><type><name><name>std</name><operator>::</operator><name>type_info</name></name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>ti</name> <init>= <expr><typeid>typeid<argument_list>(<argument><expr><name>int</name></expr></argument>)</argument_list></typeid></expr></init></decl>;</decl_stmt>
+    <expr_stmt><expr><call><name>CHECK</name><argument_list>( <argument><expr><name>ti</name> <operator>==</operator> <typeid>typeid<argument_list>(<argument><expr><name>int</name></expr></argument>)</argument_list></typeid></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+</block_content>}</block>
+
+<macro><name>TEST_CASE</name><argument_list>(<argument><literal type="string">"#1514: stderr/stdout is not captured in tests aborted by an exception"</literal></argument>, <argument><literal type="string">"[output-capture][regression][.]"</literal></argument>)</argument_list></macro> <block>{<block_content>
+    <expr_stmt><expr><name><name>std</name><operator>::</operator><name>cout</name></name> <operator>&lt;&lt;</operator> <literal type="string">"This would not be caught previously\n"</literal> <operator>&lt;&lt;</operator> <name><name>std</name><operator>::</operator><name>flush</name></name></expr>;</expr_stmt>
+    <expr_stmt><expr><name><name>std</name><operator>::</operator><name>clog</name></name> <operator>&lt;&lt;</operator> <literal type="string">"Nor would this\n"</literal> <operator>&lt;&lt;</operator> <name><name>std</name><operator>::</operator><name>flush</name></name></expr>;</expr_stmt>
+    <comment type="line">// FAIL aborts the test by throwing a Catch exception</comment>
+    <expr_stmt><expr><call><name>FAIL</name><argument_list>(<argument><expr><literal type="string">"1514"</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+</block_content>}</block>
+
+
+<macro><name>TEST_CASE</name><argument_list>( <argument><literal type="string">"#2025: -c shouldn't cause infinite loop"</literal></argument>, <argument><literal type="string">"[sections][generators][regression][.approvals]"</literal></argument> )</argument_list></macro> <block>{<block_content>
+    <macro><name>SECTION</name><argument_list>( <argument><literal type="string">"Check cursor from buffer offset"</literal></argument> )</argument_list></macro> <block>{<block_content>
+        <decl_stmt><decl><type><name>auto</name></type> <name>bufPos</name> <init>= <expr><call><name>GENERATE_REF</name><argument_list>( <argument><expr><call><name>range</name><argument_list>( <argument><expr><literal type="number">0</literal></expr></argument>, <argument><expr><literal type="number">44</literal></expr></argument> )</argument_list></call></expr></argument> )</argument_list></call></expr></init></decl>;</decl_stmt>
+        <macro><name>WHEN</name><argument_list>( <argument><literal type="string">"Buffer position is "</literal> &lt;&lt; bufPos</argument> )</argument_list></macro> <block>{<block_content> <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><literal type="number">1</literal> <operator>==</operator> <literal type="number">1</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt> </block_content>}</block>
+    </block_content>}</block>
+</block_content>}</block>
+
+<macro><name>TEST_CASE</name><argument_list>(<argument><literal type="string">"#2025: original repro"</literal></argument>, <argument><literal type="string">"[sections][generators][regression][.approvals]"</literal></argument>)</argument_list></macro> <block>{<block_content>
+    <decl_stmt><decl><type><name>auto</name></type> <name>fov</name> <init>= <expr><call><name>GENERATE</name><argument_list>(<argument><expr><literal type="boolean">true</literal></expr></argument>, <argument><expr><literal type="boolean">false</literal></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+    <macro><name>DYNAMIC_SECTION</name><argument_list>(<argument><literal type="string">"fov_"</literal> &lt;&lt; fov</argument>)</argument_list></macro> <block>{<block_content>
+        <expr_stmt><expr><name><name>std</name><operator>::</operator><name>cout</name></name> <operator>&lt;&lt;</operator> <literal type="string">"inside with fov: "</literal> <operator>&lt;&lt;</operator> <name>fov</name> <operator>&lt;&lt;</operator> <literal type="char">'\n'</literal></expr>;</expr_stmt>
+    </block_content>}</block>
+</block_content>}</block>
+
+<macro><name>TEST_CASE</name><argument_list>(<argument><literal type="string">"#2025: same-level sections"</literal></argument>, <argument><literal type="string">"[sections][generators][regression][.approvals]"</literal></argument>)</argument_list></macro> <block>{<block_content>
+    <macro><name>SECTION</name><argument_list>(<argument><literal type="string">"A"</literal></argument>)</argument_list></macro> <block>{<block_content>
+        <expr_stmt><expr><call><name>SUCCEED</name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block>
+    <decl_stmt><decl><type><name>auto</name></type> <name>i</name> <init>= <expr><call><name>GENERATE</name><argument_list>(<argument><expr><literal type="number">1</literal></expr></argument>, <argument><expr><literal type="number">2</literal></expr></argument>, <argument><expr><literal type="number">3</literal></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+    <macro><name>SECTION</name><argument_list>(<argument><literal type="string">"B"</literal></argument>)</argument_list></macro> <block>{<block_content>
+        <expr_stmt><expr><call><name>REQUIRE</name><argument_list>(<argument><expr><name>i</name> <operator>&lt;</operator> <literal type="number">4</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block>
+</block_content>}</block>
+</unit>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" xmlns:diff="http://www.srcML.org/srcDiff" revision="1.0.0" language="C++" filename="C:\Users\saile\AppData\Local\Temp\catch2_100_z8gzpiwf\b7d70ddcd609a798048f055cf8f5b6803ac06e52\src_catch2_internal_catch_random_seed_generation_cpp\src_catch2_internal_catch_random_seed_generation_cpp.old|C:\Users\saile\AppData\Local\Temp\catch2_100_z8gzpiwf\b7d70ddcd609a798048f055cf8f5b6803ac06e52\src_catch2_internal_catch_random_seed_generation_cpp\src_catch2_internal_catch_random_seed_generation_cpp.new">
+<comment type="line">//              Copyright Catch2 Authors</comment>
+<comment type="line">// Distributed under the Boost Software License, Version 1.0.</comment>
+<comment type="line">//   (See accompanying file LICENSE.txt or copy at</comment>
+<comment type="line">//        https://www.boost.org/LICENSE_1_0.txt)</comment>
+
+<comment type="line">// SPDX-License-Identifier: BSL-1.0</comment>
+
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;catch2/internal/catch_random_seed_generation.hpp&gt;</cpp:file></cpp:include>
+
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;catch2/internal/catch_enforce.hpp&gt;</cpp:file></cpp:include>
+<diff:insert xmlns:diff="http://www.srcML.org/srcDiff"><cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;catch2/internal/catch_random_integer_helpers.hpp&gt;</cpp:file></cpp:include></diff:insert>
+<diff:insert xmlns:diff="http://www.srcML.org/srcDiff"><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+</diff:ws></diff:insert><cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;ctime&gt;</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;random&gt;</cpp:file></cpp:include>
+
+<namespace>namespace <name>Catch</name> <block>{
+
+    <function><type><name><name>std</name><operator>::</operator><name>uint32_t</name></name></type> <name>generateRandomSeed</name><parameter_list>( <parameter><decl><type><name>GenerateFrom</name></type> <name>from</name></decl></parameter> )</parameter_list> <block>{<block_content>
+        <switch>switch <condition>( <expr><name>from</name></expr> )</condition> <block>{<block_content>
+        <case>case <expr><name><name>GenerateFrom</name><operator>::</operator><name>Time</name></name></expr>:</case>
+            <return>return <expr><cast type="static">static_cast<argument_list type="generic">&lt;<argument><expr><name><name>std</name><operator>::</operator><name>uint32_t</name></name></expr></argument>&gt;</argument_list><argument_list>( <argument><expr><call><name><name>std</name><operator>::</operator><name>time</name></name><argument_list>( <argument><expr><literal type="null">nullptr</literal></expr></argument> )</argument_list></call></expr></argument> )</argument_list></cast></expr>;</return>
+
+        <case>case <expr><name><name>GenerateFrom</name><operator>::</operator><name>Default</name></name></expr>:</case>
+        <case>case <expr><name><name>GenerateFrom</name><operator>::</operator><name>RandomDevice</name></name></expr>:</case><diff:delete type="replace" xmlns:diff="http://www.srcML.org/srcDiff"><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+            </diff:ws><comment type="line">//<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>In<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>theory,<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>a<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>platform<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>could<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>have<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>random_device<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>that<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>returns<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>just</comment><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+            </diff:ws><comment type="line">//<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>16<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>bits.<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>That<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>is<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>still<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>some<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>randomness,<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>so<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>we<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>don't<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>care<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>too<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>much</comment><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+            </diff:ws><return>return<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><expr><cast type="static">static_cast<argument_list type="generic">&lt;<argument><expr><name><name>std</name><operator>::</operator><name>uint32_t</name></name></expr></argument>&gt;</argument_list><argument_list>(<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><argument><expr><call><call><name><name>std</name><operator>::</operator><name>random_device</name></name><argument_list>{}</argument_list></call></call><operator>(</operator><operator>)</operator></expr></argument><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>)</argument_list></cast></expr>;</return></diff:delete><diff:insert type="replace" xmlns:diff="http://www.srcML.org/srcDiff"><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><block>{<block_content><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+            </diff:ws><decl_stmt><decl><type><name><name>std</name><operator>::</operator><name>random_device</name></name></type><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><name>rd</name></decl>;</decl_stmt><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+            </diff:ws><return>return<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><expr><call><name><name>Detail</name><operator>::</operator><name>fillBitsFrom</name><argument_list type="generic">&lt;<argument><expr><name><name>std</name><operator>::</operator><name>uint32_t</name></name></expr></argument>&gt;</argument_list></name><argument_list>(<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><argument><expr><name>rd</name></expr></argument><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>)</argument_list></call></expr>;</return><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+        </diff:ws></block_content>}</block></diff:insert>
+
+        <default>default:</default>
+            <expr_stmt><expr><call><name>CATCH_ERROR</name><argument_list>(<argument><expr><literal type="string">"Unknown generation method"</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        </block_content>}</block></switch>
+    </block_content>}</block></function>
+
+}</block></namespace> <comment type="line">// end namespace Catch</comment>
+</unit>

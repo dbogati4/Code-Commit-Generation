@@ -1,0 +1,15 @@
+{
+  "commit_id": "61e838edf212df0dcd7305630b8e2357f57a42eb",
+  "parent_id": "516dbc83bcd685b68ac4e82220744487f316bca7",
+  "message": "Reorganised (some) usage tests so they can be included multiple times",
+  "changed_files": [
+    "projects/SelfTest/UsageTests/Approx.tests.cpp",
+    "projects/SelfTest/UsageTests/BDD.tests.cpp",
+    "projects/SelfTest/UsageTests/Class.tests.cpp",
+    "projects/SelfTest/UsageTests/Compilation.tests.cpp",
+    "projects/SelfTest/UsageTests/Condition.tests.cpp",
+    "projects/SelfTest/UsageTests/Exception.tests.cpp",
+    "projects/SelfTest/UsageTests/Matchers.tests.cpp",
+    "projects/SelfTest/UsageTests/Misc.tests.cpp"
+  ]
+}

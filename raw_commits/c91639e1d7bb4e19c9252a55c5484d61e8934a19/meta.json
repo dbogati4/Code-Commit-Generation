@@ -1,0 +1,8 @@
+{
+  "commit_id": "c91639e1d7bb4e19c9252a55c5484d61e8934a19",
+  "parent_id": "3a37f45a97276b3450f8fb86811f590fc1abf1b7",
+  "message": "Use Columns to format reporter list",
+  "changed_files": [
+    "include/internal/catch_list.cpp"
+  ]
+}

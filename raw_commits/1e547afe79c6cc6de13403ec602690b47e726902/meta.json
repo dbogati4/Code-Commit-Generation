@@ -1,0 +1,8 @@
+{
+  "commit_id": "1e547afe79c6cc6de13403ec602690b47e726902",
+  "parent_id": "ab6dd55fcf81fe08b76c3ced09cb7282157c29b5",
+  "message": "Tweaked some option names and added verbosity",
+  "changed_files": [
+    "projects/SelfTest/CmdLineTests.cpp"
+  ]
+}

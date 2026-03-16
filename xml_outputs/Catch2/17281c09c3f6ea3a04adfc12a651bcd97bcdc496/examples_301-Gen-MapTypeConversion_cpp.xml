@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" xmlns:diff="http://www.srcML.org/srcDiff" revision="1.0.0" language="C++" filename="C:\Users\saile\AppData\Local\Temp\catch2_100_z8gzpiwf\17281c09c3f6ea3a04adfc12a651bcd97bcdc496\examples_301-Gen-MapTypeConversion_cpp\examples_301-Gen-MapTypeConversion_cpp.old|C:\Users\saile\AppData\Local\Temp\catch2_100_z8gzpiwf\17281c09c3f6ea3a04adfc12a651bcd97bcdc496\examples_301-Gen-MapTypeConversion_cpp\examples_301-Gen-MapTypeConversion_cpp.new"><comment type="line">// 301-Gen-MapTypeConversion.cpp</comment>
+<comment type="line">// Shows how to use map to modify generator's return type.</comment>
+
+<diff:delete type="replace" xmlns:diff="http://www.srcML.org/srcDiff"><comment type="line">//<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>TODO</comment></diff:delete><diff:insert type="replace" xmlns:diff="http://www.srcML.org/srcDiff"><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+</diff:ws><cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;catch2/catch_test_macros.hpp&gt;</cpp:file></cpp:include></diff:insert>
+<diff:delete xmlns:diff="http://www.srcML.org/srcDiff"><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+</diff:ws></diff:delete><cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;<diff:delete type="replace" xmlns:diff="http://www.srcML.org/srcDiff">catch2/catch.hpp</diff:delete><diff:insert type="replace" xmlns:diff="http://www.srcML.org/srcDiff">catch2/catch_generators_generic.hpp</diff:insert>&gt;</cpp:file></cpp:include>
+
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;string&gt;</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;sstream&gt;</cpp:file></cpp:include>
+
+<comment type="line">// Returns a line from a stream. You could have it e.g. read lines from</comment>
+<comment type="line">// a file, but to avoid problems with paths in examples, we will use</comment>
+<comment type="line">// a fixed stringstream.</comment>
+<class>class <name>LineGenerator</name> <super_list>: <super><specifier>public</specifier> <name><name>Catch</name><operator>::</operator><name>Generators</name><operator>::</operator><name>IGenerator</name><argument_list type="generic">&lt;<argument><expr><name><name>std</name><operator>::</operator><name>string</name></name></expr></argument>&gt;</argument_list></name></super></super_list> <block>{<private type="default">
+    <decl_stmt><decl><type><name><name>std</name><operator>::</operator><name>string</name></name></type> <name>m_line</name></decl>;</decl_stmt>
+    <decl_stmt><decl><type><name><name>std</name><operator>::</operator><name>stringstream</name></name></type> <name>m_stream</name></decl>;</decl_stmt>
+</private><public>public:
+    <constructor><name>LineGenerator</name><parameter_list>()</parameter_list> <block>{<block_content>
+        <expr_stmt><expr><call><name><name>m_stream</name><operator>.</operator><name>str</name></name><argument_list>(<argument><expr><literal type="string">"1\n2\n3\n4\n"</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        <if_stmt><if>if <condition>(<expr><operator>!</operator><call><name>next</name><argument_list>()</argument_list></call></expr>)</condition> <block>{<block_content>
+            <throw>throw <expr><call><name><name>Catch</name><operator>::</operator><name>GeneratorException</name></name><argument_list>(<argument><expr><literal type="string">"Couldn't read a single line"</literal></expr></argument>)</argument_list></call></expr>;</throw>
+        </block_content>}</block></if></if_stmt>
+    </block_content>}</block></constructor>
+
+    <function_decl><type><name><name>std</name><operator>::</operator><name>string</name></name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>get</name><parameter_list>()</parameter_list> <specifier>const</specifier> <specifier>override</specifier>;</function_decl>
+<diff:delete xmlns:diff="http://www.srcML.org/srcDiff"><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">    </diff:ws></diff:delete>
+    <function><type><name>bool</name></type> <name>next</name><parameter_list>()</parameter_list> <specifier>override</specifier> <block>{<block_content>
+        <return>return <expr><operator>!</operator><operator>!</operator><call><name><name>std</name><operator>::</operator><name>getline</name></name><argument_list>(<argument><expr><name>m_stream</name></expr></argument>, <argument><expr><name>m_line</name></expr></argument>)</argument_list></call></expr>;</return>
+    </block_content>}</block></function>
+</public>}</block>;</class>
+
+<function><type><name><name>std</name><operator>::</operator><name>string</name></name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name><name>LineGenerator</name><operator>::</operator><name>get</name></name><parameter_list>()</parameter_list> <specifier>const</specifier> <block>{<block_content>
+    <return>return <expr><name>m_line</name></expr>;</return>
+</block_content>}</block></function>
+
+<comment type="line">// This helper function provides a nicer UX when instantiating the generator</comment>
+<comment type="line">// Notice that it returns an instance of GeneratorWrapper&lt;std::string&gt;, which</comment>
+<comment type="line">// is a value-wrapper around std::unique_ptr&lt;IGenerator&lt;std::string&gt;&gt;.</comment>
+<function><type><name><name>Catch</name><operator>::</operator><name>Generators</name><operator>::</operator><name>GeneratorWrapper</name><argument_list type="generic">&lt;<argument><expr><name><name>std</name><operator>::</operator><name>string</name></name></expr></argument>&gt;</argument_list></name></type> <name>lines</name><parameter_list>(<parameter><decl><type><name><name>std</name><operator>::</operator><name>string</name></name></type></decl></parameter> <comment type="block">/* ignored for example */</comment>)</parameter_list> <block>{<block_content>
+    <return>return <expr><call><name><name>Catch</name><operator>::</operator><name>Generators</name><operator>::</operator><name>GeneratorWrapper</name><argument_list type="generic">&lt;<argument><expr><name><name>std</name><operator>::</operator><name>string</name></name></expr></argument>&gt;</argument_list></name><argument_list>(
+        <argument><expr><call><name><name>std</name><operator>::</operator><name>unique_ptr</name><argument_list type="generic">&lt;<argument><expr><name><name>Catch</name><operator>::</operator><name>Generators</name><operator>::</operator><name>IGenerator</name><argument_list type="generic">&lt;<argument><expr><name><name>std</name><operator>::</operator><name>string</name></name></expr></argument>&gt;</argument_list></name></expr></argument>&gt;</argument_list></name><argument_list>(
+            <argument><expr><operator>new</operator> <call><name>LineGenerator</name><argument_list>()</argument_list></call></expr></argument>
+        )</argument_list></call></expr></argument>
+    )</argument_list></call></expr>;</return>
+</block_content>}</block></function>
+
+
+
+<macro><name>TEST_CASE</name><argument_list>(<argument><literal type="string">"filter can convert types inside the generator expression"</literal></argument>, <argument><literal type="string">"[example][generator]"</literal></argument>)</argument_list></macro> <block>{<block_content>
+    <decl_stmt><decl><type><name>auto</name></type> <name>num</name> <init>= <expr><call><name>GENERATE</name><argument_list>(<argument><expr><call><name><name>map</name><argument_list type="generic">&lt;<argument><expr><name>int</name></expr></argument>&gt;</argument_list></name><argument_list>(<argument><expr><lambda><capture>[]</capture><parameter_list>(<parameter><decl><type><name><name>std</name><operator>::</operator><name>string</name></name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>line</name></decl></parameter>)</parameter_list> <block>{<block_content> <return>return <expr><call><name><name>std</name><operator>::</operator><name>stoi</name></name><argument_list>(<argument><expr><name>line</name></expr></argument>)</argument_list></call></expr>;</return> </block_content>}</block></lambda></expr></argument>,
+                                 <argument><expr><call><name>lines</name><argument_list>(<argument><expr><literal type="string">"fake-file"</literal></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+<diff:delete xmlns:diff="http://www.srcML.org/srcDiff"><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">                                 </diff:ws></diff:delete>
+    <expr_stmt><expr><call><name>REQUIRE</name><argument_list>(<argument><expr><name>num</name> <operator>&gt;</operator> <literal type="number">0</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+</block_content>}</block>
+
+<comment type="line">// Compiling and running this file will result in 4 successful assertions</comment>
+</unit>

@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" xmlns:diff="http://www.srcML.org/srcDiff" revision="1.0.0" language="C++" filename="C:\Users\saile\AppData\Local\Temp\catch2_100_z8gzpiwf\2a4725b40eaaaf385b08cdc36164baaa3c5e89d1\projects_SelfTest_UsageTests_Generators_tests_cpp\projects_SelfTest_UsageTests_Generators_tests_cpp.old|C:\Users\saile\AppData\Local\Temp\catch2_100_z8gzpiwf\2a4725b40eaaaf385b08cdc36164baaa3c5e89d1\projects_SelfTest_UsageTests_Generators_tests_cpp\projects_SelfTest_UsageTests_Generators_tests_cpp.new"><cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">"catch.hpp"</cpp:file></cpp:include>
+
+<comment type="line">// Examples of usage of Generators</comment>
+
+<comment type="line">// This test doesn't do much - it just shows how you can have several generators, of different</comment>
+<comment type="line">// types (ie `i` and `j` are different types), can be sequenced using `,` and</comment>
+<comment type="line">// can be expressed as named generators (like range) or as individual values.</comment>
+<comment type="line">// Generators can be mixed with SECTIONs.</comment>
+<comment type="line">// At time of writing the generated values are not automatically reported as part of the test</comment>
+<comment type="line">// name or associated values - so we explicitly CAPTURE then (run this with `-s` to see them).</comment>
+<comment type="line">// We could also incorporate them into the section names using DYNAMIC_SECTION. See the BDD</comment>
+<comment type="line">// example later for more information.</comment>
+<macro><name>TEST_CASE</name><argument_list>(<argument><literal type="string">"Generators"</literal></argument>)</argument_list></macro> <block>{<block_content>
+
+    <decl_stmt><decl><type><name>auto</name></type> <name>i</name> <init>= <expr><call><name>GENERATE</name><argument_list>( <argument><expr><call><name><name>as</name><argument_list type="generic">&lt;<argument><expr><name><name>std</name><operator>::</operator><name>string</name></name></expr></argument>&gt;</argument_list></name><argument_list>()</argument_list></call></expr></argument>, <argument><expr><literal type="string">"a"</literal></expr></argument>, <argument><expr><literal type="string">"b"</literal></expr></argument>, <argument><expr><literal type="string">"c"</literal></expr></argument> )</argument_list></call></expr></init></decl>;</decl_stmt>
+
+    <macro><name>SECTION</name><argument_list>( <argument><literal type="string">"one"</literal></argument> )</argument_list></macro> <block>{<block_content>
+        <decl_stmt><decl><type><name>auto</name></type> <name>j</name> <init>= <expr><call><name>GENERATE</name><argument_list>( <argument><expr><call><name>range</name><argument_list>( <argument><expr><literal type="number">8</literal></expr></argument>, <argument><expr><literal type="number">11</literal></expr></argument> )</argument_list></call></expr></argument>, <argument><expr><literal type="number">2</literal></expr></argument> )</argument_list></call></expr></init></decl>;</decl_stmt>
+
+        <expr_stmt><expr><call><name>CAPTURE</name><argument_list>( <argument><expr><name>i</name></expr></argument>, <argument><expr><name>j</name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name>SUCCEED</name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block>
+    <macro><name>SECTION</name><argument_list>( <argument><literal type="string">"two"</literal></argument> )</argument_list></macro> <block>{<block_content>
+        <decl_stmt><decl><type><name>auto</name></type> <name>j</name> <init>= <expr><call><name>GENERATE</name><argument_list>( <argument><expr><literal type="number">3.141</literal></expr></argument>, <argument><expr><literal type="number">1.379</literal></expr></argument> )</argument_list></call></expr></init></decl>;</decl_stmt>
+        <expr_stmt><expr><call><name>CAPTURE</name><argument_list>( <argument><expr><name>i</name></expr></argument>, <argument><expr><name>j</name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name>SUCCEED</name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block>
+</block_content>}</block>
+
+<comment type="line">// This one generates the cross-product of two ranges.</comment>
+<comment type="line">// It's mostly here to demonstrate the performance which, at time of writing,</comment>
+<comment type="line">// leaves a lot to be desired.</comment>
+<macro><name>TEST_CASE</name><argument_list>( <argument><literal type="string">"100x100 ints"</literal></argument>, <argument><literal type="string">"[.][approvals]"</literal></argument> )</argument_list></macro> <block>{<block_content>
+    <decl_stmt><decl><type><name>auto</name></type> <name>x</name> <init>= <expr><call><name>GENERATE</name><argument_list>( <argument><expr><call><name>range</name><argument_list>( <argument><expr><literal type="number">0</literal></expr></argument>,<argument><expr><literal type="number">100</literal></expr></argument> )</argument_list></call></expr></argument> )</argument_list></call></expr></init></decl>;</decl_stmt>
+    <decl_stmt><decl><type><name>auto</name></type> <name>y</name> <init>= <expr><call><name>GENERATE</name><argument_list>( <argument><expr><call><name>range</name><argument_list>( <argument><expr><literal type="number">200</literal></expr></argument>,<argument><expr><literal type="number">300</literal></expr></argument> )</argument_list></call></expr></argument> )</argument_list></call></expr></init></decl>;</decl_stmt>
+
+    <expr_stmt><expr><call><name>CHECK</name><argument_list>( <argument><expr><name>x</name> <operator>&lt;</operator> <name>y</name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+</block_content>}</block>
+
+<comment type="line">// smaller version</comment>
+<macro><name>TEST_CASE</name><argument_list>( <argument><literal type="string">"10x10 ints"</literal></argument> )</argument_list></macro> <block>{<block_content>
+    <decl_stmt><decl><type><name>auto</name></type> <name>x</name> <init>= <expr><call><name>GENERATE</name><argument_list>( <argument><expr><call><name>range</name><argument_list>( <argument><expr><literal type="number">1</literal></expr></argument>,<argument><expr><literal type="number">11</literal></expr></argument> )</argument_list></call></expr></argument> )</argument_list></call></expr></init></decl>;</decl_stmt>
+    <decl_stmt><decl><type><name>auto</name></type> <name>y</name> <init>= <expr><call><name>GENERATE</name><argument_list>( <argument><expr><call><name>range</name><argument_list>( <argument><expr><literal type="number">101</literal></expr></argument>, <argument><expr><literal type="number">111</literal></expr></argument> )</argument_list></call></expr></argument> )</argument_list></call></expr></init></decl>;</decl_stmt>
+
+    <expr_stmt><expr><call><name>CHECK</name><argument_list>( <argument><expr><name>x</name> <operator>&lt;</operator> <name>y</name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+</block_content>}</block>
+
+<comment type="line">// Some of the following tests use structured bindings for convenience and so are</comment>
+<comment type="line">// conditionally compiled using the de-facto (and soon to be formally) standard</comment>
+<comment type="line">// feature macros</comment>
+
+<cpp:ifdef xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">ifdef</cpp:directive> <name>__cpp_structured_bindings</name></cpp:ifdef>
+
+<comment type="line">// One way to do pairs of values (actual/ expected?)</comment>
+<comment type="line">// For a simple case like this I'd recommend writing out a series of REQUIREs</comment>
+<comment type="line">// but it demonstrates a possible usage.</comment>
+<comment type="line">// Spelling out the pair like this is a bit verbose, so read on for better examples</comment>
+<comment type="line">// - the use of structured bindings here is an optional convenience</comment>
+<macro><name>TEST_CASE</name><argument_list>( <argument><literal type="string">"strlen"</literal></argument>, <argument><literal type="string">"[<diff:delete xmlns:diff="http://www.srcML.org/srcDiff">.][</diff:delete>approvals]"</literal></argument> )</argument_list></macro> <block>{<block_content>
+    <expr_stmt><expr><name>auto</name> <index>[<expr><name>test_input</name></expr><operator>,</operator> <name>expected</name>]</index> <operator>=</operator> <call><name>GENERATE</name><argument_list>( <argument><expr><call><name><name>values</name><argument_list type="generic">&lt;<argument><expr><name><name>std</name><operator>::</operator><name>pair</name><argument_list type="generic">&lt;<argument><expr><name><name>std</name><operator>::</operator><name>string_view</name></name></expr></argument>, <argument><expr><name>size_t</name></expr></argument>&gt;</argument_list></name></expr></argument>&gt;</argument_list></name><argument_list>(<argument><expr><block>{
+            <expr><block>{<expr><literal type="string">"one"</literal></expr>, <expr><literal type="number">3</literal></expr>}</block></expr>,
+            <expr><block>{<expr><literal type="string">"two"</literal></expr>, <expr><literal type="number">3</literal></expr>}</block></expr>,
+            <expr><block>{<expr><literal type="string">"three"</literal></expr>, <expr><literal type="number">5</literal></expr>}</block></expr>,
+            <expr><block>{<expr><literal type="string">"four"</literal></expr>, <expr><literal type="number">4</literal></expr>}</block></expr>
+        }</block></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+
+    <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name><name>test_input</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call> <operator>==</operator> <name>expected</name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+</block_content>}</block>
+
+<comment type="line">// A nicer way to do pairs (or more) of values - using the table generator.</comment>
+<comment type="line">// Note, you must specify the types up-front.</comment>
+<macro><name>TEST_CASE</name><argument_list>( <argument><literal type="string">"strlen2"</literal></argument>, <argument><literal type="string">"[<diff:delete xmlns:diff="http://www.srcML.org/srcDiff">.][</diff:delete>approvals]"</literal></argument> )</argument_list></macro> <block>{<block_content>
+    <expr_stmt><expr><name>auto</name> <index>[<expr><name>test_input</name></expr><operator>,</operator> <name>expected</name>]</index> <operator>=</operator> <call><name>GENERATE</name><argument_list>( <argument><expr><call><name><name>table</name><argument_list type="generic">&lt;<argument><expr><name><name>std</name><operator>::</operator><name>string</name></name></expr></argument>, <argument><expr><name>size_t</name></expr></argument>&gt;</argument_list></name><argument_list>(<argument><expr><block>{
+            <expr><block>{<expr><literal type="string">"one"</literal></expr>, <expr><literal type="number">3</literal></expr>}</block></expr>,
+            <expr><block>{<expr><literal type="string">"two"</literal></expr>, <expr><literal type="number">3</literal></expr>}</block></expr>,
+            <expr><block>{<expr><literal type="string">"three"</literal></expr>, <expr><literal type="number">5</literal></expr>}</block></expr>,
+            <expr><block>{<expr><literal type="string">"four"</literal></expr>, <expr><literal type="number">4</literal></expr>}</block></expr>
+        }</block></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+
+    <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name><name>test_input</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call> <operator>==</operator> <name>expected</name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+</block_content>}</block>
+<cpp:endif xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">endif</cpp:directive></cpp:endif>
+
+<comment type="line">// An alternate way of doing data tables without structure bindings</comment>
+<comment type="line">// - I'd prefer to have the Data class within the test case but gcc 4.x doesn't seem to like it</comment>
+<struct>struct <name>Data</name> <block>{<public type="default"> <decl_stmt><decl><type><name><name>std</name><operator>::</operator><name>string</name></name></type> <name>str</name></decl>;</decl_stmt> <decl_stmt><decl><type><name>size_t</name></type> <name>len</name></decl>;</decl_stmt> </public>}</block>;</struct>
+
+<macro><name>TEST_CASE</name><argument_list>( <argument><literal type="string">"strlen3"</literal></argument> )</argument_list></macro> <block>{<block_content>
+    <decl_stmt><decl><type><name>auto</name></type> <name>data</name> <init>= <expr><call><name>GENERATE</name><argument_list>( <argument><expr><call><name><name>values</name><argument_list type="generic">&lt;<argument><expr><name>Data</name></expr></argument>&gt;</argument_list></name><argument_list>(<argument><expr><block>{
+            <expr><block>{<expr><literal type="string">"one"</literal></expr>, <expr><literal type="number">3</literal></expr>}</block></expr>,
+            <expr><block>{<expr><literal type="string">"two"</literal></expr>, <expr><literal type="number">3</literal></expr>}</block></expr>,
+            <expr><block>{<expr><literal type="string">"three"</literal></expr>, <expr><literal type="number">5</literal></expr>}</block></expr>,
+            <expr><block>{<expr><literal type="string">"four"</literal></expr>, <expr><literal type="number">4</literal></expr>}</block></expr>
+        }</block></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+
+    <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name><name>data</name><operator>.</operator><name>str</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call> <operator>==</operator> <name><name>data</name><operator>.</operator><name>len</name></name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+</block_content>}</block>
+
+<comment type="line">// A nod towards property-based testing - generate a random selection of numbers</comment>
+<comment type="line">// in a range and assert on global properties those numbers.</comment>
+<function><type><specifier>static</specifier> <name>auto</name></type> <name>square</name><parameter_list>( <parameter><decl><type><name>int</name></type> <name>i</name></decl></parameter> )</parameter_list> -&gt; <type><name>int</name></type> <block>{<block_content> <return>return <expr><name>i</name><operator>*</operator><name>i</name></expr>;</return> </block_content>}</block></function>
+
+<macro><name>TEST_CASE</name><argument_list>( <argument><literal type="string">"Random numbers in a range"</literal></argument>, <argument><literal type="string">"[.][approvals]"</literal></argument> )</argument_list></macro> <block>{<block_content>
+    <decl_stmt><decl><type><name>auto</name></type> <name>x</name> <init>= <expr><call><name>GENERATE</name><argument_list>( <argument><expr><call><name>random</name><argument_list>( <argument><expr><operator>-</operator><literal type="number">10000</literal></expr></argument>, <argument><expr><literal type="number">10000</literal></expr></argument> )</argument_list></call></expr></argument> )</argument_list></call></expr></init></decl>;</decl_stmt>
+    <expr_stmt><expr><call><name>CAPTURE</name><argument_list>( <argument><expr><name>x</name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name>square</name><argument_list>(<argument><expr><name>x</name></expr></argument>)</argument_list></call> <operator>&gt;=</operator> <literal type="number">0</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+</block_content>}</block>
+
+<cpp:ifdef xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">ifdef</cpp:directive> <name>__cpp_structured_bindings</name></cpp:ifdef>
+
+<comment type="line">// Based on example from https://docs.cucumber.io/gherkin/reference/#scenario-outline</comment>
+<comment type="line">// (thanks to https://github.com/catchorg/Catch2/issues/850#issuecomment-399504851)</comment>
+
+<comment type="line">// Note that GIVEN, WHEN, and THEN now forward onto DYNAMIC_SECTION instead of SECTION.</comment>
+<comment type="line">// DYNAMIC_SECTION takes its name as a stringstream-style expression, so can be formatted using</comment>
+<comment type="line">// variables in scope - such as the generated variables here. This reads quite nicely in the</comment>
+<comment type="line">// test name output (the full scenario description).</comment>
+
+<function><type><specifier>static</specifier> <name>auto</name></type> <name>eatCucumbers</name><parameter_list>( <parameter><decl><type><name>int</name></type> <name>start</name></decl></parameter>, <parameter><decl><type><name>int</name></type> <name>eat</name></decl></parameter> )</parameter_list> -&gt; <type><name>int</name></type> <block>{<block_content> <return>return <expr><name>start</name><operator>-</operator><name>eat</name></expr>;</return> </block_content>}</block></function>
+
+<macro><name>SCENARIO</name><argument_list>(<argument><literal type="string">"Eating cucumbers"</literal></argument>, <argument><literal type="string">"[<diff:delete xmlns:diff="http://www.srcML.org/srcDiff">.][</diff:delete>approvals]"</literal></argument>)</argument_list></macro> <block>{<block_content>
+
+    <expr_stmt><expr><name>auto</name> <index>[<expr><name>start</name></expr><operator>,</operator> <name>eat</name><operator>,</operator> <name>left</name>]</index> <operator>=</operator> <call><name>GENERATE</name><argument_list>( <argument><expr><call><name><name>table</name><argument_list type="generic">&lt;<argument><expr><name>int</name></expr></argument>,<argument><expr><name>int</name></expr></argument>,<argument><expr><name>int</name></expr></argument>&gt;</argument_list></name> <argument_list>(<argument><expr><block>{
+            <expr><block>{ <expr><literal type="number">12</literal></expr>, <expr><literal type="number">5</literal></expr>, <expr><literal type="number">7</literal></expr> }</block></expr>,
+            <expr><block>{ <expr><literal type="number">20</literal></expr>, <expr><literal type="number">5</literal></expr>, <expr><literal type="number">15</literal></expr> }</block></expr>
+        }</block></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+
+    <macro><name>GIVEN</name><argument_list>( <argument><literal type="string">"there are "</literal> &lt;&lt; start &lt;&lt; <literal type="string">" cucumbers"</literal></argument> )</argument_list></macro>
+    <macro><name>WHEN</name><argument_list>( <argument><literal type="string">"I eat "</literal> &lt;&lt; eat &lt;&lt; <literal type="string">" cucumbers"</literal></argument> )</argument_list></macro>
+    <macro><name>THEN</name><argument_list>( <argument><literal type="string">"I should have "</literal> &lt;&lt; left &lt;&lt; <literal type="string">" cucumbers"</literal></argument> )</argument_list></macro> <block>{<block_content>
+        <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name>eatCucumbers</name><argument_list>( <argument><expr><name>start</name></expr></argument>, <argument><expr><name>eat</name></expr></argument> )</argument_list></call> <operator>==</operator> <name>left</name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block>
+</block_content>}</block>
+<cpp:endif xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">endif</cpp:directive></cpp:endif>
+</unit>

@@ -1,0 +1,12 @@
+diff --git a/projects/ExtraTests/X01-PrefixedMacros.cpp b/projects/ExtraTests/X01-PrefixedMacros.cpp
+index 7671cbc4..3d2ab9c1 100644
+--- a/projects/ExtraTests/X01-PrefixedMacros.cpp
++++ b/projects/ExtraTests/X01-PrefixedMacros.cpp
+@@ -48,6 +48,7 @@ CATCH_TEST_CASE("PrefixedMacros") {
+     CATCH_CHECK_THAT("bdef", Equals("bdef"));
+ 
+     CATCH_INFO( "some info" );
++    CATCH_UNSCOPED_INFO( "some info" );
+     CATCH_WARN( "some warn" );
+     CATCH_SECTION("some section") {
+         int i = 1;

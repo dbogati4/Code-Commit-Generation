@@ -1,0 +1,9 @@
+{
+  "commit_id": "efbfaa1704665bca48c6f13378a699e8b92e4796",
+  "parent_id": "c4e5b05cfc3305fa1b3aa5265eb4192c71df16aa",
+  "message": "Don't cast nanoseconds to integers when writing output",
+  "changed_files": [
+    "src/catch2/reporters/catch_reporter_console.cpp",
+    "src/catch2/reporters/catch_reporter_xml.cpp"
+  ]
+}

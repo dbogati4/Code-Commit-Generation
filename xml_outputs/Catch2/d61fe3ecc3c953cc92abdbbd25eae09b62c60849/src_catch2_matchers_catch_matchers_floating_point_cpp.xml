@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" xmlns:diff="http://www.srcML.org/srcDiff" revision="1.0.0" language="C++" filename="C:\Users\saile\AppData\Local\Temp\catch2_100_z8gzpiwf\d61fe3ecc3c953cc92abdbbd25eae09b62c60849\src_catch2_matchers_catch_matchers_floating_point_cpp\src_catch2_matchers_catch_matchers_floating_point_cpp.old|C:\Users\saile\AppData\Local\Temp\catch2_100_z8gzpiwf\d61fe3ecc3c953cc92abdbbd25eae09b62c60849\src_catch2_matchers_catch_matchers_floating_point_cpp\src_catch2_matchers_catch_matchers_floating_point_cpp.new">
+<comment type="line">//              Copyright Catch2 Authors</comment>
+<comment type="line">// Distributed under the Boost Software License, Version 1.0.</comment>
+<comment type="line">//   (See accompanying file LICENSE_1_0.txt or copy at</comment>
+<comment type="line">//        https://www.boost.org/LICENSE_1_0.txt)</comment>
+
+<comment type="line">// SPDX-License-Identifier: BSL-1.0</comment>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;catch2/matchers/catch_matchers_floating_point.hpp&gt;</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;catch2/internal/catch_enforce.hpp&gt;</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;catch2/internal/catch_polyfills.hpp&gt;</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;catch2/internal/catch_to_string.hpp&gt;</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;catch2/catch_tostring.hpp&gt;</cpp:file></cpp:include>
+
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;algorithm&gt;</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;cmath&gt;</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;cstdlib&gt;</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;cstdint&gt;</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;cstring&gt;</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;sstream&gt;</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;iomanip&gt;</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;limits&gt;</cpp:file></cpp:include>
+
+
+<namespace>namespace <name>Catch</name> <block>{
+<namespace>namespace <block>{
+
+    <function><type><name>int32_t</name></type> <name>convert</name><parameter_list>(<parameter><decl><type><name>float</name></type> <name>f</name></decl></parameter>)</parameter_list> <block>{<block_content>
+        <assert type="static">static_assert<argument_list>(<argument><expr><sizeof>sizeof<argument_list>(<argument><expr><name>float</name></expr></argument>)</argument_list></sizeof> <operator>==</operator> <sizeof>sizeof<argument_list>(<argument><expr><name>int32_t</name></expr></argument>)</argument_list></sizeof></expr></argument>, <argument><expr><literal type="string">"Important ULP matcher assumption violated"</literal></expr></argument>)</argument_list>;</assert>
+        <decl_stmt><decl><type><name>int32_t</name></type> <name>i</name></decl>;</decl_stmt>
+        <expr_stmt><expr><call><name><name>std</name><operator>::</operator><name>memcpy</name></name><argument_list>(<argument><expr><operator>&amp;</operator><name>i</name></expr></argument>, <argument><expr><operator>&amp;</operator><name>f</name></expr></argument>, <argument><expr><sizeof>sizeof<argument_list>(<argument><expr><name>f</name></expr></argument>)</argument_list></sizeof></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        <return>return <expr><name>i</name></expr>;</return>
+    </block_content>}</block></function>
+
+    <function><type><name>int64_t</name></type> <name>convert</name><parameter_list>(<parameter><decl><type><name>double</name></type> <name>d</name></decl></parameter>)</parameter_list> <block>{<block_content>
+        <assert type="static">static_assert<argument_list>(<argument><expr><sizeof>sizeof<argument_list>(<argument><expr><name>double</name></expr></argument>)</argument_list></sizeof> <operator>==</operator> <sizeof>sizeof<argument_list>(<argument><expr><name>int64_t</name></expr></argument>)</argument_list></sizeof></expr></argument>, <argument><expr><literal type="string">"Important ULP matcher assumption violated"</literal></expr></argument>)</argument_list>;</assert>
+        <decl_stmt><decl><type><name>int64_t</name></type> <name>i</name></decl>;</decl_stmt>
+        <expr_stmt><expr><call><name><name>std</name><operator>::</operator><name>memcpy</name></name><argument_list>(<argument><expr><operator>&amp;</operator><name>i</name></expr></argument>, <argument><expr><operator>&amp;</operator><name>d</name></expr></argument>, <argument><expr><sizeof>sizeof<argument_list>(<argument><expr><name>d</name></expr></argument>)</argument_list></sizeof></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        <return>return <expr><name>i</name></expr>;</return>
+    </block_content>}</block></function>
+
+    <function><template>template <parameter_list>&lt;<parameter><type><name>typename</name></type> <name>FP</name></parameter>&gt;</parameter_list></template>
+    <type><name>bool</name></type> <name>almostEqualUlps</name><parameter_list>(<parameter><decl><type><name>FP</name></type> <name>lhs</name></decl></parameter>, <parameter><decl><type><name>FP</name></type> <name>rhs</name></decl></parameter>, <parameter><decl><type><name>uint64_t</name></type> <name>maxUlpDiff</name></decl></parameter>)</parameter_list> <block>{<block_content>
+        <comment type="line">// Comparison with NaN should always be false.</comment>
+        <comment type="line">// This way we can rule it out before getting into the ugly details</comment>
+        <if_stmt><if>if <condition>(<expr><call><name><name>Catch</name><operator>::</operator><name>isnan</name></name><argument_list>(<argument><expr><name>lhs</name></expr></argument>)</argument_list></call> <operator>||</operator> <call><name><name>Catch</name><operator>::</operator><name>isnan</name></name><argument_list>(<argument><expr><name>rhs</name></expr></argument>)</argument_list></call></expr>)</condition> <block>{<block_content>
+            <return>return <expr><literal type="boolean">false</literal></expr>;</return>
+        </block_content>}</block></if></if_stmt>
+
+        <decl_stmt><decl><type><name>auto</name></type> <name>lc</name> <init>= <expr><call><name>convert</name><argument_list>(<argument><expr><name>lhs</name></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+        <decl_stmt><decl><type><name>auto</name></type> <name>rc</name> <init>= <expr><call><name>convert</name><argument_list>(<argument><expr><name>rhs</name></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+
+        <if_stmt><if>if <condition>(<expr><operator>(</operator><name>lc</name> <operator>&lt;</operator> <literal type="number">0</literal><operator>)</operator> <operator>!=</operator> <operator>(</operator><name>rc</name> <operator>&lt;</operator> <literal type="number">0</literal><operator>)</operator></expr>)</condition> <block>{<block_content>
+            <comment type="line">// Potentially we can have +0 and -0</comment>
+            <return>return <expr><name>lhs</name> <operator>==</operator> <name>rhs</name></expr>;</return>
+        </block_content>}</block></if></if_stmt>
+
+<diff:insert xmlns:diff="http://www.srcML.org/srcDiff"><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">        </diff:ws><comment type="line">//<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>static<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>cast<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>as<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>a<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>workaround<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>for<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>IBM<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>XLC</comment><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+</diff:ws></diff:insert>        <decl_stmt><decl><type><name>auto</name></type> <name>ulpDiff</name> <init>= <expr><call><name><name>std</name><operator>::</operator><name>abs</name></name><argument_list>(<argument><diff:insert xmlns:diff="http://www.srcML.org/srcDiff"><expr><diff:delete type="replace" xmlns:diff="http://www.srcML.org/srcDiff"><expr><name>lc</name><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><operator>-</operator><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><name>rc</name></expr></diff:delete><diff:insert type="replace" xmlns:diff="http://www.srcML.org/srcDiff"><cast type="static">static_cast<argument_list type="generic">&lt;<argument><expr><name>FP</name></expr></argument>&gt;</argument_list><argument_list>(<argument><expr><name>lc</name><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><operator>-</operator><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><name>rc</name></expr></argument>)</argument_list></cast></diff:insert></expr></diff:insert></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+        <return>return <expr><cast type="static">static_cast<argument_list type="generic">&lt;<argument><expr><name>uint64_t</name></expr></argument>&gt;</argument_list><argument_list>(<argument><expr><name>ulpDiff</name></expr></argument>)</argument_list></cast> <operator>&lt;=</operator> <name>maxUlpDiff</name></expr>;</return>
+    </block_content>}</block></function>
+
+<cpp:if xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">if</cpp:directive> <expr><call><name>defined</name><argument_list>(<argument><expr><name>CATCH_CONFIG_GLOBAL_NEXTAFTER</name></expr></argument>)</argument_list></call></expr></cpp:if>
+
+    <function><type><name>float</name></type> <name>nextafter</name><parameter_list>(<parameter><decl><type><name>float</name></type> <name>x</name></decl></parameter>, <parameter><decl><type><name>float</name></type> <name>y</name></decl></parameter>)</parameter_list> <block>{<block_content>
+        <return>return <expr><call><name><operator>::</operator><name>nextafterf</name></name><argument_list>(<argument><expr><name>x</name></expr></argument>, <argument><expr><name>y</name></expr></argument>)</argument_list></call></expr>;</return>
+    </block_content>}</block></function>
+
+    <function><type><name>double</name></type> <name>nextafter</name><parameter_list>(<parameter><decl><type><name>double</name></type> <name>x</name></decl></parameter>, <parameter><decl><type><name>double</name></type> <name>y</name></decl></parameter>)</parameter_list> <block>{<block_content>
+        <return>return <expr><call><name><operator>::</operator><name>nextafter</name></name><argument_list>(<argument><expr><name>x</name></expr></argument>, <argument><expr><name>y</name></expr></argument>)</argument_list></call></expr>;</return>
+    </block_content>}</block></function>
+
+<cpp:endif xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">endif</cpp:directive></cpp:endif> <comment type="line">// ^^^ CATCH_CONFIG_GLOBAL_NEXTAFTER ^^^</comment>
+
+<function><template>template <parameter_list>&lt;<parameter><type><name>typename</name></type> <name>FP</name></parameter>&gt;</parameter_list></template>
+<type><name>FP</name></type> <name>step</name><parameter_list>(<parameter><decl><type><name>FP</name></type> <name>start</name></decl></parameter>, <parameter><decl><type><name>FP</name></type> <name>direction</name></decl></parameter>, <parameter><decl><type><name>uint64_t</name></type> <name>steps</name></decl></parameter>)</parameter_list> <block>{<block_content>
+    <for>for <control>(<init><decl><type><name>uint64_t</name></type> <name>i</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>i</name> <operator>&lt;</operator> <name>steps</name></expr>;</condition> <incr><expr><operator>++</operator><name>i</name></expr></incr>)</control> <block>{<block_content>
+<cpp:if xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">if</cpp:directive> <expr><call><name>defined</name><argument_list>(<argument><expr><name>CATCH_CONFIG_GLOBAL_NEXTAFTER</name></expr></argument>)</argument_list></call></expr></cpp:if>
+        <expr_stmt><expr><name>start</name> <operator>=</operator> <call><name><name>Catch</name><operator>::</operator><name>nextafter</name></name><argument_list>(<argument><expr><name>start</name></expr></argument>, <argument><expr><name>direction</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+<cpp:else xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">else</cpp:directive></cpp:else>
+        <expr_stmt><expr><name>start</name> <operator>=</operator> <call><name><name>std</name><operator>::</operator><name>nextafter</name></name><argument_list>(<argument><expr><name>start</name></expr></argument>, <argument><expr><name>direction</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+<cpp:endif xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">endif</cpp:directive></cpp:endif>
+    </block_content>}</block></for>
+    <return>return <expr><name>start</name></expr>;</return>
+</block_content>}</block></function>
+
+<comment type="line">// Performs equivalent check of std::fabs(lhs - rhs) &lt;= margin</comment>
+<comment type="line">// But without the subtraction to allow for INFINITY in comparison</comment>
+<function><type><name>bool</name></type> <name>marginComparison</name><parameter_list>(<parameter><decl><type><name>double</name></type> <name>lhs</name></decl></parameter>, <parameter><decl><type><name>double</name></type> <name>rhs</name></decl></parameter>, <parameter><decl><type><name>double</name></type> <name>margin</name></decl></parameter>)</parameter_list> <block>{<block_content>
+    <return>return <expr><operator>(</operator><name>lhs</name> <operator>+</operator> <name>margin</name> <operator>&gt;=</operator> <name>rhs</name><operator>)</operator> <operator>&amp;&amp;</operator> <operator>(</operator><name>rhs</name> <operator>+</operator> <name>margin</name> <operator>&gt;=</operator> <name>lhs</name><operator>)</operator></expr>;</return>
+</block_content>}</block></function>
+
+<function><template>template <parameter_list>&lt;<parameter><type><name>typename</name></type> <name>FloatingPoint</name></parameter>&gt;</parameter_list></template>
+<type><name>void</name></type> <name>write</name><parameter_list>(<parameter><decl><type><name><name>std</name><operator>::</operator><name>ostream</name></name><modifier>&amp;</modifier></type> <name>out</name></decl></parameter>, <parameter><decl><type><name>FloatingPoint</name></type> <name>num</name></decl></parameter>)</parameter_list> <block>{<block_content>
+    <expr_stmt><expr><name>out</name> <operator>&lt;&lt;</operator> <name><name>std</name><operator>::</operator><name>scientific</name></name>
+        <operator>&lt;&lt;</operator> <call><name><name>std</name><operator>::</operator><name>setprecision</name></name><argument_list>(<argument><expr><name><name>std</name><operator>::</operator><name>numeric_limits</name><argument_list type="generic">&lt;<argument><expr><name>FloatingPoint</name></expr></argument>&gt;</argument_list><operator>::</operator><name>max_digits10</name></name> <operator>-</operator> <literal type="number">1</literal></expr></argument>)</argument_list></call>
+        <operator>&lt;&lt;</operator> <name>num</name></expr>;</expr_stmt>
+</block_content>}</block></function>
+
+}</block></namespace> <comment type="line">// end anonymous namespace</comment>
+
+<namespace>namespace <name>Matchers</name> <block>{
+<namespace>namespace <name>Detail</name> <block>{
+
+    <enum type="class">enum class <name>FloatingPointKind</name> : <type><name>uint8_t</name></type> <block>{
+        <decl><name>Float</name></decl>,
+        <decl><name>Double</name></decl>
+    }</block>;</enum>
+
+}</block></namespace> <comment type="line">// end namespace Detail</comment>
+
+
+    <constructor><name><name>WithinAbsMatcher</name><operator>::</operator><name>WithinAbsMatcher</name></name><parameter_list>(<parameter><decl><type><name>double</name></type> <name>target</name></decl></parameter>, <parameter><decl><type><name>double</name></type> <name>margin</name></decl></parameter>)</parameter_list>
+        <member_init_list>:<call><name>m_target</name><argument_list>{ <argument><expr><name>target</name></expr></argument> }</argument_list></call>, <call><name>m_margin</name><argument_list>{ <argument><expr><name>margin</name></expr></argument> }</argument_list></call> </member_init_list><block>{<block_content>
+        <expr_stmt><expr><call><name>CATCH_ENFORCE</name><argument_list>(<argument><expr><name>margin</name> <operator>&gt;=</operator> <literal type="number">0</literal></expr></argument>, <argument><expr><literal type="string">"Invalid margin: "</literal> <operator>&lt;&lt;</operator> <name>margin</name> <operator>&lt;&lt;</operator> <literal type="char">'.'</literal>
+            <operator>&lt;&lt;</operator> <literal type="string">" Margin has to be non-negative."</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block></constructor>
+
+    <comment type="line">// Performs equivalent check of std::fabs(lhs - rhs) &lt;= margin</comment>
+    <comment type="line">// But without the subtraction to allow for INFINITY in comparison</comment>
+    <function><type><name>bool</name></type> <name><name>WithinAbsMatcher</name><operator>::</operator><name>match</name></name><parameter_list>(<parameter><decl><type><name>double</name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>matchee</name></decl></parameter>)</parameter_list> <specifier>const</specifier> <block>{<block_content>
+        <return>return <expr><operator>(</operator><name>matchee</name> <operator>+</operator> <name>m_margin</name> <operator>&gt;=</operator> <name>m_target</name><operator>)</operator> <operator>&amp;&amp;</operator> <operator>(</operator><name>m_target</name> <operator>+</operator> <name>m_margin</name> <operator>&gt;=</operator> <name>matchee</name><operator>)</operator></expr>;</return>
+    </block_content>}</block></function>
+
+    <function><type><name><name>std</name><operator>::</operator><name>string</name></name></type> <name><name>WithinAbsMatcher</name><operator>::</operator><name>describe</name></name><parameter_list>()</parameter_list> <specifier>const</specifier> <block>{<block_content>
+        <return>return <expr><literal type="string">"is within "</literal> <operator>+</operator> <call><name><operator>::</operator><name>Catch</name><operator>::</operator><name>Detail</name><operator>::</operator><name>stringify</name></name><argument_list>(<argument><expr><name>m_margin</name></expr></argument>)</argument_list></call> <operator>+</operator> <literal type="string">" of "</literal> <operator>+</operator> <call><name><operator>::</operator><name>Catch</name><operator>::</operator><name>Detail</name><operator>::</operator><name>stringify</name></name><argument_list>(<argument><expr><name>m_target</name></expr></argument>)</argument_list></call></expr>;</return>
+    </block_content>}</block></function>
+
+
+    <constructor><name><name>WithinUlpsMatcher</name><operator>::</operator><name>WithinUlpsMatcher</name></name><parameter_list>(<parameter><decl><type><name>double</name></type> <name>target</name></decl></parameter>, <parameter><decl><type><name>uint64_t</name></type> <name>ulps</name></decl></parameter>, <parameter><decl><type><name><name>Detail</name><operator>::</operator><name>FloatingPointKind</name></name></type> <name>baseType</name></decl></parameter>)</parameter_list>
+        <member_init_list>:<call><name>m_target</name><argument_list>{ <argument><expr><name>target</name></expr></argument> }</argument_list></call>, <call><name>m_ulps</name><argument_list>{ <argument><expr><name>ulps</name></expr></argument> }</argument_list></call>, <call><name>m_type</name><argument_list>{ <argument><expr><name>baseType</name></expr></argument> }</argument_list></call> </member_init_list><block>{<block_content>
+        <expr_stmt><expr><call><name>CATCH_ENFORCE</name><argument_list>(<argument><expr><name>m_type</name> <operator>==</operator> <name><name>Detail</name><operator>::</operator><name>FloatingPointKind</name><operator>::</operator><name>Double</name></name>
+                   <operator>||</operator> <name>m_ulps</name> <operator>&lt;</operator> <operator>(</operator><name><name>std</name><operator>::</operator><name>numeric_limits</name><argument_list type="generic">&lt;<argument><expr><name>uint32_t</name></expr></argument>&gt;</argument_list><operator>::</operator><name>max</name></name><operator>)</operator><operator>(</operator><operator>)</operator></expr></argument>,
+            <argument><expr><literal type="string">"Provided ULP is impossibly large for a float comparison."</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block></constructor>
+
+<cpp:if xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">if</cpp:directive> <expr><call><name>defined</name><argument_list>(<argument><expr><name>__clang__</name></expr></argument>)</argument_list></call></expr></cpp:if>
+<cpp:pragma xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">pragma</cpp:directive> <name>clang</name> <name>diagnostic</name> <name>push</name></cpp:pragma>
+<comment type="line">// Clang &lt;3.5 reports on the default branch in the switch below</comment>
+<cpp:pragma xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">pragma</cpp:directive> <name>clang</name> <name>diagnostic</name> <name>ignored</name> <cpp:literal xmlns:cpp="http://www.srcML.org/srcML/cpp">"-Wunreachable-code"</cpp:literal></cpp:pragma>
+<cpp:endif xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">endif</cpp:directive></cpp:endif>
+
+    <function><type><name>bool</name></type> <name><name>WithinUlpsMatcher</name><operator>::</operator><name>match</name></name><parameter_list>(<parameter><decl><type><name>double</name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>matchee</name></decl></parameter>)</parameter_list> <specifier>const</specifier> <block>{<block_content>
+        <switch>switch <condition>(<expr><name>m_type</name></expr>)</condition> <block>{<block_content>
+        <case>case <expr><name><name>Detail</name><operator>::</operator><name>FloatingPointKind</name><operator>::</operator><name>Float</name></name></expr>:</case>
+            <return>return <expr><call><name><name>almostEqualUlps</name><argument_list type="generic">&lt;<argument><expr><name>float</name></expr></argument>&gt;</argument_list></name><argument_list>(<argument><expr><cast type="static">static_cast<argument_list type="generic">&lt;<argument><expr><name>float</name></expr></argument>&gt;</argument_list><argument_list>(<argument><expr><name>matchee</name></expr></argument>)</argument_list></cast></expr></argument>, <argument><expr><cast type="static">static_cast<argument_list type="generic">&lt;<argument><expr><name>float</name></expr></argument>&gt;</argument_list><argument_list>(<argument><expr><name>m_target</name></expr></argument>)</argument_list></cast></expr></argument>, <argument><expr><name>m_ulps</name></expr></argument>)</argument_list></call></expr>;</return>
+        <case>case <expr><name><name>Detail</name><operator>::</operator><name>FloatingPointKind</name><operator>::</operator><name>Double</name></name></expr>:</case>
+            <return>return <expr><call><name><name>almostEqualUlps</name><argument_list type="generic">&lt;<argument><expr><name>double</name></expr></argument>&gt;</argument_list></name><argument_list>(<argument><expr><name>matchee</name></expr></argument>, <argument><expr><name>m_target</name></expr></argument>, <argument><expr><name>m_ulps</name></expr></argument>)</argument_list></call></expr>;</return>
+        <default>default:</default>
+            <expr_stmt><expr><call><name>CATCH_INTERNAL_ERROR</name><argument_list>( <argument><expr><literal type="string">"Unknown Detail::FloatingPointKind value"</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        </block_content>}</block></switch>
+    </block_content>}</block></function>
+
+<cpp:if xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">if</cpp:directive> <expr><call><name>defined</name><argument_list>(<argument><expr><name>__clang__</name></expr></argument>)</argument_list></call></expr></cpp:if>
+<cpp:pragma xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">pragma</cpp:directive> <name>clang</name> <name>diagnostic</name> <name>pop</name></cpp:pragma>
+<cpp:endif xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">endif</cpp:directive></cpp:endif>
+
+    <function><type><name><name>std</name><operator>::</operator><name>string</name></name></type> <name><name>WithinUlpsMatcher</name><operator>::</operator><name>describe</name></name><parameter_list>()</parameter_list> <specifier>const</specifier> <block>{<block_content>
+        <decl_stmt><decl><type><name><name>std</name><operator>::</operator><name>stringstream</name></name></type> <name>ret</name></decl>;</decl_stmt>
+
+        <expr_stmt><expr><name>ret</name> <operator>&lt;&lt;</operator> <literal type="string">"is within "</literal> <operator>&lt;&lt;</operator> <name>m_ulps</name> <operator>&lt;&lt;</operator> <literal type="string">" ULPs of "</literal></expr>;</expr_stmt>
+
+        <if_stmt><if>if <condition>(<expr><name>m_type</name> <operator>==</operator> <name><name>Detail</name><operator>::</operator><name>FloatingPointKind</name><operator>::</operator><name>Float</name></name></expr>)</condition> <block>{<block_content>
+            <expr_stmt><expr><call><name>write</name><argument_list>(<argument><expr><name>ret</name></expr></argument>, <argument><expr><cast type="static">static_cast<argument_list type="generic">&lt;<argument><expr><name>float</name></expr></argument>&gt;</argument_list><argument_list>(<argument><expr><name>m_target</name></expr></argument>)</argument_list></cast></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+            <expr_stmt><expr><name>ret</name> <operator>&lt;&lt;</operator> <literal type="char">'f'</literal></expr>;</expr_stmt>
+        </block_content>}</block></if> <else>else <block>{<block_content>
+            <expr_stmt><expr><call><name>write</name><argument_list>(<argument><expr><name>ret</name></expr></argument>, <argument><expr><name>m_target</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        </block_content>}</block></else></if_stmt>
+
+        <expr_stmt><expr><name>ret</name> <operator>&lt;&lt;</operator> <literal type="string">" (["</literal></expr>;</expr_stmt>
+        <if_stmt><if>if <condition>(<expr><name>m_type</name> <operator>==</operator> <name><name>Detail</name><operator>::</operator><name>FloatingPointKind</name><operator>::</operator><name>Double</name></name></expr>)</condition> <block>{<block_content>
+            <expr_stmt><expr><call><name>write</name><argument_list>(<argument><expr><name>ret</name></expr></argument>, <argument><expr><call><name>step</name><argument_list>(<argument><expr><name>m_target</name></expr></argument>, <argument><expr><cast type="static">static_cast<argument_list type="generic">&lt;<argument><expr><name>double</name></expr></argument>&gt;</argument_list><argument_list>(<argument><expr><operator>-</operator><name>INFINITY</name></expr></argument>)</argument_list></cast></expr></argument>, <argument><expr><name>m_ulps</name></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+            <expr_stmt><expr><name>ret</name> <operator>&lt;&lt;</operator> <literal type="string">", "</literal></expr>;</expr_stmt>
+            <expr_stmt><expr><call><name>write</name><argument_list>(<argument><expr><name>ret</name></expr></argument>, <argument><expr><call><name>step</name><argument_list>(<argument><expr><name>m_target</name></expr></argument>, <argument><expr><cast type="static">static_cast<argument_list type="generic">&lt;<argument><expr><name>double</name></expr></argument>&gt;</argument_list><argument_list>( <argument><expr><name>INFINITY</name></expr></argument>)</argument_list></cast></expr></argument>, <argument><expr><name>m_ulps</name></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        </block_content>}</block></if> <else>else <block>{<block_content>
+            <comment type="line">// We have to cast INFINITY to float because of MinGW, see #1782</comment>
+            <expr_stmt><expr><call><name>write</name><argument_list>(<argument><expr><name>ret</name></expr></argument>, <argument><expr><call><name>step</name><argument_list>(<argument><expr><cast type="static">static_cast<argument_list type="generic">&lt;<argument><expr><name>float</name></expr></argument>&gt;</argument_list><argument_list>(<argument><expr><name>m_target</name></expr></argument>)</argument_list></cast></expr></argument>, <argument><expr><cast type="static">static_cast<argument_list type="generic">&lt;<argument><expr><name>float</name></expr></argument>&gt;</argument_list><argument_list>(<argument><expr><operator>-</operator><name>INFINITY</name></expr></argument>)</argument_list></cast></expr></argument>, <argument><expr><name>m_ulps</name></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+            <expr_stmt><expr><name>ret</name> <operator>&lt;&lt;</operator> <literal type="string">", "</literal></expr>;</expr_stmt>
+            <expr_stmt><expr><call><name>write</name><argument_list>(<argument><expr><name>ret</name></expr></argument>, <argument><expr><call><name>step</name><argument_list>(<argument><expr><cast type="static">static_cast<argument_list type="generic">&lt;<argument><expr><name>float</name></expr></argument>&gt;</argument_list><argument_list>(<argument><expr><name>m_target</name></expr></argument>)</argument_list></cast></expr></argument>, <argument><expr><cast type="static">static_cast<argument_list type="generic">&lt;<argument><expr><name>float</name></expr></argument>&gt;</argument_list><argument_list>( <argument><expr><name>INFINITY</name></expr></argument>)</argument_list></cast></expr></argument>, <argument><expr><name>m_ulps</name></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        </block_content>}</block></else></if_stmt>
+        <expr_stmt><expr><name>ret</name> <operator>&lt;&lt;</operator> <literal type="string">"])"</literal></expr>;</expr_stmt>
+
+        <return>return <expr><call><name><name>ret</name><operator>.</operator><name>str</name></name><argument_list>()</argument_list></call></expr>;</return>
+    </block_content>}</block></function>
+
+    <constructor><name><name>WithinRelMatcher</name><operator>::</operator><name>WithinRelMatcher</name></name><parameter_list>(<parameter><decl><type><name>double</name></type> <name>target</name></decl></parameter>, <parameter><decl><type><name>double</name></type> <name>epsilon</name></decl></parameter>)</parameter_list><member_init_list>:
+        <call><name>m_target</name><argument_list>(<argument><expr><name>target</name></expr></argument>)</argument_list></call>,
+        <call><name>m_epsilon</name><argument_list>(<argument><expr><name>epsilon</name></expr></argument>)</argument_list></call></member_init_list><block>{<block_content>
+        <expr_stmt><expr><call><name>CATCH_ENFORCE</name><argument_list>(<argument><expr><name>m_epsilon</name> <operator>&gt;=</operator> <literal type="number">0.</literal></expr></argument>, <argument><expr><literal type="string">"Relative comparison with epsilon &lt;  0 does not make sense."</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name>CATCH_ENFORCE</name><argument_list>(<argument><expr><name>m_epsilon</name>  <operator>&lt;</operator> <literal type="number">1.</literal></expr></argument>, <argument><expr><literal type="string">"Relative comparison with epsilon &gt;= 1 does not make sense."</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block></constructor>
+
+    <function><type><name>bool</name></type> <name><name>WithinRelMatcher</name><operator>::</operator><name>match</name></name><parameter_list>(<parameter><decl><type><name>double</name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>matchee</name></decl></parameter>)</parameter_list> <specifier>const</specifier> <block>{<block_content>
+        <decl_stmt><decl><type><specifier>const</specifier> <specifier>auto</specifier></type> <name>relMargin</name> <init>= <expr><name>m_epsilon</name> <operator>*</operator> <operator>(</operator><name><name>std</name><operator>::</operator><name>max</name></name><operator>)</operator><operator>(</operator><call><name><name>std</name><operator>::</operator><name>fabs</name></name><argument_list>(<argument><expr><name>matchee</name></expr></argument>)</argument_list></call>, <call><name><name>std</name><operator>::</operator><name>fabs</name></name><argument_list>(<argument><expr><name>m_target</name></expr></argument>)</argument_list></call><operator>)</operator></expr></init></decl>;</decl_stmt>
+        <return>return <expr><call><name>marginComparison</name><argument_list>(<argument><expr><name>matchee</name></expr></argument>, <argument><expr><name>m_target</name></expr></argument>,
+                                <argument><expr><ternary><condition><expr><call><name><name>std</name><operator>::</operator><name>isinf</name></name><argument_list>(<argument><expr><name>relMargin</name></expr></argument>)</argument_list></call></expr>?</condition><then> <expr><literal type="number">0</literal></expr> </then><else>: <expr><name>relMargin</name></expr></else></ternary></expr></argument>)</argument_list></call></expr>;</return>
+    </block_content>}</block></function>
+
+    <function><type><name><name>std</name><operator>::</operator><name>string</name></name></type> <name><name>WithinRelMatcher</name><operator>::</operator><name>describe</name></name><parameter_list>()</parameter_list> <specifier>const</specifier> <block>{<block_content>
+        <decl_stmt><decl><type><name><name>Catch</name><operator>::</operator><name>ReusableStringStream</name></name></type> <name>sstr</name></decl>;</decl_stmt>
+        <expr_stmt><expr><name>sstr</name> <operator>&lt;&lt;</operator> <literal type="string">"and "</literal> <operator>&lt;&lt;</operator> <name>m_target</name> <operator>&lt;&lt;</operator> <literal type="string">" are within "</literal> <operator>&lt;&lt;</operator> <name>m_epsilon</name> <operator>*</operator> <literal type="number">100.</literal> <operator>&lt;&lt;</operator> <literal type="string">"% of each other"</literal></expr>;</expr_stmt>
+        <return>return <expr><call><name><name>sstr</name><operator>.</operator><name>str</name></name><argument_list>()</argument_list></call></expr>;</return>
+    </block_content>}</block></function>
+
+
+<function><type><name>WithinUlpsMatcher</name></type> <name>WithinULP</name><parameter_list>(<parameter><decl><type><name>double</name></type> <name>target</name></decl></parameter>, <parameter><decl><type><name>uint64_t</name></type> <name>maxUlpDiff</name></decl></parameter>)</parameter_list> <block>{<block_content>
+    <return>return <expr><call><name>WithinUlpsMatcher</name><argument_list>(<argument><expr><name>target</name></expr></argument>, <argument><expr><name>maxUlpDiff</name></expr></argument>, <argument><expr><name><name>Detail</name><operator>::</operator><name>FloatingPointKind</name><operator>::</operator><name>Double</name></name></expr></argument>)</argument_list></call></expr>;</return>
+</block_content>}</block></function>
+
+<function><type><name>WithinUlpsMatcher</name></type> <name>WithinULP</name><parameter_list>(<parameter><decl><type><name>float</name></type> <name>target</name></decl></parameter>, <parameter><decl><type><name>uint64_t</name></type> <name>maxUlpDiff</name></decl></parameter>)</parameter_list> <block>{<block_content>
+    <return>return <expr><call><name>WithinUlpsMatcher</name><argument_list>(<argument><expr><name>target</name></expr></argument>, <argument><expr><name>maxUlpDiff</name></expr></argument>, <argument><expr><name><name>Detail</name><operator>::</operator><name>FloatingPointKind</name><operator>::</operator><name>Float</name></name></expr></argument>)</argument_list></call></expr>;</return>
+</block_content>}</block></function>
+
+<function><type><name>WithinAbsMatcher</name></type> <name>WithinAbs</name><parameter_list>(<parameter><decl><type><name>double</name></type> <name>target</name></decl></parameter>, <parameter><decl><type><name>double</name></type> <name>margin</name></decl></parameter>)</parameter_list> <block>{<block_content>
+    <return>return <expr><call><name>WithinAbsMatcher</name><argument_list>(<argument><expr><name>target</name></expr></argument>, <argument><expr><name>margin</name></expr></argument>)</argument_list></call></expr>;</return>
+</block_content>}</block></function>
+
+<function><type><name>WithinRelMatcher</name></type> <name>WithinRel</name><parameter_list>(<parameter><decl><type><name>double</name></type> <name>target</name></decl></parameter>, <parameter><decl><type><name>double</name></type> <name>eps</name></decl></parameter>)</parameter_list> <block>{<block_content>
+    <return>return <expr><call><name>WithinRelMatcher</name><argument_list>(<argument><expr><name>target</name></expr></argument>, <argument><expr><name>eps</name></expr></argument>)</argument_list></call></expr>;</return>
+</block_content>}</block></function>
+
+<function><type><name>WithinRelMatcher</name></type> <name>WithinRel</name><parameter_list>(<parameter><decl><type><name>double</name></type> <name>target</name></decl></parameter>)</parameter_list> <block>{<block_content>
+    <return>return <expr><call><name>WithinRelMatcher</name><argument_list>(<argument><expr><name>target</name></expr></argument>, <argument><expr><call><name><name>std</name><operator>::</operator><name>numeric_limits</name><argument_list type="generic">&lt;<argument><expr><name>double</name></expr></argument>&gt;</argument_list><operator>::</operator><name>epsilon</name></name><argument_list>()</argument_list></call> <operator>*</operator> <literal type="number">100</literal></expr></argument>)</argument_list></call></expr>;</return>
+</block_content>}</block></function>
+
+<function><type><name>WithinRelMatcher</name></type> <name>WithinRel</name><parameter_list>(<parameter><decl><type><name>float</name></type> <name>target</name></decl></parameter>, <parameter><decl><type><name>float</name></type> <name>eps</name></decl></parameter>)</parameter_list> <block>{<block_content>
+    <return>return <expr><call><name>WithinRelMatcher</name><argument_list>(<argument><expr><name>target</name></expr></argument>, <argument><expr><name>eps</name></expr></argument>)</argument_list></call></expr>;</return>
+</block_content>}</block></function>
+
+<function><type><name>WithinRelMatcher</name></type> <name>WithinRel</name><parameter_list>(<parameter><decl><type><name>float</name></type> <name>target</name></decl></parameter>)</parameter_list> <block>{<block_content>
+    <return>return <expr><call><name>WithinRelMatcher</name><argument_list>(<argument><expr><name>target</name></expr></argument>, <argument><expr><call><name><name>std</name><operator>::</operator><name>numeric_limits</name><argument_list type="generic">&lt;<argument><expr><name>float</name></expr></argument>&gt;</argument_list><operator>::</operator><name>epsilon</name></name><argument_list>()</argument_list></call> <operator>*</operator> <literal type="number">100</literal></expr></argument>)</argument_list></call></expr>;</return>
+</block_content>}</block></function>
+
+
+}</block></namespace> <comment type="line">// namespace Matchers</comment>
+}</block></namespace> <comment type="line">// namespace Catch</comment>
+</unit>

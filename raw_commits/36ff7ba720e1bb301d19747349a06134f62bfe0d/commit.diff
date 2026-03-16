@@ -1,0 +1,106 @@
+diff --git a/Test/ClassTests.cpp b/Test/ClassTests.cpp
+index f37f7565..c4be09c2 100644
+--- a/Test/ClassTests.cpp
++++ b/Test/ClassTests.cpp
+@@ -51,7 +51,7 @@ TEST_CASE_METHOD( Fixture, "succeeding/Fixture/succeedingCase", "A method based
+     REQUIRE( m_a == 1 );        
+ }
+ 
+-TEST_CASE_METHOD( Fixture, "succeeding/Fixture/failingCase", "A method based test run that fails" )
++TEST_CASE_METHOD( Fixture, "failing/Fixture/failingCase", "A method based test run that fails" )
+ {   
+     REQUIRE( m_a == 2 );        
+ }
+diff --git a/Test/MessageTests.cpp b/Test/MessageTests.cpp
+index 1e8e6be8..ca58c5e7 100644
+--- a/Test/MessageTests.cpp
++++ b/Test/MessageTests.cpp
+@@ -26,7 +26,7 @@ TEST_CASE( "failing/message/info/1", "INFO gets logged on failure" )
+     REQUIRE( a == 1 );
+ }
+ 
+-TEST_CASE( "failing/message/info/2", "INFO gets logged on failure" )
++TEST_CASE( "mixed/message/info/2", "INFO gets logged on failure" )
+ {
+     INFO( "this message should be logged" );
+     int a = 2;
+diff --git a/Test/MiscTests.cpp b/Test/MiscTests.cpp
+index d87dd5d4..1639a9ab 100644
+--- a/Test/MiscTests.cpp
++++ b/Test/MiscTests.cpp
+@@ -36,7 +36,7 @@ TEST_CASE( "succeeding/Misc/Sections/nested", "nested SECTION tests" )
+     
+     SECTION( "s1", "doesn't equal" )
+     {
+-        REQUIRE( a != b );
++        REQUIRE( a != b ) "a should not equal b";
+         REQUIRE( b != a );
+ 
+         SECTION( "s2", "not equal" )
+@@ -46,9 +46,35 @@ TEST_CASE( "succeeding/Misc/Sections/nested", "nested SECTION tests" )
+     }
+ }
+ 
++TEST_CASE( "mixed/Misc/Sections/loops", "looped SECTION tests" )
++{
++    int a = 1;
++    
++    for( int b = 0; b < 10; ++b )
++    {
++        std::ostringstream oss;
++        oss << "b is currently: " << b;
++        SECTION( "s1", oss.str() )
++        {
++            CHECK( b > a );            
++        }
++    }
++}
++
++TEST_CASE( "mixed/Misc/loops", "looped tests" )
++{
++    static const int fib[]  = { 1, 1, 2, 3, 5, 8, 13, 21 };
++    
++    for( size_t i=0; i < sizeof(fib)/sizeof(int); ++i )
++    {
++        INFO( "Testing if fib[" << i << "] (" << fib[i] << ") is even" );
++        CHECK( ( fib[i] % 2 ) == 0 );                
++    }
++}
++
+ TEST_CASE( "succeeding/Misc/stdout,stderr", "Sends stuff to stdout and stderr" )
+ {
+     std::cout << "Some information";
+     
+     std::cerr << "An error";
+-}
+\ No newline at end of file
++}
+diff --git a/Test/TestMain.cpp b/Test/TestMain.cpp
+index dd7eb367..7d8c1d5c 100644
+--- a/Test/TestMain.cpp
++++ b/Test/TestMain.cpp
+@@ -26,10 +26,11 @@ int main (int argc, char * const argv[])
+     std::ostringstream ossSucceeding;
+     std::ostringstream ossFailing;
+ 
+-    ReporterConfig reporterConfig( ReporterConfig::Include::SuccessfulResults );
+-    BasicReporter reporter (reporterConfig );
+-
+-    Runner runner( &reporter );
++    RunnerConfig config;
++    ReporterConfig& reporterConfig = config.getReporterConfig();
++    config.setReporter( new BasicReporter(reporterConfig ) );
++    reporterConfig.setIncludeWhat( ReporterConfig::Include::SuccessfulResults );
++    Runner runner( config );
+ 
+     reporterConfig.setStreamBuf( ossSucceeding.rdbuf() );
+     runner.runMatching( "succeeding/*" );
+@@ -61,7 +62,7 @@ int main (int argc, char * const argv[])
+ 
+     if( result == 0 )
+     {
+-        const size_t expectedTestCaseCount = 102; // !TBD factor this out
++        const size_t expectedTestCaseCount = 106; // !TBD factor this out
+         size_t testCaseCount = runner.getSuccessCount() + runner.getFailureCount();
+         std::cout << "All " << testCaseCount << " tests completed successfully" << std::endl;
+         if( testCaseCount != expectedTestCaseCount )

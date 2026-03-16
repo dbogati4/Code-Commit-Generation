@@ -1,0 +1,13 @@
+diff --git a/tools/misc/coverage-helper.cpp b/tools/misc/coverage-helper.cpp
+index a31e927f..9e7a8ca4 100644
+--- a/tools/misc/coverage-helper.cpp
++++ b/tools/misc/coverage-helper.cpp
+@@ -95,7 +95,7 @@ int exec_cmd(std::string const& cmd, int log_num, std::string const& path) {
+ 
+     // cmd has already been escaped outside this function.
+     auto real_cmd = "OpenCppCoverage --export_type binary:cov-report" + std::to_string(log_num)
+-        + ".bin --quiet " + "--sources " + escape_arg(path) + " --cover_children -- " + cmd;
++        + ".bin --quiet " + "--sources " + escape_arg(path) + "\\src" + " --cover_children -- " + cmd;
+     std::cout << "=== Marker ===: Cmd: " << real_cmd << '\n';
+     auto pipe = _popen(real_cmd.c_str(), "r");
+ 

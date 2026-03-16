@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" xmlns:diff="http://www.srcML.org/srcDiff" revision="1.0.0" language="C++" filename="C:\Users\saile\AppData\Local\Temp\catch2_100_z8gzpiwf\e8b785b1775a59e40b05fd5bd861ec2c09df5dc2\include_internal_catch_result_builder_cpp\include_internal_catch_result_builder_cpp.old|C:\Users\saile\AppData\Local\Temp\catch2_100_z8gzpiwf\e8b785b1775a59e40b05fd5bd861ec2c09df5dc2\include_internal_catch_result_builder_cpp\include_internal_catch_result_builder_cpp.new"><comment type="block">/*
+ *  Created by Phil on 28/5/2014.
+ *  Copyright 2014 Two Blue Cubes Ltd. All rights reserved.
+ *
+ *  Distributed under the Boost Software License, Version 1.0. (See accompanying
+ *  file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
+ */</comment>
+
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">"catch_result_builder.h"</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">"catch_context.h"</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">"catch_interfaces_config.h"</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">"catch_interfaces_runner.h"</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">"catch_interfaces_capture.h"</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">"catch_interfaces_registry_hub.h"</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">"catch_matchers_string.h"</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">"catch_wildcard_pattern.hpp"</cpp:file></cpp:include>
+
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;cassert&gt;</cpp:file></cpp:include>
+
+<namespace>namespace <name>Catch</name> <block>{
+
+    <constructor><name><name>CopyableStream</name><operator>::</operator><name>CopyableStream</name></name><parameter_list>( <parameter><decl><type><name>CopyableStream</name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>other</name></decl></parameter> )</parameter_list> <block>{<block_content>
+        <expr_stmt><expr><name>oss</name> <operator>&lt;&lt;</operator> <call><name><name>other</name><operator>.</operator><name>oss</name><operator>.</operator><name>str</name></name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block></constructor>
+    <function type="operator"><type><name>CopyableStream</name><modifier>&amp;</modifier></type> <name><name>CopyableStream</name><operator>::</operator><name>operator<name>=</name></name></name><parameter_list>( <parameter><decl><type><name>CopyableStream</name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>other</name></decl></parameter> )</parameter_list> <block>{<block_content>
+        <expr_stmt><expr><call><name><name>oss</name><operator>.</operator><name>str</name></name><argument_list>(<argument><expr><call><name><name>std</name><operator>::</operator><name>string</name></name><argument_list>()</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><name>oss</name> <operator>&lt;&lt;</operator> <call><name><name>other</name><operator>.</operator><name>oss</name><operator>.</operator><name>str</name></name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+        <return>return <expr><operator>*</operator><name>this</name></expr>;</return>
+    </block_content>}</block></function>
+
+
+    <constructor><name><name>ResultBuilder</name><operator>::</operator><name>ResultBuilder</name></name><parameter_list>(   <parameter><decl><type><name>char</name> <specifier>const</specifier><modifier>*</modifier></type> <name>macroName</name></decl></parameter>,
+                                    <parameter><decl><type><name>SourceLineInfo</name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>lineInfo</name></decl></parameter>,
+                                    <parameter><decl><type><name>char</name> <specifier>const</specifier><modifier>*</modifier></type> <name>capturedExpression</name></decl></parameter>,
+                                    <parameter><decl><type><name><name>ResultDisposition</name><operator>::</operator><name>Flags</name></name></type> <name>resultDisposition</name></decl></parameter> )</parameter_list>
+    <member_init_list>:   <call><name>m_assertionInfo</name><argument_list>( <argument><expr><name>macroName</name></expr></argument>, <argument><expr><name>lineInfo</name></expr></argument>, <argument><expr><name>capturedExpression</name></expr></argument>, <argument><expr><name>resultDisposition</name></expr></argument>)</argument_list></call>
+    </member_init_list><block>{<block_content/>}</block></constructor>
+
+    <destructor><name><name>ResultBuilder</name><operator>::</operator><name>~ResultBuilder</name></name><parameter_list>()</parameter_list> <block>{<block_content>
+<cpp:if xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">if</cpp:directive> <expr><call><name>defined</name><argument_list>(<argument><expr><name>CATCH_CONFIG_FAST_COMPILE</name></expr></argument>)</argument_list></call></expr></cpp:if>
+        <if_stmt><if>if <condition>( <expr><name>m_guardException</name></expr> )</condition> <block>{<block_content>
+            <expr_stmt><expr><call><name>stream</name><argument_list>()</argument_list></call><operator>.</operator><name>oss</name> <operator>&lt;&lt;</operator> <literal type="string">"Exception translation was disabled by CATCH_CONFIG_FAST_COMPILE"</literal></expr>;</expr_stmt>
+            <expr_stmt><expr><call><name>captureResult</name><argument_list>( <argument><expr><name><name>ResultWas</name><operator>::</operator><name>ThrewException</name></name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+            <expr_stmt><expr><call><name>getCurrentContext</name><argument_list>()</argument_list></call><operator>.</operator><call><name>getResultCapture</name><argument_list>()</argument_list></call><operator>-&gt;</operator><call><name>exceptionEarlyReported</name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+        </block_content>}</block></if></if_stmt>
+<cpp:endif xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">endif</cpp:directive></cpp:endif>
+    </block_content>}</block></destructor>
+
+    <function><type><name>ResultBuilder</name><modifier>&amp;</modifier></type> <name><name>ResultBuilder</name><operator>::</operator><name>setResultType</name></name><parameter_list>( <parameter><decl><type><name><name>ResultWas</name><operator>::</operator><name>OfType</name></name></type> <name>result</name></decl></parameter> )</parameter_list> <block>{<block_content>
+        <expr_stmt><expr><name><name>m_data</name><operator>.</operator><name>resultType</name></name> <operator>=</operator> <name>result</name></expr>;</expr_stmt>
+        <return>return <expr><operator>*</operator><name>this</name></expr>;</return>
+    </block_content>}</block></function>
+    <function><type><name>ResultBuilder</name><modifier>&amp;</modifier></type> <name><name>ResultBuilder</name><operator>::</operator><name>setResultType</name></name><parameter_list>( <parameter><decl><type><name>bool</name></type> <name>result</name></decl></parameter> )</parameter_list> <block>{<block_content>
+        <expr_stmt><expr><name><name>m_data</name><operator>.</operator><name>resultType</name></name> <operator>=</operator> <ternary><condition><expr><name>result</name></expr> ?</condition><then> <expr><name><name>ResultWas</name><operator>::</operator><name>Ok</name></name></expr> </then><else>: <expr><name><name>ResultWas</name><operator>::</operator><name>ExpressionFailed</name></name></expr></else></ternary></expr>;</expr_stmt>
+        <return>return <expr><operator>*</operator><name>this</name></expr>;</return>
+    </block_content>}</block></function>
+
+    <function><type><name>void</name></type> <name><name>ResultBuilder</name><operator>::</operator><name>endExpression</name></name><parameter_list>( <parameter><decl><type><name>DecomposedExpression</name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>expr</name></decl></parameter> )</parameter_list> <block>{<block_content>
+        <comment type="line">// Flip bool results if FalseTest flag is set</comment>
+        <if_stmt><if>if<condition>( <expr><call><name>isFalseTest</name><argument_list>( <argument><expr><name><name>m_assertionInfo</name><operator>.</operator><name>resultDisposition</name></name></expr></argument> )</argument_list></call></expr> )</condition> <block>{<block_content>
+            <expr_stmt><expr><call><name><name>m_data</name><operator>.</operator><name>negate</name></name><argument_list>( <argument><expr><call><name><name>expr</name><operator>.</operator><name>isBinaryExpression</name></name><argument_list>()</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        </block_content>}</block></if></if_stmt>
+
+        <expr_stmt><expr><call><name>getResultCapture</name><argument_list>()</argument_list></call><operator>.</operator><call><name>assertionRun</name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+
+        <if_stmt><if>if<condition>(<expr><call><name>getCurrentContext</name><argument_list>()</argument_list></call><operator>.</operator><call><name>getConfig</name><argument_list>()</argument_list></call><operator>-&gt;</operator><call><name>includeSuccessfulResults</name><argument_list>()</argument_list></call>
+            <operator>||</operator> <name><name>m_data</name><operator>.</operator><name>resultType</name></name> <operator>!=</operator> <name><name>ResultWas</name><operator>::</operator><name>Ok</name></name></expr>)</condition> <block>{<block_content>
+            <decl_stmt><decl><type><name>AssertionResult</name></type> <name>result</name> <init>= <expr><call><name>build</name><argument_list>( <argument><expr><name>expr</name></expr></argument> )</argument_list></call></expr></init></decl>;</decl_stmt>
+            <expr_stmt><expr><call><name>handleResult</name><argument_list>( <argument><expr><name>result</name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        </block_content>}</block></if>
+        <else>else<block type="pseudo"><block_content>
+            <expr_stmt><expr><call><name>getResultCapture</name><argument_list>()</argument_list></call><operator>.</operator><call><name>assertionPassed</name><argument_list>()</argument_list></call></expr>;</expr_stmt></block_content></block></else></if_stmt>
+    </block_content>}</block></function>
+
+    <function><type><name>void</name></type> <name><name>ResultBuilder</name><operator>::</operator><name>useActiveException</name></name><parameter_list>( <parameter><decl><type><name><name>ResultDisposition</name><operator>::</operator><name>Flags</name></name></type> <name>resultDisposition</name></decl></parameter> )</parameter_list> <block>{<block_content>
+        <expr_stmt><expr><name><name>m_assertionInfo</name><operator>.</operator><name>resultDisposition</name></name> <operator>=</operator> <name>resultDisposition</name></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name>stream</name><argument_list>()</argument_list></call><operator>.</operator><name>oss</name> <operator>&lt;&lt;</operator> <call><name><name>Catch</name><operator>::</operator><name>translateActiveException</name></name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name>captureResult</name><argument_list>( <argument><expr><name><name>ResultWas</name><operator>::</operator><name>ThrewException</name></name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block></function>
+
+    <function><type><name>void</name></type> <name><name>ResultBuilder</name><operator>::</operator><name>captureResult</name></name><parameter_list>( <parameter><decl><type><name><name>ResultWas</name><operator>::</operator><name>OfType</name></name></type> <name>resultType</name></decl></parameter> )</parameter_list> <block>{<block_content>
+        <expr_stmt><expr><call><name>setResultType</name><argument_list>( <argument><expr><name>resultType</name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name>captureExpression</name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block></function>
+<cpp:if xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">if</cpp:directive> <expr><operator>!</operator><call><name>defined</name><argument_list>(<argument><expr><name>CATCH_CONFIG_DISABLE_MATCHERS</name></expr></argument>)</argument_list></call></expr></cpp:if>
+    <function><type><name>void</name></type> <name><name>ResultBuilder</name><operator>::</operator><name>captureExpectedException</name></name><parameter_list>( <parameter><decl><type><name><name>std</name><operator>::</operator><name>string</name></name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>expectedMessage</name></decl></parameter> )</parameter_list> <block>{<block_content>
+        <if_stmt><if>if<condition>( <expr><call><name><name>expectedMessage</name><operator>.</operator><name>empty</name></name><argument_list>()</argument_list></call></expr> )</condition><block type="pseudo"><block_content>
+            <expr_stmt><expr><call><name>captureExpectedException</name><argument_list>( <argument><expr><call><name><name>Matchers</name><operator>::</operator><name>Impl</name><operator>::</operator><name>MatchAllOf</name><argument_list type="generic">&lt;<argument><expr><name><name>std</name><operator>::</operator><name>string</name></name></expr></argument>&gt;</argument_list></name><argument_list>()</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt></block_content></block></if>
+        <else>else<block type="pseudo"><block_content>
+            <expr_stmt><expr><call><name>captureExpectedException</name><argument_list>( <argument><expr><call><name><name>Matchers</name><operator>::</operator><name>Equals</name></name><argument_list>( <argument><expr><name>expectedMessage</name></expr></argument> )</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt></block_content></block></else></if_stmt>
+    </block_content>}</block></function>
+
+
+    <function><type><name>void</name></type> <name><name>ResultBuilder</name><operator>::</operator><name>captureExpectedException</name></name><parameter_list>( <parameter><decl><type><name><name>Matchers</name><operator>::</operator><name>Impl</name><operator>::</operator><name>MatcherBase</name><argument_list type="generic">&lt;<argument><expr><name><name>std</name><operator>::</operator><name>string</name></name></expr></argument>&gt;</argument_list></name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>matcher</name></decl></parameter> )</parameter_list> <block>{<block_content>
+
+        <expr_stmt><expr><call><name>assert</name><argument_list>( <argument><expr><operator>!</operator><call><name>isFalseTest</name><argument_list>( <argument><expr><name><name>m_assertionInfo</name><operator>.</operator><name>resultDisposition</name></name></expr></argument> )</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        <decl_stmt><decl><type><name>AssertionResultData</name></type> <name>data</name> <init>= <expr><name>m_data</name></expr></init></decl>;</decl_stmt>
+        <expr_stmt><expr><name><name>data</name><operator>.</operator><name>resultType</name></name> <operator>=</operator> <name><name>ResultWas</name><operator>::</operator><name>Ok</name></name></expr>;</expr_stmt>
+        <expr_stmt><expr><name><name>data</name><operator>.</operator><name>reconstructedExpression</name></name> <operator>=</operator> <name><name>m_assertionInfo</name><operator>.</operator><name>capturedExpression</name></name></expr>;</expr_stmt>
+
+        <decl_stmt><decl><type><name><name>std</name><operator>::</operator><name>string</name></name></type> <name>actualMessage</name> <init>= <expr><call><name><name>Catch</name><operator>::</operator><name>translateActiveException</name></name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+        <if_stmt><if>if<condition>( <expr><operator>!</operator><call><name><name>matcher</name><operator>.</operator><name>match</name></name><argument_list>( <argument><expr><name>actualMessage</name></expr></argument> )</argument_list></call></expr> )</condition> <block>{<block_content>
+            <expr_stmt><expr><name><name>data</name><operator>.</operator><name>resultType</name></name> <operator>=</operator> <name><name>ResultWas</name><operator>::</operator><name>ExpressionFailed</name></name></expr>;</expr_stmt>
+            <expr_stmt><expr><name><name>data</name><operator>.</operator><name>reconstructedExpression</name></name> <operator>=</operator> <call><name><name>std</name><operator>::</operator><name>move</name></name><argument_list>(<argument><expr><name>actualMessage</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        </block_content>}</block></if></if_stmt>
+        <decl_stmt><decl><type><name>AssertionResult</name></type> <name>result</name><argument_list>( <argument><expr><name>m_assertionInfo</name></expr></argument>, <argument><expr><name>data</name></expr></argument> )</argument_list></decl>;</decl_stmt>
+        <expr_stmt><expr><call><name>handleResult</name><argument_list>( <argument><expr><name>result</name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block></function>
+<cpp:endif xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">endif</cpp:directive></cpp:endif> <comment type="line">// CATCH_CONFIG_DISABLE_MATCHERS</comment>
+    <function><type><name>void</name></type> <name><name>ResultBuilder</name><operator>::</operator><name>captureExpression</name></name><parameter_list>()</parameter_list> <block>{<block_content>
+        <decl_stmt><decl><type><name>AssertionResult</name></type> <name>result</name> <init>= <expr><call><name>build</name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+        <expr_stmt><expr><call><name>handleResult</name><argument_list>( <argument><expr><name>result</name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block></function>
+
+    <function><type><name>void</name></type> <name><name>ResultBuilder</name><operator>::</operator><name>handleResult</name></name><parameter_list>( <parameter><decl><type><name>AssertionResult</name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>result</name></decl></parameter> )</parameter_list>
+    <block>{<block_content>
+        <expr_stmt><expr><call><name>getResultCapture</name><argument_list>()</argument_list></call><operator>.</operator><call><name>assertionEnded</name><argument_list>( <argument><expr><name>result</name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+
+        <if_stmt><if>if<condition>( <expr><operator>!</operator><call><name><name>result</name><operator>.</operator><name>isOk</name></name><argument_list>()</argument_list></call></expr> )</condition> <block>{<block_content>
+            <if_stmt><if>if<condition>( <expr><call><name>getCurrentContext</name><argument_list>()</argument_list></call><operator>.</operator><call><name>getConfig</name><argument_list>()</argument_list></call><operator>-&gt;</operator><call><name>shouldDebugBreak</name><argument_list>()</argument_list></call></expr> )</condition><block type="pseudo"><block_content>
+                <expr_stmt><expr><name>m_shouldDebugBreak</name> <operator>=</operator> <literal type="boolean">true</literal></expr>;</expr_stmt></block_content></block></if></if_stmt>
+            <if_stmt><if>if<condition>( <expr><call><name>getCurrentContext</name><argument_list>()</argument_list></call><operator>.</operator><call><name>getRunner</name><argument_list>()</argument_list></call><operator>-&gt;</operator><call><name>aborting</name><argument_list>()</argument_list></call> <operator>||</operator> <operator>(</operator><name><name>m_assertionInfo</name><operator>.</operator><name>resultDisposition</name></name> <operator>&amp;</operator> <name><name>ResultDisposition</name><operator>::</operator><name>Normal</name></name><operator>)</operator></expr> )</condition><block type="pseudo"><block_content>
+                <expr_stmt><expr><name>m_shouldThrow</name> <operator>=</operator> <literal type="boolean">true</literal></expr>;</expr_stmt></block_content></block></if></if_stmt>
+        </block_content>}</block></if></if_stmt>
+    </block_content>}</block></function>
+
+    <function><type><name>void</name></type> <name><name>ResultBuilder</name><operator>::</operator><name>react</name></name><parameter_list>()</parameter_list> <block>{<block_content>
+<cpp:if xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">if</cpp:directive> <expr><call><name>defined</name><argument_list>(<argument><expr><name>CATCH_CONFIG_FAST_COMPILE</name></expr></argument>)</argument_list></call></expr></cpp:if>
+        <if_stmt><if>if <condition>(<expr><name>m_shouldDebugBreak</name></expr>)</condition> <block>{<block_content>
+            <comment type="line" format="doxygen">///////////////////////////////////////////////////////////////////</comment>
+            <comment type="line">// To inspect the state during test, you need to go one level up the callstack</comment>
+            <comment type="line">// To go back to the test and change execution, jump over the throw statement</comment>
+            <comment type="line" format="doxygen">///////////////////////////////////////////////////////////////////</comment>
+            <expr_stmt><expr><call><name>CATCH_BREAK_INTO_DEBUGGER</name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+        </block_content>}</block></if></if_stmt>
+<cpp:endif xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">endif</cpp:directive></cpp:endif>
+        <if_stmt><if>if<condition>( <expr><name>m_shouldThrow</name></expr> )</condition><block type="pseudo"><block_content>
+            <throw>throw <expr><call><name><name>Catch</name><operator>::</operator><name>TestFailureException</name></name><argument_list>()</argument_list></call></expr>;</throw></block_content></block></if></if_stmt>
+    </block_content>}</block></function>
+
+    <function><type><name>bool</name></type> <name><name>ResultBuilder</name><operator>::</operator><name>shouldDebugBreak</name></name><parameter_list>()</parameter_list> <specifier>const</specifier> <block>{<block_content> <return>return <expr><name>m_shouldDebugBreak</name></expr>;</return> </block_content>}</block></function>
+    <function><type><name>bool</name></type> <name><name>ResultBuilder</name><operator>::</operator><name>allowThrows</name></name><parameter_list>()</parameter_list> <specifier>const</specifier> <block>{<block_content> <return>return <expr><call><name>getCurrentContext</name><argument_list>()</argument_list></call><operator>.</operator><call><name>getConfig</name><argument_list>()</argument_list></call><operator>-&gt;</operator><call><name>allowThrows</name><argument_list>()</argument_list></call></expr>;</return> </block_content>}</block></function>
+
+    <function><type><name>AssertionResult</name></type> <name><name>ResultBuilder</name><operator>::</operator><name>build</name></name><parameter_list>()</parameter_list> <specifier>const</specifier>
+    <block>{<block_content>
+        <return>return <expr><call><name>build</name><argument_list>( <argument><expr><operator>*</operator><name>this</name></expr></argument> )</argument_list></call></expr>;</return>
+    </block_content>}</block></function>
+
+    <comment type="line">// CAVEAT: The returned AssertionResult stores a pointer to the argument expr,</comment>
+    <comment type="line">//         a temporary DecomposedExpression, which in turn holds references to</comment>
+    <comment type="line">//         operands, possibly temporary as well.</comment>
+    <comment type="line">//         It should immediately be passed to handleResult; if the expression</comment>
+    <comment type="line">//         needs to be reported, its string expansion must be composed before</comment>
+    <comment type="line">//         the temporaries are destroyed.</comment>
+    <function><type><name>AssertionResult</name></type> <name><name>ResultBuilder</name><operator>::</operator><name>build</name></name><parameter_list>( <parameter><decl><type><name>DecomposedExpression</name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>expr</name></decl></parameter> )</parameter_list> <specifier>const</specifier> <block>{<block_content>
+        <expr_stmt><expr><call><name>assert</name><argument_list>( <argument><expr><name><name>m_data</name><operator>.</operator><name>resultType</name></name> <operator>!=</operator> <name><name>ResultWas</name><operator>::</operator><name>Unknown</name></name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        <decl_stmt><decl><type><name>AssertionResultData</name></type> <name>data</name> <init>= <expr><name>m_data</name></expr></init></decl>;</decl_stmt>
+
+        <if_stmt><if>if<condition>(<expr><name>m_usedStream</name></expr>)</condition><block type="pseudo"><block_content>
+            <expr_stmt><expr><name><name>data</name><operator>.</operator><name>message</name></name> <operator>=</operator> <diff:delete type="replace" xmlns:diff="http://www.srcML.org/srcDiff"><call><name>m_stream</name><argument_list>()</argument_list></call></diff:delete><diff:insert type="replace" xmlns:diff="http://www.srcML.org/srcDiff"><call><name>s_stream</name><argument_list>()</argument_list></call></diff:insert><operator>.</operator><call><name><name>oss</name><operator>.</operator><name>str</name></name><argument_list>()</argument_list></call></expr>;</expr_stmt></block_content></block></if></if_stmt>
+        <expr_stmt><expr><name><name>data</name><operator>.</operator><name>decomposedExpression</name></name> <operator>=</operator> <operator>&amp;</operator><name>expr</name></expr>;</expr_stmt> <comment type="line">// for lazy reconstruction</comment>
+        <return>return <expr><call><name>AssertionResult</name><argument_list>( <argument><expr><name>m_assertionInfo</name></expr></argument>, <argument><expr><name>data</name></expr></argument> )</argument_list></call></expr>;</return>
+    </block_content>}</block></function>
+
+    <function><type><name>void</name></type> <name><name>ResultBuilder</name><operator>::</operator><name>reconstructExpression</name></name><parameter_list>( <parameter><decl><type><name><name>std</name><operator>::</operator><name>string</name></name><modifier>&amp;</modifier></type> <name>dest</name></decl></parameter> )</parameter_list> <specifier>const</specifier> <block>{<block_content>
+        <expr_stmt><expr><name>dest</name> <operator>=</operator> <name><name>m_assertionInfo</name><operator>.</operator><name>capturedExpression</name></name></expr>;</expr_stmt>
+    </block_content>}</block></function>
+
+    <function><type><name>void</name></type> <name><name>ResultBuilder</name><operator>::</operator><name>setExceptionGuard</name></name><parameter_list>()</parameter_list> <block>{<block_content>
+        <expr_stmt><expr><name>m_guardException</name> <operator>=</operator> <literal type="boolean">true</literal></expr>;</expr_stmt>
+    </block_content>}</block></function>
+    <function><type><name>void</name></type> <name><name>ResultBuilder</name><operator>::</operator><name>unsetExceptionGuard</name></name><parameter_list>()</parameter_list> <block>{<block_content>
+        <expr_stmt><expr><name>m_guardException</name> <operator>=</operator> <literal type="boolean">false</literal></expr>;</expr_stmt>
+    </block_content>}</block></function>
+
+    <function><type><name>CopyableStream</name><modifier>&amp;</modifier></type> <name><name>ResultBuilder</name><operator>::</operator><name>stream</name></name><parameter_list>()</parameter_list> <block>{<block_content>
+        <if_stmt><if>if<condition>( <expr><operator>!</operator><name>m_usedStream</name></expr> )</condition> <block>{<block_content>
+            <expr_stmt><expr><name>m_usedStream</name> <operator>=</operator> <literal type="boolean">true</literal></expr>;</expr_stmt>
+            <expr_stmt><expr><call><name>s_stream</name><argument_list>()</argument_list></call><operator>.</operator><call><name><name>oss</name><operator>.</operator><name>str</name></name><argument_list>(<argument><expr><literal type="string">""</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        </block_content>}</block></if></if_stmt>
+        <return>return <expr><call><name>s_stream</name><argument_list>()</argument_list></call></expr>;</return>
+    </block_content>}</block></function>
+
+    <function><type><name>CopyableStream</name><modifier>&amp;</modifier></type> <name><name>ResultBuilder</name><operator>::</operator><name>s_stream</name></name><parameter_list>()</parameter_list> <block>{<block_content>
+        <decl_stmt><decl><type><specifier>static</specifier> <name>CopyableStream</name></type> <name>s</name></decl>;</decl_stmt>
+        <return>return <expr><name>s</name></expr>;</return>
+    </block_content>}</block></function>
+
+
+}</block></namespace> <comment type="line">// end namespace Catch</comment>
+</unit>

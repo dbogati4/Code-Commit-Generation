@@ -1,0 +1,16 @@
+diff --git a/include/internal/catch_session.cpp b/include/internal/catch_session.cpp
+index 44b45dbc..a5907e97 100644
+--- a/include/internal/catch_session.cpp
++++ b/include/internal/catch_session.cpp
+@@ -171,9 +171,9 @@ namespace Catch {
+             return 1;
+ 
+         auto result = m_cli.parse( clara::Args( argc, argv ) );
+-        config();
+-        getCurrentMutableContext().setConfig( m_config );
+         if( !result ) {
++            config();
++            getCurrentMutableContext().setConfig(m_config);
+             Catch::cerr()
+                 << Colour( Colour::Red )
+                 << "\nError(s) in input:\n"

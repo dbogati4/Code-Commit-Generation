@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" xmlns:diff="http://www.srcML.org/srcDiff" revision="1.0.0" language="C++" filename="C:\Users\saile\AppData\Local\Temp\catch2_100_z8gzpiwf\0016362f69804ae18953a0ec11d0c108e8402e1d\include_internal_catch_stringref_cpp\include_internal_catch_stringref_cpp.old|C:\Users\saile\AppData\Local\Temp\catch2_100_z8gzpiwf\0016362f69804ae18953a0ec11d0c108e8402e1d\include_internal_catch_stringref_cpp\include_internal_catch_stringref_cpp.new"><comment type="block">/*
+ *  Copyright 2016 Two Blue Cubes Ltd. All rights reserved.
+ *
+ *  Distributed under the Boost Software License, Version 1.0. (See accompanying
+ *  file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
+ */</comment>
+
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">"catch_stringref.h"</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">"catch_stringbuilder.h"</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">"catch_string.h"</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">"catch_stringdata.h"</cpp:file></cpp:include>
+
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;cstring&gt;</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;ostream&gt;</cpp:file></cpp:include>
+
+<namespace>namespace <name>Catch</name> <block>{
+    
+    <decl_stmt><decl><type><name>StringRef</name></type> <name><name>StringRef</name><operator>::</operator><name>s_emptyStringRef</name></name> <init>= <expr><literal type="string">""</literal></expr></init></decl>;</decl_stmt>
+    
+    <constructor><name><name>StringRef</name><operator>::</operator><name>StringRef</name></name><parameter_list>()</parameter_list> <noexcept>noexcept</noexcept>
+    :   <name>StringRef</name>( <name>s_emptyStringRef</name></constructor> )</block>
+    <block>{}</block></namespace>
+    
+    <constructor><name><name>StringRef</name><operator>::</operator><name>StringRef</name></name><parameter_list>( <parameter><decl><type><name>StringRef</name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>other</name></decl></parameter> )</parameter_list> <noexcept>noexcept</noexcept>
+    :   <name>m_start</name>( <name>other</name>.<name>m_start</name></constructor> )<operator>,</operator>
+        <expr_stmt><expr><call><name>m_size</name><argument_list>( <argument><expr><name><name>other</name><operator>.</operator><name>m_size</name></name></expr></argument> )</argument_list></call></expr><operator>,</operator>
+        <macro><name>m_data</name><argument_list>( <argument>other.m_data</argument> )</argument_list></macro>
+    <expr><block>{
+        <if_stmt><if>if<condition>( <expr><name>m_data</name></expr> )</condition><block type="pseudo"><block_content>
+            <expr_stmt><expr><call><name><name>m_data</name><operator>-&gt;</operator><name>addRef</name></name><argument_list>()</argument_list></call></expr>;</expr_stmt></block_content></block></if></if_stmt>
+    }</block></expr></expr_stmt>
+    
+    <constructor><name><name>StringRef</name><operator>::</operator><name>StringRef</name></name><parameter_list>( <parameter><decl><type><name>StringRef</name><modifier>&amp;&amp;</modifier></type> <name>other</name></decl></parameter> )</parameter_list> <noexcept>noexcept</noexcept>
+    :   <name>m_start</name>( <name>other</name>.<name>m_start</name></constructor> )<operator>,</operator>
+        <expr_stmt><expr><call><name>m_size</name><argument_list>( <argument><expr><name><name>other</name><operator>.</operator><name>m_size</name></name></expr></argument> )</argument_list></call></expr><operator>,</operator>
+        <macro><name>m_data</name><argument_list>( <argument>other.m_data</argument> )</argument_list></macro>
+    <expr><block>{
+        <expr><name><name>other</name><operator>.</operator><name>m_data</name></name> <operator>=</operator> <literal type="null">nullptr</literal></expr>;
+    }</block>
+    
+    <call><name><name>StringRef</name><operator>::</operator><name>StringRef</name></name><argument_list>( <argument><expr><name>char</name> <specifier>const</specifier><operator>*</operator> <name>rawChars</name></expr></argument> )</argument_list></call> <noexcept>noexcept</noexcept>
+    <operator>:</operator>   <call><name>m_start</name><argument_list>( <argument><expr><name>rawChars</name></expr></argument> )</argument_list></call></expr><operator>,</operator>
+        <macro><name>m_size</name><argument_list>( <argument><diff:insert xmlns:diff="http://www.srcML.org/srcDiff">static_cast&lt;size_type&gt;(<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws></diff:insert>std::strlen( rawChars )<diff:insert xmlns:diff="http://www.srcML.org/srcDiff"><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>)</diff:insert></argument> )</argument_list></macro>
+    <expr><block>{}</block>
+    
+    <macro><name>StringRef</name></macro><name><operator>::</operator><name>StringRef</name></name><operator>(</operator> <name>char</name> <specifier>const</specifier><operator>*</operator> <name>rawChars</name><operator>,</operator> <name>size_type</name> <name>size</name> <operator>)</operator> <noexcept>noexcept</noexcept>
+    <operator>:</operator>   <call><name>m_start</name><argument_list>( <argument><expr><name>rawChars</name></expr></argument> )</argument_list></call></expr><operator>,</operator>
+        <macro><name>m_size</name><argument_list>( <argument>size</argument> )</argument_list></macro>
+    <expr><block>{
+        <expr><name>size_type</name> <name>rawSize</name> <operator>=</operator> <name>rawChars</name> <operator>==</operator> <literal type="null">nullptr</literal> <operator>?</operator> <literal type="number">0</literal> <operator>:</operator> <diff:delete type="replace" xmlns:diff="http://www.srcML.org/srcDiff"><call><name><name>std</name><operator>::</operator><name>strlen</name></name><argument_list>(<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><argument><expr><name>rawChars</name></expr></argument><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>)</argument_list></call></diff:delete><diff:insert type="replace" xmlns:diff="http://www.srcML.org/srcDiff"><cast type="static">static_cast<argument_list type="generic">&lt;<argument><expr><name>size_type</name></expr></argument>&gt;</argument_list><argument_list>(<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><argument><expr><call><name><name>std</name><operator>::</operator><name>strlen</name></name><argument_list>(<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><argument><expr><name>rawChars</name></expr></argument><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>)</argument_list></call></expr></argument><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>)</argument_list></cast></diff:insert></expr>;
+        <if_stmt><if>if<condition>( <expr><name>rawSize</name> <operator>&lt;</operator> <name>size</name></expr> )</condition><block type="pseudo"><block_content>
+            <expr_stmt><expr><name>size</name> <operator>=</operator> <name>rawSize</name></expr>;</expr_stmt></block_content></block></if></if_stmt>
+    }</block></expr></expr_stmt>
+    
+    <constructor><name><name>StringRef</name><operator>::</operator><name>StringRef</name></name><parameter_list>( <parameter><decl><type><name>String</name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>other</name></decl></parameter> )</parameter_list> <noexcept>noexcept</noexcept>
+    :   <name>m_start</name>( <name>other</name>.<name>c_str</name>(</constructor>) )<operator>,</operator>
+        <expr_stmt><expr><call><name>m_size</name><argument_list>( <argument><expr><call><name><name>other</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call></expr></argument> )</argument_list></call></expr><operator>,</operator>
+        <macro><name>m_data</name><argument_list>( <argument><literal type="null">nullptr</literal></argument> )</argument_list></macro>
+    <expr><block>{}</block>
+    
+    <call><name><name>StringRef</name><operator>::</operator><name>StringRef</name></name><argument_list>( <argument><expr><name>String</name><operator>&amp;&amp;</operator> <name>str</name></expr></argument> )</argument_list></call> <noexcept>noexcept</noexcept>
+    <operator>:</operator>   <call><name>m_start</name><argument_list>( <argument><expr><call><name><name>str</name><operator>.</operator><name>c_str</name></name><argument_list>()</argument_list></call></expr></argument> )</argument_list></call></expr><operator>,</operator>
+        <expr><call><name>m_size</name><argument_list>( <argument><expr><call><name><name>str</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call></expr></argument> )</argument_list></call></expr><operator>,</operator>
+        <macro><name>m_data</name><argument_list>( <argument>str.m_data</argument> )</argument_list></macro>
+    <expr><block>{
+        <expr><name><name>str</name><operator>.</operator><name>m_data</name></name> <operator>=</operator> <call><name><name>StringData</name><operator>::</operator><name>getEmpty</name></name><argument_list>()</argument_list></call></expr>;
+    }</block>
+    
+    <call><name><name>StringRef</name><operator>::</operator><name>~StringRef</name></name><argument_list>()</argument_list></call> <noexcept>noexcept</noexcept> <block>{
+        <if_stmt><if>if<condition>( <expr><call><name>isOwned</name><argument_list>()</argument_list></call></expr> )</condition><block type="pseudo"><block_content>
+            <expr_stmt><expr><call><name><name>m_data</name><operator>-&gt;</operator><name>release</name></name><argument_list>()</argument_list></call></expr>;</expr_stmt></block_content></block></if></if_stmt>
+    }</block></expr></expr_stmt>
+    
+    <function type="operator"><type><name>auto</name></type> <name><name>StringRef</name><operator>::</operator><name>operator <name>=</name></name></name> <parameter_list>( <parameter><decl><type><name>StringRef</name></type> <name>other</name></decl></parameter> )</parameter_list> <noexcept>noexcept</noexcept> -&gt; <type><name>StringRef</name><modifier>&amp;</modifier></type> <block>{<block_content>
+        <expr_stmt><expr><call><name>swap</name><argument_list>( <argument><expr><name>other</name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        <return>return <expr><operator>*</operator><name>this</name></expr>;</return>
+    </block_content>}</block></function>
+
+    <function><type><name>void</name></type> <name><name>StringRef</name><operator>::</operator><name>swap</name></name><parameter_list>( <parameter><decl><type><name>StringRef</name><modifier>&amp;</modifier></type> <name>other</name></decl></parameter> )</parameter_list> <noexcept>noexcept</noexcept> <block>{<block_content>
+        <expr_stmt><expr><call><name><name>std</name><operator>::</operator><name>swap</name></name><argument_list>( <argument><expr><name>m_start</name></expr></argument>, <argument><expr><name><name>other</name><operator>.</operator><name>m_start</name></name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name><name>std</name><operator>::</operator><name>swap</name></name><argument_list>( <argument><expr><name>m_size</name></expr></argument>, <argument><expr><name><name>other</name><operator>.</operator><name>m_size</name></name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name><name>std</name><operator>::</operator><name>swap</name></name><argument_list>( <argument><expr><name>m_data</name></expr></argument>, <argument><expr><name><name>other</name><operator>.</operator><name>m_data</name></name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block></function>
+    
+    <function><type><name>auto</name></type> <name><name>StringRef</name><operator>::</operator><name>c_str</name></name><parameter_list>()</parameter_list> <specifier>const</specifier> -&gt; <type><name>char</name> <specifier>const</specifier><modifier>*</modifier></type> <block>{<block_content>
+        <if_stmt><if>if<condition>( <expr><call><name>isSubstring</name><argument_list>()</argument_list></call></expr> )</condition><block type="pseudo"><block_content>
+           <expr_stmt><expr><cast type="const">const_cast<argument_list type="generic">&lt;<argument><expr><name>StringRef</name><operator>*</operator></expr></argument>&gt;</argument_list><argument_list>( <argument><expr><name>this</name></expr></argument> )</argument_list></cast><operator>-&gt;</operator><call><name>takeOwnership</name><argument_list>()</argument_list></call></expr>;</expr_stmt></block_content></block></if></if_stmt>
+        <return>return <expr><name>m_start</name></expr>;</return>
+    </block_content>}</block></function>
+    <function><type><name>auto</name></type> <name><name>StringRef</name><operator>::</operator><name>data</name></name><parameter_list>()</parameter_list> <specifier>const</specifier> <noexcept>noexcept</noexcept> -&gt; <type><name>char</name> <specifier>const</specifier><modifier>*</modifier></type> <block>{<block_content>
+        <return>return <expr><name>m_start</name></expr>;</return>
+    </block_content>}</block></function>
+
+    <function><type><name>auto</name></type> <name><name>StringRef</name><operator>::</operator><name>isOwned</name></name><parameter_list>()</parameter_list> <specifier>const</specifier> <noexcept>noexcept</noexcept> -&gt; <type><name>bool</name></type> <block>{<block_content>
+        <return>return <expr><name>m_data</name> <operator>!=</operator> <literal type="null">nullptr</literal></expr>;</return>
+    </block_content>}</block></function>
+    <function><type><name>auto</name></type> <name><name>StringRef</name><operator>::</operator><name>isSubstring</name></name><parameter_list>()</parameter_list> <specifier>const</specifier> <noexcept>noexcept</noexcept> -&gt; <type><name>bool</name></type> <block>{<block_content>
+        <return>return <expr><name><name>m_start</name><index>[<expr><name>m_size</name></expr>]</index></name> <operator>!=</operator> <literal type="char">'\0'</literal></expr>;</return>
+    </block_content>}</block></function>
+    
+    <function><type><name>void</name></type> <name><name>StringRef</name><operator>::</operator><name>takeOwnership</name></name><parameter_list>()</parameter_list> <block>{<block_content>
+        <if_stmt><if>if<condition>( <expr><operator>!</operator><call><name>isOwned</name><argument_list>()</argument_list></call></expr> )</condition> <block>{<block_content>
+            <decl_stmt><decl><type><name>StringRef</name></type> <name>temp</name> <init>= <expr><call><name>String</name><argument_list>( <argument><expr><operator>*</operator><name>this</name></expr></argument> )</argument_list></call></expr></init></decl>;</decl_stmt>
+            <expr_stmt><expr><call><name>swap</name><argument_list>( <argument><expr><name>temp</name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        </block_content>}</block></if></if_stmt>        
+    </block_content>}</block></function>
+    <function><type><name>auto</name></type> <name><name>StringRef</name><operator>::</operator><name>substr</name></name><parameter_list>( <parameter><decl><type><name>size_type</name></type> <name>start</name></decl></parameter>, <parameter><decl><type><name>size_type</name></type> <name>size</name></decl></parameter> )</parameter_list> <specifier>const</specifier> <noexcept>noexcept</noexcept> -&gt; <type><name>StringRef</name></type> <block>{<block_content>
+        <if_stmt><if>if<condition>( <expr><name>start</name> <operator>&lt;</operator> <name>m_size</name></expr> )</condition><block type="pseudo"><block_content>
+            <return>return <expr><call><name>StringRef</name><argument_list>( <argument><expr><name>m_start</name><operator>+</operator><name>start</name></expr></argument>, <argument><expr><name>size</name></expr></argument> )</argument_list></call></expr>;</return></block_content></block></if>
+        <else>else<block type="pseudo"><block_content>
+            <return>return <expr><call><name>StringRef</name><argument_list>()</argument_list></call></expr>;</return></block_content></block></else></if_stmt>
+    </block_content>}</block></function>
+    <function type="operator"><type><name>auto</name></type> <name><name>StringRef</name><operator>::</operator><name>operator <name>==</name></name></name> <parameter_list>( <parameter><decl><type><name>StringRef</name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>other</name></decl></parameter> )</parameter_list> <specifier>const</specifier> <noexcept>noexcept</noexcept> -&gt; <type><name>bool</name></type> <block>{<block_content>
+        <return>return
+            <expr><call><name>size</name><argument_list>()</argument_list></call> <operator>==</operator> <call><name><name>other</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call> <operator>&amp;&amp;</operator>
+            <operator>(</operator><call><name><name>std</name><operator>::</operator><name>strncmp</name></name><argument_list>( <argument><expr><name>m_start</name></expr></argument>, <argument><expr><name><name>other</name><operator>.</operator><name>m_start</name></name></expr></argument>, <argument><expr><call><name>size</name><argument_list>()</argument_list></call></expr></argument> )</argument_list></call> <operator>==</operator> <literal type="number">0</literal><operator>)</operator></expr>;</return>
+    </block_content>}</block></function>
+    <function type="operator"><type><name>auto</name></type> <name><name>StringRef</name><operator>::</operator><name>operator <name>!=</name></name></name> <parameter_list>( <parameter><decl><type><name>StringRef</name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>other</name></decl></parameter> )</parameter_list> <specifier>const</specifier> <noexcept>noexcept</noexcept> -&gt; <type><name>bool</name></type> <block>{<block_content>
+        <return>return <expr><operator>!</operator><call><name>operator<name>==</name></name><argument_list>( <argument><expr><name>other</name></expr></argument> )</argument_list></call></expr>;</return>
+    </block_content>}</block></function>
+        
+    <function type="operator"><type><name>auto</name></type> <name>operator <name>+</name></name> <parameter_list>( <parameter><decl><type><name>StringRef</name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>lhs</name></decl></parameter>, <parameter><decl><type><name>StringRef</name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>rhs</name></decl></parameter> )</parameter_list> -&gt; <type><name>String</name></type> <block>{<block_content>
+        <decl_stmt><decl><type><name>StringBuilder</name></type> <name>buf</name></decl>;</decl_stmt>
+        <expr_stmt><expr><call><name><name>buf</name><operator>.</operator><name>reserve</name></name><argument_list>( <argument><expr><call><name><name>lhs</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call> <operator>+</operator> <call><name><name>rhs</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name><name>buf</name><operator>.</operator><name>append</name></name><argument_list>( <argument><expr><name>lhs</name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name><name>buf</name><operator>.</operator><name>append</name></name><argument_list>( <argument><expr><name>rhs</name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        <return>return <expr><call><name>String</name><argument_list>( <argument><expr><call><name><name>std</name><operator>::</operator><name>move</name></name><argument_list>( <argument><expr><name>buf</name></expr></argument> )</argument_list></call></expr></argument> )</argument_list></call></expr>;</return>
+    </block_content>}</block></function>
+    <function type="operator"><type><name>auto</name></type> <name>operator <name>+</name></name> <parameter_list>( <parameter><decl><type><name>StringRef</name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>lhs</name></decl></parameter>, <parameter><decl><type><specifier>const</specifier> <name>char</name><modifier>*</modifier></type> <name>rhs</name></decl></parameter> )</parameter_list> -&gt; <type><name>String</name></type> <block>{<block_content>
+        <return>return <expr><name>lhs</name> <operator>+</operator> <call><name>StringRef</name><argument_list>( <argument><expr><name>rhs</name></expr></argument> )</argument_list></call></expr>;</return>
+    </block_content>}</block></function>
+    <function type="operator"><type><name>auto</name></type> <name>operator <name>+</name></name> <parameter_list>( <parameter><decl><type><name>char</name> <specifier>const</specifier><modifier>*</modifier></type> <name>lhs</name></decl></parameter>, <parameter><decl><type><name>StringRef</name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>rhs</name></decl></parameter> )</parameter_list> -&gt; <type><name>String</name></type> <block>{<block_content>
+        <return>return <expr><call><name>StringRef</name><argument_list>( <argument><expr><name>lhs</name></expr></argument> )</argument_list></call> <operator>+</operator> <name>rhs</name></expr>;</return>
+    </block_content>}</block></function>
+
+    <function type="operator"><type><name><name>std</name><operator>::</operator><name>ostream</name></name><modifier>&amp;</modifier></type> <name>operator <name>&lt;&lt;</name></name> <parameter_list>( <parameter><decl><type><name><name>std</name><operator>::</operator><name>ostream</name></name><modifier>&amp;</modifier></type> <name>os</name></decl></parameter>, <parameter><decl><type><name>StringRef</name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>str</name></decl></parameter> )</parameter_list> <block>{<block_content>
+        <return>return <expr><name>os</name> <operator>&lt;&lt;</operator> <call><name><name>str</name><operator>.</operator><name>c_str</name></name><argument_list>()</argument_list></call></expr>;</return>
+    </block_content>}</block></function>
+        
+} <comment type="line">// namespace Catch</comment>
+</unit>

@@ -1,0 +1,8 @@
+{
+  "commit_id": "11e55161e1bd859ede9b5d67b6a7b436291fa5af",
+  "parent_id": "e2f93b6507e58c09762f2e70b274359519ddcd68",
+  "message": "Some refactoring of Clara impl and experimental string based interface",
+  "changed_files": [
+    "projects/SelfTest/CmdLineTests.cpp"
+  ]
+}

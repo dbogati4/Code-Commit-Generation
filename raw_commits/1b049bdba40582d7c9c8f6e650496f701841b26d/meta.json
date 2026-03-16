@@ -1,0 +1,8 @@
+{
+  "commit_id": "1b049bdba40582d7c9c8f6e650496f701841b26d",
+  "parent_id": "e4b16053a6763cd6f8b89aeaf59303a461ccf755",
+  "message": "2 more TEST_CASEs to DiscoverTests/register-tests.cpp",
+  "changed_files": [
+    "tests/TestScripts/DiscoverTests/register-tests.cpp"
+  ]
+}

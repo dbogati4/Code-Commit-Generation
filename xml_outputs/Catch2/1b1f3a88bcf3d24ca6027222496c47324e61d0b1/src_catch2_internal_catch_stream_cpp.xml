@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" xmlns:diff="http://www.srcML.org/srcDiff" revision="1.0.0" language="C++" filename="C:\Users\saile\AppData\Local\Temp\catch2_100_z8gzpiwf\1b1f3a88bcf3d24ca6027222496c47324e61d0b1\src_catch2_internal_catch_stream_cpp\src_catch2_internal_catch_stream_cpp.old|C:\Users\saile\AppData\Local\Temp\catch2_100_z8gzpiwf\1b1f3a88bcf3d24ca6027222496c47324e61d0b1\src_catch2_internal_catch_stream_cpp\src_catch2_internal_catch_stream_cpp.new">
+<comment type="line">//              Copyright Catch2 Authors</comment>
+<comment type="line">// Distributed under the Boost Software License, Version 1.0.</comment>
+<comment type="line">//   (See accompanying file LICENSE_1_0.txt or copy at</comment>
+<comment type="line">//        https://www.boost.org/LICENSE_1_0.txt)</comment>
+
+<comment type="line">// SPDX-License-Identifier: BSL-1.0</comment>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;catch2/internal/catch_enforce.hpp&gt;</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;catch2/internal/catch_stream.hpp&gt;</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;catch2/internal/catch_debug_console.hpp&gt;</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;catch2/internal/catch_stringref.hpp&gt;</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;catch2/internal/catch_singletons.hpp&gt;</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;catch2/internal/catch_unique_ptr.hpp&gt;</cpp:file></cpp:include>
+
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;cstdio&gt;</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;iostream&gt;</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;fstream&gt;</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;sstream&gt;</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;vector&gt;</cpp:file></cpp:include>
+
+<namespace>namespace <name>Catch</name> <block>{
+
+    <expr_stmt><expr><call><name><name>Catch</name><operator>::</operator><name>IStream</name><operator>::</operator><name>~IStream</name></name><argument_list>()</argument_list></call> <operator>=</operator> default</expr>;</expr_stmt>
+
+<namespace>namespace <name>Detail</name> <block>{
+    <namespace>namespace <block>{
+        <class><template>template<parameter_list>&lt;<parameter><type><name>typename</name></type> <name>WriterF</name></parameter>, <parameter><type><name><name>std</name><operator>::</operator><name>size_t</name></name></type> <name>bufferSize</name><init>=<expr><literal type="number">256</literal></expr></init></parameter>&gt;</parameter_list></template>
+        class <name>StreamBufImpl</name> <super_list>: <super><specifier>public</specifier> <name><name>std</name><operator>::</operator><name>streambuf</name></name></super></super_list> <block>{<private type="default">
+            <decl_stmt><decl><type><name>char</name></type> <name><name>data</name><index>[<expr><name>bufferSize</name></expr>]</index></name></decl>;</decl_stmt>
+            <decl_stmt><decl><type><name>WriterF</name></type> <name>m_writer</name></decl>;</decl_stmt>
+
+        </private><public>public:
+            <constructor><name>StreamBufImpl</name><parameter_list>()</parameter_list> <block>{<block_content>
+                <expr_stmt><expr><call><name>setp</name><argument_list>( <argument><expr><name>data</name></expr></argument>, <argument><expr><name>data</name> <operator>+</operator> <sizeof>sizeof<argument_list>(<argument><expr><name>data</name></expr></argument>)</argument_list></sizeof></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+            </block_content>}</block></constructor>
+
+            <destructor><name>~StreamBufImpl</name><parameter_list>()</parameter_list> <noexcept>noexcept</noexcept> <block>{<block_content>
+                <expr_stmt><expr><call><name><name>StreamBufImpl</name><operator>::</operator><name>sync</name></name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+            </block_content>}</block></destructor>
+
+        </public><private>private:
+            <function><type><name>int</name></type> <name>overflow</name><parameter_list>( <parameter><decl><type><name>int</name></type> <name>c</name></decl></parameter> )</parameter_list> <specifier>override</specifier> <block>{<block_content>
+                <expr_stmt><expr><call><name>sync</name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+
+                <if_stmt><if>if<condition>( <expr><name>c</name> <operator>!=</operator> <name>EOF</name></expr> )</condition> <block>{<block_content>
+                    <if_stmt><if>if<condition>( <expr><call><name>pbase</name><argument_list>()</argument_list></call> <operator>==</operator> <call><name>epptr</name><argument_list>()</argument_list></call></expr> )</condition><block type="pseudo"><block_content>
+                        <expr_stmt><expr><call><name>m_writer</name><argument_list>( <argument><expr><call><name><name>std</name><operator>::</operator><name>string</name></name><argument_list>( <argument><expr><literal type="number">1</literal></expr></argument>, <argument><expr><cast type="static">static_cast<argument_list type="generic">&lt;<argument><expr><name>char</name></expr></argument>&gt;</argument_list><argument_list>( <argument><expr><name>c</name></expr></argument> )</argument_list></cast></expr></argument> )</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt></block_content></block></if>
+                    <else>else<block type="pseudo"><block_content>
+                        <expr_stmt><expr><call><name>sputc</name><argument_list>( <argument><expr><cast type="static">static_cast<argument_list type="generic">&lt;<argument><expr><name>char</name></expr></argument>&gt;</argument_list><argument_list>( <argument><expr><name>c</name></expr></argument> )</argument_list></cast></expr></argument> )</argument_list></call></expr>;</expr_stmt></block_content></block></else></if_stmt>
+                </block_content>}</block></if></if_stmt>
+                <return>return <expr><literal type="number">0</literal></expr>;</return>
+            </block_content>}</block></function>
+
+            <function><type><name>int</name></type> <name>sync</name><parameter_list>()</parameter_list> <specifier>override</specifier> <block>{<block_content>
+                <if_stmt><if>if<condition>( <expr><call><name>pbase</name><argument_list>()</argument_list></call> <operator>!=</operator> <call><name>pptr</name><argument_list>()</argument_list></call></expr> )</condition> <block>{<block_content>
+                    <expr_stmt><expr><call><name>m_writer</name><argument_list>( <argument><expr><call><name><name>std</name><operator>::</operator><name>string</name></name><argument_list>( <argument><expr><call><name>pbase</name><argument_list>()</argument_list></call></expr></argument>, <argument><expr><cast type="static">static_cast<argument_list type="generic">&lt;<argument><expr><name><name>std</name><operator>::</operator><name>string</name><operator>::</operator><name>size_type</name></name></expr></argument>&gt;</argument_list><argument_list>( <argument><expr><call><name>pptr</name><argument_list>()</argument_list></call> <operator>-</operator> <call><name>pbase</name><argument_list>()</argument_list></call></expr></argument> )</argument_list></cast></expr></argument> )</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+                    <expr_stmt><expr><call><name>setp</name><argument_list>( <argument><expr><call><name>pbase</name><argument_list>()</argument_list></call></expr></argument>, <argument><expr><call><name>epptr</name><argument_list>()</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+                </block_content>}</block></if></if_stmt>
+                <return>return <expr><literal type="number">0</literal></expr>;</return>
+            </block_content>}</block></function>
+        </private>}</block>;</class>
+
+        <comment type="line" format="doxygen">///////////////////////////////////////////////////////////////////////////</comment>
+
+        <struct>struct <name>OutputDebugWriter</name> <block>{<public type="default">
+
+            <function type="operator"><type><name>void</name></type> <name>operator<name>()</name></name><parameter_list>( <parameter><decl><type><name><name>std</name><operator>::</operator><name>string</name></name> <specifier>const</specifier><modifier>&amp;</modifier></type><diff:insert xmlns:diff="http://www.srcML.org/srcDiff"><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws></diff:insert><name>str</name></decl></parameter> )</parameter_list> <block>{<block_content>
+<diff:insert xmlns:diff="http://www.srcML.org/srcDiff"><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">                </diff:ws><if_stmt><if>if<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><condition>(<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><expr><operator>!</operator><call><name><name>str</name><operator>.</operator><name>empty</name></name><argument_list>()</argument_list></call></expr><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>)</condition><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><block>{<block_content><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+    </diff:ws><diff:common xmlns:diff="http://www.srcML.org/srcDiff">                <expr_stmt><expr><call><name>writeToDebugConsole</name><argument_list>( <argument><expr><name>str</name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+</diff:common><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">                </diff:ws></block_content>}</block></if></if_stmt><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+</diff:ws></diff:insert>            </block_content>}</block></function>
+        </public>}</block>;</struct>
+
+        <comment type="line" format="doxygen">///////////////////////////////////////////////////////////////////////////</comment>
+
+        <class>class <name>FileStream</name> <super_list>: <super><specifier>public</specifier> <name>IStream</name></super></super_list> <block>{<private type="default">
+            <decl_stmt><decl><type><specifier>mutable</specifier> <name><name>std</name><operator>::</operator><name>ofstream</name></name></type> <name>m_ofs</name></decl>;</decl_stmt>
+        </private><public>public:
+            <constructor><name>FileStream</name><parameter_list>( <parameter><decl><type><name><name>std</name><operator>::</operator><name>string</name></name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>filename</name></decl></parameter> )</parameter_list> <block>{<block_content>
+                <expr_stmt><expr><call><name><name>m_ofs</name><operator>.</operator><name>open</name></name><argument_list>( <argument><expr><call><name><name>filename</name><operator>.</operator><name>c_str</name></name><argument_list>()</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+                <expr_stmt><expr><call><name>CATCH_ENFORCE</name><argument_list>( <argument><expr><operator>!</operator><call><name><name>m_ofs</name><operator>.</operator><name>fail</name></name><argument_list>()</argument_list></call></expr></argument>, <argument><expr><literal type="string">"Unable to open file: '"</literal> <operator>&lt;&lt;</operator> <name>filename</name> <operator>&lt;&lt;</operator> <literal type="string">"'"</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+            </block_content>}</block></constructor>
+            <destructor_decl><name>~FileStream</name><parameter_list>()</parameter_list> <specifier>override</specifier> = <specifier>default</specifier>;</destructor_decl>
+        </public><public>public: <comment type="line">// IStream</comment>
+            <function><type><name><name>std</name><operator>::</operator><name>ostream</name></name><modifier>&amp;</modifier></type> <name>stream</name><parameter_list>()</parameter_list> <specifier>const</specifier> <specifier>override</specifier> <block>{<block_content>
+                <return>return <expr><name>m_ofs</name></expr>;</return>
+            </block_content>}</block></function>
+        </public>}</block>;</class>
+
+        <comment type="line" format="doxygen">///////////////////////////////////////////////////////////////////////////</comment>
+
+        <class>class <name>CoutStream</name> <super_list>: <super><specifier>public</specifier> <name>IStream</name></super></super_list> <block>{<private type="default">
+            <decl_stmt><decl><type><specifier>mutable</specifier> <name><name>std</name><operator>::</operator><name>ostream</name></name></type> <name>m_os</name></decl>;</decl_stmt>
+        </private><public>public:
+            <comment type="line">// Store the streambuf from cout up-front because</comment>
+            <comment type="line">// cout may get redirected when running tests</comment>
+            <constructor><name>CoutStream</name><parameter_list>()</parameter_list> <member_init_list>: <call><name>m_os</name><argument_list>( <argument><expr><call><name><name>Catch</name><operator>::</operator><name>cout</name></name><argument_list>()</argument_list></call><operator>.</operator><call><name>rdbuf</name><argument_list>()</argument_list></call></expr></argument> )</argument_list></call> </member_init_list><block>{<block_content/>}</block></constructor>
+            <destructor_decl><name>~CoutStream</name><parameter_list>()</parameter_list> <specifier>override</specifier> = <specifier>default</specifier>;</destructor_decl>
+
+        </public><public>public: <comment type="line">// IStream</comment>
+            <function><type><name><name>std</name><operator>::</operator><name>ostream</name></name><modifier>&amp;</modifier></type> <name>stream</name><parameter_list>()</parameter_list> <specifier>const</specifier> <specifier>override</specifier> <block>{<block_content> <return>return <expr><name>m_os</name></expr>;</return> </block_content>}</block></function>
+        </public>}</block>;</class>
+
+        <comment type="line" format="doxygen">///////////////////////////////////////////////////////////////////////////</comment>
+
+        <class>class <name>DebugOutStream</name> <super_list>: <super><specifier>public</specifier> <name>IStream</name></super></super_list> <block>{<private type="default">
+            <decl_stmt><decl><type><name><name>Detail</name><operator>::</operator><name>unique_ptr</name><argument_list type="generic">&lt;<argument><expr><name><name>StreamBufImpl</name><argument_list type="generic">&lt;<argument><expr><name>OutputDebugWriter</name></expr></argument>&gt;</argument_list></name></expr></argument>&gt;</argument_list></name></type> <name>m_streamBuf</name></decl>;</decl_stmt>
+            <decl_stmt><decl><type><specifier>mutable</specifier> <name><name>std</name><operator>::</operator><name>ostream</name></name></type> <name>m_os</name></decl>;</decl_stmt>
+        </private><public>public:
+            <constructor><name>DebugOutStream</name><parameter_list>()</parameter_list>
+            <member_init_list>:   <call><name>m_streamBuf</name><argument_list>( <argument><expr><call><name><name>Detail</name><operator>::</operator><name>make_unique</name><argument_list type="generic">&lt;<argument><expr><name><name>StreamBufImpl</name><argument_list type="generic">&lt;<argument><expr><name>OutputDebugWriter</name></expr></argument>&gt;</argument_list></name></expr></argument>&gt;</argument_list></name><argument_list>()</argument_list></call></expr></argument> )</argument_list></call>,
+                <call><name>m_os</name><argument_list>( <argument><expr><call><name><name>m_streamBuf</name><operator>.</operator><name>get</name></name><argument_list>()</argument_list></call></expr></argument> )</argument_list></call>
+            </member_init_list><block>{<block_content/>}</block></constructor>
+
+            <destructor_decl><name>~DebugOutStream</name><parameter_list>()</parameter_list> <specifier>override</specifier> = <specifier>default</specifier>;</destructor_decl>
+
+        </public><public>public: <comment type="line">// IStream</comment>
+            <function><type><name><name>std</name><operator>::</operator><name>ostream</name></name><modifier>&amp;</modifier></type> <name>stream</name><parameter_list>()</parameter_list> <specifier>const</specifier> <specifier>override</specifier> <block>{<block_content> <return>return <expr><name>m_os</name></expr>;</return> </block_content>}</block></function>
+        </public>}</block>;</class>
+
+    }</block></namespace> <comment type="line">// unnamed namespace</comment>
+}</block></namespace> <comment type="line">// namespace Detail</comment>
+
+    <comment type="line" format="doxygen">///////////////////////////////////////////////////////////////////////////</comment>
+
+    <function><type><name>auto</name></type> <name>makeStream</name><parameter_list>( <parameter><decl><type><name><name>std</name><operator>::</operator><name>string</name></name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>filename</name></decl></parameter> )</parameter_list> -&gt; <type><name>IStream</name> <specifier>const</specifier><modifier>*</modifier></type> <block>{<block_content>
+        <if_stmt><if>if<condition>( <expr><call><name><name>filename</name><operator>.</operator><name>empty</name></name><argument_list>()</argument_list></call></expr> )</condition><block type="pseudo"><block_content>
+            <return>return <expr><operator>new</operator> <call><name><name>Detail</name><operator>::</operator><name>CoutStream</name></name><argument_list>()</argument_list></call></expr>;</return></block_content></block></if>
+        <if type="elseif">else if<condition>( <expr><name><name>filename</name><index>[<expr><literal type="number">0</literal></expr>]</index></name> <operator>==</operator> <literal type="char">'%'</literal></expr> )</condition> <block>{<block_content>
+            <if_stmt><if>if<condition>( <expr><name>filename</name> <operator>==</operator> <literal type="string">"%debug"</literal></expr> )</condition><block type="pseudo"><block_content>
+                <return>return <expr><operator>new</operator> <call><name><name>Detail</name><operator>::</operator><name>DebugOutStream</name></name><argument_list>()</argument_list></call></expr>;</return></block_content></block></if>
+            <else>else<block type="pseudo"><block_content>
+                <expr_stmt><expr><call><name>CATCH_ERROR</name><argument_list>( <argument><expr><literal type="string">"Unrecognised stream: '"</literal> <operator>&lt;&lt;</operator> <name>filename</name> <operator>&lt;&lt;</operator> <literal type="string">"'"</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt></block_content></block></else></if_stmt>
+        </block_content>}</block></if>
+        <else>else<block type="pseudo"><block_content>
+            <return>return <expr><operator>new</operator> <call><name><name>Detail</name><operator>::</operator><name>FileStream</name></name><argument_list>( <argument><expr><name>filename</name></expr></argument> )</argument_list></call></expr>;</return></block_content></block></else></if_stmt>
+    </block_content>}</block></function>
+
+
+    <comment type="line">// This class encapsulates the idea of a pool of ostringstreams that can be reused.</comment>
+    <struct>struct <name>StringStreams</name> <block>{<public type="default">
+        <decl_stmt><decl><type><name><name>std</name><operator>::</operator><name>vector</name><argument_list type="generic">&lt;<argument><expr><name><name>Detail</name><operator>::</operator><name>unique_ptr</name><argument_list type="generic">&lt;<argument><expr><name><name>std</name><operator>::</operator><name>ostringstream</name></name></expr></argument>&gt;</argument_list></name></expr></argument>&gt;</argument_list></name></type> <name>m_streams</name></decl>;</decl_stmt>
+        <decl_stmt><decl><type><name><name>std</name><operator>::</operator><name>vector</name><argument_list type="generic">&lt;<argument><expr><name><name>std</name><operator>::</operator><name>size_t</name></name></expr></argument>&gt;</argument_list></name></type> <name>m_unused</name></decl>;</decl_stmt>
+        <decl_stmt><decl><type><name><name>std</name><operator>::</operator><name>ostringstream</name></name></type> <name>m_referenceStream</name></decl>;</decl_stmt> <comment type="line">// Used for copy state/ flags from</comment>
+
+        <function><type><name>auto</name></type> <name>add</name><parameter_list>()</parameter_list> -&gt; <type><name><name>std</name><operator>::</operator><name>size_t</name></name></type> <block>{<block_content>
+            <if_stmt><if>if<condition>( <expr><call><name><name>m_unused</name><operator>.</operator><name>empty</name></name><argument_list>()</argument_list></call></expr> )</condition> <block>{<block_content>
+                <expr_stmt><expr><call><name><name>m_streams</name><operator>.</operator><name>push_back</name></name><argument_list>( <argument><expr><call><name><name>Detail</name><operator>::</operator><name>unique_ptr</name><argument_list type="generic">&lt;<argument><expr><name><name>std</name><operator>::</operator><name>ostringstream</name></name></expr></argument>&gt;</argument_list></name><argument_list>( <argument><expr><operator>new</operator> <name><name>std</name><operator>::</operator><name>ostringstream</name></name></expr></argument> )</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+                <return>return <expr><call><name><name>m_streams</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call><operator>-</operator><literal type="number">1</literal></expr>;</return>
+            </block_content>}</block></if>
+            <else>else <block>{<block_content>
+                <decl_stmt><decl><type><name>auto</name></type> <name>index</name> <init>= <expr><call><name><name>m_unused</name><operator>.</operator><name>back</name></name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+                <expr_stmt><expr><call><name><name>m_unused</name><operator>.</operator><name>pop_back</name></name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+                <return>return <expr><name>index</name></expr>;</return>
+            </block_content>}</block></else></if_stmt>
+        </block_content>}</block></function>
+
+        <function><type><name>void</name></type> <name>release</name><parameter_list>( <parameter><decl><type><name><name>std</name><operator>::</operator><name>size_t</name></name></type> <name>index</name></decl></parameter> )</parameter_list> <block>{<block_content>
+            <expr_stmt><expr><name><name>m_streams</name><index>[<expr><name>index</name></expr>]</index></name><operator>-&gt;</operator><call><name>copyfmt</name><argument_list>( <argument><expr><name>m_referenceStream</name></expr></argument> )</argument_list></call></expr>;</expr_stmt> <comment type="line">// Restore initial flags and other state</comment>
+            <expr_stmt><expr><call><name><name>m_unused</name><operator>.</operator><name>push_back</name></name><argument_list>(<argument><expr><name>index</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        </block_content>}</block></function>
+    </public>}</block>;</struct>
+
+    <constructor><name><name>ReusableStringStream</name><operator>::</operator><name>ReusableStringStream</name></name><parameter_list>()</parameter_list>
+    <member_init_list>:   <call><name>m_index</name><argument_list>( <argument><expr><call><name><name><name>Singleton</name><argument_list type="generic">&lt;<argument><expr><name>StringStreams</name></expr></argument>&gt;</argument_list></name><operator>::</operator><name>getMutable</name></name><argument_list>()</argument_list></call><operator>.</operator><call><name>add</name><argument_list>()</argument_list></call></expr></argument> )</argument_list></call>,
+        <call><name>m_oss</name><argument_list>( <argument><expr><call><name><name><name>Singleton</name><argument_list type="generic">&lt;<argument><expr><name>StringStreams</name></expr></argument>&gt;</argument_list></name><operator>::</operator><name>getMutable</name></name><argument_list>()</argument_list></call><operator>.</operator><name><name>m_streams</name><index>[<expr><name>m_index</name></expr>]</index></name><operator>.</operator><call><name>get</name><argument_list>()</argument_list></call></expr></argument> )</argument_list></call>
+    </member_init_list><block>{<block_content/>}</block></constructor>
+
+    <destructor><name><name>ReusableStringStream</name><operator>::</operator><name>~ReusableStringStream</name></name><parameter_list>()</parameter_list> <block>{<block_content>
+        <expr_stmt><expr><cast type="static">static_cast<argument_list type="generic">&lt;<argument><expr><name><name>std</name><operator>::</operator><name>ostringstream</name></name><operator>*</operator></expr></argument>&gt;</argument_list><argument_list>( <argument><expr><name>m_oss</name></expr></argument> )</argument_list></cast><operator>-&gt;</operator><call><name>str</name><argument_list>(<argument><expr><literal type="string">""</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name><name>m_oss</name><operator>-&gt;</operator><name>clear</name></name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name><name><name>Singleton</name><argument_list type="generic">&lt;<argument><expr><name>StringStreams</name></expr></argument>&gt;</argument_list></name><operator>::</operator><name>getMutable</name></name><argument_list>()</argument_list></call><operator>.</operator><call><name>release</name><argument_list>( <argument><expr><name>m_index</name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block></destructor>
+
+    <function><type><name><name>std</name><operator>::</operator><name>string</name></name></type> <name><name>ReusableStringStream</name><operator>::</operator><name>str</name></name><parameter_list>()</parameter_list> <specifier>const</specifier> <block>{<block_content>
+        <return>return <expr><cast type="static">static_cast<argument_list type="generic">&lt;<argument><expr><name><name>std</name><operator>::</operator><name>ostringstream</name></name><operator>*</operator></expr></argument>&gt;</argument_list><argument_list>( <argument><expr><name>m_oss</name></expr></argument> )</argument_list></cast><operator>-&gt;</operator><call><name>str</name><argument_list>()</argument_list></call></expr>;</return>
+    </block_content>}</block></function>
+
+    <function><type><name>void</name></type> <name><name>ReusableStringStream</name><operator>::</operator><name>str</name></name><parameter_list>( <parameter><decl><type><name><name>std</name><operator>::</operator><name>string</name></name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>str</name></decl></parameter> )</parameter_list> <block>{<block_content>
+        <expr_stmt><expr><cast type="static">static_cast<argument_list type="generic">&lt;<argument><expr><name><name>std</name><operator>::</operator><name>ostringstream</name></name><operator>*</operator></expr></argument>&gt;</argument_list><argument_list>( <argument><expr><name>m_oss</name></expr></argument> )</argument_list></cast><operator>-&gt;</operator><call><name>str</name><argument_list>( <argument><expr><name>str</name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block></function>
+
+
+    <comment type="line" format="doxygen">///////////////////////////////////////////////////////////////////////////</comment>
+
+
+<cpp:ifndef xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">ifndef</cpp:directive> <name>CATCH_CONFIG_NOSTDOUT</name></cpp:ifndef> <comment type="line">// If you #define this you must implement these functions</comment>
+    <function><type><name><name>std</name><operator>::</operator><name>ostream</name></name><modifier>&amp;</modifier></type> <name>cout</name><parameter_list>()</parameter_list> <block>{<block_content> <return>return <expr><name><name>std</name><operator>::</operator><name>cout</name></name></expr>;</return> </block_content>}</block></function>
+    <function><type><name><name>std</name><operator>::</operator><name>ostream</name></name><modifier>&amp;</modifier></type> <name>cerr</name><parameter_list>()</parameter_list> <block>{<block_content> <return>return <expr><name><name>std</name><operator>::</operator><name>cerr</name></name></expr>;</return> </block_content>}</block></function>
+    <function><type><name><name>std</name><operator>::</operator><name>ostream</name></name><modifier>&amp;</modifier></type> <name>clog</name><parameter_list>()</parameter_list> <block>{<block_content> <return>return <expr><name><name>std</name><operator>::</operator><name>clog</name></name></expr>;</return> </block_content>}</block></function>
+<cpp:endif xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">endif</cpp:directive></cpp:endif>
+}</block></namespace>
+</unit>

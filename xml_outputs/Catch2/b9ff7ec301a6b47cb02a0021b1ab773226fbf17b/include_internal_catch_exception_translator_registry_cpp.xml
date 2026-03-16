@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" xmlns:diff="http://www.srcML.org/srcDiff" revision="1.0.0" language="C++" filename="C:\Users\saile\AppData\Local\Temp\catch2_100_z8gzpiwf\b9ff7ec301a6b47cb02a0021b1ab773226fbf17b\include_internal_catch_exception_translator_registry_cpp\include_internal_catch_exception_translator_registry_cpp.old|C:\Users\saile\AppData\Local\Temp\catch2_100_z8gzpiwf\b9ff7ec301a6b47cb02a0021b1ab773226fbf17b\include_internal_catch_exception_translator_registry_cpp\include_internal_catch_exception_translator_registry_cpp.new"><comment type="block">/*
+ *  Created by Phil on 20/04/2011.
+ *  Copyright 2011 Two Blue Cubes Ltd. All rights reserved.
+ *
+ *  Distributed under the Boost Software License, Version 1.0. (See accompanying
+ *  file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
+ */</comment>
+
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">"catch_assertionhandler.h"</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">"catch_exception_translator_registry.h"</cpp:file></cpp:include>
+
+<cpp:ifdef xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">ifdef</cpp:directive> <name>__OBJC__</name></cpp:ifdef>
+<cpp:empty xmlns:cpp="http://www.srcML.org/srcML/cpp">#import "Foundation/Foundation.h"</cpp:empty>
+<cpp:endif xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">endif</cpp:directive></cpp:endif>
+
+<namespace>namespace <name>Catch</name> <block>{
+
+    <destructor><name><name>ExceptionTranslatorRegistry</name><operator>::</operator><name>~ExceptionTranslatorRegistry</name></name><parameter_list>()</parameter_list> <block>{<block_content>
+    </block_content>}</block></destructor>
+
+    <function><type><name>void</name></type> <name><name>ExceptionTranslatorRegistry</name><operator>::</operator><name>registerTranslator</name></name><parameter_list>( <parameter><decl><type><specifier>const</specifier> <name>IExceptionTranslator</name><modifier>*</modifier></type> <name>translator</name></decl></parameter> )</parameter_list> <block>{<block_content>
+        <expr_stmt><expr><call><name><name>m_translators</name><operator>.</operator><name>push_back</name></name><argument_list>( <argument><expr><call><name><name>std</name><operator>::</operator><name>unique_ptr</name><argument_list type="generic">&lt;<argument><expr><specifier>const</specifier> <name>IExceptionTranslator</name></expr></argument>&gt;</argument_list></name><argument_list>( <argument><expr><name>translator</name></expr></argument> )</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block></function>
+
+    <function><type><name><name>std</name><operator>::</operator><name>string</name></name></type> <name><name>ExceptionTranslatorRegistry</name><operator>::</operator><name>translateActiveException</name></name><parameter_list>()</parameter_list> <specifier>const</specifier> <block>{<block_content>
+        <try>try <block>{<block_content>
+<cpp:ifdef xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">ifdef</cpp:directive> <name>__OBJC__</name></cpp:ifdef>
+            <comment type="line">// In Objective-C try objective-c exceptions first</comment>
+            @<try>try <block>{<block_content>
+                <return>return <expr><call><name>tryTranslators</name><argument_list>()</argument_list></call></expr>;</return>
+            </block_content>}</block></try>
+            @<catch>catch <parameter_list>(<parameter><decl><type><name>NSException</name> <modifier>*</modifier></type><name>exception</name></decl></parameter>)</parameter_list> <block>{<block_content>
+                <return>return <macro><name>Catch</name></macro><expr><name><diff:delete type="replace" xmlns:diff="http://www.srcML.org/srcDiff"><operator>::</operator><name>toString</name></diff:delete><diff:insert type="replace" xmlns:diff="http://www.srcML.org/srcDiff"><operator>::</operator><name>Detail</name><operator>::</operator><name>stringify</name></diff:insert></name><operator>(</operator> <index>[<expr><name>exception</name> <name>description</name></expr>]</index> <operator>)</operator></expr>;</return>
+            </block_content>}</block></catch>
+<cpp:else xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">else</cpp:directive></cpp:else>
+            <return>return <expr><call><name>tryTranslators</name><argument_list>()</argument_list></call></expr>;</return>
+<cpp:endif xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">endif</cpp:directive></cpp:endif>
+        </block_content>}</block>
+        <catch>catch<parameter_list>( <parameter><decl><type><name>TestFailureException</name><modifier>&amp;</modifier></type></decl></parameter> )</parameter_list> <block>{<block_content>
+            <throw>throw;</throw>
+        </block_content>}</block></catch>
+        <catch>catch<parameter_list>( <parameter><decl><type><name><name>std</name><operator>::</operator><name>exception</name></name><modifier>&amp;</modifier></type> <name>ex</name></decl></parameter> )</parameter_list> <block>{<block_content>
+            <return>return <expr><call><name><name>ex</name><operator>.</operator><name>what</name></name><argument_list>()</argument_list></call></expr>;</return>
+        </block_content>}</block></catch>
+        <catch>catch<parameter_list>( <parameter><decl><type><name><name>std</name><operator>::</operator><name>string</name></name><modifier>&amp;</modifier></type> <name>msg</name></decl></parameter> )</parameter_list> <block>{<block_content>
+            <return>return <expr><name>msg</name></expr>;</return>
+        </block_content>}</block></catch>
+        <catch>catch<parameter_list>( <parameter><decl><type><specifier>const</specifier> <name>char</name><modifier>*</modifier></type> <name>msg</name></decl></parameter> )</parameter_list> <block>{<block_content>
+            <return>return <expr><name>msg</name></expr>;</return>
+        </block_content>}</block></catch>
+        <catch>catch<parameter_list>(<parameter><decl><type><modifier>...</modifier></type></decl></parameter>)</parameter_list> <block>{<block_content>
+            <return>return <expr><literal type="string">"Unknown exception"</literal></expr>;</return>
+        </block_content>}</block></catch></try>
+    </block_content>}</block></function>
+
+    <function><type><name><name>std</name><operator>::</operator><name>string</name></name></type> <name><name>ExceptionTranslatorRegistry</name><operator>::</operator><name>tryTranslators</name></name><parameter_list>()</parameter_list> <specifier>const</specifier> <block>{<block_content>
+        <if_stmt><if>if<condition>( <expr><call><name><name>m_translators</name><operator>.</operator><name>empty</name></name><argument_list>()</argument_list></call></expr> )</condition><block type="pseudo"><block_content>
+            <throw>throw;</throw></block_content></block></if>
+        <else>else<block type="pseudo"><block_content>
+            <return>return <expr><name><name>m_translators</name><index>[<expr><literal type="number">0</literal></expr>]</index></name><operator>-&gt;</operator><call><name>translate</name><argument_list>( <argument><expr><call><name><name>m_translators</name><operator>.</operator><name>begin</name></name><argument_list>()</argument_list></call><operator>+</operator><literal type="number">1</literal></expr></argument>, <argument><expr><call><name><name>m_translators</name><operator>.</operator><name>end</name></name><argument_list>()</argument_list></call></expr></argument> )</argument_list></call></expr>;</return></block_content></block></else></if_stmt>
+    </block_content>}</block></function>
+}</block></namespace>
+</unit>

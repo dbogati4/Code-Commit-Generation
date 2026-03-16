@@ -1,0 +1,9 @@
+{
+  "commit_id": "0653f4880ba6353b0cf9444930e9101337b6fd4a",
+  "parent_id": "83224e637fed18ccba47114c46c378015c6199d3",
+  "message": "Added tests for true == true etc",
+  "changed_files": [
+    "projects/SelfTest/ConditionTests.cpp",
+    "projects/SelfTest/TestMain.cpp"
+  ]
+}

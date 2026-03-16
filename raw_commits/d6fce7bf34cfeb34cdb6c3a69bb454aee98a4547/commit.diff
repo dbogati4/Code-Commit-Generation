@@ -1,0 +1,48 @@
+diff --git a/include/internal/catch_approx.cpp b/include/internal/catch_approx.cpp
+index a7d7111c..da7e4020 100644
+--- a/include/internal/catch_approx.cpp
++++ b/include/internal/catch_approx.cpp
+@@ -55,18 +55,18 @@ namespace Detail {
+         return marginComparison(m_value, other, m_margin) || marginComparison(m_value, other, m_epsilon * (m_scale + std::fabs(m_value)));
+     }
+ 
+-    void Approx::setMargin(double margin) {
+-        CATCH_ENFORCE(margin >= 0,
+-            "Invalid Approx::margin: " << margin << '.'
++    void Approx::setMargin(double newMargin) {
++        CATCH_ENFORCE(newMargin >= 0,
++            "Invalid Approx::margin: " << newMargin << '.'
+             << " Approx::Margin has to be non-negative.");
+-        m_margin = margin;
++        m_margin = newMargin;
+     }
+ 
+-    void Approx::setEpsilon(double epsilon) {
+-        CATCH_ENFORCE(epsilon >= 0 && epsilon <= 1.0,
+-            "Invalid Approx::epsilon: " << epsilon << '.'
++    void Approx::setEpsilon(double newEpsilon) {
++        CATCH_ENFORCE(newEpsilon >= 0 && newEpsilon <= 1.0,
++            "Invalid Approx::epsilon: " << newEpsilon << '.'
+             << " Approx::epsilon has to be in [0, 1]");
+-        m_epsilon = epsilon;
++        m_epsilon = newEpsilon;
+     }
+ 
+ } // end namespace Detail
+diff --git a/projects/SelfTest/UsageTests/Message.tests.cpp b/projects/SelfTest/UsageTests/Message.tests.cpp
+index 50992ceb..ccb7ac2f 100644
+--- a/projects/SelfTest/UsageTests/Message.tests.cpp
++++ b/projects/SelfTest/UsageTests/Message.tests.cpp
+@@ -227,9 +227,9 @@ TEST_CASE( "CAPTURE can deal with complex expressions", "[messages][capture]" )
+ 
+ template <typename T1, typename T2>
+ struct helper_1436 {
+-    helper_1436(T1 t1, T2 t2):
+-        t1{ t1 },
+-        t2{ t2 }
++    helper_1436(T1 t1_, T2 t2_):
++        t1{ t1_ },
++        t2{ t2_ }
+     {}
+     T1 t1;
+     T2 t2;

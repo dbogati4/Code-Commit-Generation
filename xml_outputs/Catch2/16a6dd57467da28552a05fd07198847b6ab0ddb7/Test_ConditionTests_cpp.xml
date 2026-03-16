@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" xmlns:diff="http://www.srcML.org/srcDiff" revision="1.0.0" language="C++" filename="C:\Users\saile\AppData\Local\Temp\catch2_100_z8gzpiwf\16a6dd57467da28552a05fd07198847b6ab0ddb7\Test_ConditionTests_cpp\Test_ConditionTests_cpp.old|C:\Users\saile\AppData\Local\Temp\catch2_100_z8gzpiwf\16a6dd57467da28552a05fd07198847b6ab0ddb7\Test_ConditionTests_cpp\Test_ConditionTests_cpp.new"><comment type="block">/*
+ *  ConditionTests.cpp
+ *  Catch - Test
+ *
+ *  Created by Phil on 08/11/2010.
+ *  Copyright 2010 Two Blue Cubes Ltd. All rights reserved.
+ *
+ *  Distributed under the Boost Software License, Version 1.0. (See accompanying
+ *  file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
+ *
+ */</comment>
+
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">"catch.hpp"</cpp:file></cpp:include>
+
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;string&gt;</cpp:file></cpp:include>
+
+<struct>struct <name>TestData</name>
+<block>{<public type="default">
+    <constructor><name>TestData</name><parameter_list>()</parameter_list>
+    <member_init_list>:   <call><name>int_seven</name><argument_list>( <argument><expr><literal type="number">7</literal></expr></argument> )</argument_list></call>,
+        <call><name>str_hello</name><argument_list>( <argument><expr><literal type="string">"hello"</literal></expr></argument> )</argument_list></call>,
+        <call><name>float_nine_point_one</name><argument_list>( <argument><expr><literal type="number">9.1f</literal></expr></argument> )</argument_list></call>,
+        <call><name>double_pi</name><argument_list>( <argument><expr><literal type="number">3.1415926535</literal></expr></argument> )</argument_list></call>
+    </member_init_list><block>{<block_content/>}</block></constructor>
+    
+    <decl_stmt><decl><type><name>int</name></type> <name>int_seven</name></decl>;</decl_stmt>
+    <decl_stmt><decl><type><name><name>std</name><operator>::</operator><name>string</name></name></type> <name>str_hello</name></decl>;</decl_stmt>
+    <decl_stmt><decl><type><name>float</name></type> <name>float_nine_point_one</name></decl>;</decl_stmt>
+    <decl_stmt><decl><type><name>double</name></type> <name>double_pi</name></decl>;</decl_stmt>
+</public>}</block>;</struct>
+
+<comment type="line">// These tests all use the CHECK macro, which continues if the specific test fails.</comment>
+<comment type="line">// This allows us to see all results, even if an earlier check fails - which is </comment>
+<comment type="line">// particularly important for the "should fail" checks</comment>
+
+<comment type="line">// Equality tests</comment>
+<macro><name>TEST_CASE</name><argument_list>( <argument><literal type="string">"succeeding/conditions/equality"</literal></argument>, <argument><literal type="string">"Equality checks that should succeed"</literal></argument> )</argument_list></macro>
+<block>{<block_content>
+    <decl_stmt><decl><type><name>TestData</name></type> <name>data</name></decl>;</decl_stmt>
+    
+    <expr_stmt><expr><call><name>CHECK</name><argument_list>( <argument><expr><name><name>data</name><operator>.</operator><name>int_seven</name></name> <operator>==</operator> <literal type="number">7</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>CHECK</name><argument_list>( <argument><expr><name><name>data</name><operator>.</operator><name>float_nine_point_one</name></name> <operator>==</operator> <call><name>Approx</name><argument_list>( <argument><expr><literal type="number">9.1f</literal></expr></argument> )</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>CHECK</name><argument_list>( <argument><expr><name><name>data</name><operator>.</operator><name>double_pi</name></name> <operator>==</operator> <call><name>Approx</name><argument_list>( <argument><expr><literal type="number">3.1415926535</literal></expr></argument> )</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>CHECK</name><argument_list>( <argument><expr><name><name>data</name><operator>.</operator><name>str_hello</name></name> <operator>==</operator> <literal type="string">"hello"</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>CHECK</name><argument_list>( <argument><expr><call><name><name>data</name><operator>.</operator><name>str_hello</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call> <operator>==</operator> <literal type="number">5</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+
+    <decl_stmt><decl><type><name>double</name></type> <name>x</name> <init>= <expr><literal type="number">1.1</literal> <operator>+</operator> <literal type="number">0.1</literal> <operator>+</operator> <literal type="number">0.1</literal></expr></init></decl>;</decl_stmt>
+    <expr_stmt><expr><call><name>CHECK</name><argument_list>( <argument><expr><name>x</name> <operator>==</operator> <call><name>Approx</name><argument_list>( <argument><expr><literal type="number">1.3</literal></expr></argument> )</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+</block_content>}</block>
+
+<macro><name>TEST_CASE</name><argument_list>( <argument><literal type="string">"failing/conditions/equality"</literal></argument>, <argument><literal type="string">"Equality checks that should fail"</literal></argument> )</argument_list></macro>
+<block>{<block_content>
+    <decl_stmt><decl><type><name>TestData</name></type> <name>data</name></decl>;</decl_stmt>
+    
+    <expr_stmt><expr><call><name>CHECK</name><argument_list>( <argument><expr><name><name>data</name><operator>.</operator><name>int_seven</name></name> <operator>==</operator> <literal type="number">6</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>CHECK</name><argument_list>( <argument><expr><name><name>data</name><operator>.</operator><name>int_seven</name></name> <operator>==</operator> <literal type="number">8</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>CHECK</name><argument_list>( <argument><expr><name><name>data</name><operator>.</operator><name>int_seven</name></name> <operator>==</operator> <literal type="number">0</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>CHECK</name><argument_list>( <argument><expr><name><name>data</name><operator>.</operator><name>float_nine_point_one</name></name> <operator>==</operator> <call><name>Approx</name><argument_list>( <argument><expr><literal type="number">9.11f</literal></expr></argument> )</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>CHECK</name><argument_list>( <argument><expr><name><name>data</name><operator>.</operator><name>float_nine_point_one</name></name> <operator>==</operator> <call><name>Approx</name><argument_list>( <argument><expr><literal type="number">9.0f</literal></expr></argument> )</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>CHECK</name><argument_list>( <argument><expr><name><name>data</name><operator>.</operator><name>float_nine_point_one</name></name> <operator>==</operator> <literal type="number">1</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>CHECK</name><argument_list>( <argument><expr><name><name>data</name><operator>.</operator><name>float_nine_point_one</name></name> <operator>==</operator> <literal type="number">0</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>CHECK</name><argument_list>( <argument><expr><name><name>data</name><operator>.</operator><name>double_pi</name></name> <operator>==</operator> <call><name>Approx</name><argument_list>( <argument><expr><literal type="number">3.1415</literal></expr></argument> )</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>CHECK</name><argument_list>( <argument><expr><name><name>data</name><operator>.</operator><name>str_hello</name></name> <operator>==</operator> <literal type="string">"goodbye"</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>CHECK</name><argument_list>( <argument><expr><name><name>data</name><operator>.</operator><name>str_hello</name></name> <operator>==</operator> <literal type="string">"hell"</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>CHECK</name><argument_list>( <argument><expr><name><name>data</name><operator>.</operator><name>str_hello</name></name> <operator>==</operator> <literal type="string">"hello1"</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>CHECK</name><argument_list>( <argument><expr><call><name><name>data</name><operator>.</operator><name>str_hello</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call> <operator>==</operator> <literal type="number">6</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+
+    <decl_stmt><decl><type><name>double</name></type> <name>x</name> <init>= <expr><literal type="number">1.1</literal> <operator>+</operator> <literal type="number">0.1</literal> <operator>+</operator> <literal type="number">0.1</literal></expr></init></decl>;</decl_stmt>
+    <expr_stmt><expr><call><name>CHECK</name><argument_list>( <argument><expr><name>x</name> <operator>==</operator> <call><name>Approx</name><argument_list>( <argument><expr><literal type="number">1.301</literal></expr></argument> )</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+</block_content>}</block>
+
+<macro><name>TEST_CASE</name><argument_list>( <argument><literal type="string">"succeeding/conditions/inequality"</literal></argument>, <argument><literal type="string">"Inequality checks that should succeed"</literal></argument> )</argument_list></macro>
+<block>{<block_content>
+    <decl_stmt><decl><type><name>TestData</name></type> <name>data</name></decl>;</decl_stmt>
+    
+    <expr_stmt><expr><call><name>CHECK</name><argument_list>( <argument><expr><name><name>data</name><operator>.</operator><name>int_seven</name></name> <operator>!=</operator> <literal type="number">6</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>CHECK</name><argument_list>( <argument><expr><name><name>data</name><operator>.</operator><name>int_seven</name></name> <operator>!=</operator> <literal type="number">8</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>CHECK</name><argument_list>( <argument><expr><name><name>data</name><operator>.</operator><name>float_nine_point_one</name></name> <operator>!=</operator> <call><name>Approx</name><argument_list>( <argument><expr><literal type="number">9.11f</literal></expr></argument> )</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>CHECK</name><argument_list>( <argument><expr><name><name>data</name><operator>.</operator><name>float_nine_point_one</name></name> <operator>!=</operator> <call><name>Approx</name><argument_list>( <argument><expr><literal type="number">9.0f</literal></expr></argument> )</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>CHECK</name><argument_list>( <argument><expr><name><name>data</name><operator>.</operator><name>float_nine_point_one</name></name> <operator>!=</operator> <literal type="number">1</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>CHECK</name><argument_list>( <argument><expr><name><name>data</name><operator>.</operator><name>float_nine_point_one</name></name> <operator>!=</operator> <literal type="number">0</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>CHECK</name><argument_list>( <argument><expr><name><name>data</name><operator>.</operator><name>double_pi</name></name> <operator>!=</operator> <call><name>Approx</name><argument_list>( <argument><expr><literal type="number">3.1415</literal></expr></argument> )</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>CHECK</name><argument_list>( <argument><expr><name><name>data</name><operator>.</operator><name>str_hello</name></name> <operator>!=</operator> <literal type="string">"goodbye"</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>CHECK</name><argument_list>( <argument><expr><name><name>data</name><operator>.</operator><name>str_hello</name></name> <operator>!=</operator> <literal type="string">"hell"</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>CHECK</name><argument_list>( <argument><expr><name><name>data</name><operator>.</operator><name>str_hello</name></name> <operator>!=</operator> <literal type="string">"hello1"</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>CHECK</name><argument_list>( <argument><expr><call><name><name>data</name><operator>.</operator><name>str_hello</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call> <operator>!=</operator> <literal type="number">6</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+</block_content>}</block>
+
+<macro><name>TEST_CASE</name><argument_list>( <argument><literal type="string">"failing/conditions/inequality"</literal></argument>, <argument><literal type="string">"Inequality checks that should fails"</literal></argument> )</argument_list></macro>
+<block>{<block_content>
+    <decl_stmt><decl><type><name>TestData</name></type> <name>data</name></decl>;</decl_stmt>
+    
+    <expr_stmt><expr><call><name>CHECK</name><argument_list>( <argument><expr><name><name>data</name><operator>.</operator><name>int_seven</name></name> <operator>!=</operator> <literal type="number">7</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>CHECK</name><argument_list>( <argument><expr><name><name>data</name><operator>.</operator><name>float_nine_point_one</name></name> <operator>!=</operator> <call><name>Approx</name><argument_list>( <argument><expr><literal type="number">9.1f</literal></expr></argument> )</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>CHECK</name><argument_list>( <argument><expr><name><name>data</name><operator>.</operator><name>double_pi</name></name> <operator>!=</operator> <call><name>Approx</name><argument_list>( <argument><expr><literal type="number">3.1415926535</literal></expr></argument> )</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>CHECK</name><argument_list>( <argument><expr><name><name>data</name><operator>.</operator><name>str_hello</name></name> <operator>!=</operator> <literal type="string">"hello"</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>CHECK</name><argument_list>( <argument><expr><call><name><name>data</name><operator>.</operator><name>str_hello</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call> <operator>!=</operator> <literal type="number">5</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+</block_content>}</block>
+
+<comment type="line">// Ordering comparison tests</comment>
+<macro><name>TEST_CASE</name><argument_list>( <argument><literal type="string">"succeeding/conditions/ordered"</literal></argument>, <argument><literal type="string">"Ordering comparison checks that should succeed"</literal></argument> )</argument_list></macro>
+<block>{<block_content>
+    <decl_stmt><decl><type><name>TestData</name></type> <name>data</name></decl>;</decl_stmt>
+    
+    <expr_stmt><expr><call><name>CHECK</name><argument_list>( <argument><expr><name><name>data</name><operator>.</operator><name>int_seven</name></name> <operator>&lt;</operator> <literal type="number">8</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>CHECK</name><argument_list>( <argument><expr><name><name>data</name><operator>.</operator><name>int_seven</name></name> <operator>&gt;</operator> <literal type="number">6</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>CHECK</name><argument_list>( <argument><expr><name><name>data</name><operator>.</operator><name>int_seven</name></name> <operator>&gt;</operator> <literal type="number">0</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>CHECK</name><argument_list>( <argument><expr><name><name>data</name><operator>.</operator><name>int_seven</name></name> <operator>&gt;</operator> <operator>-</operator><literal type="number">1</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+
+    <expr_stmt><expr><call><name>CHECK</name><argument_list>( <argument><expr><name><name>data</name><operator>.</operator><name>int_seven</name></name> <operator>&gt;=</operator> <literal type="number">7</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>CHECK</name><argument_list>( <argument><expr><name><name>data</name><operator>.</operator><name>int_seven</name></name> <operator>&gt;=</operator> <literal type="number">6</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>CHECK</name><argument_list>( <argument><expr><name><name>data</name><operator>.</operator><name>int_seven</name></name> <operator>&lt;=</operator> <literal type="number">7</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>CHECK</name><argument_list>( <argument><expr><name><name>data</name><operator>.</operator><name>int_seven</name></name> <operator>&lt;=</operator> <literal type="number">8</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    
+    <expr_stmt><expr><call><name>CHECK</name><argument_list>( <argument><expr><name><name>data</name><operator>.</operator><name>float_nine_point_one</name></name> <operator>&gt;</operator> <literal type="number">9</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>CHECK</name><argument_list>( <argument><expr><name><name>data</name><operator>.</operator><name>float_nine_point_one</name></name> <operator>&lt;</operator> <literal type="number">10</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>CHECK</name><argument_list>( <argument><expr><name><name>data</name><operator>.</operator><name>float_nine_point_one</name></name> <operator>&lt;</operator> <literal type="number">9.2</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    
+    <expr_stmt><expr><call><name>CHECK</name><argument_list>( <argument><expr><name><name>data</name><operator>.</operator><name>str_hello</name></name> <operator>&lt;=</operator> <literal type="string">"hello"</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>CHECK</name><argument_list>( <argument><expr><name><name>data</name><operator>.</operator><name>str_hello</name></name> <operator>&gt;=</operator> <literal type="string">"hello"</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    
+    <expr_stmt><expr><call><name>CHECK</name><argument_list>( <argument><expr><name><name>data</name><operator>.</operator><name>str_hello</name></name> <operator>&lt;</operator> <literal type="string">"hellp"</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>CHECK</name><argument_list>( <argument><expr><name><name>data</name><operator>.</operator><name>str_hello</name></name> <operator>&lt;</operator> <literal type="string">"zebra"</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>CHECK</name><argument_list>( <argument><expr><name><name>data</name><operator>.</operator><name>str_hello</name></name> <operator>&gt;</operator> <literal type="string">"hellm"</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>CHECK</name><argument_list>( <argument><expr><name><name>data</name><operator>.</operator><name>str_hello</name></name> <operator>&gt;</operator> <literal type="string">"a"</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+</block_content>}</block>
+
+<macro><name>TEST_CASE</name><argument_list>( <argument><literal type="string">"failing/conditions/ordered"</literal></argument>, <argument><literal type="string">"Ordering comparison checks that should fail"</literal></argument> )</argument_list></macro>
+<block>{<block_content>
+    <decl_stmt><decl><type><name>TestData</name></type> <name>data</name></decl>;</decl_stmt>
+    
+    <expr_stmt><expr><call><name>CHECK</name><argument_list>( <argument><expr><name><name>data</name><operator>.</operator><name>int_seven</name></name> <operator>&gt;</operator> <literal type="number">7</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>CHECK</name><argument_list>( <argument><expr><name><name>data</name><operator>.</operator><name>int_seven</name></name> <operator>&lt;</operator> <literal type="number">7</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>CHECK</name><argument_list>( <argument><expr><name><name>data</name><operator>.</operator><name>int_seven</name></name> <operator>&gt;</operator> <literal type="number">8</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>CHECK</name><argument_list>( <argument><expr><name><name>data</name><operator>.</operator><name>int_seven</name></name> <operator>&lt;</operator> <literal type="number">6</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>CHECK</name><argument_list>( <argument><expr><name><name>data</name><operator>.</operator><name>int_seven</name></name> <operator>&lt;</operator> <literal type="number">0</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>CHECK</name><argument_list>( <argument><expr><name><name>data</name><operator>.</operator><name>int_seven</name></name> <operator>&lt;</operator> <operator>-</operator><literal type="number">1</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+
+    <expr_stmt><expr><call><name>CHECK</name><argument_list>( <argument><expr><name><name>data</name><operator>.</operator><name>int_seven</name></name> <operator>&gt;=</operator> <literal type="number">8</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>CHECK</name><argument_list>( <argument><expr><name><name>data</name><operator>.</operator><name>int_seven</name></name> <operator>&lt;=</operator> <literal type="number">6</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    
+    <expr_stmt><expr><call><name>CHECK</name><argument_list>( <argument><expr><name><name>data</name><operator>.</operator><name>float_nine_point_one</name></name> <operator>&lt;</operator> <literal type="number">9</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>CHECK</name><argument_list>( <argument><expr><name><name>data</name><operator>.</operator><name>float_nine_point_one</name></name> <operator>&gt;</operator> <literal type="number">10</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>CHECK</name><argument_list>( <argument><expr><name><name>data</name><operator>.</operator><name>float_nine_point_one</name></name> <operator>&gt;</operator> <literal type="number">9.2</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    
+    <expr_stmt><expr><call><name>CHECK</name><argument_list>( <argument><expr><name><name>data</name><operator>.</operator><name>str_hello</name></name> <operator>&gt;</operator> <literal type="string">"hello"</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>CHECK</name><argument_list>( <argument><expr><name><name>data</name><operator>.</operator><name>str_hello</name></name> <operator>&lt;</operator> <literal type="string">"hello"</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>CHECK</name><argument_list>( <argument><expr><name><name>data</name><operator>.</operator><name>str_hello</name></name> <operator>&gt;</operator> <literal type="string">"hellp"</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>CHECK</name><argument_list>( <argument><expr><name><name>data</name><operator>.</operator><name>str_hello</name></name> <operator>&gt;</operator> <literal type="string">"z"</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>CHECK</name><argument_list>( <argument><expr><name><name>data</name><operator>.</operator><name>str_hello</name></name> <operator>&lt;</operator> <literal type="string">"hellm"</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>CHECK</name><argument_list>( <argument><expr><name><name>data</name><operator>.</operator><name>str_hello</name></name> <operator>&lt;</operator> <literal type="string">"a"</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+
+    <expr_stmt><expr><call><name>CHECK</name><argument_list>( <argument><expr><name><name>data</name><operator>.</operator><name>str_hello</name></name> <operator>&gt;=</operator> <literal type="string">"z"</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>CHECK</name><argument_list>( <argument><expr><name><name>data</name><operator>.</operator><name>str_hello</name></name> <operator>&lt;=</operator> <literal type="string">"a"</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+</block_content>}</block>
+
+<comment type="line">// Not (!) tests</comment>
+<diff:insert xmlns:diff="http://www.srcML.org/srcDiff"><comment type="line">//<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>The<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>problem<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>with<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>the<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>!<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>operator<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>is<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>that<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>it<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>has<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>right-to-left<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>associativity.</comment><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+</diff:ws><comment type="line">//<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>This<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>means<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>we<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>can't<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>isolate<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>it<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>when<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>we<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>decompose.<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>The<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>simple<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>CHECK(<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>!false<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>)<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>form,<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>therefore,</comment><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+</diff:ws><comment type="line">//<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>cannot<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>have<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>the<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>operand<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>value<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>extracted.<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>The<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>test<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>will<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>work<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>correctly,<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>and<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>the<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>situation</comment><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+</diff:ws><comment type="line">//<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>is<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>detected<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>and<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>a<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>warning<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>issued.</comment><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+</diff:ws><comment type="line">//<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>An<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>alternative<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>form<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>of<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>the<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>macros<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>(CHECK_NOT<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>and<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>EXPECT_NOT)<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>can<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>be<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>used<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>instead<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>to<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>capture</comment><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+</diff:ws><comment type="line">//<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>the<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>operand<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>value.</comment><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+</diff:ws></diff:insert><macro><name>TEST_CASE</name><argument_list>( <argument><literal type="string">"succeeding/conditions/not"</literal></argument>, <argument><literal type="string">"'Not' checks that should succeed"</literal></argument> )</argument_list></macro>
+<block>{<block_content>
+    <decl_stmt><decl><type><name>bool</name></type> <name>falseValue</name> <init>= <expr><literal type="boolean">false</literal></expr></init></decl>;</decl_stmt>
+    
+    <expr_stmt><expr><call><name>CHECK</name><argument_list>( <argument><expr><operator>!</operator><literal type="boolean">false</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>CHECK_NOT</name><argument_list>( <argument><expr><literal type="boolean">false</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+
+    <expr_stmt><expr><call><name>CHECK</name><argument_list>( <argument><expr><operator>!</operator><name>falseValue</name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>CHECK_NOT</name><argument_list>( <argument><expr><name>falseValue</name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+
+    <expr_stmt><expr><call><name>CHECK</name><argument_list>( <argument><expr><operator>!</operator><operator>(</operator><literal type="number">1</literal> <operator>==</operator> <literal type="number">2</literal><operator>)</operator></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>CHECK_NOT</name><argument_list>( <argument><expr><literal type="number">1</literal> <operator>==</operator> <literal type="number">2</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+</block_content>}</block>
+
+<macro><name>TEST_CASE</name><argument_list>( <argument><literal type="string">"failing/conditions/not"</literal></argument>, <argument><literal type="string">"'Not' checks that should fail"</literal></argument> )</argument_list></macro>
+<block>{<block_content>
+    <decl_stmt><decl><type><name>bool</name></type> <name>trueValue</name> <init>= <expr><literal type="boolean">true</literal></expr></init></decl>;</decl_stmt>
+    
+    <expr_stmt><expr><call><name>CHECK</name><argument_list>( <argument><expr><operator>!</operator><literal type="boolean">true</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>CHECK_NOT</name><argument_list>( <argument><expr><literal type="boolean">true</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    
+    <expr_stmt><expr><call><name>CHECK</name><argument_list>( <argument><expr><operator>!</operator><name>trueValue</name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>CHECK_NOT</name><argument_list>( <argument><expr><name>trueValue</name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    
+    <expr_stmt><expr><call><name>CHECK</name><argument_list>( <argument><expr><operator>!</operator><operator>(</operator><literal type="number">1</literal> <operator>==</operator> <literal type="number">1</literal><operator>)</operator></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>CHECK_NOT</name><argument_list>( <argument><expr><literal type="number">1</literal> <operator>==</operator> <literal type="number">1</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+</block_content>}</block>
+
+</unit>

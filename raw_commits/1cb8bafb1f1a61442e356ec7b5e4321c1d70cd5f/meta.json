@@ -1,0 +1,8 @@
+{
+  "commit_id": "1cb8bafb1f1a61442e356ec7b5e4321c1d70cd5f",
+  "parent_id": "d08cee288f6f1940b1c6125e48499c8736acbde3",
+  "message": "Added missing #include in test file",
+  "changed_files": [
+    "projects/SelfTest/TrickyTests.cpp"
+  ]
+}

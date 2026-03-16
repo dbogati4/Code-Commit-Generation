@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" xmlns:diff="http://www.srcML.org/srcDiff" revision="1.0.0" language="C++" filename="C:\Users\saile\AppData\Local\Temp\catch2_100_z8gzpiwf\b3dbd83da2f793a8630647e0053b6613ba5fb874\tests_SelfTest_UsageTests_Decomposition_tests_cpp\tests_SelfTest_UsageTests_Decomposition_tests_cpp.old|C:\Users\saile\AppData\Local\Temp\catch2_100_z8gzpiwf\b3dbd83da2f793a8630647e0053b6613ba5fb874\tests_SelfTest_UsageTests_Decomposition_tests_cpp\tests_SelfTest_UsageTests_Decomposition_tests_cpp.new">
+<comment type="line">//              Copyright Catch2 Authors</comment>
+<comment type="line">// Distributed under the Boost Software License, Version 1.0.</comment>
+<comment type="line">//   (See accompanying file LICENSE.txt or copy at</comment>
+<comment type="line">//        https://www.boost.org/LICENSE_1_0.txt)</comment>
+
+<comment type="line">// SPDX-License-Identifier: BSL-1.0</comment>
+
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;iostream&gt;</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;cstdio&gt;</cpp:file></cpp:include>
+
+<namespace>namespace <block>{
+
+<struct>struct <name>truthy</name> <block>{<public type="default">
+    <constructor><name>truthy</name><parameter_list>(<parameter><decl><type><name>bool</name></type> <name>b</name></decl></parameter>)</parameter_list><member_init_list>:<call><name>m_value</name><argument_list>(<argument><expr><name>b</name></expr></argument>)</argument_list></call></member_init_list><block>{<block_content/>}</block></constructor>
+    <function type="operator"><name>operator <name>bool</name></name><parameter_list>()</parameter_list> <specifier>const</specifier> <block>{<block_content>
+        <return>return <expr><literal type="boolean">false</literal></expr>;</return>
+    </block_content>}</block></function>
+    <decl_stmt><decl><type><name>bool</name></type> <name>m_value</name></decl>;</decl_stmt>
+</public>}</block>;</struct>
+
+<function type="operator"><type><name><name>std</name><operator>::</operator><name>ostream</name></name><modifier>&amp;</modifier></type> <name>operator<name>&lt;&lt;</name></name><parameter_list>(<parameter><decl><type><name><name>std</name><operator>::</operator><name>ostream</name></name><modifier>&amp;</modifier></type> <name>o</name></decl></parameter>, <parameter><decl><type><name>truthy</name></type></decl></parameter>)</parameter_list> <block>{<block_content>
+    <expr_stmt><expr><name>o</name> <operator>&lt;&lt;</operator> <literal type="string">"Hey, its truthy!"</literal></expr>;</expr_stmt>
+    <return>return <expr><name>o</name></expr>;</return>
+</block_content>}</block></function>
+
+}</block></namespace> <comment type="line">// end anonymous namespace</comment>
+
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;catch2/catch_test_macros.hpp&gt;</cpp:file></cpp:include>
+
+<macro><name>TEST_CASE</name><argument_list>( <argument><literal type="string">"Reconstruction should be based on stringification: #914"</literal></argument> , <argument><literal type="string">"[Decomposition][failing][.]"</literal></argument>)</argument_list></macro> <block>{<block_content>
+    <expr_stmt><expr><call><name>CHECK</name><argument_list>(<argument><expr><call><name>truthy</name><argument_list>(<argument><expr><literal type="boolean">false</literal></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+</block_content>}</block>
+
+<macro><name>TEST_CASE</name><argument_list>(<argument><literal type="string">"#1005: Comparing pointer to int and long (NULL can be either on various systems)"</literal></argument>, <argument><literal type="string">"[Decomposition][approvals]"</literal></argument>)</argument_list></macro> <block>{<block_content>
+    <decl_stmt><decl><type><name>FILE</name><modifier>*</modifier></type> <name>fptr</name> <init>= <expr><literal type="null">nullptr</literal></expr></init></decl>;</decl_stmt>
+    <expr_stmt><expr><call><name>REQUIRE</name><argument_list>(<diff:insert xmlns:diff="http://www.srcML.org/srcDiff"><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws></diff:insert><argument><expr><name>fptr</name> <operator>==</operator> <literal type="number">0</literal></expr></argument><diff:insert xmlns:diff="http://www.srcML.org/srcDiff"><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws></diff:insert>)</argument_list></call></expr>;</expr_stmt>
+<diff:insert xmlns:diff="http://www.srcML.org/srcDiff"><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">    </diff:ws><expr_stmt><expr><call><name>REQUIRE_FALSE</name><argument_list>(<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><argument><expr><name>fptr</name><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><operator>!=</operator><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><literal type="number">0</literal></expr></argument><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>)</argument_list></call></expr>;</expr_stmt><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+</diff:ws></diff:insert>    <expr_stmt><expr><call><name>REQUIRE</name><argument_list>(<diff:insert xmlns:diff="http://www.srcML.org/srcDiff"><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws></diff:insert><argument><expr><name>fptr</name> <operator>==</operator> <literal type="number">0l</literal></expr></argument><diff:insert xmlns:diff="http://www.srcML.org/srcDiff"><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws></diff:insert>)</argument_list></call></expr>;</expr_stmt>
+<diff:insert xmlns:diff="http://www.srcML.org/srcDiff"><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">    </diff:ws><expr_stmt><expr><call><name>REQUIRE_FALSE</name><argument_list>(<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><argument><expr><name>fptr</name><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><operator>!=</operator><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><literal type="number">0l</literal></expr></argument><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>)</argument_list></call></expr>;</expr_stmt><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+</diff:ws></diff:insert></block_content>}</block>
+</unit>

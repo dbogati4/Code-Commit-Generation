@@ -1,0 +1,279 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" xmlns:diff="http://www.srcML.org/srcDiff" revision="1.0.0" language="C++" filename="C:\Users\saile\AppData\Local\Temp\catch2_100_z8gzpiwf\6ec7709e07f89baeb01d3872236b80c3aa17bb8a\projects_SelfTest_TestMain_cpp\projects_SelfTest_TestMain_cpp.old|C:\Users\saile\AppData\Local\Temp\catch2_100_z8gzpiwf\6ec7709e07f89baeb01d3872236b80c3aa17bb8a\projects_SelfTest_TestMain_cpp\projects_SelfTest_TestMain_cpp.new"><comment type="block">/*
+ *  Created by Phil on 22/10/2010.
+ *  Copyright 2010 Two Blue Cubes Ltd
+ *
+ *  Distributed under the Boost Software License, Version 1.0. (See accompanying
+ *  file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
+ */</comment>
+
+<cpp:define xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">define</cpp:directive> <cpp:macro xmlns:cpp="http://www.srcML.org/srcML/cpp"><name>CATCH_CONFIG_MAIN</name></cpp:macro></cpp:define>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">"catch.hpp"</cpp:file></cpp:include>
+<diff:delete xmlns:diff="http://www.srcML.org/srcDiff"><cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">"internal/catch_text.h"</cpp:file></cpp:include><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><comment type="line">//<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>temporarily</comment><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+</diff:ws></diff:delete><cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">"../include/reporters/catch_reporter_teamcity.hpp"</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">"../include/reporters/catch_reporter_tap.hpp"</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">"../include/reporters/catch_reporter_automake.hpp"</cpp:file></cpp:include>
+
+
+<comment type="line">// Some example tag aliases</comment>
+<macro><name>CATCH_REGISTER_TAG_ALIAS</name><argument_list>( <argument><literal type="string">"[@nhf]"</literal></argument>, <argument><literal type="string">"[failing]~[.]"</literal></argument> )</argument_list></macro>
+<macro><name>CATCH_REGISTER_TAG_ALIAS</name><argument_list>( <argument><literal type="string">"[@tricky]"</literal></argument>, <argument><literal type="string">"[tricky]~[.]"</literal></argument> )</argument_list></macro>
+
+
+<cpp:ifdef xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">ifdef</cpp:directive> <name>__clang__</name></cpp:ifdef>
+<cpp:pragma xmlns:cpp="http://www.srcML.org/srcML/cpp">#   <cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">pragma</cpp:directive> <name>clang</name> <name>diagnostic</name> <name>ignored</name> <cpp:literal xmlns:cpp="http://www.srcML.org/srcML/cpp">"-Wpadded"</cpp:literal></cpp:pragma>
+<cpp:pragma xmlns:cpp="http://www.srcML.org/srcML/cpp">#   <cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">pragma</cpp:directive> <name>clang</name> <name>diagnostic</name> <name>ignored</name> <cpp:literal xmlns:cpp="http://www.srcML.org/srcML/cpp">"-Wweak-vtables"</cpp:literal></cpp:pragma>
+<cpp:pragma xmlns:cpp="http://www.srcML.org/srcML/cpp">#   <cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">pragma</cpp:directive> <name>clang</name> <name>diagnostic</name> <name>ignored</name> <cpp:literal xmlns:cpp="http://www.srcML.org/srcML/cpp">"-Wc++98-compat"</cpp:literal></cpp:pragma>
+<cpp:endif xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">endif</cpp:directive></cpp:endif>
+
+
+<comment type="line">//template&lt;size_t size&gt;</comment>
+<comment type="line">//void parseIntoConfig( const char * (&amp;argv)[size], Catch::ConfigData&amp; config ) {</comment>
+<comment type="line">//    auto parser = Catch::makeCommandLineParser();</comment>
+<comment type="line">//    parser.parseInto( Catch::Clara::argsToVector( size, argv ), config );</comment>
+<comment type="line">//}</comment>
+<comment type="line">//</comment>
+<comment type="line">//template&lt;size_t size&gt;</comment>
+<comment type="line">//std::string parseIntoConfigAndReturnError( const char * (&amp;argv)[size], Catch::ConfigData&amp; config ) {</comment>
+<comment type="line">//    try {</comment>
+<comment type="line">//        parseIntoConfig( argv, config );</comment>
+<comment type="line">//        FAIL( "expected exception" );</comment>
+<comment type="line">//    }</comment>
+<comment type="line">//    catch( std::exception&amp; ex ) {</comment>
+<comment type="line">//        return ex.what();</comment>
+<comment type="line">//    }</comment>
+<comment type="line">//    return "";</comment>
+<comment type="line">//}</comment>
+<comment type="line">//</comment>
+<function><type><specifier>inline</specifier> <name><name>Catch</name><operator>::</operator><name>TestCase</name></name></type> <name>fakeTestCase</name><parameter_list>( <parameter><decl><type><specifier>const</specifier> <name>char</name><modifier>*</modifier></type> <name>name</name></decl></parameter>, <parameter><decl><type><specifier>const</specifier> <name>char</name><modifier>*</modifier></type> <name>desc</name> <init>= <expr><literal type="string">""</literal></expr></init></decl></parameter> )</parameter_list><block>{<block_content> <return>return <expr><call><name><name>Catch</name><operator>::</operator><name>makeTestCase</name></name><argument_list>( <argument><expr><literal type="null">nullptr</literal></expr></argument>, <argument><expr><literal type="string">""</literal></expr></argument>, <argument><expr><name>name</name></expr></argument>, <argument><expr><name>desc</name></expr></argument>, <argument><expr><name>CATCH_INTERNAL_LINEINFO</name></expr></argument> )</argument_list></call></expr>;</return> </block_content>}</block></function>
+
+<macro><name>TEST_CASE</name><argument_list>( <argument><literal type="string">"Process can be configured on command line"</literal></argument>, <argument><literal type="string">"[config][command-line]"</literal></argument> )</argument_list></macro> <block>{<block_content>
+
+    <using>using <namespace>namespace <name><name>Catch</name><operator>::</operator><name>Matchers</name></name>;</namespace></using>
+
+    <decl_stmt><decl><type><name><name>Catch</name><operator>::</operator><name>ConfigData</name></name></type> <name>config</name></decl>;</decl_stmt>
+    <decl_stmt><decl><type><name>auto</name></type> <name>cli</name> <init>= <expr><call><name><name>Catch</name><operator>::</operator><name>makeCommandLineParser</name></name><argument_list>(<argument><expr><name>config</name></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+
+    <macro><name>SECTION</name><argument_list>(<argument><literal type="string">"empty args don't cause a crash"</literal></argument>)</argument_list></macro> <block>{<block_content>
+        <decl_stmt><decl><type><name>auto</name></type> <name>result</name> <init>= <expr><call><name><name>cli</name><operator>.</operator><name>parse</name></name><argument_list>(<argument><expr><block>{<expr><literal type="string">""</literal></expr>}</block></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+        <expr_stmt><expr><call><name>CHECK</name><argument_list>(<argument><expr><name>result</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name>CHECK</name><argument_list>(<argument><expr><name><name>config</name><operator>.</operator><name>processName</name></name> <operator>==</operator> <literal type="string">""</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block>
+
+
+    <macro><name>SECTION</name><argument_list>(<argument><literal type="string">"default - no arguments"</literal></argument>)</argument_list></macro> <block>{<block_content>
+        <decl_stmt><decl><type><name>auto</name></type> <name>result</name> <init>= <expr><call><name><name>cli</name><operator>.</operator><name>parse</name></name><argument_list>(<argument><expr><block>{<expr><literal type="string">"test"</literal></expr>}</block></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+        <expr_stmt><expr><call><name>CHECK</name><argument_list>(<argument><expr><name>result</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name>CHECK</name><argument_list>(<argument><expr><name><name>config</name><operator>.</operator><name>processName</name></name> <operator>==</operator> <literal type="string">"test"</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name>CHECK</name><argument_list>(<argument><expr><name><name>config</name><operator>.</operator><name>shouldDebugBreak</name></name> <operator>==</operator> <literal type="boolean">false</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name>CHECK</name><argument_list>(<argument><expr><name><name>config</name><operator>.</operator><name>abortAfter</name></name> <operator>==</operator> <operator>-</operator><literal type="number">1</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name>CHECK</name><argument_list>(<argument><expr><name><name>config</name><operator>.</operator><name>noThrow</name></name> <operator>==</operator> <literal type="boolean">false</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name>CHECK</name><argument_list>(<argument><expr><call><name><name>config</name><operator>.</operator><name>reporterNames</name><operator>.</operator><name>empty</name></name><argument_list>()</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block>
+
+    <macro><name>SECTION</name><argument_list>(<argument><literal type="string">"test lists"</literal></argument>)</argument_list></macro> <block>{<block_content>
+        <macro><name>SECTION</name><argument_list>(<argument><literal type="string">"1 test"</literal></argument>, <argument><literal type="string">"Specify one test case using"</literal></argument>)</argument_list></macro> <block>{<block_content>
+            <decl_stmt><decl><type><name>auto</name></type> <name>result</name> <init>= <expr><call><name><name>cli</name><operator>.</operator><name>parse</name></name><argument_list>(<argument><expr><block>{<expr><literal type="string">"test"</literal></expr>, <expr><literal type="string">"test1"</literal></expr>}</block></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+            <expr_stmt><expr><call><name>CHECK</name><argument_list>(<argument><expr><name>result</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+
+            <function_decl><type><name><name>Catch</name><operator>::</operator><name>Config</name></name></type> <name>cfg</name><parameter_list>(<parameter><decl><type><name>config</name></type></decl></parameter>)</parameter_list>;</function_decl>
+            <expr_stmt><expr><call><name>REQUIRE</name><argument_list>(<argument><expr><call><name><name>cfg</name><operator>.</operator><name>testSpec</name></name><argument_list>()</argument_list></call><operator>.</operator><call><name>matches</name><argument_list>(<argument><expr><call><name>fakeTestCase</name><argument_list>(<argument><expr><literal type="string">"notIncluded"</literal></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call> <operator>==</operator> <literal type="boolean">false</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+            <expr_stmt><expr><call><name>REQUIRE</name><argument_list>(<argument><expr><call><name><name>cfg</name><operator>.</operator><name>testSpec</name></name><argument_list>()</argument_list></call><operator>.</operator><call><name>matches</name><argument_list>(<argument><expr><call><name>fakeTestCase</name><argument_list>(<argument><expr><literal type="string">"test1"</literal></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        </block_content>}</block>
+        <macro><name>SECTION</name><argument_list>(<argument><literal type="string">"Specify one test case exclusion using exclude:"</literal></argument>)</argument_list></macro> <block>{<block_content>
+            <decl_stmt><decl><type><name>auto</name></type> <name>result</name> <init>= <expr><call><name><name>cli</name><operator>.</operator><name>parse</name></name><argument_list>(<argument><expr><block>{<expr><literal type="string">"test"</literal></expr>, <expr><literal type="string">"exclude:test1"</literal></expr>}</block></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+            <expr_stmt><expr><call><name>CHECK</name><argument_list>(<argument><expr><name>result</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+
+            <function_decl><type><name><name>Catch</name><operator>::</operator><name>Config</name></name></type> <name>cfg</name><parameter_list>(<parameter><decl><type><name>config</name></type></decl></parameter>)</parameter_list>;</function_decl>
+            <expr_stmt><expr><call><name>REQUIRE</name><argument_list>(<argument><expr><call><name><name>cfg</name><operator>.</operator><name>testSpec</name></name><argument_list>()</argument_list></call><operator>.</operator><call><name>matches</name><argument_list>(<argument><expr><call><name>fakeTestCase</name><argument_list>(<argument><expr><literal type="string">"test1"</literal></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call> <operator>==</operator> <literal type="boolean">false</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+            <expr_stmt><expr><call><name>REQUIRE</name><argument_list>(<argument><expr><call><name><name>cfg</name><operator>.</operator><name>testSpec</name></name><argument_list>()</argument_list></call><operator>.</operator><call><name>matches</name><argument_list>(<argument><expr><call><name>fakeTestCase</name><argument_list>(<argument><expr><literal type="string">"alwaysIncluded"</literal></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        </block_content>}</block>
+
+        <macro><name>SECTION</name><argument_list>(<argument><literal type="string">"Specify one test case exclusion using ~"</literal></argument>)</argument_list></macro> <block>{<block_content>
+            <decl_stmt><decl><type><name>auto</name></type> <name>result</name> <init>= <expr><call><name><name>cli</name><operator>.</operator><name>parse</name></name><argument_list>(<argument><expr><block>{<expr><literal type="string">"test"</literal></expr>, <expr><literal type="string">"~test1"</literal></expr>}</block></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+            <expr_stmt><expr><call><name>CHECK</name><argument_list>(<argument><expr><name>result</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+
+            <function_decl><type><name><name>Catch</name><operator>::</operator><name>Config</name></name></type> <name>cfg</name><parameter_list>(<parameter><decl><type><name>config</name></type></decl></parameter>)</parameter_list>;</function_decl>
+            <expr_stmt><expr><call><name>REQUIRE</name><argument_list>(<argument><expr><call><name><name>cfg</name><operator>.</operator><name>testSpec</name></name><argument_list>()</argument_list></call><operator>.</operator><call><name>matches</name><argument_list>(<argument><expr><call><name>fakeTestCase</name><argument_list>(<argument><expr><literal type="string">"test1"</literal></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call> <operator>==</operator> <literal type="boolean">false</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+            <expr_stmt><expr><call><name>REQUIRE</name><argument_list>(<argument><expr><call><name><name>cfg</name><operator>.</operator><name>testSpec</name></name><argument_list>()</argument_list></call><operator>.</operator><call><name>matches</name><argument_list>(<argument><expr><call><name>fakeTestCase</name><argument_list>(<argument><expr><literal type="string">"alwaysIncluded"</literal></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        </block_content>}</block>
+
+    </block_content>}</block>
+
+    <macro><name>SECTION</name><argument_list>(<argument><literal type="string">"reporter"</literal></argument>)</argument_list></macro> <block>{<block_content>
+        <macro><name>SECTION</name><argument_list>(<argument><literal type="string">"-r/console"</literal></argument>)</argument_list></macro> <block>{<block_content>
+            <expr_stmt><expr><call><name>CHECK</name><argument_list>(<argument><expr><call><name><name>cli</name><operator>.</operator><name>parse</name></name><argument_list>(<argument><expr><block>{<expr><literal type="string">"test"</literal></expr>, <expr><literal type="string">"-r"</literal></expr>, <expr><literal type="string">"console"</literal></expr>}</block></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+
+            <expr_stmt><expr><call><name>REQUIRE</name><argument_list>(<argument><expr><name><name>config</name><operator>.</operator><name>reporterNames</name><index>[<expr><literal type="number">0</literal></expr>]</index></name> <operator>==</operator> <literal type="string">"console"</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        </block_content>}</block>
+        <macro><name>SECTION</name><argument_list>(<argument><literal type="string">"-r/xml"</literal></argument>)</argument_list></macro> <block>{<block_content>
+            <expr_stmt><expr><call><name>CHECK</name><argument_list>(<argument><expr><call><name><name>cli</name><operator>.</operator><name>parse</name></name><argument_list>(<argument><expr><block>{<expr><literal type="string">"test"</literal></expr>, <expr><literal type="string">"-r"</literal></expr>, <expr><literal type="string">"xml"</literal></expr>}</block></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+
+            <expr_stmt><expr><call><name>REQUIRE</name><argument_list>(<argument><expr><name><name>config</name><operator>.</operator><name>reporterNames</name><index>[<expr><literal type="number">0</literal></expr>]</index></name> <operator>==</operator> <literal type="string">"xml"</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        </block_content>}</block>
+        <macro><name>SECTION</name><argument_list>(<argument><literal type="string">"-r xml and junit"</literal></argument>)</argument_list></macro> <block>{<block_content>
+            <expr_stmt><expr><call><name>CHECK</name><argument_list>(<argument><expr><call><name><name>cli</name><operator>.</operator><name>parse</name></name><argument_list>(<argument><expr><block>{<expr><literal type="string">"test"</literal></expr>, <expr><literal type="string">"-r"</literal></expr>, <expr><literal type="string">"xml"</literal></expr>, <expr><literal type="string">"-r"</literal></expr>, <expr><literal type="string">"junit"</literal></expr>}</block></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+
+            <expr_stmt><expr><call><name>REQUIRE</name><argument_list>(<argument><expr><call><name><name>config</name><operator>.</operator><name>reporterNames</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call> <operator>==</operator> <literal type="number">2</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+            <expr_stmt><expr><call><name>REQUIRE</name><argument_list>(<argument><expr><name><name>config</name><operator>.</operator><name>reporterNames</name><index>[<expr><literal type="number">0</literal></expr>]</index></name> <operator>==</operator> <literal type="string">"xml"</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+            <expr_stmt><expr><call><name>REQUIRE</name><argument_list>(<argument><expr><name><name>config</name><operator>.</operator><name>reporterNames</name><index>[<expr><literal type="number">1</literal></expr>]</index></name> <operator>==</operator> <literal type="string">"junit"</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        </block_content>}</block>
+        <macro><name>SECTION</name><argument_list>(<argument><literal type="string">"--reporter/junit"</literal></argument>)</argument_list></macro> <block>{<block_content>
+            <expr_stmt><expr><call><name>CHECK</name><argument_list>(<argument><expr><call><name><name>cli</name><operator>.</operator><name>parse</name></name><argument_list>(<argument><expr><block>{<expr><literal type="string">"test"</literal></expr>, <expr><literal type="string">"--reporter"</literal></expr>, <expr><literal type="string">"junit"</literal></expr>}</block></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+
+            <expr_stmt><expr><call><name>REQUIRE</name><argument_list>(<argument><expr><name><name>config</name><operator>.</operator><name>reporterNames</name><index>[<expr><literal type="number">0</literal></expr>]</index></name> <operator>==</operator> <literal type="string">"junit"</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        </block_content>}</block>
+    </block_content>}</block>
+
+
+    <macro><name>SECTION</name><argument_list>(<argument><literal type="string">"debugger"</literal></argument>)</argument_list></macro> <block>{<block_content>
+        <macro><name>SECTION</name><argument_list>(<argument><literal type="string">"-b"</literal></argument>)</argument_list></macro> <block>{<block_content>
+            <expr_stmt><expr><call><name>CHECK</name><argument_list>(<argument><expr><call><name><name>cli</name><operator>.</operator><name>parse</name></name><argument_list>(<argument><expr><block>{<expr><literal type="string">"test"</literal></expr>, <expr><literal type="string">"-b"</literal></expr>}</block></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+
+            <expr_stmt><expr><call><name>REQUIRE</name><argument_list>(<argument><expr><name><name>config</name><operator>.</operator><name>shouldDebugBreak</name></name> <operator>==</operator> <literal type="boolean">true</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        </block_content>}</block>
+        <macro><name>SECTION</name><argument_list>(<argument><literal type="string">"--break"</literal></argument>)</argument_list></macro> <block>{<block_content>
+            <expr_stmt><expr><call><name>CHECK</name><argument_list>(<argument><expr><call><name><name>cli</name><operator>.</operator><name>parse</name></name><argument_list>(<argument><expr><block>{<expr><literal type="string">"test"</literal></expr>, <expr><literal type="string">"--break"</literal></expr>}</block></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+
+            <expr_stmt><expr><call><name>REQUIRE</name><argument_list>(<argument><expr><name><name>config</name><operator>.</operator><name>shouldDebugBreak</name></name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        </block_content>}</block>
+    </block_content>}</block>
+
+
+    <macro><name>SECTION</name><argument_list>(<argument><literal type="string">"abort"</literal></argument>)</argument_list></macro> <block>{<block_content>
+        <macro><name>SECTION</name><argument_list>(<argument><literal type="string">"-a aborts after first failure"</literal></argument>)</argument_list></macro> <block>{<block_content>
+            <expr_stmt><expr><call><name>CHECK</name><argument_list>(<argument><expr><call><name><name>cli</name><operator>.</operator><name>parse</name></name><argument_list>(<argument><expr><block>{<expr><literal type="string">"test"</literal></expr>, <expr><literal type="string">"-a"</literal></expr>}</block></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+
+            <expr_stmt><expr><call><name>REQUIRE</name><argument_list>(<argument><expr><name><name>config</name><operator>.</operator><name>abortAfter</name></name> <operator>==</operator> <literal type="number">1</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        </block_content>}</block>
+        <macro><name>SECTION</name><argument_list>(<argument><literal type="string">"-x 2 aborts after two failures"</literal></argument>)</argument_list></macro> <block>{<block_content>
+            <expr_stmt><expr><call><name>CHECK</name><argument_list>(<argument><expr><call><name><name>cli</name><operator>.</operator><name>parse</name></name><argument_list>(<argument><expr><block>{<expr><literal type="string">"test"</literal></expr>, <expr><literal type="string">"-x"</literal></expr>, <expr><literal type="string">"2"</literal></expr>}</block></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+
+            <expr_stmt><expr><call><name>REQUIRE</name><argument_list>(<argument><expr><name><name>config</name><operator>.</operator><name>abortAfter</name></name> <operator>==</operator> <literal type="number">2</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        </block_content>}</block>
+        <macro><name>SECTION</name><argument_list>(<argument><literal type="string">"-x must be numeric"</literal></argument>)</argument_list></macro> <block>{<block_content>
+            <decl_stmt><decl><type><name>auto</name></type> <name>result</name> <init>= <expr><call><name><name>cli</name><operator>.</operator><name>parse</name></name><argument_list>(<argument><expr><block>{<expr><literal type="string">"test"</literal></expr>, <expr><literal type="string">"-x"</literal></expr>, <expr><literal type="string">"oops"</literal></expr>}</block></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+            <expr_stmt><expr><call><name>CHECK</name><argument_list>(<argument><expr><operator>!</operator><name>result</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+
+            <expr_stmt><expr><call><name>REQUIRE_THAT</name><argument_list>(<argument><expr><call><name><name>result</name><operator>.</operator><name>errorMessage</name></name><argument_list>()</argument_list></call></expr></argument>, <argument><expr><call><name>Contains</name><argument_list>(<argument><expr><literal type="string">"convert"</literal></expr></argument>)</argument_list></call> <operator>&amp;&amp;</operator> <call><name>Contains</name><argument_list>(<argument><expr><literal type="string">"oops"</literal></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        </block_content>}</block>
+    </block_content>}</block>
+
+    <macro><name>SECTION</name><argument_list>(<argument><literal type="string">"nothrow"</literal></argument>)</argument_list></macro> <block>{<block_content>
+        <macro><name>SECTION</name><argument_list>(<argument><literal type="string">"-e"</literal></argument>)</argument_list></macro> <block>{<block_content>
+            <expr_stmt><expr><call><name>CHECK</name><argument_list>(<argument><expr><call><name><name>cli</name><operator>.</operator><name>parse</name></name><argument_list>(<argument><expr><block>{<expr><literal type="string">"test"</literal></expr>, <expr><literal type="string">"-e"</literal></expr>}</block></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+
+            <expr_stmt><expr><call><name>REQUIRE</name><argument_list>(<argument><expr><name><name>config</name><operator>.</operator><name>noThrow</name></name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        </block_content>}</block>
+        <macro><name>SECTION</name><argument_list>(<argument><literal type="string">"--nothrow"</literal></argument>)</argument_list></macro> <block>{<block_content>
+            <expr_stmt><expr><call><name>CHECK</name><argument_list>(<argument><expr><call><name><name>cli</name><operator>.</operator><name>parse</name></name><argument_list>(<argument><expr><block>{<expr><literal type="string">"test"</literal></expr>, <expr><literal type="string">"--nothrow"</literal></expr>}</block></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+
+            <expr_stmt><expr><call><name>REQUIRE</name><argument_list>(<argument><expr><name><name>config</name><operator>.</operator><name>noThrow</name></name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        </block_content>}</block>
+    </block_content>}</block>
+
+    <macro><name>SECTION</name><argument_list>(<argument><literal type="string">"output filename"</literal></argument>)</argument_list></macro> <block>{<block_content>
+        <macro><name>SECTION</name><argument_list>(<argument><literal type="string">"-o filename"</literal></argument>)</argument_list></macro> <block>{<block_content>
+            <expr_stmt><expr><call><name>CHECK</name><argument_list>(<argument><expr><call><name><name>cli</name><operator>.</operator><name>parse</name></name><argument_list>(<argument><expr><block>{<expr><literal type="string">"test"</literal></expr>, <expr><literal type="string">"-o"</literal></expr>, <expr><literal type="string">"filename.ext"</literal></expr>}</block></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+
+            <expr_stmt><expr><call><name>REQUIRE</name><argument_list>(<argument><expr><name><name>config</name><operator>.</operator><name>outputFilename</name></name> <operator>==</operator> <literal type="string">"filename.ext"</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        </block_content>}</block>
+        <macro><name>SECTION</name><argument_list>(<argument><literal type="string">"--out"</literal></argument>)</argument_list></macro> <block>{<block_content>
+            <expr_stmt><expr><call><name>CHECK</name><argument_list>(<argument><expr><call><name><name>cli</name><operator>.</operator><name>parse</name></name><argument_list>(<argument><expr><block>{<expr><literal type="string">"test"</literal></expr>, <expr><literal type="string">"--out"</literal></expr>, <expr><literal type="string">"filename.ext"</literal></expr>}</block></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+
+            <expr_stmt><expr><call><name>REQUIRE</name><argument_list>(<argument><expr><name><name>config</name><operator>.</operator><name>outputFilename</name></name> <operator>==</operator> <literal type="string">"filename.ext"</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        </block_content>}</block>
+    </block_content>}</block>
+
+    <macro><name>SECTION</name><argument_list>(<argument><literal type="string">"combinations"</literal></argument>)</argument_list></macro> <block>{<block_content>
+        <macro><name>SECTION</name><argument_list>(<argument><literal type="string">"Single character flags can be combined"</literal></argument>)</argument_list></macro> <block>{<block_content>
+            <expr_stmt><expr><call><name>CHECK</name><argument_list>(<argument><expr><call><name><name>cli</name><operator>.</operator><name>parse</name></name><argument_list>(<argument><expr><block>{<expr><literal type="string">"test"</literal></expr>, <expr><literal type="string">"-abe"</literal></expr>}</block></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+
+            <expr_stmt><expr><call><name>CHECK</name><argument_list>(<argument><expr><name><name>config</name><operator>.</operator><name>abortAfter</name></name> <operator>==</operator> <literal type="number">1</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+            <expr_stmt><expr><call><name>CHECK</name><argument_list>(<argument><expr><name><name>config</name><operator>.</operator><name>shouldDebugBreak</name></name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+            <expr_stmt><expr><call><name>CHECK</name><argument_list>(<argument><expr><name><name>config</name><operator>.</operator><name>noThrow</name></name> <operator>==</operator> <literal type="boolean">true</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        </block_content>}</block>
+    </block_content>}</block>
+
+
+    <macro><name>SECTION</name><argument_list>( <argument><literal type="string">"use-colour"</literal></argument>)</argument_list></macro> <block>{<block_content>
+
+        <using>using <name><name>Catch</name><operator>::</operator><name>UseColour</name></name>;</using>
+
+        <macro><name>SECTION</name><argument_list>( <argument><literal type="string">"without option"</literal></argument> )</argument_list></macro> <block>{<block_content>
+            <expr_stmt><expr><call><name>CHECK</name><argument_list>(<argument><expr><call><name><name>cli</name><operator>.</operator><name>parse</name></name><argument_list>(<argument><expr><block>{<expr><literal type="string">"test"</literal></expr>}</block></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+
+            <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><name><name>config</name><operator>.</operator><name>useColour</name></name> <operator>==</operator> <name><name>UseColour</name><operator>::</operator><name>Auto</name></name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        </block_content>}</block>
+
+        <macro><name>SECTION</name><argument_list>( <argument><literal type="string">"auto"</literal></argument> )</argument_list></macro> <block>{<block_content>
+            <expr_stmt><expr><call><name>CHECK</name><argument_list>(<argument><expr><call><name><name>cli</name><operator>.</operator><name>parse</name></name><argument_list>(<argument><expr><block>{<expr><literal type="string">"test"</literal></expr>, <expr><literal type="string">"--use-colour"</literal></expr>, <expr><literal type="string">"auto"</literal></expr>}</block></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+
+            <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><name><name>config</name><operator>.</operator><name>useColour</name></name> <operator>==</operator> <name><name>UseColour</name><operator>::</operator><name>Auto</name></name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        </block_content>}</block>
+
+        <macro><name>SECTION</name><argument_list>( <argument><literal type="string">"yes"</literal></argument> )</argument_list></macro> <block>{<block_content>
+            <expr_stmt><expr><call><name>CHECK</name><argument_list>(<argument><expr><call><name><name>cli</name><operator>.</operator><name>parse</name></name><argument_list>(<argument><expr><block>{<expr><literal type="string">"test"</literal></expr>, <expr><literal type="string">"--use-colour"</literal></expr>, <expr><literal type="string">"yes"</literal></expr>}</block></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+
+            <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><name><name>config</name><operator>.</operator><name>useColour</name></name> <operator>==</operator> <name><name>UseColour</name><operator>::</operator><name>Yes</name></name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        </block_content>}</block>
+
+        <macro><name>SECTION</name><argument_list>( <argument><literal type="string">"no"</literal></argument> )</argument_list></macro> <block>{<block_content>
+            <expr_stmt><expr><call><name>CHECK</name><argument_list>(<argument><expr><call><name><name>cli</name><operator>.</operator><name>parse</name></name><argument_list>(<argument><expr><block>{<expr><literal type="string">"test"</literal></expr>, <expr><literal type="string">"--use-colour"</literal></expr>, <expr><literal type="string">"no"</literal></expr>}</block></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+
+            <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><name><name>config</name><operator>.</operator><name>useColour</name></name> <operator>==</operator> <name><name>UseColour</name><operator>::</operator><name>No</name></name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        </block_content>}</block>
+
+        <macro><name>SECTION</name><argument_list>( <argument><literal type="string">"error"</literal></argument> )</argument_list></macro> <block>{<block_content>
+            <decl_stmt><decl><type><name>auto</name></type> <name>result</name> <init>= <expr><call><name><name>cli</name><operator>.</operator><name>parse</name></name><argument_list>(<argument><expr><block>{<expr><literal type="string">"test"</literal></expr>, <expr><literal type="string">"--use-colour"</literal></expr>, <expr><literal type="string">"wrong"</literal></expr>}</block></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+            <expr_stmt><expr><call><name>CHECK</name><argument_list>( <argument><expr><operator>!</operator><name>result</name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+            <expr_stmt><expr><call><name>CHECK_THAT</name><argument_list>( <argument><expr><call><name><name>result</name><operator>.</operator><name>errorMessage</name></name><argument_list>()</argument_list></call></expr></argument>, <argument><expr><call><name>Contains</name><argument_list>( <argument><expr><literal type="string">"colour mode must be one of"</literal></expr></argument> )</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        </block_content>}</block>
+    </block_content>}</block>
+</block_content>}</block>
+
+
+<macro><name>TEST_CASE</name><argument_list>( <argument><literal type="string">"replaceInPlace"</literal></argument> )</argument_list></macro> <block>{<block_content>
+    <decl_stmt><decl><type><name><name>std</name><operator>::</operator><name>string</name></name></type> <name>letters</name> <init>= <expr><literal type="string">"abcdefcg"</literal></expr></init></decl>;</decl_stmt>
+    <macro><name>SECTION</name><argument_list>( <argument><literal type="string">"replace single char"</literal></argument> )</argument_list></macro> <block>{<block_content>
+        <expr_stmt><expr><call><name>CHECK</name><argument_list>( <argument><expr><call><name><name>Catch</name><operator>::</operator><name>replaceInPlace</name></name><argument_list>( <argument><expr><name>letters</name></expr></argument>, <argument><expr><literal type="string">"b"</literal></expr></argument>, <argument><expr><literal type="string">"z"</literal></expr></argument> )</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name>CHECK</name><argument_list>( <argument><expr><name>letters</name> <operator>==</operator> <literal type="string">"azcdefcg"</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block>
+    <macro><name>SECTION</name><argument_list>( <argument><literal type="string">"replace two chars"</literal></argument> )</argument_list></macro> <block>{<block_content>
+        <expr_stmt><expr><call><name>CHECK</name><argument_list>( <argument><expr><call><name><name>Catch</name><operator>::</operator><name>replaceInPlace</name></name><argument_list>( <argument><expr><name>letters</name></expr></argument>, <argument><expr><literal type="string">"c"</literal></expr></argument>, <argument><expr><literal type="string">"z"</literal></expr></argument> )</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name>CHECK</name><argument_list>( <argument><expr><name>letters</name> <operator>==</operator> <literal type="string">"abzdefzg"</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block>
+    <macro><name>SECTION</name><argument_list>( <argument><literal type="string">"replace first char"</literal></argument> )</argument_list></macro> <block>{<block_content>
+        <expr_stmt><expr><call><name>CHECK</name><argument_list>( <argument><expr><call><name><name>Catch</name><operator>::</operator><name>replaceInPlace</name></name><argument_list>( <argument><expr><name>letters</name></expr></argument>, <argument><expr><literal type="string">"a"</literal></expr></argument>, <argument><expr><literal type="string">"z"</literal></expr></argument> )</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name>CHECK</name><argument_list>( <argument><expr><name>letters</name> <operator>==</operator> <literal type="string">"zbcdefcg"</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block>
+    <macro><name>SECTION</name><argument_list>( <argument><literal type="string">"replace last char"</literal></argument> )</argument_list></macro> <block>{<block_content>
+        <expr_stmt><expr><call><name>CHECK</name><argument_list>( <argument><expr><call><name><name>Catch</name><operator>::</operator><name>replaceInPlace</name></name><argument_list>( <argument><expr><name>letters</name></expr></argument>, <argument><expr><literal type="string">"g"</literal></expr></argument>, <argument><expr><literal type="string">"z"</literal></expr></argument> )</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name>CHECK</name><argument_list>( <argument><expr><name>letters</name> <operator>==</operator> <literal type="string">"abcdefcz"</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block>
+    <macro><name>SECTION</name><argument_list>( <argument><literal type="string">"replace all chars"</literal></argument> )</argument_list></macro> <block>{<block_content>
+        <expr_stmt><expr><call><name>CHECK</name><argument_list>( <argument><expr><call><name><name>Catch</name><operator>::</operator><name>replaceInPlace</name></name><argument_list>( <argument><expr><name>letters</name></expr></argument>, <argument><expr><name>letters</name></expr></argument>, <argument><expr><literal type="string">"replaced"</literal></expr></argument> )</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name>CHECK</name><argument_list>( <argument><expr><name>letters</name> <operator>==</operator> <literal type="string">"replaced"</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block>
+    <macro><name>SECTION</name><argument_list>( <argument><literal type="string">"replace no chars"</literal></argument> )</argument_list></macro> <block>{<block_content>
+        <expr_stmt><expr><call><name>CHECK_FALSE</name><argument_list>( <argument><expr><call><name><name>Catch</name><operator>::</operator><name>replaceInPlace</name></name><argument_list>( <argument><expr><name>letters</name></expr></argument>, <argument><expr><literal type="string">"x"</literal></expr></argument>, <argument><expr><literal type="string">"z"</literal></expr></argument> )</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name>CHECK</name><argument_list>( <argument><expr><name>letters</name> <operator>==</operator> <name>letters</name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block>
+    <macro><name>SECTION</name><argument_list>( <argument><literal type="string">"escape '"</literal></argument> )</argument_list></macro> <block>{<block_content>
+        <decl_stmt><decl><type><name><name>std</name><operator>::</operator><name>string</name></name></type> <name>s</name> <init>= <expr><literal type="string">"didn't"</literal></expr></init></decl>;</decl_stmt>
+        <expr_stmt><expr><call><name>CHECK</name><argument_list>( <argument><expr><call><name><name>Catch</name><operator>::</operator><name>replaceInPlace</name></name><argument_list>( <argument><expr><name>s</name></expr></argument>, <argument><expr><literal type="string">"'"</literal></expr></argument>, <argument><expr><literal type="string">"|'"</literal></expr></argument> )</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name>CHECK</name><argument_list>( <argument><expr><name>s</name> <operator>==</operator> <literal type="string">"didn|'t"</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block>
+</block_content>}</block>
+
+
+<function><type><specifier>inline</specifier> <name>void</name></type> <name>manuallyRegisteredTestFunction</name><parameter_list>()</parameter_list> <block>{<block_content>
+    <expr_stmt><expr><call><name>SUCCEED</name><argument_list>( <argument><expr><literal type="string">"was called"</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+</block_content>}</block></function>
+<struct>struct <name>AutoTestReg</name> <block>{<public type="default">
+    <constructor><name>AutoTestReg</name><parameter_list>()</parameter_list> <block>{<block_content>
+        <expr_stmt><expr><call><name>REGISTER_TEST_CASE</name><argument_list>( <argument><expr><name>manuallyRegisteredTestFunction</name></expr></argument>, <argument><expr><literal type="string">"ManuallyRegistered"</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block></constructor>
+</public>}</block>;</struct>
+<decl_stmt><decl><type><name>AutoTestReg</name></type> <name>autoTestReg</name></decl>;</decl_stmt>
+</unit>

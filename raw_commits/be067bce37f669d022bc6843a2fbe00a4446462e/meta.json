@@ -1,0 +1,8 @@
+{
+  "commit_id": "be067bce37f669d022bc6843a2fbe00a4446462e",
+  "parent_id": "115db71bab371c610f58b8eed1095247a1778bf6",
+  "message": "Explicit ctor used to fix compilation failures caused by copy initialization.",
+  "changed_files": [
+    "include/reporters/catch_reporter_multi.cpp"
+  ]
+}

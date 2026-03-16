@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" xmlns:diff="http://www.srcML.org/srcDiff" revision="1.0.0" language="C++" filename="C:\Users\saile\AppData\Local\Temp\catch2_100_z8gzpiwf\04f18d996ba7d71fda1d28662e2413c06c5e5a49\src_catch2_benchmark_detail_catch_complete_invoke_cpp\src_catch2_benchmark_detail_catch_complete_invoke_cpp.old|C:\Users\saile\AppData\Local\Temp\catch2_100_z8gzpiwf\04f18d996ba7d71fda1d28662e2413c06c5e5a49\src_catch2_benchmark_detail_catch_complete_invoke_cpp\src_catch2_benchmark_detail_catch_complete_invoke_cpp.new"><comment type="block">/*
+ *  Distributed under the Boost Software License, Version 1.0. (See accompanying
+ *  file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
+ */</comment>
+
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;catch2/benchmark/detail/catch_complete_invoke.hpp&gt;</cpp:file></cpp:include>
+
+<namespace>namespace <name>Catch</name> <block>{
+    <namespace>namespace <name>Benchmark</name> <block>{
+        <namespace>namespace <name>Detail</name> <block>{
+            <decl_stmt><decl><type><diff:insert xmlns:diff="http://www.srcML.org/srcDiff"><name>CATCH_INTERNAL_START_WARNINGS_SUPPRESSION</name><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+            </diff:ws><name>CATCH_INTERNAL_SUPPRESS_GLOBALS_WARNINGS</name><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+            </diff:ws></diff:insert><specifier>const</specifier> <name><name>std</name><operator>::</operator><name>string</name></name></type> <name>benchmarkErrorMsg</name> <init>= <expr><literal type="string">"a benchmark failed to run successfully"</literal></expr></init></decl>;</decl_stmt>
+<diff:insert xmlns:diff="http://www.srcML.org/srcDiff"><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">            </diff:ws><expr_stmt><expr><name>CATCH_INTERNAL_STOP_WARNINGS_SUPPRESSION</name></expr></expr_stmt><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+</diff:ws></diff:insert>        }</block></namespace> <comment type="line">// namespace Detail</comment>
+    }</block></namespace> <comment type="line">// namespace Benchmark</comment>
+}</block></namespace> <comment type="line">// namespace Catch</comment>
+</unit>

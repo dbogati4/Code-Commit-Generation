@@ -1,0 +1,8 @@
+{
+  "commit_id": "2a4725b40eaaaf385b08cdc36164baaa3c5e89d1",
+  "parent_id": "a81c01d4f99cf9cd328cac6738fd86bfa9f6d7d6",
+  "message": "Enable some more generator tests in standard test run",
+  "changed_files": [
+    "projects/SelfTest/UsageTests/Generators.tests.cpp"
+  ]
+}

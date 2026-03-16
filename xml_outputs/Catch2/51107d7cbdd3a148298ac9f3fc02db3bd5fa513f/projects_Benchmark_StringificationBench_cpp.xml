@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" xmlns:diff="http://www.srcML.org/srcDiff" revision="1.0.0" language="C++" filename="C:\Users\saile\AppData\Local\Temp\catch2_100_z8gzpiwf\51107d7cbdd3a148298ac9f3fc02db3bd5fa513f\projects_Benchmark_StringificationBench_cpp\projects_Benchmark_StringificationBench_cpp.old|C:\Users\saile\AppData\Local\Temp\catch2_100_z8gzpiwf\51107d7cbdd3a148298ac9f3fc02db3bd5fa513f\projects_Benchmark_StringificationBench_cpp\projects_Benchmark_StringificationBench_cpp.new"><diff:insert xmlns:diff="http://www.srcML.org/srcDiff"><comment type="block">/*<diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+ </diff:ws>*<diff:ws xmlns:diff="http://www.srcML.org/srcDiff">  </diff:ws>Created<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>by<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>Martin<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>on<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>16/01/2017.<diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+ </diff:ws>*<diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+ </diff:ws>*<diff:ws xmlns:diff="http://www.srcML.org/srcDiff">  </diff:ws>Distributed<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>under<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>the<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>Boost<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>Software<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>License,<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>Version<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>1.0.<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>(See<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>accompanying<diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+ </diff:ws>*<diff:ws xmlns:diff="http://www.srcML.org/srcDiff">  </diff:ws>file<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>LICENSE_1_0.txt<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>or<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>copy<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>at<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>http://www.boost.org/LICENSE_1_0.txt)<diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+ </diff:ws>*/</comment><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+
+</diff:ws></diff:insert><cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">"catch.hpp"</cpp:file></cpp:include>
+
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;vector&gt;</cpp:file></cpp:include>
+
+<comment type="line" format="doxygen">///////////////////////////////////////////////////////////////////////////////</comment>
+<macro><name>TEST_CASE</name><argument_list>(<argument><literal type="string">"Successful tests -- REQUIRE"</literal></argument>, <argument><literal type="string">"[Success]"</literal></argument>)</argument_list></macro> <block>{<block_content>
+    <decl_stmt><decl><type><specifier>const</specifier> <name>size_t</name></type> <name>sz</name> <init>= <expr><literal type="number">1</literal> <operator>*</operator> <literal type="number">1024</literal> <operator>*</operator> <literal type="number">1024</literal></expr></init></decl>;</decl_stmt>
+
+
+    <decl_stmt><decl><type><name><name>std</name><operator>::</operator><name>vector</name><argument_list type="generic">&lt;<argument><expr><name>size_t</name></expr></argument>&gt;</argument_list></name></type> <name>vec</name></decl>;</decl_stmt> <expr_stmt><expr><call><name><name>vec</name><operator>.</operator><name>reserve</name></name><argument_list>(<argument><expr><name>sz</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    <for>for <control>(<init><decl><type><name>size_t</name></type> <name>i</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>i</name> <operator>&lt;</operator> <name>sz</name></expr>;</condition> <incr><expr><operator>++</operator><name>i</name></expr></incr>)</control><block>{<block_content>
+        <expr_stmt><expr><call><name><name>vec</name><operator>.</operator><name>push_back</name></name><argument_list>(<argument><expr><name>i</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name>REQUIRE</name><argument_list>(<argument><expr><call><name><name>vec</name><operator>.</operator><name>back</name></name><argument_list>()</argument_list></call> <operator>==</operator> <name>i</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block></for>
+</block_content>}</block>
+
+<comment type="line" format="doxygen">///////////////////////////////////////////////////////////////////////////////</comment>
+<macro><name>TEST_CASE</name><argument_list>(<argument><literal type="string">"Successful tests -- CHECK"</literal></argument>, <argument><literal type="string">"[Success]"</literal></argument>)</argument_list></macro> <block>{<block_content>
+    <decl_stmt><decl><type><specifier>const</specifier> <name>size_t</name></type> <name>sz</name> <init>= <expr><literal type="number">1</literal> <operator>*</operator> <literal type="number">1024</literal> <operator>*</operator> <literal type="number">1024</literal></expr></init></decl>;</decl_stmt>
+
+
+    <decl_stmt><decl><type><name><name>std</name><operator>::</operator><name>vector</name><argument_list type="generic">&lt;<argument><expr><name>size_t</name></expr></argument>&gt;</argument_list></name></type> <name>vec</name></decl>;</decl_stmt> <expr_stmt><expr><call><name><name>vec</name><operator>.</operator><name>reserve</name></name><argument_list>(<argument><expr><name>sz</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    <for>for <control>(<init><decl><type><name>size_t</name></type> <name>i</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>i</name> <operator>&lt;</operator> <name>sz</name></expr>;</condition> <incr><expr><operator>++</operator><name>i</name></expr></incr>)</control><block>{<block_content>
+        <expr_stmt><expr><call><name><name>vec</name><operator>.</operator><name>push_back</name></name><argument_list>(<argument><expr><name>i</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name>CHECK</name><argument_list>(<argument><expr><call><name><name>vec</name><operator>.</operator><name>back</name></name><argument_list>()</argument_list></call> <operator>==</operator> <name>i</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block></for>
+</block_content>}</block>
+
+<comment type="line" format="doxygen">///////////////////////////////////////////////////////////////////////////////</comment>
+<macro><name>TEST_CASE</name><argument_list>(<argument><literal type="string">"Unsuccessful tests -- CHECK"</literal></argument>, <argument><literal type="string">"[Failure]"</literal></argument>)</argument_list></macro> <block>{<block_content>
+    <decl_stmt><decl><type><specifier>const</specifier> <name>size_t</name></type> <name>sz</name> <init>= <expr><literal type="number">1024</literal> <operator>*</operator> <literal type="number">1024</literal></expr></init></decl>;</decl_stmt>
+
+
+    <decl_stmt><decl><type><name><name>std</name><operator>::</operator><name>vector</name><argument_list type="generic">&lt;<argument><expr><name>size_t</name></expr></argument>&gt;</argument_list></name></type> <name>vec</name></decl>;</decl_stmt> <expr_stmt><expr><call><name><name>vec</name><operator>.</operator><name>reserve</name></name><argument_list>(<argument><expr><name>sz</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    <for>for <control>(<init><decl><type><name>size_t</name></type> <name>i</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>i</name> <operator>&lt;</operator> <name>sz</name></expr>;</condition> <incr><expr><operator>++</operator><name>i</name></expr></incr>)</control><block>{<block_content>
+        <expr_stmt><expr><call><name><name>vec</name><operator>.</operator><name>push_back</name></name><argument_list>(<argument><expr><name>i</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name>CHECK</name><argument_list>(<argument><expr><call><name><name>vec</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call> <operator>==</operator> <name>i</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block></for>
+</block_content>}</block>
+</unit>

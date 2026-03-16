@@ -1,0 +1,14 @@
+diff --git a/include/internal/catch_capture_matchers.cpp b/include/internal/catch_capture_matchers.cpp
+index 8c30a154..758177e9 100644
+--- a/include/internal/catch_capture_matchers.cpp
++++ b/include/internal/catch_capture_matchers.cpp
+@@ -16,7 +16,8 @@ namespace Catch {
+     // There is another overload, in catch_assertinhandler.h/.cpp, that only takes a string and infers
+     // the Equals matcher (so the header does not mention matchers)
+     void handleExceptionMatchExpr( AssertionHandler& handler, StringMatcher const& matcher, StringRef matcherString  ) {
+-        MatchExpr<std::string, StringMatcher const&> expr( Catch::translateActiveException(), matcher, matcherString );
++        std::string exceptionMessage = Catch::translateActiveException();
++        MatchExpr<std::string, StringMatcher const&> expr( exceptionMessage, matcher, matcherString );
+         handler.handle( expr );
+     }
+ 

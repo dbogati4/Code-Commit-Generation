@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" xmlns:diff="http://www.srcML.org/srcDiff" revision="1.0.0" language="C++" filename="C:\Users\saile\AppData\Local\Temp\catch2_100_z8gzpiwf\0653f4880ba6353b0cf9444930e9101337b6fd4a\projects_SelfTest_TestMain_cpp\projects_SelfTest_TestMain_cpp.old|C:\Users\saile\AppData\Local\Temp\catch2_100_z8gzpiwf\0653f4880ba6353b0cf9444930e9101337b6fd4a\projects_SelfTest_TestMain_cpp\projects_SelfTest_TestMain_cpp.new"><comment type="block">/*
+ *  main.cpp
+ *  Catch - Test
+ *
+ *  Created by Phil on 22/10/2010.
+ *  Copyright 2010 Two Blue Cubes Ltd
+ *
+ *  Distributed under the Boost Software License, Version 1.0. (See accompanying
+ *  file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
+ *
+ */</comment>
+
+<cpp:define xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">define</cpp:directive> <cpp:macro xmlns:cpp="http://www.srcML.org/srcML/cpp"><name>CATCH_CONFIG_MAIN</name></cpp:macro></cpp:define>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">"catch.hpp"</cpp:file></cpp:include>
+
+
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">"catch_self_test.hpp"</cpp:file></cpp:include>
+
+<macro><name>TEST_CASE</name><argument_list>( <argument><literal type="string">"selftest/main"</literal></argument>, <argument><literal type="string">"Runs all Catch self tests and checks their results"</literal></argument> )</argument_list></macro>
+<block>{<block_content>
+    <using>using <namespace>namespace <name>Catch</name>;</namespace></using>
+    
+    <comment type="line" format="doxygen">///////////////////////////////////////////////////////////////////////////</comment>
+    <macro><name>SECTION</name><argument_list>(    <argument><literal type="string">"selftest/expected result"</literal></argument>,
+                <argument><literal type="string">"Tests do what they claim"</literal></argument> )</argument_list></macro>
+    <block>{<block_content>
+        <macro><name>SECTION</name><argument_list>(    <argument><literal type="string">"selftest/expected result/failing tests"</literal></argument>, 
+                    <argument><literal type="string">"Tests in the 'failing' branch fail"</literal></argument> )</argument_list></macro>
+        <block>{<block_content>
+            <expr_stmt><expr><call><name><name>MetaTestRunner</name><operator>::</operator><name>runMatching</name></name><argument_list>( <argument><expr><literal type="string">"./failing/*"</literal></expr></argument>,  <argument><expr><name><name>MetaTestRunner</name><operator>::</operator><name>Expected</name><operator>::</operator><name>ToFail</name></name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        </block_content>}</block>
+        
+        <macro><name>SECTION</name><argument_list>(    <argument><literal type="string">"selftest/expected result/succeeding tests"</literal></argument>, 
+                    <argument><literal type="string">"Tests in the 'succeeding' branch succeed"</literal></argument> )</argument_list></macro>
+        <block>{<block_content>
+            <expr_stmt><expr><call><name><name>MetaTestRunner</name><operator>::</operator><name>runMatching</name></name><argument_list>( <argument><expr><literal type="string">"./succeeding/*"</literal></expr></argument>,  <argument><expr><name><name>MetaTestRunner</name><operator>::</operator><name>Expected</name><operator>::</operator><name>ToSucceed</name></name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        </block_content>}</block>
+    </block_content>}</block>
+    
+    <comment type="line" format="doxygen">///////////////////////////////////////////////////////////////////////////</comment>
+    <macro><name>SECTION</name><argument_list>(    <argument><literal type="string">"selftest/test counts"</literal></argument>, 
+                <argument><literal type="string">"Number of test cases that run is fixed"</literal></argument> )</argument_list></macro>
+    <block>{<block_content>
+        <decl_stmt><decl><type><name>EmbeddedRunner</name></type> <name>runner</name></decl>;</decl_stmt>
+        
+        <macro><name>SECTION</name><argument_list>(    <argument><literal type="string">"selftest/test counts/succeeding tests"</literal></argument>, 
+                    <argument><literal type="string">"Number of 'succeeding' tests is fixed"</literal></argument> )</argument_list></macro>
+        <block>{<block_content>
+            <expr_stmt><expr><call><name><name>runner</name><operator>.</operator><name>runMatching</name></name><argument_list>( <argument><expr><literal type="string">"./succeeding/*"</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+            <expr_stmt><expr><call><name>CHECK</name><argument_list>( <argument><expr><call><name><name>runner</name><operator>.</operator><name>getSuccessCount</name></name><argument_list>()</argument_list></call> <operator>==</operator> <literal type="number"><diff:delete type="replace" xmlns:diff="http://www.srcML.org/srcDiff">257</diff:delete><diff:insert type="replace" xmlns:diff="http://www.srcML.org/srcDiff">259</diff:insert></literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+            <expr_stmt><expr><call><name>CHECK</name><argument_list>( <argument><expr><call><name><name>runner</name><operator>.</operator><name>getFailureCount</name></name><argument_list>()</argument_list></call> <operator>==</operator> <literal type="number">0</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        </block_content>}</block>
+
+        <macro><name>SECTION</name><argument_list>(    <argument><literal type="string">"selftest/test counts/failing tests"</literal></argument>, 
+                    <argument><literal type="string">"Number of 'failing' tests is fixed"</literal></argument> )</argument_list></macro>
+        <block>{<block_content>
+            <expr_stmt><expr><call><name><name>runner</name><operator>.</operator><name>runMatching</name></name><argument_list>( <argument><expr><literal type="string">"./failing/*"</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>        
+            <expr_stmt><expr><call><name>CHECK</name><argument_list>( <argument><expr><call><name><name>runner</name><operator>.</operator><name>getSuccessCount</name></name><argument_list>()</argument_list></call> <operator>==</operator> <literal type="number">0</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+            <expr_stmt><expr><call><name>CHECK</name><argument_list>( <argument><expr><call><name><name>runner</name><operator>.</operator><name>getFailureCount</name></name><argument_list>()</argument_list></call> <operator>==</operator> <literal type="number"><diff:delete type="replace" xmlns:diff="http://www.srcML.org/srcDiff">60</diff:delete><diff:insert type="replace" xmlns:diff="http://www.srcML.org/srcDiff">62</diff:insert></literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        </block_content>}</block>
+    </block_content>}</block>
+</block_content>}</block>
+
+<macro><name>TEST_CASE</name><argument_list>( <argument><literal type="string">"meta/Misc/Sections"</literal></argument>, <argument><literal type="string">"looped tests"</literal></argument> )</argument_list></macro>
+<block>{<block_content>
+    <decl_stmt><decl><type><name><name>Catch</name><operator>::</operator><name>EmbeddedRunner</name></name></type> <name>runner</name></decl>;</decl_stmt>
+    
+    <expr_stmt><expr><call><name><name>runner</name><operator>.</operator><name>runMatching</name></name><argument_list>( <argument><expr><literal type="string">"./mixed/Misc/Sections/nested2"</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>CHECK</name><argument_list>( <argument><expr><call><name><name>runner</name><operator>.</operator><name>getSuccessCount</name></name><argument_list>()</argument_list></call> <operator>==</operator> <literal type="number">2</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>CHECK</name><argument_list>( <argument><expr><call><name><name>runner</name><operator>.</operator><name>getFailureCount</name></name><argument_list>()</argument_list></call> <operator>==</operator> <literal type="number">1</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    
+</block_content>}</block>
+</unit>

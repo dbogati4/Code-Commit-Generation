@@ -1,0 +1,8 @@
+{
+  "commit_id": "d19b7292b37548c539281587e054665f82c25a34",
+  "parent_id": "5e063616dfc2e6f12edac666129f0cf58f5d7ae4",
+  "message": "xml reporter reports WARN message when not used with -s",
+  "changed_files": [
+    "include/reporters/catch_reporter_xml.cpp"
+  ]
+}

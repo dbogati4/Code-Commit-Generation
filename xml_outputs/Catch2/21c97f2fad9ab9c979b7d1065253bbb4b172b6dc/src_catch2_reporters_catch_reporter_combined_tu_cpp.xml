@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" xmlns:diff="http://www.srcML.org/srcDiff" revision="1.0.0" language="C++" filename="C:\Users\saile\AppData\Local\Temp\catch2_100_z8gzpiwf\21c97f2fad9ab9c979b7d1065253bbb4b172b6dc\src_catch2_reporters_catch_reporter_combined_tu_cpp\src_catch2_reporters_catch_reporter_combined_tu_cpp.old|C:\Users\saile\AppData\Local\Temp\catch2_100_z8gzpiwf\21c97f2fad9ab9c979b7d1065253bbb4b172b6dc\src_catch2_reporters_catch_reporter_combined_tu_cpp\src_catch2_reporters_catch_reporter_combined_tu_cpp.new">
+<comment type="line">//              Copyright Catch2 Authors</comment>
+<comment type="line">// Distributed under the Boost Software License, Version 1.0.</comment>
+<comment type="line">//   (See accompanying file LICENSE_1_0.txt or copy at</comment>
+<comment type="line">//        https://www.boost.org/LICENSE_1_0.txt)</comment>
+
+<comment type="line">// SPDX-License-Identifier: BSL-1.0</comment>
+<comment type="block" format="doxygen">/** \file
+ * This is a special TU that combines what would otherwise be a very
+ * small reporter-related TUs into one bigger TU.
+ *
+ * The reason for this is compilation performance improvements by
+ * avoiding reparsing headers for many small TUs, instead having this
+ * one TU include bit more, but having it all parsed only once.
+ *
+ * To avoid heavy-tail problem with compilation times, each "subpart"
+ * of Catch2 has its own combined TU like this.
+ */</comment>
+
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;catch2/reporters/catch_reporter_helpers.hpp&gt;</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;catch2/interfaces/catch_interfaces_config.hpp&gt;</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;catch2/internal/catch_console_width.hpp&gt;</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;catch2/internal/catch_errno_guard.hpp&gt;</cpp:file></cpp:include>
+
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;cfloat&gt;</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;cstdio&gt;</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;ostream&gt;</cpp:file></cpp:include>
+
+<namespace>namespace <name>Catch</name> <block>{
+
+    <comment type="line">// Because formatting using c++ streams is stateful, drop down to C is</comment>
+    <comment type="line">// required Alternatively we could use stringstream, but its performance</comment>
+    <comment type="line">// is... not good.</comment>
+    <function><type><name><name>std</name><operator>::</operator><name>string</name></name></type> <name>getFormattedDuration</name><parameter_list>( <parameter><decl><type><name>double</name></type> <name>duration</name></decl></parameter> )</parameter_list> <block>{<block_content>
+        <comment type="line">// Max exponent + 1 is required to represent the whole part</comment>
+        <comment type="line">// + 1 for decimal point</comment>
+        <comment type="line">// + 3 for the 3 decimal places</comment>
+        <comment type="line">// + 1 for null terminator</comment>
+        <decl_stmt><decl><type><specifier>const</specifier> <name><name>std</name><operator>::</operator><name>size_t</name></name></type> <name>maxDoubleSize</name> <init>= <expr><name>DBL_MAX_10_EXP</name> <operator>+</operator> <literal type="number">1</literal> <operator>+</operator> <literal type="number">1</literal> <operator>+</operator> <literal type="number">3</literal> <operator>+</operator> <literal type="number">1</literal></expr></init></decl>;</decl_stmt>
+        <decl_stmt><decl><type><name>char</name></type> <name><name>buffer</name><index>[<expr><name>maxDoubleSize</name></expr>]</index></name></decl>;</decl_stmt>
+
+        <comment type="line">// Save previous errno, to prevent sprintf from overwriting it</comment>
+        <decl_stmt><decl><type><name>ErrnoGuard</name></type> <name>guard</name></decl>;</decl_stmt>
+<cpp:ifdef xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">ifdef</cpp:directive> <name>_MSC_VER</name></cpp:ifdef>
+        <expr_stmt><expr><call><name>sprintf_s</name><argument_list>( <argument><expr><name>buffer</name></expr></argument>, <argument><expr><literal type="string">"%.3f"</literal></expr></argument>, <argument><expr><name>duration</name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+<cpp:else xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">else</cpp:directive></cpp:else>
+        <expr_stmt><expr><call><name><name>std</name><operator>::</operator><name><diff:delete type="replace" xmlns:diff="http://www.srcML.org/srcDiff">sprintf</diff:delete><diff:insert type="replace" xmlns:diff="http://www.srcML.org/srcDiff">snprintf</diff:insert></name></name><argument_list>( <argument><expr><name>buffer</name></expr></argument>, <diff:insert xmlns:diff="http://www.srcML.org/srcDiff"><argument><expr><name>maxDoubleSize</name></expr></argument>,<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws></diff:insert><argument><expr><literal type="string">"%.3f"</literal></expr></argument>, <argument><expr><name>duration</name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+<cpp:endif xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">endif</cpp:directive></cpp:endif>
+        <return>return <expr><call><name><name>std</name><operator>::</operator><name>string</name></name><argument_list>( <argument><expr><name>buffer</name></expr></argument> )</argument_list></call></expr>;</return>
+    </block_content>}</block></function>
+
+    <function><type><name>bool</name></type> <name>shouldShowDuration</name><parameter_list>( <parameter><decl><type><name>IConfig</name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>config</name></decl></parameter>, <parameter><decl><type><name>double</name></type> <name>duration</name></decl></parameter> )</parameter_list> <block>{<block_content>
+        <if_stmt><if>if <condition>( <expr><call><name><name>config</name><operator>.</operator><name>showDurations</name></name><argument_list>()</argument_list></call> <operator>==</operator> <name><name>ShowDurations</name><operator>::</operator><name>Always</name></name></expr> )</condition> <block>{<block_content>
+            <return>return <expr><literal type="boolean">true</literal></expr>;</return>
+        </block_content>}</block></if></if_stmt>
+        <if_stmt><if>if <condition>( <expr><call><name><name>config</name><operator>.</operator><name>showDurations</name></name><argument_list>()</argument_list></call> <operator>==</operator> <name><name>ShowDurations</name><operator>::</operator><name>Never</name></name></expr> )</condition> <block>{<block_content>
+            <return>return <expr><literal type="boolean">false</literal></expr>;</return>
+        </block_content>}</block></if></if_stmt>
+        <decl_stmt><decl><type><specifier>const</specifier> <name>double</name></type> <name>min</name> <init>= <expr><call><name><name>config</name><operator>.</operator><name>minDuration</name></name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+        <return>return <expr><name>min</name> <operator>&gt;=</operator> <literal type="number">0</literal> <operator>&amp;&amp;</operator> <name>duration</name> <operator>&gt;=</operator> <name>min</name></expr>;</return>
+    </block_content>}</block></function>
+
+    <function><type><name><name>std</name><operator>::</operator><name>string</name></name></type> <name>serializeFilters</name><parameter_list>( <parameter><decl><type><name><name>std</name><operator>::</operator><name>vector</name><argument_list type="generic">&lt;<argument><expr><name><name>std</name><operator>::</operator><name>string</name></name></expr></argument>&gt;</argument_list></name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>filters</name></decl></parameter> )</parameter_list> <block>{<block_content>
+        <comment type="line">// We add a ' ' separator between each filter</comment>
+        <decl_stmt><decl><type><name>size_t</name></type> <name>serialized_size</name> <init>= <expr><call><name><name>filters</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call> <operator>-</operator> <literal type="number">1</literal></expr></init></decl>;</decl_stmt>
+        <for>for <control>(<init><decl><type><specifier>auto</specifier> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>filter</name> <range>: <expr><name>filters</name></expr></range></decl></init>)</control> <block>{<block_content>
+            <expr_stmt><expr><name>serialized_size</name> <operator>+=</operator> <call><name><name>filter</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+        </block_content>}</block></for>
+
+        <decl_stmt><decl><type><name><name>std</name><operator>::</operator><name>string</name></name></type> <name>serialized</name></decl>;</decl_stmt>
+        <expr_stmt><expr><call><name><name>serialized</name><operator>.</operator><name>reserve</name></name><argument_list>(<argument><expr><name>serialized_size</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        <decl_stmt><decl><type><name>bool</name></type> <name>first</name> <init>= <expr><literal type="boolean">true</literal></expr></init></decl>;</decl_stmt>
+
+        <for>for <control>(<init><decl><type><specifier>auto</specifier> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>filter</name> <range>: <expr><name>filters</name></expr></range></decl></init>)</control> <block>{<block_content>
+            <if_stmt><if>if <condition>(<expr><operator>!</operator><name>first</name></expr>)</condition> <block>{<block_content>
+                <expr_stmt><expr><call><name><name>serialized</name><operator>.</operator><name>push_back</name></name><argument_list>(<argument><expr><literal type="char">' '</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+            </block_content>}</block></if></if_stmt>
+            <expr_stmt><expr><name>first</name> <operator>=</operator> <literal type="boolean">false</literal></expr>;</expr_stmt>
+            <expr_stmt><expr><call><name><name>serialized</name><operator>.</operator><name>append</name></name><argument_list>(<argument><expr><name>filter</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        </block_content>}</block></for>
+
+        <return>return <expr><name>serialized</name></expr>;</return>
+    </block_content>}</block></function>
+
+    <function type="operator"><type><name><name>std</name><operator>::</operator><name>ostream</name></name><modifier>&amp;</modifier></type> <name>operator<name>&lt;&lt;</name></name><parameter_list>( <parameter><decl><type><name><name>std</name><operator>::</operator><name>ostream</name></name><modifier>&amp;</modifier></type> <name>out</name></decl></parameter>, <parameter><decl><type><name>lineOfChars</name></type> <name>value</name></decl></parameter> )</parameter_list> <block>{<block_content>
+        <for>for <control>( <init><decl><type><name>size_t</name></type> <name>idx</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>idx</name> <operator>&lt;</operator> <name>CATCH_CONFIG_CONSOLE_WIDTH</name> <operator>-</operator> <literal type="number">1</literal></expr>;</condition> <incr><expr><operator>++</operator><name>idx</name></expr></incr> )</control> <block>{<block_content>
+            <expr_stmt><expr><call><name><name>out</name><operator>.</operator><name>put</name></name><argument_list>( <argument><expr><name><name>value</name><operator>.</operator><name>c</name></name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        </block_content>}</block></for>
+        <return>return <expr><name>out</name></expr>;</return>
+    </block_content>}</block></function>
+
+}</block></namespace> <comment type="line">// namespace Catch</comment>
+
+
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;catch2/reporters/catch_reporter_event_listener.hpp&gt;</cpp:file></cpp:include>
+
+<namespace>namespace <name>Catch</name> <block>{
+    <function><type><name>void</name></type> <name><name>EventListenerBase</name><operator>::</operator><name>assertionStarting</name></name><parameter_list>( <parameter><decl><type><name>AssertionInfo</name> <specifier>const</specifier><modifier>&amp;</modifier></type></decl></parameter> )</parameter_list> <block>{<block_content/>}</block></function>
+
+    <function><type><name>bool</name></type> <name><name>EventListenerBase</name><operator>::</operator><name>assertionEnded</name></name><parameter_list>( <parameter><decl><type><name>AssertionStats</name> <specifier>const</specifier><modifier>&amp;</modifier></type></decl></parameter> )</parameter_list> <block>{<block_content>
+        <return>return <expr><literal type="boolean">false</literal></expr>;</return>
+    </block_content>}</block></function>
+    <function><type><name>void</name></type>
+    <name><name>EventListenerBase</name><operator>::</operator><name>listReporters</name></name><parameter_list>( <parameter><decl><type><name><name>std</name><operator>::</operator><name>vector</name><argument_list type="generic">&lt;<argument><expr><name>ReporterDescription</name></expr></argument>&gt;</argument_list></name> <specifier>const</specifier><modifier>&amp;</modifier></type></decl></parameter>,
+                                      <parameter><decl><type><name>IConfig</name> <specifier>const</specifier><modifier>&amp;</modifier></type></decl></parameter> )</parameter_list> <block>{<block_content/>}</block></function>
+    <function><type><name>void</name></type> <name><name>EventListenerBase</name><operator>::</operator><name>listTests</name></name><parameter_list>( <parameter><decl><type><name><name>std</name><operator>::</operator><name>vector</name><argument_list type="generic">&lt;<argument><expr><name>TestCaseHandle</name></expr></argument>&gt;</argument_list></name> <specifier>const</specifier><modifier>&amp;</modifier></type></decl></parameter>,
+                                       <parameter><decl><type><name>IConfig</name> <specifier>const</specifier><modifier>&amp;</modifier></type></decl></parameter> )</parameter_list> <block>{<block_content/>}</block></function>
+    <function><type><name>void</name></type> <name><name>EventListenerBase</name><operator>::</operator><name>listTags</name></name><parameter_list>( <parameter><decl><type><name><name>std</name><operator>::</operator><name>vector</name><argument_list type="generic">&lt;<argument><expr><name>TagInfo</name></expr></argument>&gt;</argument_list></name> <specifier>const</specifier><modifier>&amp;</modifier></type></decl></parameter>,
+                                      <parameter><decl><type><name>IConfig</name> <specifier>const</specifier><modifier>&amp;</modifier></type></decl></parameter> )</parameter_list> <block>{<block_content/>}</block></function>
+    <function><type><name>void</name></type> <name><name>EventListenerBase</name><operator>::</operator><name>noMatchingTestCases</name></name><parameter_list>( <parameter><decl><type><name><name>std</name><operator>::</operator><name>string</name></name> <specifier>const</specifier><modifier>&amp;</modifier></type></decl></parameter> )</parameter_list> <block>{<block_content/>}</block></function>
+    <function><type><name>void</name></type> <name><name>EventListenerBase</name><operator>::</operator><name>testRunStarting</name></name><parameter_list>( <parameter><decl><type><name>TestRunInfo</name> <specifier>const</specifier><modifier>&amp;</modifier></type></decl></parameter> )</parameter_list> <block>{<block_content/>}</block></function>
+    <function><type><name>void</name></type> <name><name>EventListenerBase</name><operator>::</operator><name>testGroupStarting</name></name><parameter_list>( <parameter><decl><type><name>GroupInfo</name> <specifier>const</specifier><modifier>&amp;</modifier></type></decl></parameter> )</parameter_list> <block>{<block_content/>}</block></function>
+    <function><type><name>void</name></type> <name><name>EventListenerBase</name><operator>::</operator><name>testCaseStarting</name></name><parameter_list>( <parameter><decl><type><name>TestCaseInfo</name> <specifier>const</specifier><modifier>&amp;</modifier></type></decl></parameter> )</parameter_list> <block>{<block_content/>}</block></function>
+    <function><type><name>void</name></type> <name><name>EventListenerBase</name><operator>::</operator><name>sectionStarting</name></name><parameter_list>( <parameter><decl><type><name>SectionInfo</name> <specifier>const</specifier><modifier>&amp;</modifier></type></decl></parameter> )</parameter_list> <block>{<block_content/>}</block></function>
+    <function><type><name>void</name></type> <name><name>EventListenerBase</name><operator>::</operator><name>sectionEnded</name></name><parameter_list>( <parameter><decl><type><name>SectionStats</name> <specifier>const</specifier><modifier>&amp;</modifier></type></decl></parameter> )</parameter_list> <block>{<block_content/>}</block></function>
+    <function><type><name>void</name></type> <name><name>EventListenerBase</name><operator>::</operator><name>testCaseEnded</name></name><parameter_list>( <parameter><decl><type><name>TestCaseStats</name> <specifier>const</specifier><modifier>&amp;</modifier></type></decl></parameter> )</parameter_list> <block>{<block_content/>}</block></function>
+    <function><type><name>void</name></type> <name><name>EventListenerBase</name><operator>::</operator><name>testGroupEnded</name></name><parameter_list>( <parameter><decl><type><name>TestGroupStats</name> <specifier>const</specifier><modifier>&amp;</modifier></type></decl></parameter> )</parameter_list> <block>{<block_content/>}</block></function>
+    <function><type><name>void</name></type> <name><name>EventListenerBase</name><operator>::</operator><name>testRunEnded</name></name><parameter_list>( <parameter><decl><type><name>TestRunStats</name> <specifier>const</specifier><modifier>&amp;</modifier></type></decl></parameter> )</parameter_list> <block>{<block_content/>}</block></function>
+    <function><type><name>void</name></type> <name><name>EventListenerBase</name><operator>::</operator><name>skipTest</name></name><parameter_list>( <parameter><decl><type><name>TestCaseInfo</name> <specifier>const</specifier><modifier>&amp;</modifier></type></decl></parameter> )</parameter_list> <block>{<block_content/>}</block></function>
+}</block></namespace> <comment type="line">// namespace Catch</comment>
+</unit>

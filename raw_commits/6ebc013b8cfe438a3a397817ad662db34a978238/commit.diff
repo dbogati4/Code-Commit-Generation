@@ -1,0 +1,30 @@
+diff --git a/src/catch2/catch_approx.cpp b/src/catch2/catch_approx.cpp
+index 407586d1..9ad4ce3e 100644
+--- a/src/catch2/catch_approx.cpp
++++ b/src/catch2/catch_approx.cpp
+@@ -70,10 +70,10 @@ namespace Catch {
+     }
+ 
+ namespace literals {
+-    Approx operator "" _a(long double val) {
++    Approx operator ""_a(long double val) {
+         return Approx(val);
+     }
+-    Approx operator "" _a(unsigned long long val) {
++    Approx operator ""_a(unsigned long long val) {
+         return Approx(val);
+     }
+ } // end namespace literals
+diff --git a/tests/SelfTest/IntrospectiveTests/String.tests.cpp b/tests/SelfTest/IntrospectiveTests/String.tests.cpp
+index 7a0b3b4a..43c58b49 100644
+--- a/tests/SelfTest/IntrospectiveTests/String.tests.cpp
++++ b/tests/SelfTest/IntrospectiveTests/String.tests.cpp
+@@ -177,7 +177,7 @@ TEST_CASE("StringRef at compilation time", "[Strings][StringRef][constexpr]") {
+         STATIC_REQUIRE_FALSE(sr1.empty());
+         STATIC_REQUIRE(sr1.size() == 3);
+ 
+-        using Catch::operator"" _sr;
++        using Catch::operator""_sr;
+         constexpr auto sr2 = ""_sr;
+         STATIC_REQUIRE(sr2.empty());
+         STATIC_REQUIRE(sr2.size() == 0);

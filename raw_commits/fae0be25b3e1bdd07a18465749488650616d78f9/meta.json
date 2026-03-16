@@ -1,0 +1,9 @@
+{
+  "commit_id": "fae0be25b3e1bdd07a18465749488650616d78f9",
+  "parent_id": "899554bff2ba64afa7a20e1796b85d396cbbfd8d",
+  "message": "Improve error handling in parsing reporter specs",
+  "changed_files": [
+    "src/catch2/internal/catch_commandline.cpp",
+    "tests/SelfTest/IntrospectiveTests/CmdLine.tests.cpp"
+  ]
+}

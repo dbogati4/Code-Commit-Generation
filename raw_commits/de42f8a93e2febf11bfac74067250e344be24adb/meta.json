@@ -1,0 +1,8 @@
+{
+  "commit_id": "de42f8a93e2febf11bfac74067250e344be24adb",
+  "parent_id": "fc2066bf18e4f20cc1609d1083adcfe3764866af",
+  "message": "Fix escaping of quotes in coverage helper",
+  "changed_files": [
+    "misc/coverage-helper.cpp"
+  ]
+}

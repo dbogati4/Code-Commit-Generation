@@ -1,0 +1,8 @@
+{
+  "commit_id": "caf1264588a58be6b57ffbfdd64db39f43dba556",
+  "parent_id": "a6d59b62b2c2054e892fc62be66b3f5045ca8c3c",
+  "message": "Fixes for matcher testing helpers when testing bools",
+  "changed_files": [
+    "tests/SelfTest/UsageTests/MatchersRanges.tests.cpp"
+  ]
+}

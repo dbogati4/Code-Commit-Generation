@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" xmlns:diff="http://www.srcML.org/srcDiff" revision="1.0.0" language="C++" filename="C:\Users\saile\AppData\Local\Temp\catch2_100_z8gzpiwf\4d9bfb2951769dc2ba200b99bcd3891d02a028bd\src_catch2_catch_approx_cpp\src_catch2_catch_approx_cpp.old|C:\Users\saile\AppData\Local\Temp\catch2_100_z8gzpiwf\4d9bfb2951769dc2ba200b99bcd3891d02a028bd\src_catch2_catch_approx_cpp\src_catch2_catch_approx_cpp.new">
+<comment type="line">//              Copyright Catch2 Authors</comment>
+<comment type="line">// Distributed under the Boost Software License, Version 1.0.</comment>
+<comment type="line">//   (See accompanying file LICENSE_1_0.txt or copy at</comment>
+<comment type="line">//        https://www.boost.org/LICENSE_1_0.txt)</comment>
+
+<comment type="line">// SPDX-License-Identifier: BSL-1.0</comment>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;catch2/catch_approx.hpp&gt;</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;catch2/internal/catch_enforce.hpp&gt;</cpp:file></cpp:include>
+
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;cmath&gt;</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;limits&gt;</cpp:file></cpp:include>
+
+<namespace>namespace <block>{
+
+<comment type="line">// Performs equivalent check of std::fabs(lhs - rhs) &lt;= margin</comment>
+<comment type="line">// But without the subtraction to allow for INFINITY in comparison</comment>
+<function><type><name>bool</name></type> <name>marginComparison</name><parameter_list>(<parameter><decl><type><name>double</name></type> <name>lhs</name></decl></parameter>, <parameter><decl><type><name>double</name></type> <name>rhs</name></decl></parameter>, <parameter><decl><type><name>double</name></type> <name>margin</name></decl></parameter>)</parameter_list> <block>{<block_content>
+    <return>return <expr><operator>(</operator><name>lhs</name> <operator>+</operator> <name>margin</name> <operator>&gt;=</operator> <name>rhs</name><operator>)</operator> <operator>&amp;&amp;</operator> <operator>(</operator><name>rhs</name> <operator>+</operator> <name>margin</name> <operator>&gt;=</operator> <name>lhs</name><operator>)</operator></expr>;</return>
+</block_content>}</block></function>
+
+}</block></namespace>
+
+<namespace>namespace <name>Catch</name> <block>{
+
+    <constructor><name><name>Approx</name><operator>::</operator><name>Approx</name></name> <parameter_list>( <parameter><decl><type><name>double</name></type> <name>value</name></decl></parameter> )</parameter_list>
+    <member_init_list>:   <call><name>m_epsilon</name><argument_list>( <argument><expr><call><name><name>std</name><operator>::</operator><name>numeric_limits</name><argument_list type="generic">&lt;<argument><expr><name>float</name></expr></argument>&gt;</argument_list><operator>::</operator><name>epsilon</name></name><argument_list>()</argument_list></call><operator>*</operator><literal type="number"><diff:delete type="replace" xmlns:diff="http://www.srcML.org/srcDiff">100</diff:delete><diff:insert type="replace" xmlns:diff="http://www.srcML.org/srcDiff">100.</diff:insert></literal></expr></argument> )</argument_list></call>,
+        <call><name>m_margin</name><argument_list>( <argument><expr><literal type="number">0.0</literal></expr></argument> )</argument_list></call>,
+        <call><name>m_scale</name><argument_list>( <argument><expr><literal type="number">0.0</literal></expr></argument> )</argument_list></call>,
+        <call><name>m_value</name><argument_list>( <argument><expr><name>value</name></expr></argument> )</argument_list></call>
+    </member_init_list><block>{<block_content/>}</block></constructor>
+
+    <function><type><name>Approx</name></type> <name><name>Approx</name><operator>::</operator><name>custom</name></name><parameter_list>()</parameter_list> <block>{<block_content>
+        <return>return <expr><call><name>Approx</name><argument_list>( <argument><expr><literal type="number">0</literal></expr></argument> )</argument_list></call></expr>;</return>
+    </block_content>}</block></function>
+
+    <function type="operator"><type><name>Approx</name></type> <name><name>Approx</name><operator>::</operator><name>operator<name>-</name></name></name><parameter_list>()</parameter_list> <specifier>const</specifier> <block>{<block_content>
+        <decl_stmt><decl><type><name>auto</name></type> <name>temp</name><argument_list>(<argument><expr><operator>*</operator><name>this</name></expr></argument>)</argument_list></decl>;</decl_stmt>
+        <expr_stmt><expr><name><name>temp</name><operator>.</operator><name>m_value</name></name> <operator>=</operator> <operator>-</operator><name><name>temp</name><operator>.</operator><name>m_value</name></name></expr>;</expr_stmt>
+        <return>return <expr><name>temp</name></expr>;</return>
+    </block_content>}</block></function>
+
+
+    <function><type><name><name>std</name><operator>::</operator><name>string</name></name></type> <name><name>Approx</name><operator>::</operator><name>toString</name></name><parameter_list>()</parameter_list> <specifier>const</specifier> <block>{<block_content>
+        <decl_stmt><decl><type><name>ReusableStringStream</name></type> <name>rss</name></decl>;</decl_stmt>
+        <expr_stmt><expr><name>rss</name> <operator>&lt;&lt;</operator> <literal type="string">"Approx( "</literal> <operator>&lt;&lt;</operator> <call><name><operator>::</operator><name>Catch</name><operator>::</operator><name>Detail</name><operator>::</operator><name>stringify</name></name><argument_list>( <argument><expr><name>m_value</name></expr></argument> )</argument_list></call> <operator>&lt;&lt;</operator> <literal type="string">" )"</literal></expr>;</expr_stmt>
+        <return>return <expr><call><name><name>rss</name><operator>.</operator><name>str</name></name><argument_list>()</argument_list></call></expr>;</return>
+    </block_content>}</block></function>
+
+    <function><type><name>bool</name></type> <name><name>Approx</name><operator>::</operator><name>equalityComparisonImpl</name></name><parameter_list>(<parameter><decl><type><specifier>const</specifier> <name>double</name></type> <name>other</name></decl></parameter>)</parameter_list> <specifier>const</specifier> <block>{<block_content>
+        <comment type="line">// First try with fixed margin, then compute margin based on epsilon, scale and Approx's value</comment>
+        <comment type="line">// Thanks to Richard Harris for his help refining the scaled margin value</comment>
+        <return>return <expr><call><name>marginComparison</name><argument_list>(<argument><expr><name>m_value</name></expr></argument>, <argument><expr><name>other</name></expr></argument>, <argument><expr><name>m_margin</name></expr></argument>)</argument_list></call>
+            <operator>||</operator> <call><name>marginComparison</name><argument_list>(<argument><expr><name>m_value</name></expr></argument>, <argument><expr><name>other</name></expr></argument>, <argument><expr><name>m_epsilon</name> <operator>*</operator> <operator>(</operator><name>m_scale</name> <operator>+</operator> <call><name><name>std</name><operator>::</operator><name>fabs</name></name><argument_list>(<argument><expr><ternary><condition><expr><call><name><name>std</name><operator>::</operator><name>isinf</name></name><argument_list>(<argument><expr><name>m_value</name></expr></argument>)</argument_list></call></expr>?</condition><then> <expr><literal type="number">0</literal></expr> </then><else>: <expr><name>m_value</name></expr></else></ternary></expr></argument>)</argument_list></call><operator>)</operator></expr></argument>)</argument_list></call></expr>;</return>
+    </block_content>}</block></function>
+
+    <function><type><name>void</name></type> <name><name>Approx</name><operator>::</operator><name>setMargin</name></name><parameter_list>(<parameter><decl><type><name>double</name></type> <name>newMargin</name></decl></parameter>)</parameter_list> <block>{<block_content>
+        <expr_stmt><expr><call><name>CATCH_ENFORCE</name><argument_list>(<argument><expr><name>newMargin</name> <operator>&gt;=</operator> <literal type="number">0</literal></expr></argument>,
+            <argument><expr><literal type="string">"Invalid Approx::margin: "</literal> <operator>&lt;&lt;</operator> <name>newMargin</name> <operator>&lt;&lt;</operator> <literal type="char">'.'</literal>
+            <operator>&lt;&lt;</operator> <literal type="string">" Approx::Margin has to be non-negative."</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><name>m_margin</name> <operator>=</operator> <name>newMargin</name></expr>;</expr_stmt>
+    </block_content>}</block></function>
+
+    <function><type><name>void</name></type> <name><name>Approx</name><operator>::</operator><name>setEpsilon</name></name><parameter_list>(<parameter><decl><type><name>double</name></type> <name>newEpsilon</name></decl></parameter>)</parameter_list> <block>{<block_content>
+        <expr_stmt><expr><call><name>CATCH_ENFORCE</name><argument_list>(<argument><expr><name>newEpsilon</name> <operator>&gt;=</operator> <literal type="number">0</literal> <operator>&amp;&amp;</operator> <name>newEpsilon</name> <operator>&lt;=</operator> <literal type="number">1.0</literal></expr></argument>,
+            <argument><expr><literal type="string">"Invalid Approx::epsilon: "</literal> <operator>&lt;&lt;</operator> <name>newEpsilon</name> <operator>&lt;&lt;</operator> <literal type="char">'.'</literal>
+            <operator>&lt;&lt;</operator> <literal type="string">" Approx::epsilon has to be in [0, 1]"</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><name>m_epsilon</name> <operator>=</operator> <name>newEpsilon</name></expr>;</expr_stmt>
+    </block_content>}</block></function>
+
+<namespace>namespace <name>literals</name> <block>{
+    <function type="operator"><type><name>Approx</name></type> <name>operator <name>"" _a</name></name><parameter_list>(<parameter><decl><type><name>long</name> <name>double</name></type> <name>val</name></decl></parameter>)</parameter_list> <block>{<block_content>
+        <return>return <expr><call><name>Approx</name><argument_list>(<argument><expr><name>val</name></expr></argument>)</argument_list></call></expr>;</return>
+    </block_content>}</block></function>
+    <function type="operator"><type><name>Approx</name></type> <name>operator <name>"" _a</name></name><parameter_list>(<parameter><decl><type><name>unsigned</name> <name>long</name> <name>long</name></type> <name>val</name></decl></parameter>)</parameter_list> <block>{<block_content>
+        <return>return <expr><call><name>Approx</name><argument_list>(<argument><expr><name>val</name></expr></argument>)</argument_list></call></expr>;</return>
+    </block_content>}</block></function>
+}</block></namespace> <comment type="line">// end namespace literals</comment>
+
+<function><type><name><name>std</name><operator>::</operator><name>string</name></name></type> <name><name><name>StringMaker</name><argument_list type="generic">&lt;<argument><expr><name><name>Catch</name><operator>::</operator><name>Approx</name></name></expr></argument>&gt;</argument_list></name><operator>::</operator><name>convert</name></name><parameter_list>(<parameter><decl><type><name><name>Catch</name><operator>::</operator><name>Approx</name></name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>value</name></decl></parameter>)</parameter_list> <block>{<block_content>
+    <return>return <expr><call><name><name>value</name><operator>.</operator><name>toString</name></name><argument_list>()</argument_list></call></expr>;</return>
+</block_content>}</block></function>
+
+}</block></namespace> <comment type="line">// end namespace Catch</comment>
+</unit>

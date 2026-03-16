@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" xmlns:diff="http://www.srcML.org/srcDiff" revision="1.0.0" language="C++" filename="C:\Users\saile\AppData\Local\Temp\catch2_100_z8gzpiwf\36ff7ba720e1bb301d19747349a06134f62bfe0d\Test_ClassTests_cpp\Test_ClassTests_cpp.old|C:\Users\saile\AppData\Local\Temp\catch2_100_z8gzpiwf\36ff7ba720e1bb301d19747349a06134f62bfe0d\Test_ClassTests_cpp\Test_ClassTests_cpp.new"><comment type="block">/*
+ *  ClassTests.cpp
+ *  Catch - Test
+ *
+ *  Created by Phil on 09/11/2010.
+ *  Copyright 2010 Two Blue Cubes Ltd. All rights reserved.
+ *
+ *  Distributed under the Boost Software License, Version 1.0. (See accompanying
+ *  file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
+ *
+ */</comment>
+
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">"../catch.hpp"</cpp:file></cpp:include>
+
+<namespace>namespace
+<block>{
+    <class>class <name>TestClass</name>
+    <block>{<private type="default">
+        <decl_stmt><decl><type><name><name>std</name><operator>::</operator><name>string</name></name></type> <name>s</name></decl>;</decl_stmt>
+        
+    </private><public>public:
+        <constructor><name>TestClass</name><parameter_list>()</parameter_list>
+        <member_init_list>: <call><name>s</name><argument_list>( <argument><expr><literal type="string">"hello"</literal></expr></argument> )</argument_list></call>
+        </member_init_list><block>{<block_content/>}</block></constructor>
+        
+        <function><type><name>void</name></type> <name>succeedingCase</name><parameter_list>()</parameter_list>
+        <block>{<block_content>            
+            <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><name>s</name> <operator>==</operator> <literal type="string">"hello"</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        </block_content>}</block></function>
+        <function><type><name>void</name></type> <name>failingCase</name><parameter_list>()</parameter_list>
+        <block>{<block_content>            
+            <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><name>s</name> <operator>==</operator> <literal type="string">"world"</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        </block_content>}</block></function>
+    </public>}</block>;</class>
+}</block></namespace>
+
+
+<expr_stmt><expr><call><name>METHOD_AS_TEST_CASE</name><argument_list>( <argument><expr><name><name>TestClass</name><operator>::</operator><name>succeedingCase</name></name></expr></argument>, <argument><expr><literal type="string">"succeeding/TestClass/succeedingCase"</literal></expr></argument>, <argument><expr><literal type="string">"A method based test run that succeeds"</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+<expr_stmt><expr><call><name>METHOD_AS_TEST_CASE</name><argument_list>( <argument><expr><name><name>TestClass</name><operator>::</operator><name>failingCase</name></name></expr></argument>, <argument><expr><literal type="string">"failing/TestClass/failingCase"</literal></expr></argument>, <argument><expr><literal type="string">"A method based test run that fails"</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+
+
+<struct>struct <name>Fixture</name>
+<block>{<public type="default">
+    <constructor><name>Fixture</name><parameter_list>()</parameter_list> <member_init_list>: <call><name>m_a</name><argument_list>( <argument><expr><literal type="number">1</literal></expr></argument> )</argument_list></call> </member_init_list><block>{<block_content/>}</block></constructor>
+    
+    <decl_stmt><decl><type><name>int</name></type> <name>m_a</name></decl>;</decl_stmt>
+</public>}</block>;</struct>
+
+<macro><name>TEST_CASE_METHOD</name><argument_list>( <argument>Fixture</argument>, <argument><literal type="string">"succeeding/Fixture/succeedingCase"</literal></argument>, <argument><literal type="string">"A method based test run that succeeds"</literal></argument> )</argument_list></macro>
+<block>{<block_content>   
+    <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><name>m_a</name> <operator>==</operator> <literal type="number">1</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>        
+</block_content>}</block>
+
+<macro><name>TEST_CASE_METHOD</name><argument_list>( <argument>Fixture</argument>, <argument><literal type="string">"<diff:delete type="replace" xmlns:diff="http://www.srcML.org/srcDiff">succeeding/Fixture/failingCase</diff:delete><diff:insert type="replace" xmlns:diff="http://www.srcML.org/srcDiff">failing/Fixture/failingCase</diff:insert>"</literal></argument>, <argument><literal type="string">"A method based test run that fails"</literal></argument> )</argument_list></macro>
+<block>{<block_content>   
+    <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><name>m_a</name> <operator>==</operator> <literal type="number">2</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>        
+</block_content>}</block>
+</unit>

@@ -1,0 +1,29 @@
+diff --git a/src/catch2/internal/catch_run_context.cpp b/src/catch2/internal/catch_run_context.cpp
+index 8e04748e..7852b369 100644
+--- a/src/catch2/internal/catch_run_context.cpp
++++ b/src/catch2/internal/catch_run_context.cpp
+@@ -485,6 +485,12 @@ namespace Catch {
+         SourceLineInfo lineInfo,
+         Generators::GeneratorBasePtr&& generator ) {
+ 
++        if ( m_config->warnAboutInfiniteGenerators() &&
++             !generator->isFinite() ) {
++            // TBD: Would it be better to expand this macro inline?
++            FAIL( "GENERATE() would run infinitely" );
++        }
++
+         auto nameAndLoc = TestCaseTracking::NameAndLocation( static_cast<std::string>( generatorName ), lineInfo );
+         auto& currentTracker = m_trackerContext.currentTracker();
+         assert(
+@@ -497,11 +503,6 @@ namespace Catch {
+         currentTracker.addChild( CATCH_MOVE( newTracker ) );
+ 
+         ret->setGenerator( CATCH_MOVE( generator ) );
+-        if ( m_config->warnAboutInfiniteGenerators() &&
+-             !ret->getGenerator()->isFinite() ) {
+-            // TBD: Would it be better to expand this macro inline?
+-            FAIL( "GENERATE() would run infinitely" );
+-        }
+         ret->open();
+         return ret;
+     }

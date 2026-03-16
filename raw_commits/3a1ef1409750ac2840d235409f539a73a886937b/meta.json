@@ -1,0 +1,9 @@
+{
+  "commit_id": "3a1ef1409750ac2840d235409f539a73a886937b",
+  "parent_id": "13fae1e2ff9939d03bb8a5a6f3341538d4127dc5",
+  "message": "Use hasMessage() instead of getMessage().empty()",
+  "changed_files": [
+    "src/catch2/reporters/catch_reporter_junit.cpp",
+    "src/catch2/reporters/catch_reporter_sonarqube.cpp"
+  ]
+}

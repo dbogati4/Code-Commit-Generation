@@ -1,0 +1,8 @@
+{
+  "commit_id": "5ce355a38c54bbcd486e51ed6f6bb00c46c7540f",
+  "parent_id": "edde6f473604c6364476d2963939272ac7c795d4",
+  "message": "For macOS builds, disable isDebuggerActive() for non-AppleClang targets. Fixes #1588",
+  "changed_files": [
+    "include/internal/catch_debugger.cpp"
+  ]
+}

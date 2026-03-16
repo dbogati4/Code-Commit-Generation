@@ -1,0 +1,8 @@
+{
+  "commit_id": "72671fdbdfc7a6f1fad03af40e75ad8d881822a8",
+  "parent_id": "120827d4d616d4aa024dbe8d0eeba8089bcba80c",
+  "message": "Check for infinite generators before we construct generator's tracker",
+  "changed_files": [
+    "src/catch2/internal/catch_run_context.cpp"
+  ]
+}

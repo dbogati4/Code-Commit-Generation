@@ -1,0 +1,22 @@
+diff --git a/tests/ExtraTests/X03-DisabledExceptions-DefaultHandler.cpp b/tests/ExtraTests/X03-DisabledExceptions-DefaultHandler.cpp
+index c981fa0b..fefbae0d 100644
+--- a/tests/ExtraTests/X03-DisabledExceptions-DefaultHandler.cpp
++++ b/tests/ExtraTests/X03-DisabledExceptions-DefaultHandler.cpp
+@@ -1,4 +1,7 @@
+ #include <catch2/catch_test_macros.hpp>
++#include <catch2/benchmark/catch_benchmark.hpp>
++#include <catch2/matchers/catch_matchers.hpp>
++#include <catch2/matchers/catch_matchers_predicate.hpp>
+ 
+ TEST_CASE("Tests that run") {
+     // All of these should be run and be reported
+@@ -20,3 +23,9 @@ TEST_CASE("Tests that abort") {
+     // We should not get here, because the test above aborts
+     REQUIRE(1 != 4);
+ }
++
++TEST_CASE( "Misc. macros to check that they compile without exceptions" ) {
++    BENCHMARK( "simple benchmark" ) { return 1 * 2 + 3; };
++    REQUIRE_THAT( 1,
++                  Catch::Matchers::Predicate<int>( []( int i ) { return i == 1; } ) );
++}

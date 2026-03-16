@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" xmlns:diff="http://www.srcML.org/srcDiff" revision="1.0.0" language="C++" filename="C:\Users\saile\AppData\Local\Temp\catch2_100_z8gzpiwf\be067bce37f669d022bc6843a2fbe00a4446462e\include_reporters_catch_reporter_multi_cpp\include_reporters_catch_reporter_multi_cpp.old|C:\Users\saile\AppData\Local\Temp\catch2_100_z8gzpiwf\be067bce37f669d022bc6843a2fbe00a4446462e\include_reporters_catch_reporter_multi_cpp\include_reporters_catch_reporter_multi_cpp.new"><comment type="block">/*
+ *  Created by Phil on 5/08/2015.
+ *  Copyright 2015 Two Blue Cubes Ltd. All rights reserved.
+ *
+ *  Distributed under the Boost Software License, Version 1.0. (See accompanying
+ *  file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
+ */</comment>
+
+ <cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">"catch_reporter_multi.h"</cpp:file></cpp:include>
+<diff:delete xmlns:diff="http://www.srcML.org/srcDiff"><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws></diff:delete>
+<namespace>namespace <name>Catch</name> <block>{
+
+    <function><type><name>void</name></type> <name><name>MultipleReporters</name><operator>::</operator><name>add</name></name><parameter_list>( <parameter><decl><type><name>IStreamingReporterPtr</name><modifier>&amp;&amp;</modifier></type> <name>reporter</name></decl></parameter> )</parameter_list> <block>{<block_content>
+        <expr_stmt><expr><call><name><name>m_reporters</name><operator>.</operator><name>push_back</name></name><argument_list>( <argument><expr><call><name><name>std</name><operator>::</operator><name>move</name></name><argument_list>( <argument><expr><name>reporter</name></expr></argument> )</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block></function>
+
+    <function><type><name>ReporterPreferences</name></type> <name><name>MultipleReporters</name><operator>::</operator><name>getPreferences</name></name><parameter_list>()</parameter_list> <specifier>const</specifier> <block>{<block_content>
+        <return>return <expr><name><name>m_reporters</name><index>[<expr><literal type="number">0</literal></expr>]</index></name><operator>-&gt;</operator><call><name>getPreferences</name><argument_list>()</argument_list></call></expr>;</return>
+    </block_content>}</block></function>
+
+    <function><type><name><name>std</name><operator>::</operator><name>set</name><argument_list type="generic">&lt;<argument><expr><name>Verbosity</name></expr></argument>&gt;</argument_list></name></type> <name><name>MultipleReporters</name><operator>::</operator><name>getSupportedVerbosities</name></name><parameter_list>()</parameter_list> <block>{<block_content>
+        <return>return <expr><diff:delete type="replace" xmlns:diff="http://www.srcML.org/srcDiff"><block>{<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>}</block></diff:delete><diff:insert type="replace" xmlns:diff="http://www.srcML.org/srcDiff"><call><name><name>std</name><operator>::</operator><name>set</name><argument_list type="generic">&lt;<argument><expr><name>Verbosity</name></expr></argument>&gt;</argument_list></name><argument_list>{<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>}</argument_list></call></diff:insert></expr>;</return>
+    </block_content>}</block></function>
+
+<diff:delete xmlns:diff="http://www.srcML.org/srcDiff"><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">    </diff:ws></diff:delete>
+    <function><type><name>void</name></type> <name><name>MultipleReporters</name><operator>::</operator><name>noMatchingTestCases</name></name><parameter_list>( <parameter><decl><type><name><name>std</name><operator>::</operator><name>string</name></name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>spec</name></decl></parameter> )</parameter_list> <block>{<block_content>
+        <for>for<control>( <init><decl><type><specifier>auto</specifier> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>reporter</name> <range>: <expr><name>m_reporters</name></expr></range></decl></init> )</control><block type="pseudo"><block_content>
+            <expr_stmt><expr><call><name><name>reporter</name><operator>-&gt;</operator><name>noMatchingTestCases</name></name><argument_list>( <argument><expr><name>spec</name></expr></argument> )</argument_list></call></expr>;</expr_stmt></block_content></block></for>
+    </block_content>}</block></function>
+
+
+    <function><type><name>void</name></type> <name><name>MultipleReporters</name><operator>::</operator><name>testRunStarting</name></name><parameter_list>( <parameter><decl><type><name>TestRunInfo</name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>testRunInfo</name></decl></parameter> )</parameter_list> <block>{<block_content>
+        <for>for<control>( <init><decl><type><specifier>auto</specifier> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>reporter</name> <range>: <expr><name>m_reporters</name></expr></range></decl></init> )</control><block type="pseudo"><block_content>
+            <expr_stmt><expr><call><name><name>reporter</name><operator>-&gt;</operator><name>testRunStarting</name></name><argument_list>( <argument><expr><name>testRunInfo</name></expr></argument> )</argument_list></call></expr>;</expr_stmt></block_content></block></for>
+    </block_content>}</block></function>
+
+    <function><type><name>void</name></type> <name><name>MultipleReporters</name><operator>::</operator><name>testGroupStarting</name></name><parameter_list>( <parameter><decl><type><name>GroupInfo</name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>groupInfo</name></decl></parameter> )</parameter_list> <block>{<block_content>
+        <for>for<control>( <init><decl><type><specifier>auto</specifier> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>reporter</name> <range>: <expr><name>m_reporters</name></expr></range></decl></init> )</control><block type="pseudo"><block_content>
+            <expr_stmt><expr><call><name><name>reporter</name><operator>-&gt;</operator><name>testGroupStarting</name></name><argument_list>( <argument><expr><name>groupInfo</name></expr></argument> )</argument_list></call></expr>;</expr_stmt></block_content></block></for>
+    </block_content>}</block></function>
+
+
+    <function><type><name>void</name></type> <name><name>MultipleReporters</name><operator>::</operator><name>testCaseStarting</name></name><parameter_list>( <parameter><decl><type><name>TestCaseInfo</name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>testInfo</name></decl></parameter> )</parameter_list> <block>{<block_content>
+        <for>for<control>( <init><decl><type><specifier>auto</specifier> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>reporter</name> <range>: <expr><name>m_reporters</name></expr></range></decl></init> )</control><block type="pseudo"><block_content>
+            <expr_stmt><expr><call><name><name>reporter</name><operator>-&gt;</operator><name>testCaseStarting</name></name><argument_list>( <argument><expr><name>testInfo</name></expr></argument> )</argument_list></call></expr>;</expr_stmt></block_content></block></for>
+    </block_content>}</block></function>
+
+    <function><type><name>void</name></type> <name><name>MultipleReporters</name><operator>::</operator><name>sectionStarting</name></name><parameter_list>( <parameter><decl><type><name>SectionInfo</name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>sectionInfo</name></decl></parameter> )</parameter_list> <block>{<block_content>
+        <for>for<control>( <init><decl><type><specifier>auto</specifier> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>reporter</name> <range>: <expr><name>m_reporters</name></expr></range></decl></init> )</control><block type="pseudo"><block_content>
+            <expr_stmt><expr><call><name><name>reporter</name><operator>-&gt;</operator><name>sectionStarting</name></name><argument_list>( <argument><expr><name>sectionInfo</name></expr></argument> )</argument_list></call></expr>;</expr_stmt></block_content></block></for>
+    </block_content>}</block></function>
+
+    <function><type><name>void</name></type> <name><name>MultipleReporters</name><operator>::</operator><name>assertionStarting</name></name><parameter_list>( <parameter><decl><type><name>AssertionInfo</name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>assertionInfo</name></decl></parameter> )</parameter_list> <block>{<block_content>
+        <for>for<control>( <init><decl><type><specifier>auto</specifier> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>reporter</name> <range>: <expr><name>m_reporters</name></expr></range></decl></init> )</control><block type="pseudo"><block_content>
+            <expr_stmt><expr><call><name><name>reporter</name><operator>-&gt;</operator><name>assertionStarting</name></name><argument_list>( <argument><expr><name>assertionInfo</name></expr></argument> )</argument_list></call></expr>;</expr_stmt></block_content></block></for>
+    </block_content>}</block></function>
+
+    <comment type="line">// The return value indicates if the messages buffer should be cleared:</comment>
+    <function><type><name>bool</name></type> <name><name>MultipleReporters</name><operator>::</operator><name>assertionEnded</name></name><parameter_list>( <parameter><decl><type><name>AssertionStats</name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>assertionStats</name></decl></parameter> )</parameter_list> <block>{<block_content>
+        <decl_stmt><decl><type><name>bool</name></type> <name>clearBuffer</name> <init>= <expr><literal type="boolean">false</literal></expr></init></decl>;</decl_stmt>
+        <for>for<control>( <init><decl><type><specifier>auto</specifier> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>reporter</name> <range>: <expr><name>m_reporters</name></expr></range></decl></init> )</control><block type="pseudo"><block_content>
+            <expr_stmt><expr><name>clearBuffer</name> <operator>|=</operator> <call><name><name>reporter</name><operator>-&gt;</operator><name>assertionEnded</name></name><argument_list>( <argument><expr><name>assertionStats</name></expr></argument> )</argument_list></call></expr>;</expr_stmt></block_content></block></for>
+        <return>return <expr><name>clearBuffer</name></expr>;</return>
+    </block_content>}</block></function>
+
+    <function><type><name>void</name></type> <name><name>MultipleReporters</name><operator>::</operator><name>sectionEnded</name></name><parameter_list>( <parameter><decl><type><name>SectionStats</name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>sectionStats</name></decl></parameter> )</parameter_list> <block>{<block_content>
+        <for>for<control>( <init><decl><type><specifier>auto</specifier> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>reporter</name> <range>: <expr><name>m_reporters</name></expr></range></decl></init> )</control><block type="pseudo"><block_content>
+            <expr_stmt><expr><call><name><name>reporter</name><operator>-&gt;</operator><name>sectionEnded</name></name><argument_list>( <argument><expr><name>sectionStats</name></expr></argument> )</argument_list></call></expr>;</expr_stmt></block_content></block></for>
+    </block_content>}</block></function>
+
+    <function><type><name>void</name></type> <name><name>MultipleReporters</name><operator>::</operator><name>testCaseEnded</name></name><parameter_list>( <parameter><decl><type><name>TestCaseStats</name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>testCaseStats</name></decl></parameter> )</parameter_list> <block>{<block_content>
+        <for>for<control>( <init><decl><type><specifier>auto</specifier> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>reporter</name> <range>: <expr><name>m_reporters</name></expr></range></decl></init> )</control><block type="pseudo"><block_content>
+            <expr_stmt><expr><call><name><name>reporter</name><operator>-&gt;</operator><name>testCaseEnded</name></name><argument_list>( <argument><expr><name>testCaseStats</name></expr></argument> )</argument_list></call></expr>;</expr_stmt></block_content></block></for>
+    </block_content>}</block></function>
+
+    <function><type><name>void</name></type> <name><name>MultipleReporters</name><operator>::</operator><name>testGroupEnded</name></name><parameter_list>( <parameter><decl><type><name>TestGroupStats</name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>testGroupStats</name></decl></parameter> )</parameter_list> <block>{<block_content>
+        <for>for<control>( <init><decl><type><specifier>auto</specifier> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>reporter</name> <range>: <expr><name>m_reporters</name></expr></range></decl></init> )</control><block type="pseudo"><block_content>
+            <expr_stmt><expr><call><name><name>reporter</name><operator>-&gt;</operator><name>testGroupEnded</name></name><argument_list>( <argument><expr><name>testGroupStats</name></expr></argument> )</argument_list></call></expr>;</expr_stmt></block_content></block></for>
+    </block_content>}</block></function>
+
+    <function><type><name>void</name></type> <name><name>MultipleReporters</name><operator>::</operator><name>testRunEnded</name></name><parameter_list>( <parameter><decl><type><name>TestRunStats</name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>testRunStats</name></decl></parameter> )</parameter_list> <block>{<block_content>
+        <for>for<control>( <init><decl><type><specifier>auto</specifier> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>reporter</name> <range>: <expr><name>m_reporters</name></expr></range></decl></init> )</control><block type="pseudo"><block_content>
+            <expr_stmt><expr><call><name><name>reporter</name><operator>-&gt;</operator><name>testRunEnded</name></name><argument_list>( <argument><expr><name>testRunStats</name></expr></argument> )</argument_list></call></expr>;</expr_stmt></block_content></block></for>
+    </block_content>}</block></function>
+
+
+    <function><type><name>void</name></type> <name><name>MultipleReporters</name><operator>::</operator><name>skipTest</name></name><parameter_list>( <parameter><decl><type><name>TestCaseInfo</name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>testInfo</name></decl></parameter> )</parameter_list> <block>{<block_content>
+        <for>for<control>( <init><decl><type><specifier>auto</specifier> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>reporter</name> <range>: <expr><name>m_reporters</name></expr></range></decl></init> )</control><block type="pseudo"><block_content>
+            <expr_stmt><expr><call><name><name>reporter</name><operator>-&gt;</operator><name>skipTest</name></name><argument_list>( <argument><expr><name>testInfo</name></expr></argument> )</argument_list></call></expr>;</expr_stmt></block_content></block></for>
+    </block_content>}</block></function>
+
+    <function><type><name>bool</name></type> <name><name>MultipleReporters</name><operator>::</operator><name>isMulti</name></name><parameter_list>()</parameter_list> <specifier>const</specifier> <block>{<block_content>
+        <return>return <expr><literal type="boolean">true</literal></expr>;</return>
+    </block_content>}</block></function>
+
+}</block></namespace> <comment type="line">// end namespace Catch</comment>
+</unit>

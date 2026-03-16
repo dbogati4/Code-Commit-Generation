@@ -1,0 +1,13 @@
+diff --git a/src/catch2/reporters/catch_reporter_json.cpp b/src/catch2/reporters/catch_reporter_json.cpp
+index 58ae388b..1f0db8b0 100644
+--- a/src/catch2/reporters/catch_reporter_json.cpp
++++ b/src/catch2/reporters/catch_reporter_json.cpp
+@@ -130,7 +130,7 @@ namespace Catch {
+     }
+ 
+     std::string JsonReporter::getDescription() {
+-        return "WIP! Reports test results as a JSON document. WIP!";
++        return "Outputs listings as JSON. Test listing is Work-in-Progress!";
+     }
+ 
+     void JsonReporter::testRunStarting( TestRunInfo const& testInfo ) {

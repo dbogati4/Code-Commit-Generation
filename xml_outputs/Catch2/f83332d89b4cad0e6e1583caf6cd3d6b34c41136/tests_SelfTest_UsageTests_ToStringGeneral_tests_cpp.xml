@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" xmlns:diff="http://www.srcML.org/srcDiff" revision="1.0.0" language="C++" filename="C:\Users\saile\AppData\Local\Temp\catch2_100_z8gzpiwf\f83332d89b4cad0e6e1583caf6cd3d6b34c41136\tests_SelfTest_UsageTests_ToStringGeneral_tests_cpp\tests_SelfTest_UsageTests_ToStringGeneral_tests_cpp.old|C:\Users\saile\AppData\Local\Temp\catch2_100_z8gzpiwf\f83332d89b4cad0e6e1583caf6cd3d6b34c41136\tests_SelfTest_UsageTests_ToStringGeneral_tests_cpp\tests_SelfTest_UsageTests_ToStringGeneral_tests_cpp.new"><diff:delete type="replace" xmlns:diff="http://www.srcML.org/srcDiff"><comment type="block">/*<diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+ </diff:ws>*<diff:ws xmlns:diff="http://www.srcML.org/srcDiff">  </diff:ws>Distributed<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>under<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>the<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>Boost<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>Software<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>License,<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>Version<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>1.0.<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>(See<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>accompanying<diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+ </diff:ws>*<diff:ws xmlns:diff="http://www.srcML.org/srcDiff">  </diff:ws>file<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>LICENSE_1_0.txt<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>or<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>copy<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>at<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>http://www.boost.org/LICENSE_1_0.txt)<diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+ </diff:ws>*/</comment></diff:delete><diff:insert type="replace" xmlns:diff="http://www.srcML.org/srcDiff"><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+</diff:ws><comment type="line">//<diff:ws xmlns:diff="http://www.srcML.org/srcDiff">              </diff:ws>Copyright<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>Catch2<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>Authors</comment><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+</diff:ws><comment type="line">//<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>Distributed<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>under<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>the<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>Boost<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>Software<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>License,<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>Version<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>1.0.</comment><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+</diff:ws><comment type="line">//<diff:ws xmlns:diff="http://www.srcML.org/srcDiff">   </diff:ws>(See<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>accompanying<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>file<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>LICENSE_1_0.txt<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>or<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>copy<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>at</comment><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+</diff:ws><comment type="line">//<diff:ws xmlns:diff="http://www.srcML.org/srcDiff">        </diff:ws>https://www.boost.org/LICENSE_1_0.txt)</comment><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+
+</diff:ws><comment type="line">//<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>SPDX-License-Identifier:<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>BSL-1.0</comment></diff:insert>
+
+<cpp:define xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">define</cpp:directive> <cpp:macro xmlns:cpp="http://www.srcML.org/srcML/cpp"><name>CATCH_CONFIG_ENABLE_PAIR_STRINGMAKER</name></cpp:macro></cpp:define>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;catch2/catch_test_macros.hpp&gt;</cpp:file></cpp:include>
+
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;map&gt;</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;set&gt;</cpp:file></cpp:include>
+
+<macro><name>TEST_CASE</name><argument_list>( <argument><literal type="string">"Character pretty printing"</literal></argument> )</argument_list></macro><block>{<block_content>
+    <macro><name>SECTION</name><argument_list>(<argument><literal type="string">"Specifically escaped"</literal></argument>)</argument_list></macro><block>{<block_content>
+        <decl_stmt><decl><type><name>char</name></type> <name>tab</name> <init>= <expr><literal type="char">'\t'</literal></expr></init></decl>;</decl_stmt>
+        <decl_stmt><decl><type><name>char</name></type> <name>newline</name> <init>= <expr><literal type="char">'\n'</literal></expr></init></decl>;</decl_stmt>
+        <decl_stmt><decl><type><name>char</name></type> <name>carr_return</name> <init>= <expr><literal type="char">'\r'</literal></expr></init></decl>;</decl_stmt>
+        <decl_stmt><decl><type><name>char</name></type> <name>form_feed</name> <init>= <expr><literal type="char">'\f'</literal></expr></init></decl>;</decl_stmt>
+        <expr_stmt><expr><call><name>CHECK</name><argument_list>(<argument><expr><name>tab</name> <operator>==</operator> <literal type="char">'\t'</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name>CHECK</name><argument_list>(<argument><expr><name>newline</name> <operator>==</operator> <literal type="char">'\n'</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name>CHECK</name><argument_list>(<argument><expr><name>carr_return</name> <operator>==</operator> <literal type="char">'\r'</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name>CHECK</name><argument_list>(<argument><expr><name>form_feed</name> <operator>==</operator> <literal type="char">'\f'</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block>
+    <macro><name>SECTION</name><argument_list>(<argument><literal type="string">"General chars"</literal></argument>)</argument_list></macro><block>{<block_content>
+        <decl_stmt><decl><type><name>char</name></type> <name>space</name> <init>= <expr><literal type="char">' '</literal></expr></init></decl>;</decl_stmt>
+        <expr_stmt><expr><call><name>CHECK</name><argument_list>(<argument><expr><name>space</name> <operator>==</operator> <literal type="char">' '</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        <decl_stmt><decl><type><name>char</name></type> <name><name>chars</name><index>[]</index></name> <init>= <expr><block>{<expr><literal type="char">'a'</literal></expr>, <expr><literal type="char">'z'</literal></expr>, <expr><literal type="char">'A'</literal></expr>, <expr><literal type="char">'Z'</literal></expr>}</block></expr></init></decl>;</decl_stmt>
+        <for>for <control>(<init><decl><type><name>int</name></type> <name>i</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>i</name> <operator>&lt;</operator> <literal type="number">4</literal></expr>;</condition> <incr><expr><operator>++</operator><name>i</name></expr></incr>)</control><block>{<block_content>
+            <decl_stmt><decl><type><name>char</name></type> <name>c</name> <init>= <expr><name><name>chars</name><index>[<expr><name>i</name></expr>]</index></name></expr></init></decl>;</decl_stmt>
+            <expr_stmt><expr><call><name>REQUIRE</name><argument_list>(<argument><expr><name>c</name> <operator>==</operator> <name><name>chars</name><index>[<expr><name>i</name></expr>]</index></name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        </block_content>}</block></for>
+    </block_content>}</block>
+    <macro><name>SECTION</name><argument_list>(<argument><literal type="string">"Low ASCII"</literal></argument>)</argument_list></macro><block>{<block_content>
+        <decl_stmt><decl><type><name>char</name></type> <name>null_terminator</name> <init>= <expr><literal type="char">'\0'</literal></expr></init></decl>;</decl_stmt>
+        <expr_stmt><expr><call><name>CHECK</name><argument_list>(<argument><expr><name>null_terminator</name> <operator>==</operator> <literal type="char">'\0'</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        <for>for <control>(<init><decl><type><name>int</name></type> <name>i</name> <init>= <expr><literal type="number">2</literal></expr></init></decl>;</init> <condition><expr><name>i</name> <operator>&lt;</operator> <literal type="number">6</literal></expr>;</condition> <incr><expr><operator>++</operator><name>i</name></expr></incr>)</control><block>{<block_content>
+            <decl_stmt><decl><type><name>char</name></type> <name>c</name> <init>= <expr><cast type="static">static_cast<argument_list type="generic">&lt;<argument><expr><name>char</name></expr></argument>&gt;</argument_list><argument_list>(<argument><expr><name>i</name></expr></argument>)</argument_list></cast></expr></init></decl>;</decl_stmt>
+            <expr_stmt><expr><call><name>REQUIRE</name><argument_list>(<argument><expr><name>c</name> <operator>==</operator> <name>i</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        </block_content>}</block></for>
+    </block_content>}</block>
+</block_content>}</block>
+
+
+<macro><name>TEST_CASE</name><argument_list>( <argument><literal type="string">"Capture and info messages"</literal></argument> )</argument_list></macro> <block>{<block_content>
+    <macro><name>SECTION</name><argument_list>(<argument><literal type="string">"Capture should stringify like assertions"</literal></argument>)</argument_list></macro> <block>{<block_content>
+        <decl_stmt><decl><type><name>int</name></type> <name>i</name> <init>= <expr><literal type="number">2</literal></expr></init></decl>;</decl_stmt>
+        <expr_stmt><expr><call><name>CAPTURE</name><argument_list>(<argument><expr><name>i</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name>REQUIRE</name><argument_list>(<argument><expr><literal type="boolean">true</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block>
+    <macro><name>SECTION</name><argument_list>(<argument><literal type="string">"Info should NOT stringify the way assertions do"</literal></argument>)</argument_list></macro> <block>{<block_content>
+        <decl_stmt><decl><type><name>int</name></type> <name>i</name> <init>= <expr><literal type="number">3</literal></expr></init></decl>;</decl_stmt>
+        <expr_stmt><expr><call><name>INFO</name><argument_list>(<argument><expr><name>i</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name>REQUIRE</name><argument_list>(<argument><expr><literal type="boolean">true</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block>
+</block_content>}</block>
+
+<macro><name>TEST_CASE</name><argument_list>( <argument><literal type="string">"std::map is convertible string"</literal></argument>, <argument><literal type="string">"[toString]"</literal></argument> )</argument_list></macro> <block>{<block_content>
+
+    <macro><name>SECTION</name><argument_list>( <argument><literal type="string">"empty"</literal></argument> )</argument_list></macro> <block>{<block_content>
+        <decl_stmt><decl><type><name><name>std</name><operator>::</operator><name>map</name><argument_list type="generic">&lt;<argument><expr><name><name>std</name><operator>::</operator><name>string</name></name></expr></argument>, <argument><expr><name>int</name></expr></argument>&gt;</argument_list></name></type> <name>emptyMap</name></decl>;</decl_stmt>
+
+        <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name><name>Catch</name><operator>::</operator><name>Detail</name><operator>::</operator><name>stringify</name></name><argument_list>( <argument><expr><name>emptyMap</name></expr></argument> )</argument_list></call> <operator>==</operator> <literal type="string">"{  }"</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block>
+
+    <macro><name>SECTION</name><argument_list>( <argument><literal type="string">"single item"</literal></argument> )</argument_list></macro> <block>{<block_content>
+        <decl_stmt><decl><type><name><name>std</name><operator>::</operator><name>map</name><argument_list type="generic">&lt;<argument><expr><name><name>std</name><operator>::</operator><name>string</name></name></expr></argument>, <argument><expr><name>int</name></expr></argument>&gt;</argument_list></name></type> <name>map</name> <init>= <expr><block>{ <expr><block>{ <expr><literal type="string">"one"</literal></expr>, <expr><literal type="number">1</literal></expr> }</block></expr> }</block></expr></init></decl>;</decl_stmt>
+
+        <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name><name>Catch</name><operator>::</operator><name>Detail</name><operator>::</operator><name>stringify</name></name><argument_list>( <argument><expr><name>map</name></expr></argument> )</argument_list></call> <operator>==</operator> <literal type="string">"{ { \"one\", 1 } }"</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block>
+
+    <macro><name>SECTION</name><argument_list>( <argument><literal type="string">"several items"</literal></argument> )</argument_list></macro> <block>{<block_content>
+        <decl_stmt><decl><type><name><name>std</name><operator>::</operator><name>map</name><argument_list type="generic">&lt;<argument><expr><name><name>std</name><operator>::</operator><name>string</name></name></expr></argument>, <argument><expr><name>int</name></expr></argument>&gt;</argument_list></name></type> <name>map</name> <init>= <expr><block>{
+                <expr><block>{ <expr><literal type="string">"abc"</literal></expr>, <expr><literal type="number">1</literal></expr> }</block></expr>,
+                <expr><block>{ <expr><literal type="string">"def"</literal></expr>, <expr><literal type="number">2</literal></expr> }</block></expr>,
+                <expr><block>{ <expr><literal type="string">"ghi"</literal></expr>, <expr><literal type="number">3</literal></expr> }</block></expr>
+            }</block></expr></init></decl>;</decl_stmt>
+
+        <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name><name>Catch</name><operator>::</operator><name>Detail</name><operator>::</operator><name>stringify</name></name><argument_list>( <argument><expr><name>map</name></expr></argument> )</argument_list></call> <operator>==</operator> <literal type="string">"{ { \"abc\", 1 }, { \"def\", 2 }, { \"ghi\", 3 } }"</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block>
+</block_content>}</block>
+
+<macro><name>TEST_CASE</name><argument_list>( <argument><literal type="string">"std::set is convertible string"</literal></argument>, <argument><literal type="string">"[toString]"</literal></argument> )</argument_list></macro> <block>{<block_content>
+
+    <macro><name>SECTION</name><argument_list>( <argument><literal type="string">"empty"</literal></argument> )</argument_list></macro> <block>{<block_content>
+        <decl_stmt><decl><type><name><name>std</name><operator>::</operator><name>set</name><argument_list type="generic">&lt;<argument><expr><name><name>std</name><operator>::</operator><name>string</name></name></expr></argument>&gt;</argument_list></name></type> <name>emptySet</name></decl>;</decl_stmt>
+
+        <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name><name>Catch</name><operator>::</operator><name>Detail</name><operator>::</operator><name>stringify</name></name><argument_list>( <argument><expr><name>emptySet</name></expr></argument> )</argument_list></call> <operator>==</operator> <literal type="string">"{  }"</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block>
+
+    <macro><name>SECTION</name><argument_list>( <argument><literal type="string">"single item"</literal></argument> )</argument_list></macro> <block>{<block_content>
+        <decl_stmt><decl><type><name><name>std</name><operator>::</operator><name>set</name><argument_list type="generic">&lt;<argument><expr><name><name>std</name><operator>::</operator><name>string</name></name></expr></argument>&gt;</argument_list></name></type> <name>set</name> <init>= <expr><block>{ <expr><literal type="string">"one"</literal></expr> }</block></expr></init></decl>;</decl_stmt>
+
+        <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name><name>Catch</name><operator>::</operator><name>Detail</name><operator>::</operator><name>stringify</name></name><argument_list>( <argument><expr><name>set</name></expr></argument> )</argument_list></call> <operator>==</operator> <literal type="string">"{ \"one\" }"</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block>
+
+    <macro><name>SECTION</name><argument_list>( <argument><literal type="string">"several items"</literal></argument> )</argument_list></macro> <block>{<block_content>
+        <decl_stmt><decl><type><name><name>std</name><operator>::</operator><name>set</name><argument_list type="generic">&lt;<argument><expr><name><name>std</name><operator>::</operator><name>string</name></name></expr></argument>&gt;</argument_list></name></type> <name>set</name> <init>= <expr><block>{ <expr><literal type="string">"abc"</literal></expr>, <expr><literal type="string">"def"</literal></expr>, <expr><literal type="string">"ghi"</literal></expr> }</block></expr></init></decl>;</decl_stmt>
+
+        <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name><name>Catch</name><operator>::</operator><name>Detail</name><operator>::</operator><name>stringify</name></name><argument_list>( <argument><expr><name>set</name></expr></argument> )</argument_list></call> <operator>==</operator> <literal type="string">"{ \"abc\", \"def\", \"ghi\" }"</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block>
+</block_content>}</block>
+
+<macro><name>TEST_CASE</name><argument_list>(<argument><literal type="string">"Static arrays are convertible to string"</literal></argument>, <argument><literal type="string">"[toString]"</literal></argument>)</argument_list></macro> <block>{<block_content>
+    <macro><name>SECTION</name><argument_list>(<argument><literal type="string">"Single item"</literal></argument>)</argument_list></macro> <block>{<block_content>
+        <decl_stmt><decl><type><name>int</name></type> <name><name>singular</name><index>[<expr><literal type="number">1</literal></expr>]</index></name> <init>= <expr><block>{ <expr><literal type="number">1</literal></expr> }</block></expr></init></decl>;</decl_stmt>
+        <expr_stmt><expr><call><name>REQUIRE</name><argument_list>(<argument><expr><call><name><name>Catch</name><operator>::</operator><name>Detail</name><operator>::</operator><name>stringify</name></name><argument_list>(<argument><expr><name>singular</name></expr></argument>)</argument_list></call> <operator>==</operator> <literal type="string">"{ 1 }"</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block>
+    <macro><name>SECTION</name><argument_list>(<argument><literal type="string">"Multiple"</literal></argument>)</argument_list></macro> <block>{<block_content>
+        <decl_stmt><decl><type><name>int</name></type> <name><name>arr</name><index>[<expr><literal type="number">3</literal></expr>]</index></name> <init>= <expr><block>{ <expr><literal type="number">3</literal></expr>, <expr><literal type="number">2</literal></expr>, <expr><literal type="number">1</literal></expr> }</block></expr></init></decl>;</decl_stmt>
+        <expr_stmt><expr><call><name>REQUIRE</name><argument_list>(<argument><expr><call><name><name>Catch</name><operator>::</operator><name>Detail</name><operator>::</operator><name>stringify</name></name><argument_list>(<argument><expr><name>arr</name></expr></argument>)</argument_list></call> <operator>==</operator> <literal type="string">"{ 3, 2, 1 }"</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block>
+    <macro><name>SECTION</name><argument_list>(<argument><literal type="string">"Non-trivial inner items"</literal></argument>)</argument_list></macro> <block>{<block_content>
+        <decl_stmt><decl><type><name><name>std</name><operator>::</operator><name>vector</name><argument_list type="generic">&lt;<argument><expr><name><name>std</name><operator>::</operator><name>string</name></name></expr></argument>&gt;</argument_list></name></type> <name><name>arr</name><index>[<expr><literal type="number">2</literal></expr>]</index></name> <init>= <expr><block>{ <expr><block>{<expr><literal type="string">"1:1"</literal></expr>, <expr><literal type="string">"1:2"</literal></expr>, <expr><literal type="string">"1:3"</literal></expr>}</block></expr>, <expr><block>{<expr><literal type="string">"2:1"</literal></expr>, <expr><literal type="string">"2:2"</literal></expr>}</block></expr> }</block></expr></init></decl>;</decl_stmt>
+        <expr_stmt><expr><call><name>REQUIRE</name><argument_list>(<argument><expr><call><name><name>Catch</name><operator>::</operator><name>Detail</name><operator>::</operator><name>stringify</name></name><argument_list>(<argument><expr><name>arr</name></expr></argument>)</argument_list></call> <operator>==</operator> <literal type="string">R"({ { "1:1", "1:2", "1:3" }, { "2:1", "2:2" } })"</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block>
+</block_content>}</block>
+
+<cpp:ifdef xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">ifdef</cpp:directive> <name>CATCH_CONFIG_CPP17_STRING_VIEW</name></cpp:ifdef>
+
+<macro><name>TEST_CASE</name><argument_list>(<argument><literal type="string">"String views are stringified like other strings"</literal></argument>, <argument><literal type="string">"[toString][approvals]"</literal></argument>)</argument_list></macro> <block>{<block_content>
+    <decl_stmt><decl><type><name><name>std</name><operator>::</operator><name>string_view</name></name></type> <name>view</name><argument_list>{<argument><expr><literal type="string">"abc"</literal></expr></argument>}</argument_list></decl>;</decl_stmt>
+    <expr_stmt><expr><call><name>CHECK</name><argument_list>(<argument><expr><call><name><name>Catch</name><operator>::</operator><name>Detail</name><operator>::</operator><name>stringify</name></name><argument_list>(<argument><expr><name>view</name></expr></argument>)</argument_list></call> <operator>==</operator> <literal type="string">R"("abc")"</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+
+    <decl_stmt><decl><type><name><name>std</name><operator>::</operator><name>string_view</name></name></type> <name><name>arr</name><index>[]</index></name> <argument_list>{ <argument><expr><name>view</name></expr></argument> }</argument_list></decl>;</decl_stmt>
+    <expr_stmt><expr><call><name>CHECK</name><argument_list>(<argument><expr><call><name><name>Catch</name><operator>::</operator><name>Detail</name><operator>::</operator><name>stringify</name></name><argument_list>(<argument><expr><name>arr</name></expr></argument>)</argument_list></call> <operator>==</operator> <literal type="string">R"({ "abc" })"</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+</block_content>}</block>
+
+<cpp:endif xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">endif</cpp:directive></cpp:endif>
+
+<macro><name>TEST_CASE</name><argument_list>(<argument><literal type="string">"Precision of floating point stringification can be set"</literal></argument>, <argument><literal type="string">"[toString][floatingPoint]"</literal></argument>)</argument_list></macro> <block>{<block_content>
+    <macro><name>SECTION</name><argument_list>(<argument><literal type="string">"Floats"</literal></argument>)</argument_list></macro> <block>{<block_content>
+        <using>using <name>sm</name> <init>= <type><name><name>Catch</name><operator>::</operator><name>StringMaker</name><argument_list type="generic">&lt;<argument><expr><name>float</name></expr></argument>&gt;</argument_list></name></type></init>;</using>
+        <decl_stmt><decl><type><specifier>const</specifier> <specifier>auto</specifier></type> <name>oldPrecision</name> <init>= <expr><name><name>sm</name><operator>::</operator><name>precision</name></name></expr></init></decl>;</decl_stmt>
+
+        <decl_stmt><decl><type><specifier>const</specifier> <name>float</name></type> <name>testFloat</name> <init>= <expr><literal type="number">1.12345678901234567899f</literal></expr></init></decl>;</decl_stmt>
+        <decl_stmt><decl><type><name>auto</name></type> <name>str1</name> <init>= <expr><call><name><name>sm</name><operator>::</operator><name>convert</name></name><argument_list>(<argument><expr><name>testFloat</name></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+        <expr_stmt><expr><name><name>sm</name><operator>::</operator><name>precision</name></name> <operator>=</operator> <literal type="number">5</literal></expr>;</expr_stmt>
+        <comment type="line">// "1." prefix = 2 chars, f suffix is another char</comment>
+        <expr_stmt><expr><call><name>CHECK</name><argument_list>(<argument><expr><call><name><name>str1</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call> <operator>==</operator> <literal type="number">3</literal> <operator>+</operator> <literal type="number">5</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+
+        <expr_stmt><expr><name><name>sm</name><operator>::</operator><name>precision</name></name> <operator>=</operator> <literal type="number">10</literal></expr>;</expr_stmt>
+        <decl_stmt><decl><type><name>auto</name></type> <name>str2</name> <init>= <expr><call><name><name>sm</name><operator>::</operator><name>convert</name></name><argument_list>(<argument><expr><name>testFloat</name></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+        <expr_stmt><expr><call><name>REQUIRE</name><argument_list>(<argument><expr><call><name><name>str2</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call> <operator>==</operator> <literal type="number">3</literal> <operator>+</operator> <literal type="number">10</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><name><name>sm</name><operator>::</operator><name>precision</name></name> <operator>=</operator> <name>oldPrecision</name></expr>;</expr_stmt>
+    </block_content>}</block>
+    <macro><name>SECTION</name><argument_list>(<argument><literal type="string">"Double"</literal></argument>)</argument_list></macro> <block>{<block_content>
+        <using>using <name>sm</name> <init>= <type><name><name>Catch</name><operator>::</operator><name>StringMaker</name><argument_list type="generic">&lt;<argument><expr><name>double</name></expr></argument>&gt;</argument_list></name></type></init>;</using>
+        <decl_stmt><decl><type><specifier>const</specifier> <specifier>auto</specifier></type> <name>oldPrecision</name> <init>= <expr><name><name>sm</name><operator>::</operator><name>precision</name></name></expr></init></decl>;</decl_stmt>
+
+        <decl_stmt><decl><type><specifier>const</specifier> <name>double</name></type> <name>testDouble</name> <init>= <expr><literal type="number">1.123456789012345678901234567899</literal></expr></init></decl>;</decl_stmt>
+        <expr_stmt><expr><name><name>sm</name><operator>::</operator><name>precision</name></name> <operator>=</operator> <literal type="number">5</literal></expr>;</expr_stmt>
+        <decl_stmt><decl><type><name>auto</name></type> <name>str1</name> <init>= <expr><call><name><name>sm</name><operator>::</operator><name>convert</name></name><argument_list>(<argument><expr><name>testDouble</name></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+        <comment type="line">// "1." prefix = 2 chars</comment>
+        <expr_stmt><expr><call><name>CHECK</name><argument_list>(<argument><expr><call><name><name>str1</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call> <operator>==</operator> <literal type="number">2</literal> <operator>+</operator> <literal type="number">5</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+
+        <expr_stmt><expr><name><name>sm</name><operator>::</operator><name>precision</name></name> <operator>=</operator> <literal type="number">15</literal></expr>;</expr_stmt>
+        <decl_stmt><decl><type><name>auto</name></type> <name>str2</name> <init>= <expr><call><name><name>sm</name><operator>::</operator><name>convert</name></name><argument_list>(<argument><expr><name>testDouble</name></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+        <expr_stmt><expr><call><name>REQUIRE</name><argument_list>(<argument><expr><call><name><name>str2</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call> <operator>==</operator> <literal type="number">2</literal> <operator>+</operator> <literal type="number">15</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+
+        <expr_stmt><expr><name><name>sm</name><operator>::</operator><name>precision</name></name> <operator>=</operator> <name>oldPrecision</name></expr>;</expr_stmt>
+    </block_content>}</block>
+</block_content>}</block>
+
+<namespace>namespace <block>{
+
+<struct>struct <name>WhatException</name> <super_list>: <super><name><name>std</name><operator>::</operator><name>exception</name></name></super></super_list> <block>{<public type="default">
+    <function><type><name>char</name> <specifier>const</specifier><modifier>*</modifier></type> <name>what</name><parameter_list>()</parameter_list> <specifier>const</specifier> <noexcept>noexcept</noexcept> <specifier>override</specifier> <block>{<block_content>
+        <return>return <expr><literal type="string">"This exception has overridden what() method"</literal></expr>;</return>
+    </block_content>}</block></function>
+    <destructor_decl><name>~WhatException</name><parameter_list>()</parameter_list> <specifier>override</specifier>;</destructor_decl>
+</public>}</block>;</struct>
+
+<struct>struct <name>OperatorException</name> <super_list>: <super><name><name>std</name><operator>::</operator><name>exception</name></name></super></super_list> <block>{<public type="default">
+    <destructor_decl><name>~OperatorException</name><parameter_list>()</parameter_list> <specifier>override</specifier>;</destructor_decl>
+</public>}</block>;</struct>
+
+<function type="operator"><type><name><name>std</name><operator>::</operator><name>ostream</name></name><modifier>&amp;</modifier></type> <name>operator<name>&lt;&lt;</name></name><parameter_list>(<parameter><decl><type><name><name>std</name><operator>::</operator><name>ostream</name></name><modifier>&amp;</modifier></type> <name>out</name></decl></parameter>, <parameter><decl><type><name>OperatorException</name> <specifier>const</specifier><modifier>&amp;</modifier></type></decl></parameter>)</parameter_list> <block>{<block_content>
+    <expr_stmt><expr><name>out</name> <operator>&lt;&lt;</operator> <literal type="string">"OperatorException"</literal></expr>;</expr_stmt>
+    <return>return <expr><name>out</name></expr>;</return>
+</block_content>}</block></function>
+
+<struct>struct <name>StringMakerException</name> <super_list>: <super><name><name>std</name><operator>::</operator><name>exception</name></name></super></super_list> <block>{<public type="default">
+    <destructor_decl><name>~StringMakerException</name><parameter_list>()</parameter_list> <specifier>override</specifier>;</destructor_decl>
+</public>}</block>;</struct>
+
+}</block></namespace> <comment type="line">// end anonymous namespace</comment>
+
+<namespace>namespace <name>Catch</name> <block>{
+<struct><template>template <parameter_list>&lt;&gt;</parameter_list></template>
+struct <name><name>StringMaker</name><argument_list type="generic">&lt;<argument><expr><name>StringMakerException</name></expr></argument>&gt;</argument_list></name> <block>{<public type="default">
+    <function><type><specifier>static</specifier> <name><name>std</name><operator>::</operator><name>string</name></name></type> <name>convert</name><parameter_list>(<parameter><decl><type><name>StringMakerException</name> <specifier>const</specifier><modifier>&amp;</modifier></type></decl></parameter>)</parameter_list> <block>{<block_content>
+        <return>return <expr><literal type="string">"StringMakerException"</literal></expr>;</return>
+    </block_content>}</block></function>
+</public>}</block>;</struct>
+}</block></namespace>
+
+<comment type="line">// Avoid -Wweak-tables</comment>
+<expr_stmt><expr><call><name><name>WhatException</name><operator>::</operator><name>~WhatException</name></name><argument_list>()</argument_list></call> <operator>=</operator> default</expr>;</expr_stmt>
+<expr_stmt><expr><call><name><name>OperatorException</name><operator>::</operator><name>~OperatorException</name></name><argument_list>()</argument_list></call> <operator>=</operator> default</expr>;</expr_stmt>
+<expr_stmt><expr><call><name><name>StringMakerException</name><operator>::</operator><name>~StringMakerException</name></name><argument_list>()</argument_list></call> <operator>=</operator> default</expr>;</expr_stmt>
+
+
+
+
+<macro><name>TEST_CASE</name><argument_list>(<argument><literal type="string">"Exception as a value (e.g. in REQUIRE_THROWS_MATCHES) can be stringified"</literal></argument>, <argument><literal type="string">"[toString][exception]"</literal></argument>)</argument_list></macro> <block>{<block_content>
+    <expr_stmt><expr><call><name>REQUIRE</name><argument_list>(<argument><expr><call><name><operator>::</operator><name>Catch</name><operator>::</operator><name>Detail</name><operator>::</operator><name>stringify</name></name><argument_list>(<argument><expr><call><name>WhatException</name><argument_list>{}</argument_list></call></expr></argument>)</argument_list></call> <operator>==</operator> <literal type="string">"This exception has overridden what() method"</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>REQUIRE</name><argument_list>(<argument><expr><call><name><operator>::</operator><name>Catch</name><operator>::</operator><name>Detail</name><operator>::</operator><name>stringify</name></name><argument_list>(<argument><expr><call><name>OperatorException</name><argument_list>{}</argument_list></call></expr></argument>)</argument_list></call> <operator>==</operator> <literal type="string">"OperatorException"</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>REQUIRE</name><argument_list>(<argument><expr><call><name><operator>::</operator><name>Catch</name><operator>::</operator><name>Detail</name><operator>::</operator><name>stringify</name></name><argument_list>(<argument><expr><call><name>StringMakerException</name><argument_list>{}</argument_list></call></expr></argument>)</argument_list></call> <operator>==</operator> <literal type="string">"StringMakerException"</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+</block_content>}</block>
+</unit>

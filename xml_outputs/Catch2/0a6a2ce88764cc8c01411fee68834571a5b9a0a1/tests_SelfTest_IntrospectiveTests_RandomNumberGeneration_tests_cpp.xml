@@ -1,0 +1,625 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" xmlns:diff="http://www.srcML.org/srcDiff" revision="1.0.0" language="C++" filename="C:\Users\saile\AppData\Local\Temp\catch2_100_z8gzpiwf\0a6a2ce88764cc8c01411fee68834571a5b9a0a1\tests_SelfTest_IntrospectiveTests_RandomNumberGeneration_tests_cpp\tests_SelfTest_IntrospectiveTests_RandomNumberGeneration_tests_cpp.old|C:\Users\saile\AppData\Local\Temp\catch2_100_z8gzpiwf\0a6a2ce88764cc8c01411fee68834571a5b9a0a1\tests_SelfTest_IntrospectiveTests_RandomNumberGeneration_tests_cpp\tests_SelfTest_IntrospectiveTests_RandomNumberGeneration_tests_cpp.new">
+<comment type="line">//              Copyright Catch2 Authors</comment>
+<comment type="line">// Distributed under the Boost Software License, Version 1.0.</comment>
+<comment type="line">//   (See accompanying file LICENSE.txt or copy at</comment>
+<comment type="line">//        https://www.boost.org/LICENSE_1_0.txt)</comment>
+
+<comment type="line">// SPDX-License-Identifier: BSL-1.0</comment>
+
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;catch2/catch_test_macros.hpp&gt;</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;catch2/catch_template_test_macros.hpp&gt;</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;catch2/internal/catch_floating_point_helpers.hpp&gt;</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;catch2/internal/catch_random_integer_helpers.hpp&gt;</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;catch2/internal/catch_random_number_generator.hpp&gt;</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;catch2/internal/catch_random_seed_generation.hpp&gt;</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;catch2/internal/catch_uniform_floating_point_distribution.hpp&gt;</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;catch2/internal/catch_uniform_integer_distribution.hpp&gt;</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;catch2/generators/catch_generators.hpp&gt;</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;catch2/matchers/catch_matchers_range_equals.hpp&gt;</cpp:file></cpp:include>
+
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;random&gt;</cpp:file></cpp:include>
+
+<macro><name>TEST_CASE</name><argument_list>(<argument><literal type="string">"Our PCG implementation provides expected results for known seeds"</literal></argument>, <argument><literal type="string">"[rng]"</literal></argument>)</argument_list></macro> <block>{<block_content>
+    <decl_stmt><decl><type><name><name>Catch</name><operator>::</operator><name>SimplePcg32</name></name></type> <name>rng</name></decl>;</decl_stmt>
+    <macro><name>SECTION</name><argument_list>(<argument><literal type="string">"Default seeded"</literal></argument>)</argument_list></macro> <block>{<block_content>
+        <expr_stmt><expr><call><name>REQUIRE</name><argument_list>(<argument><expr><call><name>rng</name><argument_list>()</argument_list></call> <operator>==</operator> <literal type="number">0xfcdb943b</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name>REQUIRE</name><argument_list>(<argument><expr><call><name>rng</name><argument_list>()</argument_list></call> <operator>==</operator> <literal type="number">0x6f55b921</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name>REQUIRE</name><argument_list>(<argument><expr><call><name>rng</name><argument_list>()</argument_list></call> <operator>==</operator> <literal type="number">0x4c17a916</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name>REQUIRE</name><argument_list>(<argument><expr><call><name>rng</name><argument_list>()</argument_list></call> <operator>==</operator> <literal type="number">0x71eae25f</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name>REQUIRE</name><argument_list>(<argument><expr><call><name>rng</name><argument_list>()</argument_list></call> <operator>==</operator> <literal type="number">0x6ce7909c</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block>
+    <macro><name>SECTION</name><argument_list>(<argument><literal type="string">"Specific seed"</literal></argument>)</argument_list></macro> <block>{<block_content>
+        <expr_stmt><expr><call><name><name>rng</name><operator>.</operator><name>seed</name></name><argument_list>(<argument><expr><literal type="number">0xabcd1234</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name>REQUIRE</name><argument_list>(<argument><expr><call><name>rng</name><argument_list>()</argument_list></call> <operator>==</operator> <literal type="number">0x57c08495</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name>REQUIRE</name><argument_list>(<argument><expr><call><name>rng</name><argument_list>()</argument_list></call> <operator>==</operator> <literal type="number">0x33c956ac</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name>REQUIRE</name><argument_list>(<argument><expr><call><name>rng</name><argument_list>()</argument_list></call> <operator>==</operator> <literal type="number">0x2206fd76</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name>REQUIRE</name><argument_list>(<argument><expr><call><name>rng</name><argument_list>()</argument_list></call> <operator>==</operator> <literal type="number">0x3501a35b</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name>REQUIRE</name><argument_list>(<argument><expr><call><name>rng</name><argument_list>()</argument_list></call> <operator>==</operator> <literal type="number">0xfdffb30f</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+
+        <comment type="line">// Also check repeated output after reseeding</comment>
+        <expr_stmt><expr><call><name><name>rng</name><operator>.</operator><name>seed</name></name><argument_list>(<argument><expr><literal type="number">0xabcd1234</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name>REQUIRE</name><argument_list>(<argument><expr><call><name>rng</name><argument_list>()</argument_list></call> <operator>==</operator> <literal type="number">0x57c08495</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name>REQUIRE</name><argument_list>(<argument><expr><call><name>rng</name><argument_list>()</argument_list></call> <operator>==</operator> <literal type="number">0x33c956ac</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name>REQUIRE</name><argument_list>(<argument><expr><call><name>rng</name><argument_list>()</argument_list></call> <operator>==</operator> <literal type="number">0x2206fd76</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name>REQUIRE</name><argument_list>(<argument><expr><call><name>rng</name><argument_list>()</argument_list></call> <operator>==</operator> <literal type="number">0x3501a35b</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name>REQUIRE</name><argument_list>(<argument><expr><call><name>rng</name><argument_list>()</argument_list></call> <operator>==</operator> <literal type="number">0xfdffb30f</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block>
+</block_content>}</block>
+
+<macro><name>TEST_CASE</name><argument_list>(<argument><literal type="string">"Comparison ops"</literal></argument>, <argument><literal type="string">"[rng]"</literal></argument>)</argument_list></macro> <block>{<block_content>
+    <using>using <name><name>Catch</name><operator>::</operator><name>SimplePcg32</name></name>;</using>
+    <expr_stmt><expr><call><name>REQUIRE</name><argument_list>(<argument><expr><call><name>SimplePcg32</name><argument_list>{}</argument_list></call> <operator>==</operator> <call><name>SimplePcg32</name><argument_list>{}</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>REQUIRE</name><argument_list>(<argument><expr><call><name>SimplePcg32</name><argument_list>{ <argument><expr><literal type="number">0</literal></expr></argument> }</argument_list></call> <operator>!=</operator> <call><name>SimplePcg32</name><argument_list>{}</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>REQUIRE_FALSE</name><argument_list>(<argument><expr><call><name>SimplePcg32</name><argument_list>{ <argument><expr><literal type="number">1</literal></expr></argument> }</argument_list></call> <operator>==</operator> <call><name>SimplePcg32</name><argument_list>{ <argument><expr><literal type="number">2</literal></expr></argument> }</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>REQUIRE_FALSE</name><argument_list>(<argument><expr><call><name>SimplePcg32</name><argument_list>{ <argument><expr><literal type="number">1</literal></expr></argument> }</argument_list></call> <operator>!=</operator> <call><name>SimplePcg32</name><argument_list>{ <argument><expr><literal type="number">1</literal></expr></argument> }</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+</block_content>}</block>
+
+<macro><name>TEST_CASE</name><argument_list>(<argument><literal type="string">"Random seed generation reports unknown methods"</literal></argument>, <argument><literal type="string">"[rng][seed]"</literal></argument>)</argument_list></macro> <block>{<block_content>
+    <expr_stmt><expr><call><name>REQUIRE_THROWS</name><argument_list>(<argument><expr><call><name><name>Catch</name><operator>::</operator><name>generateRandomSeed</name></name><argument_list>(<argument><expr><cast type="static">static_cast<argument_list type="generic">&lt;<argument><expr><name><name>Catch</name><operator>::</operator><name>GenerateFrom</name></name></expr></argument>&gt;</argument_list><argument_list>(<argument><expr><literal type="number">77</literal></expr></argument>)</argument_list></cast></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+</block_content>}</block>
+
+<macro><name>TEST_CASE</name><argument_list>(<argument><literal type="string">"Random seed generation accepts known methods"</literal></argument>, <argument><literal type="string">"[rng][seed]"</literal></argument>)</argument_list></macro> <block>{<block_content>
+    <using>using <name><name>Catch</name><operator>::</operator><name>GenerateFrom</name></name>;</using>
+    <decl_stmt><decl><type><specifier>const</specifier> <specifier>auto</specifier></type> <name>method</name> <init>= <expr><call><name>GENERATE</name><argument_list>(
+        <argument><expr><name><name>GenerateFrom</name><operator>::</operator><name>Time</name></name></expr></argument>,
+        <argument><expr><name><name>GenerateFrom</name><operator>::</operator><name>RandomDevice</name></name></expr></argument>,
+        <argument><expr><name><name>GenerateFrom</name><operator>::</operator><name>Default</name></name></expr></argument>
+    )</argument_list></call></expr></init></decl>;</decl_stmt>
+
+    <expr_stmt><expr><call><name>REQUIRE_NOTHROW</name><argument_list>(<argument><expr><call><name><name>Catch</name><operator>::</operator><name>generateRandomSeed</name></name><argument_list>(<argument><expr><name>method</name></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+</block_content>}</block>
+
+<macro><name>TEMPLATE_TEST_CASE</name><argument_list>(<argument><literal type="string">"uniform_floating_point_distribution never returns infs from finite range"</literal></argument>,
+          <argument><literal type="string">"[rng][distribution][floating-point][approvals]"</literal></argument>, <argument>float</argument>, <argument>double</argument>)</argument_list></macro> <block>{<block_content>
+    <decl_stmt><decl><type><name><name>std</name><operator>::</operator><name>random_device</name></name></type> <name>rd</name><argument_list>{}</argument_list></decl>;</decl_stmt>
+    <decl_stmt><decl><type><name><name>Catch</name><operator>::</operator><name>SimplePcg32</name></name></type> <name>pcg</name><argument_list>( <argument><expr><call><name>rd</name><argument_list>()</argument_list></call></expr></argument> )</argument_list></decl>;</decl_stmt>
+    <decl_stmt><decl><type><name><name>Catch</name><operator>::</operator><name>uniform_floating_point_distribution</name><argument_list type="generic">&lt;<argument><expr><name>TestType</name></expr></argument>&gt;</argument_list></name></type> <name>dist</name><argument_list>(
+        <argument><expr><operator>-</operator><call><name><name>std</name><operator>::</operator><name>numeric_limits</name><argument_list type="generic">&lt;<argument><expr><name>TestType</name></expr></argument>&gt;</argument_list><operator>::</operator><name>max</name></name><argument_list>()</argument_list></call></expr></argument>,
+        <argument><expr><call><name><name>std</name><operator>::</operator><name>numeric_limits</name><argument_list type="generic">&lt;<argument><expr><name>TestType</name></expr></argument>&gt;</argument_list><operator>::</operator><name>max</name></name><argument_list>()</argument_list></call></expr></argument> )</argument_list></decl>;</decl_stmt>
+
+    <for>for <control>(<init><decl><type><name>size_t</name></type> <name>i</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>i</name> <operator>&lt;</operator> <literal type="number">10</literal><literal type="char">'000; ++i) {
+        auto ret = dist( pcg );
+        REQUIRE_FALSE( std::isinf( ret ) );
+        REQUIRE_FALSE( std::isnan( ret ) );
+    }
+}
+
+TEST_CASE( "fillBitsFrom - shortening and stretching", "[rng][approvals]" ) {
+    using Catch::Detail::fillBitsFrom;
+
+    // The seed is not important, but the numbers below have to be repeatable.
+    // They should also exhibit the same general pattern of being prefixes
+    Catch::SimplePcg32 pcg( 0xaabb'</literal><name>ccdd</name></expr></condition> )</control><empty_stmt>;</empty_stmt></for>
+
+    <macro><name>SECTION</name><argument_list>( <argument><literal type="string">"Shorten to 8 bits"</literal></argument> )</argument_list></macro> <block>{<block_content>
+        <comment type="line">// We cast the result to avoid dealing with char-like type in uint8_t</comment>
+        <decl_stmt><decl><type><name>auto</name></type> <name>shortened</name> <init>= <expr><cast type="static">static_cast<argument_list type="generic">&lt;<argument><expr><name>uint32_t</name></expr></argument>&gt;</argument_list><argument_list>( <argument><expr><call><name><name>fillBitsFrom</name><argument_list type="generic">&lt;<argument><expr><name>uint8_t</name></expr></argument>&gt;</argument_list></name><argument_list>( <argument><expr><name>pcg</name></expr></argument> )</argument_list></call></expr></argument> )</argument_list></cast></expr></init></decl>;</decl_stmt>
+        <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><name>shortened</name> <operator>==</operator> <literal type="number">0xcc</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block>
+    <macro><name>SECTION</name><argument_list>( <argument><literal type="string">"Shorten to 16 bits"</literal></argument> )</argument_list></macro> <block>{<block_content>
+        <decl_stmt><decl><type><name>auto</name></type> <name>shortened</name> <init>= <expr><call><name><name>fillBitsFrom</name><argument_list type="generic">&lt;<argument><expr><name>uint16_t</name></expr></argument>&gt;</argument_list></name><argument_list>( <argument><expr><name>pcg</name></expr></argument> )</argument_list></call></expr></init></decl>;</decl_stmt>
+        <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><name>shortened</name> <operator>==</operator> <literal type="number">0xccbe</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block>
+    <macro><name>SECTION</name><argument_list>( <argument><literal type="string">"Keep at 32 bits"</literal></argument> )</argument_list></macro> <block>{<block_content>
+        <decl_stmt><decl><type><name>auto</name></type> <name>n</name> <init>= <expr><call><name><name>fillBitsFrom</name><argument_list type="generic">&lt;<argument><expr><name>uint32_t</name></expr></argument>&gt;</argument_list></name><argument_list>( <argument><expr><name>pcg</name></expr></argument> )</argument_list></call></expr></init></decl>;</decl_stmt>
+        <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><name>n</name> <operator>==</operator> <literal type="number">0xccbe</literal><literal type="char">'5f04 );
+    }
+    SECTION( "Stretch to 64 bits" ) {
+        auto stretched = fillBitsFrom&lt;uint64_t&gt;( pcg );
+        REQUIRE( stretched == 0xccbe'</literal><literal type="number">5f04</literal><literal type="char">'a424'</literal><name>a486</name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block>
+</block_content>}</block>
+
+<macro><name>TEST_CASE</name><argument_list>(<argument><literal type="string">"uniform_integer_distribution can return the bounds"</literal></argument>, <argument><literal type="string">"[rng][distribution]"</literal></argument>)</argument_list></macro> <block>{<block_content>
+    <decl_stmt><decl><type><name><name>Catch</name><operator>::</operator><name>uniform_integer_distribution</name><argument_list type="generic">&lt;<argument><expr><name>int32_t</name></expr></argument>&gt;</argument_list></name></type> <name>dist</name><argument_list>( <argument><expr><operator>-</operator><literal type="number">10</literal></expr></argument>, <argument><expr><literal type="number">10</literal></expr></argument> )</argument_list></decl>;</decl_stmt>
+    <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name><name>dist</name><operator>.</operator><name>a</name></name><argument_list>()</argument_list></call> <operator>==</operator> <operator>-</operator><literal type="number">10</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name><name>dist</name><operator>.</operator><name>b</name></name><argument_list>()</argument_list></call> <operator>==</operator> <literal type="number">10</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+</block_content>}</block>
+
+<namespace>namespace <block>{
+    <function><template>template <parameter_list>&lt;<parameter><type><name>typename</name></type> <name>T</name></parameter>&gt;</parameter_list></template>
+    <type><specifier>static</specifier> <name>void</name></type> <name>CheckReturnValue</name><parameter_list>(<parameter><decl><type><name><name>Catch</name><operator>::</operator><name>uniform_integer_distribution</name><argument_list type="generic">&lt;<argument><expr><name>T</name></expr></argument>&gt;</argument_list></name><modifier>&amp;</modifier></type> <name>dist</name></decl></parameter>,
+                                 <parameter><decl><type><name><name>Catch</name><operator>::</operator><name>SimplePcg32</name></name><modifier>&amp;</modifier></type> <name>rng</name></decl></parameter>,
+                                 <parameter><decl><type><name>T</name></type> <name>target</name></decl></parameter>)</parameter_list> <block>{<block_content>
+        <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name><name>dist</name><operator>.</operator><name>a</name></name><argument_list>()</argument_list></call> <operator>==</operator> <call><name><name>dist</name><operator>.</operator><name>b</name></name><argument_list>()</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        <for>for <control>(<init><decl><type><name>int</name></type> <name>i</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>i</name> <operator>&lt;</operator> <literal type="number">1</literal><literal type="char">'000; ++i) {
+            REQUIRE( dist( rng ) == target );
+        }
+    }
+}
+
+TEMPLATE_TEST_CASE( "uniform_integer_distribution can handle unit ranges",
+                    "[rng][distribution][approvals]",
+                    unsigned char,
+                    signed char,
+                    char,
+                    uint8_t,
+                    int8_t,
+                    uint16_t,
+                    int16_t,
+                    uint32_t,
+                    int32_t,
+                    uint64_t,
+                    int64_t,
+                    size_t,
+                    ptrdiff_t) {
+    // We want random seed to sample different parts of the rng state,
+    // the output is predetermined anyway
+    std::random_device rd;
+    auto seed = rd();
+    CAPTURE( seed );
+    Catch::SimplePcg32 pcg( seed );
+
+    // We check unitary ranges of 3 different values, min for type, max for type,
+    // some value inbetween just to make sure
+    SECTION("lowest value") {
+        constexpr auto lowest = std::numeric_limits&lt;TestType&gt;::min();
+        Catch::uniform_integer_distribution&lt;TestType&gt; dist( lowest, lowest );
+        CheckReturnValue( dist, pcg, lowest );
+    }
+    SECTION( "highest value" ) {
+        constexpr auto highest = std::numeric_limits&lt;TestType&gt;::max();
+        Catch::uniform_integer_distribution&lt;TestType&gt; dist( highest, highest );
+        CheckReturnValue( dist, pcg, highest );
+    }
+    SECTION( "some value" ) {
+        constexpr auto some = TestType( 42 );
+        Catch::uniform_integer_distribution&lt;TestType&gt; dist( some, some );
+        CheckReturnValue( dist, pcg, some );
+    }
+}
+
+// Bool needs its own test because it doesn'</literal><name>t</name> <name>have</name> <name>a</name> <name>valid</name> <literal type="string">"third"</literal> <name>value</name>
+<macro><name>TEST_CASE</name><argument_list>( <argument><literal type="string">"uniform_integer_distribution can handle boolean unit ranges"</literal></argument>,
+           <argument><literal type="string">"[rng][distribution][approvals]"</literal></argument> )</argument_list></macro> <block>{
+    <comment type="line">// We want random seed to sample different parts of the rng state,</comment>
+    <comment type="line">// the output is predetermined anyway</comment>
+    <expr><name><name>std</name><operator>::</operator><name>random_device</name></name> <name>rd</name></expr>;
+    <expr><name>auto</name> <name>seed</name> <operator>=</operator> <call><name>rd</name><argument_list>()</argument_list></call></expr>;
+    <expr><call><name>CAPTURE</name><argument_list>( <argument><expr><name>seed</name></expr></argument> )</argument_list></call></expr>;
+    <expr><name><name>Catch</name><operator>::</operator><name>SimplePcg32</name></name> <call><name>pcg</name><argument_list>( <argument><expr><name>seed</name></expr></argument> )</argument_list></call></expr>;
+
+    <comment type="line">// We check unitary ranges of 3 different values, min for type, max for</comment>
+    <comment type="line">// type, some value inbetween just to make sure</comment>
+    <macro><name>SECTION</name><argument_list>( <argument><literal type="string">"lowest value"</literal></argument> )</argument_list></macro> <expr><block>{
+        <expr><name><name>Catch</name><operator>::</operator><name>uniform_integer_distribution</name><argument_list type="generic">&lt;<argument><expr><name>bool</name></expr></argument>&gt;</argument_list></name> <call><name>dist</name><argument_list>( <argument><expr><literal type="boolean">false</literal></expr></argument>, <argument><expr><literal type="boolean">false</literal></expr></argument> )</argument_list></call></expr>;
+        <expr><call><name>CheckReturnValue</name><argument_list>( <argument><expr><name>dist</name></expr></argument>, <argument><expr><name>pcg</name></expr></argument>, <argument><expr><literal type="boolean">false</literal></expr></argument> )</argument_list></call></expr>;
+    }</block>
+    <macro><name>SECTION</name><argument_list>( <argument><literal type="string">"highest value"</literal></argument> )</argument_list></macro> <block>{
+        <expr><name><name>Catch</name><operator>::</operator><name>uniform_integer_distribution</name><argument_list type="generic">&lt;<argument><expr><name>bool</name></expr></argument>&gt;</argument_list></name> <call><name>dist</name><argument_list>( <argument><expr><literal type="boolean">true</literal></expr></argument>, <argument><expr><literal type="boolean">true</literal></expr></argument> )</argument_list></call></expr>;
+        <expr><call><name>CheckReturnValue</name><argument_list>( <argument><expr><name>dist</name></expr></argument>, <argument><expr><name>pcg</name></expr></argument>, <argument><expr><literal type="boolean">true</literal></expr></argument> )</argument_list></call></expr>;
+    }</block></expr>
+}</block>
+
+<macro><name>TEMPLATE_TEST_CASE</name><argument_list>( <argument><literal type="string">"uniform_integer_distribution can handle full width ranges"</literal></argument>,
+                    <argument><literal type="string">"[rng][distribution][approvals]"</literal></argument>,
+                    <argument>unsigned char</argument>,
+                    <argument>signed char</argument>,
+                    <argument>char</argument>,
+                    <argument>uint8_t</argument>,
+                    <argument>int8_t</argument>,
+                    <argument>uint16_t</argument>,
+                    <argument>int16_t</argument>,
+                    <argument>uint32_t</argument>,
+                    <argument>int32_t</argument>,
+                    <argument>uint64_t</argument>,
+                    <argument>int64_t</argument> )</argument_list></macro> <block>{
+    <comment type="line">// We want random seed to sample different parts of the rng state,</comment>
+    <comment type="line">// the output is predetermined anyway</comment>
+    <expr><name><name>std</name><operator>::</operator><name>random_device</name></name> <name>rd</name></expr>;
+    <expr><name>auto</name> <name>seed</name> <operator>=</operator> <call><name>rd</name><argument_list>()</argument_list></call></expr>;
+    <expr><call><name>CAPTURE</name><argument_list>( <argument><expr><name>seed</name></expr></argument> )</argument_list></call></expr>;
+    <expr><name><name>Catch</name><operator>::</operator><name>SimplePcg32</name></name> <call><name>pcg</name><argument_list>( <argument><expr><name>seed</name></expr></argument> )</argument_list></call></expr>;
+
+    <expr><specifier>constexpr</specifier> <name>auto</name> <name>lowest</name> <operator>=</operator> <call><name><name>std</name><operator>::</operator><name>numeric_limits</name><argument_list type="generic">&lt;<argument><expr><name>TestType</name></expr></argument>&gt;</argument_list><operator>::</operator><name>min</name></name><argument_list>()</argument_list></call></expr>;
+    <expr><specifier>constexpr</specifier> <name>auto</name> <name>highest</name> <operator>=</operator> <call><name><name>std</name><operator>::</operator><name>numeric_limits</name><argument_list type="generic">&lt;<argument><expr><name>TestType</name></expr></argument>&gt;</argument_list><operator>::</operator><name>max</name></name><argument_list>()</argument_list></call></expr>;
+    <expr><name><name>Catch</name><operator>::</operator><name>uniform_integer_distribution</name><argument_list type="generic">&lt;<argument><expr><name>TestType</name></expr></argument>&gt;</argument_list></name> <call><name>dist</name><argument_list>( <argument><expr><name>lowest</name></expr></argument>, <argument><expr><name>highest</name></expr></argument> )</argument_list></call></expr>;
+    <expr><call><name>STATIC_REQUIRE</name><argument_list>( <argument><expr><name><name>std</name><operator>::</operator><name>is_same</name><argument_list type="generic">&lt;<argument><expr><name>TestType</name></expr></argument>, <argument><expr><decltype>decltype<argument_list>( <argument><expr><call><name>dist</name><argument_list>( <argument><expr><name>pcg</name></expr></argument> )</argument_list></call></expr></argument> )</argument_list></decltype></expr></argument>&gt;</argument_list><operator>::</operator><name>value</name></name></expr></argument> )</argument_list></call></expr>;
+
+    <comment type="line">// We need to do bit operations on the results, so we will have to</comment>
+    <comment type="line">// cast them to unsigned type.</comment>
+    using <expr><name>BitType</name> <operator>=</operator> <name><name>std</name><operator>::</operator><name>make_unsigned_t</name><argument_list type="generic">&lt;<argument><expr><name>TestType</name></expr></argument>&gt;</argument_list></name></expr>;
+    <expr><name>BitType</name> <name>ORs</name> <operator>=</operator> <literal type="number">0</literal></expr>;
+    <expr><name>BitType</name> <name>ANDs</name> <operator>=</operator> <call><name>BitType</name><argument_list>(<argument><expr><operator>-</operator><literal type="number">1</literal></expr></argument>)</argument_list></call></expr>;
+    <for>for <control>(<init><decl><type><name>int</name></type> <name>i</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>i</name> <operator>&lt;</operator> <literal type="number">100</literal></expr>;</condition> <incr><expr><operator>++</operator><name>i</name></expr></incr>)</control> <block>{<block_content>
+        <decl_stmt><decl><type><name>auto</name></type> <name>bits</name> <init>= <expr><cast type="static">static_cast<argument_list type="generic">&lt;<argument><expr><name>BitType</name></expr></argument>&gt;</argument_list><argument_list>( <argument><expr><call><name>dist</name><argument_list>( <argument><expr><name>pcg</name></expr></argument> )</argument_list></call></expr></argument> )</argument_list></cast></expr></init></decl>;</decl_stmt>
+        <expr_stmt><expr><name>ORs</name> <operator>|=</operator> <name>bits</name></expr>;</expr_stmt>
+        <expr_stmt><expr><name>ANDs</name> <operator>&amp;=</operator> <name>bits</name></expr>;</expr_stmt>
+    <expr_stmt/></block_content></block></for>}</block>
+    <comment type="line">// Assuming both our RNG and distribution are unbiased, asking for</comment>
+    <comment type="line">// the full range should essentially give us random bit generator.</comment>
+    <comment type="line">// Over long run, OR of all the generated values should have all</comment>
+    <comment type="line">// bits set to 1, while AND should have all bits set to 0.</comment>
+    <comment type="line">// The chance of this test failing for unbiased pipeline is</comment>
+    <comment type="line">// 1 / 2**iters, which for 100 iterations is astronomical.</comment>
+    <call><name>REQUIRE</name><argument_list>( <argument><expr><name>ORs</name> <operator>==</operator> <call><name>BitType</name><argument_list>( <argument><expr><operator>-</operator><literal type="number">1</literal></expr></argument> )</argument_list></call></expr></argument> )</argument_list></call></expr>;</condition>
+    <incr><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><name>ANDs</name> <operator>==</operator> <literal type="number">0</literal></expr></argument> )</argument_list></call></expr>;</incr>
+}</control></for>
+
+<namespace>namespace <block>{
+    <struct_decl><template>template <parameter_list>&lt;<parameter><type><name>typename</name></type> <name>T</name></parameter>&gt;</parameter_list></template>
+    struct <name>uniform_integer_test_params</name>;</struct_decl>
+
+    <struct><template>template <parameter_list>&lt;&gt;</parameter_list></template>
+    struct <name><name>uniform_integer_test_params</name><argument_list type="generic">&lt;<argument><expr><name>bool</name></expr></argument>&gt;</argument_list></name> <block>{<public type="default">
+        <decl_stmt><decl><type><specifier>static</specifier> <specifier>constexpr</specifier> <name>bool</name></type> <name>lowest</name> <init>= <expr><literal type="boolean">false</literal></expr></init></decl>;</decl_stmt>
+        <decl_stmt><decl><type><specifier>static</specifier> <specifier>constexpr</specifier> <name>bool</name></type> <name>highest</name> <init>= <expr><literal type="boolean">true</literal></expr></init></decl>;</decl_stmt>
+        <comment type="line">//  This seems weird, but it is an artifact of the specific seed</comment>
+        <decl_stmt><decl><type><specifier>static</specifier> <specifier>constexpr</specifier> <name>bool</name></type> <name><name>expected</name><index>[]</index></name> <init>= <expr><block>{ <expr><literal type="boolean">true</literal></expr>,
+                                             <expr><literal type="boolean">true</literal></expr>,
+                                             <expr><literal type="boolean">true</literal></expr>,
+                                             <expr><literal type="boolean">true</literal></expr>,
+                                             <expr><literal type="boolean">true</literal></expr>,
+                                             <expr><literal type="boolean">true</literal></expr>,
+                                             <expr><literal type="boolean">false</literal></expr>,
+                                             <expr><literal type="boolean">true</literal></expr>,
+                                             <expr><literal type="boolean">true</literal></expr>,
+                                             <expr><literal type="boolean">true</literal></expr>,
+                                             <expr><literal type="boolean">true</literal></expr>,
+                                             <expr><literal type="boolean">true</literal></expr>,
+                                             <expr><literal type="boolean">false</literal></expr>,
+                                             <expr><literal type="boolean">true</literal></expr>,
+                                             <expr><literal type="boolean">true</literal></expr> }</block></expr></init></decl>;</decl_stmt>
+    </public>}</block>;</struct>
+
+    <struct><template>template <parameter_list>&lt;&gt;</parameter_list></template>
+    struct <name><name>uniform_integer_test_params</name><argument_list type="generic">&lt;<argument><expr><name>char</name></expr></argument>&gt;</argument_list></name> <block>{<public type="default">
+        <decl_stmt><decl><type><specifier>static</specifier> <specifier>constexpr</specifier> <name>char</name></type> <name>lowest</name> <init>= <expr><literal type="number">32</literal></expr></init></decl>;</decl_stmt>
+        <decl_stmt><decl><type><specifier>static</specifier> <specifier>constexpr</specifier> <name>char</name></type> <name>highest</name> <init>= <expr><literal type="number">126</literal></expr></init></decl>;</decl_stmt>
+        <decl_stmt><decl><type><specifier>static</specifier> <specifier>constexpr</specifier> <name>char</name></type> <name><name>expected</name><index>[]</index></name> <init>= <expr><block>{ <expr><literal type="char">'k'</literal></expr>,
+                                             <expr><literal type="char">'\\'</literal></expr>,
+                                             <expr><literal type="char">'Z'</literal></expr>,
+                                             <expr><literal type="char">'X'</literal></expr>,
+                                             <expr><literal type="char">'`'</literal></expr>,
+                                             <expr><literal type="char">'Q'</literal></expr>,
+                                             <expr><literal type="char">';'</literal></expr>,
+                                             <expr><literal type="char">'o'</literal></expr>,
+                                             <expr><literal type="char">']'</literal></expr>,
+                                             <expr><literal type="char">'T'</literal></expr>,
+                                             <expr><literal type="char">'v'</literal></expr>,
+                                             <expr><literal type="char">'p'</literal></expr>,
+                                             <expr><literal type="char">':'</literal></expr>,
+                                             <expr><literal type="char">'S'</literal></expr>,
+                                             <expr><literal type="char">'t'</literal></expr> }</block></expr></init></decl>;</decl_stmt>
+    </public>}</block>;</struct>
+
+    <struct><template>template <parameter_list>&lt;&gt;</parameter_list></template>
+    struct <name><name>uniform_integer_test_params</name><argument_list type="generic">&lt;<argument><expr><name>uint8_t</name></expr></argument>&gt;</argument_list></name> <block>{<public type="default">
+        <decl_stmt><decl><type><specifier>static</specifier> <specifier>constexpr</specifier> <name>uint8_t</name></type> <name>lowest</name> <init>= <expr><literal type="number">3</literal></expr></init></decl>;</decl_stmt>
+        <decl_stmt><decl><type><specifier>static</specifier> <specifier>constexpr</specifier> <name>uint8_t</name></type> <name>highest</name> <init>= <expr><literal type="number">123</literal></expr></init></decl>;</decl_stmt>
+        <decl_stmt><decl><type><specifier>static</specifier> <specifier>constexpr</specifier> <name>uint8_t</name></type> <name><name>expected</name><index>[]</index></name> <init>= <expr><block>{ <expr><literal type="char">'c'</literal></expr>,
+                                                <expr><literal type="char">'P'</literal></expr>,
+                                                <expr><literal type="char">'M'</literal></expr>,
+                                                <expr><literal type="char">'J'</literal></expr>,
+                                                <expr><literal type="char">'U'</literal></expr>,
+                                                <expr><literal type="char">'A'</literal></expr>,
+                                                <expr><literal type="char">'%'</literal></expr>,
+                                                <expr><literal type="char">'h'</literal></expr>,
+                                                <expr><literal type="char">'Q'</literal></expr>,
+                                                <expr><literal type="char">'F'</literal></expr>,
+                                                <expr><literal type="char">'q'</literal></expr>,
+                                                <expr><literal type="char">'i'</literal></expr>,
+                                                <expr><literal type="char">'$'</literal></expr>,
+                                                <expr><literal type="char">'E'</literal></expr>,
+                                                <expr><literal type="char">'o'</literal></expr> }</block></expr></init></decl>;</decl_stmt>
+    </public>}</block>;</struct>
+
+    <struct><template>template <parameter_list>&lt;&gt;</parameter_list></template>
+    struct <name><name>uniform_integer_test_params</name><argument_list type="generic">&lt;<argument><expr><name>int8_t</name></expr></argument>&gt;</argument_list></name> <block>{<public type="default">
+        <decl_stmt><decl><type><specifier>static</specifier> <specifier>constexpr</specifier> <name>int8_t</name></type> <name>lowest</name> <init>= <expr><operator>-</operator><literal type="number">27</literal></expr></init></decl>;</decl_stmt>
+        <decl_stmt><decl><type><specifier>static</specifier> <specifier>constexpr</specifier> <name>int8_t</name></type> <name>highest</name> <init>= <expr><literal type="number">73</literal></expr></init></decl>;</decl_stmt>
+        <decl_stmt><decl><type><specifier>static</specifier> <specifier>constexpr</specifier> <name>int8_t</name></type> <name><name>expected</name><index>[]</index></name> <init>= <expr><block>{ <expr><literal type="char">'5'</literal></expr>,
+                                               <expr><literal type="char">'%'</literal></expr>,
+                                               <expr><literal type="char">'#'</literal></expr>,
+                                               <expr><literal type="char">' '</literal></expr>,
+                                               <expr><literal type="char">'*'</literal></expr>,
+                                               <expr><literal type="number">25</literal></expr>,
+                                               <expr><literal type="number">2</literal></expr>,
+                                               <expr><literal type="char">'9'</literal></expr>,
+                                               <expr><literal type="char">'&amp;'</literal></expr>,
+                                               <expr><literal type="number">29</literal></expr>,
+                                               <expr><literal type="char">'A'</literal></expr>,
+                                               <expr><literal type="char">':'</literal></expr>,
+                                               <expr><literal type="number">1</literal></expr>,
+                                               <expr><literal type="number">28</literal></expr>,
+                                               <expr><literal type="char">'?'</literal></expr> }</block></expr></init></decl>;</decl_stmt>
+    </public>}</block>;</struct>
+
+    <struct><template>template <parameter_list>&lt;&gt;</parameter_list></template>
+    struct <name><name>uniform_integer_test_params</name><argument_list type="generic">&lt;<argument><expr><name>uint16_t</name></expr></argument>&gt;</argument_list></name> <block>{<public type="default">
+        <decl_stmt><decl><type><specifier>static</specifier> <specifier>constexpr</specifier> <name>uint16_t</name></type> <name>lowest</name> <init>= <expr><literal type="number">123</literal></expr></init></decl>;</decl_stmt>
+        <decl_stmt><decl><type><specifier>static</specifier> <specifier>constexpr</specifier> <name>uint16_t</name></type> <name>highest</name> <init>= <expr><literal type="number">33333</literal></expr></init></decl>;</decl_stmt>
+        <decl_stmt><decl><type><specifier>static</specifier> <specifier>constexpr</specifier> <name>uint16_t</name></type> <name><name>expected</name><index>[]</index></name> <init>= <expr><block>{ <expr><literal type="number">26684</literal></expr>,
+                                                 <expr><literal type="number">21417</literal></expr>,
+                                                 <expr><literal type="number">20658</literal></expr>,
+                                                 <expr><literal type="number">19791</literal></expr>,
+                                                 <expr><literal type="number">22896</literal></expr>,
+                                                 <expr><literal type="number">17433</literal></expr>,
+                                                 <expr><literal type="number">9806</literal></expr>,
+                                                 <expr><literal type="number">27948</literal></expr>,
+                                                 <expr><literal type="number">21767</literal></expr>,
+                                                 <expr><literal type="number">18588</literal></expr>,
+                                                 <expr><literal type="number">30556</literal></expr>,
+                                                 <expr><literal type="number">28244</literal></expr>,
+                                                 <expr><literal type="number">9439</literal></expr>,
+                                                 <expr><literal type="number">18293</literal></expr>,
+                                                 <expr><literal type="number">29949</literal></expr> }</block></expr></init></decl>;</decl_stmt>
+    </public>}</block>;</struct>
+
+    <struct><template>template <parameter_list>&lt;&gt;</parameter_list></template>
+    struct <name><name>uniform_integer_test_params</name><argument_list type="generic">&lt;<argument><expr><name>int16_t</name></expr></argument>&gt;</argument_list></name> <block>{<public type="default">
+        <decl_stmt><decl><type><specifier>static</specifier> <specifier>constexpr</specifier> <name>int16_t</name></type> <name>lowest</name> <init>= <expr><operator>-</operator><literal type="number">17222</literal></expr></init></decl>;</decl_stmt>
+        <decl_stmt><decl><type><specifier>static</specifier> <specifier>constexpr</specifier> <name>int16_t</name></type> <name>highest</name> <init>= <expr><literal type="number">17222</literal></expr></init></decl>;</decl_stmt>
+        <decl_stmt><decl><type><specifier>static</specifier> <specifier>constexpr</specifier> <name>int16_t</name></type> <name><name>expected</name><index>[]</index></name> <init>= <expr><block>{ <expr><literal type="number">10326</literal></expr>,
+                                                 <expr><literal type="number">4863</literal></expr>,
+                                                 <expr><literal type="number">4076</literal></expr>,
+                                                 <expr><literal type="number">3177</literal></expr>,
+                                                 <expr><literal type="number">6397</literal></expr>,
+                                                 <expr><literal type="number">731</literal></expr>,
+                                                 <expr><operator>-</operator><literal type="number">7179</literal></expr>,
+                                                 <expr><literal type="number">11637</literal></expr>,
+                                                 <expr><literal type="number">5226</literal></expr>,
+                                                 <expr><literal type="number">1929</literal></expr>,
+                                                 <expr><literal type="number">14342</literal></expr>,
+                                                 <expr><literal type="number">11944</literal></expr>,
+                                                 <expr><operator>-</operator><literal type="number">7560</literal></expr>,
+                                                 <expr><literal type="number">1623</literal></expr>,
+                                                 <expr><literal type="number">13712</literal></expr> }</block></expr></init></decl>;</decl_stmt>
+    </public>}</block>;</struct>
+
+    <struct><template>template <parameter_list>&lt;&gt;</parameter_list></template>
+    struct <name><name>uniform_integer_test_params</name><argument_list type="generic">&lt;<argument><expr><name>uint32_t</name></expr></argument>&gt;</argument_list></name> <block>{<public type="default">
+        <decl_stmt><decl><type><specifier>static</specifier> <specifier>constexpr</specifier> <name>uint32_t</name></type> <name>lowest</name> <init>= <expr><literal type="number">17222</literal></expr></init></decl>;</decl_stmt>
+        <decl_stmt><decl><type><specifier>static</specifier> <specifier>constexpr</specifier> <name>uint32_t</name></type> <name>highest</name> <init>= <expr><literal type="number">234234</literal></expr></init></decl>;</decl_stmt>
+        <decl_stmt><decl><type><specifier>static</specifier> <specifier>constexpr</specifier> <name>uint32_t</name></type> <name><name>expected</name><index>[]</index></name> <init>= <expr><block>{ <expr><literal type="number">190784</literal></expr>,
+                                                 <expr><literal type="number">156367</literal></expr>,
+                                                 <expr><literal type="number">151409</literal></expr>,
+                                                 <expr><literal type="number">145743</literal></expr>,
+                                                 <expr><literal type="number">166032</literal></expr>,
+                                                 <expr><literal type="number">130337</literal></expr>,
+                                                 <expr><literal type="number">80501</literal></expr>,
+                                                 <expr><literal type="number">199046</literal></expr>,
+                                                 <expr><literal type="number">158654</literal></expr>,
+                                                 <expr><literal type="number">137883</literal></expr>,
+                                                 <expr><literal type="number">216091</literal></expr>,
+                                                 <expr><literal type="number">200981</literal></expr>,
+                                                 <expr><literal type="number">78099</literal></expr>,
+                                                 <expr><literal type="number">135954</literal></expr>,
+                                                 <expr><literal type="number">212120</literal></expr> }</block></expr></init></decl>;</decl_stmt>
+    </public>}</block>;</struct>
+
+    <struct><template>template <parameter_list>&lt;&gt;</parameter_list></template>
+    struct <name><name>uniform_integer_test_params</name><argument_list type="generic">&lt;<argument><expr><name>int32_t</name></expr></argument>&gt;</argument_list></name> <block>{<public type="default">
+        <decl_stmt><decl><type><specifier>static</specifier> <specifier>constexpr</specifier> <name>int32_t</name></type> <name>lowest</name> <init>= <expr><operator>-</operator><literal type="number">237272</literal></expr></init></decl>;</decl_stmt>
+        <decl_stmt><decl><type><specifier>static</specifier> <specifier>constexpr</specifier> <name>int32_t</name></type> <name>highest</name> <init>= <expr><literal type="number">234234</literal></expr></init></decl>;</decl_stmt>
+        <decl_stmt><decl><type><specifier>static</specifier> <specifier>constexpr</specifier> <name>int32_t</name></type> <name><name>expected</name><index>[]</index></name> <init>= <expr><block>{ <expr><literal type="number">139829</literal></expr>,
+                                                <expr><literal type="number">65050</literal></expr>,
+                                                <expr><literal type="number">54278</literal></expr>,
+                                                <expr><literal type="number">41969</literal></expr>,
+                                                <expr><literal type="number">86051</literal></expr>,
+                                                <expr><literal type="number">8494</literal></expr>,
+                                                <expr><operator>-</operator><literal type="number">99785</literal></expr>,
+                                                <expr><literal type="number">157781</literal></expr>,
+                                                <expr><literal type="number">70021</literal></expr>,
+                                                <expr><literal type="number">24890</literal></expr>,
+                                                <expr><literal type="number">194815</literal></expr>,
+                                                <expr><literal type="number">161985</literal></expr>,
+                                                <expr><operator>-</operator><literal type="number">105004</literal></expr>,
+                                                <expr><literal type="number">20699</literal></expr>,
+                                                <expr><literal type="number">186186</literal></expr> }</block></expr></init></decl>;</decl_stmt>
+    </public>}</block>;</struct>
+
+    <struct><template>template <parameter_list>&lt;&gt;</parameter_list></template>
+    struct <name><name>uniform_integer_test_params</name><argument_list type="generic">&lt;<argument><expr><name>uint64_t</name></expr></argument>&gt;</argument_list></name> <block>{<public type="default">
+        <decl_stmt><decl><type><specifier>static</specifier> <specifier>constexpr</specifier> <name>uint64_t</name></type> <name>lowest</name> <init>= <expr><literal type="number">1234</literal></expr></init></decl>;</decl_stmt>
+        <decl_stmt><decl><type><specifier>static</specifier> <specifier>constexpr</specifier> <name>uint64_t</name></type> <name>highest</name> <init>= <expr><literal type="number">1234567890</literal></expr></init></decl>;</decl_stmt>
+        <decl_stmt><decl><type><specifier>static</specifier> <specifier>constexpr</specifier> <name>uint64_t</name></type> <name><name>expected</name><index>[]</index></name> <init>= <expr><block>{ <expr><literal type="number">987382749</literal></expr>,
+                                                 <expr><literal type="number">763380386</literal></expr>,
+                                                 <expr><literal type="number">846572137</literal></expr>,
+                                                 <expr><literal type="number">359990258</literal></expr>,
+                                                 <expr><literal type="number">804599765</literal></expr>,
+                                                 <expr><literal type="number">1131353566</literal></expr>,
+                                                 <expr><literal type="number">346324913</literal></expr>,
+                                                 <expr><literal type="number">1108760730</literal></expr>,
+                                                 <expr><literal type="number">1141693933</literal></expr>,
+                                                 <expr><literal type="number">856999148</literal></expr>,
+                                                 <expr><literal type="number">879390623</literal></expr>,
+                                                 <expr><literal type="number">1149485521</literal></expr>,
+                                                 <expr><literal type="number">900556586</literal></expr>,
+                                                 <expr><literal type="number">952385958</literal></expr>,
+                                                 <expr><literal type="number">807916408</literal></expr> }</block></expr></init></decl>;</decl_stmt>
+    </public>}</block>;</struct>
+
+    <struct><template>template <parameter_list>&lt;&gt;</parameter_list></template>
+    struct <name><name>uniform_integer_test_params</name><argument_list type="generic">&lt;<argument><expr><name>int64_t</name></expr></argument>&gt;</argument_list></name> <block>{<public type="default">
+        <decl_stmt><decl><type><specifier>static</specifier> <specifier>constexpr</specifier> <name>int64_t</name></type> <name>lowest</name> <init>= <expr><operator>-</operator><literal type="number">1234567890</literal></expr></init></decl>;</decl_stmt>
+        <decl_stmt><decl><type><specifier>static</specifier> <specifier>constexpr</specifier> <name>int64_t</name></type> <name>highest</name> <init>= <expr><literal type="number">1234567890</literal></expr></init></decl>;</decl_stmt>
+        <decl_stmt><decl><type><specifier>static</specifier> <specifier>constexpr</specifier> <name>int64_t</name></type> <name><name>expected</name><index>[]</index></name> <init>= <expr><block>{ <expr><literal type="number">740197113</literal></expr>,
+                                                <expr><literal type="number">292191940</literal></expr>,
+                                                <expr><literal type="number">458575608</literal></expr>,
+                                                <expr><operator>-</operator><literal type="number">514589122</literal></expr>,
+                                                <expr><literal type="number">374630781</literal></expr>,
+                                                <expr><literal type="number">1028139036</literal></expr>,
+                                                <expr><operator>-</operator><literal type="number">541919840</literal></expr>,
+                                                <expr><literal type="number">982953318</literal></expr>,
+                                                <expr><literal type="number">1048819790</literal></expr>,
+                                                <expr><literal type="number">479429651</literal></expr>,
+                                                <expr><literal type="number">524212647</literal></expr>,
+                                                <expr><literal type="number">1064402981</literal></expr>,
+                                                <expr><literal type="number">566544615</literal></expr>,
+                                                <expr><literal type="number">670203462</literal></expr>,
+                                                <expr><literal type="number">381264073</literal></expr> }</block></expr></init></decl>;</decl_stmt>
+    </public>}</block>;</struct>
+
+    <comment type="line">// We need these definitions for C++14 and earlier, but</comment>
+    <comment type="line">// GCC will complain about them in newer C++ standards</comment>
+<cpp:if xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">if</cpp:directive> <expr><name>__cplusplus</name> <operator>&lt;=</operator> <literal type="number">201402L</literal></expr></cpp:if>
+    <decl_stmt><decl><type><specifier>constexpr</specifier> <name>bool</name></type> <name><name><name>uniform_integer_test_params</name><argument_list type="generic">&lt;<argument><expr><name>bool</name></expr></argument>&gt;</argument_list></name><operator>::</operator><name>expected</name><index>[]</index></name></decl>;</decl_stmt>
+    <decl_stmt><decl><type><specifier>constexpr</specifier> <name>char</name></type> <name><name><name>uniform_integer_test_params</name><argument_list type="generic">&lt;<argument><expr><name>char</name></expr></argument>&gt;</argument_list></name><operator>::</operator><name>expected</name><index>[]</index></name></decl>;</decl_stmt>
+    <decl_stmt><decl><type><specifier>constexpr</specifier> <name>uint8_t</name></type> <name><name><name>uniform_integer_test_params</name><argument_list type="generic">&lt;<argument><expr><name>uint8_t</name></expr></argument>&gt;</argument_list></name><operator>::</operator><name>expected</name><index>[]</index></name></decl>;</decl_stmt>
+    <decl_stmt><decl><type><specifier>constexpr</specifier> <name>int8_t</name></type> <name><name><name>uniform_integer_test_params</name><argument_list type="generic">&lt;<argument><expr><name>int8_t</name></expr></argument>&gt;</argument_list></name><operator>::</operator><name>expected</name><index>[]</index></name></decl>;</decl_stmt>
+    <decl_stmt><decl><type><specifier>constexpr</specifier> <name>uint16_t</name></type> <name><name><name>uniform_integer_test_params</name><argument_list type="generic">&lt;<argument><expr><name>uint16_t</name></expr></argument>&gt;</argument_list></name><operator>::</operator><name>expected</name><index>[]</index></name></decl>;</decl_stmt>
+    <decl_stmt><decl><type><specifier>constexpr</specifier> <name>int16_t</name></type> <name><name><name>uniform_integer_test_params</name><argument_list type="generic">&lt;<argument><expr><name>int16_t</name></expr></argument>&gt;</argument_list></name><operator>::</operator><name>expected</name><index>[]</index></name></decl>;</decl_stmt>
+    <decl_stmt><decl><type><specifier>constexpr</specifier> <name>uint32_t</name></type> <name><name><name>uniform_integer_test_params</name><argument_list type="generic">&lt;<argument><expr><name>uint32_t</name></expr></argument>&gt;</argument_list></name><operator>::</operator><name>expected</name><index>[]</index></name></decl>;</decl_stmt>
+    <decl_stmt><decl><type><specifier>constexpr</specifier> <name>int32_t</name></type> <name><name><name>uniform_integer_test_params</name><argument_list type="generic">&lt;<argument><expr><name>int32_t</name></expr></argument>&gt;</argument_list></name><operator>::</operator><name>expected</name><index>[]</index></name></decl>;</decl_stmt>
+    <decl_stmt><decl><type><specifier>constexpr</specifier> <name>uint64_t</name></type> <name><name><name>uniform_integer_test_params</name><argument_list type="generic">&lt;<argument><expr><name>uint64_t</name></expr></argument>&gt;</argument_list></name><operator>::</operator><name>expected</name><index>[]</index></name></decl>;</decl_stmt>
+    <decl_stmt><decl><type><specifier>constexpr</specifier> <name>int64_t</name></type> <name><name><name>uniform_integer_test_params</name><argument_list type="generic">&lt;<argument><expr><name>int64_t</name></expr></argument>&gt;</argument_list></name><operator>::</operator><name>expected</name><index>[]</index></name></decl>;</decl_stmt>
+<cpp:endif xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">endif</cpp:directive></cpp:endif>
+
+}</block></namespace>
+
+<macro><name>TEMPLATE_TEST_CASE</name><argument_list>( <argument><literal type="string">"uniform_integer_distribution is reproducible"</literal></argument>,
+                    <argument><literal type="string">"[rng][distribution][approvals]"</literal></argument>,
+                   <argument>bool</argument>,
+                   <argument>char</argument>,
+                   <argument>uint8_t</argument>,
+                   <argument>int8_t</argument>,
+                   <argument>uint16_t</argument>,
+                   <argument>int16_t</argument>,
+                   <argument>uint32_t</argument>,
+                   <argument>int32_t</argument>,
+                   <argument>uint64_t</argument>,
+                   <argument>int64_t</argument>)</argument_list></macro> <block>{<block_content>
+    <decl_stmt><decl><type><name><name>Catch</name><operator>::</operator><name>SimplePcg32</name></name></type> <name>pcg</name><argument_list>( <argument><expr><literal type="number">0xaabb</literal><literal type="char">'ccdd );
+
+    constexpr auto lowest = uniform_integer_test_params&lt;TestType&gt;::lowest;
+    constexpr auto highest = uniform_integer_test_params&lt;TestType&gt;::highest;
+    Catch::uniform_integer_distribution&lt;TestType&gt; dist(lowest, highest);
+
+    constexpr auto iters = 15;
+    std::array&lt;TestType, iters&gt; generated;
+    for (int i = 0; i &lt; iters; ++i) {
+        generated[i] = dist( pcg );
+    }
+
+    REQUIRE_THAT(generated, Catch::Matchers::RangeEquals(uniform_integer_test_params&lt;TestType&gt;::expected));
+}
+
+<diff:insert xmlns:diff="http://www.srcML.org/srcDiff">//<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>The<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>reproducibility<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>tests<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>assume<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>that<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>operations<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>on<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>`float`/`double`<diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+</diff:ws>//<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>happen<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>in<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>the<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>same<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>precision<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>as<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>the<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>operated-upon<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>type.<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>This<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>is<diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+</diff:ws>//<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>generally<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>true,<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>unless<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>the<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>code<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>is<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>compiled<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>for<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>32<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>bit<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>targets<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>without<diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+</diff:ws>//<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>SSE2<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>enabled,<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>in<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>which<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>case<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>the<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>operations<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>are<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>done<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>in<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>the<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>x87<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>FPU,<diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+</diff:ws>//<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>which<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>usually<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>implies<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>doing<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>math<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>in<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>80<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>bit<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>floats,<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>and<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>then<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>rounding<diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+</diff:ws>//<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>into<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>smaller<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>type<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>when<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>the<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>type<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>is<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>saved<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>into<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>memory.<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>This<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>obviously<diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+</diff:ws>//<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>leads<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>to<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>a<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>different<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>answer,<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>than<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>doing<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>the<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>math<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>in<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>the<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>correct<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>precision.<diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+</diff:ws>#if<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>(<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>defined(<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>_MSC_VER<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>)<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>&amp;&amp;<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>_M_IX86_FP<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>&lt;<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>2<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>)<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>||<diff:ws xmlns:diff="http://www.srcML.org/srcDiff">              </diff:ws>\
+<diff:ws xmlns:diff="http://www.srcML.org/srcDiff">    </diff:ws>(<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>defined(<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>__GNUC__<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>)<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>&amp;&amp;<diff:ws xmlns:diff="http://www.srcML.org/srcDiff">                                  </diff:ws>\
+<diff:ws xmlns:diff="http://www.srcML.org/srcDiff">      </diff:ws>(<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>(<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>defined(<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>__i386__<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>)<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>||<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>defined(<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>__x86_64__<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>)<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>)<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>)<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>&amp;&amp;<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>\
+<diff:ws xmlns:diff="http://www.srcML.org/srcDiff">      </diff:ws>!defined(<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>__SSE2_MATH__<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>)<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>)<diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+</diff:ws>#<diff:ws xmlns:diff="http://www.srcML.org/srcDiff">    </diff:ws>define<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>CATCH_TEST_CONFIG_DISABLE_FLOAT_REPRODUCIBILITY_TESTS<diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+</diff:ws>#endif<diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+
+</diff:ws>#if<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>!defined(<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>CATCH_TEST_CONFIG_DISABLE_FLOAT_REPRODUCIBILITY_TESTS<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>)<diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+
+</diff:ws></diff:insert>namespace {
+    template &lt;typename T&gt;
+    struct uniform_fp_test_params;
+
+    template&lt;&gt;
+    struct uniform_fp_test_params&lt;float&gt; {
+        // These are exactly representable
+        static constexpr float lowest = -256.125f;
+        static constexpr float highest = 385.125f;
+        // These are just round-trip formatted
+        static constexpr float expected[] = { 92.56961f,
+                                              -23.170044f,
+                                              310.81833f,
+                                              -53.023132f,
+                                              105.03287f,
+                                              198.77591f,
+                                              -172.72931f,
+                                              51.805176f,
+                                              -241.10156f,
+                                              64.66101f,
+                                              212.12509f,
+                                              -49.24292f,
+                                              -177.1399f,
+                                              245.23679f,
+                                              173.22421f };
+    };
+    template &lt;&gt;
+    struct uniform_fp_test_params&lt;double&gt; {
+        // These are exactly representable
+        static constexpr double lowest = -234582.9921875;
+        static constexpr double highest = 261238.015625;
+        // These are just round-trip formatted
+        static constexpr double expected[] = { 35031.207052832615,
+                                               203783.3401838024,
+                                               44667.940405848756,
+                                               -170100.5877224467,
+                                               -222966.7418051684,
+                                               127472.72630072923,
+                                               -173510.88209096913,
+                                               97394.16172239158,
+                                               119123.6921592663,
+                                               22595.741022785165,
+                                               8988.68409120926,
+                                               136906.86520606978,
+                                               33369.19104222473,
+                                               60912.7615841752,
+                                               -149060.05936760217 };
+    };
+
+// We need these definitions for C++14 and earlier, but
+// GCC will complain about them in newer C++ standards
+#if __cplusplus &lt;= 201402L
+    constexpr float uniform_fp_test_params&lt;float&gt;::expected[];
+    constexpr double uniform_fp_test_params&lt;double&gt;::expected[];
+#endif
+} // namespace
+
+<diff:delete xmlns:diff="http://www.srcML.org/srcDiff">//<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>The<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>reproducibility<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>tests<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>assume<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>that<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>operations<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>on<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>`float`/`double`<diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+</diff:ws>//<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>happen<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>in<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>the<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>same<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>precision<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>as<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>the<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>operated-upon<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>type.<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>This<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>is<diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+</diff:ws>//<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>generally<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>true,<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>unless<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>the<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>code<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>is<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>compiled<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>for<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>32<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>bit<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>targets<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>without<diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+</diff:ws>//<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>SSE2<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>enabled,<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>in<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>which<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>case<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>the<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>operations<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>are<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>done<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>in<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>the<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>x87<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>FPU,<diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+</diff:ws>//<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>which<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>usually<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>implies<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>doing<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>math<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>in<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>80<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>bit<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>floats,<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>and<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>then<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>rounding<diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+</diff:ws>//<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>into<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>smaller<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>type<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>when<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>the<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>type<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>is<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>saved<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>into<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>memory.<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>This<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>obviously<diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+</diff:ws>//<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>leads<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>to<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>a<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>different<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>answer,<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>than<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>doing<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>the<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>math<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>in<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>the<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>correct<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>precision.<diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+</diff:ws>#if<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>(<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>defined(<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>_MSC_VER<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>)<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>&amp;&amp;<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>_M_IX86_FP<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>&lt;<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>2<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>)<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>||<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>\
+<diff:ws xmlns:diff="http://www.srcML.org/srcDiff">    </diff:ws>(<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>defined(<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>__GNUC__<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>)<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>&amp;&amp;<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>!defined(<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>__SSE2_MATH__<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>)<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>)<diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+</diff:ws>#<diff:ws xmlns:diff="http://www.srcML.org/srcDiff">    </diff:ws>define<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>CATCH_TEST_CONFIG_DISABLE_FLOAT_REPRODUCIBILITY_TESTS<diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+</diff:ws>#endif<diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+
+</diff:ws>#if<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>!defined(<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>CATCH_TEST_CONFIG_DISABLE_FLOAT_REPRODUCIBILITY_TESTS<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>)<diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+
+</diff:ws></diff:delete>TEMPLATE_TEST_CASE( "uniform_floating_point_distribution is reproducible",
+                    "[rng][distribution][floating-point][approvals]",
+                    float,
+                    double ) {
+    Catch::SimplePcg32 pcg( 0xaabb'</literal><name>aabb</name></expr></argument> )</argument_list></decl>;</decl_stmt>
+
+    <decl_stmt><decl><type><specifier>const</specifier> <specifier>auto</specifier></type> <name>lowest</name> <init>= <expr><name><name><name>uniform_fp_test_params</name><argument_list type="generic">&lt;<argument><expr><name>TestType</name></expr></argument>&gt;</argument_list></name><operator>::</operator><name>lowest</name></name></expr></init></decl>;</decl_stmt>
+    <decl_stmt><decl><type><specifier>const</specifier> <specifier>auto</specifier></type> <name>highest</name> <init>= <expr><name><name><name>uniform_fp_test_params</name><argument_list type="generic">&lt;<argument><expr><name>TestType</name></expr></argument>&gt;</argument_list></name><operator>::</operator><name>highest</name></name></expr></init></decl>;</decl_stmt>
+    <decl_stmt><decl><type><name><name>Catch</name><operator>::</operator><name>uniform_floating_point_distribution</name><argument_list type="generic">&lt;<argument><expr><name>TestType</name></expr></argument>&gt;</argument_list></name></type> <name>dist</name><argument_list>( <argument><expr><name>lowest</name></expr></argument>, <argument><expr><name>highest</name></expr></argument> )</argument_list></decl>;</decl_stmt>
+
+    <decl_stmt><decl><type><specifier>constexpr</specifier> <name>auto</name></type> <name>iters</name> <init>= <expr><literal type="number">15</literal></expr></init></decl>;</decl_stmt>
+    <decl_stmt><decl><type><name><name>std</name><operator>::</operator><name>array</name><argument_list type="generic">&lt;<argument><expr><name>TestType</name></expr></argument>, <argument><expr><name>iters</name></expr></argument>&gt;</argument_list></name></type> <name>generated</name></decl>;</decl_stmt>
+    <for>for <control>( <init><decl><type><name>int</name></type> <name>i</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>i</name> <operator>&lt;</operator> <name>iters</name></expr>;</condition> <incr><expr><operator>++</operator><name>i</name></expr></incr> )</control> <block>{<block_content>
+        <expr_stmt><expr><name><name>generated</name><index>[<expr><name>i</name></expr>]</index></name> <operator>=</operator> <call><name>dist</name><argument_list>( <argument><expr><name>pcg</name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block></for>
+
+    <expr_stmt><expr><call><name>REQUIRE_THAT</name><argument_list>( <argument><expr><name>generated</name></expr></argument>, <argument><expr><call><name><name>Catch</name><operator>::</operator><name>Matchers</name><operator>::</operator><name>RangeEquals</name></name><argument_list>( <argument><expr><name><name><name>uniform_fp_test_params</name><argument_list type="generic">&lt;<argument><expr><name>TestType</name></expr></argument>&gt;</argument_list></name><operator>::</operator><name>expected</name></name></expr></argument> )</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+</block_content>}</block>
+
+<cpp:endif xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">endif</cpp:directive></cpp:endif> <comment type="line">// ^^ float reproducibility tests are enabled</comment>
+
+<macro><name>TEMPLATE_TEST_CASE</name><argument_list>( <argument><literal type="string">"uniform_floating_point_distribution can handle unitary ranges"</literal></argument>,
+                    <argument><literal type="string">"[rng][distribution][floating-point][approvals]"</literal></argument>,
+                    <argument>float</argument>,
+                    <argument>double</argument> )</argument_list></macro> <block>{<block_content>
+    <decl_stmt><decl><type><name><name>std</name><operator>::</operator><name>random_device</name></name></type> <name>rd</name></decl>;</decl_stmt>
+    <decl_stmt><decl><type><name>auto</name></type> <name>seed</name> <init>= <expr><call><name>rd</name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+    <expr_stmt><expr><call><name>CAPTURE</name><argument_list>( <argument><expr><name>seed</name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    <decl_stmt><decl><type><name><name>Catch</name><operator>::</operator><name>SimplePcg32</name></name></type> <name>pcg</name><argument_list>( <argument><expr><name>seed</name></expr></argument> )</argument_list></decl>;</decl_stmt>
+
+    <decl_stmt><decl><type><specifier>const</specifier> <specifier>auto</specifier></type> <name>highest</name> <init>= <diff:delete xmlns:diff="http://www.srcML.org/srcDiff"><expr><diff:delete type="replace" xmlns:diff="http://www.srcML.org/srcDiff"><name><name><name>uniform_fp_test_params</name><argument_list type="generic">&lt;<argument><expr><name>TestType</name></expr></argument>&gt;</argument_list></name><operator>::</operator><name>highest</name></name></diff:delete><diff:insert type="replace" xmlns:diff="http://www.srcML.org/srcDiff"><expr><call><name>TestType</name><argument_list>(<argument><expr><literal type="number">385.125</literal></expr></argument>)</argument_list></call></expr></diff:insert></expr></diff:delete></init></decl>;</decl_stmt>
+    <decl_stmt><decl><type><name><name>Catch</name><operator>::</operator><name>uniform_floating_point_distribution</name><argument_list type="generic">&lt;<argument><expr><name>TestType</name></expr></argument>&gt;</argument_list></name></type> <name>dist</name><argument_list>( <argument><expr><name>highest</name></expr></argument>,
+                                                               <argument><expr><name>highest</name></expr></argument> )</argument_list></decl>;</decl_stmt>
+
+    <decl_stmt><decl><type><specifier>constexpr</specifier> <name>auto</name></type> <name>iters</name> <init>= <expr><literal type="number">20</literal></expr></init></decl>;</decl_stmt>
+    <for>for <control>(<init><decl><type><name>int</name></type> <name>i</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>i</name> <operator>&lt;</operator> <name>iters</name></expr>;</condition> <incr><expr><operator>++</operator><name>i</name></expr></incr>)</control> <block>{<block_content>
+        <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name><name>Catch</name><operator>::</operator><name>Detail</name><operator>::</operator><name>directCompare</name></name><argument_list>( <argument><expr><call><name>dist</name><argument_list>( <argument><expr><name>pcg</name></expr></argument> )</argument_list></call></expr></argument>, <argument><expr><name>highest</name></expr></argument> )</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block></for>
+</block_content>}</block></block_content></block></function></block></namespace>
+</unit>

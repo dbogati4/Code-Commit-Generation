@@ -1,0 +1,8 @@
+{
+  "commit_id": "1b1f3a88bcf3d24ca6027222496c47324e61d0b1",
+  "parent_id": "02ab64da2e924ba9dbae3dc3e1f6357041d1b037",
+  "message": "Don't debug log empty strings",
+  "changed_files": [
+    "src/catch2/internal/catch_stream.cpp"
+  ]
+}

@@ -1,0 +1,330 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" xmlns:diff="http://www.srcML.org/srcDiff" revision="1.0.0" language="C++" filename="C:\Users\saile\AppData\Local\Temp\catch2_100_z8gzpiwf\0b523db6b9276a1792d0723df440c393a843349c\projects_SelfTest_PartTrackerTests_cpp\projects_SelfTest_PartTrackerTests_cpp.old|C:\Users\saile\AppData\Local\Temp\catch2_100_z8gzpiwf\0b523db6b9276a1792d0723df440c393a843349c\projects_SelfTest_PartTrackerTests_cpp\projects_SelfTest_PartTrackerTests_cpp.new"><comment type="block">/*
+ *  Created by Phil on 1/10/2015.
+ *  Copyright 2015 Two Blue Cubes Ltd
+ *
+ *  Distributed under the Boost Software License, Version 1.0. (See accompanying
+ *  file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
+ */</comment>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">"internal/catch_suppress_warnings.h"</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">"internal/catch_test_case_tracker.hpp"</cpp:file></cpp:include>
+
+
+<namespace>namespace <name>Catch</name>
+<block>{
+    <class>class <name>LocalContext</name> <block>{<private type="default">
+        
+    </private><public>public:
+        <function type="operator"><type><name>TrackerContext</name><modifier>&amp;</modifier></type> <name>operator<name>()</name></name><parameter_list>()</parameter_list> <specifier>const</specifier> <block>{<block_content>
+            <return>return <expr><call><name><name>TrackerContext</name><operator>::</operator><name>instance</name></name><argument_list>()</argument_list></call></expr>;</return>
+        </block_content>}</block></function>
+    </public>}</block>;</class>
+    
+}</block></namespace> <comment type="line">// namespace Catch</comment>
+
+<function><type><specifier>inline</specifier> <name><name>Catch</name><operator>::</operator><name>TrackerContext</name></name><modifier>&amp;</modifier></type> <name>C_A_T_C_H_Context</name><parameter_list>()</parameter_list> <block>{<block_content>
+    <return>return <expr><call><name><name>Catch</name><operator>::</operator><name>TrackerContext</name><operator>::</operator><name>instance</name></name><argument_list>()</argument_list></call></expr>;</return>
+</block_content>}</block></function>
+
+<comment type="line">// -------------------</comment>
+
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">"catch.hpp"</cpp:file></cpp:include>
+
+<using>using <namespace>namespace <name>Catch</name>;</namespace></using>
+
+<comment type="line">//inline void testCase( Catch::LocalContext const&amp; C_A_T_C_H_Context ) {</comment>
+<comment type="line">//</comment>
+<comment type="line">//    REQUIRE( C_A_T_C_H_Context().i() == 42 );</comment>
+<comment type="line">//}</comment>
+
+<macro><name>TEST_CASE</name><argument_list>( <argument><literal type="string">"Tracker"</literal></argument><diff:insert xmlns:diff="http://www.srcML.org/srcDiff">,<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><argument><literal type="string">""</literal></argument></diff:insert> )</argument_list></macro> <block>{<block_content>
+    
+    <decl_stmt><decl><type><name>TrackerContext</name></type> <name>ctx</name></decl>;</decl_stmt>
+    <expr_stmt><expr><call><name><name>ctx</name><operator>.</operator><name>startRun</name></name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name><name>ctx</name><operator>.</operator><name>startCycle</name></name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+    
+    <decl_stmt><decl><type><name>ITracker</name><modifier>&amp;</modifier></type> <name>testCase</name> <init>= <expr><call><name><name>SectionTracker</name><operator>::</operator><name>acquire</name></name><argument_list>( <argument><expr><name>ctx</name></expr></argument>, <argument><expr><literal type="string">"Testcase"</literal></expr></argument> )</argument_list></call></expr></init></decl>;</decl_stmt>
+    <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name><name>testCase</name><operator>.</operator><name>isOpen</name></name><argument_list>()</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+
+    <decl_stmt><decl><type><name>ITracker</name><modifier>&amp;</modifier></type> <name>s1</name> <init>= <expr><call><name><name>SectionTracker</name><operator>::</operator><name>acquire</name></name><argument_list>( <argument><expr><name>ctx</name></expr></argument>, <argument><expr><literal type="string">"S1"</literal></expr></argument> )</argument_list></call></expr></init></decl>;</decl_stmt>
+    <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name><name>s1</name><operator>.</operator><name>isOpen</name></name><argument_list>()</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+
+    <macro><name>SECTION</name><argument_list>( <argument><literal type="string">"successfully close one section"</literal></argument><diff:insert xmlns:diff="http://www.srcML.org/srcDiff">,<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><argument><literal type="string">""</literal></argument></diff:insert> )</argument_list></macro> <block>{<block_content>
+        <expr_stmt><expr><call><name><name>s1</name><operator>.</operator><name>close</name></name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name><name>s1</name><operator>.</operator><name>isSuccessfullyCompleted</name></name><argument_list>()</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name><name>testCase</name><operator>.</operator><name>isComplete</name></name><argument_list>()</argument_list></call> <operator>==</operator> <literal type="boolean">false</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+
+        <expr_stmt><expr><call><name><name>testCase</name><operator>.</operator><name>close</name></name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name><name>ctx</name><operator>.</operator><name>completedCycle</name></name><argument_list>()</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name><name>testCase</name><operator>.</operator><name>isSuccessfullyCompleted</name></name><argument_list>()</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block>
+    
+    <macro><name>SECTION</name><argument_list>( <argument><literal type="string">"fail one section"</literal></argument><diff:insert xmlns:diff="http://www.srcML.org/srcDiff">,<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><argument><literal type="string">""</literal></argument></diff:insert> )</argument_list></macro> <block>{<block_content>
+        <expr_stmt><expr><call><name><name>s1</name><operator>.</operator><name>fail</name></name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name><name>s1</name><operator>.</operator><name>isComplete</name></name><argument_list>()</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name><name>s1</name><operator>.</operator><name>isSuccessfullyCompleted</name></name><argument_list>()</argument_list></call> <operator>==</operator> <literal type="boolean">false</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name><name>testCase</name><operator>.</operator><name>isComplete</name></name><argument_list>()</argument_list></call> <operator>==</operator> <literal type="boolean">false</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        
+        <expr_stmt><expr><call><name><name>testCase</name><operator>.</operator><name>close</name></name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name><name>ctx</name><operator>.</operator><name>completedCycle</name></name><argument_list>()</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name><name>testCase</name><operator>.</operator><name>isSuccessfullyCompleted</name></name><argument_list>()</argument_list></call> <operator>==</operator> <literal type="boolean">false</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+
+        <macro><name>SECTION</name><argument_list>( <argument><literal type="string">"re-enter after failed section"</literal></argument><diff:insert xmlns:diff="http://www.srcML.org/srcDiff">,<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><argument><literal type="string">""</literal></argument></diff:insert> )</argument_list></macro> <block>{<block_content>
+            <expr_stmt><expr><call><name><name>ctx</name><operator>.</operator><name>startCycle</name></name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+            <decl_stmt><decl><type><name>ITracker</name><modifier>&amp;</modifier></type> <name>testCase2</name> <init>= <expr><call><name><name>SectionTracker</name><operator>::</operator><name>acquire</name></name><argument_list>( <argument><expr><name>ctx</name></expr></argument>, <argument><expr><literal type="string">"Testcase"</literal></expr></argument> )</argument_list></call></expr></init></decl>;</decl_stmt>
+            <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name><name>testCase2</name><operator>.</operator><name>isOpen</name></name><argument_list>()</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+            
+            <decl_stmt><decl><type><name>ITracker</name><modifier>&amp;</modifier></type> <name>s1b</name> <init>= <expr><call><name><name>SectionTracker</name><operator>::</operator><name>acquire</name></name><argument_list>( <argument><expr><name>ctx</name></expr></argument>, <argument><expr><literal type="string">"S1"</literal></expr></argument> )</argument_list></call></expr></init></decl>;</decl_stmt>
+            <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name><name>s1b</name><operator>.</operator><name>isOpen</name></name><argument_list>()</argument_list></call> <operator>==</operator> <literal type="boolean">false</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+            
+            <expr_stmt><expr><call><name><name>testCase2</name><operator>.</operator><name>close</name></name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+            <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name><name>ctx</name><operator>.</operator><name>completedCycle</name></name><argument_list>()</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+            <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name><name>testCase</name><operator>.</operator><name>isComplete</name></name><argument_list>()</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+            <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name><name>testCase</name><operator>.</operator><name>isSuccessfullyCompleted</name></name><argument_list>()</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        </block_content>}</block>
+        <macro><name>SECTION</name><argument_list>( <argument><literal type="string">"re-enter after failed section and find next section"</literal></argument><diff:insert xmlns:diff="http://www.srcML.org/srcDiff">,<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><argument><literal type="string">""</literal></argument></diff:insert> )</argument_list></macro> <block>{<block_content>
+            <expr_stmt><expr><call><name><name>ctx</name><operator>.</operator><name>startCycle</name></name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+            <decl_stmt><decl><type><name>ITracker</name><modifier>&amp;</modifier></type> <name>testCase2</name> <init>= <expr><call><name><name>SectionTracker</name><operator>::</operator><name>acquire</name></name><argument_list>( <argument><expr><name>ctx</name></expr></argument>, <argument><expr><literal type="string">"Testcase"</literal></expr></argument> )</argument_list></call></expr></init></decl>;</decl_stmt>
+            <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name><name>testCase2</name><operator>.</operator><name>isOpen</name></name><argument_list>()</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+            
+            <decl_stmt><decl><type><name>ITracker</name><modifier>&amp;</modifier></type> <name>s1b</name> <init>= <expr><call><name><name>SectionTracker</name><operator>::</operator><name>acquire</name></name><argument_list>( <argument><expr><name>ctx</name></expr></argument>, <argument><expr><literal type="string">"S1"</literal></expr></argument> )</argument_list></call></expr></init></decl>;</decl_stmt>
+            <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name><name>s1b</name><operator>.</operator><name>isOpen</name></name><argument_list>()</argument_list></call> <operator>==</operator> <literal type="boolean">false</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+
+            <decl_stmt><decl><type><name>ITracker</name><modifier>&amp;</modifier></type> <name>s2</name> <init>= <expr><call><name><name>SectionTracker</name><operator>::</operator><name>acquire</name></name><argument_list>( <argument><expr><name>ctx</name></expr></argument>, <argument><expr><literal type="string">"S2"</literal></expr></argument> )</argument_list></call></expr></init></decl>;</decl_stmt>
+            <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name><name>s2</name><operator>.</operator><name>isOpen</name></name><argument_list>()</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+
+            <expr_stmt><expr><call><name><name>s2</name><operator>.</operator><name>close</name></name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+            <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name><name>ctx</name><operator>.</operator><name>completedCycle</name></name><argument_list>()</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+            
+            <expr_stmt><expr><call><name><name>testCase2</name><operator>.</operator><name>close</name></name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+            <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name><name>testCase</name><operator>.</operator><name>isComplete</name></name><argument_list>()</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+            <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name><name>testCase</name><operator>.</operator><name>isSuccessfullyCompleted</name></name><argument_list>()</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        </block_content>}</block>
+    </block_content>}</block>
+    
+    <macro><name>SECTION</name><argument_list>( <argument><literal type="string">"successfully close one section, then find another"</literal></argument><diff:insert xmlns:diff="http://www.srcML.org/srcDiff">,<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><argument><literal type="string">""</literal></argument></diff:insert> )</argument_list></macro> <block>{<block_content>
+        <expr_stmt><expr><call><name><name>s1</name><operator>.</operator><name>close</name></name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+        
+        <decl_stmt><decl><type><name>ITracker</name><modifier>&amp;</modifier></type> <name>s2</name> <init>= <expr><call><name><name>SectionTracker</name><operator>::</operator><name>acquire</name></name><argument_list>( <argument><expr><name>ctx</name></expr></argument>, <argument><expr><literal type="string">"S2"</literal></expr></argument> )</argument_list></call></expr></init></decl>;</decl_stmt>
+        <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name><name>s2</name><operator>.</operator><name>isOpen</name></name><argument_list>()</argument_list></call> <operator>==</operator> <literal type="boolean">false</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        
+        <expr_stmt><expr><call><name><name>testCase</name><operator>.</operator><name>close</name></name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name><name>testCase</name><operator>.</operator><name>isComplete</name></name><argument_list>()</argument_list></call> <operator>==</operator> <literal type="boolean">false</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+
+        <macro><name>SECTION</name><argument_list>( <argument><literal type="string">"Re-enter - skips S1 and enters S2"</literal></argument><diff:insert xmlns:diff="http://www.srcML.org/srcDiff">,<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><argument><literal type="string">""</literal></argument></diff:insert> )</argument_list></macro> <block>{<block_content>
+            <expr_stmt><expr><call><name><name>ctx</name><operator>.</operator><name>startCycle</name></name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+            <decl_stmt><decl><type><name>ITracker</name><modifier>&amp;</modifier></type> <name>testCase2</name> <init>= <expr><call><name><name>SectionTracker</name><operator>::</operator><name>acquire</name></name><argument_list>( <argument><expr><name>ctx</name></expr></argument>, <argument><expr><literal type="string">"Testcase"</literal></expr></argument> )</argument_list></call></expr></init></decl>;</decl_stmt>
+            <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name><name>testCase2</name><operator>.</operator><name>isOpen</name></name><argument_list>()</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+            
+            <decl_stmt><decl><type><name>ITracker</name><modifier>&amp;</modifier></type> <name>s1b</name> <init>= <expr><call><name><name>SectionTracker</name><operator>::</operator><name>acquire</name></name><argument_list>( <argument><expr><name>ctx</name></expr></argument>, <argument><expr><literal type="string">"S1"</literal></expr></argument> )</argument_list></call></expr></init></decl>;</decl_stmt>
+            <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name><name>s1b</name><operator>.</operator><name>isOpen</name></name><argument_list>()</argument_list></call> <operator>==</operator> <literal type="boolean">false</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+
+            <decl_stmt><decl><type><name>ITracker</name><modifier>&amp;</modifier></type> <name>s2b</name> <init>= <expr><call><name><name>SectionTracker</name><operator>::</operator><name>acquire</name></name><argument_list>( <argument><expr><name>ctx</name></expr></argument>, <argument><expr><literal type="string">"S2"</literal></expr></argument> )</argument_list></call></expr></init></decl>;</decl_stmt>
+            <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name><name>s2b</name><operator>.</operator><name>isOpen</name></name><argument_list>()</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+
+            <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name><name>ctx</name><operator>.</operator><name>completedCycle</name></name><argument_list>()</argument_list></call> <operator>==</operator> <literal type="boolean">false</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+            
+            <macro><name>SECTION</name> <argument_list>(<argument><literal type="string">"Successfully close S2"</literal></argument>)</argument_list></macro> <block>{<block_content>
+                <expr_stmt><expr><call><name><name>s2b</name><operator>.</operator><name>close</name></name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+                <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name><name>ctx</name><operator>.</operator><name>completedCycle</name></name><argument_list>()</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+
+                <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name><name>s2b</name><operator>.</operator><name>isSuccessfullyCompleted</name></name><argument_list>()</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+                <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name><name>testCase2</name><operator>.</operator><name>isComplete</name></name><argument_list>()</argument_list></call> <operator>==</operator> <literal type="boolean">false</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+                
+                <expr_stmt><expr><call><name><name>testCase2</name><operator>.</operator><name>close</name></name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+                <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name><name>testCase2</name><operator>.</operator><name>isSuccessfullyCompleted</name></name><argument_list>()</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+            </block_content>}</block>
+            <macro><name>SECTION</name> <argument_list>(<argument><literal type="string">"fail S2"</literal></argument>)</argument_list></macro> <block>{<block_content>
+                <expr_stmt><expr><call><name><name>s2b</name><operator>.</operator><name>fail</name></name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+                <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name><name>ctx</name><operator>.</operator><name>completedCycle</name></name><argument_list>()</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+
+                <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name><name>s2b</name><operator>.</operator><name>isComplete</name></name><argument_list>()</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+                <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name><name>s2b</name><operator>.</operator><name>isSuccessfullyCompleted</name></name><argument_list>()</argument_list></call> <operator>==</operator> <literal type="boolean">false</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+                
+                <expr_stmt><expr><call><name><name>testCase2</name><operator>.</operator><name>close</name></name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+                <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name><name>testCase2</name><operator>.</operator><name>isSuccessfullyCompleted</name></name><argument_list>()</argument_list></call> <operator>==</operator> <literal type="boolean">false</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+
+                <comment type="line">// Need a final cycle</comment>
+                <expr_stmt><expr><call><name><name>ctx</name><operator>.</operator><name>startCycle</name></name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+                <decl_stmt><decl><type><name>ITracker</name><modifier>&amp;</modifier></type> <name>testCase3</name> <init>= <expr><call><name><name>SectionTracker</name><operator>::</operator><name>acquire</name></name><argument_list>( <argument><expr><name>ctx</name></expr></argument>, <argument><expr><literal type="string">"Testcase"</literal></expr></argument> )</argument_list></call></expr></init></decl>;</decl_stmt>
+                <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name><name>testCase3</name><operator>.</operator><name>isOpen</name></name><argument_list>()</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+                
+                <decl_stmt><decl><type><name>ITracker</name><modifier>&amp;</modifier></type> <name>s1c</name> <init>= <expr><call><name><name>SectionTracker</name><operator>::</operator><name>acquire</name></name><argument_list>( <argument><expr><name>ctx</name></expr></argument>, <argument><expr><literal type="string">"S1"</literal></expr></argument> )</argument_list></call></expr></init></decl>;</decl_stmt>
+                <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name><name>s1c</name><operator>.</operator><name>isOpen</name></name><argument_list>()</argument_list></call> <operator>==</operator> <literal type="boolean">false</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+                
+                <decl_stmt><decl><type><name>ITracker</name><modifier>&amp;</modifier></type> <name>s2c</name> <init>= <expr><call><name><name>SectionTracker</name><operator>::</operator><name>acquire</name></name><argument_list>( <argument><expr><name>ctx</name></expr></argument>, <argument><expr><literal type="string">"S2"</literal></expr></argument> )</argument_list></call></expr></init></decl>;</decl_stmt>
+                <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name><name>s2c</name><operator>.</operator><name>isOpen</name></name><argument_list>()</argument_list></call> <operator>==</operator> <literal type="boolean">false</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+            
+                <expr_stmt><expr><call><name><name>testCase3</name><operator>.</operator><name>close</name></name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+                <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name><name>testCase3</name><operator>.</operator><name>isSuccessfullyCompleted</name></name><argument_list>()</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+            </block_content>}</block>
+        </block_content>}</block>
+    </block_content>}</block>
+    
+    <macro><name>SECTION</name><argument_list>( <argument><literal type="string">"open a nested section"</literal></argument><diff:insert xmlns:diff="http://www.srcML.org/srcDiff">,<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><argument><literal type="string">""</literal></argument></diff:insert> )</argument_list></macro> <block>{<block_content>
+        <decl_stmt><decl><type><name>ITracker</name><modifier>&amp;</modifier></type> <name>s2</name> <init>= <expr><call><name><name>SectionTracker</name><operator>::</operator><name>acquire</name></name><argument_list>( <argument><expr><name>ctx</name></expr></argument>, <argument><expr><literal type="string">"S2"</literal></expr></argument> )</argument_list></call></expr></init></decl>;</decl_stmt>
+        <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name><name>s2</name><operator>.</operator><name>isOpen</name></name><argument_list>()</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+
+        <expr_stmt><expr><call><name><name>s2</name><operator>.</operator><name>close</name></name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name><name>s2</name><operator>.</operator><name>isComplete</name></name><argument_list>()</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name><name>s1</name><operator>.</operator><name>isComplete</name></name><argument_list>()</argument_list></call> <operator>==</operator> <literal type="boolean">false</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        
+        <expr_stmt><expr><call><name><name>s1</name><operator>.</operator><name>close</name></name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name><name>s1</name><operator>.</operator><name>isComplete</name></name><argument_list>()</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name><name>testCase</name><operator>.</operator><name>isComplete</name></name><argument_list>()</argument_list></call> <operator>==</operator> <literal type="boolean">false</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        
+        <expr_stmt><expr><call><name><name>testCase</name><operator>.</operator><name>close</name></name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name><name>testCase</name><operator>.</operator><name>isComplete</name></name><argument_list>()</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block>
+    
+    <macro><name>SECTION</name><argument_list>( <argument><literal type="string">"start a generator"</literal></argument><diff:insert xmlns:diff="http://www.srcML.org/srcDiff">,<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><argument><literal type="string">""</literal></argument></diff:insert> )</argument_list></macro> <block>{<block_content>
+        <decl_stmt><decl><type><name>IndexTracker</name><modifier>&amp;</modifier></type> <name>g1</name> <init>= <expr><call><name><name>IndexTracker</name><operator>::</operator><name>acquire</name></name><argument_list>( <argument><expr><name>ctx</name></expr></argument>, <argument><expr><literal type="string">"G1"</literal></expr></argument>, <argument><expr><literal type="number">2</literal></expr></argument> )</argument_list></call></expr></init></decl>;</decl_stmt>
+        <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name><name>g1</name><operator>.</operator><name>isOpen</name></name><argument_list>()</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name><name>g1</name><operator>.</operator><name>index</name></name><argument_list>()</argument_list></call> <operator>==</operator> <literal type="number">0</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+
+        <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name><name>g1</name><operator>.</operator><name>isComplete</name></name><argument_list>()</argument_list></call> <operator>==</operator> <literal type="boolean">false</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name><name>s1</name><operator>.</operator><name>isComplete</name></name><argument_list>()</argument_list></call> <operator>==</operator> <literal type="boolean">false</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+
+        <macro><name>SECTION</name><argument_list>( <argument><literal type="string">"close outer section"</literal></argument> )</argument_list></macro>
+        <block>{<block_content>
+            <expr_stmt><expr><call><name><name>s1</name><operator>.</operator><name>close</name></name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+            <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name><name>s1</name><operator>.</operator><name>isComplete</name></name><argument_list>()</argument_list></call> <operator>==</operator> <literal type="boolean">false</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+            <expr_stmt><expr><call><name><name>testCase</name><operator>.</operator><name>close</name></name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+            <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name><name>testCase</name><operator>.</operator><name>isSuccessfullyCompleted</name></name><argument_list>()</argument_list></call> <operator>==</operator> <literal type="boolean">false</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+
+            <macro><name>SECTION</name><argument_list>( <argument><literal type="string">"Re-enter for second generation"</literal></argument><diff:insert xmlns:diff="http://www.srcML.org/srcDiff">,<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><argument><literal type="string">""</literal></argument></diff:insert> )</argument_list></macro> <block>{<block_content>
+                <expr_stmt><expr><call><name><name>ctx</name><operator>.</operator><name>startCycle</name></name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+                <decl_stmt><decl><type><name>ITracker</name><modifier>&amp;</modifier></type> <name>testCase2</name> <init>= <expr><call><name><name>SectionTracker</name><operator>::</operator><name>acquire</name></name><argument_list>( <argument><expr><name>ctx</name></expr></argument>, <argument><expr><literal type="string">"Testcase"</literal></expr></argument> )</argument_list></call></expr></init></decl>;</decl_stmt>
+                <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name><name>testCase2</name><operator>.</operator><name>isOpen</name></name><argument_list>()</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+                
+                <decl_stmt><decl><type><name>ITracker</name><modifier>&amp;</modifier></type> <name>s1b</name> <init>= <expr><call><name><name>SectionTracker</name><operator>::</operator><name>acquire</name></name><argument_list>( <argument><expr><name>ctx</name></expr></argument>, <argument><expr><literal type="string">"S1"</literal></expr></argument> )</argument_list></call></expr></init></decl>;</decl_stmt>
+                <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name><name>s1b</name><operator>.</operator><name>isOpen</name></name><argument_list>()</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+                
+                
+                <decl_stmt><decl><type><name>IndexTracker</name><modifier>&amp;</modifier></type> <name>g1b</name> <init>= <expr><call><name><name>IndexTracker</name><operator>::</operator><name>acquire</name></name><argument_list>( <argument><expr><name>ctx</name></expr></argument>, <argument><expr><literal type="string">"G1"</literal></expr></argument>, <argument><expr><literal type="number">2</literal></expr></argument> )</argument_list></call></expr></init></decl>;</decl_stmt>
+                <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name><name>g1b</name><operator>.</operator><name>isOpen</name></name><argument_list>()</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+                <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name><name>g1b</name><operator>.</operator><name>index</name></name><argument_list>()</argument_list></call> <operator>==</operator> <literal type="number">1</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+                
+                <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name><name>s1</name><operator>.</operator><name>isComplete</name></name><argument_list>()</argument_list></call> <operator>==</operator> <literal type="boolean">false</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+                
+                <expr_stmt><expr><call><name><name>s1b</name><operator>.</operator><name>close</name></name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+                <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name><name>s1b</name><operator>.</operator><name>isComplete</name></name><argument_list>()</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+                <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name><name>g1b</name><operator>.</operator><name>isComplete</name></name><argument_list>()</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+                <expr_stmt><expr><call><name><name>testCase2</name><operator>.</operator><name>close</name></name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+                <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name><name>testCase2</name><operator>.</operator><name>isComplete</name></name><argument_list>()</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+            </block_content>}</block>
+        </block_content>}</block>
+        <macro><name>SECTION</name><argument_list>( <argument><literal type="string">"Start a new inner section"</literal></argument><diff:insert xmlns:diff="http://www.srcML.org/srcDiff">,<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><argument><literal type="string">""</literal></argument></diff:insert> )</argument_list></macro> <block>{<block_content>
+            <decl_stmt><decl><type><name>ITracker</name><modifier>&amp;</modifier></type> <name>s2</name> <init>= <expr><call><name><name>SectionTracker</name><operator>::</operator><name>acquire</name></name><argument_list>( <argument><expr><name>ctx</name></expr></argument>, <argument><expr><literal type="string">"S2"</literal></expr></argument> )</argument_list></call></expr></init></decl>;</decl_stmt>
+            <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name><name>s2</name><operator>.</operator><name>isOpen</name></name><argument_list>()</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+
+            <expr_stmt><expr><call><name><name>s2</name><operator>.</operator><name>close</name></name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+            <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name><name>s2</name><operator>.</operator><name>isComplete</name></name><argument_list>()</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+
+            <expr_stmt><expr><call><name><name>s1</name><operator>.</operator><name>close</name></name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+            <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name><name>s1</name><operator>.</operator><name>isComplete</name></name><argument_list>()</argument_list></call> <operator>==</operator> <literal type="boolean">false</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+
+            <expr_stmt><expr><call><name><name>testCase</name><operator>.</operator><name>close</name></name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+            <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name><name>testCase</name><operator>.</operator><name>isComplete</name></name><argument_list>()</argument_list></call> <operator>==</operator> <literal type="boolean">false</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+            
+            <macro><name>SECTION</name><argument_list>( <argument><literal type="string">"Re-enter for second generation"</literal></argument><diff:insert xmlns:diff="http://www.srcML.org/srcDiff">,<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><argument><literal type="string">""</literal></argument></diff:insert> )</argument_list></macro> <block>{<block_content>
+                <expr_stmt><expr><call><name><name>ctx</name><operator>.</operator><name>startCycle</name></name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+                <decl_stmt><decl><type><name>ITracker</name><modifier>&amp;</modifier></type> <name>testCase2</name> <init>= <expr><call><name><name>SectionTracker</name><operator>::</operator><name>acquire</name></name><argument_list>( <argument><expr><name>ctx</name></expr></argument>, <argument><expr><literal type="string">"Testcase"</literal></expr></argument> )</argument_list></call></expr></init></decl>;</decl_stmt>
+                <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name><name>testCase2</name><operator>.</operator><name>isOpen</name></name><argument_list>()</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+                
+                <decl_stmt><decl><type><name>ITracker</name><modifier>&amp;</modifier></type> <name>s1b</name> <init>= <expr><call><name><name>SectionTracker</name><operator>::</operator><name>acquire</name></name><argument_list>( <argument><expr><name>ctx</name></expr></argument>, <argument><expr><literal type="string">"S1"</literal></expr></argument> )</argument_list></call></expr></init></decl>;</decl_stmt>
+                <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name><name>s1b</name><operator>.</operator><name>isOpen</name></name><argument_list>()</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+                
+                <comment type="line">// generator - next value</comment>
+                <decl_stmt><decl><type><name>IndexTracker</name><modifier>&amp;</modifier></type> <name>g1b</name> <init>= <expr><call><name><name>IndexTracker</name><operator>::</operator><name>acquire</name></name><argument_list>( <argument><expr><name>ctx</name></expr></argument>, <argument><expr><literal type="string">"G1"</literal></expr></argument>, <argument><expr><literal type="number">2</literal></expr></argument> )</argument_list></call></expr></init></decl>;</decl_stmt>
+                <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name><name>g1b</name><operator>.</operator><name>isOpen</name></name><argument_list>()</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+                <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name><name>g1b</name><operator>.</operator><name>index</name></name><argument_list>()</argument_list></call> <operator>==</operator> <literal type="number">1</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+                
+                <comment type="line">// inner section again</comment>
+                <decl_stmt><decl><type><name>ITracker</name><modifier>&amp;</modifier></type> <name>s2b</name> <init>= <expr><call><name><name>SectionTracker</name><operator>::</operator><name>acquire</name></name><argument_list>( <argument><expr><name>ctx</name></expr></argument>, <argument><expr><literal type="string">"S2"</literal></expr></argument> )</argument_list></call></expr></init></decl>;</decl_stmt>
+                <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name><name>s2b</name><operator>.</operator><name>isOpen</name></name><argument_list>()</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+                
+                <expr_stmt><expr><call><name><name>s2b</name><operator>.</operator><name>close</name></name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+                <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name><name>s2b</name><operator>.</operator><name>isComplete</name></name><argument_list>()</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+                
+                <expr_stmt><expr><call><name><name>s1b</name><operator>.</operator><name>close</name></name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+                <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name><name>g1b</name><operator>.</operator><name>isComplete</name></name><argument_list>()</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+                <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name><name>s1b</name><operator>.</operator><name>isComplete</name></name><argument_list>()</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+                
+                <expr_stmt><expr><call><name><name>testCase2</name><operator>.</operator><name>close</name></name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+                <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name><name>testCase2</name><operator>.</operator><name>isComplete</name></name><argument_list>()</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+            </block_content>}</block>
+        </block_content>}</block>
+        
+        <macro><name>SECTION</name><argument_list>( <argument><literal type="string">"Fail an inner section"</literal></argument><diff:insert xmlns:diff="http://www.srcML.org/srcDiff">,<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><argument><literal type="string">""</literal></argument></diff:insert> )</argument_list></macro> <block>{<block_content>
+            <decl_stmt><decl><type><name>ITracker</name><modifier>&amp;</modifier></type> <name>s2</name> <init>= <expr><call><name><name>SectionTracker</name><operator>::</operator><name>acquire</name></name><argument_list>( <argument><expr><name>ctx</name></expr></argument>, <argument><expr><literal type="string">"S2"</literal></expr></argument> )</argument_list></call></expr></init></decl>;</decl_stmt>
+            <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name><name>s2</name><operator>.</operator><name>isOpen</name></name><argument_list>()</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+            
+            <expr_stmt><expr><call><name><name>s2</name><operator>.</operator><name>fail</name></name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+            <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name><name>s2</name><operator>.</operator><name>isComplete</name></name><argument_list>()</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+            <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name><name>s2</name><operator>.</operator><name>isSuccessfullyCompleted</name></name><argument_list>()</argument_list></call> <operator>==</operator> <literal type="boolean">false</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+            
+            <expr_stmt><expr><call><name><name>s1</name><operator>.</operator><name>close</name></name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+            <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name><name>s1</name><operator>.</operator><name>isComplete</name></name><argument_list>()</argument_list></call> <operator>==</operator> <literal type="boolean">false</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+            
+            <expr_stmt><expr><call><name><name>testCase</name><operator>.</operator><name>close</name></name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+            <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name><name>testCase</name><operator>.</operator><name>isComplete</name></name><argument_list>()</argument_list></call> <operator>==</operator> <literal type="boolean">false</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+            
+            <macro><name>SECTION</name><argument_list>( <argument><literal type="string">"Re-enter for second generation"</literal></argument><diff:insert xmlns:diff="http://www.srcML.org/srcDiff">,<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><argument><literal type="string">""</literal></argument></diff:insert> )</argument_list></macro> <block>{<block_content>
+                <expr_stmt><expr><call><name><name>ctx</name><operator>.</operator><name>startCycle</name></name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+                <decl_stmt><decl><type><name>ITracker</name><modifier>&amp;</modifier></type> <name>testCase2</name> <init>= <expr><call><name><name>SectionTracker</name><operator>::</operator><name>acquire</name></name><argument_list>( <argument><expr><name>ctx</name></expr></argument>, <argument><expr><literal type="string">"Testcase"</literal></expr></argument> )</argument_list></call></expr></init></decl>;</decl_stmt>
+                <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name><name>testCase2</name><operator>.</operator><name>isOpen</name></name><argument_list>()</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+                
+                <decl_stmt><decl><type><name>ITracker</name><modifier>&amp;</modifier></type> <name>s1b</name> <init>= <expr><call><name><name>SectionTracker</name><operator>::</operator><name>acquire</name></name><argument_list>( <argument><expr><name>ctx</name></expr></argument>, <argument><expr><literal type="string">"S1"</literal></expr></argument> )</argument_list></call></expr></init></decl>;</decl_stmt>
+                <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name><name>s1b</name><operator>.</operator><name>isOpen</name></name><argument_list>()</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+                
+                <comment type="line">// generator - still same value</comment>
+                <decl_stmt><decl><type><name>IndexTracker</name><modifier>&amp;</modifier></type> <name>g1b</name> <init>= <expr><call><name><name>IndexTracker</name><operator>::</operator><name>acquire</name></name><argument_list>( <argument><expr><name>ctx</name></expr></argument>, <argument><expr><literal type="string">"G1"</literal></expr></argument>, <argument><expr><literal type="number">2</literal></expr></argument> )</argument_list></call></expr></init></decl>;</decl_stmt>
+                <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name><name>g1b</name><operator>.</operator><name>isOpen</name></name><argument_list>()</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+                <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name><name>g1b</name><operator>.</operator><name>index</name></name><argument_list>()</argument_list></call> <operator>==</operator> <literal type="number">0</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+                
+                <comment type="line">// inner section again - this time won't open</comment>
+                <decl_stmt><decl><type><name>ITracker</name><modifier>&amp;</modifier></type> <name>s2b</name> <init>= <expr><call><name><name>SectionTracker</name><operator>::</operator><name>acquire</name></name><argument_list>( <argument><expr><name>ctx</name></expr></argument>, <argument><expr><literal type="string">"S2"</literal></expr></argument> )</argument_list></call></expr></init></decl>;</decl_stmt>
+                <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name><name>s2b</name><operator>.</operator><name>isOpen</name></name><argument_list>()</argument_list></call> <operator>==</operator> <literal type="boolean">false</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+                
+                <expr_stmt><expr><call><name><name>s1b</name><operator>.</operator><name>close</name></name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+                <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name><name>g1b</name><operator>.</operator><name>isComplete</name></name><argument_list>()</argument_list></call> <operator>==</operator> <literal type="boolean">false</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+                <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name><name>s1b</name><operator>.</operator><name>isComplete</name></name><argument_list>()</argument_list></call> <operator>==</operator> <literal type="boolean">false</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+                
+                <expr_stmt><expr><call><name><name>testCase2</name><operator>.</operator><name>close</name></name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+                <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name><name>testCase2</name><operator>.</operator><name>isComplete</name></name><argument_list>()</argument_list></call> <operator>==</operator> <literal type="boolean">false</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+                
+                <comment type="line">// Another cycle - now should complete</comment>
+                <expr_stmt><expr><call><name><name>ctx</name><operator>.</operator><name>startCycle</name></name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+                <decl_stmt><decl><type><name>ITracker</name><modifier>&amp;</modifier></type> <name>testCase3</name> <init>= <expr><call><name><name>SectionTracker</name><operator>::</operator><name>acquire</name></name><argument_list>( <argument><expr><name>ctx</name></expr></argument>, <argument><expr><literal type="string">"Testcase"</literal></expr></argument> )</argument_list></call></expr></init></decl>;</decl_stmt>
+                <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name><name>testCase3</name><operator>.</operator><name>isOpen</name></name><argument_list>()</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+                
+                <decl_stmt><decl><type><name>ITracker</name><modifier>&amp;</modifier></type> <name>s1c</name> <init>= <expr><call><name><name>SectionTracker</name><operator>::</operator><name>acquire</name></name><argument_list>( <argument><expr><name>ctx</name></expr></argument>, <argument><expr><literal type="string">"S1"</literal></expr></argument> )</argument_list></call></expr></init></decl>;</decl_stmt>
+                <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name><name>s1c</name><operator>.</operator><name>isOpen</name></name><argument_list>()</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+                
+                <comment type="line">// generator - now next value</comment>
+                <decl_stmt><decl><type><name>IndexTracker</name><modifier>&amp;</modifier></type> <name>g1c</name> <init>= <expr><call><name><name>IndexTracker</name><operator>::</operator><name>acquire</name></name><argument_list>( <argument><expr><name>ctx</name></expr></argument>, <argument><expr><literal type="string">"G1"</literal></expr></argument>, <argument><expr><literal type="number">2</literal></expr></argument> )</argument_list></call></expr></init></decl>;</decl_stmt>
+                <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name><name>g1c</name><operator>.</operator><name>isOpen</name></name><argument_list>()</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+                <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name><name>g1c</name><operator>.</operator><name>index</name></name><argument_list>()</argument_list></call> <operator>==</operator> <literal type="number">1</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+                
+                <comment type="line">// inner section - now should open again</comment>
+                <decl_stmt><decl><type><name>ITracker</name><modifier>&amp;</modifier></type> <name>s2c</name> <init>= <expr><call><name><name>SectionTracker</name><operator>::</operator><name>acquire</name></name><argument_list>( <argument><expr><name>ctx</name></expr></argument>, <argument><expr><literal type="string">"S2"</literal></expr></argument> )</argument_list></call></expr></init></decl>;</decl_stmt>
+                <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name><name>s2c</name><operator>.</operator><name>isOpen</name></name><argument_list>()</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+                
+                <expr_stmt><expr><call><name><name>s2c</name><operator>.</operator><name>close</name></name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+                <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name><name>s2c</name><operator>.</operator><name>isComplete</name></name><argument_list>()</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+                
+                <expr_stmt><expr><call><name><name>s1c</name><operator>.</operator><name>close</name></name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+                <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name><name>g1c</name><operator>.</operator><name>isComplete</name></name><argument_list>()</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+                <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name><name>s1c</name><operator>.</operator><name>isComplete</name></name><argument_list>()</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+                
+                <expr_stmt><expr><call><name><name>testCase3</name><operator>.</operator><name>close</name></name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+                <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name><name>testCase3</name><operator>.</operator><name>isComplete</name></name><argument_list>()</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+            </block_content>}</block>
+        </block_content>}</block>
+        <comment type="line">// !TBD"</comment>
+        <comment type="line">//   nested generator</comment>
+        <comment type="line">//   two sections within a generator</comment>
+    </block_content>}</block>
+</block_content>}</block>
+</unit>

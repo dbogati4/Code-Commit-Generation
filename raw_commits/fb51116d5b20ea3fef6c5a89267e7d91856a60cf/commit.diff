@@ -1,0 +1,15 @@
+diff --git a/src/catch2/benchmark/detail/catch_analyse.cpp b/src/catch2/benchmark/detail/catch_analyse.cpp
+index 7d27daf1..14d7f450 100644
+--- a/src/catch2/benchmark/detail/catch_analyse.cpp
++++ b/src/catch2/benchmark/detail/catch_analyse.cpp
+@@ -63,8 +63,8 @@ namespace Catch {
+                     FDuration mean = FDuration(0);
+                     int i = 0;
+                     for (auto it = first; it < last; ++it, ++i) {
+-                        samples.push_back(FDuration(*it));
+-                        mean += FDuration(*it);
++                        samples.push_back(*it);
++                        mean += *it;
+                     }
+                     mean /= i;
+ 

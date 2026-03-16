@@ -1,0 +1,8 @@
+{
+  "commit_id": "ba13f3f098454a31ac62690f9eb1a1ec6dbd1b55",
+  "parent_id": "063593828c48b34e91473e9dae1b0b4db41bdf7e",
+  "message": "Restored second arg to a TEST_CASE for non variadic compilers",
+  "changed_files": [
+    "projects/SelfTest/MessageTests.cpp"
+  ]
+}

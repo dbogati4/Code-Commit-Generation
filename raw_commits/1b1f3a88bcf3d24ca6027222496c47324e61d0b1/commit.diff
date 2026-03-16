@@ -1,0 +1,17 @@
+diff --git a/src/catch2/internal/catch_stream.cpp b/src/catch2/internal/catch_stream.cpp
+index 8b954c15..38919f8f 100644
+--- a/src/catch2/internal/catch_stream.cpp
++++ b/src/catch2/internal/catch_stream.cpp
+@@ -64,8 +64,10 @@ namespace Detail {
+ 
+         struct OutputDebugWriter {
+ 
+-            void operator()( std::string const&str ) {
+-                writeToDebugConsole( str );
++            void operator()( std::string const& str ) {
++                if ( !str.empty() ) {
++                    writeToDebugConsole( str );
++                }
+             }
+         };
+ 

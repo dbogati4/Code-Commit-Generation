@@ -1,0 +1,8 @@
+{
+  "commit_id": "f1faaa9c107113692301ad8bb56084460ef1a2ff",
+  "parent_id": "9e1bdca4667295fcb16265eae00efa8423f07007",
+  "message": "Fix convert from char on ARM build",
+  "changed_files": [
+    "include/internal/catch_tostring.cpp"
+  ]
+}

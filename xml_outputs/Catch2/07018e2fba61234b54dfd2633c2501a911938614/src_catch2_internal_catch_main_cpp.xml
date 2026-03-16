@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" xmlns:diff="http://www.srcML.org/srcDiff" revision="1.0.0" language="C++" filename="C:\Users\saile\AppData\Local\Temp\catch2_100_z8gzpiwf\07018e2fba61234b54dfd2633c2501a911938614\src_catch2_internal_catch_main_cpp\src_catch2_internal_catch_main_cpp.old|C:\Users\saile\AppData\Local\Temp\catch2_100_z8gzpiwf\07018e2fba61234b54dfd2633c2501a911938614\src_catch2_internal_catch_main_cpp\src_catch2_internal_catch_main_cpp.new">
+<comment type="line">//              Copyright Catch2 Authors</comment>
+<comment type="line">// Distributed under the Boost Software License, Version 1.0.</comment>
+<comment type="line">//   (See accompanying file LICENSE_1_0.txt or copy at</comment>
+<comment type="line">//        https://www.boost.org/LICENSE_1_0.txt)</comment>
+
+<comment type="line">// SPDX-License-Identifier: BSL-1.0</comment>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;catch2/catch_session.hpp&gt;</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;catch2/internal/catch_compiler_capabilities.hpp&gt;</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;catch2/internal/catch_config_wchar.hpp&gt;</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;catch2/internal/catch_leak_detector.hpp&gt;</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;catch2/internal/catch_platform.hpp&gt;</cpp:file></cpp:include>
+
+<namespace>namespace <name>Catch</name> <block>{
+    <decl_stmt><decl><type><name>CATCH_INTERNAL_START_WARNINGS_SUPPRESSION</name>
+    <name>CATCH_INTERNAL_SUPPRESS_GLOBALS_WARNINGS</name>
+    <name>LeakDetector</name></type> <name>leakDetector</name></decl>;</decl_stmt>
+    <expr_stmt><expr><name>CATCH_INTERNAL_STOP_WARNINGS_SUPPRESSION</name></expr></expr_stmt>
+}</block></namespace>
+
+<cpp:if xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">if</cpp:directive> <expr><call><name>defined</name><argument_list>(<argument><expr><name>CATCH_CONFIG_WCHAR</name></expr></argument>)</argument_list></call> <operator>&amp;&amp;</operator> <call><name>defined</name><argument_list>(<argument><expr><name>CATCH_PLATFORM_WINDOWS</name></expr></argument>)</argument_list></call> <operator>&amp;&amp;</operator> <call><name>defined</name><argument_list>(<argument><expr><name>_UNICODE</name></expr></argument>)</argument_list></call> <operator>&amp;&amp;</operator> <operator>!</operator><call><name>defined</name><argument_list>(<argument><expr><name>DO_NOT_USE_WMAIN</name></expr></argument>)</argument_list></call></expr></cpp:if>
+<comment type="line">// Standard C/C++ Win32 Unicode wmain entry point</comment>
+<extern>extern <literal type="string">"C"</literal> <function><type><name>int</name><diff:insert xmlns:diff="http://www.srcML.org/srcDiff"><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><name>__cdecl</name></diff:insert></type> <name>wmain</name> <parameter_list>(<parameter><decl><type><name>int</name></type> <name>argc</name></decl></parameter>, <parameter><decl><type><name>wchar_t</name> <modifier>*</modifier></type> <name><name>argv</name><index>[]</index></name></decl></parameter>, <parameter><decl><type><name><name>wchar_t</name> <modifier>*</modifier> <index>[]</index></name></type></decl></parameter>)</parameter_list> <block>{<block_content>
+<cpp:else xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">else</cpp:directive></cpp:else>
+<comment type="line">// Standard C/C++ main entry point</comment>
+<function><type><name>int</name></type> <name>main</name> <parameter_list>(<parameter><decl><type><name>int</name></type> <name>argc</name></decl></parameter>, <parameter><decl><type><name>char</name> <modifier>*</modifier></type> <name><name>argv</name><index>[]</index></name></decl></parameter>)</parameter_list> <block>{<block_content>
+<cpp:endif xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">endif</cpp:directive></cpp:endif>
+
+    <comment type="line">// We want to force the linker not to discard the global variable</comment>
+    <comment type="line">// and its constructor, as it (optionally) registers leak detector</comment>
+    <expr_stmt><expr><operator>(</operator><name>void</name><operator>)</operator><operator>&amp;</operator><name><name>Catch</name><operator>::</operator><name>leakDetector</name></name></expr>;</expr_stmt>
+
+    <return>return <expr><call><name><name>Catch</name><operator>::</operator><name>Session</name></name><argument_list>()</argument_list></call><operator>.</operator><call><name>run</name><argument_list>( <argument><expr><name>argc</name></expr></argument>, <argument><expr><name>argv</name></expr></argument> )</argument_list></call></expr>;</return>
+</block_content>}</block></function></block_content></block></function></extern>
+</unit>

@@ -1,0 +1,9 @@
+{
+  "commit_id": "b9ff7ec301a6b47cb02a0021b1ab773226fbf17b",
+  "parent_id": "a63b4a75bd2084b103c3e6dd49a239db838ab1b8",
+  "message": "Fixed issues for ObjC use (see #1011)",
+  "changed_files": [
+    "include/internal/catch_exception_translator_registry.cpp",
+    "include/reporters/catch_reporter_console.cpp"
+  ]
+}

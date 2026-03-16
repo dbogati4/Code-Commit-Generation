@@ -1,0 +1,54 @@
+diff --git a/src/catch2/internal/catch_run_context.cpp b/src/catch2/internal/catch_run_context.cpp
+index 7025b768..0beeedaa 100644
+--- a/src/catch2/internal/catch_run_context.cpp
++++ b/src/catch2/internal/catch_run_context.cpp
+@@ -331,7 +331,7 @@ namespace Catch {
+         m_activeSections.push_back(&sectionTracker);
+ 
+         SectionInfo sectionInfo( sectionLineInfo, static_cast<std::string>(sectionName) );
+-        m_lastAssertionInfo.lineInfo = sectionInfo.lineInfo;
++        m_lastAssertionInfo.lineInfo = sectionLineInfo;
+ 
+         {
+             auto _ = scopedDeactivate( *m_outputRedirect );
+@@ -638,11 +638,11 @@ namespace Catch {
+             std::string&& message,
+             AssertionReaction& reaction
+     ) {
+-        m_lastAssertionInfo = info;
++        m_lastAssertionInfo.lineInfo = info.lineInfo;
+ 
+         AssertionResultData data( resultType, LazyExpression( false ) );
+         data.message = CATCH_MOVE( message );
+-        AssertionResult assertionResult{ m_lastAssertionInfo,
++        AssertionResult assertionResult{ info,
+                                          CATCH_MOVE( data ) };
+ 
+         const auto isOk = assertionResult.isOk();
+@@ -669,7 +669,7 @@ namespace Catch {
+             std::string&& message,
+             AssertionReaction& reaction
+     ) {
+-        m_lastAssertionInfo = info;
++        m_lastAssertionInfo.lineInfo = info.lineInfo;
+ 
+         AssertionResultData data( ResultWas::ThrewException, LazyExpression( false ) );
+         data.message = CATCH_MOVE(message);
+@@ -690,7 +690,7 @@ namespace Catch {
+             AssertionInfo const& info
+     ) {
+         using namespace std::string_literals;
+-        m_lastAssertionInfo = info;
++        m_lastAssertionInfo.lineInfo = info.lineInfo;
+ 
+         AssertionResultData data( ResultWas::ThrewException, LazyExpression( false ) );
+         data.message = "Exception translation was disabled by CATCH_CONFIG_FAST_COMPILE"s;
+@@ -703,7 +703,7 @@ namespace Catch {
+             ResultWas::OfType resultType,
+             AssertionReaction &reaction
+     ) {
+-        m_lastAssertionInfo = info;
++        m_lastAssertionInfo.lineInfo = info.lineInfo;
+ 
+         AssertionResultData data( resultType, LazyExpression( false ) );
+         AssertionResult assertionResult{ info, CATCH_MOVE( data ) };

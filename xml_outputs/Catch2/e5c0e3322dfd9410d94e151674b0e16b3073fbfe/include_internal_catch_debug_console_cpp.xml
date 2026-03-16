@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" xmlns:diff="http://www.srcML.org/srcDiff" revision="1.0.0" language="C++" filename="C:\Users\saile\AppData\Local\Temp\catch2_100_z8gzpiwf\e5c0e3322dfd9410d94e151674b0e16b3073fbfe\include_internal_catch_debug_console_cpp\include_internal_catch_debug_console_cpp.old|C:\Users\saile\AppData\Local\Temp\catch2_100_z8gzpiwf\e5c0e3322dfd9410d94e151674b0e16b3073fbfe\include_internal_catch_debug_console_cpp\include_internal_catch_debug_console_cpp.new"><comment type="block">/*
+ *  Created by Martin on 29/08/2017.
+ *
+ *  Distributed under the Boost Software License, Version 1.0. (See accompanying
+ *  file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
+ *
+ */</comment>
+
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">"catch_debug_console.h"</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">"catch_stream.h"</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">"catch_platform.h"</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">"catch_windows_h_proxy.h"</cpp:file></cpp:include>
+
+<diff:delete type="replace" xmlns:diff="http://www.srcML.org/srcDiff"><cpp:ifdef xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">ifdef</cpp:directive><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><name>CATCH_PLATFORM_WINDOWS</name></cpp:ifdef></diff:delete><diff:insert type="replace" xmlns:diff="http://www.srcML.org/srcDiff"><cpp:if xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">if</cpp:directive><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><expr><call><name>defined</name><argument_list>(<argument><expr><name>__ANDROID__</name></expr></argument>)</argument_list></call></expr></cpp:if><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+</diff:ws><cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;android/log.h&gt;</cpp:file></cpp:include><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+
+    </diff:ws><namespace>namespace<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><name>Catch</name><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><block>{<diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+        </diff:ws><function><type><name>void</name></type><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><name>writeToDebugConsole</name><parameter_list>(<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><parameter><decl><type><name><name>std</name><operator>::</operator><name>string</name></name><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><specifier>const</specifier><modifier>&amp;</modifier></type><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><name>text</name></decl></parameter><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>)</parameter_list><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><block>{<block_content><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+            </diff:ws><expr_stmt><expr><call><name>__android_log_print</name><argument_list>(<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><argument><expr><name>ANDROID_LOG_DEBUG</name></expr></argument>,<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><argument><expr><literal type="string">"Catch"</literal></expr></argument>,<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><argument><expr><call><name><name>text</name><operator>.</operator><name>c_str</name></name><argument_list>()</argument_list></call></expr></argument><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>)</argument_list></call></expr>;</expr_stmt><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+        </diff:ws></block_content>}</block></function><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+    </diff:ws>}</block></namespace><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+
+</diff:ws><cpp:elif xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">elif</cpp:directive><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws><expr><call><name>defined</name><argument_list>(<argument><expr><name>CATCH_PLATFORM_WINDOWS</name></expr></argument>)</argument_list></call></expr></cpp:elif></diff:insert>
+
+    <namespace>namespace <name>Catch</name> <block>{
+        <function><type><name>void</name></type> <name>writeToDebugConsole</name><parameter_list>( <parameter><decl><type><name><name>std</name><operator>::</operator><name>string</name></name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>text</name></decl></parameter> )</parameter_list> <block>{<block_content>
+            <expr_stmt><expr><call><name><operator>::</operator><name>OutputDebugStringA</name></name><argument_list>( <argument><expr><call><name><name>text</name><operator>.</operator><name>c_str</name></name><argument_list>()</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        </block_content>}</block></function>
+    }</block></namespace>
+
+<cpp:else xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">else</cpp:directive></cpp:else>
+
+    <namespace>namespace <name>Catch</name> <block>{
+        <function><type><name>void</name></type> <name>writeToDebugConsole</name><parameter_list>( <parameter><decl><type><name><name>std</name><operator>::</operator><name>string</name></name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>text</name></decl></parameter> )</parameter_list> <block>{<block_content>
+            <comment type="line">// !TBD: Need a version for Mac/ XCode and other IDEs</comment>
+            <expr_stmt><expr><call><name><name>Catch</name><operator>::</operator><name>cout</name></name><argument_list>()</argument_list></call> <operator>&lt;&lt;</operator> <name>text</name></expr>;</expr_stmt>
+        </block_content>}</block></function>
+    }</block></namespace>
+
+<cpp:endif xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">endif</cpp:directive></cpp:endif> <comment type="line">// Platform</comment>
+</unit>

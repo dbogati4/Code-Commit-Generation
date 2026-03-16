@@ -1,0 +1,12 @@
+diff --git a/include/internal/catch_timer.cpp b/include/internal/catch_timer.cpp
+index 0057cc39..b9ae6887 100644
+--- a/include/internal/catch_timer.cpp
++++ b/include/internal/catch_timer.cpp
+@@ -9,7 +9,6 @@
+ #include "catch_timer.h"
+ 
+ #include <chrono>
+-#include <iostream>
+ 
+ namespace Catch {
+ 

@@ -1,0 +1,8 @@
+{
+  "commit_id": "e085d4811a4b4396091a2a59c8f0a000c8ff6d92",
+  "parent_id": "2f6371f2eca46d8e2cfde0577fc8e8f2b789e685",
+  "message": "Qualified path to xmlwriter to fix travis error",
+  "changed_files": [
+    "projects/SelfTest/MiscTests.cpp"
+  ]
+}

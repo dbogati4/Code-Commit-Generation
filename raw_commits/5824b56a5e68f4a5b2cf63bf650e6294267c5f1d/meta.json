@@ -1,0 +1,10 @@
+{
+  "commit_id": "5824b56a5e68f4a5b2cf63bf650e6294267c5f1d",
+  "parent_id": "f3dd0938ff3fadd9535b04bcd104469bd2b8a33c",
+  "message": "Cleaned up some GCC/LLVM warnings",
+  "changed_files": [
+    "projects/SelfTest/ConditionTests.cpp",
+    "projects/SelfTest/ExceptionTests.cpp",
+    "projects/SelfTest/TestMain.cpp"
+  ]
+}

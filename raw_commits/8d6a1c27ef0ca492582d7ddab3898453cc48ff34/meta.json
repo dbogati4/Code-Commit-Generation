@@ -1,0 +1,10 @@
+{
+  "commit_id": "8d6a1c27ef0ca492582d7ddab3898453cc48ff34",
+  "parent_id": "41ad0fda11d0898ce3aaeee9db4e7bc16eec5051",
+  "message": "Use StringRef literals where possible in XML using reporters",
+  "changed_files": [
+    "src/catch2/reporters/catch_reporter_junit.cpp",
+    "src/catch2/reporters/catch_reporter_sonarqube.cpp",
+    "src/catch2/reporters/catch_reporter_xml.cpp"
+  ]
+}

@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" xmlns:diff="http://www.srcML.org/srcDiff" revision="1.0.0" language="C++" filename="C:\Users\saile\AppData\Local\Temp\catch2_100_z8gzpiwf\f83332d89b4cad0e6e1583caf6cd3d6b34c41136\tests_SelfTest_UsageTests_Class_tests_cpp\tests_SelfTest_UsageTests_Class_tests_cpp.old|C:\Users\saile\AppData\Local\Temp\catch2_100_z8gzpiwf\f83332d89b4cad0e6e1583caf6cd3d6b34c41136\tests_SelfTest_UsageTests_Class_tests_cpp\tests_SelfTest_UsageTests_Class_tests_cpp.new"><diff:delete type="replace" xmlns:diff="http://www.srcML.org/srcDiff"><comment type="block">/*<diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+ </diff:ws>*<diff:ws xmlns:diff="http://www.srcML.org/srcDiff">  </diff:ws>Distributed<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>under<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>the<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>Boost<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>Software<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>License,<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>Version<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>1.0.<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>(See<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>accompanying<diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+ </diff:ws>*<diff:ws xmlns:diff="http://www.srcML.org/srcDiff">  </diff:ws>file<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>LICENSE_1_0.txt<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>or<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>copy<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>at<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>http://www.boost.org/LICENSE_1_0.txt)<diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+ </diff:ws>*/</comment></diff:delete><diff:insert type="replace" xmlns:diff="http://www.srcML.org/srcDiff"><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+</diff:ws><comment type="line">//<diff:ws xmlns:diff="http://www.srcML.org/srcDiff">              </diff:ws>Copyright<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>Catch2<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>Authors</comment><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+</diff:ws><comment type="line">//<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>Distributed<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>under<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>the<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>Boost<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>Software<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>License,<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>Version<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>1.0.</comment><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+</diff:ws><comment type="line">//<diff:ws xmlns:diff="http://www.srcML.org/srcDiff">   </diff:ws>(See<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>accompanying<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>file<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>LICENSE_1_0.txt<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>or<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>copy<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>at</comment><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+</diff:ws><comment type="line">//<diff:ws xmlns:diff="http://www.srcML.org/srcDiff">        </diff:ws>https://www.boost.org/LICENSE_1_0.txt)</comment><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+
+</diff:ws><comment type="line">//<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>SPDX-License-Identifier:<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>BSL-1.0</comment></diff:insert>
+
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;catch2/catch_test_macros.hpp&gt;</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;catch2/catch_template_test_macros.hpp&gt;</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;array&gt;</cpp:file></cpp:include>
+
+<namespace>namespace <block>{
+
+    <class>class <name>TestClass</name> <block>{<private type="default">
+        <decl_stmt><decl><type><name><name>std</name><operator>::</operator><name>string</name></name></type> <name>s</name></decl>;</decl_stmt>
+
+    </private><public>public:
+        <constructor><name>TestClass</name><parameter_list>()</parameter_list><member_init_list>: <call><name>s</name><argument_list>( <argument><expr><literal type="string">"hello"</literal></expr></argument> )</argument_list></call> </member_init_list><block>{<block_content/>}</block></constructor>
+
+        <function><type><name>void</name></type> <name>succeedingCase</name><parameter_list>()</parameter_list> <block>{<block_content> <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><name>s</name> <operator>==</operator> <literal type="string">"hello"</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt> </block_content>}</block></function>
+        <function><type><name>void</name></type> <name>failingCase</name><parameter_list>()</parameter_list> <block>{<block_content> <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><name>s</name> <operator>==</operator> <literal type="string">"world"</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt> </block_content>}</block></function>
+    </public>}</block>;</class>
+
+    <struct>struct <name>Fixture</name> <block>{<public type="default">
+        <constructor><name>Fixture</name><parameter_list>()</parameter_list><member_init_list>: <call><name>m_a</name><argument_list>( <argument><expr><literal type="number">1</literal></expr></argument> )</argument_list></call> </member_init_list><block>{<block_content/>}</block></constructor>
+
+        <decl_stmt><decl><type><name>int</name></type> <name>m_a</name></decl>;</decl_stmt>
+    </public>}</block>;</struct>
+
+    <struct><template>template <parameter_list>&lt;<parameter><type><name>typename</name></type> <name>T</name></parameter>&gt;</parameter_list></template> struct <name>Template_Fixture</name> <block>{<public type="default">
+        <constructor><name>Template_Fixture</name><parameter_list>()</parameter_list><member_init_list>: <call><name>m_a</name><argument_list>( <argument><expr><literal type="number">1</literal></expr></argument> )</argument_list></call> </member_init_list><block>{<block_content/>}</block></constructor>
+
+        <decl_stmt><decl><type><name>T</name></type> <name>m_a</name></decl>;</decl_stmt>
+    </public>}</block>;</struct>
+
+    <struct><template>template <parameter_list>&lt;<parameter><type><name>typename</name></type> <name>T</name></parameter>&gt;</parameter_list></template> struct <name>Template_Fixture_2</name> <block>{<public type="default">
+        <constructor><name>Template_Fixture_2</name><parameter_list>()</parameter_list> <block>{<block_content/>}</block></constructor>
+
+        <decl_stmt><decl><type><name>T</name></type> <name>m_a</name></decl>;</decl_stmt>
+    </public>}</block>;</struct>
+
+    <struct><template>template <parameter_list>&lt;<parameter><type><name>typename</name></type> <name>T</name></parameter>&gt;</parameter_list></template> struct <name>Template_Foo</name> <block>{<public type="default">
+        <function><type><name>size_t</name></type> <name>size</name><parameter_list>()</parameter_list> <block>{<block_content> <return>return <expr><literal type="number">0</literal></expr>;</return> </block_content>}</block></function>
+    </public>}</block>;</struct>
+
+    <struct><template>template <parameter_list>&lt;<parameter><type><name>typename</name></type> <name>T</name></parameter>, <parameter><type><name>size_t</name></type> <name>V</name></parameter>&gt;</parameter_list></template> struct <name>Template_Foo_2</name> <block>{<public type="default">
+        <function><type><name>size_t</name></type> <name>size</name><parameter_list>()</parameter_list> <block>{<block_content> <return>return <expr><name>V</name></expr>;</return> </block_content>}</block></function>
+    </public>}</block>;</struct>
+
+    <struct><template>template <parameter_list>&lt;<parameter><type><name>int</name></type> <name>V</name></parameter>&gt;</parameter_list></template> struct <name>Nttp_Fixture</name> <block>{<public type="default"> <decl_stmt><decl><type><name>int</name></type> <name>value</name> <init>= <expr><name>V</name></expr></init></decl>;</decl_stmt> </public>}</block>;</struct>
+
+}</block></namespace> <comment type="line">// end unnamed namespace</comment>
+
+<macro><name>METHOD_AS_TEST_CASE</name><argument_list>( <argument>TestClass::succeedingCase</argument>, <argument><literal type="string">"A METHOD_AS_TEST_CASE based test run that succeeds"</literal></argument>, <argument><literal type="string">"[class]"</literal></argument> )</argument_list></macro>
+<macro><name>METHOD_AS_TEST_CASE</name><argument_list>( <argument>TestClass::failingCase</argument>, <argument><literal type="string">"A METHOD_AS_TEST_CASE based test run that fails"</literal></argument>, <argument><literal type="string">"[.][class][failing]"</literal></argument> )</argument_list></macro>
+
+<macro><name>TEST_CASE_METHOD</name><argument_list>( <argument>Fixture</argument>, <argument><literal type="string">"A TEST_CASE_METHOD based test run that succeeds"</literal></argument>, <argument><literal type="string">"[class]"</literal></argument> )</argument_list></macro>
+<block>{<block_content>
+    <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><name>m_a</name> <operator>==</operator> <literal type="number">1</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+</block_content>}</block>
+
+<macro><name>TEMPLATE_TEST_CASE_METHOD</name><argument_list>(<argument>Template_Fixture</argument>, <argument><literal type="string">"A TEMPLATE_TEST_CASE_METHOD based test run that succeeds"</literal></argument>, <argument><literal type="string">"[class][template]"</literal></argument>, <argument>int</argument>, <argument>float</argument>, <argument>double</argument>)</argument_list></macro> <block>{<block_content>
+    <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><name><name><name>Template_Fixture</name><argument_list type="generic">&lt;<argument><expr><name>TestType</name></expr></argument>&gt;</argument_list></name><operator>::</operator><name>m_a</name></name> <operator>==</operator> <literal type="number">1</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+</block_content>}</block>
+
+<macro><name>TEMPLATE_TEST_CASE_METHOD_SIG</name><argument_list>(<argument>Nttp_Fixture</argument>, <argument><literal type="string">"A TEMPLATE_TEST_CASE_METHOD_SIG based test run that succeeds"</literal></argument>, <argument><literal type="string">"[class][template][nttp]"</literal></argument>,<argument>((int V), V)</argument>, <argument><literal type="number">1</literal></argument>, <argument><literal type="number">3</literal></argument>, <argument><literal type="number">6</literal></argument>)</argument_list></macro> <block>{<block_content>
+    <expr_stmt><expr><call><name>REQUIRE</name><argument_list>(<argument><expr><name><name><name>Nttp_Fixture</name><argument_list type="generic">&lt;<argument><expr><name>V</name></expr></argument>&gt;</argument_list></name><operator>::</operator><name>value</name></name> <operator>&gt;</operator> <literal type="number">0</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+</block_content>}</block>
+
+<macro><name>TEMPLATE_PRODUCT_TEST_CASE_METHOD</name><argument_list>(<argument>Template_Fixture_2</argument>, <argument><literal type="string">"A TEMPLATE_PRODUCT_TEST_CASE_METHOD based test run that succeeds"</literal></argument>,<argument><literal type="string">"[class][template][product]"</literal></argument>,<argument>(std::vector,Template_Foo)</argument>,<argument>(int,float)</argument>)</argument_list></macro>
+<block>{<block_content>
+    <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name><name><name>Template_Fixture_2</name><argument_list type="generic">&lt;<argument><expr><name>TestType</name></expr></argument>&gt;</argument_list></name><operator>::</operator><name>m_a</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call> <operator>==</operator> <literal type="number">0</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+</block_content>}</block>
+
+<macro><name>TEMPLATE_PRODUCT_TEST_CASE_METHOD_SIG</name><argument_list>(<argument>Template_Fixture_2</argument>, <argument><literal type="string">"A TEMPLATE_PRODUCT_TEST_CASE_METHOD_SIG based test run that succeeds"</literal></argument>, <argument><literal type="string">"[class][template][product][nttp]"</literal></argument>, <argument>((typename T, size_t S), T, S)</argument>,<argument>(std::array, Template_Foo_2)</argument>, <argument>((int,<literal type="number">2</literal>), (float,<literal type="number">6</literal>))</argument>)</argument_list></macro>
+<block>{<block_content>
+    <expr_stmt><expr><call><name>REQUIRE</name><argument_list>(<argument><expr><call><name><name>Template_Fixture_2</name><argument_list type="generic">&lt;<argument><expr><name>TestType</name></expr></argument>&gt;</argument_list></name><argument_list>{}</argument_list></call><operator>.</operator><call><name><name>m_a</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call> <operator>&gt;=</operator> <literal type="number">2</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+</block_content>}</block>
+
+<using>using <name>MyTypes</name> <init>= <type><name><name>std</name><operator>::</operator><name>tuple</name><argument_list type="generic">&lt;<argument><expr><name>int</name></expr></argument>, <argument><expr><name>char</name></expr></argument>, <argument><expr><name>double</name></expr></argument>&gt;</argument_list></name></type></init>;</using>
+<macro><name>TEMPLATE_LIST_TEST_CASE_METHOD</name><argument_list>(<argument>Template_Fixture</argument>, <argument><literal type="string">"Template test case method with test types specified inside std::tuple"</literal></argument>, <argument><literal type="string">"[class][template][list]"</literal></argument>, <argument>MyTypes</argument>)</argument_list></macro>
+<block>{<block_content>
+    <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><name><name><name>Template_Fixture</name><argument_list type="generic">&lt;<argument><expr><name>TestType</name></expr></argument>&gt;</argument_list></name><operator>::</operator><name>m_a</name></name> <operator>==</operator> <literal type="number">1</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+</block_content>}</block>
+
+<comment type="line">// We should be able to write our tests within a different namespace</comment>
+<namespace>namespace <name>Inner</name>
+<block>{
+    <macro><name>TEST_CASE_METHOD</name><argument_list>( <argument>Fixture</argument>, <argument><literal type="string">"A TEST_CASE_METHOD based test run that fails"</literal></argument>, <argument><literal type="string">"[.][class][failing]"</literal></argument> )</argument_list></macro>
+    <block>{<block_content>
+        <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><name>m_a</name> <operator>==</operator> <literal type="number">2</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block>
+
+    <macro><name>TEMPLATE_TEST_CASE_METHOD</name><argument_list>(<argument>Template_Fixture</argument>,<argument><literal type="string">"A TEMPLATE_TEST_CASE_METHOD based test run that fails"</literal></argument>, <argument><literal type="string">"[.][class][template][failing]"</literal></argument>, <argument>int</argument>, <argument>float</argument>, <argument>double</argument>)</argument_list></macro>
+    <block>{<block_content>
+        <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><name><name><name>Template_Fixture</name><argument_list type="generic">&lt;<argument><expr><name>TestType</name></expr></argument>&gt;</argument_list></name><operator>::</operator><name>m_a</name></name> <operator>==</operator> <literal type="number">2</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block>
+
+    <macro><name>TEMPLATE_TEST_CASE_METHOD_SIG</name><argument_list>(<argument>Nttp_Fixture</argument>, <argument><literal type="string">"A TEMPLATE_TEST_CASE_METHOD_SIG based test run that fails"</literal></argument>, <argument><literal type="string">"[.][class][template][nttp][failing]"</literal></argument>, <argument>((int V), V)</argument>, <argument><literal type="number">1</literal></argument>, <argument><literal type="number">3</literal></argument>, <argument><literal type="number">6</literal></argument>)</argument_list></macro> <block>{<block_content>
+        <expr_stmt><expr><call><name>REQUIRE</name><argument_list>(<argument><expr><name><name><name>Nttp_Fixture</name><argument_list type="generic">&lt;<argument><expr><name>V</name></expr></argument>&gt;</argument_list></name><operator>::</operator><name>value</name></name> <operator>==</operator> <literal type="number">0</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block>
+
+    <macro><name>TEMPLATE_PRODUCT_TEST_CASE_METHOD</name><argument_list>(<argument>Template_Fixture_2</argument>, <argument><literal type="string">"A TEMPLATE_PRODUCT_TEST_CASE_METHOD based test run that fails"</literal></argument>,<argument><literal type="string">"[.][class][template][product][failing]"</literal></argument>,<argument>(std::vector,Template_Foo)</argument>,<argument>(int,float)</argument>)</argument_list></macro>
+    <block>{<block_content>
+        <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name><name><name>Template_Fixture_2</name><argument_list type="generic">&lt;<argument><expr><name>TestType</name></expr></argument>&gt;</argument_list></name><operator>::</operator><name>m_a</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call> <operator>==</operator> <literal type="number">1</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block>
+
+    <macro><name>TEMPLATE_PRODUCT_TEST_CASE_METHOD_SIG</name><argument_list>(<argument>Template_Fixture_2</argument>, <argument><literal type="string">"A TEMPLATE_PRODUCT_TEST_CASE_METHOD_SIG based test run that fails"</literal></argument>, <argument><literal type="string">"[.][class][template][product][nttp][failing]"</literal></argument>, <argument>((typename T, size_t S), T, S)</argument>, <argument>(std::array, Template_Foo_2)</argument>, <argument>((int, <literal type="number">2</literal>), (float, <literal type="number">6</literal>))</argument>)</argument_list></macro>
+    <block>{<block_content>
+        <expr_stmt><expr><call><name>REQUIRE</name><argument_list>(<argument><expr><call><name><name>Template_Fixture_2</name><argument_list type="generic">&lt;<argument><expr><name>TestType</name></expr></argument>&gt;</argument_list></name><argument_list>{}</argument_list></call><operator>.</operator><call><name><name>m_a</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call> <operator>&lt;</operator> <literal type="number">2</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block>
+}</block></namespace>
+</unit>

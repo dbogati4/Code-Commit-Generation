@@ -1,0 +1,44 @@
+diff --git a/projects/SelfTest/ConditionTests.cpp b/projects/SelfTest/ConditionTests.cpp
+index 91d9f627..e03b8d05 100644
+--- a/projects/SelfTest/ConditionTests.cpp
++++ b/projects/SelfTest/ConditionTests.cpp
+@@ -241,6 +241,8 @@ TEST_CASE(  "./succeeding/conditions/not",
+ {
+     bool falseValue = false;
+     
++    REQUIRE( false == false );
++    REQUIRE( true == true );
+     REQUIRE( !false );
+     REQUIRE_FALSE( false );
+ 
+@@ -256,6 +258,8 @@ TEST_CASE(  "./failing/conditions/not",
+ {
+     bool trueValue = true;
+     
++    CHECK( false != false );
++    CHECK( true != true );
+     CHECK( !true );
+     CHECK_FALSE( true );
+     
+diff --git a/projects/SelfTest/TestMain.cpp b/projects/SelfTest/TestMain.cpp
+index 8355c2f7..4bab286f 100644
+--- a/projects/SelfTest/TestMain.cpp
++++ b/projects/SelfTest/TestMain.cpp
+@@ -47,7 +47,7 @@ TEST_CASE( "selftest/main", "Runs all Catch self tests and checks their results"
+                     "Number of 'succeeding' tests is fixed" )
+         {
+             runner.runMatching( "./succeeding/*" );
+-            CHECK( runner.getSuccessCount() == 257 );
++            CHECK( runner.getSuccessCount() == 259 );
+             CHECK( runner.getFailureCount() == 0 );
+         }
+ 
+@@ -56,7 +56,7 @@ TEST_CASE( "selftest/main", "Runs all Catch self tests and checks their results"
+         {
+             runner.runMatching( "./failing/*" );        
+             CHECK( runner.getSuccessCount() == 0 );
+-            CHECK( runner.getFailureCount() == 60 );
++            CHECK( runner.getFailureCount() == 62 );
+         }
+     }
+ }

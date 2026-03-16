@@ -1,0 +1,8 @@
+{
+  "commit_id": "efb54926eec28900e020131930b35116075f6f84",
+  "parent_id": "7a2f9f4633412b57e3e60e710a1a0e1ef33ca122",
+  "message": "Don't cache stdout handle in Windows console colour impl",
+  "changed_files": [
+    "src/catch2/internal/catch_console_colour.cpp"
+  ]
+}

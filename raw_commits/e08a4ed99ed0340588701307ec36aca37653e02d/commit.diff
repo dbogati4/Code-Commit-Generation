@@ -1,0 +1,12 @@
+diff --git a/include/internal/catch_stringref.cpp b/include/internal/catch_stringref.cpp
+index 41c6ac5c..127406ff 100644
+--- a/include/internal/catch_stringref.cpp
++++ b/include/internal/catch_stringref.cpp
+@@ -14,6 +14,7 @@
+ #include "catch_stringref.h"
+ 
+ #include <ostream>
++#include <cstring>
+ 
+ namespace Catch {
+     auto StringRef::fromRaw( char const* rawChars ) -> StringRef {

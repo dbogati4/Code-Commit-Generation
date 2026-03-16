@@ -1,0 +1,9 @@
+{
+  "commit_id": "0e2895934cf778f3bd7e84b3df10dac81d4ef7e3",
+  "parent_id": "a01073d87105371f4465e243fde9ae719d52f5d1",
+  "message": "Use precomputed string sizes when constructing std::strings",
+  "changed_files": [
+    "src/catch2/reporters/catch_reporter_combined_tu.cpp",
+    "src/catch2/reporters/catch_reporter_junit.cpp"
+  ]
+}

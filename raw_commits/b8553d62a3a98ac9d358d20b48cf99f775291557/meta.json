@@ -1,0 +1,11 @@
+{
+  "commit_id": "b8553d62a3a98ac9d358d20b48cf99f775291557",
+  "parent_id": "504607701bd5bbe6a4dbd26709aac3e181a075e3",
+  "message": "Moved inline functions in cpp files into anon namespaces",
+  "changed_files": [
+    "include/internal/catch_assertionhandler.cpp",
+    "include/internal/catch_string_manip.cpp",
+    "include/internal/catch_test_case_info.cpp",
+    "include/internal/catch_timer.cpp"
+  ]
+}

@@ -1,0 +1,8 @@
+{
+  "commit_id": "0477326ad908d1c96dd3118b54fccc95e5628ef8",
+  "parent_id": "f04c93462b3eba1845ed05bb9198d14cbba60b0f",
+  "message": "Directly construct empty string for invalid SectionInfo",
+  "changed_files": [
+    "src/catch2/internal/catch_section.cpp"
+  ]
+}

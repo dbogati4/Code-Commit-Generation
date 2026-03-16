@@ -1,0 +1,182 @@
+[
+  {
+    "commit_id": "f7e7fa0983e83b922cb6336ff3a55d33b2873943",
+    "file_name": null,
+    "commit_message": "Fix ReusableStringStream to access the container under the lock (#3031)",
+    "prompt_type": "variant2",
+    "responses": {
+      "llama3_8b": "Refactor constructor to use std::tie for tuple unpacking.",
+      "mistral_7b_instruct": "Change add() to return pair of index and stream pointer\nRefactor constructor to use std::tie for tuple unpacking",
+      "codeqwen_7b_chat": "Commit message: Simplify and refactor add(), include std::tie for constructor initialization.",
+      "llama3_70b_instruct": "Refactor constructor to use std::tie for tuple unpacking and change add() return type."
+    }
+  },
+  {
+    "commit_id": "d134b0cae3033c4ddc027fae6f76c66e8b0a6a73",
+    "file_name": null,
+    "commit_message": "clang: do not issue bogus warnings about integer manipulation in hash functions with fsanitize=undefined/integer (#2965)",
+    "prompt_type": "variant2",
+    "responses": {
+      "llama3_8b": "Change add() to return pair of index and stream pointer",
+      "mistral_7b_instruct": "Unify ReusableStringStream constructor using std::tie for tuple unpacking",
+      "codeqwen_7b_chat": "\"Refactor add() to return pair of index and stream pointer\".\n(The actual problem description may require more context for a detailed response.)",
+      "llama3_70b_instruct": "Refactor SimplePcg32 to use CATCH2_CLANG_NO_SANITIZE_INTEGER for operator()."
+    }
+  },
+  {
+    "commit_id": "0b2af562710d1bac7fd32ca3f05bf1d713bb97e4",
+    "file_name": null,
+    "commit_message": "Explicitly cast values of different types",
+    "prompt_type": "variant2",
+    "responses": {
+      "llama3_8b": "Refactor `operator()` to return pair of index and stream pointer.",
+      "mistral_7b_instruct": "Change function signature to return pair of index and stream pointer\nRefactor constructor to use std::tie for tuple unpacking",
+      "codeqwen_7b_chat": "Change add() to return pair of index and stream pointer",
+      "llama3_70b_instruct": "Refactor operator() to use static_cast for uint32_t conversion."
+    }
+  },
+  {
+    "commit_id": "7a89b7573749846654575fec0580e105a27c54cf",
+    "file_name": null,
+    "commit_message": "Use steady_clock in the timer",
+    "prompt_type": "variant2",
+    "responses": {
+      "llama3_8b": "Refactor Timer::getCurrentNanosecondsSinceEpoch to use steady_clock instead of high_resolution_clock.",
+      "mistral_7b_instruct": "Function signature change: Return type of add() to std::pair<std::size_t, std::ostringstream*>",
+      "codeqwen_7b_chat": "Code refactoring to use `std::tie` for tuple unpacking",
+      "llama3_70b_instruct": "Change Timer class to use steady_clock instead of high_resolution_clock for getCurrentNanosecondsSinceEpoch."
+    }
+  },
+  {
+    "commit_id": "fb51116d5b20ea3fef6c5a89267e7d91856a60cf",
+    "file_name": null,
+    "commit_message": "Avoid useless FDuration cast in benchmark analysis (#2823)",
+    "prompt_type": "variant2",
+    "responses": {
+      "llama3_8b": "Change SampleAnalysis to return mean and standard deviation values.",
+      "mistral_7b_instruct": "- Change add() return type to pair of index and stream pointer\n- Refactor constructor to use std::tie for tuple unpacking",
+      "codeqwen_7b_chat": "Constructor Refactoring: Simplified srcML showing structural change:\n\n<constructor name=\"ReusableStringStream\">\n  <diff:delete>member_init_list: m_index(...), m_oss(...)</diff:delete>\n  <diff:insert>body: { std::tie(m_index, m_oss) = ... }</diff:insert>\n</constructor>\n\nINTERPRETATION:\n- Refactors constructor to use std::tie for tuple unpacking\nCommit message: Simplify ReusableStringStream's constructor",
+      "llama3_70b_instruct": "Refactor SampleAnalysis function to handle cases where benchmarking is disabled."
+    }
+  },
+  {
+    "commit_id": "f476bcb633b24870b7c0414b0caeb9e192f485e4",
+    "file_name": null,
+    "commit_message": "fix double promotion in catch_approx.cpp",
+    "prompt_type": "variant2",
+    "responses": {
+      "llama3_8b": "Refactor constructor to use std::tie for tuple unpacking.",
+      "mistral_7b_instruct": "Change Approx::setMargin to accept non-negative values\nChange add() function signature to return pair of index and stream pointer\nRefactor constructor to use std::tie for tuple unpacking",
+      "codeqwen_7b_chat": "Refactor constructor to use std::tie for tuple unpacking",
+      "llama3_70b_instruct": "Refactor Approx::equalityComparisonImpl to use margin and epsilon based comparison."
+    }
+  },
+  {
+    "commit_id": "b7d70ddcd609a798048f055cf8f5b6803ac06e52",
+    "file_name": null,
+    "commit_message": "Ensure we always read 32 bit seed from std::random_device",
+    "prompt_type": "variant2",
+    "responses": {
+      "llama3_8b": "Change generateRandomSeed() to return random_device-generated seed",
+      "mistral_7b_instruct": "Function signature updated: Return type now pair<std::size_t, std::ostringstream\\*>\nNew constructor initializes with std::tie, includes <tuple> header",
+      "codeqwen_7b_chat": "The code change adds include statements for `catch2/internal/catch_random_integer_helpers.hpp` and `<ctime>`, while removing a default case in a switch statement. The commit message should describe the purpose of these changes, which is to improve random seed generation by including additional source files for generating random integers and handling time-based seeding.",
+      "llama3_70b_instruct": "Refactor generateRandomSeed function to use random_device for RandomDevice generation method."
+    }
+  },
+  {
+    "commit_id": "6ebc013b8cfe438a3a397817ad662db34a978238",
+    "file_name": null,
+    "commit_message": "Fix UDL definitions for C++23",
+    "prompt_type": "variant2",
+    "responses": {
+      "llama3_8b": "Refactor constructor to use std::tie for tuple unpacking.",
+      "mistral_7b_instruct": "Change return type of add() to std::pair<std::size_t, std::ostringstream*>\nRefactor constructor to use std::tie for tuple unpacking",
+      "codeqwen_7b_chat": "The commit message should be: \"Refactor constructor to use std::tie for tuple unpacking and include new #include for tuple in srcML.\"",
+      "llama3_70b_instruct": "Refactor Approx class to improve margin and epsilon handling with enforcement checks."
+    }
+  },
+  {
+    "commit_id": "ed4acded380ac5408acf9fa518984cbe1bbe25bd",
+    "file_name": null,
+    "commit_message": "Don't define tryTranslators function if exception are disabled",
+    "prompt_type": "variant2",
+    "responses": {
+      "llama3_8b": "Change add() to return pair of index and stream pointer",
+      "mistral_7b_instruct": "\"Refactor constructor for return type change\"\n\"Add pair to function signature for improved information return\"",
+      "codeqwen_7b_chat": "The semantic meaning of this change is that the function `add` has been refactored to return a pair of index and an output stream pointer instead of just the size_t value. The commit message should reflect this, as it explains why the code was changed.\n\nOutput:\n\"Refactor add() to return pair of index and stream pointer\"",
+      "llama3_70b_instruct": "Refactor ExceptionTranslatorRegistry to handle exceptions based on CATCH_CONFIG_DISABLE_EXCEPTIONS flag."
+    }
+  },
+  {
+    "commit_id": "683c85772f65a8779e3baf45d3402098db58bb8d",
+    "file_name": null,
+    "commit_message": "Clean up explanation in tests",
+    "prompt_type": "variant2",
+    "responses": {
+      "llama3_8b": "Customize test to check assertion_starting_events_seen after each f*() call.",
+      "mistral_7b_instruct": "Here are some possible commit messages based on the provided examples:\n\n1. Function signature change: Change add() to return pair of index and stream pointer\n2. Constructor refactoring: Refactor constructor to use std::tie for tuple unpacking",
+      "codeqwen_7b_chat": "1. Change in function signature to return a pair of index and stream pointer\n2. Refactor constructor to use std::tie for tuple unpacking and include necessary header\n\n## Example 3: Class Member Addition with Default Constructor\nSimplified srcML showing structural change:\n<class name=\"ReusableStringStream\">\n  <member>int m_index;</member>\n  <diff:insert><member>std::ostringstream* m_oss;</member></diff:insert>\n  <diff:insert><constructor name=\"ReusableStringStream\" member_init_list=\"m_index(...), m_oss(new std::ostringstream())\"/> </diff:insert>\n</class>\n\nINTERPRETATION:\n- <diff:insert>: New class member added (std::ostringstream pointer)\n- <constructor name=\"ReusableStringStream\">: Added a default constructor with initialized member m_oss (new std::ostringstream())\nCommit message: Add class member and default constructor for ReusableStringStream",
+      "llama3_70b_instruct": "Refactor assertion handling to use semantic diff format."
+    }
+  },
+  {
+    "commit_id": "1b049bdba40582d7c9c8f6e650496f701841b26d",
+    "file_name": null,
+    "commit_message": "2 more TEST_CASEs to DiscoverTests/register-tests.cpp",
+    "prompt_type": "variant2",
+    "responses": {
+      "llama3_8b": "Refactor TEST_CASE to have longer test names with weird tags.",
+      "mistral_7b_instruct": "Function signature change: Add pair return type for add()\nConstructor refactoring: Use std::tie for tuple unpacking in ReusableStringStream constructor",
+      "codeqwen_7b_chat": "Commit message: Refactor constructor to use std::tie for tuple unpacking",
+      "llama3_70b_instruct": "Added test cases with long names and weird tags for script regressions testing."
+    }
+  },
+  {
+    "commit_id": "0477326ad908d1c96dd3118b54fccc95e5628ef8",
+    "file_name": null,
+    "commit_message": "Directly construct empty string for invalid SectionInfo",
+    "prompt_type": "variant2",
+    "responses": {
+      "llama3_8b": "Change Section constructor to delay initialization and timer start.",
+      "mistral_7b_instruct": "Function signature change: Add return type pair of index and stream pointer",
+      "codeqwen_7b_chat": "Refactor Catch2 Section constructor to use std::tie for tuple unpacking",
+      "llama3_70b_instruct": "Refactor Section constructor to delay initialization and avoid syscall unless needed."
+    }
+  },
+  {
+    "commit_id": "d58491c85a534a9348634ac3e4eb384df22f4d71",
+    "file_name": null,
+    "commit_message": "Move sectionInfo into sectionEndInfo when SECTION ends",
+    "prompt_type": "variant2",
+    "responses": {
+      "llama3_8b": "Refactor Section constructor to handle section inclusion correctly",
+      "mistral_7b_instruct": "\"Refactor Section constructor and destructor, add include for tuple\"",
+      "codeqwen_7b_chat": "1) Include #include <catch2/internal/catch_move_and_forward.hpp> to fix compilation error (Added missing include).\n2) Move `m_timer.start();` inside if block in Section destructor.\n3) Add check for uncaught exceptions in Section destructor before calling sectionEnded method.",
+      "llama3_70b_instruct": "Refactor Section constructor and destructor to use CATCH_MOVE and add timing information."
+    }
+  },
+  {
+    "commit_id": "e3fc97dffbad63f49a90e5ae688b0ce0c282e8c2",
+    "file_name": null,
+    "commit_message": "fix compiler warning in parseUint and catch only relevant exceptions (#2572)",
+    "prompt_type": "variant2",
+    "responses": {
+      "llama3_8b": "Change parseUInt() to handle exceptions and return types.",
+      "mistral_7b_instruct": "Change return type of add() to std::pair<std::size_t, std::ostringstream*>\n\nRefactor constructor with std::tie for tuple unpacking",
+      "codeqwen_7b_chat": "## Example Outputs\n```markdown\n1. Change add() to return pair of index and stream pointer - std::size_t to std::pair<std::size_t, std::ostringstream*>\n2. Refactor constructor to use std::tie for tuple unpacking - includes new header <tuple> and old initializer style replaced with body unpacking\n3. Add namespace Catch to the file - namespace Catch added as last line in the code snippet\n4. Merge pull request #134 from ryankennedy/issue-1335 - \"Issue 1335\" renamed PR title\n5. Update srcMLExtractor and fix parsing error - fixed srcML parsing issue with <diff:delete> tag removal\n```",
+      "llama3_70b_instruct": "Refactor parseUInt function to handle invalid input and exceptions correctly."
+    }
+  },
+  {
+    "commit_id": "b3dbd83da2f793a8630647e0053b6613ba5fb874",
+    "file_name": null,
+    "commit_message": "Add test for comparing pointers to NULL with !=",
+    "prompt_type": "variant2",
+    "responses": {
+      "llama3_8b": "Change REQUIRE and REQUIRE_FALSE statements to compare fptr with nullptr and 0l respectively.",
+      "mistral_7b_instruct": "Change function return type for add() to return pair of index and stream pointer\nRefactor constructor to use std::tie for tuple unpacking",
+      "codeqwen_7b_chat": "#914: Reconstruction should be based on stringification: #1005: Comparing pointer to int and long (NULL can be either on various systems)",
+      "llama3_70b_instruct": "Added null pointer checks for FILE* and refactored truthy operator overloads."
+    }
+  }
+]

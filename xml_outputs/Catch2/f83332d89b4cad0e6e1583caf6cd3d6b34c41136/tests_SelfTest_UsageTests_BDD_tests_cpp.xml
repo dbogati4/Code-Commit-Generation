@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" xmlns:diff="http://www.srcML.org/srcDiff" revision="1.0.0" language="C++" filename="C:\Users\saile\AppData\Local\Temp\catch2_100_z8gzpiwf\f83332d89b4cad0e6e1583caf6cd3d6b34c41136\tests_SelfTest_UsageTests_BDD_tests_cpp\tests_SelfTest_UsageTests_BDD_tests_cpp.old|C:\Users\saile\AppData\Local\Temp\catch2_100_z8gzpiwf\f83332d89b4cad0e6e1583caf6cd3d6b34c41136\tests_SelfTest_UsageTests_BDD_tests_cpp\tests_SelfTest_UsageTests_BDD_tests_cpp.new"><diff:delete type="replace" xmlns:diff="http://www.srcML.org/srcDiff"><comment type="block">/*<diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+ </diff:ws>*<diff:ws xmlns:diff="http://www.srcML.org/srcDiff">  </diff:ws>Distributed<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>under<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>the<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>Boost<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>Software<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>License,<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>Version<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>1.0.<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>(See<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>accompanying<diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+ </diff:ws>*<diff:ws xmlns:diff="http://www.srcML.org/srcDiff">  </diff:ws>file<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>LICENSE_1_0.txt<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>or<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>copy<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>at<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>http://www.boost.org/LICENSE_1_0.txt)<diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+ </diff:ws>*/</comment></diff:delete><diff:insert type="replace" xmlns:diff="http://www.srcML.org/srcDiff"><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+</diff:ws><comment type="line">//<diff:ws xmlns:diff="http://www.srcML.org/srcDiff">              </diff:ws>Copyright<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>Catch2<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>Authors</comment><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+</diff:ws><comment type="line">//<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>Distributed<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>under<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>the<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>Boost<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>Software<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>License,<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>Version<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>1.0.</comment><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+</diff:ws><comment type="line">//<diff:ws xmlns:diff="http://www.srcML.org/srcDiff">   </diff:ws>(See<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>accompanying<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>file<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>LICENSE_1_0.txt<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>or<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>copy<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>at</comment><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+</diff:ws><comment type="line">//<diff:ws xmlns:diff="http://www.srcML.org/srcDiff">        </diff:ws>https://www.boost.org/LICENSE_1_0.txt)</comment><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+
+</diff:ws><comment type="line">//<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>SPDX-License-Identifier:<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>BSL-1.0</comment></diff:insert>
+
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;catch2/catch_test_macros.hpp&gt;</cpp:file></cpp:include>
+
+<namespace>namespace <block>{
+
+    <function><type><specifier>static</specifier> <name>bool</name></type> <name>itDoesThis</name><parameter_list>()</parameter_list> <block>{<block_content> <return>return <expr><literal type="boolean">true</literal></expr>;</return> </block_content>}</block></function>
+
+    <function><type><specifier>static</specifier> <name>bool</name></type> <name>itDoesThat</name><parameter_list>()</parameter_list> <block>{<block_content> <return>return <expr><literal type="boolean">true</literal></expr>;</return> </block_content>}</block></function>
+
+    <comment type="line">// a trivial fixture example to support SCENARIO_METHOD tests</comment>
+    <struct>struct <name>Fixture</name> <block>{<public type="default">
+        <constructor><name>Fixture</name><parameter_list>()</parameter_list><member_init_list>: <call><name>d_counter</name><argument_list>( <argument><expr><literal type="number">0</literal></expr></argument> )</argument_list></call> </member_init_list><block>{<block_content/>}</block></constructor>
+
+        <function><type><name>int</name></type> <name>counter</name><parameter_list>()</parameter_list> <block>{<block_content> <return>return <expr><name>d_counter</name><operator>++</operator></expr>;</return> </block_content>}</block></function>
+
+        <decl_stmt><decl><type><name>int</name></type> <name>d_counter</name></decl>;</decl_stmt>
+    </public>}</block>;</struct>
+
+}</block></namespace>
+
+
+<macro><name>SCENARIO</name><argument_list>(<argument><literal type="string">"Do that thing with the thing"</literal></argument>, <argument><literal type="string">"[Tags]"</literal></argument>)</argument_list></macro> <block>{<block_content>
+    <macro><name>GIVEN</name><argument_list>(<argument><literal type="string">"This stuff exists"</literal></argument>)</argument_list></macro> <block>{<block_content>
+        <comment type="line">// make stuff exist</comment>
+        <macro><name>AND_GIVEN</name><argument_list>(<argument><literal type="string">"And some assumption"</literal></argument>)</argument_list></macro> <block>{<block_content>
+            <comment type="line">// Validate assumption</comment>
+            <macro><name>WHEN</name><argument_list>(<argument><literal type="string">"I do this"</literal></argument>)</argument_list></macro> <block>{<block_content>
+                <comment type="line">// do this</comment>
+                <macro><name>THEN</name><argument_list>(<argument><literal type="string">"it should do this"</literal></argument>)</argument_list></macro> <block>{<block_content>
+                    <expr_stmt><expr><call><name>REQUIRE</name><argument_list>(<argument><expr><call><name>itDoesThis</name><argument_list>()</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+                    <macro><name>AND_THEN</name><argument_list>(<argument><literal type="string">"do that"</literal></argument>)</argument_list></macro> <block>{<block_content>
+                        <expr_stmt><expr><call><name>REQUIRE</name><argument_list>(<argument><expr><call><name>itDoesThat</name><argument_list>()</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+                    </block_content>}</block>
+                </block_content>}</block>
+            </block_content>}</block>
+        </block_content>}</block>
+    </block_content>}</block>
+</block_content>}</block>
+
+<macro><name>SCENARIO</name><argument_list>( <argument><literal type="string">"Vector resizing affects size and capacity"</literal></argument>,
+          <argument><literal type="string">"[vector][bdd][size][capacity]"</literal></argument> )</argument_list></macro> <block>{<block_content>
+    <macro><name>GIVEN</name><argument_list>( <argument><literal type="string">"an empty vector"</literal></argument> )</argument_list></macro> <block>{<block_content>
+        <decl_stmt><decl><type><name><name>std</name><operator>::</operator><name>vector</name><argument_list type="generic">&lt;<argument><expr><name>int</name></expr></argument>&gt;</argument_list></name></type> <name>v</name></decl>;</decl_stmt>
+        <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name><name>v</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call> <operator>==</operator> <literal type="number">0</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+
+        <macro><name>WHEN</name><argument_list>( <argument><literal type="string">"it is made larger"</literal></argument> )</argument_list></macro> <block>{<block_content>
+            <expr_stmt><expr><call><name><name>v</name><operator>.</operator><name>resize</name></name><argument_list>( <argument><expr><literal type="number">10</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+            <macro><name>THEN</name><argument_list>( <argument><literal type="string">"the size and capacity go up"</literal></argument> )</argument_list></macro> <block>{<block_content>
+                <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name><name>v</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call> <operator>==</operator> <literal type="number">10</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+                <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name><name>v</name><operator>.</operator><name>capacity</name></name><argument_list>()</argument_list></call> <operator>&gt;=</operator> <literal type="number">10</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+
+                <macro><name>AND_WHEN</name><argument_list>( <argument><literal type="string">"it is made smaller again"</literal></argument> )</argument_list></macro> <block>{<block_content>
+                    <expr_stmt><expr><call><name><name>v</name><operator>.</operator><name>resize</name></name><argument_list>( <argument><expr><literal type="number">5</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+                    <macro><name>THEN</name><argument_list>(
+                        <argument><literal type="string">"the size goes down but the capacity stays the same"</literal></argument> )</argument_list></macro> <block>{<block_content>
+                        <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name><name>v</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call> <operator>==</operator> <literal type="number">5</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+                        <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name><name>v</name><operator>.</operator><name>capacity</name></name><argument_list>()</argument_list></call> <operator>&gt;=</operator> <literal type="number">10</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+                    </block_content>}</block>
+                </block_content>}</block>
+            </block_content>}</block>
+        </block_content>}</block>
+
+        <macro><name>WHEN</name><argument_list>( <argument><literal type="string">"we reserve more space"</literal></argument> )</argument_list></macro> <block>{<block_content>
+            <expr_stmt><expr><call><name><name>v</name><operator>.</operator><name>reserve</name></name><argument_list>( <argument><expr><literal type="number">10</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+            <macro><name>THEN</name><argument_list>( <argument><literal type="string">"The capacity is increased but the size remains the same"</literal></argument> )</argument_list></macro> <block>{<block_content>
+                <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name><name>v</name><operator>.</operator><name>capacity</name></name><argument_list>()</argument_list></call> <operator>&gt;=</operator> <literal type="number">10</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+                <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name><name>v</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call> <operator>==</operator> <literal type="number">0</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+            </block_content>}</block>
+        </block_content>}</block>
+    </block_content>}</block>
+</block_content>}</block>
+
+<macro><name>SCENARIO</name><argument_list>(<argument><literal type="string">"This is a really long scenario name to see how the list command deals with wrapping"</literal></argument>,
+         <argument><literal type="string">"[very long tags][lots][long][tags][verbose]"</literal>
+                 <literal type="string">"[one very long tag name that should cause line wrapping writing out using the list command]"</literal>
+                 <literal type="string">"[anotherReallyLongTagNameButThisOneHasNoObviousWrapPointsSoShouldSplitWithinAWordUsingADashCharacter]"</literal></argument>)</argument_list></macro> <block>{<block_content>
+    <macro><name>GIVEN</name><argument_list>(<argument><literal type="string">"A section name that is so long that it cannot fit in a single console width"</literal></argument>)</argument_list></macro> <block>{<block_content>
+        <macro><name>WHEN</name><argument_list>(<argument><literal type="string">"The test headers are printed as part of the normal running of the scenario"</literal></argument>)</argument_list></macro> <block>{<block_content>
+            <macro><name>THEN</name><argument_list>(<argument><literal type="string">"The, deliberately very long and overly verbose (you see what I did there?) section names must wrap, along with an indent"</literal></argument>)</argument_list></macro> <block>{<block_content>
+                <expr_stmt><expr><call><name>SUCCEED</name><argument_list>(<argument><expr><literal type="string">"boo!"</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+            </block_content>}</block>
+        </block_content>}</block>
+    </block_content>}</block>
+</block_content>}</block>
+
+<macro><name>SCENARIO_METHOD</name><argument_list>(<argument>Fixture</argument>,
+                <argument><literal type="string">"BDD tests requiring Fixtures to provide commonly-accessed data or methods"</literal></argument>,
+                <argument><literal type="string">"[bdd][fixtures]"</literal></argument>)</argument_list></macro> <block>{<block_content>
+    <decl_stmt><decl><type><specifier>const</specifier> <name>int</name></type> <name>before</name><argument_list>(<argument><expr><call><name>counter</name><argument_list>()</argument_list></call></expr></argument>)</argument_list></decl>;</decl_stmt>
+    <macro><name>GIVEN</name><argument_list>(<argument><literal type="string">"No operations precede me"</literal></argument>)</argument_list></macro> <block>{<block_content>
+        <expr_stmt><expr><call><name>REQUIRE</name><argument_list>(<argument><expr><name>before</name> <operator>==</operator> <literal type="number">0</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        <macro><name>WHEN</name><argument_list>(<argument><literal type="string">"We get the count"</literal></argument>)</argument_list></macro> <block>{<block_content>
+            <decl_stmt><decl><type><specifier>const</specifier> <name>int</name></type> <name>after</name><argument_list>(<argument><expr><call><name>counter</name><argument_list>()</argument_list></call></expr></argument>)</argument_list></decl>;</decl_stmt>
+            <macro><name>THEN</name><argument_list>(<argument><literal type="string">"Subsequently values are higher"</literal></argument>)</argument_list></macro> <block>{<block_content>
+                <expr_stmt><expr><call><name>REQUIRE</name><argument_list>(<argument><expr><name>after</name> <operator>&gt;</operator> <name>before</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+            </block_content>}</block>
+        </block_content>}</block>
+    </block_content>}</block>
+</block_content>}</block>
+</unit>

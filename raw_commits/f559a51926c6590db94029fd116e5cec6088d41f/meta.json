@@ -1,0 +1,8 @@
+{
+  "commit_id": "f559a51926c6590db94029fd116e5cec6088d41f",
+  "parent_id": "13cbdf7e7d84e281820500661fdf516a4f663025",
+  "message": "ToStringTuple - gcc doesn't like tuple init_list ctor",
+  "changed_files": [
+    "projects/SelfTest/ToStringTuple.cpp"
+  ]
+}

@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" xmlns:diff="http://www.srcML.org/srcDiff" revision="1.0.0" language="C++" filename="C:\Users\saile\AppData\Local\Temp\catch2_100_z8gzpiwf\683c85772f65a8779e3baf45d3402098db58bb8d\tests_ExtraTests_X20-AssertionStartingEventGoesBeforeAssertionIsEvaluated_cpp\tests_ExtraTests_X20-AssertionStartingEventGoesBeforeAssertionIsEvaluated_cpp.old|C:\Users\saile\AppData\Local\Temp\catch2_100_z8gzpiwf\683c85772f65a8779e3baf45d3402098db58bb8d\tests_ExtraTests_X20-AssertionStartingEventGoesBeforeAssertionIsEvaluated_cpp\tests_ExtraTests_X20-AssertionStartingEventGoesBeforeAssertionIsEvaluated_cpp.new">
+<comment type="line">//              Copyright Catch2 Authors</comment>
+<comment type="line">// Distributed under the Boost Software License, Version 1.0.</comment>
+<comment type="line">//   (See accompanying file LICENSE.txt or copy at</comment>
+<comment type="line">//        https://www.boost.org/LICENSE_1_0.txt)</comment>
+
+<comment type="line">// SPDX-License-Identifier: BSL-1.0</comment>
+
+<comment type="block" format="doxygen">/**\file
+ * <diff:delete xmlns:diff="http://www.srcML.org/srcDiff">TODO:<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>FIXES<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws></diff:delete>Registers <diff:delete type="replace" xmlns:diff="http://www.srcML.org/srcDiff">custom<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>reporter<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>that<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>reports<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>testCase</diff:delete><diff:insert type="replace" xmlns:diff="http://www.srcML.org/srcDiff">an<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>event<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>listener<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>to<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>increments<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>counter<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>of<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>assertionStarting<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>events.</diff:insert><diff:insert xmlns:diff="http://www.srcML.org/srcDiff"><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+ </diff:ws></diff:insert>*<diff:delete xmlns:diff="http://www.srcML.org/srcDiff"><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>events</diff:delete>
+ *<diff:delete type="replace" xmlns:diff="http://www.srcML.org/srcDiff"><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+ </diff:ws>*<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>The<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>resulting<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>executable<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>can</diff:delete><diff:insert type="replace" xmlns:diff="http://www.srcML.org/srcDiff"><diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>Different<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>assertion<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>macros</diff:insert> then <diff:delete type="replace" xmlns:diff="http://www.srcML.org/srcDiff">be<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>used<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>by<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>an<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>external<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>Python<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>script<diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+ </diff:ws>*<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>to<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>verify</diff:delete><diff:insert type="replace" xmlns:diff="http://www.srcML.org/srcDiff">check</diff:insert> that <diff:delete type="replace" xmlns:diff="http://www.srcML.org/srcDiff">testCase{Starting,Ended}<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>and<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>testCasePartial{Starting,Ended}</diff:delete><diff:insert type="replace" xmlns:diff="http://www.srcML.org/srcDiff">the<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>counter<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>is<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>at<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>expected</diff:insert>
+ * <diff:delete type="replace" xmlns:diff="http://www.srcML.org/srcDiff">events</diff:delete><diff:insert type="replace" xmlns:diff="http://www.srcML.org/srcDiff">value<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>when<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>they</diff:insert> are <diff:delete type="replace" xmlns:diff="http://www.srcML.org/srcDiff">properly<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>nested.</diff:delete><diff:insert type="replace" xmlns:diff="http://www.srcML.org/srcDiff">evaluated.</diff:insert>
+ */</comment>
+
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;catch2/catch_test_macros.hpp&gt;</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;catch2/reporters/catch_reporter_event_listener.hpp&gt;</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;catch2/reporters/catch_reporter_registrars.hpp&gt;</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;catch2/matchers/catch_matchers_predicate.hpp&gt;</cpp:file></cpp:include>
+
+<namespace>namespace <block>{
+
+    <decl_stmt><decl><type><specifier>static</specifier> <name>size_t</name></type> <name>assertion_starting_events_seen</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</decl_stmt>
+
+<diff:delete xmlns:diff="http://www.srcML.org/srcDiff"><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">    </diff:ws><comment type="line">//<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>TODO:<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>custom<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>matcher<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>to<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>check<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>that<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>"assertion_starting_events_seen"<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>has</comment><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+    </diff:ws><comment type="line">//<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>the<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>right<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>number<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>of<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>checks</comment><diff:ws xmlns:diff="http://www.srcML.org/srcDiff">
+
+</diff:ws></diff:delete>    <class>class <name>AssertionStartingListener</name> <super_list>: <super><specifier>public</specifier> <name><name>Catch</name><operator>::</operator><name>EventListenerBase</name></name></super></super_list> <block>{<private type="default">
+    </private><public>public:
+        <constructor><name>AssertionStartingListener</name><parameter_list>( <parameter><decl><type><name><name>Catch</name><operator>::</operator><name>IConfig</name></name> <specifier>const</specifier><modifier>*</modifier></type> <name>config</name></decl></parameter> )</parameter_list><member_init_list>:
+            <call><name>EventListenerBase</name><argument_list>( <argument><expr><name>config</name></expr></argument> )</argument_list></call> </member_init_list><block>{<block_content/>}</block></constructor>
+
+        <function><type><name>void</name></type> <name>assertionStarting</name><parameter_list>( <parameter><decl><type><name><name>Catch</name><operator>::</operator><name>AssertionInfo</name></name> <specifier>const</specifier><modifier>&amp;</modifier></type></decl></parameter> )</parameter_list> <specifier>override</specifier> <block>{<block_content>
+            <expr_stmt><expr><operator>++</operator><name>assertion_starting_events_seen</name></expr>;</expr_stmt>
+        </block_content>}</block></function>
+    </public>}</block>;</class>
+
+    <function><type><specifier>static</specifier> <name>bool</name></type> <name>f1</name><parameter_list>()</parameter_list> <block>{<block_content>
+        <return>return <expr><name>assertion_starting_events_seen</name> <operator>==</operator> <literal type="number">1</literal></expr>;</return>
+    </block_content>}</block></function>
+
+    <function><type><specifier>static</specifier> <name>void</name></type> <name>f2</name><parameter_list>()</parameter_list> <block>{<block_content>
+        <if_stmt><if>if <condition>( <expr><name>assertion_starting_events_seen</name> <operator>!=</operator> <literal type="number">2</literal></expr> )</condition> <block>{<block_content> <throw>throw <expr><literal type="number">1</literal></expr>;</throw> </block_content>}</block></if></if_stmt>
+    </block_content>}</block></function>
+
+    <function><type><specifier>static</specifier> <name>void</name></type> <name>f3</name><parameter_list>()</parameter_list> <block>{<block_content>
+        <if_stmt><if>if <condition>( <expr><name>assertion_starting_events_seen</name> <operator>==</operator> <literal type="number">3</literal></expr> )</condition> <block>{<block_content> <throw>throw <expr><literal type="number">1</literal></expr>;</throw> </block_content>}</block></if></if_stmt>
+    </block_content>}</block></function>
+
+    <function><type><specifier>static</specifier> <name>bool</name></type> <name>f4</name><parameter_list>()</parameter_list> <block>{<block_content> <return>return <expr><name>assertion_starting_events_seen</name> <operator>==</operator> <literal type="number">4</literal></expr>;</return> </block_content>}</block></function>
+
+    <function><type><specifier>static</specifier> <name>void</name></type> <name>f5</name><parameter_list>()</parameter_list> <block>{<block_content> <throw>throw <expr><name>assertion_starting_events_seen</name></expr>;</throw> </block_content>}</block></function>
+
+}</block></namespace> <comment type="line">// anonymous namespace</comment>
+
+<macro><name>CATCH_REGISTER_LISTENER</name><argument_list>( <argument>AssertionStartingListener</argument> )</argument_list></macro>
+
+<macro><name>TEST_CASE</name><argument_list>()</argument_list></macro> <block>{<block_content>
+    <comment type="line">// **IMPORTANT**</comment>
+    <comment type="line">// The order of assertions below matters.</comment>
+    <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><call><name>f1</name><argument_list>()</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>REQUIRE_NOTHROW</name><argument_list>( <argument><expr><call><name>f2</name><argument_list>()</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>REQUIRE_THROWS</name><argument_list>( <argument><expr><call><name>f3</name><argument_list>()</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>REQUIRE_THAT</name><argument_list>( <argument><expr><call><name>f4</name><argument_list>()</argument_list></call></expr></argument>,
+                  <argument><expr><call><name><name>Catch</name><operator>::</operator><name>Matchers</name><operator>::</operator><name>Predicate</name><argument_list type="generic">&lt;<argument><expr><name>bool</name></expr></argument>&gt;</argument_list></name><argument_list>( <argument><expr><lambda><capture>[]</capture><parameter_list>( <parameter><decl><type><name>bool</name></type> <name>b</name></decl></parameter> )</parameter_list> <block>{<block_content> <return>return <expr><name>b</name></expr>;</return> </block_content>}</block></lambda></expr></argument> )</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>REQUIRE_THROWS_MATCHES</name><argument_list>(
+        <argument><expr><call><name>f5</name><argument_list>()</argument_list></call></expr></argument>, <argument><expr><name>size_t</name></expr></argument>, <argument><expr><call><name><name>Catch</name><operator>::</operator><name>Matchers</name><operator>::</operator><name>Predicate</name><argument_list type="generic">&lt;<argument><expr><name>size_t</name></expr></argument>&gt;</argument_list></name><argument_list>( <argument><expr><lambda><capture>[]</capture><parameter_list>( <parameter><decl><type><name>size_t</name></type> <name>i</name></decl></parameter> )</parameter_list> <block>{<block_content>
+            <return>return <expr><name>i</name> <operator>==</operator> <literal type="number">5</literal></expr>;</return>
+        </block_content>}</block></lambda></expr></argument> )</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+
+    <expr_stmt><expr><call><name>CAPTURE</name><argument_list>( <argument><expr><name>assertion_starting_events_seen</name></expr></argument> )</argument_list></call></expr>;</expr_stmt> <comment type="line">// **not** an assertion</comment>
+    <expr_stmt><expr><call><name>INFO</name><argument_list>( <argument><expr><literal type="string">"some info msg"</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>                   <comment type="line">// **not** an assertion</comment>
+    <expr_stmt><expr><call><name>WARN</name><argument_list>( <argument><expr><literal type="string">"warning! warning!"</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>               <comment type="line">// assertion-like message</comment>
+    <expr_stmt><expr><call><name>SUCCEED</name><argument_list>()</argument_list></call></expr>;</expr_stmt>                                 <comment type="line">// assertion-like message</comment>
+
+    <comment type="line">// We skip FAIL/SKIP and so on, which fail the test.</comment>
+
+    <comment type="line">// This require will also increment the count once</comment>
+    <expr_stmt><expr><call><name>REQUIRE</name><argument_list>( <argument><expr><name>assertion_starting_events_seen</name> <operator>==</operator> <literal type="number">8</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+</block_content>}</block>
+</unit>

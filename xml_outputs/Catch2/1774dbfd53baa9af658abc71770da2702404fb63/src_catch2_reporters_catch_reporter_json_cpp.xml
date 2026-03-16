@@ -1,0 +1,374 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" xmlns:diff="http://www.srcML.org/srcDiff" revision="1.0.0" language="C++" filename="C:\Users\saile\AppData\Local\Temp\catch2_100_z8gzpiwf\1774dbfd53baa9af658abc71770da2702404fb63\src_catch2_reporters_catch_reporter_json_cpp\src_catch2_reporters_catch_reporter_json_cpp.old|C:\Users\saile\AppData\Local\Temp\catch2_100_z8gzpiwf\1774dbfd53baa9af658abc71770da2702404fb63\src_catch2_reporters_catch_reporter_json_cpp\src_catch2_reporters_catch_reporter_json_cpp.new">
+<comment type="line">//              Copyright Catch2 Authors</comment>
+<comment type="line">// Distributed under the Boost Software License, Version 1.0.</comment>
+<comment type="line">//   (See accompanying file LICENSE.txt or copy at</comment>
+<comment type="line">//        https://www.boost.org/LICENSE_1_0.txt)</comment>
+
+<comment type="line">// SPDX-License-Identifier: BSL-1.0</comment>
+<comment type="line">//</comment>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;catch2/catch_test_case_info.hpp&gt;</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;catch2/catch_test_spec.hpp&gt;</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;catch2/catch_version.hpp&gt;</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;catch2/interfaces/catch_interfaces_config.hpp&gt;</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;catch2/internal/catch_list.hpp&gt;</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;catch2/internal/catch_string_manip.hpp&gt;</cpp:file></cpp:include>
+<cpp:include xmlns:cpp="http://www.srcML.org/srcML/cpp">#<cpp:directive xmlns:cpp="http://www.srcML.org/srcML/cpp">include</cpp:directive> <cpp:file xmlns:cpp="http://www.srcML.org/srcML/cpp">&lt;catch2/reporters/catch_reporter_json.hpp&gt;</cpp:file></cpp:include>
+
+<namespace>namespace <name>Catch</name> <block>{
+    <namespace>namespace <block>{
+        <function><type><name>void</name></type> <name>writeSourceInfo</name><parameter_list>( <parameter><decl><type><name>JsonObjectWriter</name><modifier>&amp;</modifier></type> <name>writer</name></decl></parameter>,
+                              <parameter><decl><type><name>SourceLineInfo</name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>sourceInfo</name></decl></parameter> )</parameter_list> <block>{<block_content>
+            <decl_stmt><decl><type><name>auto</name></type> <name>source_location_writer</name> <init>=
+                <expr><call><name><name>writer</name><operator>.</operator><name>write</name></name><argument_list>( <argument><expr><literal type="string">"source-location"</literal><name>_sr</name></expr></argument> )</argument_list></call><operator>.</operator><call><name>writeObject</name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+            <expr_stmt><expr><call><name><name>source_location_writer</name><operator>.</operator><name>write</name></name><argument_list>( <argument><expr><literal type="string">"filename"</literal><name>_sr</name></expr></argument> )</argument_list></call>
+                <operator>.</operator><call><name>write</name><argument_list>( <argument><expr><name><name>sourceInfo</name><operator>.</operator><name>file</name></name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+            <expr_stmt><expr><call><name><name>source_location_writer</name><operator>.</operator><name>write</name></name><argument_list>( <argument><expr><literal type="string">"line"</literal><name>_sr</name></expr></argument> )</argument_list></call><operator>.</operator><call><name>write</name><argument_list>( <argument><expr><name><name>sourceInfo</name><operator>.</operator><name>line</name></name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        </block_content>}</block></function>
+
+        <function><type><name>void</name></type> <name>writeTags</name><parameter_list>( <parameter><decl><type><name>JsonArrayWriter</name></type> <name>writer</name></decl></parameter>, <parameter><decl><type><name><name>std</name><operator>::</operator><name>vector</name><argument_list type="generic">&lt;<argument><expr><name>Tag</name></expr></argument>&gt;</argument_list></name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>tags</name></decl></parameter> )</parameter_list> <block>{<block_content>
+            <for>for <control>( <init><decl><type><specifier>auto</specifier> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>tag</name> <range>: <expr><name>tags</name></expr></range></decl></init> )</control> <block>{<block_content>
+                <expr_stmt><expr><call><name><name>writer</name><operator>.</operator><name>write</name></name><argument_list>( <argument><expr><name><name>tag</name><operator>.</operator><name>original</name></name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+            </block_content>}</block></for>
+        </block_content>}</block></function>
+
+        <function><type><name>void</name></type> <name>writeProperties</name><parameter_list>( <parameter><decl><type><name>JsonArrayWriter</name></type> <name>writer</name></decl></parameter>,
+                              <parameter><decl><type><name>TestCaseInfo</name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>info</name></decl></parameter> )</parameter_list> <block>{<block_content>
+            <if_stmt><if>if <condition>( <expr><call><name><name>info</name><operator>.</operator><name>isHidden</name></name><argument_list>()</argument_list></call></expr> )</condition> <block>{<block_content> <expr_stmt><expr><call><name><name>writer</name><operator>.</operator><name>write</name></name><argument_list>( <argument><expr><literal type="string">"is-hidden"</literal><name>_sr</name></expr></argument> )</argument_list></call></expr>;</expr_stmt> </block_content>}</block></if></if_stmt>
+            <if_stmt><if>if <condition>( <expr><call><name><name>info</name><operator>.</operator><name>okToFail</name></name><argument_list>()</argument_list></call></expr> )</condition> <block>{<block_content> <expr_stmt><expr><call><name><name>writer</name><operator>.</operator><name>write</name></name><argument_list>( <argument><expr><literal type="string">"ok-to-fail"</literal><name>_sr</name></expr></argument> )</argument_list></call></expr>;</expr_stmt> </block_content>}</block></if></if_stmt>
+            <if_stmt><if>if <condition>( <expr><call><name><name>info</name><operator>.</operator><name>expectedToFail</name></name><argument_list>()</argument_list></call></expr> )</condition> <block>{<block_content>
+                <expr_stmt><expr><call><name><name>writer</name><operator>.</operator><name>write</name></name><argument_list>( <argument><expr><literal type="string">"expected-to-fail"</literal><name>_sr</name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+            </block_content>}</block></if></if_stmt>
+            <if_stmt><if>if <condition>( <expr><call><name><name>info</name><operator>.</operator><name>throws</name></name><argument_list>()</argument_list></call></expr> )</condition> <block>{<block_content> <expr_stmt><expr><call><name><name>writer</name><operator>.</operator><name>write</name></name><argument_list>( <argument><expr><literal type="string">"throws"</literal><name>_sr</name></expr></argument> )</argument_list></call></expr>;</expr_stmt> </block_content>}</block></if></if_stmt>
+        </block_content>}</block></function>
+
+    }</block></namespace> <comment type="line">// namespace</comment>
+
+    <constructor><name><name>JsonReporter</name><operator>::</operator><name>JsonReporter</name></name><parameter_list>( <parameter><decl><type><name>ReporterConfig</name><modifier>&amp;&amp;</modifier></type> <name>config</name></decl></parameter> )</parameter_list><member_init_list>:
+        <call><name>StreamingReporterBase</name><argument_list>{ <argument><expr><macro><name>CATCH_MOVE</name><argument_list>( <argument>config</argument> )</argument_list></macro></expr></argument> }</argument_list></call> </member_init_list><block>{<block_content>
+
+        <expr_stmt><expr><name><name>m_preferences</name><operator>.</operator><name>shouldRedirectStdOut</name></name> <operator>=</operator> <literal type="boolean">true</literal></expr>;</expr_stmt>
+        <comment type="line">// TBD: Do we want to report all assertions? XML reporter does</comment>
+        <comment type="line">//      not, but for machine-parseable reporters I think the answer</comment>
+        <comment type="line">//      should be yes.</comment>
+        <expr_stmt><expr><name><name>m_preferences</name><operator>.</operator><name>shouldReportAllAssertions</name></name> <operator>=</operator> <literal type="boolean">true</literal></expr>;</expr_stmt>
+
+        <expr_stmt><expr><call><name><name>m_objectWriters</name><operator>.</operator><name>emplace</name></name><argument_list>( <argument><expr><name>m_stream</name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name><name>m_writers</name><operator>.</operator><name>emplace</name></name><argument_list>( <argument><expr><name><name>Writer</name><operator>::</operator><name>Object</name></name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><name>auto</name><operator>&amp;</operator> <name>writer</name> <operator>=</operator> <call><name><name>m_objectWriters</name><operator>.</operator><name>top</name></name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+
+        <expr_stmt><expr><call><name><name>writer</name><operator>.</operator><name>write</name></name><argument_list>( <argument><expr><literal type="string">"version"</literal><name>_sr</name></expr></argument> )</argument_list></call><operator>.</operator><call><name>write</name><argument_list>( <argument><expr><literal type="number">1</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+
+        <block>{<block_content>
+            <decl_stmt><decl><type><name>auto</name></type> <name>metadata_writer</name> <init>= <expr><call><name><name>writer</name><operator>.</operator><name>write</name></name><argument_list>( <argument><expr><literal type="string">"metadata"</literal><name>_sr</name></expr></argument> )</argument_list></call><operator>.</operator><call><name>writeObject</name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+            <expr_stmt><expr><call><name><name>metadata_writer</name><operator>.</operator><name>write</name></name><argument_list>( <argument><expr><literal type="string">"name"</literal><name>_sr</name></expr></argument> )</argument_list></call><operator>.</operator><call><name>write</name><argument_list>( <argument><expr><call><name><name>m_config</name><operator>-&gt;</operator><name>name</name></name><argument_list>()</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+            <expr_stmt><expr><call><name><name>metadata_writer</name><operator>.</operator><name>write</name></name><argument_list>( <argument><expr><literal type="string">"rng-seed"</literal><name>_sr</name></expr></argument> )</argument_list></call><operator>.</operator><call><name>write</name><argument_list>( <argument><expr><call><name><name>m_config</name><operator>-&gt;</operator><name>rngSeed</name></name><argument_list>()</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+            <expr_stmt><expr><call><name><name>metadata_writer</name><operator>.</operator><name>write</name></name><argument_list>( <argument><expr><literal type="string">"catch2-version"</literal><name>_sr</name></expr></argument> )</argument_list></call>
+                <operator>.</operator><call><name>write</name><argument_list>( <argument><expr><call><name>libraryVersion</name><argument_list>()</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+            <if_stmt><if>if <condition>( <expr><call><name><name>m_config</name><operator>-&gt;</operator><name>testSpec</name></name><argument_list>()</argument_list></call><operator>.</operator><call><name>hasFilters</name><argument_list>()</argument_list></call></expr> )</condition> <block>{<block_content>
+                <expr_stmt><expr><call><name><name>metadata_writer</name><operator>.</operator><name>write</name></name><argument_list>( <argument><expr><literal type="string">"filters"</literal><name>_sr</name></expr></argument> )</argument_list></call>
+                    <operator>.</operator><call><name>write</name><argument_list>( <argument><expr><call><name><name>m_config</name><operator>-&gt;</operator><name>testSpec</name></name><argument_list>()</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+            </block_content>}</block></if></if_stmt>
+        </block_content>}</block>
+    </block_content>}</block></constructor>
+
+    <destructor><name><name>JsonReporter</name><operator>::</operator><name>~JsonReporter</name></name><parameter_list>()</parameter_list> <block>{<block_content>
+        <expr_stmt><expr><call><name>endListing</name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+        <comment type="line">// TODO: Ensure this closes the top level object, add asserts</comment>
+        <expr_stmt><expr><call><name>assert</name><argument_list>( <argument><expr><call><name><name>m_writers</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call> <operator>==</operator> <literal type="number">1</literal> <operator>&amp;&amp;</operator> <literal type="string">"Only the top level object should be open"</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name>assert</name><argument_list>( <argument><expr><call><name><name>m_writers</name><operator>.</operator><name>top</name></name><argument_list>()</argument_list></call> <operator>==</operator> <name><name>Writer</name><operator>::</operator><name>Object</name></name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name>endObject</name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><name>m_stream</name> <operator>&lt;&lt;</operator> <literal type="char">'\n'</literal> <operator>&lt;&lt;</operator> <name><name>std</name><operator>::</operator><name>flush</name></name></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name>assert</name><argument_list>( <argument><expr><call><name><name>m_writers</name><operator>.</operator><name>empty</name></name><argument_list>()</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block></destructor>
+
+    <function><type><name>JsonArrayWriter</name><modifier>&amp;</modifier></type> <name><name>JsonReporter</name><operator>::</operator><name>startArray</name></name><parameter_list>()</parameter_list> <block>{<block_content>
+        <expr_stmt><expr><call><name><name>m_arrayWriters</name><operator>.</operator><name>emplace</name></name><argument_list>( <argument><expr><call><name><name>m_arrayWriters</name><operator>.</operator><name>top</name></name><argument_list>()</argument_list></call><operator>.</operator><call><name>writeArray</name><argument_list>()</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name><name>m_writers</name><operator>.</operator><name>emplace</name></name><argument_list>( <argument><expr><name><name>Writer</name><operator>::</operator><name>Array</name></name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        <return>return <expr><call><name><name>m_arrayWriters</name><operator>.</operator><name>top</name></name><argument_list>()</argument_list></call></expr>;</return>
+    </block_content>}</block></function>
+    <function><type><name>JsonArrayWriter</name><modifier>&amp;</modifier></type> <name><name>JsonReporter</name><operator>::</operator><name>startArray</name></name><parameter_list>( <parameter><decl><type><name>StringRef</name></type> <name>key</name></decl></parameter> )</parameter_list> <block>{<block_content>
+        <expr_stmt><expr><call><name><name>m_arrayWriters</name><operator>.</operator><name>emplace</name></name><argument_list>(
+            <argument><expr><call><name><name>m_objectWriters</name><operator>.</operator><name>top</name></name><argument_list>()</argument_list></call><operator>.</operator><call><name>write</name><argument_list>( <argument><expr><name>key</name></expr></argument> )</argument_list></call><operator>.</operator><call><name>writeArray</name><argument_list>()</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name><name>m_writers</name><operator>.</operator><name>emplace</name></name><argument_list>( <argument><expr><name><name>Writer</name><operator>::</operator><name>Array</name></name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        <return>return <expr><call><name><name>m_arrayWriters</name><operator>.</operator><name>top</name></name><argument_list>()</argument_list></call></expr>;</return>
+    </block_content>}</block></function>
+
+    <function><type><name>JsonObjectWriter</name><modifier>&amp;</modifier></type> <name><name>JsonReporter</name><operator>::</operator><name>startObject</name></name><parameter_list>()</parameter_list> <block>{<block_content>
+        <expr_stmt><expr><call><name><name>m_objectWriters</name><operator>.</operator><name>emplace</name></name><argument_list>( <argument><expr><call><name><name>m_arrayWriters</name><operator>.</operator><name>top</name></name><argument_list>()</argument_list></call><operator>.</operator><call><name>writeObject</name><argument_list>()</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name><name>m_writers</name><operator>.</operator><name>emplace</name></name><argument_list>( <argument><expr><name><name>Writer</name><operator>::</operator><name>Object</name></name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        <return>return <expr><call><name><name>m_objectWriters</name><operator>.</operator><name>top</name></name><argument_list>()</argument_list></call></expr>;</return>
+    </block_content>}</block></function>
+    <function><type><name>JsonObjectWriter</name><modifier>&amp;</modifier></type> <name><name>JsonReporter</name><operator>::</operator><name>startObject</name></name><parameter_list>( <parameter><decl><type><name>StringRef</name></type> <name>key</name></decl></parameter> )</parameter_list> <block>{<block_content>
+        <expr_stmt><expr><call><name><name>m_objectWriters</name><operator>.</operator><name>emplace</name></name><argument_list>(
+            <argument><expr><call><name><name>m_objectWriters</name><operator>.</operator><name>top</name></name><argument_list>()</argument_list></call><operator>.</operator><call><name>write</name><argument_list>( <argument><expr><name>key</name></expr></argument> )</argument_list></call><operator>.</operator><call><name>writeObject</name><argument_list>()</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name><name>m_writers</name><operator>.</operator><name>emplace</name></name><argument_list>( <argument><expr><name><name>Writer</name><operator>::</operator><name>Object</name></name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        <return>return <expr><call><name><name>m_objectWriters</name><operator>.</operator><name>top</name></name><argument_list>()</argument_list></call></expr>;</return>
+    </block_content>}</block></function>
+
+    <function><type><name>void</name></type> <name><name>JsonReporter</name><operator>::</operator><name>endObject</name></name><parameter_list>()</parameter_list> <block>{<block_content>
+        <expr_stmt><expr><call><name>assert</name><argument_list>( <argument><expr><call><name>isInside</name><argument_list>( <argument><expr><name><name>Writer</name><operator>::</operator><name>Object</name></name></expr></argument> )</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name><name>m_objectWriters</name><operator>.</operator><name>pop</name></name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name><name>m_writers</name><operator>.</operator><name>pop</name></name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block></function>
+    <function><type><name>void</name></type> <name><name>JsonReporter</name><operator>::</operator><name>endArray</name></name><parameter_list>()</parameter_list> <block>{<block_content>
+        <expr_stmt><expr><call><name>assert</name><argument_list>( <argument><expr><call><name>isInside</name><argument_list>( <argument><expr><name><name>Writer</name><operator>::</operator><name>Array</name></name></expr></argument> )</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name><name>m_arrayWriters</name><operator>.</operator><name>pop</name></name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name><name>m_writers</name><operator>.</operator><name>pop</name></name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block></function>
+
+    <function><type><name>bool</name></type> <name><name>JsonReporter</name><operator>::</operator><name>isInside</name></name><parameter_list>( <parameter><decl><type><name>Writer</name></type> <name>writer</name></decl></parameter> )</parameter_list> <block>{<block_content>
+        <return>return <expr><operator>!</operator><call><name><name>m_writers</name><operator>.</operator><name>empty</name></name><argument_list>()</argument_list></call> <operator>&amp;&amp;</operator> <call><name><name>m_writers</name><operator>.</operator><name>top</name></name><argument_list>()</argument_list></call> <operator>==</operator> <name>writer</name></expr>;</return>
+    </block_content>}</block></function>
+
+    <function><type><name>void</name></type> <name><name>JsonReporter</name><operator>::</operator><name>startListing</name></name><parameter_list>()</parameter_list> <block>{<block_content>
+        <if_stmt><if>if <condition>( <expr><operator>!</operator><name>m_startedListing</name></expr> )</condition> <block>{<block_content> <expr_stmt><expr><call><name>startObject</name><argument_list>( <argument><expr><literal type="string">"listings"</literal><name>_sr</name></expr></argument> )</argument_list></call></expr>;</expr_stmt> </block_content>}</block></if></if_stmt>
+        <expr_stmt><expr><name>m_startedListing</name> <operator>=</operator> <literal type="boolean">true</literal></expr>;</expr_stmt>
+    </block_content>}</block></function>
+    <function><type><name>void</name></type> <name><name>JsonReporter</name><operator>::</operator><name>endListing</name></name><parameter_list>()</parameter_list> <block>{<block_content>
+        <if_stmt><if>if <condition>( <expr><name>m_startedListing</name></expr> )</condition> <block>{<block_content> <expr_stmt><expr><call><name>endObject</name><argument_list>()</argument_list></call></expr>;</expr_stmt> </block_content>}</block></if></if_stmt>
+        <expr_stmt><expr><name>m_startedListing</name> <operator>=</operator> <literal type="boolean">false</literal></expr>;</expr_stmt>
+    </block_content>}</block></function>
+
+    <function><type><name><name>std</name><operator>::</operator><name>string</name></name></type> <name><name>JsonReporter</name><operator>::</operator><name>getDescription</name></name><parameter_list>()</parameter_list> <block>{<block_content>
+        <return>return <diff:delete type="replace" xmlns:diff="http://www.srcML.org/srcDiff"><expr><literal type="string">"WIP!<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>Reports<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>test<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>results<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>as<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>a<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>JSON<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>document.<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>WIP!"</literal></expr>;</diff:delete><diff:insert type="replace" xmlns:diff="http://www.srcML.org/srcDiff"><expr><literal type="string">"Outputs<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>listings<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>as<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>JSON.<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>Test<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>listing<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>is<diff:ws xmlns:diff="http://www.srcML.org/srcDiff"> </diff:ws>Work-in-Progress!"</literal></expr>;</diff:insert></return>
+    </block_content>}</block></function>
+
+    <function><type><name>void</name></type> <name><name>JsonReporter</name><operator>::</operator><name>testRunStarting</name></name><parameter_list>( <parameter><decl><type><name>TestRunInfo</name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>testInfo</name></decl></parameter> )</parameter_list> <block>{<block_content>
+        <expr_stmt><expr><call><name><name>StreamingReporterBase</name><operator>::</operator><name>testRunStarting</name></name><argument_list>( <argument><expr><name>testInfo</name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name>endListing</name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+
+        <expr_stmt><expr><call><name>assert</name><argument_list>( <argument><expr><call><name>isInside</name><argument_list>( <argument><expr><name><name>Writer</name><operator>::</operator><name>Object</name></name></expr></argument> )</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name>startObject</name><argument_list>( <argument><expr><literal type="string">"test-run"</literal><name>_sr</name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name>startArray</name><argument_list>( <argument><expr><literal type="string">"test-cases"</literal><name>_sr</name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block></function>
+
+     <function><type><specifier>static</specifier> <name>void</name></type> <name>writeCounts</name><parameter_list>( <parameter><decl><type><name>JsonObjectWriter</name><modifier>&amp;&amp;</modifier></type> <name>writer</name></decl></parameter>, <parameter><decl><type><name>Counts</name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>counts</name></decl></parameter> )</parameter_list> <block>{<block_content>
+        <expr_stmt><expr><call><name><name>writer</name><operator>.</operator><name>write</name></name><argument_list>( <argument><expr><literal type="string">"passed"</literal><name>_sr</name></expr></argument> )</argument_list></call><operator>.</operator><call><name>write</name><argument_list>( <argument><expr><name><name>counts</name><operator>.</operator><name>passed</name></name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name><name>writer</name><operator>.</operator><name>write</name></name><argument_list>( <argument><expr><literal type="string">"failed"</literal><name>_sr</name></expr></argument> )</argument_list></call><operator>.</operator><call><name>write</name><argument_list>( <argument><expr><name><name>counts</name><operator>.</operator><name>failed</name></name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name><name>writer</name><operator>.</operator><name>write</name></name><argument_list>( <argument><expr><literal type="string">"fail-but-ok"</literal><name>_sr</name></expr></argument> )</argument_list></call><operator>.</operator><call><name>write</name><argument_list>( <argument><expr><name><name>counts</name><operator>.</operator><name>failedButOk</name></name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name><name>writer</name><operator>.</operator><name>write</name></name><argument_list>( <argument><expr><literal type="string">"skipped"</literal><name>_sr</name></expr></argument> )</argument_list></call><operator>.</operator><call><name>write</name><argument_list>( <argument><expr><name><name>counts</name><operator>.</operator><name>skipped</name></name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block></function>
+
+    <function><type><name>void</name></type> <name><name>JsonReporter</name><operator>::</operator><name>testRunEnded</name></name><parameter_list>(<parameter><decl><type><name>TestRunStats</name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>runStats</name></decl></parameter>)</parameter_list> <block>{<block_content>
+        <expr_stmt><expr><call><name>assert</name><argument_list>( <argument><expr><call><name>isInside</name><argument_list>( <argument><expr><name><name>Writer</name><operator>::</operator><name>Array</name></name></expr></argument> )</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        <comment type="line">// End "test-cases"</comment>
+        <expr_stmt><expr><call><name>endArray</name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+
+        <block>{<block_content>
+            <decl_stmt><decl><type><name>auto</name></type> <name>totals</name> <init>=
+                <expr><call><name><name>m_objectWriters</name><operator>.</operator><name>top</name></name><argument_list>()</argument_list></call><operator>.</operator><call><name>write</name><argument_list>( <argument><expr><literal type="string">"totals"</literal><name>_sr</name></expr></argument> )</argument_list></call><operator>.</operator><call><name>writeObject</name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+            <expr_stmt><expr><call><name>writeCounts</name><argument_list>( <argument><expr><call><name><name>totals</name><operator>.</operator><name>write</name></name><argument_list>( <argument><expr><literal type="string">"assertions"</literal><name>_sr</name></expr></argument> )</argument_list></call><operator>.</operator><call><name>writeObject</name><argument_list>()</argument_list></call></expr></argument>,
+                         <argument><expr><name><name>runStats</name><operator>.</operator><name>totals</name><operator>.</operator><name>assertions</name></name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+            <expr_stmt><expr><call><name>writeCounts</name><argument_list>( <argument><expr><call><name><name>totals</name><operator>.</operator><name>write</name></name><argument_list>( <argument><expr><literal type="string">"test-cases"</literal><name>_sr</name></expr></argument> )</argument_list></call><operator>.</operator><call><name>writeObject</name><argument_list>()</argument_list></call></expr></argument>,
+                         <argument><expr><name><name>runStats</name><operator>.</operator><name>totals</name><operator>.</operator><name>testCases</name></name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        </block_content>}</block>
+
+        <comment type="line">// End the "test-run" object</comment>
+        <expr_stmt><expr><call><name>endObject</name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block></function>
+
+    <function><type><name>void</name></type> <name><name>JsonReporter</name><operator>::</operator><name>testCaseStarting</name></name><parameter_list>( <parameter><decl><type><name>TestCaseInfo</name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>tcInfo</name></decl></parameter> )</parameter_list> <block>{<block_content>
+        <expr_stmt><expr><call><name><name>StreamingReporterBase</name><operator>::</operator><name>testCaseStarting</name></name><argument_list>( <argument><expr><name>tcInfo</name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+
+        <expr_stmt><expr><call><name>assert</name><argument_list>( <argument><expr><call><name>isInside</name><argument_list>( <argument><expr><name><name>Writer</name><operator>::</operator><name>Array</name></name></expr></argument> )</argument_list></call> <operator>&amp;&amp;</operator>
+                <literal type="string">"We should be in the 'test-cases' array"</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name>startObject</name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+        <comment type="line">// "test-info" prelude</comment>
+        <block>{<block_content>
+            <decl_stmt><decl><type><name>auto</name></type> <name>testInfo</name> <init>=
+                <expr><call><name><name>m_objectWriters</name><operator>.</operator><name>top</name></name><argument_list>()</argument_list></call><operator>.</operator><call><name>write</name><argument_list>( <argument><expr><literal type="string">"test-info"</literal><name>_sr</name></expr></argument> )</argument_list></call><operator>.</operator><call><name>writeObject</name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+            <comment type="line">// TODO: handle testName vs className!!</comment>
+            <expr_stmt><expr><call><name><name>testInfo</name><operator>.</operator><name>write</name></name><argument_list>( <argument><expr><literal type="string">"name"</literal><name>_sr</name></expr></argument> )</argument_list></call><operator>.</operator><call><name>write</name><argument_list>( <argument><expr><name><name>tcInfo</name><operator>.</operator><name>name</name></name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+            <expr_stmt><expr><call><name>writeSourceInfo</name><argument_list>(<argument><expr><name>testInfo</name></expr></argument>, <argument><expr><name><name>tcInfo</name><operator>.</operator><name>lineInfo</name></name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+            <expr_stmt><expr><call><name>writeTags</name><argument_list>( <argument><expr><call><name><name>testInfo</name><operator>.</operator><name>write</name></name><argument_list>( <argument><expr><literal type="string">"tags"</literal><name>_sr</name></expr></argument> )</argument_list></call><operator>.</operator><call><name>writeArray</name><argument_list>()</argument_list></call></expr></argument>, <argument><expr><name><name>tcInfo</name><operator>.</operator><name>tags</name></name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+            <expr_stmt><expr><call><name>writeProperties</name><argument_list>( <argument><expr><call><name><name>testInfo</name><operator>.</operator><name>write</name></name><argument_list>( <argument><expr><literal type="string">"properties"</literal><name>_sr</name></expr></argument> )</argument_list></call><operator>.</operator><call><name>writeArray</name><argument_list>()</argument_list></call></expr></argument>,
+                             <argument><expr><name>tcInfo</name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        </block_content>}</block>
+
+
+        <comment type="line">// Start the array for individual test runs (testCasePartial pairs)</comment>
+        <expr_stmt><expr><call><name>startArray</name><argument_list>( <argument><expr><literal type="string">"runs"</literal><name>_sr</name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block></function>
+
+    <function><type><name>void</name></type> <name><name>JsonReporter</name><operator>::</operator><name>testCaseEnded</name></name><parameter_list>( <parameter><decl><type><name>TestCaseStats</name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>tcStats</name></decl></parameter> )</parameter_list> <block>{<block_content>
+        <expr_stmt><expr><call><name><name>StreamingReporterBase</name><operator>::</operator><name>testCaseEnded</name></name><argument_list>( <argument><expr><name>tcStats</name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+
+        <comment type="line">// We need to close the 'runs' array before finishing the test case</comment>
+        <expr_stmt><expr><call><name>assert</name><argument_list>( <argument><expr><call><name>isInside</name><argument_list>( <argument><expr><name><name>Writer</name><operator>::</operator><name>Array</name></name></expr></argument> )</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name>endArray</name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+
+        <block>{<block_content>
+            <decl_stmt><decl><type><name>auto</name></type> <name>totals</name> <init>=
+                <expr><call><name><name>m_objectWriters</name><operator>.</operator><name>top</name></name><argument_list>()</argument_list></call><operator>.</operator><call><name>write</name><argument_list>( <argument><expr><literal type="string">"totals"</literal><name>_sr</name></expr></argument> )</argument_list></call><operator>.</operator><call><name>writeObject</name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+            <expr_stmt><expr><call><name>writeCounts</name><argument_list>( <argument><expr><call><name><name>totals</name><operator>.</operator><name>write</name></name><argument_list>( <argument><expr><literal type="string">"assertions"</literal><name>_sr</name></expr></argument> )</argument_list></call><operator>.</operator><call><name>writeObject</name><argument_list>()</argument_list></call></expr></argument>,
+                         <argument><expr><name><name>tcStats</name><operator>.</operator><name>totals</name><operator>.</operator><name>assertions</name></name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+            <comment type="line">// We do not write the test case totals, because there will always be just one test case here.</comment>
+            <comment type="line">// TODO: overall "result" -&gt; success, skip, fail here? Or in partial result?</comment>
+        </block_content>}</block>
+        <comment type="line">// We do not write out stderr/stdout, because we instead wrote those out in partial runs</comment>
+
+        <comment type="line">// TODO: aborting?</comment>
+
+        <comment type="line">// And we also close this test case's object</comment>
+        <expr_stmt><expr><call><name>assert</name><argument_list>( <argument><expr><call><name>isInside</name><argument_list>( <argument><expr><name><name>Writer</name><operator>::</operator><name>Object</name></name></expr></argument> )</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name>endObject</name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block></function>
+
+    <function><type><name>void</name></type> <name><name>JsonReporter</name><operator>::</operator><name>testCasePartialStarting</name></name><parameter_list>( <parameter><decl><type><name>TestCaseInfo</name> <specifier>const</specifier><modifier>&amp;</modifier></type></decl></parameter> <comment type="block">/*tcInfo*/</comment>,
+                                                <parameter><decl><type><name>uint64_t</name></type> <name>index</name></decl></parameter> )</parameter_list> <block>{<block_content>
+        <expr_stmt><expr><call><name>startObject</name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name><name>m_objectWriters</name><operator>.</operator><name>top</name></name><argument_list>()</argument_list></call><operator>.</operator><call><name>write</name><argument_list>( <argument><expr><literal type="string">"run-idx"</literal><name>_sr</name></expr></argument> )</argument_list></call><operator>.</operator><call><name>write</name><argument_list>( <argument><expr><name>index</name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name>startArray</name><argument_list>( <argument><expr><literal type="string">"path"</literal><name>_sr</name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        <comment type="line">// TODO: we want to delay most of the printing to the 'root' section</comment>
+        <comment type="line">// TODO: childSection key name?</comment>
+    </block_content>}</block></function>
+
+    <function><type><name>void</name></type> <name><name>JsonReporter</name><operator>::</operator><name>testCasePartialEnded</name></name><parameter_list>( <parameter><decl><type><name>TestCaseStats</name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>tcStats</name></decl></parameter>,
+                                             <parameter><decl><type><name>uint64_t</name></type></decl></parameter> <comment type="block">/*index*/</comment> )</parameter_list> <block>{<block_content>
+        <comment type="line">// Fixme: the top level section handles this.</comment>
+        <comment type="line" format="doxygen">//// path object</comment>
+        <expr_stmt><expr><call><name>endArray</name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+        <if_stmt><if>if <condition>( <expr><operator>!</operator><call><name><name>tcStats</name><operator>.</operator><name>stdOut</name><operator>.</operator><name>empty</name></name><argument_list>()</argument_list></call></expr> )</condition> <block>{<block_content>
+            <expr_stmt><expr><call><name><name>m_objectWriters</name><operator>.</operator><name>top</name></name><argument_list>()</argument_list></call>
+                <operator>.</operator><call><name>write</name><argument_list>( <argument><expr><literal type="string">"captured-stdout"</literal><name>_sr</name></expr></argument> )</argument_list></call>
+                <operator>.</operator><call><name>write</name><argument_list>( <argument><expr><name><name>tcStats</name><operator>.</operator><name>stdOut</name></name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        </block_content>}</block></if></if_stmt>
+        <if_stmt><if>if <condition>( <expr><operator>!</operator><call><name><name>tcStats</name><operator>.</operator><name>stdErr</name><operator>.</operator><name>empty</name></name><argument_list>()</argument_list></call></expr> )</condition> <block>{<block_content>
+            <expr_stmt><expr><call><name><name>m_objectWriters</name><operator>.</operator><name>top</name></name><argument_list>()</argument_list></call>
+                <operator>.</operator><call><name>write</name><argument_list>( <argument><expr><literal type="string">"captured-stderr"</literal><name>_sr</name></expr></argument> )</argument_list></call>
+                <operator>.</operator><call><name>write</name><argument_list>( <argument><expr><name><name>tcStats</name><operator>.</operator><name>stdErr</name></name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        </block_content>}</block></if></if_stmt>
+        <block>{<block_content>
+            <decl_stmt><decl><type><name>auto</name></type> <name>totals</name> <init>=
+                <expr><call><name><name>m_objectWriters</name><operator>.</operator><name>top</name></name><argument_list>()</argument_list></call><operator>.</operator><call><name>write</name><argument_list>( <argument><expr><literal type="string">"totals"</literal><name>_sr</name></expr></argument> )</argument_list></call><operator>.</operator><call><name>writeObject</name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+            <expr_stmt><expr><call><name>writeCounts</name><argument_list>( <argument><expr><call><name><name>totals</name><operator>.</operator><name>write</name></name><argument_list>( <argument><expr><literal type="string">"assertions"</literal><name>_sr</name></expr></argument> )</argument_list></call><operator>.</operator><call><name>writeObject</name><argument_list>()</argument_list></call></expr></argument>,
+                         <argument><expr><name><name>tcStats</name><operator>.</operator><name>totals</name><operator>.</operator><name>assertions</name></name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+            <comment type="line">// We do not write the test case totals, because there will</comment>
+            <comment type="line">// always be just one test case here.</comment>
+            <comment type="line">// TODO: overall "result" -&gt; success, skip, fail here? Or in</comment>
+            <comment type="line">// partial result?</comment>
+        </block_content>}</block>
+        <comment type="line">// TODO: aborting?</comment>
+        <comment type="line">// run object</comment>
+        <expr_stmt><expr><call><name>endObject</name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block></function>
+
+    <function><type><name>void</name></type> <name><name>JsonReporter</name><operator>::</operator><name>sectionStarting</name></name><parameter_list>( <parameter><decl><type><name>SectionInfo</name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>sectionInfo</name></decl></parameter> )</parameter_list> <block>{<block_content>
+        <expr_stmt><expr><call><name>assert</name><argument_list>( <argument><expr><call><name>isInside</name><argument_list>( <argument><expr><name><name>Writer</name><operator>::</operator><name>Array</name></name></expr></argument> )</argument_list></call> <operator>&amp;&amp;</operator>
+                <literal type="string">"Section should always start inside an object"</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        <comment type="line">// We want to nest top level sections, even though it shares name</comment>
+        <comment type="line">// and source loc with the TEST_CASE</comment>
+        <expr_stmt><expr><name>auto</name><operator>&amp;</operator> <name>sectionObject</name> <operator>=</operator> <call><name>startObject</name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name><name>sectionObject</name><operator>.</operator><name>write</name></name><argument_list>( <argument><expr><literal type="string">"kind"</literal><name>_sr</name></expr></argument> )</argument_list></call><operator>.</operator><call><name>write</name><argument_list>( <argument><expr><literal type="string">"section"</literal><name>_sr</name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name><name>sectionObject</name><operator>.</operator><name>write</name></name><argument_list>( <argument><expr><literal type="string">"name"</literal><name>_sr</name></expr></argument> )</argument_list></call><operator>.</operator><call><name>write</name><argument_list>( <argument><expr><name><name>sectionInfo</name><operator>.</operator><name>name</name></name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name>writeSourceInfo</name><argument_list>( <argument><expr><call><name><name>m_objectWriters</name><operator>.</operator><name>top</name></name><argument_list>()</argument_list></call></expr></argument>, <argument><expr><name><name>sectionInfo</name><operator>.</operator><name>lineInfo</name></name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+
+
+        <comment type="line">// TBD: Do we want to create this event lazily? It would become</comment>
+        <comment type="line">//      rather complex, but we could do it, and it would look</comment>
+        <comment type="line">//      better for empty sections. OTOH, empty sections should</comment>
+        <comment type="line">//      be rare.</comment>
+        <expr_stmt><expr><call><name>startArray</name><argument_list>( <argument><expr><literal type="string">"path"</literal><name>_sr</name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block></function>
+    <function><type><name>void</name></type> <name><name>JsonReporter</name><operator>::</operator><name>sectionEnded</name></name><parameter_list>( <parameter><decl><type><name>SectionStats</name> <specifier>const</specifier><modifier>&amp;</modifier></type></decl></parameter> <comment type="block">/*sectionStats */</comment>)</parameter_list> <block>{<block_content>
+        <comment type="line">// End the subpath array</comment>
+        <expr_stmt><expr><call><name>endArray</name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+        <comment type="line">// TODO: metadata</comment>
+        <comment type="line">// TODO: what info do we have here?</comment>
+
+        <comment type="line">// End the section object</comment>
+        <expr_stmt><expr><call><name>endObject</name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block></function>
+
+    <function><type><name>void</name></type> <name><name>JsonReporter</name><operator>::</operator><name>assertionStarting</name></name><parameter_list>( <parameter><decl><type><name>AssertionInfo</name> <specifier>const</specifier><modifier>&amp;</modifier></type></decl></parameter> <comment type="block">/*assertionInfo*/</comment> )</parameter_list> <block>{<block_content/>}</block></function>
+    <function><type><name>void</name></type> <name><name>JsonReporter</name><operator>::</operator><name>assertionEnded</name></name><parameter_list>( <parameter><decl><type><name>AssertionStats</name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>assertionStats</name></decl></parameter> )</parameter_list> <block>{<block_content>
+        <comment type="line">// TODO: There is lot of different things to handle here, but</comment>
+        <comment type="line">//       we can fill it in later, after we show that the basic</comment>
+        <comment type="line">//       outline and streaming reporter impl works well enough.</comment>
+        <comment type="line">//if ( !m_config-&gt;includeSuccessfulResults()</comment>
+        <comment type="line">//    &amp;&amp; assertionStats.assertionResult.isOk() ) {</comment>
+        <comment type="line">//    return;</comment>
+        <comment type="line">//}</comment>
+        <expr_stmt><expr><call><name>assert</name><argument_list>( <argument><expr><call><name>isInside</name><argument_list>( <argument><expr><name><name>Writer</name><operator>::</operator><name>Array</name></name></expr></argument> )</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        <decl_stmt><decl><type><name>auto</name></type> <name>assertionObject</name> <init>= <expr><call><name><name>m_arrayWriters</name><operator>.</operator><name>top</name></name><argument_list>()</argument_list></call><operator>.</operator><call><name>writeObject</name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+
+        <expr_stmt><expr><call><name><name>assertionObject</name><operator>.</operator><name>write</name></name><argument_list>( <argument><expr><literal type="string">"kind"</literal><name>_sr</name></expr></argument> )</argument_list></call><operator>.</operator><call><name>write</name><argument_list>( <argument><expr><literal type="string">"assertion"</literal><name>_sr</name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name>writeSourceInfo</name><argument_list>( <argument><expr><name>assertionObject</name></expr></argument>,
+                         <argument><expr><call><name><name>assertionStats</name><operator>.</operator><name>assertionResult</name><operator>.</operator><name>getSourceInfo</name></name><argument_list>()</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name><name>assertionObject</name><operator>.</operator><name>write</name></name><argument_list>( <argument><expr><literal type="string">"status"</literal><name>_sr</name></expr></argument> )</argument_list></call>
+            <operator>.</operator><call><name>write</name><argument_list>( <argument><expr><call><name><name>assertionStats</name><operator>.</operator><name>assertionResult</name><operator>.</operator><name>isOk</name></name><argument_list>()</argument_list></call></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        <comment type="line">// TODO: handling of result.</comment>
+        <comment type="line">// TODO: messages</comment>
+        <comment type="line">// TODO: totals?</comment>
+    </block_content>}</block></function>
+
+
+    <function><type><name>void</name></type> <name><name>JsonReporter</name><operator>::</operator><name>benchmarkPreparing</name></name><parameter_list>( <parameter><decl><type><name>StringRef</name></type> <name>name</name></decl></parameter> )</parameter_list> <block>{<block_content> <expr_stmt><expr><operator>(</operator><name>void</name><operator>)</operator><name>name</name></expr>;</expr_stmt> </block_content>}</block></function>
+    <function><type><name>void</name></type> <name><name>JsonReporter</name><operator>::</operator><name>benchmarkStarting</name></name><parameter_list>( <parameter><decl><type><name>BenchmarkInfo</name> <specifier>const</specifier><modifier>&amp;</modifier></type></decl></parameter> )</parameter_list> <block>{<block_content/>}</block></function>
+    <function><type><name>void</name></type> <name><name>JsonReporter</name><operator>::</operator><name>benchmarkEnded</name></name><parameter_list>( <parameter><decl><type><name><name>BenchmarkStats</name><argument_list type="generic">&lt;&gt;</argument_list></name> <specifier>const</specifier><modifier>&amp;</modifier></type></decl></parameter> )</parameter_list> <block>{<block_content/>}</block></function>
+    <function><type><name>void</name></type> <name><name>JsonReporter</name><operator>::</operator><name>benchmarkFailed</name></name><parameter_list>( <parameter><decl><type><name>StringRef</name></type> <name>error</name></decl></parameter> )</parameter_list> <block>{<block_content> <expr_stmt><expr><operator>(</operator><name>void</name><operator>)</operator><name>error</name></expr>;</expr_stmt> </block_content>}</block></function>
+
+    <function><type><name>void</name></type> <name><name>JsonReporter</name><operator>::</operator><name>listReporters</name></name><parameter_list>(
+        <parameter><decl><type><name><name>std</name><operator>::</operator><name>vector</name><argument_list type="generic">&lt;<argument><expr><name>ReporterDescription</name></expr></argument>&gt;</argument_list></name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>descriptions</name></decl></parameter> )</parameter_list> <block>{<block_content>
+        <expr_stmt><expr><call><name>startListing</name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+
+        <decl_stmt><decl><type><name>auto</name></type> <name>writer</name> <init>=
+            <expr><call><name><name>m_objectWriters</name><operator>.</operator><name>top</name></name><argument_list>()</argument_list></call><operator>.</operator><call><name>write</name><argument_list>( <argument><expr><literal type="string">"reporters"</literal><name>_sr</name></expr></argument> )</argument_list></call><operator>.</operator><call><name>writeArray</name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+        <for>for <control>( <init><decl><type><specifier>auto</specifier> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>desc</name> <range>: <expr><name>descriptions</name></expr></range></decl></init> )</control> <block>{<block_content>
+            <decl_stmt><decl><type><name>auto</name></type> <name>desc_writer</name> <init>= <expr><call><name><name>writer</name><operator>.</operator><name>writeObject</name></name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+            <expr_stmt><expr><call><name><name>desc_writer</name><operator>.</operator><name>write</name></name><argument_list>( <argument><expr><literal type="string">"name"</literal><name>_sr</name></expr></argument> )</argument_list></call><operator>.</operator><call><name>write</name><argument_list>( <argument><expr><name><name>desc</name><operator>.</operator><name>name</name></name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+            <expr_stmt><expr><call><name><name>desc_writer</name><operator>.</operator><name>write</name></name><argument_list>( <argument><expr><literal type="string">"description"</literal><name>_sr</name></expr></argument> )</argument_list></call><operator>.</operator><call><name>write</name><argument_list>( <argument><expr><name><name>desc</name><operator>.</operator><name>description</name></name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        </block_content>}</block></for>
+    </block_content>}</block></function>
+    <function><type><name>void</name></type> <name><name>JsonReporter</name><operator>::</operator><name>listListeners</name></name><parameter_list>(
+        <parameter><decl><type><name><name>std</name><operator>::</operator><name>vector</name><argument_list type="generic">&lt;<argument><expr><name>ListenerDescription</name></expr></argument>&gt;</argument_list></name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>descriptions</name></decl></parameter> )</parameter_list> <block>{<block_content>
+        <expr_stmt><expr><call><name>startListing</name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+
+        <decl_stmt><decl><type><name>auto</name></type> <name>writer</name> <init>=
+            <expr><call><name><name>m_objectWriters</name><operator>.</operator><name>top</name></name><argument_list>()</argument_list></call><operator>.</operator><call><name>write</name><argument_list>( <argument><expr><literal type="string">"listeners"</literal><name>_sr</name></expr></argument> )</argument_list></call><operator>.</operator><call><name>writeArray</name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+
+        <for>for <control>( <init><decl><type><specifier>auto</specifier> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>desc</name> <range>: <expr><name>descriptions</name></expr></range></decl></init> )</control> <block>{<block_content>
+            <decl_stmt><decl><type><name>auto</name></type> <name>desc_writer</name> <init>= <expr><call><name><name>writer</name><operator>.</operator><name>writeObject</name></name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+            <expr_stmt><expr><call><name><name>desc_writer</name><operator>.</operator><name>write</name></name><argument_list>( <argument><expr><literal type="string">"name"</literal><name>_sr</name></expr></argument> )</argument_list></call><operator>.</operator><call><name>write</name><argument_list>( <argument><expr><name><name>desc</name><operator>.</operator><name>name</name></name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+            <expr_stmt><expr><call><name><name>desc_writer</name><operator>.</operator><name>write</name></name><argument_list>( <argument><expr><literal type="string">"description"</literal><name>_sr</name></expr></argument> )</argument_list></call><operator>.</operator><call><name>write</name><argument_list>( <argument><expr><name><name>desc</name><operator>.</operator><name>description</name></name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        </block_content>}</block></for>
+    </block_content>}</block></function>
+    <function><type><name>void</name></type> <name><name>JsonReporter</name><operator>::</operator><name>listTests</name></name><parameter_list>( <parameter><decl><type><name><name>std</name><operator>::</operator><name>vector</name><argument_list type="generic">&lt;<argument><expr><name>TestCaseHandle</name></expr></argument>&gt;</argument_list></name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>tests</name></decl></parameter> )</parameter_list> <block>{<block_content>
+        <expr_stmt><expr><call><name>startListing</name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+
+        <decl_stmt><decl><type><name>auto</name></type> <name>writer</name> <init>= <expr><call><name><name>m_objectWriters</name><operator>.</operator><name>top</name></name><argument_list>()</argument_list></call><operator>.</operator><call><name>write</name><argument_list>( <argument><expr><literal type="string">"tests"</literal><name>_sr</name></expr></argument> )</argument_list></call><operator>.</operator><call><name>writeArray</name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+
+        <for>for <control>( <init><decl><type><specifier>auto</specifier> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>test</name> <range>: <expr><name>tests</name></expr></range></decl></init> )</control> <block>{<block_content>
+            <decl_stmt><decl><type><name>auto</name></type> <name>desc_writer</name> <init>= <expr><call><name><name>writer</name><operator>.</operator><name>writeObject</name></name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+            <decl_stmt><decl><type><specifier>auto</specifier> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>info</name> <init>= <expr><call><name><name>test</name><operator>.</operator><name>getTestCaseInfo</name></name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+
+            <expr_stmt><expr><call><name><name>desc_writer</name><operator>.</operator><name>write</name></name><argument_list>( <argument><expr><literal type="string">"name"</literal><name>_sr</name></expr></argument> )</argument_list></call><operator>.</operator><call><name>write</name><argument_list>( <argument><expr><name><name>info</name><operator>.</operator><name>name</name></name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+            <expr_stmt><expr><call><name><name>desc_writer</name><operator>.</operator><name>write</name></name><argument_list>( <argument><expr><literal type="string">"class-name"</literal><name>_sr</name></expr></argument> )</argument_list></call><operator>.</operator><call><name>write</name><argument_list>( <argument><expr><name><name>info</name><operator>.</operator><name>className</name></name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+            <block>{<block_content>
+                <decl_stmt><decl><type><name>auto</name></type> <name>tag_writer</name> <init>= <expr><call><name><name>desc_writer</name><operator>.</operator><name>write</name></name><argument_list>( <argument><expr><literal type="string">"tags"</literal><name>_sr</name></expr></argument> )</argument_list></call><operator>.</operator><call><name>writeArray</name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+                <for>for <control>( <init><decl><type><specifier>auto</specifier> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>tag</name> <range>: <expr><name><name>info</name><operator>.</operator><name>tags</name></name></expr></range></decl></init> )</control> <block>{<block_content>
+                    <expr_stmt><expr><call><name><name>tag_writer</name><operator>.</operator><name>write</name></name><argument_list>( <argument><expr><name><name>tag</name><operator>.</operator><name>original</name></name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+                </block_content>}</block></for>
+            </block_content>}</block>
+            <expr_stmt><expr><call><name>writeSourceInfo</name><argument_list>( <argument><expr><name>desc_writer</name></expr></argument>, <argument><expr><name><name>info</name><operator>.</operator><name>lineInfo</name></name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        </block_content>}</block></for>
+    </block_content>}</block></function>
+    <function><type><name>void</name></type> <name><name>JsonReporter</name><operator>::</operator><name>listTags</name></name><parameter_list>( <parameter><decl><type><name><name>std</name><operator>::</operator><name>vector</name><argument_list type="generic">&lt;<argument><expr><name>TagInfo</name></expr></argument>&gt;</argument_list></name> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>tags</name></decl></parameter> )</parameter_list> <block>{<block_content>
+        <expr_stmt><expr><call><name>startListing</name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+
+        <decl_stmt><decl><type><name>auto</name></type> <name>writer</name> <init>= <expr><call><name><name>m_objectWriters</name><operator>.</operator><name>top</name></name><argument_list>()</argument_list></call><operator>.</operator><call><name>write</name><argument_list>( <argument><expr><literal type="string">"tags"</literal><name>_sr</name></expr></argument> )</argument_list></call><operator>.</operator><call><name>writeArray</name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+        <for>for <control>( <init><decl><type><specifier>auto</specifier> <specifier>const</specifier><modifier>&amp;</modifier></type> <name>tag</name> <range>: <expr><name>tags</name></expr></range></decl></init> )</control> <block>{<block_content>
+            <decl_stmt><decl><type><name>auto</name></type> <name>tag_writer</name> <init>= <expr><call><name><name>writer</name><operator>.</operator><name>writeObject</name></name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+            <block>{<block_content>
+                <decl_stmt><decl><type><name>auto</name></type> <name>aliases_writer</name> <init>=
+                    <expr><call><name><name>tag_writer</name><operator>.</operator><name>write</name></name><argument_list>( <argument><expr><literal type="string">"aliases"</literal><name>_sr</name></expr></argument> )</argument_list></call><operator>.</operator><call><name>writeArray</name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+                <for>for <control>( <init><decl><type><name>auto</name></type> <name>alias</name> <range>: <expr><name><name>tag</name><operator>.</operator><name>spellings</name></name></expr></range></decl></init> )</control> <block>{<block_content>
+                    <expr_stmt><expr><call><name><name>aliases_writer</name><operator>.</operator><name>write</name></name><argument_list>( <argument><expr><name>alias</name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+                </block_content>}</block></for>
+            </block_content>}</block>
+            <expr_stmt><expr><call><name><name>tag_writer</name><operator>.</operator><name>write</name></name><argument_list>( <argument><expr><literal type="string">"count"</literal><name>_sr</name></expr></argument> )</argument_list></call><operator>.</operator><call><name>write</name><argument_list>( <argument><expr><name><name>tag</name><operator>.</operator><name>count</name></name></expr></argument> )</argument_list></call></expr>;</expr_stmt>
+        </block_content>}</block></for>
+    </block_content>}</block></function>
+}</block></namespace> <comment type="line">// namespace Catch</comment>
+</unit>

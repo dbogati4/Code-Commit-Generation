@@ -1,0 +1,15 @@
+diff --git a/src/catch2/internal/catch_combined_tu.cpp b/src/catch2/internal/catch_combined_tu.cpp
+index 60106c46..021368b3 100644
+--- a/src/catch2/internal/catch_combined_tu.cpp
++++ b/src/catch2/internal/catch_combined_tu.cpp
+@@ -152,8 +152,8 @@ namespace Catch {
+ //////////////////////////////////////////////
+ // vvv formerly catch_leak_detector.cpp vvv //
+ //////////////////////////////////////////////
+- #include <catch2/internal/catch_leak_detector.hpp>
+- #include <catch2/interfaces/catch_interfaces_registry_hub.hpp>
++#include <catch2/internal/catch_leak_detector.hpp>
++#include <catch2/interfaces/catch_interfaces_registry_hub.hpp>
+ 
+ 
+ #ifdef CATCH_CONFIG_WINDOWS_CRTDBG
