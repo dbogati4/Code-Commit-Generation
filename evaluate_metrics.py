@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 Evaluate commit message generation using BLEU, ROUGE, and METEOR scores.
-Compares all variants and models against reference messages.
+Compares all variants and models against reference messages. 
 """
 
 import json
