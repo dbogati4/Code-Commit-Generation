@@ -1,0 +1,9 @@
+{
+  "commit_id": "ee73989f9bc3a42c6224218a222d90c44daf120c",
+  "parent_id": "646e1f608d37640d4f4e359cf6b7ff7d9c7bbcdd",
+  "message": "Suppress Wunreachable-code in floating matchers and exception tests",
+  "changed_files": [
+    "include/internal/catch_matchers_floating.cpp",
+    "projects/SelfTest/UsageTests/Exception.tests.cpp"
+  ]
+}

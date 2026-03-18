@@ -1,0 +1,14 @@
+{
+  "events": [
+    {
+      "event_id": "e1",
+      "op": "insert",
+      "node": "expr_stmt",
+      "level": "stmt",
+      "old": "",
+      "new": "#include <cstring>",
+      "enclosing": {},
+      "anchor": "unit[1]"
+    }
+  ]
+}

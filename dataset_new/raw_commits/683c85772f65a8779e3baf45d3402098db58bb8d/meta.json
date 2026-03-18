@@ -1,0 +1,8 @@
+{
+  "commit_id": "683c85772f65a8779e3baf45d3402098db58bb8d",
+  "parent_id": "1b049bdba40582d7c9c8f6e650496f701841b26d",
+  "message": "Clean up explanation in tests",
+  "changed_files": [
+    "tests/ExtraTests/X20-AssertionStartingEventGoesBeforeAssertionIsEvaluated.cpp"
+  ]
+}

@@ -1,0 +1,8 @@
+{
+  "commit_id": "9f091cbe9d9060f4241fb611486a1fbb8c552fc3",
+  "parent_id": "4c1e896d4770711ae8de75fb02be3daa8aef4fbc",
+  "message": "Remove some code duplication from default test listing impl",
+  "changed_files": [
+    "src/catch2/reporters/catch_reporter_combined_tu.cpp"
+  ]
+}

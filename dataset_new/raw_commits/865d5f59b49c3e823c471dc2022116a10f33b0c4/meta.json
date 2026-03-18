@@ -1,0 +1,8 @@
+{
+  "commit_id": "865d5f59b49c3e823c471dc2022116a10f33b0c4",
+  "parent_id": "05cd05743a75caeffbd6ad4c675ac68bc8e270f1",
+  "message": "Fix 'defined but not used' warning",
+  "changed_files": [
+    "include/internal/catch_fatal_condition.cpp"
+  ]
+}

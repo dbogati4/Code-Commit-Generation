@@ -1,0 +1,8 @@
+{
+  "commit_id": "beb8c3a99dd365509baced07c4e8dc2fa8005ac8",
+  "parent_id": "656b15d37be4a8ce36f3fdafd96232d642cfa28c",
+  "message": "Fixed typo in \"benchmark name\" column width calculation. Closes #1885.",
+  "changed_files": [
+    "src/catch2/reporters/catch_reporter_console.cpp"
+  ]
+}

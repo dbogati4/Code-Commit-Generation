@@ -1,0 +1,8 @@
+{
+  "commit_id": "ab6dd55fcf81fe08b76c3ced09cb7282157c29b5",
+  "parent_id": "b7632659f58dd43a4f88cc32b294b6925b6ba4b7",
+  "message": "Clara: formatting and code tweaks",
+  "changed_files": [
+    "projects/SelfTest/CmdLineTests.cpp"
+  ]
+}

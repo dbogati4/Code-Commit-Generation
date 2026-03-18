@@ -1,0 +1,8 @@
+{
+  "commit_id": "789f3591ef1ff05eaa816565956035628d9a08fb",
+  "parent_id": "6e8d769775c6840156355a663b9073be78ac4bcb",
+  "message": "Do not write singular characters into stream as C-strings",
+  "changed_files": [
+    "include/reporters/catch_reporter_console.cpp"
+  ]
+}

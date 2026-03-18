@@ -1,0 +1,13 @@
+diff --git a/include/internal/catch_commandline.cpp b/include/internal/catch_commandline.cpp
+index d92a1c39..1410baa4 100644
+--- a/include/internal/catch_commandline.cpp
++++ b/include/internal/catch_commandline.cpp
+@@ -135,7 +135,7 @@ namespace Catch {
+             + Opt( setWarning, "warning name" )
+                 ["-w"]["--warn"]
+                 ( "enable warnings" )
+-            + Opt( [&]( bool ) { config.showDurations = ShowDurations::Always; } )
++            + Opt( [&]( bool flag ) { config.showDurations = flag ? ShowDurations::Always : ShowDurations::Never; }, "yes|no" )
+                 ["-d"]["--durations"]
+                 ( "show test durations" )
+             + Opt( loadTestNamesFromFile, "filename" )

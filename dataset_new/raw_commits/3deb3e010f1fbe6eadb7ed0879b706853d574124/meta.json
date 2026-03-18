@@ -1,0 +1,8 @@
+{
+  "commit_id": "3deb3e010f1fbe6eadb7ed0879b706853d574124",
+  "parent_id": "73a140fb9e2aeed03011c70715ccd05be5eaf8d7",
+  "message": "Removed the \"part\" component of the tracker names",
+  "changed_files": [
+    "projects/SelfTest/PartTrackerTests.cpp"
+  ]
+}

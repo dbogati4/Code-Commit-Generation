@@ -1,0 +1,8 @@
+{
+  "commit_id": "ad564634770d04eac3ce1819dce49f6df3d2639b",
+  "parent_id": "9538d160051c09150645c0ed9b135a67f79200e0",
+  "message": "Flush stream after benchmarkStarting in ConsoleReporter",
+  "changed_files": [
+    "src/catch2/reporters/catch_reporter_console.cpp"
+  ]
+}

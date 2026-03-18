@@ -1,0 +1,8 @@
+{
+  "commit_id": "dcafc605f3232f5109e3f86ac8d8281e6ed611d2",
+  "parent_id": "7a2a6c632feb7d6e438671b8520beb80efd60ad2",
+  "message": "Only reseed the internal RNG when a test is first entered",
+  "changed_files": [
+    "src/catch2/internal/catch_run_context.cpp"
+  ]
+}

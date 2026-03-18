@@ -1,0 +1,106 @@
+diff --git a/src/catch2/catch_tostring.cpp b/src/catch2/catch_tostring.cpp
+index 4d80b173..cc686567 100644
+--- a/src/catch2/catch_tostring.cpp
++++ b/src/catch2/catch_tostring.cpp
+@@ -61,35 +61,35 @@ namespace Detail {
+         std::string ret;
+         // This is enough for the "don't escape invisibles" case, and a good
+         // lower bound on the "escape invisibles" case.
+-        ret.reserve(string.size() + 2);
++        ret.reserve( string.size() + 2 );
+ 
+-        if (!escapeInvisibles) {
++        if ( !escapeInvisibles ) {
+             ret += '"';
+             ret += string;
+             ret += '"';
+             return ret;
+         }
+ 
++        size_t last_start = 0;
++        auto write_to = [&]( size_t idx ) {
++            if ( last_start < idx ) {
++                ret += string.substr( last_start, idx - last_start );
++            }
++            last_start = idx + 1;
++        };
++
+         ret += '"';
+-        for (char c : string) {
+-            switch (c) {
+-            case '\r':
+-                ret.append("\\r");
+-                break;
+-            case '\n':
+-                ret.append("\\n");
+-                break;
+-            case '\t':
+-                ret.append("\\t");
+-                break;
+-            case '\f':
+-                ret.append("\\f");
+-                break;
+-            default:
+-                ret.push_back(c);
+-                break;
++        for ( size_t i = 0; i < string.size(); ++i ) {
++            const char c = string[i];
++            if ( c == '\r' || c == '\n' || c == '\t' || c == '\f' ) {
++                write_to( i );
++                if ( c == '\r' ) { ret.append( "\\r" ); }
++                if ( c == '\n' ) { ret.append( "\\n" ); }
++                if ( c == '\t' ) { ret.append( "\\t" ); }
++                if ( c == '\f' ) { ret.append( "\\f" ); }
+             }
+         }
++        write_to( string.size() );
+         ret += '"';
+ 
+         return ret;
+diff --git a/tests/SelfTest/IntrospectiveTests/ToString.tests.cpp b/tests/SelfTest/IntrospectiveTests/ToString.tests.cpp
+index be639ce3..01d989a7 100644
+--- a/tests/SelfTest/IntrospectiveTests/ToString.tests.cpp
++++ b/tests/SelfTest/IntrospectiveTests/ToString.tests.cpp
+@@ -6,11 +6,13 @@
+ 
+ // SPDX-License-Identifier: BSL-1.0
+ 
++#include <catch2/benchmark/catch_benchmark.hpp>
++#include <catch2/catch_template_test_macros.hpp>
++#include <catch2/catch_test_macros.hpp>
++#include <catch2/generators/catch_generators.hpp>
+ #include <catch2/internal/catch_enum_values_registry.hpp>
+ #include <catch2/matchers/catch_matchers_string.hpp>
+ #include <catch2/matchers/catch_matchers_vector.hpp>
+-#include <catch2/catch_test_macros.hpp>
+-#include <catch2/catch_template_test_macros.hpp>
+ 
+ #include <chrono>
+ 
+@@ -139,3 +141,26 @@ TEST_CASE( "Exception thrown inside stringify does not fail the test", "[toStrin
+     ThrowsOnStringification tos;
+     CHECK( tos == tos );
+ }
++
++TEST_CASE( "string escaping benchmark", "[toString][!benchmark]" ) {
++    const auto input_length = GENERATE( as<size_t>{}, 10, 100, 10'000, 100'000 );
++    std::string test_input( input_length, 'a' );
++    BENCHMARK( "no-escape string, no-escaping, len=" +
++               std::to_string( input_length ) ) {
++        return Catch::Detail::convertIntoString( test_input, false );
++    };
++    BENCHMARK( "no-escape string, escaping, len=" +
++               std::to_string( input_length ) ) {
++        return Catch::Detail::convertIntoString( test_input, true );
++    };
++
++    std::string escape_input( input_length, '\r' );
++    BENCHMARK( "full escape string, no-escaping, len=" +
++               std::to_string( input_length ) ) {
++        return Catch::Detail::convertIntoString( escape_input, false );
++    };
++    BENCHMARK( "full escape string, escaping, len=" +
++               std::to_string( input_length ) ) {
++        return Catch::Detail::convertIntoString( escape_input, true );
++    };
++}

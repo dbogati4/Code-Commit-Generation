@@ -1,0 +1,9 @@
+{
+  "commit_id": "684cbb2631fbb31c60e3a9cf1eedae22aa5227d0",
+  "parent_id": "6282999291f604c27d515cfeb9bb50ba01987d40",
+  "message": "Fixes issue with fatal errors and non-failing assertions Fixes #990",
+  "changed_files": [
+    "include/internal/catch_run_context.cpp",
+    "projects/SelfTest/TrickyTests.cpp"
+  ]
+}

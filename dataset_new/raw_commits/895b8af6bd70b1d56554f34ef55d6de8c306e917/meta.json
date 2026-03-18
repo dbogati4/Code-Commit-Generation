@@ -1,0 +1,8 @@
+{
+  "commit_id": "895b8af6bd70b1d56554f34ef55d6de8c306e917",
+  "parent_id": "066f00acf52f38fec7fc411b0b110b28f28a19fe",
+  "message": "Avoid needless copy in handling fatal errors",
+  "changed_files": [
+    "src/catch2/internal/catch_run_context.cpp"
+  ]
+}

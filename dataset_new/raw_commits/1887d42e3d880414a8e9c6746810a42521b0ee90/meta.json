@@ -1,0 +1,8 @@
+{
+  "commit_id": "1887d42e3d880414a8e9c6746810a42521b0ee90",
+  "parent_id": "1774dbfd53baa9af658abc71770da2702404fb63",
+  "message": "Use our PCG32 RNG instead of mt19937 in Benchmark::analyse_samples",
+  "changed_files": [
+    "src/catch2/benchmark/detail/catch_stats.cpp"
+  ]
+}

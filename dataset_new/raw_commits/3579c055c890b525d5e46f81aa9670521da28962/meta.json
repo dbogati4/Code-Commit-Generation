@@ -1,0 +1,10 @@
+{
+  "commit_id": "3579c055c890b525d5e46f81aa9670521da28962",
+  "parent_id": "3ec63324a823c19697720fda3eab1f18d297210c",
+  "message": "Use Detail::make_unique<T> in more places",
+  "changed_files": [
+    "src/catch2/catch_session.cpp",
+    "src/catch2/catch_test_case_info.cpp",
+    "src/catch2/internal/catch_stream.cpp"
+  ]
+}

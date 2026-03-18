@@ -1,0 +1,8 @@
+{
+  "commit_id": "6135a78c31c39e9d6cabb51c6fc5c21fa85d7e1f",
+  "parent_id": "e8ba329b6c66b06c4afd07953020b74c4b0f1a75",
+  "message": "Don't insert the foo part of [.foo] tag twice when parsing test spec",
+  "changed_files": [
+    "src/catch2/internal/catch_test_spec_parser.cpp"
+  ]
+}

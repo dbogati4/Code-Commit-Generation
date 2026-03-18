@@ -1,0 +1,14 @@
+{
+  "events": [
+    {
+      "event_id": "e1",
+      "op": "replace",
+      "node": "literal",
+      "level": "token",
+      "old": "100",
+      "new": "100.",
+      "enclosing": {},
+      "anchor": "unit[1]/namespace[name=Catch]/block[1]/constructor[name=Approx]/member_init_list[1]/call[name=m_epsilon]/argument_list[1]/argument[1]/expr[1]/literal[1]"
+    }
+  ]
+}

@@ -1,0 +1,8 @@
+{
+  "commit_id": "d26f763180c081c8c10d17dee59b2b1139268220",
+  "parent_id": "5e44382423585b99f33afd54c3c412c69ae2382f",
+  "message": "Initialize ReusableStringStream cache before user threads can run",
+  "changed_files": [
+    "src/catch2/internal/catch_run_context.cpp"
+  ]
+}

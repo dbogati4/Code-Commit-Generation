@@ -1,0 +1,8 @@
+{
+  "commit_id": "b601b7facadf8053d36b548d19d91a6cfe90acbd",
+  "parent_id": "b841650253975d6acd9a58f408eba0f91e366747",
+  "message": "Workaround AppleClang bug by renaming TestHasher constructor argument",
+  "changed_files": [
+    "src/catch2/internal/catch_test_case_registry_impl.cpp"
+  ]
+}

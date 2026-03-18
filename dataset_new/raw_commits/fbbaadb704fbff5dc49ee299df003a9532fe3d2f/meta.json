@@ -1,0 +1,8 @@
+{
+  "commit_id": "fbbaadb704fbff5dc49ee299df003a9532fe3d2f",
+  "parent_id": "dd1f0f1c7298cb51389cf5a2f8946aa0c8ca621c",
+  "message": "Use StringRef literal for unknown enum values instead of string lit",
+  "changed_files": [
+    "include/internal/catch_enum_values_registry.cpp"
+  ]
+}

@@ -1,0 +1,8 @@
+{
+  "commit_id": "bd2d918f328ddb916202f4952b25cf809434b290",
+  "parent_id": "d134b0cae3033c4ddc027fae6f76c66e8b0a6a73",
+  "message": "patched >2-digit tag-count padding in base reporter",
+  "changed_files": [
+    "src/catch2/reporters/catch_reporter_helpers.cpp"
+  ]
+}

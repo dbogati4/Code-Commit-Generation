@@ -1,0 +1,8 @@
+{
+  "commit_id": "7b2e7d623b626ed2cae1d4b7f2b5480bdabbefd8",
+  "parent_id": "3ca5cf32e59f77b3af106367fe725c336034667b",
+  "message": "Disable Bazel's env checking on UWP",
+  "changed_files": [
+    "src/catch2/catch_config.cpp"
+  ]
+}

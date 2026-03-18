@@ -1,0 +1,8 @@
+{
+  "commit_id": "f16be402f77eaea8996b60299f670bfa557cee52",
+  "parent_id": "e418e75c74274354b4c2c7597d919929426d89c8",
+  "message": "Make XmlEncoding tests slightly more efficient",
+  "changed_files": [
+    "tests/SelfTest/IntrospectiveTests/Xml.tests.cpp"
+  ]
+}

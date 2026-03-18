@@ -1,0 +1,8 @@
+{
+  "commit_id": "d09fe4459d0ed1174383a173a9bb50b028fe0d9e",
+  "parent_id": "e484236825ef5c70eb05dfe50ca05907df29a5c0",
+  "message": "Stop recounting constant string's length on each passed assertion",
+  "changed_files": [
+    "include/internal/catch_run_context.cpp"
+  ]
+}

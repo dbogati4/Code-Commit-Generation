@@ -1,0 +1,17 @@
+{
+  "events": [
+    {
+      "event_id": "e1",
+      "op": "replace",
+      "node": "return_expr",
+      "level": "stmt",
+      "old": "return std::chrono::duration_cast<std::chrono::nanoseconds>(std::chrono::high_resolution_clock::now().time_since_epoch()).count();",
+      "new": "return std::chrono::duration_cast<std::chrono::nanoseconds>(std::chrono::steady_clock::now().time_since_epoch()).count();",
+      "enclosing": {
+        "function": "getCurrentNanosecondsSinceEpoch",
+        "statement": "return"
+      },
+      "anchor": "unit[1]/namespace[name=Catch]/block[1]/namespace[1]/block[1]/function[name=getCurrentNanosecondsSinceEpoch]/block[1]/block_content[1]/return[1]"
+    }
+  ]
+}

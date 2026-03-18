@@ -1,0 +1,8 @@
+{
+  "commit_id": "912df7df354fd6c814b5d7c45ac44f494a5fb5fe",
+  "parent_id": "931f41b4d62bb572216c958899258e6d0b592f25",
+  "message": "Fix quadratic runtime when linebreaking strings without newlines",
+  "changed_files": [
+    "src/catch2/internal/catch_textflow.cpp"
+  ]
+}

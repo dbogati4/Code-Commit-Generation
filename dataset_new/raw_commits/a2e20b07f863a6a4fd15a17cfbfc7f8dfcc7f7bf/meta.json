@@ -1,0 +1,8 @@
+{
+  "commit_id": "a2e20b07f863a6a4fd15a17cfbfc7f8dfcc7f7bf",
+  "parent_id": "ace70407a260a023fd3513740251df1e676435bd",
+  "message": "\"Fix\" build by annotating the new test as !shouldfail",
+  "changed_files": [
+    "projects/SelfTest/MiscTests.cpp"
+  ]
+}

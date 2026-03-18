@@ -1,0 +1,14 @@
+{
+  "events": [
+    {
+      "event_id": "e1",
+      "op": "delete",
+      "node": "comment",
+      "level": "comment",
+      "old": "*",
+      "new": "",
+      "enclosing": {},
+      "anchor": "unit[1]/comment[6]"
+    }
+  ]
+}

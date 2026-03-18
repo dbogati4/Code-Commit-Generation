@@ -1,0 +1,8 @@
+{
+  "commit_id": "5e063616dfc2e6f12edac666129f0cf58f5d7ae4",
+  "parent_id": "aa9d635014c3ab321fe65bd59c50fa71d6a86583",
+  "message": "Moved runner helpers into Catch namespace",
+  "changed_files": [
+    "include/internal/catch_session.cpp"
+  ]
+}

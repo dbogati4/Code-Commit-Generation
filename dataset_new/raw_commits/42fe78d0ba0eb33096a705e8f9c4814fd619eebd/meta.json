@@ -1,0 +1,8 @@
+{
+  "commit_id": "42fe78d0ba0eb33096a705e8f9c4814fd619eebd",
+  "parent_id": "2bce3e276b5f859ac45c43f011ffed98d0325115",
+  "message": "Handle active Sections for fatal errors",
+  "changed_files": [
+    "src/catch2/internal/catch_run_context.cpp"
+  ]
+}

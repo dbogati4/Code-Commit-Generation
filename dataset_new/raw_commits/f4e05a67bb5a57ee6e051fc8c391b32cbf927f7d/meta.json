@@ -1,0 +1,9 @@
+{
+  "commit_id": "f4e05a67bb5a57ee6e051fc8c391b32cbf927f7d",
+  "parent_id": "fb2e4fbe413824a5cad4101c0e94cb10b7828f0d",
+  "message": "Improve performance of writing XML",
+  "changed_files": [
+    "src/catch2/internal/catch_xmlwriter.cpp",
+    "tests/SelfTest/IntrospectiveTests/Xml.tests.cpp"
+  ]
+}

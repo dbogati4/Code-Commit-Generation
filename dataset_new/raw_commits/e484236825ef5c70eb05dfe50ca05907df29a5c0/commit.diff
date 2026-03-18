@@ -1,0 +1,33 @@
+diff --git a/include/internal/catch_stringref.cpp b/include/internal/catch_stringref.cpp
+index 5b6970d0..e209cf39 100644
+--- a/include/internal/catch_stringref.cpp
++++ b/include/internal/catch_stringref.cpp
+@@ -14,8 +14,8 @@
+ #include "catch_stringref.h"
+ 
+ #include <ostream>
+-#include <cassert>
+ #include <cstring>
++#include <stdexcept>
+ 
+ 
+ 
+@@ -43,12 +43,12 @@ namespace Catch {
+         other.m_data = nullptr;
+     }
+ 
+-    StringRef::StringRef( char const* rawChars ) noexcept
+-    :   m_start( rawChars ),
+-        m_size( static_cast<size_type>( std::strlen( rawChars ) ) )
+-    {
+-        assert( rawChars != nullptr );
+-    }
++    StringRef::StringRef(char const* rawChars) noexcept
++        :   m_start(rawChars),
++            m_size( (rawChars != nullptr)?
++                    (static_cast<size_type>(std::strlen(rawChars))):
++                     throw std::domain_error("Cannot create StringRef from nullptr"))
++    {}
+ 
+     StringRef::StringRef( char const* rawChars, size_type size ) noexcept
+     :   m_start( rawChars ),

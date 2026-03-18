@@ -1,0 +1,8 @@
+{
+  "commit_id": "e6da4e10aeee70556f9cea23e71f8eea6151b3d9",
+  "parent_id": "816f69416be1bccd3bebfe61f631b654ea292723",
+  "message": "Use make_unique instead of unique_ptr(new T)",
+  "changed_files": [
+    "extras/catch_amalgamated.cpp"
+  ]
+}

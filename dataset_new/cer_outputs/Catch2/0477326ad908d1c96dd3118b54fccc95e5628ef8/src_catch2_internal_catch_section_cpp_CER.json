@@ -1,0 +1,14 @@
+{
+  "events": [
+    {
+      "event_id": "e1",
+      "op": "replace",
+      "node": "expr_stmt",
+      "level": "stmt",
+      "old": "\"\"",
+      "new": "std::string {}",
+      "enclosing": {},
+      "anchor": "unit[1]/namespace[name=Catch]/block[1]/constructor[name=Section]/member_init_list[1]/call[name=m_info]/argument_list[1]/argument[2]/expr[1]"
+    }
+  ]
+}

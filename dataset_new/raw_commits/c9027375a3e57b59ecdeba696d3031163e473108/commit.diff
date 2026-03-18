@@ -1,0 +1,232 @@
+diff --git a/src/catch2/catch_session.cpp b/src/catch2/catch_session.cpp
+index 5b1a50a9..edfef717 100644
+--- a/src/catch2/catch_session.cpp
++++ b/src/catch2/catch_session.cpp
+@@ -161,16 +161,16 @@ namespace Catch {
+ 
+     void Session::showHelp() const {
+         Catch::cout()
+-                << "\nCatch v" << libraryVersion() << "\n"
+-                << m_cli << std::endl
+-                << "For more detailed usage please see the project docs\n" << std::endl;
++                << "\nCatch v" << libraryVersion() << '\n'
++                << m_cli << '\n'
++                << "For more detailed usage please see the project docs\n\n" << std::flush;
+     }
+     void Session::libIdentify() {
+         Catch::cout()
+                 << std::left << std::setw(16) << "description: " << "A Catch2 test executable\n"
+                 << std::left << std::setw(16) << "category: " << "testframework\n"
+                 << std::left << std::setw(16) << "framework: " << "Catch Test\n"
+-                << std::left << std::setw(16) << "version: " << libraryVersion() << std::endl;
++                << std::left << std::setw(16) << "version: " << libraryVersion() << '\n' << std::flush;
+     }
+ 
+     int Session::applyCommandLine( int argc, char const * const * argv ) {
+@@ -186,7 +186,7 @@ namespace Catch {
+                 << "\nError(s) in input:\n"
+                 << TextFlow::Column( result.errorMessage() ).indent( 2 )
+                 << "\n\n";
+-            Catch::cerr() << "Run with -? for usage\n" << std::endl;
++            Catch::cerr() << "Run with -? for usage\n\n" << std::flush;
+             return MaxExitCode;
+         }
+ 
+@@ -229,12 +229,12 @@ namespace Catch {
+ 
+     int Session::run() {
+         if( ( m_configData.waitForKeypress & WaitForKeypress::BeforeStart ) != 0 ) {
+-            Catch::cout() << "...waiting for enter/ return before starting" << std::endl;
++            Catch::cout() << "...waiting for enter/ return before starting\n" << std::flush;
+             static_cast<void>(std::getchar());
+         }
+         int exitCode = runInternal();
+         if( ( m_configData.waitForKeypress & WaitForKeypress::BeforeExit ) != 0 ) {
+-            Catch::cout() << "...waiting for enter/ return before exiting, with code: " << exitCode << std::endl;
++            Catch::cout() << "...waiting for enter/ return before exiting, with code: " << exitCode << '\n' << std::flush;
+             static_cast<void>(std::getchar());
+         }
+         return exitCode;
+@@ -296,7 +296,7 @@ namespace Catch {
+         }
+ #if !defined(CATCH_CONFIG_DISABLE_EXCEPTIONS)
+         catch( std::exception& ex ) {
+-            Catch::cerr() << ex.what() << std::endl;
++            Catch::cerr() << ex.what() << '\n' << std::flush;
+             return MaxExitCode;
+         }
+ #endif
+diff --git a/src/catch2/internal/catch_debugger.cpp b/src/catch2/internal/catch_debugger.cpp
+index e1764034..3c80173a 100644
+--- a/src/catch2/internal/catch_debugger.cpp
++++ b/src/catch2/internal/catch_debugger.cpp
+@@ -53,7 +53,7 @@
+ 
+             size = sizeof(info);
+             if( sysctl(mib, sizeof(mib) / sizeof(*mib), &info, &size, nullptr, 0) != 0 ) {
+-                Catch::cerr() << "\n** Call to sysctl failed - unable to determine if debugger is active **\n" << std::endl;
++                Catch::cerr() << "\n** Call to sysctl failed - unable to determine if debugger is active **\n\n" << std::flush;
+                 return false;
+             }
+ 
+diff --git a/src/catch2/internal/catch_xmlwriter.cpp b/src/catch2/internal/catch_xmlwriter.cpp
+index 4ea09ab5..80ff4108 100644
+--- a/src/catch2/internal/catch_xmlwriter.cpp
++++ b/src/catch2/internal/catch_xmlwriter.cpp
+@@ -329,7 +329,7 @@ namespace {
+ 
+     void XmlWriter::newlineIfNecessary() {
+         if( m_needsNewline ) {
+-            m_os << std::endl;
++            m_os << '\n' << std::flush;
+             m_needsNewline = false;
+         }
+     }
+diff --git a/src/catch2/reporters/catch_reporter_combined_tu.cpp b/src/catch2/reporters/catch_reporter_combined_tu.cpp
+index 25a52e9d..4dd53298 100644
+--- a/src/catch2/reporters/catch_reporter_combined_tu.cpp
++++ b/src/catch2/reporters/catch_reporter_combined_tu.cpp
+@@ -169,7 +169,7 @@ namespace Catch {
+                                .width( CATCH_CONFIG_CONSOLE_WIDTH - 10 );
+             out << str << wrapper << '\n';
+         }
+-        out << pluralise( tags.size(), "tag" ) << '\n' << std::endl;
++        out << pluralise(tags.size(), "tag") << "\n\n" << std::flush;
+     }
+ 
+     void defaultListTests(std::ostream& out, std::vector<TestCaseHandle> const& tests, bool isFiltered, Verbosity verbosity) {
+@@ -196,7 +196,7 @@ namespace Catch {
+ 
+             out << TextFlow::Column(testCaseInfo.name).initialIndent(2).indent(4) << '\n';
+             if (verbosity >= Verbosity::High) {
+-                out << TextFlow::Column(Catch::Detail::stringify(testCaseInfo.lineInfo)).indent(4) << std::endl;
++                out << TextFlow::Column(Catch::Detail::stringify(testCaseInfo.lineInfo)).indent(4) << '\n' << std::flush;
+             }
+             if (!testCaseInfo.tags.empty() &&
+                 verbosity > Verbosity::Quiet) {
+@@ -205,9 +205,9 @@ namespace Catch {
+         }
+ 
+         if (isFiltered) {
+-            out << pluralise(tests.size(), "matching test case") << '\n' << std::endl;
++            out << pluralise(tests.size(), "matching test case") << "\n\n" << std::flush;
+         } else {
+-            out << pluralise(tests.size(), "test case") << '\n' << std::endl;
++            out << pluralise(tests.size(), "test case") << "\n\n" << std::flush;
+         }
+     }
+ 
+diff --git a/src/catch2/reporters/catch_reporter_compact.cpp b/src/catch2/reporters/catch_reporter_compact.cpp
+index d59cb5a5..a323e1fd 100644
+--- a/src/catch2/reporters/catch_reporter_compact.cpp
++++ b/src/catch2/reporters/catch_reporter_compact.cpp
+@@ -259,7 +259,7 @@ private:
+         }
+ 
+         void CompactReporter::noMatchingTestCases( std::string const& spec ) {
+-            stream << "No test cases matched '" << spec << '\'' << std::endl;
++            stream << "No test cases matched '" << spec << "'\n";
+         }
+ 
+         void CompactReporter::assertionStarting( AssertionInfo const& ) {}
+@@ -279,20 +279,20 @@ private:
+             AssertionPrinter printer( stream, _assertionStats, printInfoMessages );
+             printer.print();
+ 
+-            stream << std::endl;
++            stream << '\n' << std::flush;
+             return true;
+         }
+ 
+         void CompactReporter::sectionEnded(SectionStats const& _sectionStats) {
+             double dur = _sectionStats.durationInSeconds;
+             if ( shouldShowDuration( *m_config, dur ) ) {
+-                stream << getFormattedDuration( dur ) << " s: " << _sectionStats.sectionInfo.name << std::endl;
++                stream << getFormattedDuration( dur ) << " s: " << _sectionStats.sectionInfo.name << '\n' << std::flush;
+             }
+         }
+ 
+         void CompactReporter::testRunEnded( TestRunStats const& _testRunStats ) {
+             printTotals( stream, _testRunStats.totals );
+-            stream << '\n' << std::endl;
++            stream << "\n\n" << std::flush;
+             StreamingReporterBase::testRunEnded( _testRunStats );
+         }
+ 
+diff --git a/src/catch2/reporters/catch_reporter_console.cpp b/src/catch2/reporters/catch_reporter_console.cpp
+index 20f6b121..80036d27 100644
+--- a/src/catch2/reporters/catch_reporter_console.cpp
++++ b/src/catch2/reporters/catch_reporter_console.cpp
+@@ -310,7 +310,7 @@ public:
+     void close() {
+         if (m_isOpen) {
+             *this << RowBreak();
+-            m_os << std::endl;
++            m_os << '\n' << std::flush;
+             m_isOpen = false;
+         }
+     }
+@@ -382,11 +382,11 @@ std::string ConsoleReporter::getDescription() {
+ }
+ 
+ void ConsoleReporter::noMatchingTestCases(std::string const& spec) {
+-    stream << "No test cases matched '" << spec << '\'' << std::endl;
++    stream << "No test cases matched '" << spec << "'\n";
+ }
+ 
+-void ConsoleReporter::reportInvalidArguments(std::string const&arg){
+-    stream << "Invalid Filter: " << arg << std::endl;
++void ConsoleReporter::reportInvalidArguments(std::string const& arg) {
++    stream << "Invalid Filter: " << arg << '\n';
+ }
+ 
+ void ConsoleReporter::assertionStarting(AssertionInfo const&) {}
+@@ -404,7 +404,7 @@ bool ConsoleReporter::assertionEnded(AssertionStats const& _assertionStats) {
+ 
+     ConsoleAssertionPrinter printer(stream, _assertionStats, includeResults);
+     printer.print();
+-    stream << std::endl;
++    stream << '\n' << std::flush;
+     return true;
+ }
+ 
+@@ -422,11 +422,11 @@ void ConsoleReporter::sectionEnded(SectionStats const& _sectionStats) {
+             stream << "\nNo assertions in section";
+         else
+             stream << "\nNo assertions in test case";
+-        stream << " '" << _sectionStats.sectionInfo.name << "'\n" << std::endl;
++        stream << " '" << _sectionStats.sectionInfo.name << "'\n\n" << std::flush;
+     }
+     double dur = _sectionStats.durationInSeconds;
+     if (shouldShowDuration(*m_config, dur)) {
+-        stream << getFormattedDuration(dur) << " s: " << _sectionStats.sectionInfo.name << std::endl;
++        stream << getFormattedDuration(dur) << " s: " << _sectionStats.sectionInfo.name << '\n' << std::flush;
+     }
+     if (m_headerPrinted) {
+         m_headerPrinted = false;
+@@ -490,14 +490,14 @@ void ConsoleReporter::testGroupEnded(TestGroupStats const& _testGroupStats) {
+         printSummaryDivider();
+         stream << "Summary for group '" << _testGroupStats.groupInfo.name << "':\n";
+         printTotals(_testGroupStats.totals);
+-        stream << '\n' << std::endl;
++        stream << "\n\n" << std::flush;
+     }
+     StreamingReporterBase::testGroupEnded(_testGroupStats);
+ }
+ void ConsoleReporter::testRunEnded(TestRunStats const& _testRunStats) {
+     printTotalsDivider(_testRunStats.totals);
+     printTotals(_testRunStats.totals);
+-    stream << std::endl;
++    stream << '\n' << std::flush;
+     StreamingReporterBase::testRunEnded(_testRunStats);
+ }
+ void ConsoleReporter::testRunStarting(TestRunInfo const& _testInfo) {
+@@ -561,7 +561,7 @@ void ConsoleReporter::printTestCaseAndSectionHeader() {
+     stream << lineOfChars('-') << '\n';
+     Colour colourGuard(Colour::FileName);
+     stream << lineInfo << '\n';
+-    stream << lineOfChars('.') << '\n' << std::endl;
++    stream << lineOfChars('.') << "\n\n" << std::flush;
+ }
+ 
+ void ConsoleReporter::printClosedHeader(std::string const& _name) {

@@ -1,0 +1,8 @@
+{
+  "commit_id": "9f8b848fe59ff9ec46093f87842a9413bce4ee92",
+  "parent_id": "aaaac35d928289b67f9b0774d29fb783fef82216",
+  "message": "XmlReporter: add information about rng-seed",
+  "changed_files": [
+    "include/reporters/catch_reporter_xml.cpp"
+  ]
+}

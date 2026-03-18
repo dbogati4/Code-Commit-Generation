@@ -1,0 +1,8 @@
+{
+  "commit_id": "06cf2a4724d74af88c0a4a9a7445424cc831afd6",
+  "parent_id": "4436a604566f18091489b55af215b8d32afe657a",
+  "message": "Apply PR #2297 to devel branch (#2300)",
+  "changed_files": [
+    "tests/SelfTest/UsageTests/Message.tests.cpp"
+  ]
+}

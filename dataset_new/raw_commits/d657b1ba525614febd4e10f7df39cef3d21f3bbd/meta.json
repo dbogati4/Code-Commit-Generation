@@ -1,0 +1,8 @@
+{
+  "commit_id": "d657b1ba525614febd4e10f7df39cef3d21f3bbd",
+  "parent_id": "acdd3b57452f17829241256bc387720c71a57d50",
+  "message": "Removed use of variadic form of SUCCEED from tests - as per #284",
+  "changed_files": [
+    "projects/SelfTest/MiscTests.cpp"
+  ]
+}

@@ -1,0 +1,13 @@
+diff --git a/projects/SelfTest/MiscTests.cpp b/projects/SelfTest/MiscTests.cpp
+index 8dbebea7..b753cf46 100644
+--- a/projects/SelfTest/MiscTests.cpp
++++ b/projects/SelfTest/MiscTests.cpp
+@@ -7,7 +7,7 @@
+  */
+ 
+ #include "catch.hpp"
+-#include "catch_xmlwriter.hpp"
++#include "internal/catch_xmlwriter.hpp"
+ 
+ #include <iostream>
+ 

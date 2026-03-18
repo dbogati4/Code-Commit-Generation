@@ -1,0 +1,17 @@
+{
+  "events": [
+    {
+      "event_id": "e1",
+      "op": "insert",
+      "node": "decl_stmt",
+      "level": "stmt",
+      "old": "",
+      "new": "m_state >> 59ustatic_cast<uint32_t>(m_state >> 59u)",
+      "enclosing": {
+        "function": "operator()",
+        "statement": "decl_stmt"
+      },
+      "anchor": "unit[1]/namespace[name=Catch]/block[1]/function[name=operator()]/block[1]/block_content[1]/decl_stmt[2]/decl[name=output]/init[1]/expr[1]/call[name=rotate_right]/argument_list[1]/argument[2]"
+    }
+  ]
+}

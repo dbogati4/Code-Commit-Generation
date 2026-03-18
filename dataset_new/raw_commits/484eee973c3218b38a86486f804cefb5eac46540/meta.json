@@ -1,0 +1,8 @@
+{
+  "commit_id": "484eee973c3218b38a86486f804cefb5eac46540",
+  "parent_id": "d09fe4459d0ed1174383a173a9bb50b028fe0d9e",
+  "message": "Move StringRef's impl details to anonymous namespace",
+  "changed_files": [
+    "include/internal/catch_stringref.cpp"
+  ]
+}

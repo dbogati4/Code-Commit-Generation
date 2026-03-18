@@ -1,0 +1,8 @@
+{
+  "commit_id": "88d7b8da25e9975793099bb4003a6f6729913e70",
+  "parent_id": "df0b0e64e11e1dd3c8364630cfb41397d21795a5",
+  "message": "Ensure stack size for POSIX signal handling is sufficient",
+  "changed_files": [
+    "include/internal/catch_fatal_condition.cpp"
+  ]
+}

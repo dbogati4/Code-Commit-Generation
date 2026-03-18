@@ -1,0 +1,8 @@
+{
+  "commit_id": "d58491c85a534a9348634ac3e4eb384df22f4d71",
+  "parent_id": "c837cb4a8aaa2064f63e67ed0a7f7055dbf159c5",
+  "message": "Move sectionInfo into sectionEndInfo when SECTION ends",
+  "changed_files": [
+    "src/catch2/internal/catch_section.cpp"
+  ]
+}

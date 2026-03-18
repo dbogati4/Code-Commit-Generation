@@ -1,0 +1,8 @@
+{
+  "commit_id": "f476bcb633b24870b7c0414b0caeb9e192f485e4",
+  "parent_id": "024cfb354211b40e368a66c40054d8881e26b8a8",
+  "message": "fix double promotion in catch_approx.cpp",
+  "changed_files": [
+    "src/catch2/catch_approx.cpp"
+  ]
+}

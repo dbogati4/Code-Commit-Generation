@@ -1,0 +1,14 @@
+diff --git a/src/catch2/internal/catch_test_case_tracker.cpp b/src/catch2/internal/catch_test_case_tracker.cpp
+index 098547fb..4341145d 100644
+--- a/src/catch2/internal/catch_test_case_tracker.cpp
++++ b/src/catch2/internal/catch_test_case_tracker.cpp
+@@ -50,7 +50,8 @@ namespace TestCaseTracking {
+ 
+ 
+     ITracker& TrackerContext::startRun() {
+-        m_rootTracker = std::make_shared<SectionTracker>( NameAndLocation( "{root}", CATCH_INTERNAL_LINEINFO ), *this, nullptr );
++        using namespace std::string_literals;
++        m_rootTracker = std::make_shared<SectionTracker>( NameAndLocation( "{root}"s, CATCH_INTERNAL_LINEINFO ), *this, nullptr );
+         m_currentTracker = nullptr;
+         m_runState = Executing;
+         return *m_rootTracker;

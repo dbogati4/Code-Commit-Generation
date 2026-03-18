@@ -1,0 +1,14 @@
+{
+  "events": [
+    {
+      "event_id": "e1",
+      "op": "replace",
+      "node": "expr_stmt",
+      "level": "stmt",
+      "old": "// X12-CustomDebugBreakMacro.cpp // Test that user-defined `CATCH_BREAK_INTO_DEBUGGER` is respected and used.",
+      "new": "/**\\file * Test that user-defined `CATCH_BREAK_INTO_DEBUGGER` is respected and used. */",
+      "enclosing": {},
+      "anchor": "unit[1]"
+    }
+  ]
+}

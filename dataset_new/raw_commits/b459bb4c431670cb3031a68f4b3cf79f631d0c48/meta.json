@@ -1,0 +1,8 @@
+{
+  "commit_id": "b459bb4c431670cb3031a68f4b3cf79f631d0c48",
+  "parent_id": "1e16be0b9e2d2fb9f72675d344ad028de90471b5",
+  "message": "Silence GCC's Wunused-function firing in compilation tests",
+  "changed_files": [
+    "projects/SelfTest/CompilationTests.cpp"
+  ]
+}

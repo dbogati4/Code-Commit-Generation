@@ -1,0 +1,35 @@
+diff --git a/include/internal/catch_console_colour.cpp b/include/internal/catch_console_colour.cpp
+index 13290544..946e2903 100644
+--- a/include/internal/catch_console_colour.cpp
++++ b/include/internal/catch_console_colour.cpp
+@@ -20,6 +20,7 @@
+ #include "catch_stream.h"
+ #include "catch_context.h"
+ #include "catch_platform.h"
++#include "catch_debugger.h"
+ 
+ namespace Catch {
+     namespace {
+@@ -156,6 +157,13 @@ namespace {
+         }
+     };
+ 
++    bool useColourOnPlatform() {
++        return
++#ifdef CATCH_PLATFORM_MAC
++            !isDebuggerActive() &&
++#endif
++            isatty(STDOUT_FILENO);
++    }
+     IColourImpl* platformColourInstance() {
+         ErrnoGuard guard;
+         IConfigPtr config = getCurrentContext().getConfig();
+@@ -163,7 +171,7 @@ namespace {
+             ? config->useColour()
+             : UseColour::Auto;
+         if( colourMode == UseColour::Auto )
+-            colourMode = isatty(STDOUT_FILENO)
++            colourMode = useColourOnPlatform()
+                 ? UseColour::Yes
+                 : UseColour::No;
+         return colourMode == UseColour::Yes

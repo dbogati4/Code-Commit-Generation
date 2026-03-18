@@ -1,0 +1,8 @@
+{
+  "commit_id": "3bfe900bbc3f2f066737922c7194a8e2e27a2cda",
+  "parent_id": "d30d0c01a7505cd27a8ef718bbd50d90b36363c4",
+  "message": "Move shard logic check after help flag check",
+  "changed_files": [
+    "src/catch2/catch_session.cpp"
+  ]
+}

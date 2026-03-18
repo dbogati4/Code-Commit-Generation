@@ -1,0 +1,14 @@
+{
+  "events": [
+    {
+      "event_id": "e1",
+      "op": "replace",
+      "node": "expr_stmt",
+      "level": "stmt",
+      "old": "// X02-DisabledMacros.cpp // Test that CATCH_CONFIG_DISABLE turns off TEST_CASE autoregistration // and expressions in assertion macros are not run.",
+      "new": "/**\\file * Test that CATCH_CONFIG_DISABLE turns off TEST_CASE autoregistration * and expressions in assertion macros are not run. */",
+      "enclosing": {},
+      "anchor": "unit[1]"
+    }
+  ]
+}

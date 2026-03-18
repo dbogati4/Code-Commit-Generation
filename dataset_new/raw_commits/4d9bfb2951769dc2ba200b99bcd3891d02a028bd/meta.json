@@ -1,0 +1,8 @@
+{
+  "commit_id": "4d9bfb2951769dc2ba200b99bcd3891d02a028bd",
+  "parent_id": "c4df47c2465ffecc5efc10420b5b36fc8e36990f",
+  "message": "Avoid static analysis warning in Approx",
+  "changed_files": [
+    "src/catch2/catch_approx.cpp"
+  ]
+}

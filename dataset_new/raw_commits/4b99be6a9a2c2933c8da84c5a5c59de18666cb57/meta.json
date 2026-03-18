@@ -1,0 +1,8 @@
+{
+  "commit_id": "4b99be6a9a2c2933c8da84c5a5c59de18666cb57",
+  "parent_id": "293e54dcbee9189f32e97dd218e10f1025a0e5af",
+  "message": "Cleaned tests up a bit",
+  "changed_files": [
+    "projects/SelfTest/PartTrackerTests.cpp"
+  ]
+}

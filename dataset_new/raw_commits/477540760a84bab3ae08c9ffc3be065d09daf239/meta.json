@@ -1,0 +1,8 @@
+{
+  "commit_id": "477540760a84bab3ae08c9ffc3be065d09daf239",
+  "parent_id": "b435e391c45c7cdb23c35cd2afb3435b0b7e53c7",
+  "message": "Use gmtime_r instead of gmtime when compiling for posixy platforms",
+  "changed_files": [
+    "src/catch2/reporters/catch_reporter_junit.cpp"
+  ]
+}

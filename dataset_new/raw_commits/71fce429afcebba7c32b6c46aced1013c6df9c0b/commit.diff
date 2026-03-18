@@ -1,0 +1,13 @@
+diff --git a/projects/SelfTest/IntrospectiveTests/String.tests.cpp b/projects/SelfTest/IntrospectiveTests/String.tests.cpp
+index 1a3bf6d2..8bf2ffb3 100644
+--- a/projects/SelfTest/IntrospectiveTests/String.tests.cpp
++++ b/projects/SelfTest/IntrospectiveTests/String.tests.cpp
+@@ -94,7 +94,7 @@ TEST_CASE( "StringRef", "[Strings][StringRef]" ) {
+             REQUIRE( ss.currentData() != s.currentData() ); // different pointer value
+ 
+             SECTION( "Self-assignment after substring" ) {
+-                ss = ss;
++                ss = *&ss; // the *& are there to suppress warnings (see: "Improvements to Clang's diagnostics" in https://rev.ng/gitlab/revng-bar-2019/clang/raw/master/docs/ReleaseNotes.rst)
+                 REQUIRE(isOwned(ss) == true);
+             }
+         }

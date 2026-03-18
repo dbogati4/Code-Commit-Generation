@@ -1,0 +1,17 @@
+diff --git a/include/reporters/catch_reporter_xml.cpp b/include/reporters/catch_reporter_xml.cpp
+index 1ea61c0b..18da6b66 100644
+--- a/include/reporters/catch_reporter_xml.cpp
++++ b/include/reporters/catch_reporter_xml.cpp
+@@ -95,10 +95,10 @@ namespace Catch {
+ 
+         bool includeResults = m_config->includeSuccessfulResults() || !result.isOk();
+ 
+-        if( includeResults ) {
++        if( includeResults || result.getResultType() == ResultWas::Warning ) {
+             // Print any info messages in <Info> tags.
+             for( auto const& msg : assertionStats.infoMessages ) {
+-                if( msg.type == ResultWas::Info ) {
++                if( msg.type == ResultWas::Info && includeResults ) {
+                     m_xml.scopedElement( "Info" )
+                             .writeText( msg.message );
+                 } else if ( msg.type == ResultWas::Warning ) {

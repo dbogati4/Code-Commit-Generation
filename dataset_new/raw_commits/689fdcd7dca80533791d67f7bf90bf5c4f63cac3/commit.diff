@@ -1,0 +1,12 @@
+diff --git a/tests/SelfTest/IntrospectiveTests/InternalBenchmark.tests.cpp b/tests/SelfTest/IntrospectiveTests/InternalBenchmark.tests.cpp
+index fa9f8e2e..24bfe68c 100644
+--- a/tests/SelfTest/IntrospectiveTests/InternalBenchmark.tests.cpp
++++ b/tests/SelfTest/IntrospectiveTests/InternalBenchmark.tests.cpp
+@@ -444,6 +444,6 @@ TEST_CASE("Failing benchmarks", "[!benchmark][.approvals]") {
+ }
+ 
+ TEST_CASE( "Failing benchmark respects should-fail",
+-           "[!shouldfail][!benchmark][.approvals]" ) {
++           "[!shouldfail][!benchmark][approvals]" ) {
+     BENCHMARK( "Asserting benchmark" ) { REQUIRE( 1 == 2 ); };
+ }

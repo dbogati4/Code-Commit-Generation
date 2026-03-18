@@ -1,0 +1,10 @@
+{
+  "commit_id": "dff7513b289f823fec91010f8898b8a01f7dcd12",
+  "parent_id": "bf5aa7b383b143ba9939fad289d1f7a41f07f8cd",
+  "message": "Static analysis cleanup in tests",
+  "changed_files": [
+    "tests/SelfTest/IntrospectiveTests/Details.tests.cpp",
+    "tests/SelfTest/IntrospectiveTests/Reporters.tests.cpp",
+    "tests/SelfTest/UsageTests/Matchers.tests.cpp"
+  ]
+}

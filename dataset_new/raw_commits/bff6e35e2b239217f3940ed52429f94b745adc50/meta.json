@@ -1,0 +1,8 @@
+{
+  "commit_id": "bff6e35e2b239217f3940ed52429f94b745adc50",
+  "parent_id": "d99eb8bec8de53639540820ee2a6563b88c4ba8c",
+  "message": "Replace last use of std::uniform_int_distribution with our own",
+  "changed_files": [
+    "src/catch2/benchmark/detail/catch_stats.cpp"
+  ]
+}

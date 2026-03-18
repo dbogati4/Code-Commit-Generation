@@ -1,0 +1,8 @@
+{
+  "commit_id": "cd93d202e047f91370b922f09db2e658653088de",
+  "parent_id": "227af796b4ede6258f9b1ff8b69cd1f03d32f662",
+  "message": "Small refactoring in CAPTURE parsing",
+  "changed_files": [
+    "src/catch2/catch_message.cpp"
+  ]
+}

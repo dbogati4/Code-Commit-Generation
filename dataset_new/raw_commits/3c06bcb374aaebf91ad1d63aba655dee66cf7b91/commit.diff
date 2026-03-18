@@ -1,0 +1,38 @@
+diff --git a/src/catch2/internal/catch_reporter_spec_parser.cpp b/src/catch2/internal/catch_reporter_spec_parser.cpp
+index a4f7105e..378a6f5a 100644
+--- a/src/catch2/internal/catch_reporter_spec_parser.cpp
++++ b/src/catch2/internal/catch_reporter_spec_parser.cpp
+@@ -139,7 +139,7 @@ namespace Catch {
+                     return {};
+                 }
+                 outputFileName = static_cast<std::string>( value );
+-            } else if ( key == "colour" ) {
++            } else if ( key == "colour-mode" ) {
+                 // Duplicated key
+                 if ( colourMode ) {
+                     return {};
+diff --git a/tests/SelfTest/IntrospectiveTests/CmdLineHelpers.tests.cpp b/tests/SelfTest/IntrospectiveTests/CmdLineHelpers.tests.cpp
+index 9045ad2a..b8a54390 100644
+--- a/tests/SelfTest/IntrospectiveTests/CmdLineHelpers.tests.cpp
++++ b/tests/SelfTest/IntrospectiveTests/CmdLineHelpers.tests.cpp
+@@ -81,7 +81,7 @@ TEST_CASE("Parsing reporter specs", "[cli][reporter-spec][approvals]") {
+                                {},
+                                { { "Xk1"s, "v1"s }, { "Xk2"s, "=v2"s } } ) );
+         REQUIRE( parseReporterSpec(
+-                     "Foo:bar:reporter::colour=ansi::Xk 1=v 1::Xk2=v:3" ) ==
++                     "Foo:bar:reporter::colour-mode=ansi::Xk 1=v 1::Xk2=v:3" ) ==
+                  ReporterSpec( "Foo:bar:reporter",
+                                {},
+                                Catch::ColourMode::ANSI,
+@@ -93,9 +93,9 @@ TEST_CASE("Parsing reporter specs", "[cli][reporter-spec][approvals]") {
+         // Unknown Catch2 arg (should be "out")
+         REQUIRE_FALSE( parseReporterSpec( "reporter::output=filename" ) );
+         // Wrong colour spec
+-        REQUIRE_FALSE( parseReporterSpec( "reporter::colour=custom" ) );
++        REQUIRE_FALSE( parseReporterSpec( "reporter::colour-mode=custom" ) );
+         // Duplicated colour spec
+-        REQUIRE_FALSE( parseReporterSpec( "reporter::colour=ansi::colour=ansi" ) );
++        REQUIRE_FALSE( parseReporterSpec( "reporter::colour-mode=ansi::colour-mode=ansi" ) );
+         // Duplicated out arg
+         REQUIRE_FALSE( parseReporterSpec( "reporter::out=f.txt::out=z.txt" ) );
+         // Duplicated custom arg

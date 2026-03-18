@@ -1,0 +1,719 @@
+diff --git a/tests/SelfTest/IntrospectiveTests/CmdLine.tests.cpp b/tests/SelfTest/IntrospectiveTests/CmdLine.tests.cpp
+index 53fc08b8..b4ec826b 100644
+--- a/tests/SelfTest/IntrospectiveTests/CmdLine.tests.cpp
++++ b/tests/SelfTest/IntrospectiveTests/CmdLine.tests.cpp
+@@ -1,7 +1,10 @@
+-/*
+- *  Distributed under the Boost Software License, Version 1.0. (See accompanying
+- *  file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
+- */
++
++//              Copyright Catch2 Authors
++// Distributed under the Boost Software License, Version 1.0.
++//   (See accompanying file LICENSE_1_0.txt or copy at
++//        https://www.boost.org/LICENSE_1_0.txt)
++
++// SPDX-License-Identifier: BSL-1.0
+ 
+ #include <catch2/catch_config.hpp>
+ #include <catch2/catch_approx.hpp>
+diff --git a/tests/SelfTest/IntrospectiveTests/Details.tests.cpp b/tests/SelfTest/IntrospectiveTests/Details.tests.cpp
+index ca72d733..987910a9 100644
+--- a/tests/SelfTest/IntrospectiveTests/Details.tests.cpp
++++ b/tests/SelfTest/IntrospectiveTests/Details.tests.cpp
+@@ -1,7 +1,10 @@
+-/*
+- *  Distributed under the Boost Software License, Version 1.0. (See accompanying
+- *  file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
+- */
++
++//              Copyright Catch2 Authors
++// Distributed under the Boost Software License, Version 1.0.
++//   (See accompanying file LICENSE_1_0.txt or copy at
++//        https://www.boost.org/LICENSE_1_0.txt)
++
++// SPDX-License-Identifier: BSL-1.0
+ 
+ #include <catch2/catch_test_macros.hpp>
+ #include <catch2/internal/catch_enforce.hpp>
+diff --git a/tests/SelfTest/IntrospectiveTests/FloatingPoint.tests.cpp b/tests/SelfTest/IntrospectiveTests/FloatingPoint.tests.cpp
+index 7a1ca110..242a8967 100644
+--- a/tests/SelfTest/IntrospectiveTests/FloatingPoint.tests.cpp
++++ b/tests/SelfTest/IntrospectiveTests/FloatingPoint.tests.cpp
+@@ -1,3 +1,11 @@
++
++//              Copyright Catch2 Authors
++// Distributed under the Boost Software License, Version 1.0.
++//   (See accompanying file LICENSE_1_0.txt or copy at
++//        https://www.boost.org/LICENSE_1_0.txt)
++
++// SPDX-License-Identifier: BSL-1.0
++
+ #include <catch2/catch_test_macros.hpp>
+ #include <catch2/catch_template_test_macros.hpp>
+ #include <catch2/internal/catch_floating_point_helpers.hpp>
+diff --git a/tests/SelfTest/IntrospectiveTests/GeneratorsImpl.tests.cpp b/tests/SelfTest/IntrospectiveTests/GeneratorsImpl.tests.cpp
+index ac60525e..b25de054 100644
+--- a/tests/SelfTest/IntrospectiveTests/GeneratorsImpl.tests.cpp
++++ b/tests/SelfTest/IntrospectiveTests/GeneratorsImpl.tests.cpp
+@@ -1,3 +1,11 @@
++
++//              Copyright Catch2 Authors
++// Distributed under the Boost Software License, Version 1.0.
++//   (See accompanying file LICENSE_1_0.txt or copy at
++//        https://www.boost.org/LICENSE_1_0.txt)
++
++// SPDX-License-Identifier: BSL-1.0
++
+ #include <catch2/catch_approx.hpp>
+ #include <catch2/catch_test_macros.hpp>
+ #include <catch2/generators/catch_generator_exception.hpp>
+diff --git a/tests/SelfTest/IntrospectiveTests/InternalBenchmark.tests.cpp b/tests/SelfTest/IntrospectiveTests/InternalBenchmark.tests.cpp
+index 19fa8f95..ead52356 100644
+--- a/tests/SelfTest/IntrospectiveTests/InternalBenchmark.tests.cpp
++++ b/tests/SelfTest/IntrospectiveTests/InternalBenchmark.tests.cpp
+@@ -1,10 +1,11 @@
+-/*
+- *  Created by Joachim on 16/04/2019.
+- *  Adapted from donated nonius code.
+- *
+- *  Distributed under the Boost Software License, Version 1.0. (See accompanying
+- *  file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
+- */
++
++//              Copyright Catch2 Authors
++// Distributed under the Boost Software License, Version 1.0.
++//   (See accompanying file LICENSE_1_0.txt or copy at
++//        https://www.boost.org/LICENSE_1_0.txt)
++
++// SPDX-License-Identifier: BSL-1.0
++// Adapted from donated nonius code.
+ 
+ #include <catch2/catch_test_macros.hpp>
+ #include <catch2/catch_approx.hpp>
+diff --git a/tests/SelfTest/IntrospectiveTests/PartTracker.tests.cpp b/tests/SelfTest/IntrospectiveTests/PartTracker.tests.cpp
+index c56adc5e..025a2860 100644
+--- a/tests/SelfTest/IntrospectiveTests/PartTracker.tests.cpp
++++ b/tests/SelfTest/IntrospectiveTests/PartTracker.tests.cpp
+@@ -1,7 +1,10 @@
+-/*
+- *  Distributed under the Boost Software License, Version 1.0. (See accompanying
+- *  file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
+- */
++
++//              Copyright Catch2 Authors
++// Distributed under the Boost Software License, Version 1.0.
++//   (See accompanying file LICENSE_1_0.txt or copy at
++//        https://www.boost.org/LICENSE_1_0.txt)
++
++// SPDX-License-Identifier: BSL-1.0
+ 
+ #include <catch2/catch_test_macros.hpp>
+ #include <catch2/generators/catch_generators.hpp>
+diff --git a/tests/SelfTest/IntrospectiveTests/RandomNumberGeneration.tests.cpp b/tests/SelfTest/IntrospectiveTests/RandomNumberGeneration.tests.cpp
+index d4a36547..b79b372e 100644
+--- a/tests/SelfTest/IntrospectiveTests/RandomNumberGeneration.tests.cpp
++++ b/tests/SelfTest/IntrospectiveTests/RandomNumberGeneration.tests.cpp
+@@ -1,7 +1,10 @@
+-/*
+- *  Distributed under the Boost Software License, Version 1.0. (See accompanying
+- *  file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
+- */
++
++//              Copyright Catch2 Authors
++// Distributed under the Boost Software License, Version 1.0.
++//   (See accompanying file LICENSE_1_0.txt or copy at
++//        https://www.boost.org/LICENSE_1_0.txt)
++
++// SPDX-License-Identifier: BSL-1.0
+ 
+ #include <catch2/catch_test_macros.hpp>
+ #include <catch2/internal/catch_random_number_generator.hpp>
+diff --git a/tests/SelfTest/IntrospectiveTests/Sharding.tests.cpp b/tests/SelfTest/IntrospectiveTests/Sharding.tests.cpp
+index 9ef80d23..ec316347 100644
+--- a/tests/SelfTest/IntrospectiveTests/Sharding.tests.cpp
++++ b/tests/SelfTest/IntrospectiveTests/Sharding.tests.cpp
+@@ -1,7 +1,11 @@
+-/*
+- *  Distributed under the Boost Software License, Version 1.0. (See accompanying
+- *  file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
+- */
++
++//              Copyright Catch2 Authors
++// Distributed under the Boost Software License, Version 1.0.
++//   (See accompanying file LICENSE_1_0.txt or copy at
++//        https://www.boost.org/LICENSE_1_0.txt)
++
++// SPDX-License-Identifier: BSL-1.0
++
+ #include <catch2/catch_test_macros.hpp>
+ #include <catch2/generators/catch_generators_all.hpp>
+ 
+diff --git a/tests/SelfTest/IntrospectiveTests/String.tests.cpp b/tests/SelfTest/IntrospectiveTests/String.tests.cpp
+index 6245ca77..08f7dc2c 100644
+--- a/tests/SelfTest/IntrospectiveTests/String.tests.cpp
++++ b/tests/SelfTest/IntrospectiveTests/String.tests.cpp
+@@ -1,3 +1,11 @@
++
++//              Copyright Catch2 Authors
++// Distributed under the Boost Software License, Version 1.0.
++//   (See accompanying file LICENSE_1_0.txt or copy at
++//        https://www.boost.org/LICENSE_1_0.txt)
++
++// SPDX-License-Identifier: BSL-1.0
++
+ #include <catch2/catch_test_macros.hpp>
+ #include <catch2/internal/catch_stringref.hpp>
+ 
+diff --git a/tests/SelfTest/IntrospectiveTests/StringManip.tests.cpp b/tests/SelfTest/IntrospectiveTests/StringManip.tests.cpp
+index ad274939..8cd995cc 100644
+--- a/tests/SelfTest/IntrospectiveTests/StringManip.tests.cpp
++++ b/tests/SelfTest/IntrospectiveTests/StringManip.tests.cpp
+@@ -1,3 +1,11 @@
++
++//              Copyright Catch2 Authors
++// Distributed under the Boost Software License, Version 1.0.
++//   (See accompanying file LICENSE_1_0.txt or copy at
++//        https://www.boost.org/LICENSE_1_0.txt)
++
++// SPDX-License-Identifier: BSL-1.0
++
+ #include <catch2/catch_test_macros.hpp>
+ #include <catch2/matchers/catch_matchers_vector.hpp>
+ #include <catch2/internal/catch_string_manip.hpp>
+diff --git a/tests/SelfTest/IntrospectiveTests/Tag.tests.cpp b/tests/SelfTest/IntrospectiveTests/Tag.tests.cpp
+index b8d751cb..d87f966b 100644
+--- a/tests/SelfTest/IntrospectiveTests/Tag.tests.cpp
++++ b/tests/SelfTest/IntrospectiveTests/Tag.tests.cpp
+@@ -1,7 +1,10 @@
+-/*
+- *  Distributed under the Boost Software License, Version 1.0. (See accompanying
+- *  file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
+- */
++
++//              Copyright Catch2 Authors
++// Distributed under the Boost Software License, Version 1.0.
++//   (See accompanying file LICENSE_1_0.txt or copy at
++//        https://www.boost.org/LICENSE_1_0.txt)
++
++// SPDX-License-Identifier: BSL-1.0
+ 
+ #include <catch2/matchers/catch_matchers_string.hpp>
+ #include <catch2/matchers/catch_matchers_vector.hpp>
+diff --git a/tests/SelfTest/IntrospectiveTests/ToString.tests.cpp b/tests/SelfTest/IntrospectiveTests/ToString.tests.cpp
+index c0415dc3..63f072dd 100644
+--- a/tests/SelfTest/IntrospectiveTests/ToString.tests.cpp
++++ b/tests/SelfTest/IntrospectiveTests/ToString.tests.cpp
+@@ -1,3 +1,11 @@
++
++//              Copyright Catch2 Authors
++// Distributed under the Boost Software License, Version 1.0.
++//   (See accompanying file LICENSE_1_0.txt or copy at
++//        https://www.boost.org/LICENSE_1_0.txt)
++
++// SPDX-License-Identifier: BSL-1.0
++
+ #include <catch2/internal/catch_enum_values_registry.hpp>
+ #include <catch2/matchers/catch_matchers_vector.hpp>
+ #include <catch2/catch_test_macros.hpp>
+diff --git a/tests/SelfTest/IntrospectiveTests/UniquePtr.tests.cpp b/tests/SelfTest/IntrospectiveTests/UniquePtr.tests.cpp
+index d461232d..40c9886c 100644
+--- a/tests/SelfTest/IntrospectiveTests/UniquePtr.tests.cpp
++++ b/tests/SelfTest/IntrospectiveTests/UniquePtr.tests.cpp
+@@ -1,3 +1,11 @@
++
++//              Copyright Catch2 Authors
++// Distributed under the Boost Software License, Version 1.0.
++//   (See accompanying file LICENSE_1_0.txt or copy at
++//        https://www.boost.org/LICENSE_1_0.txt)
++
++// SPDX-License-Identifier: BSL-1.0
++
+ #include <catch2/catch_test_macros.hpp>
+ #include <catch2/internal/catch_unique_ptr.hpp>
+ 
+diff --git a/tests/SelfTest/IntrospectiveTests/Xml.tests.cpp b/tests/SelfTest/IntrospectiveTests/Xml.tests.cpp
+index 4659dc52..678d8c87 100644
+--- a/tests/SelfTest/IntrospectiveTests/Xml.tests.cpp
++++ b/tests/SelfTest/IntrospectiveTests/Xml.tests.cpp
+@@ -1,3 +1,11 @@
++
++//              Copyright Catch2 Authors
++// Distributed under the Boost Software License, Version 1.0.
++//   (See accompanying file LICENSE_1_0.txt or copy at
++//        https://www.boost.org/LICENSE_1_0.txt)
++
++// SPDX-License-Identifier: BSL-1.0
++
+ #include <catch2/catch_test_macros.hpp>
+ #include <catch2/internal/catch_xmlwriter.hpp>
+ 
+diff --git a/tests/SelfTest/TimingTests/Sleep.tests.cpp b/tests/SelfTest/TimingTests/Sleep.tests.cpp
+index 1c82e0e9..bfb222d0 100644
+--- a/tests/SelfTest/TimingTests/Sleep.tests.cpp
++++ b/tests/SelfTest/TimingTests/Sleep.tests.cpp
+@@ -1,9 +1,10 @@
+-/*
+- *  Copyright 2011 Two Blue Cubes Ltd. All rights reserved.
+- *
+- *  Distributed under the Boost Software License, Version 1.0. (See accompanying
+- *  file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
+- */
++
++//              Copyright Catch2 Authors
++// Distributed under the Boost Software License, Version 1.0.
++//   (See accompanying file LICENSE_1_0.txt or copy at
++//        https://www.boost.org/LICENSE_1_0.txt)
++
++// SPDX-License-Identifier: BSL-1.0
+ 
+ #include <catch2/catch_test_macros.hpp>
+ 
+diff --git a/tests/SelfTest/UsageTests/Approx.tests.cpp b/tests/SelfTest/UsageTests/Approx.tests.cpp
+index 1ae5fe04..853227a2 100644
+--- a/tests/SelfTest/UsageTests/Approx.tests.cpp
++++ b/tests/SelfTest/UsageTests/Approx.tests.cpp
+@@ -1,10 +1,10 @@
+-/*
+- *  Created by Phil on 28/04/2011.
+- *  Copyright 2011 Two Blue Cubes Ltd. All rights reserved.
+- *
+- *  Distributed under the Boost Software License, Version 1.0. (See accompanying
+- *  file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
+- */
++
++//              Copyright Catch2 Authors
++// Distributed under the Boost Software License, Version 1.0.
++//   (See accompanying file LICENSE_1_0.txt or copy at
++//        https://www.boost.org/LICENSE_1_0.txt)
++
++// SPDX-License-Identifier: BSL-1.0
+ 
+ #include <catch2/catch_test_macros.hpp>
+ #include <catch2/catch_approx.hpp>
+diff --git a/tests/SelfTest/UsageTests/BDD.tests.cpp b/tests/SelfTest/UsageTests/BDD.tests.cpp
+index eba58d38..b128196c 100644
+--- a/tests/SelfTest/UsageTests/BDD.tests.cpp
++++ b/tests/SelfTest/UsageTests/BDD.tests.cpp
+@@ -1,7 +1,10 @@
+-/*
+- *  Distributed under the Boost Software License, Version 1.0. (See accompanying
+- *  file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
+- */
++
++//              Copyright Catch2 Authors
++// Distributed under the Boost Software License, Version 1.0.
++//   (See accompanying file LICENSE_1_0.txt or copy at
++//        https://www.boost.org/LICENSE_1_0.txt)
++
++// SPDX-License-Identifier: BSL-1.0
+ 
+ #include <catch2/catch_test_macros.hpp>
+ 
+diff --git a/tests/SelfTest/UsageTests/Benchmark.tests.cpp b/tests/SelfTest/UsageTests/Benchmark.tests.cpp
+index b2d41cf2..14b00107 100644
+--- a/tests/SelfTest/UsageTests/Benchmark.tests.cpp
++++ b/tests/SelfTest/UsageTests/Benchmark.tests.cpp
+@@ -1,3 +1,12 @@
++
++//              Copyright Catch2 Authors
++// Distributed under the Boost Software License, Version 1.0.
++//   (See accompanying file LICENSE_1_0.txt or copy at
++//        https://www.boost.org/LICENSE_1_0.txt)
++
++// SPDX-License-Identifier: BSL-1.0
++// Adapted from donated nonius code.
++
+ #include <catch2/catch_test_macros.hpp>
+ #include <catch2/benchmark/catch_benchmark.hpp>
+ #include <catch2/benchmark/catch_constructor.hpp>
+diff --git a/tests/SelfTest/UsageTests/Class.tests.cpp b/tests/SelfTest/UsageTests/Class.tests.cpp
+index 94e83051..128f8711 100644
+--- a/tests/SelfTest/UsageTests/Class.tests.cpp
++++ b/tests/SelfTest/UsageTests/Class.tests.cpp
+@@ -1,7 +1,10 @@
+-/*
+- *  Distributed under the Boost Software License, Version 1.0. (See accompanying
+- *  file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
+- */
++
++//              Copyright Catch2 Authors
++// Distributed under the Boost Software License, Version 1.0.
++//   (See accompanying file LICENSE_1_0.txt or copy at
++//        https://www.boost.org/LICENSE_1_0.txt)
++
++// SPDX-License-Identifier: BSL-1.0
+ 
+ #include <catch2/catch_test_macros.hpp>
+ #include <catch2/catch_template_test_macros.hpp>
+diff --git a/tests/SelfTest/UsageTests/Compilation.tests.cpp b/tests/SelfTest/UsageTests/Compilation.tests.cpp
+index 866644e3..d45f8e6c 100644
+--- a/tests/SelfTest/UsageTests/Compilation.tests.cpp
++++ b/tests/SelfTest/UsageTests/Compilation.tests.cpp
+@@ -1,7 +1,10 @@
+-/*
+- *  Distributed under the Boost Software License, Version 1.0. (See accompanying
+- *  file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
+- */
++
++//              Copyright Catch2 Authors
++// Distributed under the Boost Software License, Version 1.0.
++//   (See accompanying file LICENSE_1_0.txt or copy at
++//        https://www.boost.org/LICENSE_1_0.txt)
++
++// SPDX-License-Identifier: BSL-1.0
+ 
+ #include <type_traits>
+ 
+diff --git a/tests/SelfTest/UsageTests/Condition.tests.cpp b/tests/SelfTest/UsageTests/Condition.tests.cpp
+index 916e98f1..198b4cdb 100644
+--- a/tests/SelfTest/UsageTests/Condition.tests.cpp
++++ b/tests/SelfTest/UsageTests/Condition.tests.cpp
+@@ -1,7 +1,11 @@
+-/*
+- *  Distributed under the Boost Software License, Version 1.0. (See accompanying
+- *  file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
+- */
++
++//              Copyright Catch2 Authors
++// Distributed under the Boost Software License, Version 1.0.
++//   (See accompanying file LICENSE_1_0.txt or copy at
++//        https://www.boost.org/LICENSE_1_0.txt)
++
++// SPDX-License-Identifier: BSL-1.0
++
+ #ifdef __clang__
+ #   pragma clang diagnostic push
+ #   pragma clang diagnostic ignored "-Wpadded"
+diff --git a/tests/SelfTest/UsageTests/Decomposition.tests.cpp b/tests/SelfTest/UsageTests/Decomposition.tests.cpp
+index 1ad5b796..0a169831 100644
+--- a/tests/SelfTest/UsageTests/Decomposition.tests.cpp
++++ b/tests/SelfTest/UsageTests/Decomposition.tests.cpp
+@@ -1,7 +1,10 @@
+-/*
+- *  Distributed under the Boost Software License, Version 1.0. (See accompanying
+- *  file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
+- */
++
++//              Copyright Catch2 Authors
++// Distributed under the Boost Software License, Version 1.0.
++//   (See accompanying file LICENSE_1_0.txt or copy at
++//        https://www.boost.org/LICENSE_1_0.txt)
++
++// SPDX-License-Identifier: BSL-1.0
+ 
+ #include <iostream>
+ #include <cstdio>
+diff --git a/tests/SelfTest/UsageTests/EnumToString.tests.cpp b/tests/SelfTest/UsageTests/EnumToString.tests.cpp
+index 2a6731cb..77ec5171 100644
+--- a/tests/SelfTest/UsageTests/EnumToString.tests.cpp
++++ b/tests/SelfTest/UsageTests/EnumToString.tests.cpp
+@@ -1,3 +1,11 @@
++
++//              Copyright Catch2 Authors
++// Distributed under the Boost Software License, Version 1.0.
++//   (See accompanying file LICENSE_1_0.txt or copy at
++//        https://www.boost.org/LICENSE_1_0.txt)
++
++// SPDX-License-Identifier: BSL-1.0
++
+ #include <catch2/catch_test_macros.hpp>
+ #include <catch2/internal/catch_enum_values_registry.hpp>
+ 
+diff --git a/tests/SelfTest/UsageTests/Exception.tests.cpp b/tests/SelfTest/UsageTests/Exception.tests.cpp
+index 9b4ea030..9b6d2a58 100644
+--- a/tests/SelfTest/UsageTests/Exception.tests.cpp
++++ b/tests/SelfTest/UsageTests/Exception.tests.cpp
+@@ -1,7 +1,10 @@
+-/*
+- *  Distributed under the Boost Software License, Version 1.0. (See accompanying
+- *  file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
+- */
++
++//              Copyright Catch2 Authors
++// Distributed under the Boost Software License, Version 1.0.
++//   (See accompanying file LICENSE_1_0.txt or copy at
++//        https://www.boost.org/LICENSE_1_0.txt)
++
++// SPDX-License-Identifier: BSL-1.0
+ 
+ #include <catch2/catch_test_macros.hpp>
+ #include <catch2/catch_translate_exception.hpp>
+diff --git a/tests/SelfTest/UsageTests/Generators.tests.cpp b/tests/SelfTest/UsageTests/Generators.tests.cpp
+index b2154a1a..5b205c85 100644
+--- a/tests/SelfTest/UsageTests/Generators.tests.cpp
++++ b/tests/SelfTest/UsageTests/Generators.tests.cpp
+@@ -1,3 +1,11 @@
++
++//              Copyright Catch2 Authors
++// Distributed under the Boost Software License, Version 1.0.
++//   (See accompanying file LICENSE_1_0.txt or copy at
++//        https://www.boost.org/LICENSE_1_0.txt)
++
++// SPDX-License-Identifier: BSL-1.0
++
+ #include <catch2/catch_test_macros.hpp>
+ #include <catch2/generators/catch_generator_exception.hpp>
+ #include <catch2/generators/catch_generators_adapters.hpp>
+diff --git a/tests/SelfTest/UsageTests/Matchers.tests.cpp b/tests/SelfTest/UsageTests/Matchers.tests.cpp
+index 75578d68..afb12495 100644
+--- a/tests/SelfTest/UsageTests/Matchers.tests.cpp
++++ b/tests/SelfTest/UsageTests/Matchers.tests.cpp
+@@ -1,7 +1,10 @@
+-/*
+- *  Distributed under the Boost Software License, Version 1.0. (See accompanying
+- *  file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
+- */
++
++//              Copyright Catch2 Authors
++// Distributed under the Boost Software License, Version 1.0.
++//   (See accompanying file LICENSE_1_0.txt or copy at
++//        https://www.boost.org/LICENSE_1_0.txt)
++
++// SPDX-License-Identifier: BSL-1.0
+ 
+ #include <catch2/catch_test_macros.hpp>
+ #include <catch2/catch_template_test_macros.hpp>
+diff --git a/tests/SelfTest/UsageTests/MatchersRanges.tests.cpp b/tests/SelfTest/UsageTests/MatchersRanges.tests.cpp
+index 912b5cdb..f384a9c9 100644
+--- a/tests/SelfTest/UsageTests/MatchersRanges.tests.cpp
++++ b/tests/SelfTest/UsageTests/MatchersRanges.tests.cpp
+@@ -1,5 +1,10 @@
+-// Distributed under the Boost Software License, Version 1.0. (See accompanying
+-// file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
++
++//              Copyright Catch2 Authors
++// Distributed under the Boost Software License, Version 1.0.
++//   (See accompanying file LICENSE_1_0.txt or copy at
++//        https://www.boost.org/LICENSE_1_0.txt)
++
++// SPDX-License-Identifier: BSL-1.0
+ 
+ #include <catch2/catch_test_macros.hpp>
+ #include <catch2/matchers/catch_matchers_container_properties.hpp>
+diff --git a/tests/SelfTest/UsageTests/Message.tests.cpp b/tests/SelfTest/UsageTests/Message.tests.cpp
+index 97ac4abd..2ec71b49 100644
+--- a/tests/SelfTest/UsageTests/Message.tests.cpp
++++ b/tests/SelfTest/UsageTests/Message.tests.cpp
+@@ -1,7 +1,10 @@
+-/*
+- *  Distributed under the Boost Software License, Version 1.0. (See accompanying
+- *  file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
+- */
++
++//              Copyright Catch2 Authors
++// Distributed under the Boost Software License, Version 1.0.
++//   (See accompanying file LICENSE_1_0.txt or copy at
++//        https://www.boost.org/LICENSE_1_0.txt)
++
++// SPDX-License-Identifier: BSL-1.0
+ 
+ #include <catch2/catch_test_macros.hpp>
+ #include <iostream>
+diff --git a/tests/SelfTest/UsageTests/Misc.tests.cpp b/tests/SelfTest/UsageTests/Misc.tests.cpp
+index f1f7db03..cf608dd9 100644
+--- a/tests/SelfTest/UsageTests/Misc.tests.cpp
++++ b/tests/SelfTest/UsageTests/Misc.tests.cpp
+@@ -1,7 +1,10 @@
+-/*
+- *  Distributed under the Boost Software License, Version 1.0. (See accompanying
+- *  file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
+- */
++
++//              Copyright Catch2 Authors
++// Distributed under the Boost Software License, Version 1.0.
++//   (See accompanying file LICENSE_1_0.txt or copy at
++//        https://www.boost.org/LICENSE_1_0.txt)
++
++// SPDX-License-Identifier: BSL-1.0
+ 
+ #include <catch2/catch_test_macros.hpp>
+ #include <catch2/catch_template_test_macros.hpp>
+diff --git a/tests/SelfTest/UsageTests/ToStringByte.tests.cpp b/tests/SelfTest/UsageTests/ToStringByte.tests.cpp
+index ceb94e22..e5e12468 100644
+--- a/tests/SelfTest/UsageTests/ToStringByte.tests.cpp
++++ b/tests/SelfTest/UsageTests/ToStringByte.tests.cpp
+@@ -1,3 +1,11 @@
++
++//              Copyright Catch2 Authors
++// Distributed under the Boost Software License, Version 1.0.
++//   (See accompanying file LICENSE_1_0.txt or copy at
++//        https://www.boost.org/LICENSE_1_0.txt)
++
++// SPDX-License-Identifier: BSL-1.0
++
+ #include <catch2/catch_test_macros.hpp>
+ 
+ #if defined(CATCH_CONFIG_CPP17_BYTE)
+diff --git a/tests/SelfTest/UsageTests/ToStringChrono.tests.cpp b/tests/SelfTest/UsageTests/ToStringChrono.tests.cpp
+index 27a3dc3d..22c31c68 100644
+--- a/tests/SelfTest/UsageTests/ToStringChrono.tests.cpp
++++ b/tests/SelfTest/UsageTests/ToStringChrono.tests.cpp
+@@ -1,3 +1,11 @@
++
++//              Copyright Catch2 Authors
++// Distributed under the Boost Software License, Version 1.0.
++//   (See accompanying file LICENSE_1_0.txt or copy at
++//        https://www.boost.org/LICENSE_1_0.txt)
++
++// SPDX-License-Identifier: BSL-1.0
++
+ #include <catch2/catch_test_macros.hpp>
+ 
+ #include <chrono>
+diff --git a/tests/SelfTest/UsageTests/ToStringGeneral.tests.cpp b/tests/SelfTest/UsageTests/ToStringGeneral.tests.cpp
+index c738b32c..b8f383b1 100644
+--- a/tests/SelfTest/UsageTests/ToStringGeneral.tests.cpp
++++ b/tests/SelfTest/UsageTests/ToStringGeneral.tests.cpp
+@@ -1,7 +1,10 @@
+-/*
+- *  Distributed under the Boost Software License, Version 1.0. (See accompanying
+- *  file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
+- */
++
++//              Copyright Catch2 Authors
++// Distributed under the Boost Software License, Version 1.0.
++//   (See accompanying file LICENSE_1_0.txt or copy at
++//        https://www.boost.org/LICENSE_1_0.txt)
++
++// SPDX-License-Identifier: BSL-1.0
+ 
+ #define CATCH_CONFIG_ENABLE_PAIR_STRINGMAKER
+ #include <catch2/catch_test_macros.hpp>
+diff --git a/tests/SelfTest/UsageTests/ToStringOptional.tests.cpp b/tests/SelfTest/UsageTests/ToStringOptional.tests.cpp
+index 2b7ac3ec..bc2d2561 100644
+--- a/tests/SelfTest/UsageTests/ToStringOptional.tests.cpp
++++ b/tests/SelfTest/UsageTests/ToStringOptional.tests.cpp
+@@ -1,3 +1,11 @@
++
++//              Copyright Catch2 Authors
++// Distributed under the Boost Software License, Version 1.0.
++//   (See accompanying file LICENSE_1_0.txt or copy at
++//        https://www.boost.org/LICENSE_1_0.txt)
++
++// SPDX-License-Identifier: BSL-1.0
++
+ #define CATCH_CONFIG_ENABLE_OPTIONAL_STRINGMAKER
+ #include <catch2/catch_test_macros.hpp>
+ 
+diff --git a/tests/SelfTest/UsageTests/ToStringPair.tests.cpp b/tests/SelfTest/UsageTests/ToStringPair.tests.cpp
+index 3b8608aa..4bf592a4 100644
+--- a/tests/SelfTest/UsageTests/ToStringPair.tests.cpp
++++ b/tests/SelfTest/UsageTests/ToStringPair.tests.cpp
+@@ -1,3 +1,11 @@
++
++//              Copyright Catch2 Authors
++// Distributed under the Boost Software License, Version 1.0.
++//   (See accompanying file LICENSE_1_0.txt or copy at
++//        https://www.boost.org/LICENSE_1_0.txt)
++
++// SPDX-License-Identifier: BSL-1.0
++
+ #define CATCH_CONFIG_ENABLE_PAIR_STRINGMAKER
+ #include <catch2/catch_test_macros.hpp>
+ 
+diff --git a/tests/SelfTest/UsageTests/ToStringTuple.tests.cpp b/tests/SelfTest/UsageTests/ToStringTuple.tests.cpp
+index 3912285b..415cbf83 100644
+--- a/tests/SelfTest/UsageTests/ToStringTuple.tests.cpp
++++ b/tests/SelfTest/UsageTests/ToStringTuple.tests.cpp
+@@ -1,3 +1,11 @@
++
++//              Copyright Catch2 Authors
++// Distributed under the Boost Software License, Version 1.0.
++//   (See accompanying file LICENSE_1_0.txt or copy at
++//        https://www.boost.org/LICENSE_1_0.txt)
++
++// SPDX-License-Identifier: BSL-1.0
++
+ #define CATCH_CONFIG_ENABLE_TUPLE_STRINGMAKER
+ #include <catch2/catch_test_macros.hpp>
+ 
+diff --git a/tests/SelfTest/UsageTests/ToStringVariant.tests.cpp b/tests/SelfTest/UsageTests/ToStringVariant.tests.cpp
+index de9748cd..e67a7a2c 100644
+--- a/tests/SelfTest/UsageTests/ToStringVariant.tests.cpp
++++ b/tests/SelfTest/UsageTests/ToStringVariant.tests.cpp
+@@ -1,3 +1,11 @@
++
++//              Copyright Catch2 Authors
++// Distributed under the Boost Software License, Version 1.0.
++//   (See accompanying file LICENSE_1_0.txt or copy at
++//        https://www.boost.org/LICENSE_1_0.txt)
++
++// SPDX-License-Identifier: BSL-1.0
++
+ #define CATCH_CONFIG_ENABLE_VARIANT_STRINGMAKER
+ #include <catch2/catch_test_macros.hpp>
+ 
+diff --git a/tests/SelfTest/UsageTests/ToStringVector.tests.cpp b/tests/SelfTest/UsageTests/ToStringVector.tests.cpp
+index 96c67672..a5ccbfa7 100644
+--- a/tests/SelfTest/UsageTests/ToStringVector.tests.cpp
++++ b/tests/SelfTest/UsageTests/ToStringVector.tests.cpp
+@@ -1,3 +1,11 @@
++
++//              Copyright Catch2 Authors
++// Distributed under the Boost Software License, Version 1.0.
++//   (See accompanying file LICENSE_1_0.txt or copy at
++//        https://www.boost.org/LICENSE_1_0.txt)
++
++// SPDX-License-Identifier: BSL-1.0
++
+ #include <catch2/catch_test_macros.hpp>
+ #include <vector>
+ #include <array>
+diff --git a/tests/SelfTest/UsageTests/ToStringWhich.tests.cpp b/tests/SelfTest/UsageTests/ToStringWhich.tests.cpp
+index 7af8cc5b..7069734f 100644
+--- a/tests/SelfTest/UsageTests/ToStringWhich.tests.cpp
++++ b/tests/SelfTest/UsageTests/ToStringWhich.tests.cpp
+@@ -1,7 +1,10 @@
+-/*
+- * Demonstrate which version of toString/StringMaker is being used
+- * for various types
+- */
++
++//              Copyright Catch2 Authors
++// Distributed under the Boost Software License, Version 1.0.
++//   (See accompanying file LICENSE_1_0.txt or copy at
++//        https://www.boost.org/LICENSE_1_0.txt)
++
++// SPDX-License-Identifier: BSL-1.0
+ 
+ #include <catch2/catch_test_macros.hpp>
+ 
+diff --git a/tests/SelfTest/UsageTests/Tricky.tests.cpp b/tests/SelfTest/UsageTests/Tricky.tests.cpp
+index 03f15032..bcfa7e69 100644
+--- a/tests/SelfTest/UsageTests/Tricky.tests.cpp
++++ b/tests/SelfTest/UsageTests/Tricky.tests.cpp
+@@ -1,7 +1,10 @@
+-/*
+- *  Distributed under the Boost Software License, Version 1.0. (See accompanying
+- *  file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
+- */
++
++//              Copyright Catch2 Authors
++// Distributed under the Boost Software License, Version 1.0.
++//   (See accompanying file LICENSE_1_0.txt or copy at
++//        https://www.boost.org/LICENSE_1_0.txt)
++
++// SPDX-License-Identifier: BSL-1.0
+ 
+ #ifdef __clang__
+ #pragma clang diagnostic ignored "-Wpadded"
+diff --git a/tests/SelfTest/UsageTests/VariadicMacros.tests.cpp b/tests/SelfTest/UsageTests/VariadicMacros.tests.cpp
+index c8754dee..7bc3920e 100644
+--- a/tests/SelfTest/UsageTests/VariadicMacros.tests.cpp
++++ b/tests/SelfTest/UsageTests/VariadicMacros.tests.cpp
+@@ -1,7 +1,10 @@
+-/*
+- *  Distributed under the Boost Software License, Version 1.0. (See accompanying
+- *  file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
+- */
++
++//              Copyright Catch2 Authors
++// Distributed under the Boost Software License, Version 1.0.
++//   (See accompanying file LICENSE_1_0.txt or copy at
++//        https://www.boost.org/LICENSE_1_0.txt)
++
++// SPDX-License-Identifier: BSL-1.0
+ 
+ #include <catch2/catch_test_macros.hpp>
+ 

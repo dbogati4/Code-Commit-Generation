@@ -1,0 +1,8 @@
+{
+  "commit_id": "07018e2fba61234b54dfd2633c2501a911938614",
+  "parent_id": "ff0a5227caf84d466e3c9c8d6b58469d651e5268",
+  "message": "Force __cdecl calling convention for wmain",
+  "changed_files": [
+    "src/catch2/internal/catch_main.cpp"
+  ]
+}

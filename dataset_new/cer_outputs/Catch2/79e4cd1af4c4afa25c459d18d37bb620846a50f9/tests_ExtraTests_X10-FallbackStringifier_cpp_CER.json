@@ -1,0 +1,14 @@
+{
+  "events": [
+    {
+      "event_id": "e1",
+      "op": "replace",
+      "node": "expr_stmt",
+      "level": "stmt",
+      "old": "// X10-FallbackStringifier.cpp // Test that defining fallbackStringifier compiles",
+      "new": "/**\\file * Test that the user can define custom fallbackStringifier * * This is done by defining a custom fallback stringifier that prints * out a specific string, and then asserting (to cause stringification) * over a type without stringification support. */",
+      "enclosing": {},
+      "anchor": "unit[1]"
+    }
+  ]
+}

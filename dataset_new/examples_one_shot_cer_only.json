@@ -1,0 +1,66 @@
+{
+  "description": "One-shot example: CER (Code Event Records) only - from 69-commit Catch2 dataset",
+  "source_commit_id": "f7e7fa0983e83b922cb6336ff3a55d33b2873943",
+  "variant": "cer_only",
+  "example": {
+    "cer": {
+      "events": [
+        {
+          "event_id": "e1",
+          "op": "insert",
+          "node": "expr_stmt",
+          "level": "stmt",
+          "new": "#include <tuple>"
+        },
+        {
+          "event_id": "e2",
+          "op": "insert",
+          "node": "type",
+          "level": "token",
+          "new": "std::size_t::pair<std::size_t, std::ostringstream*>",
+          "enclosing": {
+            "function": "add"
+          }
+        },
+        {
+          "event_id": "e3",
+          "op": "insert",
+          "node": "return_expr",
+          "level": "stmt",
+          "new": "m_streams.size()-1{ m_streams.size()-1, m_streams.back().get() }",
+          "enclosing": {
+            "function": "add",
+            "statement": "return"
+          }
+        },
+        {
+          "event_id": "e4",
+          "op": "insert",
+          "node": "return_expr",
+          "level": "stmt",
+          "new": "index { index, m_streams[index].get() }",
+          "enclosing": {
+            "function": "add",
+            "statement": "return"
+          }
+        },
+        {
+          "event_id": "e5",
+          "op": "replace",
+          "node": "expr_stmt",
+          "level": "stmt",
+          "old": ": m_index( Singleton<StringStreams>::getMutable().add() ), m_oss( Singleton<StringStreams>::getMutable().m_streams[m_index].get() )",
+          "new": ""
+        },
+        {
+          "event_id": "e6",
+          "op": "insert",
+          "node": "expr_stmt",
+          "level": "stmt",
+          "new": "std::tie( m_index, m_oss ) = Singleton<StringStreams>::getMutable().add();"
+        }
+      ]
+    },
+    "commit_message": "Fix ReusableStringStream to access the container under the lock (#3031)"
+  }
+}

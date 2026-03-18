@@ -1,0 +1,8 @@
+{
+  "commit_id": "a6ee7e20cd4011129816df7992c1a9db2ef4b58f",
+  "parent_id": "0b2af562710d1bac7fd32ca3f05bf1d713bb97e4",
+  "message": "Use isatty() when using GNU libc",
+  "changed_files": [
+    "src/catch2/internal/catch_console_colour.cpp"
+  ]
+}

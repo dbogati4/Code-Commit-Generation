@@ -1,0 +1,8 @@
+{
+  "commit_id": "95a2e547027cbf17f97f3ba3c2fd2465894eb250",
+  "parent_id": "6badd7d9ed96cad01ef093ff68fc95fea550ba4c",
+  "message": "Different approach to proper colouring of filters",
+  "changed_files": [
+    "src/catch2/reporters/catch_reporter_console.cpp"
+  ]
+}

@@ -1,0 +1,8 @@
+{
+  "commit_id": "19ab2117c5bac2f376f8da4a4b25e183137bcec0",
+  "parent_id": "4acf112c19a554b35ee1fd77e7c122284e8dd8ec",
+  "message": "Remove spurious test following merge",
+  "changed_files": [
+    "projects/SelfTest/TrickyTests.cpp"
+  ]
+}

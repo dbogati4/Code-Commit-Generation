@@ -1,0 +1,180 @@
+diff --git a/src/catch2/reporters/catch_reporter_compact.cpp b/src/catch2/reporters/catch_reporter_compact.cpp
+index 643626ea..3a9b870c 100644
+--- a/src/catch2/reporters/catch_reporter_compact.cpp
++++ b/src/catch2/reporters/catch_reporter_compact.cpp
+@@ -192,7 +192,7 @@ private:
+ private:
+     std::ostream& stream;
+     AssertionResult const& result;
+-    std::vector<MessageInfo> messages;
++    std::vector<MessageInfo> const& messages;
+     std::vector<MessageInfo>::const_iterator itMessage;
+     bool printInfoMessages;
+     ColourImpl* colourImpl;
+diff --git a/src/catch2/reporters/catch_reporter_console.cpp b/src/catch2/reporters/catch_reporter_console.cpp
+index b394d2be..a46b22cf 100644
+--- a/src/catch2/reporters/catch_reporter_console.cpp
++++ b/src/catch2/reporters/catch_reporter_console.cpp
+@@ -51,7 +51,6 @@ public:
+         stats(_stats),
+         result(_stats.assertionResult),
+         colour(Colour::None),
+-        message(result.getMessage()),
+         messages(_stats.infoMessages),
+         colourImpl(colourImpl_),
+         printInfoMessages(_printInfoMessages) {
+@@ -60,10 +59,10 @@ public:
+             colour = Colour::Success;
+             passOrFail = "PASSED"_sr;
+             //if( result.hasMessage() )
+-            if (_stats.infoMessages.size() == 1)
+-                messageLabel = "with message";
+-            if (_stats.infoMessages.size() > 1)
+-                messageLabel = "with messages";
++            if (messages.size() == 1)
++                messageLabel = "with message"_sr;
++            if (messages.size() > 1)
++                messageLabel = "with messages"_sr;
+             break;
+         case ResultWas::ExpressionFailed:
+             if (result.isOk()) {
+@@ -73,51 +72,57 @@ public:
+                 colour = Colour::Error;
+                 passOrFail = "FAILED"_sr;
+             }
+-            if (_stats.infoMessages.size() == 1)
+-                messageLabel = "with message";
+-            if (_stats.infoMessages.size() > 1)
+-                messageLabel = "with messages";
++            if (messages.size() == 1)
++                messageLabel = "with message"_sr;
++            if (messages.size() > 1)
++                messageLabel = "with messages"_sr;
+             break;
+         case ResultWas::ThrewException:
+             colour = Colour::Error;
+             passOrFail = "FAILED"_sr;
+-            messageLabel = "due to unexpected exception with ";
+-            if (_stats.infoMessages.size() == 1)
+-                messageLabel += "message";
+-            if (_stats.infoMessages.size() > 1)
+-                messageLabel += "messages";
++            // todo switch
++            switch (messages.size()) { case 0:
++                messageLabel = "due to unexpected exception with "_sr;
++                break;
++            case 1:
++                messageLabel = "due to unexpected exception with message"_sr;
++                break;
++            default:
++                messageLabel = "due to unexpected exception with messages"_sr;
++                break;
++            }
+             break;
+         case ResultWas::FatalErrorCondition:
+             colour = Colour::Error;
+             passOrFail = "FAILED"_sr;
+-            messageLabel = "due to a fatal error condition";
++            messageLabel = "due to a fatal error condition"_sr;
+             break;
+         case ResultWas::DidntThrowException:
+             colour = Colour::Error;
+             passOrFail = "FAILED"_sr;
+-            messageLabel = "because no exception was thrown where one was expected";
++            messageLabel = "because no exception was thrown where one was expected"_sr;
+             break;
+         case ResultWas::Info:
+-            messageLabel = "info";
++            messageLabel = "info"_sr;
+             break;
+         case ResultWas::Warning:
+-            messageLabel = "warning";
++            messageLabel = "warning"_sr;
+             break;
+         case ResultWas::ExplicitFailure:
+             passOrFail = "FAILED"_sr;
+             colour = Colour::Error;
+-            if (_stats.infoMessages.size() == 1)
+-                messageLabel = "explicitly with message";
+-            if (_stats.infoMessages.size() > 1)
+-                messageLabel = "explicitly with messages";
++            if (messages.size() == 1)
++                messageLabel = "explicitly with message"_sr;
++            if (messages.size() > 1)
++                messageLabel = "explicitly with messages"_sr;
+             break;
+         case ResultWas::ExplicitSkip:
+             colour = Colour::Skip;
+             passOrFail = "SKIPPED"_sr;
+-            if (_stats.infoMessages.size() == 1)
+-                messageLabel = "explicitly with message";
+-            if (_stats.infoMessages.size() > 1)
+-                messageLabel = "explicitly with messages";
++            if (messages.size() == 1)
++                messageLabel = "explicitly with message"_sr;
++            if (messages.size() > 1)
++                messageLabel = "explicitly with messages"_sr;
+             break;
+             // These cases are here to prevent compiler warnings
+         case ResultWas::Unknown:
+@@ -181,9 +186,8 @@ private:
+     AssertionResult const& result;
+     Colour::Code colour;
+     StringRef passOrFail;
+-    std::string messageLabel;
+-    std::string message;
+-    std::vector<MessageInfo> messages;
++    StringRef messageLabel;
++    std::vector<MessageInfo> const& messages;
+     ColourImpl* colourImpl;
+     bool printInfoMessages;
+ };
+diff --git a/src/catch2/reporters/catch_reporter_tap.cpp b/src/catch2/reporters/catch_reporter_tap.cpp
+index d1257111..563d6fb1 100644
+--- a/src/catch2/reporters/catch_reporter_tap.cpp
++++ b/src/catch2/reporters/catch_reporter_tap.cpp
+@@ -184,7 +184,7 @@ namespace Catch {
+         private:
+             std::ostream& stream;
+             AssertionResult const& result;
+-            std::vector<MessageInfo> messages;
++            std::vector<MessageInfo> const& messages;
+             std::vector<MessageInfo>::const_iterator itMessage;
+             bool printInfoMessages;
+             std::size_t counter;
+diff --git a/src/catch2/reporters/catch_reporter_xml.cpp b/src/catch2/reporters/catch_reporter_xml.cpp
+index 011f9006..13812b92 100644
+--- a/src/catch2/reporters/catch_reporter_xml.cpp
++++ b/src/catch2/reporters/catch_reporter_xml.cpp
+@@ -66,7 +66,7 @@ namespace Catch {
+     void XmlReporter::testCaseStarting( TestCaseInfo const& testInfo ) {
+         StreamingReporterBase::testCaseStarting(testInfo);
+         m_xml.startElement( "TestCase" )
+-            .writeAttribute( "name"_sr, trim( testInfo.name ) )
++            .writeAttribute( "name"_sr, trim( StringRef(testInfo.name) ) )
+             .writeAttribute( "tags"_sr, testInfo.tagsAsString() );
+ 
+         writeSourceInfo( testInfo.lineInfo );
+@@ -80,7 +80,7 @@ namespace Catch {
+         StreamingReporterBase::sectionStarting( sectionInfo );
+         if( m_sectionDepth++ > 0 ) {
+             m_xml.startElement( "Section" )
+-                .writeAttribute( "name"_sr, trim( sectionInfo.name ) );
++                .writeAttribute( "name"_sr, trim( StringRef(sectionInfo.name) ) );
+             writeSourceInfo( sectionInfo.lineInfo );
+             m_xml.ensureTagClosed();
+         }
+@@ -194,11 +194,10 @@ namespace Catch {
+ 
+         if ( m_config->showDurations() == ShowDurations::Always )
+             e.writeAttribute( "durationInSeconds"_sr, m_testCaseTimer.getElapsedSeconds() );
+-
+         if( !testCaseStats.stdOut.empty() )
+-            m_xml.scopedElement( "StdOut" ).writeText( trim( testCaseStats.stdOut ), XmlFormatting::Newline );
++            m_xml.scopedElement( "StdOut" ).writeText( trim( StringRef(testCaseStats.stdOut) ), XmlFormatting::Newline );
+         if( !testCaseStats.stdErr.empty() )
+-            m_xml.scopedElement( "StdErr" ).writeText( trim( testCaseStats.stdErr ), XmlFormatting::Newline );
++            m_xml.scopedElement( "StdErr" ).writeText( trim( StringRef(testCaseStats.stdErr) ), XmlFormatting::Newline );
+ 
+         m_xml.endElement();
+     }

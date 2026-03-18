@@ -1,0 +1,24 @@
+{
+  "events": [
+    {
+      "event_id": "e1",
+      "op": "insert",
+      "node": "expr_stmt",
+      "level": "stmt",
+      "old": "",
+      "new": "#include <catch2/int ernal/catch_optional.hpp>",
+      "enclosing": {},
+      "anchor": "unit[1]"
+    },
+    {
+      "event_id": "e2",
+      "op": "insert",
+      "node": "expr_stmt",
+      "level": "stmt",
+      "old": "",
+      "new": "TEST_CASE(\"Optional comparison ops\", \"[optional][approvals]\") { using Catch::Optional; Optional<int> a, b; SECTION( \"Empty optionals are equal\" ) { REQUIRE( a == b ); REQUIRE_FALSE( a != b ); } SECTION( \"Empty and non-empty optionals are never equal\" ) { a = 1; REQUIRE_FALSE( a == b ); REQUIRE( a != b ); } SECTION( \"non-empty optionals are equal if the contained elements are equal\") { a = 1; b = 2; REQUIRE( a != b ); REQUIRE_FALSE( a == b ); a = 2; REQUIRE( a == b ); REQUIRE_FALSE( a != b ); } }",
+      "enclosing": {},
+      "anchor": "unit[1]"
+    }
+  ]
+}

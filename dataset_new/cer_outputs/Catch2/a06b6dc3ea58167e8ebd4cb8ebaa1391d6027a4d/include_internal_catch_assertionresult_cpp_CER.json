@@ -1,0 +1,43 @@
+{
+  "events": [
+    {
+      "event_id": "e1",
+      "op": "replace",
+      "node": "return_expr",
+      "level": "stmt",
+      "old": "return \"!(\" + std::string(m_info.capturedExpression) + \")\";",
+      "new": "return \"!(\" + + \")\";",
+      "enclosing": {
+        "function": "getExpression",
+        "statement": "return"
+      },
+      "anchor": "unit[1]/namespace[name=Catch]/block[1]/function[name=getExpression]/block[1]/block_content[1]/if_stmt[1]/if[1]/block[1]/block_content[1]/return[1]"
+    },
+    {
+      "event_id": "e2",
+      "op": "insert",
+      "node": "expr_stmt",
+      "level": "stmt",
+      "old": "",
+      "new": "m_info.macroName.c_str()",
+      "enclosing": {
+        "function": "getExpressionInMacro",
+        "statement": "expr_stmt"
+      },
+      "anchor": "unit[1]/namespace[name=Catch]/block[1]/function[name=getExpressionInMacro]/block[1]/block_content[1]/if_stmt[1]/else[1]/block[1]/block_content[1]/expr_stmt[2]/expr[name=expr]"
+    },
+    {
+      "event_id": "e3",
+      "op": "insert",
+      "node": "expr_stmt",
+      "level": "stmt",
+      "old": "",
+      "new": "m_info.capturedExpression.c_str()",
+      "enclosing": {
+        "function": "getExpressionInMacro",
+        "statement": "expr_stmt"
+      },
+      "anchor": "unit[1]/namespace[name=Catch]/block[1]/function[name=getExpressionInMacro]/block[1]/block_content[1]/if_stmt[1]/else[1]/block[1]/block_content[1]/expr_stmt[4]/expr[name=expr]"
+    }
+  ]
+}

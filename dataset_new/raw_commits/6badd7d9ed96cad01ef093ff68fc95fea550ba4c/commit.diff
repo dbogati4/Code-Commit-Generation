@@ -1,0 +1,18 @@
+diff --git a/src/catch2/reporters/catch_reporter_console.cpp b/src/catch2/reporters/catch_reporter_console.cpp
+index bd016144..65021ed7 100644
+--- a/src/catch2/reporters/catch_reporter_console.cpp
++++ b/src/catch2/reporters/catch_reporter_console.cpp
+@@ -679,8 +679,11 @@ void ConsoleReporter::printSummaryDivider() {
+ }
+ 
+ void ConsoleReporter::printTestFilters() {
+-    if (m_config->testSpec().hasFilters())
+-        stream << Colour(Colour::BrightYellow) << "Filters: " << serializeFilters( m_config->getTestsOrTags() ) << '\n';
++    if (m_config->testSpec().hasFilters()) {
++        stream << Colour(Colour::BrightYellow)
++               << "Filters: " << serializeFilters(m_config->getTestsOrTags())
++               << Colour(Colour::None) << '\n';
++    }
+ }
+ 
+ } // end namespace Catch

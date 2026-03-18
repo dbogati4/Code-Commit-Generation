@@ -1,0 +1,8 @@
+{
+  "commit_id": "6ad743a62b766082dbadfec67e812a006898e856",
+  "parent_id": "0f47fe16bdfc4546b1952da34e809388565f93c0",
+  "message": "catch_debugger.cpp - debugger detection is identical on Mac OS X and iOS",
+  "changed_files": [
+    "src/catch2/catch_debugger.cpp"
+  ]
+}

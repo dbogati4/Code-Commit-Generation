@@ -1,0 +1,14 @@
+{
+  "events": [
+    {
+      "event_id": "e1",
+      "op": "replace",
+      "node": "expr_stmt",
+      "level": "stmt",
+      "old": "// X11-DisableStringification.cpp // Test that stringification of original expression can be disabled // this is a workaround for VS 2017 issue with Raw String literal // and preprocessor token pasting. In other words, hopefully this test // will be deleted soon :-)",
+      "new": "/**\\file * Test that stringification of original expression can be disabled. * * This is a workaround for VS 2017, 2019 issue with Raw String literals * and preprocessor token pasting. */",
+      "enclosing": {},
+      "anchor": "unit[1]"
+    }
+  ]
+}

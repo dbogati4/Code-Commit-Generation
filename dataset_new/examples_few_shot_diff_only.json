@@ -1,0 +1,32 @@
+{
+  "description": "Few-shot examples: diff-only variant - from 69-commit Catch2 dataset",
+  "variant": "diff_only",
+  "source_commit_ids": [
+    "f7e7fa0983e83b922cb6336ff3a55d33b2873943",
+    "fb51116d5b20ea3fef6c5a89267e7d91856a60cf",
+    "7a89b7573749846654575fec0580e105a27c54cf"
+  ],
+  "examples": [
+    {
+      "example_num": 1,
+      "source_commit_id": "f7e7fa0983e83b922cb6336ff3a55d33b2873943",
+      "type": "Bug Fix with Lock Safety",
+      "diff": "diff --git a/src/catch2/internal/catch_reusable_string_stream.cpp b/src/catch2/internal/catch_reusable_string_stream.cpp\nindex a2dd5a63..875da4da 100644\n--- a/src/catch2/internal/catch_reusable_string_stream.cpp\n+++ b/src/catch2/internal/catch_reusable_string_stream.cpp\n@@ -12,6 +12,7 @@\n \n #include <cstdio>\n #include <sstream>\n+#include <tuple>\n #include <vector>\n \n namespace Catch {\n@@ -23,16 +24,16 @@ namespace Catch {\n         std::ostringstream m_referenceStream; // Used for copy state/ flags from\n         Detail::Mutex m_mutex;\n \n-        auto add() -> std::size_t {\n+        auto add() -> std::pair<std::size_t, std::ostringstream*> {\n             Detail::LockGuard _( m_mutex );\n             if( m_unused.empty() ) {\n                 m_streams.push_back( Detail::make_unique<std::ostringstream>() );\n-                return m_streams.size()-1;\n+                return { m_streams.size()-1, m_streams.back().get() };\n             }\n             else {\n                 auto index = m_unused.back();\n                 m_unused.pop_back();\n-                return index;\n+                return { index, m_streams[index].get() };\n             }\n         }\n \n@@ -46,10 +47,10 @@ namespace Catch {\n         }\n     };\n \n-    ReusableStringStream::ReusableStringStream()\n-    :   m_index( Singleton<StringStreams>::getMutable().add() ),\n-        m_oss( Singleton<StringStreams>::getMutable().m_streams[m_index].get() )\n-    {}\n+    ReusableStringStream::ReusableStringStream() {\n+        std::tie( m_index, m_oss ) =\n+            Singleton<StringStreams>::getMutable().add();\n+    }\n \n     ReusableStringStream::~ReusableStringStream() {\n         static_cast<std::ostringstream*>( m_oss )->str(\"\");\n",
+      "commit_message": "Fix ReusableStringStream to access the container under the lock (#3031)"
+    },
+    {
+      "example_num": 2,
+      "source_commit_id": "fb51116d5b20ea3fef6c5a89267e7d91856a60cf",
+      "type": "Performance Optimization",
+      "diff": "diff --git a/src/catch2/benchmark/detail/catch_analyse.cpp b/src/catch2/benchmark/detail/catch_analyse.cpp\nindex 7d27daf1..14d7f450 100644\n--- a/src/catch2/benchmark/detail/catch_analyse.cpp\n+++ b/src/catch2/benchmark/detail/catch_analyse.cpp\n@@ -63,8 +63,8 @@ namespace Catch {\n                     FDuration mean = FDuration(0);\n                     int i = 0;\n                     for (auto it = first; it < last; ++it, ++i) {\n-                        samples.push_back(FDuration(*it));\n-                        mean += FDuration(*it);\n+                        samples.push_back(*it);\n+                        mean += *it;\n                     }\n                     mean /= i;\n \n",
+      "commit_message": "Avoid useless FDuration cast in benchmark analysis (#2823)"
+    },
+    {
+      "example_num": 3,
+      "source_commit_id": "7a89b7573749846654575fec0580e105a27c54cf",
+      "type": "Clock Type Change",
+      "diff": "diff --git a/src/catch2/catch_timer.cpp b/src/catch2/catch_timer.cpp\nindex d75ea70c..51396654 100644\n--- a/src/catch2/catch_timer.cpp\n+++ b/src/catch2/catch_timer.cpp\n@@ -13,7 +13,7 @@ namespace Catch {\n \n     namespace {\n         static auto getCurrentNanosecondsSinceEpoch() -> uint64_t {\n-            return std::chrono::duration_cast<std::chrono::nanoseconds>(std::chrono::high_resolution_clock::now().time_since_epoch()).count();\n+            return std::chrono::duration_cast<std::chrono::nanoseconds>(std::chrono::steady_clock::now().time_since_epoch()).count();\n         }\n     } // end unnamed namespace\n",
+      "commit_message": "Use steady_clock in the timer"
+    }
+  ]
+}

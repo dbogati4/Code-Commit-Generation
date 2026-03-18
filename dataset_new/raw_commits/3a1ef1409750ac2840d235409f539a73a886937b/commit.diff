@@ -1,0 +1,26 @@
+diff --git a/src/catch2/reporters/catch_reporter_junit.cpp b/src/catch2/reporters/catch_reporter_junit.cpp
+index 9a9b94af..e7f17342 100644
+--- a/src/catch2/reporters/catch_reporter_junit.cpp
++++ b/src/catch2/reporters/catch_reporter_junit.cpp
+@@ -295,7 +295,7 @@ namespace Catch {
+                 }
+             }
+ 
+-            if( !result.getMessage().empty() )
++            if( !result.hasMessage() )
+                 rss << result.getMessage() << '\n';
+             for( auto const& msg : stats.infoMessages )
+                 if( msg.type == ResultWas::Info )
+diff --git a/src/catch2/reporters/catch_reporter_sonarqube.cpp b/src/catch2/reporters/catch_reporter_sonarqube.cpp
+index dd002b61..dc3f8c82 100644
+--- a/src/catch2/reporters/catch_reporter_sonarqube.cpp
++++ b/src/catch2/reporters/catch_reporter_sonarqube.cpp
+@@ -147,7 +147,7 @@ namespace Catch {
+                 }
+             }
+ 
+-            if (!result.getMessage().empty())
++            if (!result.hasMessage())
+                 textRss << result.getMessage() << '\n';
+ 
+             for (auto const& msg : stats.infoMessages)

@@ -1,0 +1,8 @@
+{
+  "commit_id": "bf1e902ca130a9e8d8c9e54da3277e9c0091ffc1",
+  "parent_id": "49b55d53e4dcedfaf87aa16418d009a13f339440",
+  "message": "Remove <algorithm> include from catch_commandline.cpp",
+  "changed_files": [
+    "src/catch2/internal/catch_commandline.cpp"
+  ]
+}

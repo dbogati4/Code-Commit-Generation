@@ -1,0 +1,54 @@
+{
+  "events": [
+    {
+      "event_id": "e1",
+      "op": "insert",
+      "node": "decl_stmt",
+      "level": "stmt",
+      "old": "",
+      "new": "bool showAllResults = false;",
+      "enclosing": {
+        "function": "main"
+      },
+      "anchor": "unit[1]/function[name=main]/block[1]/block_content[1]/decl_stmt[9]"
+    },
+    {
+      "event_id": "e2",
+      "op": "insert",
+      "node": "if_stmt",
+      "level": "stmt",
+      "old": "",
+      "new": "if ( argc > 1 && ( std::string( argv[1] ) == \"-s\" || std::string( argv[1] ) == \"--success\" ) ) showAllResults = true;",
+      "enclosing": {
+        "function": "main"
+      },
+      "anchor": "unit[1]/function[name=main]/block[1]/block_content[1]/if_stmt[4]"
+    },
+    {
+      "event_id": "e3",
+      "op": "insert",
+      "node": "if_stmt",
+      "level": "stmt",
+      "old": "",
+      "new": "else if ( showAllResults ) { std::cout << succeedingResults << \"\\n\\n\"; }",
+      "enclosing": {
+        "function": "main",
+        "statement": "if_stmt"
+      },
+      "anchor": "unit[1]/function[name=main]/block[1]/block_content[1]/if_stmt[1]"
+    },
+    {
+      "event_id": "e4",
+      "op": "insert",
+      "node": "if_stmt",
+      "level": "stmt",
+      "old": "",
+      "new": "else if ( showAllResults ) { std::cout << failingResults << \"\\n\\n\"; }",
+      "enclosing": {
+        "function": "main",
+        "statement": "if_stmt"
+      },
+      "anchor": "unit[1]/function[name=main]/block[1]/block_content[1]/if_stmt[2]"
+    }
+  ]
+}

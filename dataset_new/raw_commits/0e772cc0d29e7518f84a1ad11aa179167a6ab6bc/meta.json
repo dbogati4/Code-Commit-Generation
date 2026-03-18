@@ -1,0 +1,8 @@
+{
+  "commit_id": "0e772cc0d29e7518f84a1ad11aa179167a6ab6bc",
+  "parent_id": "3bcd0a4e74b2bb5f6ec80ad464775442af84343c",
+  "message": "Allow composability of unhandled exception filters (#3033)",
+  "changed_files": [
+    "src/catch2/internal/catch_fatal_condition_handler.cpp"
+  ]
+}

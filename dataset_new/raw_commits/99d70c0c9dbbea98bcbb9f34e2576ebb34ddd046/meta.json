@@ -1,0 +1,8 @@
+{
+  "commit_id": "99d70c0c9dbbea98bcbb9f34e2576ebb34ddd046",
+  "parent_id": "d1625f30b10c1a2f056cc146a7d79cc94e1dd5a4",
+  "message": "Remove superfluous whitespace before #include",
+  "changed_files": [
+    "src/catch2/internal/catch_combined_tu.cpp"
+  ]
+}

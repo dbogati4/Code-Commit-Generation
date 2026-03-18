@@ -1,0 +1,8 @@
+{
+  "commit_id": "10c36aa74c0de81ba1cb6fd26a4dd898c10cbb6f",
+  "parent_id": "bc73189c527323c1086a5b49b15cbbef17d3700d",
+  "message": "added override keyword to overrides in compact reporter",
+  "changed_files": [
+    "include/reporters/catch_reporter_compact.cpp"
+  ]
+}

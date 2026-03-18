@@ -1,0 +1,17 @@
+{
+  "events": [
+    {
+      "event_id": "e1",
+      "op": "replace",
+      "node": "return_expr",
+      "level": "stmt",
+      "old": "return { } ;",
+      "new": "return std::set<Verbosity>{ } ;",
+      "enclosing": {
+        "function": "getSupportedVerbosities",
+        "statement": "return"
+      },
+      "anchor": "unit[1]/namespace[name=Catch]/block[1]/function[name=getSupportedVerbosities]/block[1]/block_content[1]/return[1]"
+    }
+  ]
+}

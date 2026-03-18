@@ -1,0 +1,8 @@
+{
+  "commit_id": "0221148ac36ef88dce2fcc49a4fce78fed14ddb4",
+  "parent_id": "9f091cbe9d9060f4241fb611486a1fbb8c552fc3",
+  "message": "Cleanup string escaping in XmlWriter with raw string literals",
+  "changed_files": [
+    "src/catch2/internal/catch_xmlwriter.cpp"
+  ]
+}

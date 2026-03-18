@@ -1,0 +1,8 @@
+{
+  "commit_id": "e7c23b73da9689d393ba3249479f61fc137cdba6",
+  "parent_id": "3537b7858f54730f501e24d17582603c0d0d7d0b",
+  "message": "Don't call strlen in StringRef when the length was already passed",
+  "changed_files": [
+    "include/internal/catch_stringref.cpp"
+  ]
+}

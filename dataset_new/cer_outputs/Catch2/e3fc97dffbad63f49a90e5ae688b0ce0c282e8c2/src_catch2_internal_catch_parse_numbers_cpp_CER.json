@@ -1,0 +1,106 @@
+{
+  "events": [
+    {
+      "event_id": "e1",
+      "op": "delete",
+      "node": "expr_stmt",
+      "level": "stmt",
+      "old": "#include <catch2/int ernal/catch_parse_numbers.hpp>",
+      "new": "",
+      "enclosing": {},
+      "anchor": "unit[1]"
+    },
+    {
+      "event_id": "e2",
+      "op": "insert",
+      "node": "expr_stmt",
+      "level": "stmt",
+      "old": "",
+      "new": "#include <catch2/int ernal/catch_parse_numbers.hpp>",
+      "enclosing": {},
+      "anchor": "unit[1]"
+    },
+    {
+      "event_id": "e3",
+      "op": "insert",
+      "node": "expr_stmt",
+      "level": "stmt",
+      "old": "",
+      "new": "#include <stdexcept>",
+      "enclosing": {},
+      "anchor": "unit[1]"
+    },
+    {
+      "event_id": "e4",
+      "op": "replace",
+      "node": "expr_stmt",
+      "level": "stmt",
+      "old": "exception",
+      "new": "invalid_argument",
+      "enclosing": {
+        "function": "parseUInt"
+      },
+      "anchor": "unit[1]/namespace[name=Catch]/block[1]/function[name=parseUInt]/block[1]/block_content[1]/macro[name=CATCH_CATCH_ANON]/argument_list[1]/argument[1]"
+    },
+    {
+      "event_id": "e5",
+      "op": "insert",
+      "node": "expr_stmt",
+      "level": "stmt",
+      "old": "",
+      "new": "{ // no conversion could be performed } CATCH_CATCH_ANON( std::out_of_range const & )",
+      "enclosing": {
+        "function": "parseUInt"
+      },
+      "anchor": "unit[1]/namespace[name=Catch]/block[1]/function[name=parseUInt]/block[1]/block_content[1]"
+    },
+    {
+      "event_id": "e6",
+      "op": "delete",
+      "node": "comment",
+      "level": "comment",
+      "old": "There was a larger issue with",
+      "new": "",
+      "enclosing": {
+        "function": "parseUInt"
+      },
+      "anchor": "unit[1]/namespace[name=Catch]/block[1]/function[name=parseUInt]/block[1]/block_content[1]/block[2]/block_content[1]/comment[1]"
+    },
+    {
+      "event_id": "e7",
+      "op": "replace",
+      "node": "comment",
+      "level": "comment",
+      "old": "// There was a larger issue with the input, e.g. the parsed",
+      "new": "// the input does not fit into an unsigned long long",
+      "enclosing": {
+        "function": "parseUInt"
+      },
+      "anchor": "unit[1]/namespace[name=Catch]/block[1]/function[name=parseUInt]/block[1]/block_content[1]/block[2]/block_content[1]/comment[1]"
+    },
+    {
+      "event_id": "e8",
+      "op": "delete",
+      "node": "comment",
+      "level": "comment",
+      "old": "// number would be too large to fit within ull.",
+      "new": "",
+      "enclosing": {
+        "function": "parseUInt"
+      },
+      "anchor": "unit[1]/namespace[name=Catch]/block[1]/function[name=parseUInt]/block[1]/block_content[1]/block[2]/block_content[1]/comment[2]"
+    },
+    {
+      "event_id": "e9",
+      "op": "insert",
+      "node": "return_expr",
+      "level": "stmt",
+      "old": "",
+      "new": "return {} ;",
+      "enclosing": {
+        "function": "parseUInt"
+      },
+      "anchor": "unit[1]/namespace[name=Catch]/block[1]/function[name=parseUInt]/block[1]/block_content[1]/return[1]"
+    }
+  ]
+}

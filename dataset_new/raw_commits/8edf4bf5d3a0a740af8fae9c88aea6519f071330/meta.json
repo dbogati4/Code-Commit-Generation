@@ -1,0 +1,8 @@
+{
+  "commit_id": "8edf4bf5d3a0a740af8fae9c88aea6519f071330",
+  "parent_id": "c1a8e1c5dd77e4f98a4f678556592ef23a3dd4ac",
+  "message": "Removed signal handler test, for now (to avoid screwing up the approval tests)",
+  "changed_files": [
+    "projects/SelfTest/MiscTests.cpp"
+  ]
+}

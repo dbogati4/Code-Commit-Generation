@@ -1,0 +1,8 @@
+{
+  "commit_id": "f45bb0035103aa676ab362c893675c462342de24",
+  "parent_id": "7c37501b070c0e9ea9cdedbeac2059f0a6b0a8ab",
+  "message": "Add failing test for CATCH_UNSCOPED_CAPTURE",
+  "changed_files": [
+    "projects/ExtraTests/X01-PrefixedMacros.cpp"
+  ]
+}

@@ -1,0 +1,8 @@
+{
+  "commit_id": "dc3e7f9cf7628d4edf43ad04507a86ba81137c31",
+  "parent_id": "d14b7563c2f493ad1e1113e18b98409f91b6cde2",
+  "message": "Fix incorrectly clamped return value",
+  "changed_files": [
+    "include/internal/catch_session.cpp"
+  ]
+}

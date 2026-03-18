@@ -1,0 +1,16 @@
+{
+  "events": [
+    {
+      "event_id": "e1",
+      "op": "insert",
+      "node": "decl_stmt",
+      "level": "stmt",
+      "old": "",
+      "new": "std::tuple<int>{{42}42}",
+      "enclosing": {
+        "statement": "decl_stmt"
+      },
+      "anchor": "unit[1]/block[5]/block_content[1]/decl_stmt[1]/decl[name=value]/argument_list[1]/argument[1]"
+    }
+  ]
+}

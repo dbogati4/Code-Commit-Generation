@@ -1,0 +1,8 @@
+{
+  "commit_id": "d218d6f9e27afc718cef196fb63d06ca0ce21873",
+  "parent_id": "ef92178058db3f153457ad515e58d3fe1d4fe3b0",
+  "message": "Avoid recalculating string-literal size on root tracker construction",
+  "changed_files": [
+    "src/catch2/internal/catch_test_case_tracker.cpp"
+  ]
+}

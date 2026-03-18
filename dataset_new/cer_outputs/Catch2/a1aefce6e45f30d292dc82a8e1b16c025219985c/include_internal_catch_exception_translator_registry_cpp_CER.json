@@ -1,0 +1,112 @@
+{
+  "events": [
+    {
+      "event_id": "e1",
+      "op": "insert",
+      "node": "comment",
+      "level": "comment",
+      "old": "",
+      "new": "// Compiling a mixed mode project with MSVC means that CLR",
+      "enclosing": {
+        "function": "translateActiveException"
+      },
+      "anchor": "unit[1]/namespace[name=Catch]/block[1]/function[name=translateActiveException]/block[1]/block_content[1]/try[1]/block[1]/block_content[1]/comment[2]"
+    },
+    {
+      "event_id": "e2",
+      "op": "insert",
+      "node": "comment",
+      "level": "comment",
+      "old": "",
+      "new": "// exceptions will be caught in (...) as well. However, these",
+      "enclosing": {
+        "function": "translateActiveException"
+      },
+      "anchor": "unit[1]/namespace[name=Catch]/block[1]/function[name=translateActiveException]/block[1]/block_content[1]/try[1]/block[1]/block_content[1]/comment[3]"
+    },
+    {
+      "event_id": "e3",
+      "op": "insert",
+      "node": "comment",
+      "level": "comment",
+      "old": "",
+      "new": "// do not fill-in std::current_exception and thus lead to crash",
+      "enclosing": {
+        "function": "translateActiveException"
+      },
+      "anchor": "unit[1]/namespace[name=Catch]/block[1]/function[name=translateActiveException]/block[1]/block_content[1]/try[1]/block[1]/block_content[1]/comment[4]"
+    },
+    {
+      "event_id": "e4",
+      "op": "insert",
+      "node": "comment",
+      "level": "comment",
+      "old": "",
+      "new": "// when attempting rethrow.",
+      "enclosing": {
+        "function": "translateActiveException"
+      },
+      "anchor": "unit[1]/namespace[name=Catch]/block[1]/function[name=translateActiveException]/block[1]/block_content[1]/try[1]/block[1]/block_content[1]/comment[5]"
+    },
+    {
+      "event_id": "e5",
+      "op": "insert",
+      "node": "comment",
+      "level": "comment",
+      "old": "",
+      "new": "// /EHa switch also causes structured exceptions to be caught",
+      "enclosing": {
+        "function": "translateActiveException"
+      },
+      "anchor": "unit[1]/namespace[name=Catch]/block[1]/function[name=translateActiveException]/block[1]/block_content[1]/try[1]/block[1]/block_content[1]/comment[6]"
+    },
+    {
+      "event_id": "e6",
+      "op": "insert",
+      "node": "comment",
+      "level": "comment",
+      "old": "",
+      "new": "// here, but they fill-in current_exception properly, so",
+      "enclosing": {
+        "function": "translateActiveException"
+      },
+      "anchor": "unit[1]/namespace[name=Catch]/block[1]/function[name=translateActiveException]/block[1]/block_content[1]/try[1]/block[1]/block_content[1]/comment[7]"
+    },
+    {
+      "event_id": "e7",
+      "op": "insert",
+      "node": "comment",
+      "level": "comment",
+      "old": "",
+      "new": "// at worst the output should be a little weird, instead of",
+      "enclosing": {
+        "function": "translateActiveException"
+      },
+      "anchor": "unit[1]/namespace[name=Catch]/block[1]/function[name=translateActiveException]/block[1]/block_content[1]/try[1]/block[1]/block_content[1]/comment[8]"
+    },
+    {
+      "event_id": "e8",
+      "op": "insert",
+      "node": "comment",
+      "level": "comment",
+      "old": "",
+      "new": "// causing a crash.",
+      "enclosing": {
+        "function": "translateActiveException"
+      },
+      "anchor": "unit[1]/namespace[name=Catch]/block[1]/function[name=translateActiveException]/block[1]/block_content[1]/try[1]/block[1]/block_content[1]/comment[9]"
+    },
+    {
+      "event_id": "e9",
+      "op": "insert",
+      "node": "if_stmt",
+      "level": "stmt",
+      "old": "",
+      "new": "if (std::current_exception() == nullptr) { return \"Non C++ exception. Possibly a CLR exception.\"; }",
+      "enclosing": {
+        "function": "translateActiveException"
+      },
+      "anchor": "unit[1]/namespace[name=Catch]/block[1]/function[name=translateActiveException]/block[1]/block_content[1]/try[1]/block[1]/block_content[1]/if_stmt[1]"
+    }
+  ]
+}

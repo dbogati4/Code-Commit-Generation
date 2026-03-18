@@ -1,0 +1,8 @@
+{
+  "commit_id": "4aaf67ff3105713ecb98fa1abbe13bdbc1be9082",
+  "parent_id": "7bc0b445979c46b1beb52c9b417a7a143a8ad741",
+  "message": "const_casts to get rid of warnings in new wchar_t tests",
+  "changed_files": [
+    "projects/SelfTest/MiscTests.cpp"
+  ]
+}

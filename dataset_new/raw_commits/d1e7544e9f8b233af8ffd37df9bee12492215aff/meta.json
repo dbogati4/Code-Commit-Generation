@@ -1,0 +1,8 @@
+{
+  "commit_id": "d1e7544e9f8b233af8ffd37df9bee12492215aff",
+  "parent_id": "3fed2307e756aae3d2908ac71032aa7158a6cbfb",
+  "message": "Simplify handling of environment in Bazel's support",
+  "changed_files": [
+    "src/catch2/catch_config.cpp"
+  ]
+}

@@ -1,0 +1,8 @@
+{
+  "commit_id": "2c04850f88b03118ffde69f6f8a90a6fda51c130",
+  "parent_id": "c9027375a3e57b59ecdeba696d3031163e473108",
+  "message": "Add some constexpr in compact reporter impl",
+  "changed_files": [
+    "src/catch2/reporters/catch_reporter_compact.cpp"
+  ]
+}

@@ -1,0 +1,8 @@
+{
+  "commit_id": "d44f2cf40f67e866c7c53080f52db5fd59b5db41",
+  "parent_id": "d4305377b78d81fa11281ac649ef2b67f6e417e5",
+  "message": "Added binding to free functions (and renamed hierarchy)",
+  "changed_files": [
+    "projects/SelfTest/CmdLineTests.cpp"
+  ]
+}

@@ -1,0 +1,8 @@
+{
+  "commit_id": "d0df295c25e1967b9bf94cf234a47a80c47b0369",
+  "parent_id": "15fd03260839d667df0dac008cbe40e83f451fb5",
+  "message": "Added vector resizing example to BDD tests",
+  "changed_files": [
+    "projects/XCode4/CatchSelfTest/CatchSelfTest/BDDTests.cpp"
+  ]
+}

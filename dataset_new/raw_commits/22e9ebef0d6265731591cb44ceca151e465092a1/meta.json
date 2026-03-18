@@ -1,0 +1,8 @@
+{
+  "commit_id": "22e9ebef0d6265731591cb44ceca151e465092a1",
+  "parent_id": "97d6b08087b4afd335bfacfda0537581f6ef3f9b",
+  "message": "Factored table writing code out into a TablePrinter class (removes a lot of magic numbers and ad-hoc formatting)",
+  "changed_files": [
+    "include/reporters/catch_reporter_console.cpp"
+  ]
+}

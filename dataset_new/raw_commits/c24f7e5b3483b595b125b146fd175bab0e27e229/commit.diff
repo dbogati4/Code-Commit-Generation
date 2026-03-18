@@ -1,0 +1,17 @@
+diff --git a/src/catch2/catch_message.cpp b/src/catch2/catch_message.cpp
+index 3d66a5f4..6c4a0989 100644
+--- a/src/catch2/catch_message.cpp
++++ b/src/catch2/catch_message.cpp
+@@ -48,10 +48,10 @@ namespace Catch {
+ 
+     Capturer::Capturer( StringRef macroName, SourceLineInfo const& lineInfo, ResultWas::OfType resultType, StringRef names ) {
+         auto trimmed = [&] (size_t start, size_t end) {
+-            while (names[start] == ',' || isspace(names[start])) {
++            while (names[start] == ',' || isspace(static_cast<unsigned char>(names[start]))) {
+                 ++start;
+             }
+-            while (names[end] == ',' || isspace(names[end])) {
++            while (names[end] == ',' || isspace(static_cast<unsigned char>(names[end]))) {
+                 --end;
+             }
+             return names.substr(start, end - start + 1);

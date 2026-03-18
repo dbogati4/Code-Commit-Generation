@@ -1,0 +1,14 @@
+{
+  "events": [
+    {
+      "event_id": "e1",
+      "op": "replace",
+      "node": "literal",
+      "level": "token",
+      "old": "failing/message/info/2",
+      "new": "mixed/message/info/2",
+      "enclosing": {},
+      "anchor": "unit[1]/macro[name=TEST_CASE]/argument_list[1]/argument[1]/literal[1]"
+    }
+  ]
+}

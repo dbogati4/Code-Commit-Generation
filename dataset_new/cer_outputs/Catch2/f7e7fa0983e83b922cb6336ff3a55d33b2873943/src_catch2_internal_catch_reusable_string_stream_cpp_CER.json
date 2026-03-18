@@ -1,0 +1,72 @@
+{
+  "events": [
+    {
+      "event_id": "e1",
+      "op": "insert",
+      "node": "expr_stmt",
+      "level": "stmt",
+      "old": "",
+      "new": "#include <tuple>",
+      "enclosing": {},
+      "anchor": "unit[1]"
+    },
+    {
+      "event_id": "e2",
+      "op": "insert",
+      "node": "type",
+      "level": "token",
+      "old": "",
+      "new": "std::size_t::pair<std::size_t, std::ostringstream*>",
+      "enclosing": {
+        "function": "add"
+      },
+      "anchor": "unit[1]/namespace[name=Catch]/block[1]/struct[name=StringStreams]/block[1]/public[1]/function[name=add]/type[2]"
+    },
+    {
+      "event_id": "e3",
+      "op": "insert",
+      "node": "return_expr",
+      "level": "stmt",
+      "old": "",
+      "new": "m_streams.size()-1{ m_streams.size()-1, m_streams.back().get() }",
+      "enclosing": {
+        "function": "add",
+        "statement": "return"
+      },
+      "anchor": "unit[1]/namespace[name=Catch]/block[1]/struct[name=StringStreams]/block[1]/public[1]/function[name=add]/block[1]/block_content[1]/if_stmt[1]/if[1]/block[1]/block_content[1]/return[1]"
+    },
+    {
+      "event_id": "e4",
+      "op": "insert",
+      "node": "return_expr",
+      "level": "stmt",
+      "old": "",
+      "new": "index { index, m_streams[index].get() }",
+      "enclosing": {
+        "function": "add",
+        "statement": "return"
+      },
+      "anchor": "unit[1]/namespace[name=Catch]/block[1]/struct[name=StringStreams]/block[1]/public[1]/function[name=add]/block[1]/block_content[1]/if_stmt[1]/else[1]/block[1]/block_content[1]/return[1]"
+    },
+    {
+      "event_id": "e5",
+      "op": "replace",
+      "node": "expr_stmt",
+      "level": "stmt",
+      "old": ": m_index( Singleton<StringStreams>::getMutable().add() ), m_oss( Singleton<StringStreams>::getMutable().m_streams[m_index].get() )",
+      "new": "",
+      "enclosing": {},
+      "anchor": "unit[1]/namespace[name=Catch]/block[1]/constructor[name=ReusableStringStream]"
+    },
+    {
+      "event_id": "e6",
+      "op": "insert",
+      "node": "expr_stmt",
+      "level": "stmt",
+      "old": "",
+      "new": "std::tie( m_index, m_oss ) = Singleton<StringStreams>::getMutable().add();",
+      "enclosing": {},
+      "anchor": "unit[1]/namespace[name=Catch]/block[1]/constructor[name=ReusableStringStream]/block[1]/block_content[1]/expr_stmt[1]"
+    }
+  ]
+}

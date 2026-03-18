@@ -1,0 +1,16 @@
+{
+  "commit_id": "4ecb2e112e0565451c14fc42d63f438cb9ecb7dd",
+  "parent_id": "97a8640cbf10a8ff3d6f06f0293f5c37b263144a",
+  "message": "Add examples folder with initial examples",
+  "changed_files": [
+    "examples/000-CatchMain.cpp",
+    "examples/010-TestCase.cpp",
+    "examples/020-TestCase-1.cpp",
+    "examples/020-TestCase-2.cpp",
+    "examples/030-Asn-Require-Check.cpp",
+    "examples/100-Fix-Section.cpp",
+    "examples/110-Fix-ClassFixture.cpp",
+    "examples/120-Bdd-ScenarioGivenWhenThen.cpp",
+    "examples/210-Evt-EventListeners.cpp"
+  ]
+}

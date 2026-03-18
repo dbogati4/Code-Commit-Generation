@@ -1,0 +1,8 @@
+{
+  "commit_id": "26b2c3e7e2b05f8bdca5e33240acd27a052d4328",
+  "parent_id": "87a8b61d5a317ac99bbe35405d73ac7198ee51a8",
+  "message": "Change random test shuffling technique (refactored)",
+  "changed_files": [
+    "src/catch2/internal/catch_test_case_registry_impl.cpp"
+  ]
+}

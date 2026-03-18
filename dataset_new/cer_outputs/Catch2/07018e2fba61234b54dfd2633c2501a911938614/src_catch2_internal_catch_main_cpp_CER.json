@@ -1,0 +1,16 @@
+{
+  "events": [
+    {
+      "event_id": "e1",
+      "op": "insert",
+      "node": "type",
+      "level": "token",
+      "old": "",
+      "new": "__cdecl",
+      "enclosing": {
+        "function": "wmain"
+      },
+      "anchor": "unit[1]/extern[1]/function[name=wmain]/type[name=int]"
+    }
+  ]
+}

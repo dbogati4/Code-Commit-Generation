@@ -1,0 +1,8 @@
+{
+  "commit_id": "61e29b56304286b0d86edd502eb8b547645b2c22",
+  "parent_id": "54fb6f2d23005adc2d1a770f9162d28b1b1e4433",
+  "message": "Fix AssertionPrinter name conflict in console and compact reporters",
+  "changed_files": [
+    "include/reporters/catch_reporter_console.cpp"
+  ]
+}

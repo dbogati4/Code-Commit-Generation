@@ -1,0 +1,12 @@
+diff --git a/src/catch2/catch_session.cpp b/src/catch2/catch_session.cpp
+index e64299f3..809f4f89 100644
+--- a/src/catch2/catch_session.cpp
++++ b/src/catch2/catch_session.cpp
+@@ -15,7 +15,6 @@
+ #include <catch2/catch_test_spec.hpp>
+ #include <catch2/catch_version.hpp>
+ #include <catch2/interfaces/catch_interfaces_reporter.hpp>
+-#include <catch2/internal/catch_random_number_generator.hpp>
+ #include <catch2/internal/catch_startup_exception_registry.hpp>
+ #include <catch2/internal/catch_textflow.hpp>
+ #include <catch2/internal/catch_windows_h_proxy.hpp>

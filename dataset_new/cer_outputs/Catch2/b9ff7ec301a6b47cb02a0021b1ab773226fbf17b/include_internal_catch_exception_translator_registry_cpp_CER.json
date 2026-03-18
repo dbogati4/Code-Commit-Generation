@@ -1,0 +1,17 @@
+{
+  "events": [
+    {
+      "event_id": "e1",
+      "op": "replace",
+      "node": "return_expr",
+      "level": "stmt",
+      "old": "return Catch::toString( [exception description] );",
+      "new": "return Catch::Detail::stringify( [exception description] );",
+      "enclosing": {
+        "function": "translateActiveException",
+        "statement": "return"
+      },
+      "anchor": "unit[1]/namespace[name=Catch]/block[1]/function[name=translateActiveException]/block[1]/block_content[1]/try[1]/block[1]/block_content[1]/catch[1]/block[1]/block_content[1]/return[1]"
+    }
+  ]
+}

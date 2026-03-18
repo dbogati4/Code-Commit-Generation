@@ -1,0 +1,15 @@
+{
+  "commit_id": "d1ffaf55a1653575a5a24da738ee777cdb85626f",
+  "parent_id": "33b47f7309653329fdd160867acd1830d9959ab2",
+  "message": "Fix warnings in ExtraTests and Examples",
+  "changed_files": [
+    "examples/010-TestCase.cpp",
+    "examples/020-TestCase-2.cpp",
+    "examples/030-Asn-Require-Check.cpp",
+    "examples/210-Evt-EventListeners.cpp",
+    "examples/300-Gen-OwnGenerator.cpp",
+    "examples/301-Gen-MapTypeConversion.cpp",
+    "tests/ExtraTests/X01-PrefixedMacros.cpp",
+    "tests/ExtraTests/X11-DisableStringification.cpp"
+  ]
+}

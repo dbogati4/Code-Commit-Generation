@@ -1,0 +1,14 @@
+{
+  "commit_id": "a5bb3e3d911e5c43feb359f47848b7630d623338",
+  "parent_id": "923db163228b2eb0d8acdf970c2a285e9c6e7983",
+  "message": "Small updates to include directives (#1726)",
+  "changed_files": [
+    "include/internal/catch_interfaces_config.cpp",
+    "include/internal/catch_interfaces_exception.cpp",
+    "include/internal/catch_interfaces_registry_hub.cpp",
+    "include/internal/catch_interfaces_runner.cpp",
+    "include/internal/catch_interfaces_testcase.cpp",
+    "include/reporters/catch_reporter_compact.cpp",
+    "include/reporters/catch_reporter_console.cpp"
+  ]
+}

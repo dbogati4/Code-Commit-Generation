@@ -1,0 +1,8 @@
+{
+  "commit_id": "2f15ccd4d373a33898073a2d5f9153e45e9e51a2",
+  "parent_id": "8f3fc15b73d2ccf723e764a101ad9f03a343ec0a",
+  "message": "Passthrough error code from coverage helper",
+  "changed_files": [
+    "misc/coverage-helper.cpp"
+  ]
+}

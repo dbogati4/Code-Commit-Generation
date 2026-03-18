@@ -1,0 +1,13 @@
+diff --git a/include/internal/catch_test_case_tracker.cpp b/include/internal/catch_test_case_tracker.cpp
+index 1ef830d1..9e75590c 100644
+--- a/include/internal/catch_test_case_tracker.cpp
++++ b/include/internal/catch_test_case_tracker.cpp
+@@ -139,7 +139,7 @@ namespace TestCaseTracking {
+                 m_runState = CompletedSuccessfully;
+                 break;
+             case ExecutingChildren:
+-                if( m_children.empty() || m_children.back()->isComplete() )
++                if( std::all_of(m_children.begin(), m_children.end(), [](ITrackerPtr const& t){ return t->isComplete(); }) )
+                     m_runState = CompletedSuccessfully;
+                 break;
+ 

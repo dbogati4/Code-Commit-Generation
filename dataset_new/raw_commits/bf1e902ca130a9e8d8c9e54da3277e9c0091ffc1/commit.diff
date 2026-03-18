@@ -1,0 +1,12 @@
+diff --git a/src/catch2/internal/catch_commandline.cpp b/src/catch2/internal/catch_commandline.cpp
+index 546fa256..c6b46721 100644
+--- a/src/catch2/internal/catch_commandline.cpp
++++ b/src/catch2/internal/catch_commandline.cpp
+@@ -13,7 +13,6 @@
+ #include <catch2/interfaces/catch_interfaces_registry_hub.hpp>
+ #include <catch2/interfaces/catch_interfaces_reporter.hpp>
+ 
+-#include <algorithm>
+ #include <fstream>
+ #include <ctime>
+ 

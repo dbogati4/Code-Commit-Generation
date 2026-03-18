@@ -1,0 +1,8 @@
+{
+  "commit_id": "ef62b578e293e21b5f973d30130866c9a869fdeb",
+  "parent_id": "f4389b4fdb1961cd09c0567c1f3de02aed067507",
+  "message": "Added tests for failing a section within a generator - small fixes to implementation to make it work",
+  "changed_files": [
+    "projects/SelfTest/PartTrackerTests.cpp"
+  ]
+}

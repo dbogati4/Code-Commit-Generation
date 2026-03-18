@@ -1,0 +1,8 @@
+{
+  "commit_id": "99602787cd1adaa8e8567063031d28e6510f4ebe",
+  "parent_id": "31537c43d9c4c99b9d7525753e0b3ebbd13758c9",
+  "message": "Fix error message when unmatched quotes are encountered by CAPTURE",
+  "changed_files": [
+    "include/internal/catch_message.cpp"
+  ]
+}

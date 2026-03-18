@@ -1,0 +1,8 @@
+{
+  "commit_id": "4bd2c3ad6ab0bcdecf9101dcf7f5968901f68351",
+  "parent_id": "c38a5caa2ebf0738e468f419c4d3ed857001cfb0",
+  "message": "Fix compilation error with CATCH_CONFIG_GLOBAL_NEXTAFTER",
+  "changed_files": [
+    "include/internal/catch_matchers_floating.cpp"
+  ]
+}

@@ -1,0 +1,8 @@
+{
+  "commit_id": "7ada02e21ee66ac89783011526ca8058f8234053",
+  "parent_id": "2fbd66c51cbf3a406dc6bb8ddc6b9a0b96077a72",
+  "message": "Avoid technically UB type punning when determining endianness",
+  "changed_files": [
+    "include/internal/catch_tostring.cpp"
+  ]
+}

@@ -1,0 +1,8 @@
+{
+  "commit_id": "04f18d996ba7d71fda1d28662e2413c06c5e5a49",
+  "parent_id": "3bb9fcd916ecd4a78d1b8bd4c03b0e37115b2532",
+  "message": "Suppress global constructor warning in benchmarking",
+  "changed_files": [
+    "src/catch2/benchmark/detail/catch_complete_invoke.cpp"
+  ]
+}

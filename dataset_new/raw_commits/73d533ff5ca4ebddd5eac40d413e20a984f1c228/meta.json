@@ -1,0 +1,8 @@
+{
+  "commit_id": "73d533ff5ca4ebddd5eac40d413e20a984f1c228",
+  "parent_id": "899c5ed3df6fa1081b36476d9ce80310668458a7",
+  "message": "Examples: add semicolon after INFO",
+  "changed_files": [
+    "examples/210-Evt-EventListeners.cpp"
+  ]
+}

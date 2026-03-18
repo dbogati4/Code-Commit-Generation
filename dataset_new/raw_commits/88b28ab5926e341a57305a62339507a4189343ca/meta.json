@@ -1,0 +1,8 @@
+{
+  "commit_id": "88b28ab5926e341a57305a62339507a4189343ca",
+  "parent_id": "ef3374ed813590525527f229994b58c094e9c12e",
+  "message": "Extra compilation checks for compiling without exceptions",
+  "changed_files": [
+    "tests/ExtraTests/X03-DisabledExceptions-DefaultHandler.cpp"
+  ]
+}

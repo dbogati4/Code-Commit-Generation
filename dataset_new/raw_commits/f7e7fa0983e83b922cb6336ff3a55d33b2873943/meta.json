@@ -1,0 +1,8 @@
+{
+  "commit_id": "f7e7fa0983e83b922cb6336ff3a55d33b2873943",
+  "parent_id": "b626e4c7aedb953e79784265e12283a62d5e94d3",
+  "message": "Fix ReusableStringStream to access the container under the lock (#3031)",
+  "changed_files": [
+    "src/catch2/internal/catch_reusable_string_stream.cpp"
+  ]
+}

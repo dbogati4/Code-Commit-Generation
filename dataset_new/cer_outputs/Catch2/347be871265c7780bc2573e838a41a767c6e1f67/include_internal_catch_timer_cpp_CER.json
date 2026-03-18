@@ -1,0 +1,14 @@
+{
+  "events": [
+    {
+      "event_id": "e1",
+      "op": "delete",
+      "node": "expr_stmt",
+      "level": "stmt",
+      "old": "#include <iostream>",
+      "new": "",
+      "enclosing": {},
+      "anchor": "unit[1]"
+    }
+  ]
+}

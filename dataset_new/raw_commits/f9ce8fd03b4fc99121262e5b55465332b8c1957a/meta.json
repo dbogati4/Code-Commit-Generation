@@ -1,0 +1,9 @@
+{
+  "commit_id": "f9ce8fd03b4fc99121262e5b55465332b8c1957a",
+  "parent_id": "60f25c7ffd9e5019207a62aa534d3ff2132c2f71",
+  "message": "Added some missing cstring includes",
+  "changed_files": [
+    "projects/SelfTest/String.tests.cpp",
+    "projects/SelfTest/StringRef.tests.cpp"
+  ]
+}

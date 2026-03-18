@@ -1,0 +1,24 @@
+{
+  "events": [
+    {
+      "event_id": "e1",
+      "op": "replace",
+      "node": "expr_stmt",
+      "level": "stmt",
+      "old": "// TODO",
+      "new": "#include <catch2/catch_test_macros.hpp>",
+      "enclosing": {},
+      "anchor": "unit[1]"
+    },
+    {
+      "event_id": "e2",
+      "op": "replace",
+      "node": "expr_stmt",
+      "level": "stmt",
+      "old": "catch2/catch.hpp",
+      "new": "catch2/catch_generators_generic.hpp",
+      "enclosing": {},
+      "anchor": "unit[1]/include[1]/file[1]"
+    }
+  ]
+}

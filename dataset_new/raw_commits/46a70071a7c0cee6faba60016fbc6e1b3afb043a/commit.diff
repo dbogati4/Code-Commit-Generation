@@ -1,0 +1,13 @@
+diff --git a/include/internal/catch_debug_console.cpp b/include/internal/catch_debug_console.cpp
+index 26751c7e..5a99d422 100644
+--- a/include/internal/catch_debug_console.cpp
++++ b/include/internal/catch_debug_console.cpp
+@@ -16,7 +16,7 @@
+ 
+     namespace Catch {
+         void writeToDebugConsole( std::string const& text ) {
+-            __android_log_print( ANDROID_LOG_DEBUG, "Catch", text.c_str() );
++            __android_log_write( ANDROID_LOG_DEBUG, "Catch", text.c_str() );
+         }
+     }
+ 

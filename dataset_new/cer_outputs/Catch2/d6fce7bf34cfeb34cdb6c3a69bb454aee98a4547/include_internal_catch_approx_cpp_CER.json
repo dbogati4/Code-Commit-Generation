@@ -1,0 +1,133 @@
+{
+  "events": [
+    {
+      "event_id": "e1",
+      "op": "replace",
+      "node": "variable_name",
+      "level": "token",
+      "old": "margin",
+      "new": "newMargin",
+      "enclosing": {
+        "function": "setMargin"
+      },
+      "anchor": "unit[1]/namespace[name=Catch]/block[1]/namespace[name=Detail]/block[1]/function[name=setMargin]/parameter_list[1]/parameter[1]/decl[1]/name[1]"
+    },
+    {
+      "event_id": "e2",
+      "op": "replace",
+      "node": "call_name",
+      "level": "token",
+      "old": "margin",
+      "new": "newMargin",
+      "enclosing": {
+        "function": "setMargin",
+        "statement": "expr_stmt"
+      },
+      "anchor": "unit[1]/namespace[name=Catch]/block[1]/namespace[name=Detail]/block[1]/function[name=setMargin]/block[1]/block_content[1]/expr_stmt[1]/expr[1]/call[name=CATCH_ENFORCE]/argument_list[1]/argument[1]/expr[1]/name[1]",
+      "old_context": "CATCH_ENFORCE(margin >= 0, \"Invalid Approx::margin: \" << margin << '.' << \" Approx::Margin has to be non-negative.\");",
+      "new_context": "CATCH_ENFORCE(newMargin >= 0, \"Invalid Approx::margin: \" << newMargin << '.' << \" Approx::Margin has to be non-negative.\");"
+    },
+    {
+      "event_id": "e3",
+      "op": "replace",
+      "node": "call_name",
+      "level": "token",
+      "old": "margin",
+      "new": "newMargin",
+      "enclosing": {
+        "function": "setMargin",
+        "statement": "expr_stmt"
+      },
+      "anchor": "unit[1]/namespace[name=Catch]/block[1]/namespace[name=Detail]/block[1]/function[name=setMargin]/block[1]/block_content[1]/expr_stmt[1]/expr[1]/call[name=CATCH_ENFORCE]/argument_list[1]/argument[2]/expr[1]/name[1]",
+      "old_context": "CATCH_ENFORCE(margin >= 0, \"Invalid Approx::margin: \" << margin << '.' << \" Approx::Margin has to be non-negative.\");",
+      "new_context": "CATCH_ENFORCE(newMargin >= 0, \"Invalid Approx::margin: \" << newMargin << '.' << \" Approx::Margin has to be non-negative.\");"
+    },
+    {
+      "event_id": "e4",
+      "op": "replace",
+      "node": "variable_name",
+      "level": "token",
+      "old": "margin",
+      "new": "newMargin",
+      "enclosing": {
+        "function": "setMargin",
+        "statement": "expr_stmt"
+      },
+      "anchor": "unit[1]/namespace[name=Catch]/block[1]/namespace[name=Detail]/block[1]/function[name=setMargin]/block[1]/block_content[1]/expr_stmt[2]/expr[name=m_margin]/name[2]",
+      "old_context": "m_margin = margin;",
+      "new_context": "m_margin = newMargin;"
+    },
+    {
+      "event_id": "e5",
+      "op": "replace",
+      "node": "variable_name",
+      "level": "token",
+      "old": "epsilon",
+      "new": "newEpsilon",
+      "enclosing": {
+        "function": "setEpsilon"
+      },
+      "anchor": "unit[1]/namespace[name=Catch]/block[1]/namespace[name=Detail]/block[1]/function[name=setEpsilon]/parameter_list[1]/parameter[1]/decl[1]/name[1]"
+    },
+    {
+      "event_id": "e6",
+      "op": "replace",
+      "node": "call_name",
+      "level": "token",
+      "old": "epsilon",
+      "new": "newEpsilon",
+      "enclosing": {
+        "function": "setEpsilon",
+        "statement": "expr_stmt"
+      },
+      "anchor": "unit[1]/namespace[name=Catch]/block[1]/namespace[name=Detail]/block[1]/function[name=setEpsilon]/block[1]/block_content[1]/expr_stmt[1]/expr[1]/call[name=CATCH_ENFORCE]/argument_list[1]/argument[1]/expr[1]/name[1]",
+      "old_context": "CATCH_ENFORCE(epsilon >= 0 && epsilon <= 1.0, \"Invalid Approx::epsilon: \" << epsilon << '.' << \" Approx::epsilon has to be in [0, 1]\");",
+      "new_context": "CATCH_ENFORCE(newEpsilon >= 0 && newEpsilon <= 1.0, \"Invalid Approx::epsilon: \" << newEpsilon << '.' << \" Approx::epsilon has to be in [0, 1]\");"
+    },
+    {
+      "event_id": "e7",
+      "op": "replace",
+      "node": "call_name",
+      "level": "token",
+      "old": "epsilon",
+      "new": "newEpsilon",
+      "enclosing": {
+        "function": "setEpsilon",
+        "statement": "expr_stmt"
+      },
+      "anchor": "unit[1]/namespace[name=Catch]/block[1]/namespace[name=Detail]/block[1]/function[name=setEpsilon]/block[1]/block_content[1]/expr_stmt[1]/expr[1]/call[name=CATCH_ENFORCE]/argument_list[1]/argument[1]/expr[1]/name[2]",
+      "old_context": "CATCH_ENFORCE(epsilon >= 0 && epsilon <= 1.0, \"Invalid Approx::epsilon: \" << epsilon << '.' << \" Approx::epsilon has to be in [0, 1]\");",
+      "new_context": "CATCH_ENFORCE(newEpsilon >= 0 && newEpsilon <= 1.0, \"Invalid Approx::epsilon: \" << newEpsilon << '.' << \" Approx::epsilon has to be in [0, 1]\");"
+    },
+    {
+      "event_id": "e8",
+      "op": "replace",
+      "node": "call_name",
+      "level": "token",
+      "old": "epsilon",
+      "new": "newEpsilon",
+      "enclosing": {
+        "function": "setEpsilon",
+        "statement": "expr_stmt"
+      },
+      "anchor": "unit[1]/namespace[name=Catch]/block[1]/namespace[name=Detail]/block[1]/function[name=setEpsilon]/block[1]/block_content[1]/expr_stmt[1]/expr[1]/call[name=CATCH_ENFORCE]/argument_list[1]/argument[2]/expr[1]/name[1]",
+      "old_context": "CATCH_ENFORCE(epsilon >= 0 && epsilon <= 1.0, \"Invalid Approx::epsilon: \" << epsilon << '.' << \" Approx::epsilon has to be in [0, 1]\");",
+      "new_context": "CATCH_ENFORCE(newEpsilon >= 0 && newEpsilon <= 1.0, \"Invalid Approx::epsilon: \" << newEpsilon << '.' << \" Approx::epsilon has to be in [0, 1]\");"
+    },
+    {
+      "event_id": "e9",
+      "op": "replace",
+      "node": "variable_name",
+      "level": "token",
+      "old": "epsilon",
+      "new": "newEpsilon",
+      "enclosing": {
+        "function": "setEpsilon",
+        "statement": "expr_stmt"
+      },
+      "anchor": "unit[1]/namespace[name=Catch]/block[1]/namespace[name=Detail]/block[1]/function[name=setEpsilon]/block[1]/block_content[1]/expr_stmt[2]/expr[name=m_epsilon]/name[2]",
+      "old_context": "m_epsilon = epsilon;",
+      "new_context": "m_epsilon = newEpsilon;"
+    }
+  ]
+}

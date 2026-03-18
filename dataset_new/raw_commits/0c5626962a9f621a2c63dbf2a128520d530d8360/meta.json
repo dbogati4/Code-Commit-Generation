@@ -1,0 +1,8 @@
+{
+  "commit_id": "0c5626962a9f621a2c63dbf2a128520d530d8360",
+  "parent_id": "11e55161e1bd859ede9b5d67b6a7b436291fa5af",
+  "message": "test case for infinite loop",
+  "changed_files": [
+    "projects/SelfTest/MiscTests.cpp"
+  ]
+}

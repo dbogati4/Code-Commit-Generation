@@ -1,0 +1,14 @@
+{
+  "events": [
+    {
+      "event_id": "e1",
+      "op": "insert",
+      "node": "expr_stmt",
+      "level": "stmt",
+      "old": "",
+      "new": "CATCH_UNSCOPED_INFO( \"some info\" );",
+      "enclosing": {},
+      "anchor": "unit[1]/block[1]/block_content[1]/expr_stmt[22]"
+    }
+  ]
+}

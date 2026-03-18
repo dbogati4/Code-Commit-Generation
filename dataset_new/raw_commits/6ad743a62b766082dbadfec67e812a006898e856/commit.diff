@@ -1,0 +1,13 @@
+diff --git a/src/catch2/catch_debugger.cpp b/src/catch2/catch_debugger.cpp
+index 140f0204..02a8f818 100644
+--- a/src/catch2/catch_debugger.cpp
++++ b/src/catch2/catch_debugger.cpp
+@@ -12,7 +12,7 @@
+ #include <catch2/catch_stream.h>
+ #include <catch2/catch_platform.h>
+ 
+-#ifdef CATCH_PLATFORM_MAC
++#if defined(CATCH_PLATFORM_MAC) || defined(CATCH_PLATFORM_IPHONE)
+ 
+ #  include <assert.h>
+ #  include <stdbool.h>

@@ -1,0 +1,8 @@
+{
+  "commit_id": "07fb96d42c3295b7b9d3f63396d290e0bbfbc024",
+  "parent_id": "34d9a588bba93151d61269b0c182b2ebab89f0c2",
+  "message": "Don't include catch_random_number_generator.hpp in catch_session.cpp",
+  "changed_files": [
+    "src/catch2/catch_session.cpp"
+  ]
+}

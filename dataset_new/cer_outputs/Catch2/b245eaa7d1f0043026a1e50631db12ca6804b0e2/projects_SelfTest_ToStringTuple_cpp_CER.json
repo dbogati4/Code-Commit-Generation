@@ -1,0 +1,18 @@
+{
+  "events": [
+    {
+      "event_id": "e1",
+      "op": "replace",
+      "node": "literal",
+      "level": "token",
+      "old": "1.2",
+      "new": "1.2f",
+      "enclosing": {
+        "statement": "expr_stmt"
+      },
+      "anchor": "unit[1]/block[3]/block_content[1]/expr_stmt[2]/expr[1]/call[name=CHECK]/argument_list[1]/argument[1]/expr[1]/call[name=toString]/argument_list[1]/argument[1]/expr[1]/call[name=type]/argument_list[1]/argument[1]/expr[1]/literal[1]",
+      "old_context": "CHECK( \"{ 1.2f, 0 }\" == Catch::toString(type {1.2, 0}) );",
+      "new_context": "CHECK( \"{ 1.2f, 0 }\" == Catch::toString(type {1.2f, 0}) );"
+    }
+  ]
+}

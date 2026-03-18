@@ -1,0 +1,22 @@
+diff --git a/projects/SelfTest/TrickyTests.cpp b/projects/SelfTest/TrickyTests.cpp
+index 4fe2c0ba..462718db 100644
+--- a/projects/SelfTest/TrickyTests.cpp
++++ b/projects/SelfTest/TrickyTests.cpp
+@@ -44,7 +44,7 @@ TEST_CASE
+ ///////////////////////////////////////////////////////////////////////////////
+ TEST_CASE
+ (
+-    "Where the is more to the expression after the RHS[failing]",
++    "Where there is more to the expression after the RHS",
+     "[Tricky][failing][.]"
+ )
+ {
+@@ -55,7 +55,7 @@ TEST_CASE
+ ///////////////////////////////////////////////////////////////////////////////
+ TEST_CASE
+ (
+-    "Where the LHS is not a simple value[failing]",
++    "Where the LHS is not a simple value",
+     "[Tricky][failing][.]"
+ )
+ {

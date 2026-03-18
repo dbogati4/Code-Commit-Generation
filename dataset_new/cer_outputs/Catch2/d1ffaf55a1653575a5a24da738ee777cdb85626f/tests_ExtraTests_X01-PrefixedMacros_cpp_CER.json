@@ -1,0 +1,14 @@
+{
+  "events": [
+    {
+      "event_id": "e1",
+      "op": "replace",
+      "node": "expr_stmt",
+      "level": "stmt",
+      "old": "[[noreturn]] void this_throws() { throw std::runtime_error(\"Some msg\"); } void this_doesnt_throw() {}",
+      "new": "namespace { [[noreturn]] void this_throws() { throw std::runtime_error(\"Some msg\"); } void this_doesnt_throw() {} }",
+      "enclosing": {},
+      "anchor": "unit[1]"
+    }
+  ]
+}

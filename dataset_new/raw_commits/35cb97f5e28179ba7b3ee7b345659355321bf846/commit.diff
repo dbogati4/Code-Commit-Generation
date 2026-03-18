@@ -1,0 +1,49 @@
+diff --git a/projects/SelfTest/MessageTests.cpp b/projects/SelfTest/MessageTests.cpp
+index 0e010f6c..c36b1060 100644
+--- a/projects/SelfTest/MessageTests.cpp
++++ b/projects/SelfTest/MessageTests.cpp
+@@ -92,11 +92,11 @@ TEST_CASE( "./succeeding/nofail", "The NO_FAIL macro reports a failure but does
+     CHECK_NOFAIL( 1 == 2 );
+ }
+ 
+-TEST_CASE( "just info", "[info][isolated info]" )
++TEST_CASE( "just info", "[info][isolated info][hide]" )
+ {
+     INFO( "this should never be seen" );
+ }
+-TEST_CASE( "just failure", "[fail][isolated info]" )
++TEST_CASE( "just failure", "[fail][isolated info][hide]" )
+ {
+     FAIL( "Previous info should not be seen" );
+ }
+diff --git a/projects/SelfTest/MiscTests.cpp b/projects/SelfTest/MiscTests.cpp
+index 1e68fc75..97734927 100644
+--- a/projects/SelfTest/MiscTests.cpp
++++ b/projects/SelfTest/MiscTests.cpp
+@@ -243,11 +243,11 @@ TEST_CASE("./failing/matchers/Equals", "")
+ //{
+ //    REQUIRE_THAT("", Equals(NULL));
+ //}
+-TEST_CASE("/succeeding/matchers/AllOf", "")
++TEST_CASE("./succeeding/matchers/AllOf", "")
+ {
+     CHECK_THAT( testStringForMatching(), AllOf( Catch::Contains( "string" ), Catch::Contains( "abc" ) ) );
+ }
+-TEST_CASE("/succeeding/matchers/AnyOf", "")
++TEST_CASE("./succeeding/matchers/AnyOf", "")
+ {
+     CHECK_THAT( testStringForMatching(), AnyOf( Catch::Contains( "string" ), Catch::Contains( "not there" ) ) );
+     CHECK_THAT( testStringForMatching(), AnyOf( Catch::Contains( "not there" ), Catch::Contains( "string" ) ) );
+diff --git a/projects/SelfTest/TestMain.cpp b/projects/SelfTest/TestMain.cpp
+index 4085c670..fa6f3bc8 100644
+--- a/projects/SelfTest/TestMain.cpp
++++ b/projects/SelfTest/TestMain.cpp
+@@ -37,7 +37,7 @@ TEST_CASE( "selftest/main", "Runs all Catch self tests and checks their results"
+         SECTION(    "selftest/test counts/succeeding tests", 
+                     "Number of 'succeeding' tests is fixed" ) {
+             Totals totals = runner.runMatching( "./succeeding/*", 0, 2 );
+-            CHECK( totals.assertions.passed == 291 );
++            CHECK( totals.assertions.passed == 296 );
+             CHECK( totals.assertions.failed == 0 );
+         }
+ 

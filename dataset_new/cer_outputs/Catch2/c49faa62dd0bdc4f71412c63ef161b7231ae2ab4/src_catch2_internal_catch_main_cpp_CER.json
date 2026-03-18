@@ -1,0 +1,24 @@
+{
+  "events": [
+    {
+      "event_id": "e1",
+      "op": "insert",
+      "node": "comment",
+      "level": "comment",
+      "old": "",
+      "new": "// Allow users of amalgamated .cpp file to remove our main and provide their own.",
+      "enclosing": {},
+      "anchor": "unit[1]/comment[7]"
+    },
+    {
+      "event_id": "e2",
+      "op": "insert",
+      "node": "comment",
+      "level": "comment",
+      "old": "",
+      "new": "// !defined(CATCH_AMALGAMATED_CUSTOM_MAIN",
+      "enclosing": {},
+      "anchor": "unit[1]/comment[7]"
+    }
+  ]
+}

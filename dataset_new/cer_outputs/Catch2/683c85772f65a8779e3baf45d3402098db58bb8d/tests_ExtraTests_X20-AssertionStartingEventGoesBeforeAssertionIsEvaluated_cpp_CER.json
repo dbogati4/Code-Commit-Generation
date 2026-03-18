@@ -1,0 +1,94 @@
+{
+  "events": [
+    {
+      "event_id": "e1",
+      "op": "delete",
+      "node": "comment",
+      "level": "comment",
+      "old": "TODO: FIXES",
+      "new": "",
+      "enclosing": {},
+      "anchor": "unit[1]/comment[6]"
+    },
+    {
+      "event_id": "e2",
+      "op": "replace",
+      "node": "comment",
+      "level": "comment",
+      "old": "/**\\file\n * TODO: FIXES Registers custom reporter that reports testCase* events\n *\n * The resulting executable can then be used by an external Python script\n * to verify that testCase{Starting,Ended} and testCasePartial{Starting,Ended}\n * events are properly nested.\n */",
+      "new": "/**\\file\n * Registers an event listener to increments counter of assertionStarting events.\n *\n * Different assertion macros then check that the counter is at expected\n * value when they are evaluated.\n */",
+      "enclosing": {},
+      "anchor": "unit[1]/comment[6]"
+    },
+    {
+      "event_id": "e3",
+      "op": "delete",
+      "node": "comment",
+      "level": "comment",
+      "old": "events",
+      "new": "",
+      "enclosing": {},
+      "anchor": "unit[1]/comment[6]"
+    },
+    {
+      "event_id": "e4",
+      "op": "replace",
+      "node": "comment",
+      "level": "comment",
+      "old": "/**\\file\n * TODO: FIXES Registers custom reporter that reports testCase* events\n *\n * The resulting executable can then be used by an external Python script\n * to verify that testCase{Starting,Ended} and testCasePartial{Starting,Ended}\n * events are properly nested.\n */",
+      "new": "/**\\file\n * Registers an event listener to increments counter of assertionStarting events.\n *\n * Different assertion macros then check that the counter is at expected\n * value when they are evaluated.\n */",
+      "enclosing": {},
+      "anchor": "unit[1]/comment[6]"
+    },
+    {
+      "event_id": "e5",
+      "op": "replace",
+      "node": "comment",
+      "level": "comment",
+      "old": "/**\\file\n * TODO: FIXES Registers custom reporter that reports testCase* events\n *\n * The resulting executable can then be used by an external Python script\n * to verify that testCase{Starting,Ended} and testCasePartial{Starting,Ended}\n * events are properly nested.\n */",
+      "new": "/**\\file\n * Registers an event listener to increments counter of assertionStarting events.\n *\n * Different assertion macros then check that the counter is at expected\n * value when they are evaluated.\n */",
+      "enclosing": {},
+      "anchor": "unit[1]/comment[6]"
+    },
+    {
+      "event_id": "e6",
+      "op": "replace",
+      "node": "comment",
+      "level": "comment",
+      "old": "/**\\file\n * TODO: FIXES Registers custom reporter that reports testCase* events\n *\n * The resulting executable can then be used by an external Python script\n * to verify that testCase{Starting,Ended} and testCasePartial{Starting,Ended}\n * events are properly nested.\n */",
+      "new": "/**\\file\n * Registers an event listener to increments counter of assertionStarting events.\n *\n * Different assertion macros then check that the counter is at expected\n * value when they are evaluated.\n */",
+      "enclosing": {},
+      "anchor": "unit[1]/comment[6]"
+    },
+    {
+      "event_id": "e7",
+      "op": "replace",
+      "node": "comment",
+      "level": "comment",
+      "old": "/**\\file\n * TODO: FIXES Registers custom reporter that reports testCase* events\n *\n * The resulting executable can then be used by an external Python script\n * to verify that testCase{Starting,Ended} and testCasePartial{Starting,Ended}\n * events are properly nested.\n */",
+      "new": "/**\\file\n * Registers an event listener to increments counter of assertionStarting events.\n *\n * Different assertion macros then check that the counter is at expected\n * value when they are evaluated.\n */",
+      "enclosing": {},
+      "anchor": "unit[1]/comment[6]"
+    },
+    {
+      "event_id": "e8",
+      "op": "replace",
+      "node": "comment",
+      "level": "comment",
+      "old": "/**\\file\n * TODO: FIXES Registers custom reporter that reports testCase* events\n *\n * The resulting executable can then be used by an external Python script\n * to verify that testCase{Starting,Ended} and testCasePartial{Starting,Ended}\n * events are properly nested.\n */",
+      "new": "/**\\file\n * Registers an event listener to increments counter of assertionStarting events.\n *\n * Different assertion macros then check that the counter is at expected\n * value when they are evaluated.\n */",
+      "enclosing": {},
+      "anchor": "unit[1]/comment[6]"
+    },
+    {
+      "event_id": "e9",
+      "op": "delete",
+      "node": "comment",
+      "level": "comment",
+      "old": "// TODO: custom matcher to check that \"assertion_starting_events_seen\" has",
+      "new": "",
+      "enclosing": {},
+      "anchor": "unit[1]/namespace[1]/block[1]/comment[1]"
+    }
+  ]
+}

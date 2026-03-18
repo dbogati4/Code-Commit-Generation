@@ -1,0 +1,12 @@
+diff --git a/projects/SelfTest/ExceptionTests.cpp b/projects/SelfTest/ExceptionTests.cpp
+index 949962ec..dfcaa4b8 100644
+--- a/projects/SelfTest/ExceptionTests.cpp
++++ b/projects/SelfTest/ExceptionTests.cpp
+@@ -112,6 +112,7 @@ public:
+     CustomStdException( const std::string& msg )
+     : m_msg( msg )
+     {}
++    ~CustomStdException() CATCH_NOEXCEPT {}
+     
+     std::string getMessage() const
+     {

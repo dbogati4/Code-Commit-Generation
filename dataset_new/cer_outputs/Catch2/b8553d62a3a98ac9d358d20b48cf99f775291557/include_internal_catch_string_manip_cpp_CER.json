@@ -1,0 +1,24 @@
+{
+  "events": [
+    {
+      "event_id": "e1",
+      "op": "insert",
+      "node": "expr_stmt",
+      "level": "stmt",
+      "old": "",
+      "new": "namespace { char toLowerCh(char c) { return static_cast<char>( std::tolower( c ) ); } }",
+      "enclosing": {},
+      "anchor": "unit[1]/namespace[name=Catch]/block[1]"
+    },
+    {
+      "event_id": "e2",
+      "op": "delete",
+      "node": "function_name",
+      "level": "function",
+      "old": "toLowerCh",
+      "new": "",
+      "enclosing": {},
+      "anchor": "unit[1]/namespace[name=Catch]/block[1]/function[name=toLowerCh]"
+    }
+  ]
+}

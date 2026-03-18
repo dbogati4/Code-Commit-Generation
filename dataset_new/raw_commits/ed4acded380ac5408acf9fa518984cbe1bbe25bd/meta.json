@@ -1,0 +1,8 @@
+{
+  "commit_id": "ed4acded380ac5408acf9fa518984cbe1bbe25bd",
+  "parent_id": "4acc51828f7f93f3b2058a63f54d112af4034503",
+  "message": "Don't define tryTranslators function if exception are disabled",
+  "changed_files": [
+    "src/catch2/internal/catch_exception_translator_registry.cpp"
+  ]
+}

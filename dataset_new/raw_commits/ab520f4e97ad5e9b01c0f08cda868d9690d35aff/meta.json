@@ -1,0 +1,8 @@
+{
+  "commit_id": "ab520f4e97ad5e9b01c0f08cda868d9690d35aff",
+  "parent_id": "32617f42d07c83e5f99dc831f567609ec54861ea",
+  "message": "Removed unneeded 'using uchar = unsigned char'",
+  "changed_files": [
+    "src/catch2/catch_xmlwriter.cpp"
+  ]
+}

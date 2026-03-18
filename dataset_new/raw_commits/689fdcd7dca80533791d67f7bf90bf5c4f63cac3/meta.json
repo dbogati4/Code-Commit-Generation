@@ -1,0 +1,8 @@
+{
+  "commit_id": "689fdcd7dca80533791d67f7bf90bf5c4f63cac3",
+  "parent_id": "a153fce72402c74bb8480c0776f86f889b658fc1",
+  "message": "Fix some tests never being run",
+  "changed_files": [
+    "tests/SelfTest/IntrospectiveTests/InternalBenchmark.tests.cpp"
+  ]
+}

@@ -1,0 +1,8 @@
+{
+  "commit_id": "d937427f1f8ae5c61f4c4849a6f860764f2f82b7",
+  "parent_id": "2a5de4e4476b7297e2f4e37b79ef9141a1829947",
+  "message": "Disable tests for reproducible FP on non-SSE2 x86 targets",
+  "changed_files": [
+    "tests/SelfTest/IntrospectiveTests/RandomNumberGeneration.tests.cpp"
+  ]
+}

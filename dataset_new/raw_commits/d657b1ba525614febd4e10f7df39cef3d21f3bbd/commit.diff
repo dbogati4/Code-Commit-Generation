@@ -1,0 +1,13 @@
+diff --git a/projects/SelfTest/MiscTests.cpp b/projects/SelfTest/MiscTests.cpp
+index 890e1e5a..ad572ee2 100644
+--- a/projects/SelfTest/MiscTests.cpp
++++ b/projects/SelfTest/MiscTests.cpp
+@@ -341,7 +341,7 @@ TEST_CASE("A couple of nested sections followed by a failure", "[failing][.]")
+ TEST_CASE("not allowed", "[!throws]")
+ {
+     // This test case should not be included if you run with -e on the command line
+-    SUCCEED();
++    SUCCEED( "" );
+ }
+ 
+ //TEST_CASE( "Is big endian" ) {

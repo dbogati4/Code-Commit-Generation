@@ -1,0 +1,8 @@
+{
+  "commit_id": "d178df06eea318dd2f9f921391ed0ff5e5f53969",
+  "parent_id": "cda21492a8322e61445025d8c34c46a024e563d6",
+  "message": "First cut of filters implementation",
+  "changed_files": [
+    "projects/SelfTest/TestMain.cpp"
+  ]
+}

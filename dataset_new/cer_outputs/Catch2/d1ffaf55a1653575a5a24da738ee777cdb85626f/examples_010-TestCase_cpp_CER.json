@@ -1,0 +1,16 @@
+{
+  "events": [
+    {
+      "event_id": "e1",
+      "op": "insert",
+      "node": "type",
+      "level": "token",
+      "old": "",
+      "new": "static",
+      "enclosing": {
+        "function": "Factorial"
+      },
+      "anchor": "unit[1]/function[name=Factorial]/type[name=int]"
+    }
+  ]
+}

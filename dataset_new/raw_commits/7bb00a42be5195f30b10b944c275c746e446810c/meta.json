@@ -1,0 +1,8 @@
+{
+  "commit_id": "7bb00a42be5195f30b10b944c275c746e446810c",
+  "parent_id": "fb4153e05e430921574d79d868ebc44dd9528629",
+  "message": "Remove stub of obsolete test",
+  "changed_files": [
+    "tests/SelfTest/UsageTests/Misc.tests.cpp"
+  ]
+}

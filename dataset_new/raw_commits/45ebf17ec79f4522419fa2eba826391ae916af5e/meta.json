@@ -1,0 +1,8 @@
+{
+  "commit_id": "45ebf17ec79f4522419fa2eba826391ae916af5e",
+  "parent_id": "093b72416de31a804fea15a4055bb44cb523401f",
+  "message": "Do not open the output file twice",
+  "changed_files": [
+    "include/internal/catch_session.cpp"
+  ]
+}

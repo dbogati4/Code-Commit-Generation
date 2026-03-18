@@ -1,0 +1,54 @@
+diff --git a/src/catch2/catch_session.cpp b/src/catch2/catch_session.cpp
+index edfef717..4419da4c 100644
+--- a/src/catch2/catch_session.cpp
++++ b/src/catch2/catch_session.cpp
+@@ -43,19 +43,13 @@ namespace Catch {
+                 return createReporter(config->getReporterName(), config);
+             }
+ 
+-            // On older platforms, returning unique_ptr<ListeningReporter>
+-            // when the return type is unique_ptr<IStreamingReporter>
+-            // doesn't compile without a std::move call. However, this causes
+-            // a warning on newer platforms. Thus, we have to work around
+-            // it a bit and downcast the pointer manually.
+-            auto ret = Detail::unique_ptr<IStreamingReporter>(new ListeningReporter(config));
+-            auto& multi = static_cast<ListeningReporter&>(*ret);
++            auto multi = Detail::make_unique<ListeningReporter>(config);
+             auto const& listeners = Catch::getRegistryHub().getReporterRegistry().getListeners();
+             for (auto const& listener : listeners) {
+-                multi.addListener(listener->create(Catch::ReporterConfig(config)));
++                multi->addListener(listener->create(Catch::ReporterConfig(config)));
+             }
+-            multi.addReporter(createReporter(config->getReporterName(), config));
+-            return ret;
++            multi->addReporter(createReporter(config->getReporterName(), config));
++            return multi;
+         }
+ 
+         class TestGroup {
+diff --git a/src/catch2/catch_test_case_info.cpp b/src/catch2/catch_test_case_info.cpp
+index 800c94fa..6a60f928 100644
+--- a/src/catch2/catch_test_case_info.cpp
++++ b/src/catch2/catch_test_case_info.cpp
+@@ -107,7 +107,7 @@ namespace Catch {
+         makeTestCaseInfo(std::string const& _className,
+                          NameAndTags const& nameAndTags,
+                          SourceLineInfo const& _lineInfo ) {
+-        return Detail::unique_ptr<TestCaseInfo>(new TestCaseInfo(_className, nameAndTags, _lineInfo));
++        return Detail::make_unique<TestCaseInfo>(_className, nameAndTags, _lineInfo);
+     }
+ 
+     TestCaseInfo::TestCaseInfo(std::string const& _className,
+diff --git a/src/catch2/internal/catch_stream.cpp b/src/catch2/internal/catch_stream.cpp
+index c1e0d1dc..9890ae3a 100644
+--- a/src/catch2/internal/catch_stream.cpp
++++ b/src/catch2/internal/catch_stream.cpp
+@@ -145,7 +145,7 @@ namespace Detail {
+ 
+         auto add() -> std::size_t {
+             if( m_unused.empty() ) {
+-                m_streams.push_back( Detail::unique_ptr<std::ostringstream>( new std::ostringstream ) );
++                m_streams.push_back( Detail::make_unique<std::ostringstream>() );
+                 return m_streams.size()-1;
+             }
+             else {

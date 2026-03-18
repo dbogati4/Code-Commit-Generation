@@ -1,0 +1,18 @@
+diff --git a/src/catch2/internal/catch_run_context.cpp b/src/catch2/internal/catch_run_context.cpp
+index 1ecc0644..3d72131d 100644
+--- a/src/catch2/internal/catch_run_context.cpp
++++ b/src/catch2/internal/catch_run_context.cpp
+@@ -210,6 +210,13 @@ namespace Catch {
+     {
+         getCurrentMutableContext().setResultCapture( this );
+         m_reporter->testRunStarting(m_runInfo);
++
++        // TODO: HACK!
++        //       We need to make sure the underlying cache is initialized
++        //       while we are guaranteed to be running in a single thread,
++        //       because the initialization is not thread-safe.
++        ReusableStringStream rss;
++        (void)rss;
+     }
+ 
+     RunContext::~RunContext() {

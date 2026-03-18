@@ -1,0 +1,1633 @@
+diff --git a/projects/SelfTest/UsageTests/Approx.tests.cpp b/projects/SelfTest/UsageTests/Approx.tests.cpp
+index b8207617..b3974971 100644
+--- a/projects/SelfTest/UsageTests/Approx.tests.cpp
++++ b/projects/SelfTest/UsageTests/Approx.tests.cpp
+@@ -10,13 +10,32 @@
+ 
+ #include <cmath>
+ 
++namespace { namespace ApproxTests {
++
++#ifndef APPROX_TEST_HELPERS_INCLUDED // Don't compile this more than once per TU
++#define APPROX_TEST_HELPERS_INCLUDED
++
++    inline double divide( double a, double b ) {
++        return a/b;
++    }
++
++    class StrongDoubleTypedef {
++        double d_ = 0.0;
++
++    public:
++        explicit StrongDoubleTypedef(double d) : d_(d) {}
++        explicit operator double() const { return d_; }
++    };
++
++    inline std::ostream& operator<<( std::ostream& os, StrongDoubleTypedef td ) {
++        return os << "StrongDoubleTypedef(" << static_cast<double>(td) << ")";
++    }
++
++#endif
++
++
+ ///////////////////////////////////////////////////////////////////////////////
+-TEST_CASE
+-(
+-    "Some simple comparisons between doubles",
+-    "[Approx]"
+-)
+-{
++TEST_CASE( "Some simple comparisons between doubles", "[Approx]" ) {
+     double d = 1.23;
+ 
+     REQUIRE( d == Approx( 1.23 ) );
+@@ -31,12 +50,7 @@ TEST_CASE
+ }
+ 
+ ///////////////////////////////////////////////////////////////////////////////
+-TEST_CASE
+-(
+-    "Approximate comparisons with different epsilons",
+-    "[Approx]"
+- )
+-{
++TEST_CASE( "Approximate comparisons with different epsilons", "[Approx]" ) {
+     double d = 1.23;
+ 
+     REQUIRE( d != Approx( 1.231 ) );
+@@ -44,12 +58,7 @@ TEST_CASE
+ }
+ 
+ ///////////////////////////////////////////////////////////////////////////////
+-TEST_CASE
+-(
+- "Less-than inequalities with different epsilons",
+- "[Approx]"
+-)
+-{
++TEST_CASE( "Less-than inequalities with different epsilons", "[Approx]" ) {
+   double d = 1.23;
+ 
+   REQUIRE( d <= Approx( 1.24 ) );
+@@ -59,12 +68,7 @@ TEST_CASE
+ }
+ 
+ ///////////////////////////////////////////////////////////////////////////////
+-TEST_CASE
+-(
+- "Greater-than inequalities with different epsilons",
+- "[Approx]"
+-)
+-{
++TEST_CASE( "Greater-than inequalities with different epsilons", "[Approx]" ) {
+   double d = 1.23;
+ 
+   REQUIRE( d >= Approx( 1.22 ) );
+@@ -74,34 +78,19 @@ TEST_CASE
+ }
+ 
+ ///////////////////////////////////////////////////////////////////////////////
+-TEST_CASE
+-(
+-    "Approximate comparisons with floats",
+-    "[Approx]"
+-)
+-{
++TEST_CASE( "Approximate comparisons with floats", "[Approx]" ) {
+     REQUIRE( 1.23f == Approx( 1.23f ) );
+     REQUIRE( 0.0f == Approx( 0.0f ) );
+ }
+ 
+ ///////////////////////////////////////////////////////////////////////////////
+-TEST_CASE
+-(
+-    "Approximate comparisons with ints",
+-    "[Approx]"
+-)
+-{
++TEST_CASE( "Approximate comparisons with ints", "[Approx]" ) {
+     REQUIRE( 1 == Approx( 1 ) );
+     REQUIRE( 0 == Approx( 0 ) );
+ }
+ 
+ ///////////////////////////////////////////////////////////////////////////////
+-TEST_CASE
+-(
+-    "Approximate comparisons with mixed numeric types",
+-    "[Approx]"
+-)
+-{
++TEST_CASE( "Approximate comparisons with mixed numeric types", "[Approx]" ) {
+     const double dZero = 0;
+     const double dSmall = 0.00001;
+     const double dMedium = 1.234;
+@@ -114,12 +103,7 @@ TEST_CASE
+ }
+ 
+ ///////////////////////////////////////////////////////////////////////////////
+-TEST_CASE
+-(
+-    "Use a custom approx",
+-    "[Approx][custom]"
+-)
+-{
++TEST_CASE( "Use a custom approx", "[Approx][custom]" ) {
+     double d = 1.23;
+ 
+     Approx approx = Approx::custom().epsilon( 0.01 );
+@@ -135,12 +119,7 @@ TEST_CASE
+     REQUIRE( approx( d ) != 1.25 );
+ }
+ 
+-inline double divide( double a, double b ) {
+-    return a/b;
+-}
+-
+-TEST_CASE( "Approximate PI", "[Approx][PI]" )
+-{
++TEST_CASE( "Approximate PI", "[Approx][PI]" ) {
+     REQUIRE( divide( 22, 7 ) == Approx( 3.141 ).epsilon( 0.001 ) );
+     REQUIRE( divide( 22, 7 ) != Approx( 3.141 ).epsilon( 0.0001 ) );
+ }
+@@ -194,19 +173,6 @@ TEST_CASE("Assorted miscellaneous tests", "[Approx]") {
+     REQUIRE_FALSE(NAN == Approx(NAN));
+ }
+ 
+-class StrongDoubleTypedef
+-{
+-  double d_ = 0.0;
+-
+-  public:
+-    explicit StrongDoubleTypedef(double d) : d_(d) {}
+-    explicit operator double() const { return d_; }
+-};
+-
+-inline std::ostream& operator<<( std::ostream& os, StrongDoubleTypedef td ) {
+-    return os << "StrongDoubleTypedef(" << static_cast<double>(td) << ")";
+-}
+-
+ TEST_CASE( "Comparison with explicitly convertible types", "[Approx]" )
+ {
+   StrongDoubleTypedef td(10.0);
+@@ -228,3 +194,5 @@ TEST_CASE( "Comparison with explicitly convertible types", "[Approx]" )
+   REQUIRE(Approx(11.0) >= td);
+ 
+ }
++
++}} // namespace ApproxTests
+diff --git a/projects/SelfTest/UsageTests/BDD.tests.cpp b/projects/SelfTest/UsageTests/BDD.tests.cpp
+index ed89bfbc..f43fd96d 100644
+--- a/projects/SelfTest/UsageTests/BDD.tests.cpp
++++ b/projects/SelfTest/UsageTests/BDD.tests.cpp
+@@ -8,96 +8,100 @@
+ 
+ #include "catch.hpp"
+ 
+-inline bool itDoesThis(){ return true; }
+-inline bool itDoesThat(){ return true; }
+-
+-SCENARIO( "Do that thing with the thing", "[Tags]" ) {
+-    GIVEN( "This stuff exists" ) {
+-        // make stuff exist
+-        WHEN( "I do this" ) {
+-            // do this
+-            THEN( "it should do this")
+-            {
+-                REQUIRE( itDoesThis() );
+-                AND_THEN( "do that")
+-                    REQUIRE( itDoesThat() );
++namespace { namespace BDDTests {
++
++#ifndef BDD_TEST_HELPERS_INCLUDED // Don't compile this more than once per TU
++#define BDD_TEST_HELPERS_INCLUDED
++
++    inline bool itDoesThis() { return true; }
++
++    inline bool itDoesThat() { return true; }
++
++    namespace {
++
++// a trivial fixture example to support SCENARIO_METHOD tests
++        struct Fixture {
++            Fixture()
++                    : d_counter(0) {
+             }
+-        }
+-    }
+-}
+-
+-SCENARIO( "Vector resizing affects size and capacity", "[vector][bdd][size][capacity]" ) {
+-    GIVEN( "an empty vector" ) {
+-        std::vector<int> v;
+-        REQUIRE( v.size() == 0 );
+-
+-        WHEN( "it is made larger" ) {
+-            v.resize( 10 );
+-            THEN( "the size and capacity go up" ) {
+-                REQUIRE( v.size() == 10 );
+-                REQUIRE( v.capacity() >= 10 );
+-
+-                AND_WHEN( "it is made smaller again" ) {
+-                    v.resize( 5 );
+-                    THEN( "the size goes down but the capacity stays the same" ) {
+-                        REQUIRE( v.size() == 5 );
+-                        REQUIRE( v.capacity() >= 10 );
+-                    }
+-                }
++
++            int counter() {
++                return d_counter++;
+             }
+-        }
+ 
+-        WHEN( "we reserve more space" ) {
+-            v.reserve( 10 );
+-            THEN( "The capacity is increased but the size remains the same" ) {
+-                REQUIRE( v.capacity() >= 10 );
+-                REQUIRE( v.size() == 0 );
++            int d_counter;
++        };
++
++    }
++#endif
++
++    SCENARIO("Do that thing with the thing", "[Tags]") {
++        GIVEN("This stuff exists") {
++            // make stuff exist
++            WHEN("I do this") {
++                // do this
++                THEN("it should do this") {
++                    REQUIRE(itDoesThis());
++                    AND_THEN("do that")REQUIRE(itDoesThat());
++                }
+             }
+         }
+     }
+-}
+ 
+-SCENARIO(   "This is a really long scenario name to see how the list command deals with wrapping",
+-            "[very long tags][lots][long][tags][verbose]"
+-            "[one very long tag name that should cause line wrapping writing out using the list command]"
+-            "[anotherReallyLongTagNameButThisOneHasNoObviousWrapPointsSoShouldSplitWithinAWordUsingADashCharacter]" ) {
+-    GIVEN( "A section name that is so long that it cannot fit in a single console width" )
+-        WHEN( "The test headers are printed as part of the normal running of the scenario" )
+-            THEN( "The, deliberately very long and overly verbose (you see what I did there?) section names must wrap, along with an indent" )
+-                SUCCEED("boo!");
+-}
++    SCENARIO("Vector resizing affects size and capacity", "[vector][bdd][size][capacity]") {
++        GIVEN("an empty vector") {
++            std::vector<int> v;
++            REQUIRE(v.size() == 0);
+ 
+-namespace {
++            WHEN("it is made larger") {
++                v.resize(10);
++                THEN("the size and capacity go up") {
++                    REQUIRE(v.size() == 10);
++                    REQUIRE(v.capacity() >= 10);
+ 
+-// a trivial fixture example to support SCENARIO_METHOD tests
+-struct Fixture
+-{
+-    Fixture()
+-    : d_counter(0)
+-    {
++                    AND_WHEN("it is made smaller again") {
++                        v.resize(5);
++                        THEN("the size goes down but the capacity stays the same") {
++                            REQUIRE(v.size() == 5);
++                            REQUIRE(v.capacity() >= 10);
++                        }
++                    }
++                }
++            }
++
++            WHEN("we reserve more space") {
++                v.reserve(10);
++                THEN("The capacity is increased but the size remains the same") {
++                    REQUIRE(v.capacity() >= 10);
++                    REQUIRE(v.size() == 0);
++                }
++            }
++        }
+     }
+ 
+-    int counter()
+-    {
+-        return d_counter++;
++    SCENARIO("This is a really long scenario name to see how the list command deals with wrapping",
++             "[very long tags][lots][long][tags][verbose]"
++                     "[one very long tag name that should cause line wrapping writing out using the list command]"
++                     "[anotherReallyLongTagNameButThisOneHasNoObviousWrapPointsSoShouldSplitWithinAWordUsingADashCharacter]") {
++        GIVEN("A section name that is so long that it cannot fit in a single console width")WHEN(
++                    "The test headers are printed as part of the normal running of the scenario")THEN(
++                        "The, deliberately very long and overly verbose (you see what I did there?) section names must wrap, along with an indent")SUCCEED(
++                            "boo!");
+     }
+ 
+-    int d_counter;
+-};
+-
+-}
+-
+-SCENARIO_METHOD(Fixture,
+-    "BDD tests requiring Fixtures to provide commonly-accessed data or methods",
+-    "[bdd][fixtures]") {
+-    const int before(counter());
+-    GIVEN("No operations precede me") {
+-        REQUIRE(before == 0);
+-        WHEN("We get the count") {
+-            const int after(counter());
+-            THEN("Subsequently values are higher") {
+-                REQUIRE(after > before);
++    SCENARIO_METHOD(Fixture,
++                    "BDD tests requiring Fixtures to provide commonly-accessed data or methods",
++                    "[bdd][fixtures]") {
++        const int before(counter());
++        GIVEN("No operations precede me") {
++            REQUIRE(before == 0);
++            WHEN("We get the count") {
++                const int after(counter());
++                THEN("Subsequently values are higher") {
++                    REQUIRE(after > before);
++                }
+             }
+         }
+     }
+-}
++
++}} // namespace BDDtests
+diff --git a/projects/SelfTest/UsageTests/Class.tests.cpp b/projects/SelfTest/UsageTests/Class.tests.cpp
+index a4707849..c19a5172 100644
+--- a/projects/SelfTest/UsageTests/Class.tests.cpp
++++ b/projects/SelfTest/UsageTests/Class.tests.cpp
+@@ -8,32 +8,29 @@
+ 
+ #include "catch.hpp"
+ 
+-namespace
+-{
+-    class TestClass
+-    {
+-        std::string s;
+-
+-    public:
+-        TestClass()
+-        : s( "hello" )
+-        {}
+-
+-        void succeedingCase()
+-        {
+-            REQUIRE( s == "hello" );
+-        }
+-        void failingCase()
+-        {
+-            REQUIRE( s == "world" );
+-        }
+-    };
+-}
++namespace{ namespace ClassTests {
+ 
++#ifndef CLASS_TEST_HELPERS_INCLUDED // Don't compile this more than once per TU
++#define CLASS_TEST_HELPERS_INCLUDED
+ 
+-METHOD_AS_TEST_CASE( TestClass::succeedingCase, "A METHOD_AS_TEST_CASE based test run that succeeds", "[class]" )
+-METHOD_AS_TEST_CASE( TestClass::failingCase, "A METHOD_AS_TEST_CASE based test run that fails", "[.][class][failing]" )
++class TestClass
++{
++    std::string s;
+ 
++public:
++    TestClass()
++    : s( "hello" )
++    {}
++
++    void succeedingCase()
++    {
++        REQUIRE( s == "hello" );
++    }
++    void failingCase()
++    {
++        REQUIRE( s == "world" );
++    }
++};
+ 
+ struct Fixture
+ {
+@@ -42,6 +39,13 @@ struct Fixture
+     int m_a;
+ };
+ 
++#endif
++
++
++
++METHOD_AS_TEST_CASE( TestClass::succeedingCase, "A METHOD_AS_TEST_CASE based test run that succeeds", "[class]" )
++METHOD_AS_TEST_CASE( TestClass::failingCase, "A METHOD_AS_TEST_CASE based test run that fails", "[.][class][failing]" )
++
+ TEST_CASE_METHOD( Fixture, "A TEST_CASE_METHOD based test run that succeeds", "[class]" )
+ {
+     REQUIRE( m_a == 1 );
+@@ -55,3 +59,5 @@ namespace Inner
+         REQUIRE( m_a == 2 );
+     }
+ }
++
++}} // namespace ClassTests
+diff --git a/projects/SelfTest/UsageTests/Compilation.tests.cpp b/projects/SelfTest/UsageTests/Compilation.tests.cpp
+index b7999886..f140e3e8 100644
+--- a/projects/SelfTest/UsageTests/Compilation.tests.cpp
++++ b/projects/SelfTest/UsageTests/Compilation.tests.cpp
+@@ -7,51 +7,53 @@
+ 
+ #include "catch.hpp"
+ 
++namespace { namespace CompilationTests {
+ 
+-// This is a minimal example for an issue we have found in 1.7.0
+-struct foo {
+-    int i;
+-};
+-
+-template <typename T>
+-bool operator==(const T& val, foo f){
+-    return val == f.i;
+-}
++#ifndef COMPILATION_TEST_HELPERS_INCLUDED // Don't compile this more than once per TU
++#define COMPILATION_TEST_HELPERS_INCLUDED
+ 
+-TEST_CASE("#809") {
+-    foo f; f.i = 42;
+-    REQUIRE(42 == f);
+-}
++// This is a minimal example for an issue we have found in 1.7.0
++    struct foo {
++        int i;
++    };
+ 
++    template<typename T>
++    bool operator==(const T &val, foo f) {
++        return val == f.i;
++    }
+ 
+-// ------------------------------------------------------------------
+-// Changes to REQUIRE_THROWS_AS made it stop working in a template in
+-// an unfixable way (as long as C++03 compatibility is being kept).
+-// To prevent these from happening in the future, this needs to compile
++    struct Y {
++        uint32_t v : 1;
++    };
+ 
+-void throws_int(bool b) {
+-    if (b) {
+-        throw 1;
++    void throws_int(bool b) {
++        if (b) {
++            throw 1;
++        }
+     }
+-}
+-
+-template <typename T>
+-bool templated_tests(T t) {
+-    int a = 3;
+-    REQUIRE(a == t);
+-    CHECK(a == t);
+-    REQUIRE_THROWS(throws_int(true));
+-    CHECK_THROWS_AS(throws_int(true), int);
+-    REQUIRE_NOTHROW(throws_int(false));
++
++    template<typename T>
++    bool templated_tests(T t) {
++        int a = 3;
++        REQUIRE(a == t);
++        CHECK(a == t);
++        REQUIRE_THROWS(throws_int(true));
++        CHECK_THROWS_AS(throws_int(true), int);
++        REQUIRE_NOTHROW(throws_int(false));
+ #ifndef CATCH_CONFIG_DISABLE_MATCHERS
+-    REQUIRE_THAT("aaa", Catch::EndsWith("aaa"));
++        REQUIRE_THAT("aaa", Catch::EndsWith("aaa"));
+ #endif
+-    return true;
+-}
++        return true;
++    }
++
++    struct A {
++    };
+ 
+-TEST_CASE("#833") {
+-    REQUIRE(templated_tests<int>(3));
+-}
++    std::ostream &operator<<(std::ostream &o, const A &) { return o << 0; }
++
++    struct B : private A {
++        bool operator==(int) const { return true; }
++    };
+ 
+ #ifdef __clang__
+ #pragma clang diagnostic push
+@@ -63,35 +65,48 @@ TEST_CASE("#833") {
+ #pragma GCC diagnostic ignored "-Wunused-function"
+ #endif
+ 
+-// Test containing example where original stream insertable check breaks compilation
+-namespace {
+-    struct A {};
+-    std::ostream& operator<< (std::ostream &o, const A &) { return o << 0; }
++    B f();
+ 
+-    struct B : private A {
+-        bool operator== (int) const { return true; }
+-    };
++    std::ostream g();
+ 
+-    B f ();
+-    std::ostream g ();
+-}
+ #ifdef __clang__
+ #pragma clang diagnostic pop
+ #endif
+ 
+-TEST_CASE( "#872" ) {
+-    A dummy;
+-    CAPTURE( dummy );
+-    B x;
+-    REQUIRE (x == 4);
+-}
+-
+-struct Y {
+-    uint32_t v : 1;
+-};
+-
+-TEST_CASE( "#1027" ) {
+-    Y y{ 0 };
+-    REQUIRE(y.v == 0);
+-    REQUIRE(0 == y.v);
+-}
++#endif
++
++    TEST_CASE("#809") {
++        foo f;
++        f.i = 42;
++        REQUIRE(42 == f);
++    }
++
++
++// ------------------------------------------------------------------
++// Changes to REQUIRE_THROWS_AS made it stop working in a template in
++// an unfixable way (as long as C++03 compatibility is being kept).
++// To prevent these from happening in the future, this needs to compile
++
++    TEST_CASE("#833") {
++        REQUIRE(templated_tests<int>(3));
++    }
++
++
++// Test containing example where original stream insertable check breaks compilation
++
++
++    TEST_CASE("#872") {
++        A dummy;
++        CAPTURE(dummy);
++        B x;
++        REQUIRE (x == 4);
++    }
++
++
++    TEST_CASE("#1027") {
++        Y y{0};
++        REQUIRE(y.v == 0);
++        REQUIRE(0 == y.v);
++    }
++
++}} // namespace CompilationTests
+diff --git a/projects/SelfTest/UsageTests/Condition.tests.cpp b/projects/SelfTest/UsageTests/Condition.tests.cpp
+index 4bc09817..975fd400 100644
+--- a/projects/SelfTest/UsageTests/Condition.tests.cpp
++++ b/projects/SelfTest/UsageTests/Condition.tests.cpp
+@@ -17,6 +17,11 @@
+ #include <limits>
+ #include <cstdint>
+ 
++namespace { namespace ConditionTests {
++
++#ifndef CONDITION_TEST_HELPERS_INCLUDED // Don't compile this more than once per TU
++#define CONDITION_TEST_HELPERS_INCLUDED
++
+ struct TestData {
+     int int_seven = 7;
+     std::string str_hello = "hello";
+@@ -24,7 +29,6 @@ struct TestData {
+     double double_pi = 3.1415926535;
+ };
+ 
+-
+ struct TestDef {
+     TestDef& operator + ( const std::string& ) {
+         return *this;
+@@ -34,13 +38,17 @@ struct TestDef {
+     }
+ };
+ 
++inline const char* returnsConstNull(){ return nullptr; }
++inline char* returnsNull(){ return nullptr; }
++
++#endif
++
+ // The "failing" tests all use the CHECK macro, which continues if the specific test fails.
+ // This allows us to see all results, even if an earlier check fails
+ 
+ // Equality tests
+ TEST_CASE( "Equality checks that should succeed" )
+ {
+-
+     TestDef td;
+     td + "hello" + "hello";
+ 
+@@ -256,9 +264,6 @@ TEST_CASE( "Comparisons between ints where one side is computed" )
+ #pragma GCC diagnostic pop
+ #endif
+ 
+-inline const char* returnsConstNull(){ return nullptr; }
+-inline char* returnsNull(){ return nullptr; }
+-
+ TEST_CASE( "Pointers can be compared to null" )
+ {
+     TestData* p = nullptr;
+@@ -323,3 +328,4 @@ TEST_CASE( "'Not' checks that should fail", "[.][failing]" )
+     CHECK_FALSE( 1 == 1 );
+ }
+ 
++}} // namespace ConditionTests
+diff --git a/projects/SelfTest/UsageTests/Exception.tests.cpp b/projects/SelfTest/UsageTests/Exception.tests.cpp
+index 4d092f44..1100114a 100644
+--- a/projects/SelfTest/UsageTests/Exception.tests.cpp
++++ b/projects/SelfTest/UsageTests/Exception.tests.cpp
+@@ -19,70 +19,97 @@
+ #pragma clang diagnostic ignored "-Wweak-vtables"
+ #endif
+ 
+-namespace
+-{
+-    inline int thisThrows()
+-    {
+-        if( Catch::alwaysTrue() )
+-            throw std::domain_error( "expected exception" );
+-        return 1;
++namespace { namespace ExceptionTests {
++
++#ifndef EXCEPTION_TEST_HELPERS_INCLUDED // Don't compile this more than once per TU
++#define EXCEPTION_TEST_HELPERS_INCLUDED
++
++inline int thisThrows() {
++    if( Catch::alwaysTrue() )
++        throw std::domain_error( "expected exception" );
++    return 1;
++}
++
++int thisDoesntThrow() {
++    return 0;
++}
++
++class CustomException {
++public:
++    CustomException( const std::string& msg )
++            : m_msg( msg )
++    {}
++
++    std::string getMessage() const {
++        return m_msg;
+     }
+ 
+-    int thisDoesntThrow()
+-    {
+-        return 0;
++private:
++    std::string m_msg;
++};
++
++class CustomStdException : public std::exception {
++public:
++    CustomStdException( const std::string& msg )
++            : m_msg( msg )
++    {}
++    ~CustomStdException() noexcept {}
++
++    std::string getMessage() const {
++        return m_msg;
+     }
++
++private:
++    std::string m_msg;
++};
++
++inline void throwCustom() {
++    if( Catch::alwaysTrue() )
++        throw CustomException( "custom exception - not std" );
+ }
+ 
+-TEST_CASE( "When checked exceptions are thrown they can be expected or unexpected", "[!throws]" )
+-{
++#endif
++
++TEST_CASE( "When checked exceptions are thrown they can be expected or unexpected", "[!throws]" ) {
+     REQUIRE_THROWS_AS( thisThrows(), std::domain_error );
+     REQUIRE_NOTHROW( thisDoesntThrow() );
+     REQUIRE_THROWS( thisThrows() );
+ }
+ 
+-TEST_CASE( "Expected exceptions that don't throw or unexpected exceptions fail the test", "[.][failing][!throws]" )
+-{
++TEST_CASE( "Expected exceptions that don't throw or unexpected exceptions fail the test", "[.][failing][!throws]" ) {
+     CHECK_THROWS_AS( thisThrows(), std::string );
+     CHECK_THROWS_AS( thisDoesntThrow(), std::domain_error );
+     CHECK_NOTHROW( thisThrows() );
+ }
+ 
+-TEST_CASE( "When unchecked exceptions are thrown directly they are always failures", "[.][failing][!throws]" )
+-{
++TEST_CASE( "When unchecked exceptions are thrown directly they are always failures", "[.][failing][!throws]" ) {
+     if( Catch::alwaysTrue() )
+         throw std::domain_error( "unexpected exception" );
+ }
+ 
+-TEST_CASE( "An unchecked exception reports the line of the last assertion", "[.][failing][!throws]" )
+-{
++TEST_CASE( "An unchecked exception reports the line of the last assertion", "[.][failing][!throws]" ) {
+     CHECK( 1 == 1 );
+     if( Catch::alwaysTrue() )
+         throw std::domain_error( "unexpected exception" );
+ }
+ 
+-TEST_CASE( "When unchecked exceptions are thrown from sections they are always failures", "[.][failing][!throws]" )
+-{
+-    SECTION( "section name" )
+-    {
++TEST_CASE( "When unchecked exceptions are thrown from sections they are always failures", "[.][failing][!throws]" ) {
++    SECTION( "section name" ) {
+         if( Catch::alwaysTrue() )
+             throw std::domain_error( "unexpected exception" );
+     }
+ }
+ 
+-TEST_CASE( "When unchecked exceptions are thrown from functions they are always failures", "[.][failing][!throws]" )
+-{
++TEST_CASE( "When unchecked exceptions are thrown from functions they are always failures", "[.][failing][!throws]" ) {
+     CHECK( thisThrows() == 0 );
+ }
+ 
+-TEST_CASE( "When unchecked exceptions are thrown during a REQUIRE the test should abort fail", "[.][failing][!throws]" )
+-{
++TEST_CASE( "When unchecked exceptions are thrown during a REQUIRE the test should abort fail", "[.][failing][!throws]" ) {
+     REQUIRE( thisThrows() == 0 );
+     FAIL( "This should never happen" );
+ }
+ 
+-TEST_CASE( "When unchecked exceptions are thrown during a CHECK the test should continue", "[.][failing][!throws]" )
+-{
++TEST_CASE( "When unchecked exceptions are thrown during a CHECK the test should continue", "[.][failing][!throws]" ) {
+     try {
+         CHECK(thisThrows() == 0);
+     }
+@@ -91,96 +118,45 @@ TEST_CASE( "When unchecked exceptions are thrown during a CHECK the test should
+     }
+ }
+ 
+-TEST_CASE( "When unchecked exceptions are thrown, but caught, they do not affect the test", "[!throws]" )
+-{
+-    try
+-    {
++TEST_CASE( "When unchecked exceptions are thrown, but caught, they do not affect the test", "[!throws]" ) {
++    try {
+         throw std::domain_error( "unexpected exception" );
+     }
+-    catch(...)
+-    {
+-    }
++    catch(...) {}
+ }
+ 
+-class CustomException
+-{
+-public:
+-    CustomException( const std::string& msg )
+-    : m_msg( msg )
+-    {}
+-
+-    std::string getMessage() const
+-    {
+-        return m_msg;
+-    }
+-
+-private:
+-    std::string m_msg;
+-};
+-
+-class CustomStdException : public std::exception
+-{
+-public:
+-    CustomStdException( const std::string& msg )
+-    : m_msg( msg )
+-    {}
+-    ~CustomStdException() noexcept {}
+-
+-    std::string getMessage() const
+-    {
+-        return m_msg;
+-    }
+-
+-private:
+-    std::string m_msg;
+-};
+-
+ 
+-CATCH_TRANSLATE_EXCEPTION( CustomException& ex )
+-{
++CATCH_TRANSLATE_EXCEPTION( CustomException& ex ) {
+     return ex.getMessage();
+ }
+ 
+-CATCH_TRANSLATE_EXCEPTION( CustomStdException& ex )
+-{
++CATCH_TRANSLATE_EXCEPTION( CustomStdException& ex ) {
+     return ex.getMessage();
+ }
+ 
+-CATCH_TRANSLATE_EXCEPTION( double& ex )
+-{
++CATCH_TRANSLATE_EXCEPTION( double& ex ) {
+     return Catch::Detail::stringify( ex );
+ }
+ 
+-TEST_CASE("Non-std exceptions can be translated", "[.][failing][!throws]" )
+-{
++TEST_CASE("Non-std exceptions can be translated", "[.][failing][!throws]" ) {
+     if( Catch::alwaysTrue() )
+         throw CustomException( "custom exception" );
+ }
+ 
+-TEST_CASE("Custom std-exceptions can be custom translated", "[.][failing][!throws]" )
+-{
++TEST_CASE("Custom std-exceptions can be custom translated", "[.][failing][!throws]" ) {
+     if( Catch::alwaysTrue() )
+         throw CustomException( "custom std exception" );
+ }
+ 
+-inline void throwCustom() {
+-    if( Catch::alwaysTrue() )
+-        throw CustomException( "custom exception - not std" );
+-}
+-
+-TEST_CASE( "Custom exceptions can be translated when testing for nothrow", "[.][failing][!throws]" )
+-{
++TEST_CASE( "Custom exceptions can be translated when testing for nothrow", "[.][failing][!throws]" ) {
+     REQUIRE_NOTHROW( throwCustom() );
+ }
+ 
+-TEST_CASE( "Custom exceptions can be translated when testing for throwing as something else", "[.][failing][!throws]" )
+-{
++TEST_CASE( "Custom exceptions can be translated when testing for throwing as something else", "[.][failing][!throws]" ) {
+     REQUIRE_THROWS_AS( throwCustom(), std::exception );
+ }
+ 
+-
+-TEST_CASE( "Unexpected exceptions can be translated", "[.][failing][!throws]"  )
+-{
++TEST_CASE( "Unexpected exceptions can be translated", "[.][failing][!throws]"  ) {
+     if( Catch::alwaysTrue() )
+         throw double( 3.14 );
+ }
+@@ -224,6 +200,8 @@ TEST_CASE( "#748 - captures with unexpected exceptions", "[.][failing][!throws][
+     }
+ }
+ 
++}} // namespace ExceptionTests
++
+ #ifdef __clang__
+ #pragma clang diagnostic pop
+ #endif
+diff --git a/projects/SelfTest/UsageTests/Matchers.tests.cpp b/projects/SelfTest/UsageTests/Matchers.tests.cpp
+index bdfd287b..34f167ab 100644
+--- a/projects/SelfTest/UsageTests/Matchers.tests.cpp
++++ b/projects/SelfTest/UsageTests/Matchers.tests.cpp
+@@ -16,313 +16,321 @@
+ #pragma clang diagnostic ignored "-Wpadded"
+ #endif
+ 
+-#ifndef CATCH_CONFIG_DISABLE_MATCHERS
+-
+-inline const char* testStringForMatching()
+-{
+-    return "this string contains 'abc' as a substring";
+-}
+-inline const char* testStringForMatching2()
+-{
+-    return "some completely different text that contains one common word";
+-}
+-
+-using namespace Catch::Matchers;
+-
+-TEST_CASE("String matchers", "[matchers]" ) {
+-    REQUIRE_THAT( testStringForMatching(), Contains( "string" ) );
+-    REQUIRE_THAT( testStringForMatching(), Contains( "string", Catch::CaseSensitive::No ));
+-    CHECK_THAT( testStringForMatching(), Contains( "abc" ) );
+-    CHECK_THAT( testStringForMatching(), Contains( "aBC", Catch::CaseSensitive::No ));
+-
+-    CHECK_THAT( testStringForMatching(), StartsWith( "this" ) );
+-    CHECK_THAT( testStringForMatching(), StartsWith( "THIS", Catch::CaseSensitive::No ));
+-    CHECK_THAT( testStringForMatching(), EndsWith( "substring" ) );
+-    CHECK_THAT( testStringForMatching(), EndsWith(" SuBsTrInG", Catch::CaseSensitive::No ));
+-}
+-
+-TEST_CASE("Contains string matcher", "[.][failing][matchers]") {
+-    CHECK_THAT( testStringForMatching(), Contains( "not there", Catch::CaseSensitive::No ) );
+-    CHECK_THAT( testStringForMatching(), Contains( "STRING" ));
+-}
+-
+-TEST_CASE("StartsWith string matcher", "[.][failing][matchers]") {
+-    CHECK_THAT( testStringForMatching(), StartsWith( "This String" ));
+-    CHECK_THAT( testStringForMatching(), StartsWith( "string", Catch::CaseSensitive::No ) );
+-}
+-
+-TEST_CASE("EndsWith string matcher", "[.][failing][matchers]") {
+-    CHECK_THAT( testStringForMatching(), EndsWith( "Substring" ));
+-    CHECK_THAT( testStringForMatching(), EndsWith( "this", Catch::CaseSensitive::No ) );
+-}
+-
+-TEST_CASE("Equals string matcher", "[.][failing][matchers]") {
+-    CHECK_THAT( testStringForMatching(), Equals( "this string contains 'ABC' as a substring" ) );
+-    CHECK_THAT( testStringForMatching(), Equals( "something else", Catch::CaseSensitive::No ));
+-}
+-
+-TEST_CASE("Equals", "[matchers]") {
+-    CHECK_THAT( testStringForMatching(), Equals( "this string contains 'abc' as a substring" ));
+-    CHECK_THAT( testStringForMatching(), Equals( "this string contains 'ABC' as a substring", Catch::CaseSensitive::No ) );
+-}
+-
+-// <regex> does not work in libstdc++ 4.8, so we have to enable these tests only when they
+-// are expected to pass and cannot have them in baselines
+-TEST_CASE("Regex string matcher -- libstdc++-4.8 workaround", "[matchers][approvals]") {
++namespace { namespace MatchersTests {
+ 
+-// This is fiiiine
+-// Taken from an answer at
+-// https://stackoverflow.com/questions/12530406/is-gcc-4-8-or-earlier-buggy-about-regular-expressions
+-#if (!defined(__GNUC__))                                 || \
+-      (__cplusplus >= 201103L                            && \
+-      (!defined(__GLIBCXX__) || (__cplusplus >= 201402L) || \
+-        (defined(_GLIBCXX_REGEX_DFS_QUANTIFIERS_LIMIT)   || \
+-          defined(_GLIBCXX_REGEX_STATE_LIMIT)            || \
+-             (defined(_GLIBCXX_RELEASE)                  && \
+-             _GLIBCXX_RELEASE > 4))))
++#ifndef CATCH_CONFIG_DISABLE_MATCHERS
+ 
+-    REQUIRE_THAT(testStringForMatching(), Matches("this string contains 'abc' as a substring"));
+-    REQUIRE_THAT(testStringForMatching(), Matches("this string CONTAINS 'abc' as a substring", Catch::CaseSensitive::No));
+-    REQUIRE_THAT(testStringForMatching(), Matches("^this string contains 'abc' as a substring$"));
+-    REQUIRE_THAT(testStringForMatching(), Matches("^.* 'abc' .*$"));
+-    REQUIRE_THAT(testStringForMatching(), Matches("^.* 'ABC' .*$", Catch::CaseSensitive::No));
+-#endif
++#ifndef MATCHERS_TEST_HELPERS_INCLUDED // Don't compile this more than once per TU
++#define MATCHERS_TEST_HELPERS_INCLUDED
+ 
+-    REQUIRE_THAT(testStringForMatching2(), !Matches("this string contains 'abc' as a substring"));
+-}
+-
+-TEST_CASE("Regex string matcher", "[matchers][.failing]") {
+-    CHECK_THAT( testStringForMatching(), Matches("this STRING contains 'abc' as a substring"));
+-    CHECK_THAT( testStringForMatching(), Matches("contains 'abc' as a substring"));
+-    CHECK_THAT( testStringForMatching(), Matches("this string contains 'abc' as a"));
+-}
+-
+-TEST_CASE("Matchers can be (AllOf) composed with the && operator", "[matchers][operators][operator&&]")
+-{
+-    CHECK_THAT( testStringForMatching(),
+-                Contains( "string" ) &&
+-                Contains( "abc" ) &&
+-                Contains( "substring" ) &&
+-                Contains( "contains" ) );
+-}
+-
+-TEST_CASE("Matchers can be (AnyOf) composed with the || operator", "[matchers][operators][operator||]")
+-{
+-    CHECK_THAT( testStringForMatching(), Contains( "string" ) || Contains( "different" ) || Contains( "random" ) );
+-    CHECK_THAT( testStringForMatching2(), Contains( "string" ) || Contains( "different" ) || Contains( "random" ) );
+-}
+-
+-TEST_CASE("Matchers can be composed with both && and ||", "[matchers][operators][operator||][operator&&]")
+-{
+-    CHECK_THAT( testStringForMatching(), ( Contains( "string" ) || Contains( "different" ) ) && Contains( "substring" ) );
+-}
+-
+-TEST_CASE("Matchers can be composed with both && and || - failing", "[matchers][operators][operator||][operator&&][.failing]")
+-{
+-    CHECK_THAT( testStringForMatching(), ( Contains( "string" ) || Contains( "different" ) ) && Contains( "random" ) );
+-}
+-
+-TEST_CASE("Matchers can be negated (Not) with the ! operator", "[matchers][operators][not]")
+-{
+-    CHECK_THAT( testStringForMatching(), !Contains( "different" ) );
+-}
+-
+-TEST_CASE("Matchers can be negated (Not) with the ! operator - failing", "[matchers][operators][not][.failing]")
+-{
+-    CHECK_THAT( testStringForMatching(), !Contains( "substring" ) );
+-}
+-
+-TEST_CASE( "Vector matchers", "[matchers][vector]" ) {
+-    std::vector<int> v;
+-    v.push_back( 1 );
+-    v.push_back( 2 );
+-    v.push_back( 3 );
+-
+-    std::vector<int> v2;
+-    v2.push_back( 1 );
+-    v2.push_back( 2 );
+-
+-    std::vector<int> empty;
+-
+-    SECTION( "Contains (element)" ) {
+-        CHECK_THAT( v, VectorContains( 1 ) );
+-        CHECK_THAT( v, VectorContains( 2 ) );
++    inline const char *testStringForMatching() {
++        return "this string contains 'abc' as a substring";
+     }
+-    SECTION( "Contains (vector)" ) {
+-        CHECK_THAT( v, Contains( v2 ) );
+-        v2.push_back( 3 ); // now exactly matches
+-        CHECK_THAT( v, Contains( v2 ) );
+ 
+-        CHECK_THAT( v, Contains( empty) );
+-        CHECK_THAT( empty, Contains( empty) );
++    inline const char *testStringForMatching2() {
++        return "some completely different text that contains one common word";
+     }
+-    SECTION( "Contains (element), composed" ) {
+-        CHECK_THAT( v, VectorContains( 1 ) && VectorContains( 2 ) );
+-    }
+-
+-    SECTION( "Equals" ) {
+ 
+-        // Same vector
+-        CHECK_THAT( v, Equals( v ) );
+ 
+-        CHECK_THAT( empty, Equals( empty ) );
++#ifdef _MSC_VER
++#pragma warning(disable:4702) // Unreachable code -- MSVC 19 (VS 2015) sees right through the indirection
++#endif
+ 
+-        // Different vector with same elements
+-        v2.push_back( 3 );
+-        CHECK_THAT( v, Equals( v2 ) );
+-    }
+-}
++#include <exception>
+ 
+-TEST_CASE( "Vector matchers that fail", "[matchers][vector][.][failing]" ) {
+-    std::vector<int> v;
+-    v.push_back( 1 );
+-    v.push_back( 2 );
+-    v.push_back( 3 );
++    struct SpecialException : std::exception {
++        SpecialException(int i_) : i(i_) {}
+ 
+-    std::vector<int> v2;
+-    v2.push_back( 1 );
+-    v2.push_back( 2 );
++        int i;
++    };
+ 
+-    std::vector<int> empty;
++    void doesNotThrow() {}
+ 
+-    SECTION( "Contains (element)" ) {
+-        CHECK_THAT( v, VectorContains( -1 ) );
+-        CHECK_THAT( empty, VectorContains( 1 ) );
+-    }
+-    SECTION( "Contains (vector)" ) {
+-        CHECK_THAT( empty, Contains( v) );
+-        v2.push_back( 4 );
+-        CHECK_THAT( v, Contains( v2 ) );
++    [[noreturn]]
++    void throws(int i) {
++        throw SpecialException{i};
+     }
+ 
+-    SECTION( "Equals" ) {
+-
+-        CHECK_THAT( v, Equals( v2 ) );
+-        CHECK_THAT( v2, Equals( v ) );
+-        CHECK_THAT( empty, Equals( v ) );
+-        CHECK_THAT( v, Equals( empty ) );
++    [[noreturn]]
++    void throwsAsInt(int i) {
++        throw i;
+     }
+-}
+ 
+-#ifdef _MSC_VER
+-#pragma warning(disable:4702) // Unreachable code -- MSVC 19 (VS 2015) sees right through the indirection
+-#endif
++    class ExceptionMatcher : public Catch::MatcherBase<SpecialException> {
++        int m_expected;
++    public:
++        ExceptionMatcher(int i) : m_expected(i) {}
+ 
+-#include <exception>
++        bool match(SpecialException const &se) const override {
++            return se.i == m_expected;
++        }
+ 
+-struct SpecialException : std::exception {
+-    SpecialException(int i_):i(i_) {}
+-    int i;
+-};
+-
+-void doesNotThrow() {}
+-
+-[[noreturn]]
+-void throws(int i) {
+-    throw SpecialException{ i };
+-}
+-
+-[[noreturn]]
+-void throwsAsInt(int i) {
+-    throw i;
+-}
+-
+-class ExceptionMatcher : public Catch::MatcherBase<SpecialException> {
+-    int m_expected;
+-public:
+-    ExceptionMatcher(int i):m_expected(i) {}
+-    bool match(SpecialException const& se) const override {
+-        return se.i == m_expected;
+-    }
++        std::string describe() const override {
++            std::ostringstream ss;
++            ss << "special exception has value of " << m_expected;
++            return ss.str();
++        }
++    };
+ 
+-    std::string describe() const override {
+-        std::ostringstream ss;
+-        ss << "special exception has value of " << m_expected;
+-        return ss.str();
+-    }
+-};
++#endif
+ 
++    using namespace Catch::Matchers;
+ 
+-TEST_CASE( "Exception matchers that succeed", "[matchers][exceptions][!throws]" ) {
+-    CHECK_THROWS_MATCHES(throws(1), SpecialException, ExceptionMatcher{ 1 });
+-    REQUIRE_THROWS_MATCHES(throws(2), SpecialException, ExceptionMatcher{ 2 });
+-}
++    TEST_CASE("String matchers", "[matchers]") {
++        REQUIRE_THAT(testStringForMatching(), Contains("string"));
++        REQUIRE_THAT(testStringForMatching(), Contains("string", Catch::CaseSensitive::No));
++        CHECK_THAT(testStringForMatching(), Contains("abc"));
++        CHECK_THAT(testStringForMatching(), Contains("aBC", Catch::CaseSensitive::No));
+ 
+-TEST_CASE("Exception matchers that fail", "[matchers][exceptions][!throws][.failing]") {
+-    SECTION("No exception") {
+-        CHECK_THROWS_MATCHES(doesNotThrow(), SpecialException, ExceptionMatcher{ 1 });
+-        REQUIRE_THROWS_MATCHES(doesNotThrow(), SpecialException, ExceptionMatcher{ 1 });
+-    }
+-    SECTION("Type mismatch") {
+-        CHECK_THROWS_MATCHES(throwsAsInt(1), SpecialException, ExceptionMatcher{ 1 });
+-        REQUIRE_THROWS_MATCHES(throwsAsInt(1), SpecialException, ExceptionMatcher{ 1 });
++        CHECK_THAT(testStringForMatching(), StartsWith("this"));
++        CHECK_THAT(testStringForMatching(), StartsWith("THIS", Catch::CaseSensitive::No));
++        CHECK_THAT(testStringForMatching(), EndsWith("substring"));
++        CHECK_THAT(testStringForMatching(), EndsWith(" SuBsTrInG", Catch::CaseSensitive::No));
+     }
+-    SECTION("Contents are wrong") {
+-        CHECK_THROWS_MATCHES(throws(3), SpecialException, ExceptionMatcher{ 1 });
+-        REQUIRE_THROWS_MATCHES(throws(4), SpecialException, ExceptionMatcher{ 1 });
+-    }
+-}
+-
+-TEST_CASE("Floating point matchers: float", "[matchers][floating-point]") {
+-    SECTION("Margin") {
+-        REQUIRE_THAT(1.f, WithinAbs(1.f, 0));
+-        REQUIRE_THAT(0.f, WithinAbs(1.f, 1));
+-
+-        REQUIRE_THAT(0.f, !WithinAbs(1.f, 0.99f));
+-        REQUIRE_THAT(0.f, !WithinAbs(1.f, 0.99f));
+ 
+-        REQUIRE_THAT(0.f, WithinAbs(-0.f, 0));
+-        REQUIRE_THAT(NAN, !WithinAbs(NAN, 0));
++    TEST_CASE("Contains string matcher", "[.][failing][matchers]") {
++        CHECK_THAT(testStringForMatching(), Contains("not there", Catch::CaseSensitive::No));
++        CHECK_THAT(testStringForMatching(), Contains("STRING"));
+     }
+-    SECTION("ULPs") {
+-        REQUIRE_THAT(1.f, WithinULP(1.f, 0));
+ 
+-        REQUIRE_THAT(std::nextafter(1.f, 2.f), WithinULP(1.f, 1));
+-        REQUIRE_THAT(std::nextafter(1.f, 0.f), WithinULP(1.f, 1));
+-        REQUIRE_THAT(std::nextafter(1.f, 2.f), !WithinULP(1.f, 0));
+-
+-        REQUIRE_THAT(1.f, WithinULP(1.f, 0));
+-        REQUIRE_THAT(-0.f, WithinULP(0.f, 0));
+-
+-        REQUIRE_THAT(NAN, !WithinULP(NAN, 123));
++    TEST_CASE("StartsWith string matcher", "[.][failing][matchers]") {
++        CHECK_THAT(testStringForMatching(), StartsWith("This String"));
++        CHECK_THAT(testStringForMatching(), StartsWith("string", Catch::CaseSensitive::No));
+     }
+-    SECTION("Composed") {
+-        REQUIRE_THAT(1.f, WithinAbs(1.f, 0.5) || WithinULP(1.f, 1));
+-        REQUIRE_THAT(1.f, WithinAbs(2.f, 0.5) || WithinULP(1.f, 0));
+ 
+-        REQUIRE_THAT(NAN, !(WithinAbs(NAN, 100) || WithinULP(NAN, 123)));
++    TEST_CASE("EndsWith string matcher", "[.][failing][matchers]") {
++        CHECK_THAT(testStringForMatching(), EndsWith("Substring"));
++        CHECK_THAT(testStringForMatching(), EndsWith("this", Catch::CaseSensitive::No));
+     }
+-}
+-
+-TEST_CASE("Floating point matchers: double", "[matchers][floating-point]") {
+-    SECTION("Margin") {
+-        REQUIRE_THAT(1., WithinAbs(1., 0));
+-        REQUIRE_THAT(0., WithinAbs(1., 1));
+ 
+-        REQUIRE_THAT(0., !WithinAbs(1., 0.99));
+-        REQUIRE_THAT(0., !WithinAbs(1., 0.99));
++    TEST_CASE("Equals string matcher", "[.][failing][matchers]") {
++        CHECK_THAT(testStringForMatching(), Equals("this string contains 'ABC' as a substring"));
++        CHECK_THAT(testStringForMatching(), Equals("something else", Catch::CaseSensitive::No));
++    }
+ 
+-        REQUIRE_THAT(NAN, !WithinAbs(NAN, 0));
++    TEST_CASE("Equals", "[matchers]") {
++        CHECK_THAT(testStringForMatching(), Equals("this string contains 'abc' as a substring"));
++        CHECK_THAT(testStringForMatching(),
++                   Equals("this string contains 'ABC' as a substring", Catch::CaseSensitive::No));
+     }
+-    SECTION("ULPs") {
+-        REQUIRE_THAT(1., WithinULP(1., 0));
+ 
+-        REQUIRE_THAT(std::nextafter(1., 2.), WithinULP(1., 1));
+-        REQUIRE_THAT(std::nextafter(1., 0.), WithinULP(1., 1));
+-        REQUIRE_THAT(std::nextafter(1., 2.), !WithinULP(1., 0));
++// <regex> does not work in libstdc++ 4.8, so we have to enable these tests only when they
++// are expected to pass and cannot have them in baselines
++    TEST_CASE("Regex string matcher -- libstdc++-4.8 workaround", "[matchers][approvals]") {
+ 
+-        REQUIRE_THAT(1., WithinULP(1., 0));
+-        REQUIRE_THAT(-0., WithinULP(0., 0));
++// This is fiiiine
++// Taken from an answer at
++// https://stackoverflow.com/questions/12530406/is-gcc-4-8-or-earlier-buggy-about-regular-expressions
++#if (!defined(__GNUC__)) || \
++      (__cplusplus >= 201103L && \
++      (!defined(__GLIBCXX__) || (__cplusplus >= 201402L) || \
++        (defined(_GLIBCXX_REGEX_DFS_QUANTIFIERS_LIMIT) || \
++          defined(_GLIBCXX_REGEX_STATE_LIMIT) || \
++             (defined(_GLIBCXX_RELEASE) && \
++             _GLIBCXX_RELEASE > 4))))
+ 
+-        REQUIRE_THAT(NAN, !WithinULP(NAN, 123));
+-    }
+-    SECTION("Composed") {
+-        REQUIRE_THAT(1., WithinAbs(1., 0.5) || WithinULP(2., 1));
+-        REQUIRE_THAT(1., WithinAbs(2., 0.5) || WithinULP(1., 0));
++            REQUIRE_THAT(testStringForMatching(), Matches("this string contains 'abc' as a substring"));
++            REQUIRE_THAT(testStringForMatching(),
++                         Matches("this string CONTAINS 'abc' as a substring", Catch::CaseSensitive::No));
++            REQUIRE_THAT(testStringForMatching(), Matches("^this string contains 'abc' as a substring$"));
++            REQUIRE_THAT(testStringForMatching(), Matches("^.* 'abc' .*$"));
++            REQUIRE_THAT(testStringForMatching(), Matches("^.* 'ABC' .*$", Catch::CaseSensitive::No));
++#endif
+ 
+-        REQUIRE_THAT(NAN, !(WithinAbs(NAN, 100) || WithinULP(NAN, 123)));
+-    }
+-}
++            REQUIRE_THAT(testStringForMatching2(), !Matches("this string contains 'abc' as a substring"));
++        }
++
++        TEST_CASE("Regex string matcher", "[matchers][.failing]") {
++            CHECK_THAT(testStringForMatching(), Matches("this STRING contains 'abc' as a substring"));
++            CHECK_THAT(testStringForMatching(), Matches("contains 'abc' as a substring"));
++            CHECK_THAT(testStringForMatching(), Matches("this string contains 'abc' as a"));
++        }
++
++        TEST_CASE("Matchers can be (AllOf) composed with the && operator", "[matchers][operators][operator&&]") {
++            CHECK_THAT(testStringForMatching(),
++                       Contains("string") &&
++                       Contains("abc") &&
++                       Contains("substring") &&
++                       Contains("contains"));
++        }
++
++        TEST_CASE("Matchers can be (AnyOf) composed with the || operator", "[matchers][operators][operator||]") {
++            CHECK_THAT(testStringForMatching(), Contains("string") || Contains("different") || Contains("random"));
++            CHECK_THAT(testStringForMatching2(), Contains("string") || Contains("different") || Contains("random"));
++        }
++
++        TEST_CASE("Matchers can be composed with both && and ||", "[matchers][operators][operator||][operator&&]") {
++            CHECK_THAT(testStringForMatching(), (Contains("string") || Contains("different")) && Contains("substring"));
++        }
++
++        TEST_CASE("Matchers can be composed with both && and || - failing",
++                  "[matchers][operators][operator||][operator&&][.failing]") {
++            CHECK_THAT(testStringForMatching(), (Contains("string") || Contains("different")) && Contains("random"));
++        }
++
++        TEST_CASE("Matchers can be negated (Not) with the ! operator", "[matchers][operators][not]") {
++            CHECK_THAT(testStringForMatching(), !Contains("different"));
++        }
++
++        TEST_CASE("Matchers can be negated (Not) with the ! operator - failing",
++                  "[matchers][operators][not][.failing]") {
++            CHECK_THAT(testStringForMatching(), !Contains("substring"));
++        }
++
++        TEST_CASE("Vector matchers", "[matchers][vector]") {
++            std::vector<int> v;
++            v.push_back(1);
++            v.push_back(2);
++            v.push_back(3);
++
++            std::vector<int> v2;
++            v2.push_back(1);
++            v2.push_back(2);
++
++            std::vector<int> empty;
++
++            SECTION("Contains (element)") {
++                CHECK_THAT(v, VectorContains(1));
++                CHECK_THAT(v, VectorContains(2));
++            }
++            SECTION("Contains (vector)") {
++                CHECK_THAT(v, Contains(v2));
++                v2.push_back(3); // now exactly matches
++                CHECK_THAT(v, Contains(v2));
++
++                CHECK_THAT(v, Contains(empty));
++                CHECK_THAT(empty, Contains(empty));
++            }
++            SECTION("Contains (element), composed") {
++                CHECK_THAT(v, VectorContains(1) && VectorContains(2));
++            }
++
++            SECTION("Equals") {
++
++                // Same vector
++                CHECK_THAT(v, Equals(v));
++
++                CHECK_THAT(empty, Equals(empty));
++
++                // Different vector with same elements
++                v2.push_back(3);
++                CHECK_THAT(v, Equals(v2));
++            }
++        }
++
++        TEST_CASE("Vector matchers that fail", "[matchers][vector][.][failing]") {
++            std::vector<int> v;
++            v.push_back(1);
++            v.push_back(2);
++            v.push_back(3);
++
++            std::vector<int> v2;
++            v2.push_back(1);
++            v2.push_back(2);
++
++            std::vector<int> empty;
++
++            SECTION("Contains (element)") {
++                CHECK_THAT(v, VectorContains(-1));
++                CHECK_THAT(empty, VectorContains(1));
++            }
++            SECTION("Contains (vector)") {
++                CHECK_THAT(empty, Contains(v));
++                v2.push_back(4);
++                CHECK_THAT(v, Contains(v2));
++            }
++
++            SECTION("Equals") {
++
++                CHECK_THAT(v, Equals(v2));
++                CHECK_THAT(v2, Equals(v));
++                CHECK_THAT(empty, Equals(v));
++                CHECK_THAT(v, Equals(empty));
++            }
++        }
++
++        TEST_CASE("Exception matchers that succeed", "[matchers][exceptions][!throws]") {
++            CHECK_THROWS_MATCHES(throws(1), SpecialException, ExceptionMatcher{1});
++            REQUIRE_THROWS_MATCHES(throws(2), SpecialException, ExceptionMatcher{2});
++        }
++
++        TEST_CASE("Exception matchers that fail", "[matchers][exceptions][!throws][.failing]") {
++            SECTION("No exception") {
++                CHECK_THROWS_MATCHES(doesNotThrow(), SpecialException, ExceptionMatcher{1});
++                REQUIRE_THROWS_MATCHES(doesNotThrow(), SpecialException, ExceptionMatcher{1});
++            }
++            SECTION("Type mismatch") {
++                CHECK_THROWS_MATCHES(throwsAsInt(1), SpecialException, ExceptionMatcher{1});
++                REQUIRE_THROWS_MATCHES(throwsAsInt(1), SpecialException, ExceptionMatcher{1});
++            }
++            SECTION("Contents are wrong") {
++                CHECK_THROWS_MATCHES(throws(3), SpecialException, ExceptionMatcher{1});
++                REQUIRE_THROWS_MATCHES(throws(4), SpecialException, ExceptionMatcher{1});
++            }
++        }
++
++        TEST_CASE("Floating point matchers: float", "[matchers][floating-point]") {
++            SECTION("Margin") {
++                REQUIRE_THAT(1.f, WithinAbs(1.f, 0));
++                REQUIRE_THAT(0.f, WithinAbs(1.f, 1));
++
++                REQUIRE_THAT(0.f, !WithinAbs(1.f, 0.99f));
++                REQUIRE_THAT(0.f, !WithinAbs(1.f, 0.99f));
++
++                REQUIRE_THAT(0.f, WithinAbs(-0.f, 0));
++                REQUIRE_THAT(NAN, !WithinAbs(NAN, 0));
++            }
++            SECTION("ULPs") {
++                REQUIRE_THAT(1.f, WithinULP(1.f, 0));
++
++                REQUIRE_THAT(std::nextafter(1.f, 2.f), WithinULP(1.f, 1));
++                REQUIRE_THAT(std::nextafter(1.f, 0.f), WithinULP(1.f, 1));
++                REQUIRE_THAT(std::nextafter(1.f, 2.f), !WithinULP(1.f, 0));
++
++                REQUIRE_THAT(1.f, WithinULP(1.f, 0));
++                REQUIRE_THAT(-0.f, WithinULP(0.f, 0));
++
++                REQUIRE_THAT(NAN, !WithinULP(NAN, 123));
++            }
++            SECTION("Composed") {
++                REQUIRE_THAT(1.f, WithinAbs(1.f, 0.5) || WithinULP(1.f, 1));
++                REQUIRE_THAT(1.f, WithinAbs(2.f, 0.5) || WithinULP(1.f, 0));
++
++                REQUIRE_THAT(NAN, !(WithinAbs(NAN, 100) || WithinULP(NAN, 123)));
++            }
++        }
++
++        TEST_CASE("Floating point matchers: double", "[matchers][floating-point]") {
++            SECTION("Margin") {
++                REQUIRE_THAT(1., WithinAbs(1., 0));
++                REQUIRE_THAT(0., WithinAbs(1., 1));
++
++                REQUIRE_THAT(0., !WithinAbs(1., 0.99));
++                REQUIRE_THAT(0., !WithinAbs(1., 0.99));
++
++                REQUIRE_THAT(NAN, !WithinAbs(NAN, 0));
++            }
++            SECTION("ULPs") {
++                REQUIRE_THAT(1., WithinULP(1., 0));
++
++                REQUIRE_THAT(std::nextafter(1., 2.), WithinULP(1., 1));
++                REQUIRE_THAT(std::nextafter(1., 0.), WithinULP(1., 1));
++                REQUIRE_THAT(std::nextafter(1., 2.), !WithinULP(1., 0));
++
++                REQUIRE_THAT(1., WithinULP(1., 0));
++                REQUIRE_THAT(-0., WithinULP(0., 0));
++
++                REQUIRE_THAT(NAN, !WithinULP(NAN, 123));
++            }
++            SECTION("Composed") {
++                REQUIRE_THAT(1., WithinAbs(1., 0.5) || WithinULP(2., 1));
++                REQUIRE_THAT(1., WithinAbs(2., 0.5) || WithinULP(1., 0));
++
++                REQUIRE_THAT(NAN, !(WithinAbs(NAN, 100) || WithinULP(NAN, 123)));
++            }
++        }
++
++} } // namespace MatchersTests
+ 
+ #endif // CATCH_CONFIG_DISABLE_MATCHERS
+ 
+diff --git a/projects/SelfTest/UsageTests/Misc.tests.cpp b/projects/SelfTest/UsageTests/Misc.tests.cpp
+index b61a83a5..6a6f1da0 100644
+--- a/projects/SelfTest/UsageTests/Misc.tests.cpp
++++ b/projects/SelfTest/UsageTests/Misc.tests.cpp
+@@ -19,6 +19,48 @@
+ #include <limits>
+ #include <sstream>
+ 
++namespace { namespace MiscTests {
++
++#ifndef MISC_TEST_HELPERS_INCLUDED // Don't compile this more than once per TU
++#define MISC_TEST_HELPERS_INCLUDED
++
++inline const char* makeString( bool makeNull ) {
++    return makeNull ? nullptr : "valid string";
++}
++inline bool testCheckedIf( bool flag )  {
++    CHECKED_IF( flag )
++        return true;
++    else
++        return false;
++}
++inline bool testCheckedElse( bool flag ) {
++    CHECKED_ELSE( flag )
++        return false;
++
++    return true;
++}
++
++inline unsigned int Factorial( unsigned int number )  {
++    return number > 1 ? Factorial(number-1)*number : 1;
++}
++
++static int f() {
++    return 1;
++}
++
++inline void manuallyRegisteredTestFunction() {
++    SUCCEED( "was called" );
++}
++
++struct AutoTestReg {
++    AutoTestReg() {
++        REGISTER_TEST_CASE( manuallyRegisteredTestFunction, "ManuallyRegistered" );
++    }
++};
++static AutoTestReg autoTestReg;
++
++#endif
++
+ TEST_CASE( "random SECTION tests", "[.][sections][failing]" ) {
+     int a = 1;
+     int b = 2;
+@@ -108,23 +150,11 @@ TEST_CASE( "Sends stuff to stdout and stderr", "[.]" ) {
+     std::cerr << "A string sent directly to stderr" << std::endl;
+ }
+ 
+-inline const char* makeString( bool makeNull ) {
+-    return makeNull ? nullptr : "valid string";
+-}
+-
+ TEST_CASE( "null strings" ) {
+     REQUIRE( makeString( false ) != static_cast<char*>(nullptr));
+     REQUIRE( makeString( true ) == static_cast<char*>(nullptr));
+ }
+ 
+-
+-inline bool testCheckedIf( bool flag )  {
+-    CHECKED_IF( flag )
+-        return true;
+-    else
+-        return false;
+-}
+-
+ TEST_CASE( "checkedIf" ) {
+     REQUIRE( testCheckedIf( true ) );
+ }
+@@ -133,13 +163,6 @@ TEST_CASE( "checkedIf, failing", "[failing][.]" ) {
+     REQUIRE( testCheckedIf( false ) );
+ }
+ 
+-inline bool testCheckedElse( bool flag ) {
+-    CHECKED_ELSE( flag )
+-        return false;
+-
+-    return true;
+-}
+-
+ TEST_CASE( "checkedElse" ) {
+     REQUIRE( testCheckedElse( true ) );
+ }
+@@ -171,9 +194,6 @@ TEST_CASE( "atomic if", "[failing][0]") {
+         REQUIRE(x == 0);
+ }
+ 
+-inline unsigned int Factorial( unsigned int number )  {
+-  return number > 1 ? Factorial(number-1)*number : 1;
+-}
+ 
+ TEST_CASE( "Factorials are computed", "[factorial]" ) {
+   REQUIRE( Factorial(0) == 1 );
+@@ -312,11 +332,6 @@ TEST_CASE( "# A test name that starts with a #" ) {
+     SUCCEED( "yay" );
+ }
+ 
+-
+-static int f() {
+-    return 1;
+-}
+-
+ TEST_CASE( "#835 -- errno should not be touched by Catch", "[.][failing][!shouldfail]" ) {
+     errno = 1;
+     CHECK(f() == 0);
+@@ -331,12 +346,4 @@ TEST_CASE( "#961 -- Dynamically created sections should all be reported", "[.]"
+     }
+ }
+ 
+-inline void manuallyRegisteredTestFunction() {
+-    SUCCEED( "was called" );
+-}
+-struct AutoTestReg {
+-    AutoTestReg() {
+-        REGISTER_TEST_CASE( manuallyRegisteredTestFunction, "ManuallyRegistered" );
+-    }
+-};
+-static AutoTestReg autoTestReg;
++}} // namespace MiscTests

@@ -1,0 +1,28 @@
+{
+  "events": [
+    {
+      "event_id": "e1",
+      "op": "insert",
+      "node": "type",
+      "level": "token",
+      "old": "",
+      "new": "CATCH_INTERNAL_START_WARNINGS_SUPPRESSION CATCH_INTERNAL_SUPPRESS_GLOBALS_WARNINGS",
+      "enclosing": {
+        "statement": "decl_stmt"
+      },
+      "anchor": "unit[1]/namespace[name=Catch]/block[1]/namespace[name=Benchmark]/block[1]/namespace[name=Detail]/block[1]/decl_stmt[1]/decl[name=benchmarkErrorMsg]/type[name=string]",
+      "old_context": "const std::string benchmarkErrorMsg = \"a benchmark failed to run successfully\";",
+      "new_context": "CATCH_INTERNAL_START_WARNINGS_SUPPRESSION CATCH_INTERNAL_SUPPRESS_GLOBALS_WARNINGS const std::string benchmarkErrorMsg = \"a benchmark failed to run successfully\";"
+    },
+    {
+      "event_id": "e2",
+      "op": "insert",
+      "node": "expr_stmt",
+      "level": "stmt",
+      "old": "",
+      "new": "CATCH_INTERNAL_STOP_WARNINGS_SUPPRESSION",
+      "enclosing": {},
+      "anchor": "unit[1]/namespace[name=Catch]/block[1]/namespace[name=Benchmark]/block[1]/namespace[name=Detail]/block[1]/expr_stmt[1]"
+    }
+  ]
+}

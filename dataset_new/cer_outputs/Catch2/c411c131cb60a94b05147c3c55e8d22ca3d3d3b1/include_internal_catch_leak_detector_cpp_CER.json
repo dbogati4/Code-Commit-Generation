@@ -1,0 +1,44 @@
+{
+  "events": [
+    {
+      "event_id": "e1",
+      "op": "insert",
+      "node": "expr_stmt",
+      "level": "stmt",
+      "old": "",
+      "new": "#if def CATCH_CONFIG_WINDOWS_CRTDBG #include <crtdbg.h>",
+      "enclosing": {},
+      "anchor": "unit[1]"
+    },
+    {
+      "event_id": "e2",
+      "op": "delete",
+      "node": "expr_stmt",
+      "level": "stmt",
+      "old": "#if def CATCH_CONFIG_WINDOWS_CRTDBG #include <crtdbg.h>",
+      "new": "",
+      "enclosing": {},
+      "anchor": "unit[1]/namespace[name=Catch]/block[1]"
+    },
+    {
+      "event_id": "e3",
+      "op": "delete",
+      "node": "expr_stmt",
+      "level": "stmt",
+      "old": "#else LeakDetector::LeakDetector(){} #endif",
+      "new": "",
+      "enclosing": {},
+      "anchor": "unit[1]/namespace[name=Catch]/block[1]"
+    },
+    {
+      "event_id": "e4",
+      "op": "insert",
+      "node": "expr_stmt",
+      "level": "stmt",
+      "old": "",
+      "new": "#else Catch::LeakDetector::LeakDetector() {} #endif",
+      "enclosing": {},
+      "anchor": "unit[1]"
+    }
+  ]
+}

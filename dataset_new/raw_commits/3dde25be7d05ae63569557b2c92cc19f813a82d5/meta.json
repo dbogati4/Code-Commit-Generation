@@ -1,0 +1,8 @@
+{
+  "commit_id": "3dde25be7d05ae63569557b2c92cc19f813a82d5",
+  "parent_id": "d44f2cf40f67e866c7c53080f52db5fd59b5db41",
+  "message": "Clara: support for binary functions",
+  "changed_files": [
+    "projects/SelfTest/CmdLineTests.cpp"
+  ]
+}

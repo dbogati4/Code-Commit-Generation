@@ -1,0 +1,8 @@
+{
+  "commit_id": "3bd0c58878bb4d413a4ef9ed701ec08e407420ab",
+  "parent_id": "a63ad7455471dfa67275b866774f5fd0feb1cb81",
+  "message": "Fix Wunused-variable warning for MinGW",
+  "changed_files": [
+    "src/catch2/internal/catch_run_context.cpp"
+  ]
+}

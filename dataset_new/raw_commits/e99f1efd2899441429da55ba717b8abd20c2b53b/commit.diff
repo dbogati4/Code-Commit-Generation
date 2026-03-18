@@ -1,0 +1,52 @@
+diff --git a/include/internal/catch_config.cpp b/include/internal/catch_config.cpp
+index e8ad2a81..d9ee9182 100644
+--- a/include/internal/catch_config.cpp
++++ b/include/internal/catch_config.cpp
+@@ -16,10 +16,7 @@ namespace Catch {
+         m_stream( openStream() )
+     {
+         TestSpecParser parser(ITagAliasRegistry::get());
+-        if (data.testsOrTags.empty()) {
+-            parser.parse("~[.]"); // All not hidden tests
+-        }
+-        else {
++        if (!data.testsOrTags.empty()) {
+             m_hasTestFilters = true;
+             for( auto const& testOrTags : data.testsOrTags )
+                 parser.parse( testOrTags );
+diff --git a/include/internal/catch_session.cpp b/include/internal/catch_session.cpp
+index a5907e97..38b74ef7 100644
+--- a/include/internal/catch_session.cpp
++++ b/include/internal/catch_session.cpp
+@@ -72,7 +72,10 @@ namespace Catch {
+ 
+             auto const& allTestCases = getAllTestCasesSorted(*config);
+             for (auto const& testCase : allTestCases) {
+-                if (!context.aborting() && matchTest(testCase, testSpec, *config))
++                bool matching = (!testSpec.hasFilters() && !testCase.isHidden()) ||
++                                 (testSpec.hasFilters() && matchTest(testCase, testSpec, *config));
++
++                if (!context.aborting() && matching)
+                     totals += context.runTest(testCase);
+                 else
+                     context.reporter().skipTest(testCase);
+diff --git a/include/internal/catch_test_case_registry_impl.cpp b/include/internal/catch_test_case_registry_impl.cpp
+index a6b7f570..a85d0edf 100644
+--- a/include/internal/catch_test_case_registry_impl.cpp
++++ b/include/internal/catch_test_case_registry_impl.cpp
+@@ -54,9 +54,12 @@ namespace Catch {
+     std::vector<TestCase> filterTests( std::vector<TestCase> const& testCases, TestSpec const& testSpec, IConfig const& config ) {
+         std::vector<TestCase> filtered;
+         filtered.reserve( testCases.size() );
+-        for( auto const& testCase : testCases )
+-            if( matchTest( testCase, testSpec, config ) )
+-                filtered.push_back( testCase );
++        for (auto const& testCase : testCases) {
++            if ((!testSpec.hasFilters() && !testCase.isHidden()) ||
++                (testSpec.hasFilters() && matchTest(testCase, testSpec, config))) {
++                filtered.push_back(testCase);
++            }
++        }
+         return filtered;
+     }
+     std::vector<TestCase> const& getAllTestCasesSorted( IConfig const& config ) {

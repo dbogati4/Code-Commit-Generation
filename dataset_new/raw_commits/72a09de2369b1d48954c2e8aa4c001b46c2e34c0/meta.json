@@ -1,0 +1,8 @@
+{
+  "commit_id": "72a09de2369b1d48954c2e8aa4c001b46c2e34c0",
+  "parent_id": "f0a89b7345f84436c2af142e39ba304189d3851f",
+  "message": "Add tests for Optional's op== and !=",
+  "changed_files": [
+    "tests/SelfTest/IntrospectiveTests/Details.tests.cpp"
+  ]
+}

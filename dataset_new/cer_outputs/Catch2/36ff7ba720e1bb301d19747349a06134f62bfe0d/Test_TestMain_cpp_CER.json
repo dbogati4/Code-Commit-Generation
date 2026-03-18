@@ -1,0 +1,93 @@
+{
+  "events": [
+    {
+      "event_id": "e1",
+      "op": "insert",
+      "node": "decl_stmt",
+      "level": "stmt",
+      "old": "",
+      "new": "RunnerConfig config;",
+      "enclosing": {
+        "function": "main"
+      },
+      "anchor": "unit[1]/function[name=main]/block[1]/block_content[1]/decl_stmt[8]"
+    },
+    {
+      "event_id": "e2",
+      "op": "insert",
+      "node": "decl_stmt",
+      "level": "stmt",
+      "old": "",
+      "new": "ReporterConfig& reporterConfig = config.getReporterConfig();",
+      "enclosing": {
+        "function": "main"
+      },
+      "anchor": "unit[1]/function[name=main]/block[1]/block_content[1]/decl_stmt[9]"
+    },
+    {
+      "event_id": "e3",
+      "op": "insert",
+      "node": "expr_stmt",
+      "level": "stmt",
+      "old": "",
+      "new": "config.setReporter( new BasicReporter(reporterConfig ) );",
+      "enclosing": {
+        "function": "main"
+      },
+      "anchor": "unit[1]/function[name=main]/block[1]/block_content[1]/expr_stmt[5]"
+    },
+    {
+      "event_id": "e4",
+      "op": "delete",
+      "node": "decl_stmt",
+      "level": "stmt",
+      "old": "BasicReporter reporter (reporterConfig );",
+      "new": "",
+      "enclosing": {
+        "function": "main"
+      },
+      "anchor": "unit[1]/function[name=main]/block[1]/block_content[1]/decl_stmt[8]"
+    },
+    {
+      "event_id": "e5",
+      "op": "delete",
+      "node": "decl_stmt",
+      "level": "stmt",
+      "old": "&",
+      "new": "",
+      "enclosing": {
+        "function": "main",
+        "statement": "decl_stmt"
+      },
+      "anchor": "unit[1]/function[name=main]/block[1]/block_content[1]/decl_stmt[4]/decl[name=runner]/argument_list[1]/argument[1]/expr[1]"
+    },
+    {
+      "event_id": "e6",
+      "op": "replace",
+      "node": "variable_name",
+      "level": "token",
+      "old": "reporter",
+      "new": "config",
+      "enclosing": {
+        "function": "main",
+        "statement": "decl_stmt"
+      },
+      "anchor": "unit[1]/function[name=main]/block[1]/block_content[1]/decl_stmt[4]/decl[name=runner]/argument_list[1]/argument[1]/expr[1]/name[1]",
+      "old_context": "Runner runner( & reporter );",
+      "new_context": "Runner runner( config );"
+    },
+    {
+      "event_id": "e7",
+      "op": "replace",
+      "node": "decl_stmt",
+      "level": "stmt",
+      "old": "102",
+      "new": "106",
+      "enclosing": {
+        "function": "main",
+        "statement": "decl_stmt"
+      },
+      "anchor": "unit[1]/function[name=main]/block[1]/block_content[1]/if_stmt[4]/if[1]/block[1]/block_content[1]/decl_stmt[1]/decl[name=expectedTestCaseCount]/init[1]"
+    }
+  ]
+}

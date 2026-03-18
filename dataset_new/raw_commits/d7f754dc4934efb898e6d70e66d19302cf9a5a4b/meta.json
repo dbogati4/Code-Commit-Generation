@@ -1,0 +1,9 @@
+{
+  "commit_id": "d7f754dc4934efb898e6d70e66d19302cf9a5a4b",
+  "parent_id": "a14bd08b2766f7c32a7d8de06e51650da5fe5451",
+  "message": "Fix SelfTest compilation after _THROWS_ assertion change",
+  "changed_files": [
+    "projects/SelfTest/CompilationTests.cpp",
+    "projects/SelfTest/MatchersTests.cpp"
+  ]
+}

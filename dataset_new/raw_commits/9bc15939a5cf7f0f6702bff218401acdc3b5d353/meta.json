@@ -1,0 +1,8 @@
+{
+  "commit_id": "9bc15939a5cf7f0f6702bff218401acdc3b5d353",
+  "parent_id": "461843b1f02a4bf5c59db88ff201d2c56fabf3a4",
+  "message": "Don't use exception-related std:: functions with -fno-exceptions",
+  "changed_files": [
+    "include/internal/catch_exception_translator_registry.cpp"
+  ]
+}

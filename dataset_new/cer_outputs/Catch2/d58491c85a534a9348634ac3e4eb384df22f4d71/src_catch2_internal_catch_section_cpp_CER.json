@@ -1,0 +1,16 @@
+{
+  "events": [
+    {
+      "event_id": "e1",
+      "op": "insert",
+      "node": "decl_stmt",
+      "level": "stmt",
+      "old": "",
+      "new": "CATCH_MOVE(m_info)",
+      "enclosing": {
+        "statement": "decl_stmt"
+      },
+      "anchor": "unit[1]/namespace[name=Catch]/block[1]/destructor[name=~Section]/block[1]/block_content[1]/if_stmt[1]/if[1]/block[1]/block_content[1]/decl_stmt[1]/decl[name=endInfo]/argument_list[1]/argument[1]"
+    }
+  ]
+}

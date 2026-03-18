@@ -1,0 +1,8 @@
+{
+  "commit_id": "81aa2d5582444ff79eedec7c098c096b6f8aa0cf",
+  "parent_id": "9d591f19ff6b0dfe4469e1d4b6a60f92f2357c06",
+  "message": "Replace ostringstream with ReusableStringStream in ConsoleReporter",
+  "changed_files": [
+    "src/catch2/reporters/catch_reporter_console.cpp"
+  ]
+}

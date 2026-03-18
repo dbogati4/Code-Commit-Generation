@@ -1,0 +1,8 @@
+{
+  "commit_id": "0c62a503921817f1a161270b835fe70a797041bc",
+  "parent_id": "68cf4ca883ec829c8aab7932d051253ea071d62f",
+  "message": "Add the catch_main source file",
+  "changed_files": [
+    "src/catch2/catch_main.cpp"
+  ]
+}

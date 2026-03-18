@@ -1,0 +1,14 @@
+{
+  "events": [
+    {
+      "event_id": "e1",
+      "op": "replace",
+      "node": "expr_stmt",
+      "level": "stmt",
+      "old": "struct Hidden {} ; bool operator==(Hidden, Hidden) { return true; }",
+      "new": "namespace { struct Hidden {} ; bool operator==(Hidden, Hidden) { return true; } }",
+      "enclosing": {},
+      "anchor": "unit[1]"
+    }
+  ]
+}

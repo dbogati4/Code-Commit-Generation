@@ -1,0 +1,8 @@
+{
+  "commit_id": "8fdf7f3a09743ba7001c88df544ae60364215cb4",
+  "parent_id": "5e82dcd62f7804d0fc7eee7a3c5fd43fa7fab1fc",
+  "message": "Added tests for signed/ unsigned fix",
+  "changed_files": [
+    "projects/SelfTest/ConditionTests.cpp"
+  ]
+}

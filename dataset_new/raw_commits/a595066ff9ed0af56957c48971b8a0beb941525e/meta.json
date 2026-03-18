@@ -1,0 +1,8 @@
+{
+  "commit_id": "a595066ff9ed0af56957c48971b8a0beb941525e",
+  "parent_id": "cb25c4a8a3d8857b07f7b87e4879a8a993c47de7",
+  "message": "Use internal linkage for float stringification helper",
+  "changed_files": [
+    "src/catch2/catch_tostring.cpp"
+  ]
+}

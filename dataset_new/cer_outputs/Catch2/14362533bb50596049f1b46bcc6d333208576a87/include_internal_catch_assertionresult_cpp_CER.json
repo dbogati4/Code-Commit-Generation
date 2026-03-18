@@ -1,0 +1,17 @@
+{
+  "events": [
+    {
+      "event_id": "e1",
+      "op": "replace",
+      "node": "return_expr",
+      "level": "stmt",
+      "old": "return m_info.capturedExpression[0] != 0;",
+      "new": "return !m_info.capturedExpression.empty();",
+      "enclosing": {
+        "function": "hasExpression",
+        "statement": "return"
+      },
+      "anchor": "unit[1]/namespace[name=Catch]/block[1]/function[name=hasExpression]/block[1]/block_content[1]/return[1]"
+    }
+  ]
+}

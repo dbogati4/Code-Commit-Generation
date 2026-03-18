@@ -1,0 +1,14 @@
+{
+  "events": [
+    {
+      "event_id": "e1",
+      "op": "replace",
+      "node": "expr_stmt",
+      "level": "stmt",
+      "old": "std::numeric_limits<float>::epsilon()",
+      "new": "static_cast<double>(std::numeric_limits<float>::epsilon())",
+      "enclosing": {},
+      "anchor": "unit[1]/namespace[name=Catch]/block[1]/constructor[name=Approx]/member_init_list[1]/call[name=m_epsilon]/argument_list[1]/argument[1]/expr[1]"
+    }
+  ]
+}

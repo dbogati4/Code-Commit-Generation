@@ -1,0 +1,8 @@
+{
+  "commit_id": "f5cee49c71e7c0e805695b03e8af533783789762",
+  "parent_id": "7bbd4b90750ea20a08377c600da924d5d6d7f8ef",
+  "message": "Add test for iterators with const T as the value_type",
+  "changed_files": [
+    "tests/SelfTest/UsageTests/Compilation.tests.cpp"
+  ]
+}

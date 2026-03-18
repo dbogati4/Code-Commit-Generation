@@ -1,0 +1,8 @@
+{
+  "commit_id": "a4e4e82474f894d56cbe86e13a2d23bb1b46744d",
+  "parent_id": "6227ca317e4ca36769a5943587060064ccbe3729",
+  "message": "Always indent test names at 2 spaces with default listing",
+  "changed_files": [
+    "src/catch2/reporters/catch_reporter_combined_tu.cpp"
+  ]
+}

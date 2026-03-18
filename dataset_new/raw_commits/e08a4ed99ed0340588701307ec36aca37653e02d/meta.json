@@ -1,0 +1,8 @@
+{
+  "commit_id": "e08a4ed99ed0340588701307ec36aca37653e02d",
+  "parent_id": "fcba30569cee61e577af8ae43379d54eee635283",
+  "message": "Added missing <cstring> include to stringref.cpp",
+  "changed_files": [
+    "include/internal/catch_stringref.cpp"
+  ]
+}

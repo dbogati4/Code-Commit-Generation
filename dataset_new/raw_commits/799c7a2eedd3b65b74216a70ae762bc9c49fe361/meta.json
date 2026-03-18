@@ -1,0 +1,8 @@
+{
+  "commit_id": "799c7a2eedd3b65b74216a70ae762bc9c49fe361",
+  "parent_id": "9bc15939a5cf7f0f6702bff218401acdc3b5d353",
+  "message": "Remove redundant move to avoid Wredundant-move with Clang",
+  "changed_files": [
+    "include/internal/catch_session.cpp"
+  ]
+}

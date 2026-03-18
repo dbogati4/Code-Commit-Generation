@@ -1,0 +1,8 @@
+{
+  "commit_id": "6574f639a317240b39f926b47e7360a59b8f1271",
+  "parent_id": "8d1100daa6c7c9aa75e0ef6cbdf8578f6635ba57",
+  "message": "Refactored CLI tests and converted main one into a scenario",
+  "changed_files": [
+    "projects/SelfTest/CmdLineTests.cpp"
+  ]
+}

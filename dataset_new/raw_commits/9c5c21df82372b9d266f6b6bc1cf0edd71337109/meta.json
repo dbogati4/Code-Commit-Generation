@@ -1,0 +1,8 @@
+{
+  "commit_id": "9c5c21df82372b9d266f6b6bc1cf0edd71337109",
+  "parent_id": "10aef62f21e52e5cd73bf0dc6ac8be35fbc4a798",
+  "message": "Simplify removal of messages from RunContext",
+  "changed_files": [
+    "src/catch2/internal/catch_run_context.cpp"
+  ]
+}

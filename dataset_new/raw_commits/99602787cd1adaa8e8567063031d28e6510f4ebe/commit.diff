@@ -1,0 +1,13 @@
+diff --git a/include/internal/catch_message.cpp b/include/internal/catch_message.cpp
+index 69e48211..faceb50c 100644
+--- a/include/internal/catch_message.cpp
++++ b/include/internal/catch_message.cpp
+@@ -84,7 +84,7 @@ namespace Catch {
+                 if (names[i] == '\\')
+                     ++i;
+             }
+-            CATCH_INTERNAL_ERROR("CAPTURE parsing encountered unmatched parentheses");
++            CATCH_INTERNAL_ERROR("CAPTURE parsing encountered unmatched quote");
+         };
+ 
+         size_t start = 0;

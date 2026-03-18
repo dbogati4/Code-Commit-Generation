@@ -1,0 +1,8 @@
+{
+  "commit_id": "347be871265c7780bc2573e838a41a767c6e1f67",
+  "parent_id": "4da655c1b06ec238ed63424bbc0e2a6f80f9d63a",
+  "message": "Removed debug code accidentally left in previous commit",
+  "changed_files": [
+    "include/internal/catch_timer.cpp"
+  ]
+}

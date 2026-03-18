@@ -1,0 +1,19 @@
+{
+  "events": [
+    {
+      "event_id": "e1",
+      "op": "replace",
+      "node": "call_name",
+      "level": "token",
+      "old": "__android_log_print",
+      "new": "__android_log_write",
+      "enclosing": {
+        "function": "writeToDebugConsole",
+        "statement": "expr_stmt"
+      },
+      "anchor": "unit[1]/namespace[name=Catch]/block[1]/function[name=writeToDebugConsole]/block[1]/block_content[1]/expr_stmt[1]/expr[1]/call[1]/name[1]",
+      "old_context": "__android_log_print( ANDROID_LOG_DEBUG, \"Catch\", text.c_str() );",
+      "new_context": "__android_log_write( ANDROID_LOG_DEBUG, \"Catch\", text.c_str() );"
+    }
+  ]
+}

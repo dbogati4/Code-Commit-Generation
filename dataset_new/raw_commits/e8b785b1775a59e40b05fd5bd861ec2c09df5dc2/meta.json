@@ -1,0 +1,8 @@
+{
+  "commit_id": "e8b785b1775a59e40b05fd5bd861ec2c09df5dc2",
+  "parent_id": "887fe1d5d273a5ff906b110769dcc110acb6b174",
+  "message": "Fixup bad merge in 2212cdfe",
+  "changed_files": [
+    "include/internal/catch_result_builder.cpp"
+  ]
+}

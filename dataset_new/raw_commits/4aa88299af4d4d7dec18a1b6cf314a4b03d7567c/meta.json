@@ -1,0 +1,8 @@
+{
+  "commit_id": "4aa88299af4d4d7dec18a1b6cf314a4b03d7567c",
+  "parent_id": "76cdaa3b51274a748dd971313c8692c3ce967477",
+  "message": "Preconstruct error message in RunContext::handleIncomplete",
+  "changed_files": [
+    "src/catch2/internal/catch_run_context.cpp"
+  ]
+}

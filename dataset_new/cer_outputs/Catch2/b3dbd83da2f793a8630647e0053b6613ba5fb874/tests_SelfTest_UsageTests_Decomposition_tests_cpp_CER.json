@@ -1,0 +1,24 @@
+{
+  "events": [
+    {
+      "event_id": "e1",
+      "op": "insert",
+      "node": "expr_stmt",
+      "level": "stmt",
+      "old": "",
+      "new": "REQUIRE_FALSE( fptr != 0 );",
+      "enclosing": {},
+      "anchor": "unit[1]/block[2]/block_content[1]/expr_stmt[3]"
+    },
+    {
+      "event_id": "e2",
+      "op": "insert",
+      "node": "expr_stmt",
+      "level": "stmt",
+      "old": "",
+      "new": "REQUIRE_FALSE( fptr != 0l );",
+      "enclosing": {},
+      "anchor": "unit[1]/block[2]/block_content[1]/expr_stmt[3]"
+    }
+  ]
+}

@@ -1,0 +1,8 @@
+{
+  "commit_id": "0a6a2ce88764cc8c01411fee68834571a5b9a0a1",
+  "parent_id": "355a6e273b1bc5d50fd8a066af82c579ad021834",
+  "message": "Fix preprocessor check for enabling FP reproducibility tests",
+  "changed_files": [
+    "tests/SelfTest/IntrospectiveTests/RandomNumberGeneration.tests.cpp"
+  ]
+}

@@ -1,0 +1,8 @@
+{
+  "commit_id": "e5c0e3322dfd9410d94e151674b0e16b3073fbfe",
+  "parent_id": "dc8c8e957fd5e65f1c5e512e3b6b77d9fb42be75",
+  "message": "Add Android implementation of writeToDebugConsole that prints to Logcat (#1710)",
+  "changed_files": [
+    "include/internal/catch_debug_console.cpp"
+  ]
+}

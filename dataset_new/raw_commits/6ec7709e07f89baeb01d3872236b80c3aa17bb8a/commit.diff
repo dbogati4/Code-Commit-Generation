@@ -1,0 +1,62 @@
+diff --git a/include/reporters/catch_reporter_console.cpp b/include/reporters/catch_reporter_console.cpp
+index 3643c1df..b70df425 100644
+--- a/include/reporters/catch_reporter_console.cpp
++++ b/include/reporters/catch_reporter_console.cpp
+@@ -11,13 +11,15 @@
+ #include "../internal/catch_reporter_registrars.hpp"
+ #include "../internal/catch_console_colour.hpp"
+ #include "../internal/catch_version.h"
+-#include "../internal/catch_text.h"
++#include "../internal/catch_clara.h" // For TextFlow
+ 
+ #include <cfloat>
+ #include <cstdio>
+ 
+ namespace Catch {
+ 
++    using namespace clara::TextFlow;
++
+     struct ConsoleReporter : StreamingReporterBase<ConsoleReporter> {
+         using StreamingReporterBase::StreamingReporterBase;
+ 
+@@ -209,7 +211,7 @@ namespace Catch {
+                 if( result.hasExpandedExpression() ) {
+                     stream << "with expansion:\n";
+                     Colour colourGuard( Colour::ReconstructedExpression );
+-                    stream << Text( result.getExpandedExpression(), TextAttributes().setIndent(2) ) << '\n';
++                    stream << Column( result.getExpandedExpression() ).indent(2) << '\n';
+                 }
+             }
+             void printMessage() const {
+@@ -218,7 +220,7 @@ namespace Catch {
+                 for( auto const& msg : messages ) {
+                     // If this assertion is a warning ignore any INFO messages
+                     if( printInfoMessages || msg.type != ResultWas::Info )
+-                        stream << Text( msg.message, TextAttributes().setIndent(2) ) << '\n';
++                        stream << Column( msg.message ).indent(2) << '\n';
+                 }
+             }
+             void printSourceInfo() const {
+@@ -311,9 +313,7 @@ namespace Catch {
+                 i+=2;
+             else
+                 i = 0;
+-            stream << Text( _string, TextAttributes()
+-                                        .setIndent( indent+i)
+-                                        .setInitialIndent( indent ) ) << '\n';
++            stream << Column( _string ).indent( indent+i ).initialIndent( indent ) << '\n';
+         }
+ 
+         struct SummaryColumn {
+diff --git a/projects/SelfTest/TestMain.cpp b/projects/SelfTest/TestMain.cpp
+index 84cf35ed..aad1f036 100644
+--- a/projects/SelfTest/TestMain.cpp
++++ b/projects/SelfTest/TestMain.cpp
+@@ -8,7 +8,6 @@
+ 
+ #define CATCH_CONFIG_MAIN
+ #include "catch.hpp"
+-#include "internal/catch_text.h" // temporarily
+ #include "../include/reporters/catch_reporter_teamcity.hpp"
+ #include "../include/reporters/catch_reporter_tap.hpp"
+ #include "../include/reporters/catch_reporter_automake.hpp"

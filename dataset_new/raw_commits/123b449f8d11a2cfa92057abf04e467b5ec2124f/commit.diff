@@ -1,0 +1,26 @@
+diff --git a/src/catch2/catch_console_colour.cpp b/src/catch2/catch_console_colour.cpp
+index 030b4b7c..6a9bcc38 100644
+--- a/src/catch2/catch_console_colour.cpp
++++ b/src/catch2/catch_console_colour.cpp
+@@ -167,7 +167,7 @@ namespace {
+ 
+     bool useColourOnPlatform() {
+         return
+-#ifdef CATCH_PLATFORM_MAC
++#if defined(CATCH_PLATFORM_MAC) || defined(CATCH_PLATFORM_IPHONE)
+             !isDebuggerActive() &&
+ #endif
+ #if !(defined(__DJGPP__) && defined(__STRICT_ANSI__))
+diff --git a/src/catch2/catch_debugger.cpp b/src/catch2/catch_debugger.cpp
+index 02a8f818..068025af 100644
+--- a/src/catch2/catch_debugger.cpp
++++ b/src/catch2/catch_debugger.cpp
+@@ -12,7 +12,7 @@
+ #include <catch2/catch_stream.h>
+ #include <catch2/catch_platform.h>
+ 
+-#if defined(CATCH_PLATFORM_MAC) || defined(CATCH_PLATFORM_IPHONE)
++#if defined(CATCH_PLATFORM_MAC) || defined(CATCH_PLATFORM_IPHONE)
+ 
+ #  include <assert.h>
+ #  include <stdbool.h>

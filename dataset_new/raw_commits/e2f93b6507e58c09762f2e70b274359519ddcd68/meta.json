@@ -1,0 +1,8 @@
+{
+  "commit_id": "e2f93b6507e58c09762f2e70b274359519ddcd68",
+  "parent_id": "a13ab71cbf97d56ac13e1d07ff50d09fab2d2200",
+  "message": "Clara: Allow space separator, as well as : and =",
+  "changed_files": [
+    "projects/SelfTest/CmdLineTests.cpp"
+  ]
+}

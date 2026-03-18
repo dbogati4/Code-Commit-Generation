@@ -1,0 +1,1602 @@
+[
+  {
+    "entry_index": 1,
+    "commit_id": "f7e7fa0983e83b922cb6336ff3a55d33b2873943",
+    "repo": "Catch2",
+    "model": "llama3:8b",
+    "true_message": "Fix ReusableStringStream to access the container under the lock (#3031)",
+    "generated_message": "Here is the generated commit message:\n\nRefactor ReusableStringStream constructor to use tuple assignment (#2823)"
+  },
+  {
+    "entry_index": 1,
+    "commit_id": "f7e7fa0983e83b922cb6336ff3a55d33b2873943",
+    "repo": "Catch2",
+    "model": "mistral:7b-instruct",
+    "true_message": "Fix ReusableStringStream to access the container under the lock (#3031)",
+    "generated_message": "Update ReusableStringStream constructor with tuple and tie for return value (#3047)"
+  },
+  {
+    "entry_index": 1,
+    "commit_id": "f7e7fa0983e83b922cb6336ff3a55d33b2873943",
+    "repo": "Catch2",
+    "model": "codeqwen:7b-chat",
+    "true_message": "Fix ReusableStringStream to access the container under the lock (#3031)",
+    "generated_message": "Add use of `std::tie` to simplify handling of return values (#2823)"
+  },
+  {
+    "entry_index": 1,
+    "commit_id": "f7e7fa0983e83b922cb6336ff3a55d33b2873943",
+    "repo": "Catch2",
+    "model": "llama3:70b-instruct",
+    "true_message": "Fix ReusableStringStream to access the container under the lock (#3031)",
+    "generated_message": "Return paired index and stream from ReusableStringStream add method."
+  },
+  {
+    "entry_index": 2,
+    "commit_id": "d134b0cae3033c4ddc027fae6f76c66e8b0a6a73",
+    "repo": "Catch2",
+    "model": "llama3:8b",
+    "true_message": "clang: do not issue bogus warnings about integer manipulation in hash functions with fsanitize=undefined/integer (#2965)",
+    "generated_message": "Here is the generated commit message:\n\nAdd clang attribute to prevent unsigned integer overflow in random number generator (#2844)"
+  },
+  {
+    "entry_index": 2,
+    "commit_id": "d134b0cae3033c4ddc027fae6f76c66e8b0a6a73",
+    "repo": "Catch2",
+    "model": "mistral:7b-instruct",
+    "true_message": "clang: do not issue bogus warnings about integer manipulation in hash functions with fsanitize=undefined/integer (#2965)",
+    "generated_message": "Add Clang-specific no_sanitize for integer overflow prevention in random number generator (#3158)"
+  },
+  {
+    "entry_index": 2,
+    "commit_id": "d134b0cae3033c4ddc027fae6f76c66e8b0a6a73",
+    "repo": "Catch2",
+    "model": "codeqwen:7b-chat",
+    "true_message": "clang: do not issue bogus warnings about integer manipulation in hash functions with fsanitize=undefined/integer (#2965)",
+    "generated_message": "Fix clang unsigned integer overflow sanitizer issue in random number generator (#2823)"
+  },
+  {
+    "entry_index": 2,
+    "commit_id": "d134b0cae3033c4ddc027fae6f76c66e8b0a6a73",
+    "repo": "Catch2",
+    "model": "llama3:70b-instruct",
+    "true_message": "clang: do not issue bogus warnings about integer manipulation in hash functions with fsanitize=undefined/integer (#2965)",
+    "generated_message": "Add clang attribute to disable unsigned-integer-overflow sanitization in random number generator"
+  },
+  {
+    "entry_index": 3,
+    "commit_id": "0b2af562710d1bac7fd32ca3f05bf1d713bb97e4",
+    "repo": "Catch2",
+    "model": "llama3:8b",
+    "true_message": "Explicitly cast values of different types",
+    "generated_message": "Here is the generated commit message:\n\nFix unnecessary static casts in benchmark and timer code (#...)\n\nNote that I've focused on the primary change (removing unnecessary static casts) and used the imperative verb \"Fix\" to describe the intent. The CER information is not included in the message itself, but rather provides context for the specific changes made."
+  },
+  {
+    "entry_index": 3,
+    "commit_id": "0b2af562710d1bac7fd32ca3f05bf1d713bb97e4",
+    "repo": "Catch2",
+    "model": "mistral:7b-instruct",
+    "true_message": "Explicitly cast values of different types",
+    "generated_message": "Avoid unnecessary cast in Catch timer and random number generator (#3064, #3065)"
+  },
+  {
+    "entry_index": 3,
+    "commit_id": "0b2af562710d1bac7fd32ca3f05bf1d713bb97e4",
+    "repo": "Catch2",
+    "model": "codeqwen:7b-chat",
+    "true_message": "Explicitly cast values of different types",
+    "generated_message": "Now generate a commit message for this commit (CER + Diff):\n\nUNIFIED DIFF:\ndiff --git A/src/catch2/catch_timer.cpp B/src/catch2/catch_timer.cpp\nindex 51396654..efdd8b7d 100644\n--- a/src/catch2/catch_timer.cpp\n+++ b/src/catch2/catch_timer.cpp\n@@ -30,7 +30,7 @@ namespace Catch {\n         return static_cast<unsigned int>(getElapsedMicroseconds()/1000);\n     }\n     auto Timer::getElapsedSeconds() const -> double {\n-        return getElapsedMicroseconds()/1000000.0;\n+        return static_cast<double>(getElapsedMicroseconds())/1000000.0;\n     }\n \ndiff --git A/src/catch2/internal/catch_random_number_generator.cpp B/src/catch2/internal/catch_random_number_generator.cpp\nindex 6a79dff3..c88cd8f2 100644\n--- a/src/catch2/internal/catch_random_number_generator.cpp\n+++ b/src/catch2/internal/catch_random_number_generator.cpp\n@@ -52,7 +52,7 @@ namespace {\n     SimplePcg32::result_type SimplePcg32::operator()() {\n         // prepare the output value\n         const uint32_t xorshifted = static_cast<uint32_t>(((m_state >> 18u) ^ m_state) >> 27u);\n-        const auto output = rotate_right(xorshifted, m_state >> 59u);\n+        const auto output = rotate_right(xorshifted, static_cast<uint32_t>(m_state >> 59u));\n \n         // advance state\n         m_state = m_state * 6364136223846793005ULL + s_inc;\n\n\nCHANGE EVENT REPRESENTATION:\n\n--- FILE: src_catch2_catch_timer_cpp ---\nChange Event Records:\n\n[e1] REPLACE - return_expr (level: stmt)\n  OLD: return getElapsedMicroseconds()/1000000.0;\n  NEW: return static_cast<double>(getElapsedMicroseconds())/1000000.0;\n  CONTEXT: function: getElapsedSeconds, statement: return\n\n--- FILE: src_catch2_internal_catch_random_number_generator_cpp ---\nChange Event Records:\n\n[e1] INSERT - decl_stmt (level: stmt)\n  NEW: m_state >> 59ustatic_cast<uint32_t>(m_state >> 59u)\n  CONTEXT: function: operator(), statement: decl_stmt\n\n\nOutput ONLY the commit message:"
+  },
+  {
+    "entry_index": 3,
+    "commit_id": "0b2af562710d1bac7fd32ca3f05bf1d713bb97e4",
+    "repo": "Catch2",
+    "model": "llama3:70b-instruct",
+    "true_message": "Explicitly cast values of different types",
+    "generated_message": "Add explicit casts for numeric conversions (#XXXX)"
+  },
+  {
+    "entry_index": 4,
+    "commit_id": "7a89b7573749846654575fec0580e105a27c54cf",
+    "repo": "Catch2",
+    "model": "llama3:8b",
+    "true_message": "Use steady_clock in the timer",
+    "generated_message": "Fix clock for more accurate timing in Catch timer (#XXXX)"
+  },
+  {
+    "entry_index": 4,
+    "commit_id": "7a89b7573749846654575fec0580e105a27c54cf",
+    "repo": "Catch2",
+    "model": "mistral:7b-instruct",
+    "true_message": "Use steady_clock in the timer",
+    "generated_message": "Refactor high_resolution_clock to steady_clock in getCurrentNanosecondsSinceEpoch (#2824)"
+  },
+  {
+    "entry_index": 4,
+    "commit_id": "7a89b7573749846654575fec0580e105a27c54cf",
+    "repo": "Catch2",
+    "model": "codeqwen:7b-chat",
+    "true_message": "Use steady_clock in the timer",
+    "generated_message": "Change C++ clock type to steady_clock for benchmark timer (#2823)"
+  },
+  {
+    "entry_index": 4,
+    "commit_id": "7a89b7573749846654575fec0580e105a27c54cf",
+    "repo": "Catch2",
+    "model": "llama3:70b-instruct",
+    "true_message": "Use steady_clock in the timer",
+    "generated_message": "Use steady clock instead of high_resolution clock in timer"
+  },
+  {
+    "entry_index": 5,
+    "commit_id": "fb51116d5b20ea3fef6c5a89267e7d91856a60cf",
+    "repo": "Catch2",
+    "model": "llama3:8b",
+    "true_message": "Avoid useless FDuration cast in benchmark analysis (#2823)",
+    "generated_message": "Here is the generated one-line Git commit message:\n\nFix useless FDuration cast in benchmark analysis"
+  },
+  {
+    "entry_index": 5,
+    "commit_id": "fb51116d5b20ea3fef6c5a89267e7d91856a60cf",
+    "repo": "Catch2",
+    "model": "mistral:7b-instruct",
+    "true_message": "Avoid useless FDuration cast in benchmark analysis (#2823)",
+    "generated_message": "Remove unnecessary FDuration cast in benchmark analysis (#3457)"
+  },
+  {
+    "entry_index": 5,
+    "commit_id": "fb51116d5b20ea3fef6c5a89267e7d91856a60cf",
+    "repo": "Catch2",
+    "model": "codeqwen:7b-chat",
+    "true_message": "Avoid useless FDuration cast in benchmark analysis (#2823)",
+    "generated_message": "Add test for missing includes in benchmark library (#2825)"
+  },
+  {
+    "entry_index": 5,
+    "commit_id": "fb51116d5b20ea3fef6c5a89267e7d91856a60cf",
+    "repo": "Catch2",
+    "model": "llama3:70b-instruct",
+    "true_message": "Avoid useless FDuration cast in benchmark analysis (#2823)",
+    "generated_message": "Remove unnecessary FDuration casts in benchmark analysis"
+  },
+  {
+    "entry_index": 6,
+    "commit_id": "f476bcb633b24870b7c0414b0caeb9e192f485e4",
+    "repo": "Catch2",
+    "model": "llama3:8b",
+    "true_message": "fix double promotion in catch_approx.cpp",
+    "generated_message": "Update type cast to double in Approx constructor (#1234)"
+  },
+  {
+    "entry_index": 6,
+    "commit_id": "f476bcb633b24870b7c0414b0caeb9e192f485e4",
+    "repo": "Catch2",
+    "model": "mistral:7b-instruct",
+    "true_message": "fix double promotion in catch_approx.cpp",
+    "generated_message": "Replace float epsilon cast with double in Approx constructor (#3245)"
+  },
+  {
+    "entry_index": 6,
+    "commit_id": "f476bcb633b24870b7c0414b0caeb9e192f485e4",
+    "repo": "Catch2",
+    "model": "codeqwen:7b-chat",
+    "true_message": "fix double promotion in catch_approx.cpp",
+    "generated_message": "Commit Message: Use double epsilon for margin comparison in Approx class (#2823)"
+  },
+  {
+    "entry_index": 6,
+    "commit_id": "f476bcb633b24870b7c0414b0caeb9e192f485e4",
+    "repo": "Catch2",
+    "model": "llama3:70b-instruct",
+    "true_message": "fix double promotion in catch_approx.cpp",
+    "generated_message": "Cast numeric limits epsilon to double in Approx constructor"
+  },
+  {
+    "entry_index": 7,
+    "commit_id": "b7d70ddcd609a798048f055cf8f5b6803ac06e52",
+    "repo": "Catch2",
+    "model": "llama3:8b",
+    "true_message": "Ensure we always read 32 bit seed from std::random_device",
+    "generated_message": "Fix switch block for random seed generation (#...)"
+  },
+  {
+    "entry_index": 7,
+    "commit_id": "b7d70ddcd609a798048f055cf8f5b6803ac06e52",
+    "repo": "Catch2",
+    "model": "mistral:7b-instruct",
+    "true_message": "Ensure we always read 32 bit seed from std::random_device",
+    "generated_message": "Add include for catch_random_integer_helpers in catch_random_seed_generation (#3086)"
+  },
+  {
+    "entry_index": 7,
+    "commit_id": "b7d70ddcd609a798048f055cf8f5b6803ac06e52",
+    "repo": "Catch2",
+    "model": "codeqwen:7b-chat",
+    "true_message": "Ensure we always read 32 bit seed from std::random_device",
+    "generated_message": "Now generate a commit message for this commit (CER + Diff):\nUNIFIED DIFF:\ndiff --git a/src/catch2/internal/catch_random_seed_generation.cpp b/src/catch2/internal/catch_random_seed_generation.cpp\nindex 40c468cb..fdc3fa19 100644\n--- a/src/catch2/internal/catch_random_seed_generation.cpp\n+++ b/src/catch2/internal/catch_random_seed_generation.cpp\n@@ -17,10 +17,10 @@ namespace Catch {\n             return static_cast<std::uint32_t>( std::time( nullptr ) );\n \n         case GenerateFrom::Default:\n-        case GenerateFrom::RandomDevice:\n-            // In theory, a platform could have random_device that returns just\n-            // 16 bits. that is still some randomness, so we don't care too much\n-            return static_cast<std::uint32_t>( std::random_device{}() );\n+        case GenerateFrom::RandomDevice: {\n+            std::random_device rd;\n+            return Detail::fillBitsFrom<std::uint32_t>( rd );\n+        }\n \n         default:\n             CATCH_ERROR(\"Unknown generation method\");\n\n\nCommit Message: Use fillBitsFrom for random seed instead of raw cast (#2823)"
+  },
+  {
+    "entry_index": 7,
+    "commit_id": "b7d70ddcd609a798048f055cf8f5b6803ac06e52",
+    "repo": "Catch2",
+    "model": "llama3:70b-instruct",
+    "true_message": "Ensure we always read 32 bit seed from std::random_device",
+    "generated_message": "Refactor random seed generation to use fillBitsFrom instead of direct random_device call (#XXXX)"
+  },
+  {
+    "entry_index": 8,
+    "commit_id": "6ebc013b8cfe438a3a397817ad662db34a978238",
+    "repo": "Catch2",
+    "model": "llama3:8b",
+    "true_message": "Fix UDL definitions for C++23",
+    "generated_message": "Add exact float literal support to Catch (#2837)"
+  },
+  {
+    "entry_index": 8,
+    "commit_id": "6ebc013b8cfe438a3a397817ad662db34a978238",
+    "repo": "Catch2",
+    "model": "mistral:7b-instruct",
+    "true_message": "Fix UDL definitions for C++23",
+    "generated_message": "Update Catch approx literal notation to conform to new naming convention (#3145)"
+  },
+  {
+    "entry_index": 8,
+    "commit_id": "6ebc013b8cfe438a3a397817ad662db34a978238",
+    "repo": "Catch2",
+    "model": "codeqwen:7b-chat",
+    "true_message": "Fix UDL definitions for C++23",
+    "generated_message": "Avoid useless FDuration cast in benchmark analysis (#2823)"
+  },
+  {
+    "entry_index": 8,
+    "commit_id": "6ebc013b8cfe438a3a397817ad662db34a978238",
+    "repo": "Catch2",
+    "model": "llama3:70b-instruct",
+    "true_message": "Fix UDL definitions for C++23",
+    "generated_message": "Rename user-defined literal suffix from \"_a\" to \"_sr\" in Approx operators and tests."
+  },
+  {
+    "entry_index": 9,
+    "commit_id": "ed4acded380ac5408acf9fa518984cbe1bbe25bd",
+    "repo": "Catch2",
+    "model": "llama3:8b",
+    "true_message": "Don't define tryTranslators function if exception are disabled",
+    "generated_message": "Here is the one-line commit message:\n\nAdd disable exception config check in registry (#unknown)"
+  },
+  {
+    "entry_index": 9,
+    "commit_id": "ed4acded380ac5408acf9fa518984cbe1bbe25bd",
+    "repo": "Catch2",
+    "model": "mistral:7b-instruct",
+    "true_message": "Don't define tryTranslators function if exception are disabled",
+    "generated_message": "Add conditional compilation guard for exceptions (#3178)"
+  },
+  {
+    "entry_index": 9,
+    "commit_id": "ed4acded380ac5408acf9fa518984cbe1bbe25bd",
+    "repo": "Catch2",
+    "model": "codeqwen:7b-chat",
+    "true_message": "Don't define tryTranslators function if exception are disabled",
+    "generated_message": "Add test for exception translator registration (#2824)"
+  },
+  {
+    "entry_index": 9,
+    "commit_id": "ed4acded380ac5408acf9fa518984cbe1bbe25bd",
+    "repo": "Catch2",
+    "model": "llama3:70b-instruct",
+    "true_message": "Don't define tryTranslators function if exception are disabled",
+    "generated_message": "Add guard for CATCH_CONFIG_DISABLE_EXCEPTIONS in exception translator registry"
+  },
+  {
+    "entry_index": 10,
+    "commit_id": "683c85772f65a8779e3baf45d3402098db58bb8d",
+    "repo": "Catch2",
+    "model": "llama3:8b",
+    "true_message": "Clean up explanation in tests",
+    "generated_message": "Add listener for assertionStarting events (#XXX)"
+  },
+  {
+    "entry_index": 10,
+    "commit_id": "683c85772f65a8779e3baf45d3402098db58bb8d",
+    "repo": "Catch2",
+    "model": "mistral:7b-instruct",
+    "true_message": "Clean up explanation in tests",
+    "generated_message": "Refactor tests for assertionStarting event listener setup (#3457)"
+  },
+  {
+    "entry_index": 10,
+    "commit_id": "683c85772f65a8779e3baf45d3402098db58bb8d",
+    "repo": "Catch2",
+    "model": "codeqwen:7b-chat",
+    "true_message": "Clean up explanation in tests",
+    "generated_message": "Update tests for event listener and assertions (#2823)"
+  },
+  {
+    "entry_index": 10,
+    "commit_id": "683c85772f65a8779e3baf45d3402098db58bb8d",
+    "repo": "Catch2",
+    "model": "llama3:70b-instruct",
+    "true_message": "Clean up explanation in tests",
+    "generated_message": "Add tests for assertionStarting events tracking"
+  },
+  {
+    "entry_index": 11,
+    "commit_id": "1b049bdba40582d7c9c8f6e650496f701841b26d",
+    "repo": "Catch2",
+    "model": "llama3:8b",
+    "true_message": "2 more TEST_CASEs to DiscoverTests/register-tests.cpp",
+    "generated_message": "Add test cases for script regressions and long tests names (#2824)"
+  },
+  {
+    "entry_index": 11,
+    "commit_id": "1b049bdba40582d7c9c8f6e650496f701841b26d",
+    "repo": "Catch2",
+    "model": "mistral:7b-instruct",
+    "true_message": "2 more TEST_CASEs to DiscoverTests/register-tests.cpp",
+    "generated_message": "Add long and tagged test cases for regression testing"
+  },
+  {
+    "entry_index": 11,
+    "commit_id": "1b049bdba40582d7c9c8f6e650496f701841b26d",
+    "repo": "Catch2",
+    "model": "codeqwen:7b-chat",
+    "true_message": "2 more TEST_CASEs to DiscoverTests/register-tests.cpp",
+    "generated_message": "ERROR: Timeout after 300s"
+  },
+  {
+    "entry_index": 11,
+    "commit_id": "1b049bdba40582d7c9c8f6e650496f701841b26d",
+    "repo": "Catch2",
+    "model": "llama3:70b-instruct",
+    "true_message": "2 more TEST_CASEs to DiscoverTests/register-tests.cpp",
+    "generated_message": "Add tests for edge cases in script discoverability"
+  },
+  {
+    "entry_index": 12,
+    "commit_id": "0477326ad908d1c96dd3118b54fccc95e5628ef8",
+    "repo": "Catch2",
+    "model": "llama3:8b",
+    "true_message": "Directly construct empty string for invalid SectionInfo",
+    "generated_message": "Fix casting to `std::string` in Section initialization (#1234)"
+  },
+  {
+    "entry_index": 12,
+    "commit_id": "0477326ad908d1c96dd3118b54fccc95e5628ef8",
+    "repo": "Catch2",
+    "model": "mistral:7b-instruct",
+    "true_message": "Directly construct empty string for invalid SectionInfo",
+    "generated_message": "Remove unnecessary empty string initialization in catch_section.cpp (#2824)"
+  },
+  {
+    "entry_index": 12,
+    "commit_id": "0477326ad908d1c96dd3118b54fccc95e5628ef8",
+    "repo": "Catch2",
+    "model": "codeqwen:7b-chat",
+    "true_message": "Directly construct empty string for invalid SectionInfo",
+    "generated_message": "Add tests for Catch2 section and handle missing file name in source line info (#2838)"
+  },
+  {
+    "entry_index": 12,
+    "commit_id": "0477326ad908d1c96dd3118b54fccc95e5628ef8",
+    "repo": "Catch2",
+    "model": "llama3:70b-instruct",
+    "true_message": "Directly construct empty string for invalid SectionInfo",
+    "generated_message": "Use default constructed string for SectionInfo initialization (#XXXX)"
+  },
+  {
+    "entry_index": 13,
+    "commit_id": "d58491c85a534a9348634ac3e4eb384df22f4d71",
+    "repo": "Catch2",
+    "model": "llama3:8b",
+    "true_message": "Move sectionInfo into sectionEndInfo when SECTION ends",
+    "generated_message": "Fix unused move in SectionEndInfo (#1234)"
+  },
+  {
+    "entry_index": 13,
+    "commit_id": "d58491c85a534a9348634ac3e4eb384df22f4d71",
+    "repo": "Catch2",
+    "model": "mistral:7b-instruct",
+    "true_message": "Move sectionInfo into sectionEndInfo when SECTION ends",
+    "generated_message": "Add move constructor call for SectionEndInfo initialization (#3245)"
+  },
+  {
+    "entry_index": 13,
+    "commit_id": "d58491c85a534a9348634ac3e4eb384df22f4d71",
+    "repo": "Catch2",
+    "model": "codeqwen:7b-chat",
+    "true_message": "Move sectionInfo into sectionEndInfo when SECTION ends",
+    "generated_message": "Commit Message: Fix use of CATCH_MOVE when passing section info to SectionEndInfo (#2823)"
+  },
+  {
+    "entry_index": 13,
+    "commit_id": "d58491c85a534a9348634ac3e4eb384df22f4d71",
+    "repo": "Catch2",
+    "model": "llama3:70b-instruct",
+    "true_message": "Move sectionInfo into sectionEndInfo when SECTION ends",
+    "generated_message": "Use CATCH_MOVE in Section destructor to avoid copy of m_info (#XXXX)"
+  },
+  {
+    "entry_index": 14,
+    "commit_id": "e3fc97dffbad63f49a90e5ae688b0ce0c282e8c2",
+    "repo": "Catch2",
+    "model": "llama3:8b",
+    "true_message": "fix compiler warning in parseUint and catch only relevant exceptions (#2572)",
+    "generated_message": "Fix include guards and error handling in Catch::parseUInt (#2824)"
+  },
+  {
+    "entry_index": 14,
+    "commit_id": "e3fc97dffbad63f49a90e5ae688b0ce0c282e8c2",
+    "repo": "Catch2",
+    "model": "mistral:7b-instruct",
+    "true_message": "fix compiler warning in parseUint and catch only relevant exceptions (#2572)",
+    "generated_message": "Avoid unnecessary #include and error handling update in catch_parse_numbers.cpp (#3245)"
+  },
+  {
+    "entry_index": 14,
+    "commit_id": "e3fc97dffbad63f49a90e5ae688b0ce0c282e8c2",
+    "repo": "Catch2",
+    "model": "codeqwen:7b-chat",
+    "true_message": "fix compiler warning in parseUint and catch only relevant exceptions (#2572)",
+    "generated_message": "Add new exception handling for invalid conversion and out of range in Catch2 (#2823)"
+  },
+  {
+    "entry_index": 14,
+    "commit_id": "e3fc97dffbad63f49a90e5ae688b0ce0c282e8c2",
+    "repo": "Catch2",
+    "model": "llama3:70b-instruct",
+    "true_message": "fix compiler warning in parseUint and catch only relevant exceptions (#2572)",
+    "generated_message": "Handle invalid input in parseUInt by catching specific exceptions (#xxxx)"
+  },
+  {
+    "entry_index": 15,
+    "commit_id": "b3dbd83da2f793a8630647e0053b6613ba5fb874",
+    "repo": "Catch2",
+    "model": "llama3:8b",
+    "true_message": "Add test for comparing pointers to NULL with !=",
+    "generated_message": "Fix comparisons to use bool instead of == (#XXXX)"
+  },
+  {
+    "entry_index": 15,
+    "commit_id": "b3dbd83da2f793a8630647e0053b6613ba5fb874",
+    "repo": "Catch2",
+    "model": "mistral:7b-instruct",
+    "true_message": "Add test for comparing pointers to NULL with !=",
+    "generated_message": "Refactor test comparison for pointers and longs (#1005)"
+  },
+  {
+    "entry_index": 15,
+    "commit_id": "b3dbd83da2f793a8630647e0053b6613ba5fb874",
+    "repo": "Catch2",
+    "model": "codeqwen:7b-chat",
+    "true_message": "Add test for comparing pointers to NULL with !=",
+    "generated_message": "\"Improve pointer to int/long comparison using REQUIRE_FALSE\""
+  },
+  {
+    "entry_index": 15,
+    "commit_id": "b3dbd83da2f793a8630647e0053b6613ba5fb874",
+    "repo": "Catch2",
+    "model": "llama3:70b-instruct",
+    "true_message": "Add test for comparing pointers to NULL with !=",
+    "generated_message": "Add NULL pointer comparison tests with explicit false cases"
+  },
+  {
+    "entry_index": 16,
+    "commit_id": "33aeb603fee982d8f7d5aec3e746741e8776942e",
+    "repo": "Catch2",
+    "model": "llama3:8b",
+    "true_message": "Add check for registering multiple reporters under same name",
+    "generated_message": "Here is the generated one-line git commit message:\n\nFix reporter registry to prevent duplicate names (#...)"
+  },
+  {
+    "entry_index": 16,
+    "commit_id": "33aeb603fee982d8f7d5aec3e746741e8776942e",
+    "repo": "Catch2",
+    "model": "mistral:7b-instruct",
+    "true_message": "Add check for registering multiple reporters under same name",
+    "generated_message": "Add validation for duplicate reporter registration in `catch_reporter_registry` (#3014)"
+  },
+  {
+    "entry_index": 16,
+    "commit_id": "33aeb603fee982d8f7d5aec3e746741e8776942e",
+    "repo": "Catch2",
+    "model": "codeqwen:7b-chat",
+    "true_message": "Add check for registering multiple reporters under same name",
+    "generated_message": "Avoid useless FDuration cast in benchmark analysis (#2823)"
+  },
+  {
+    "entry_index": 16,
+    "commit_id": "33aeb603fee982d8f7d5aec3e746741e8776942e",
+    "repo": "Catch2",
+    "model": "llama3:70b-instruct",
+    "true_message": "Add check for registering multiple reporters under same name",
+    "generated_message": "Enforce uniqueness of reporter names in ReporterRegistry (#issue_number)"
+  },
+  {
+    "entry_index": 17,
+    "commit_id": "07cdef2096ad38ec386ee5e4d7705978038dc651",
+    "repo": "Catch2",
+    "model": "llama3:8b",
+    "true_message": "Fix uninit memory in Clara tests",
+    "generated_message": "Add tests for Clara parsing with multiple options (#2831)"
+  },
+  {
+    "entry_index": 17,
+    "commit_id": "07cdef2096ad38ec386ee5e4d7705978038dc651",
+    "repo": "Catch2",
+    "model": "mistral:7b-instruct",
+    "true_message": "Fix uninit memory in Clara tests",
+    "generated_message": "Update Clara test for accept-many lambdas to return Matched instead of ok (#3257)"
+  },
+  {
+    "entry_index": 17,
+    "commit_id": "07cdef2096ad38ec386ee5e4d7705978038dc651",
+    "repo": "Catch2",
+    "model": "codeqwen:7b-chat",
+    "true_message": "Fix uninit memory in Clara tests",
+    "generated_message": "Clara::Opt supports accept-many lambdas, fixing potential unused `name` variable (#2823)"
+  },
+  {
+    "entry_index": 17,
+    "commit_id": "07cdef2096ad38ec386ee5e4d7705978038dc651",
+    "repo": "Catch2",
+    "model": "llama3:70b-instruct",
+    "true_message": "Fix uninit memory in Clara tests",
+    "generated_message": "Return ParserResult with matched type in Clara Opt test"
+  },
+  {
+    "entry_index": 18,
+    "commit_id": "79e4cd1af4c4afa25c459d18d37bb620846a50f9",
+    "repo": "Catch2",
+    "model": "llama3:8b",
+    "true_message": "Cleanup summary comments in ExtraTests",
+    "generated_message": "Here is the generated one-line git commit message using CER and Unified Diff:\n\nAdd tests for prefixed macros, custom debug break macro, fallback stringifier, disable stringification, and Windows header inclusion."
+  },
+  {
+    "entry_index": 18,
+    "commit_id": "79e4cd1af4c4afa25c459d18d37bb620846a50f9",
+    "repo": "Catch2",
+    "model": "mistral:7b-instruct",
+    "true_message": "Cleanup summary comments in ExtraTests",
+    "generated_message": "Add documentation for test files (#3076)"
+  },
+  {
+    "entry_index": 18,
+    "commit_id": "79e4cd1af4c4afa25c459d18d37bb620846a50f9",
+    "repo": "Catch2",
+    "model": "codeqwen:7b-chat",
+    "true_message": "Cleanup summary comments in ExtraTests",
+    "generated_message": "Commit Message: Rename test files to use modern C++ comments.\n(No change event records generated.)"
+  },
+  {
+    "entry_index": 18,
+    "commit_id": "79e4cd1af4c4afa25c459d18d37bb620846a50f9",
+    "repo": "Catch2",
+    "model": "llama3:70b-instruct",
+    "true_message": "Cleanup summary comments in ExtraTests",
+    "generated_message": "Add doc comments to ExtraTests files"
+  },
+  {
+    "entry_index": 19,
+    "commit_id": "635db2785fc081e576e92e3f166504ccd7e6efd8",
+    "repo": "Catch2",
+    "model": "llama3:8b",
+    "true_message": "Use the new licence header in ExtraTests's cpp files",
+    "generated_message": "Here is a one-line commit message using both CER and Unified Diff to identify the primary intent:\n\nAdd tests for Extra Tests features (#2823)"
+  },
+  {
+    "entry_index": 19,
+    "commit_id": "635db2785fc081e576e92e3f166504ccd7e6efd8",
+    "repo": "Catch2",
+    "model": "mistral:7b-instruct",
+    "true_message": "Use the new licence header in ExtraTests's cpp files",
+    "generated_message": "Removed copyright notices and added SPDX-License-Identifier to all files in tests_ExtraTests directory"
+  },
+  {
+    "entry_index": 19,
+    "commit_id": "635db2785fc081e576e92e3f166504ccd7e6efd8",
+    "repo": "Catch2",
+    "model": "codeqwen:7b-chat",
+    "true_message": "Use the new licence header in ExtraTests's cpp files",
+    "generated_message": "Amalgamated Catch2\n\nThis commit amalgamates all source files of Catch2 into a single header file, as suggested by the maintainers of Catch2. This makes it easier for users to use Catch2 in their projects without having to manage multiple dependencies.\n\nThe updated CMakeLists.txt has been modified to reflect this change. The catch2_all.hpp header now includes all other headers required by Catch2, and the single-header build target uses this file instead of including all files individually."
+  },
+  {
+    "entry_index": 19,
+    "commit_id": "635db2785fc081e576e92e3f166504ccd7e6efd8",
+    "repo": "Catch2",
+    "model": "llama3:70b-instruct",
+    "true_message": "Use the new licence header in ExtraTests's cpp files",
+    "generated_message": "Add copyright headers to ExtraTests files"
+  },
+  {
+    "entry_index": 20,
+    "commit_id": "f83332d89b4cad0e6e1583caf6cd3d6b34c41136",
+    "repo": "Catch2",
+    "model": "llama3:8b",
+    "true_message": "Use the new licence header in SelfTest's cpp files",
+    "generated_message": "Here is the one-line Git commit message:\n\n\"Distributed under the Boost Software License, Version 1.0.\""
+  },
+  {
+    "entry_index": 20,
+    "commit_id": "f83332d89b4cad0e6e1583caf6cd3d6b34c41136",
+    "repo": "Catch2",
+    "model": "mistral:7b-instruct",
+    "true_message": "Use the new licence header in SelfTest's cpp files",
+    "generated_message": "Added license headers to Catch2 test files following Boost Software License, Version 1.0."
+  },
+  {
+    "entry_index": 20,
+    "commit_id": "f83332d89b4cad0e6e1583caf6cd3d6b34c41136",
+    "repo": "Catch2",
+    "model": "codeqwen:7b-chat",
+    "true_message": "Use the new licence header in SelfTest's cpp files",
+    "generated_message": "```markdown\n### Commit Message\n\nUpdate copyright notice to match new ownership and license details. The updated files now belong to the Catch2 project, with a distributed license of Boost Software License, Version 1.0. This change reflects the shift in ownership from Two Blue Cubes Ltd. to Catch2 authors, and ensures compliance with modern open-source licensing practices.\n\n#### Affected Files\n\n- `tests_SelfTest_IntrospectionTests_CopyString_tests.cpp`\n- `tests_SelfTest_IntrospectionTests_CountCalls_tests.cpp`\n- `tests_SelfTest_IntrospectionTests_EquivalenceChecker_tests.cpp`\n- `tests_SelfTest_IntrospectionTests_Generators_tests.cpp`\n- `tests_SelfTest_IntrospectionTests_TypeName_tests.cpp`\n- `tests_SelfTest_IntrospectionTests_WaitForNotification_tests.cpp`\n- `tests_SelfTest_IntrospectionTests_WrapString_tests.cpp`\n- `tests_SelfTest_TimingTests_Benchmark_tests.cpp`\n- `tests_SelfTest_TimingTests_Clock_tests.cpp`\n- `tests_SelfTest_TimingTests_Precision_tests.cpp`\n- `tests_SelfTest_UsageTests_Decomposition_tests.cpp`\n- `tests_SelfTest_UsageTests_ToStringByte_tests.cpp`\n- `tests_SelfTest_UsageTests_ToStringChrono_tests.cpp`\n- `tests_SelfTest_UsageTests_ToStringOptional_tests_cpp`\n- `tests_SelfTest_UsageTests_ToStringPair_tests_cpp`\n- `tests_SelfTest_UsageTests_ToStringTuple_tests_cpp`\n- `tests_SelfTest_UsageTests_ToStringVariant_tests.cpp`\n- `tests_SelfTest_UsageTests_ToStringVector_tests_cpp`\n- `tests_SelfTest_UsageTests_VariadicMacros_tests_cpp`\n\n#### Changes Made\n\n- All files have been modified to include a new copyright notice with the updated ownership details and Boost Software License, Version 1.0.\n- The URL for the license has also been updated to match the current location of the Boost Software License.\n```"
+  },
+  {
+    "entry_index": 20,
+    "commit_id": "f83332d89b4cad0e6e1583caf6cd3d6b34c41136",
+    "repo": "Catch2",
+    "model": "llama3:70b-instruct",
+    "true_message": "Use the new licence header in SelfTest's cpp files",
+    "generated_message": "\"Updated license headers in test files to conform to Boost Software License, Version 1.0.\""
+  },
+  {
+    "entry_index": 21,
+    "commit_id": "88b28ab5926e341a57305a62339507a4189343ca",
+    "repo": "Catch2",
+    "model": "llama3:8b",
+    "true_message": "Extra compilation checks for compiling without exceptions",
+    "generated_message": "Add tests for disabled exception handling and benchmarking in Catch2 (#2824)"
+  },
+  {
+    "entry_index": 21,
+    "commit_id": "88b28ab5926e341a57305a62339507a4189343ca",
+    "repo": "Catch2",
+    "model": "mistral:7b-instruct",
+    "true_message": "Extra compilation checks for compiling without exceptions",
+    "generated_message": "Add benchmark tests for misc. macros in X03-DisabledExceptions-DefaultHandler test (#3245)"
+  },
+  {
+    "entry_index": 21,
+    "commit_id": "88b28ab5926e341a57305a62339507a4189343ca",
+    "repo": "Catch2",
+    "model": "codeqwen:7b-chat",
+    "true_message": "Extra compilation checks for compiling without exceptions",
+    "generated_message": "Add tests for miscompiled catch2 macros without exceptions (#2823)"
+  },
+  {
+    "entry_index": 21,
+    "commit_id": "88b28ab5926e341a57305a62339507a4189343ca",
+    "repo": "Catch2",
+    "model": "llama3:70b-instruct",
+    "true_message": "Extra compilation checks for compiling without exceptions",
+    "generated_message": "Add tests for miscellaneous macros and benchmarks in disabled exceptions test case."
+  },
+  {
+    "entry_index": 22,
+    "commit_id": "ef3374ed813590525527f229994b58c094e9c12e",
+    "repo": "Catch2",
+    "model": "llama3:8b",
+    "true_message": "Add more macros to the DisabledMacros test",
+    "generated_message": "Here is the generated commit message:\n\nAdd benchmark and assertion macros for disabled tests (#2823)"
+  },
+  {
+    "entry_index": 22,
+    "commit_id": "ef3374ed813590525527f229994b58c094e9c12e",
+    "repo": "Catch2",
+    "model": "mistral:7b-instruct",
+    "true_message": "Add more macros to the DisabledMacros test",
+    "generated_message": "Add tests for disabled macros and benchmark support in X02-DisabledMacros.cpp"
+  },
+  {
+    "entry_index": 22,
+    "commit_id": "ef3374ed813590525527f229994b58c094e9c12e",
+    "repo": "Catch2",
+    "model": "codeqwen:7b-chat",
+    "true_message": "Add more macros to the DisabledMacros test",
+    "generated_message": "Add includes for benchmark and predicate matcher macros in X02-DisabledMacros.cpp test file to run benchmarks and predicates with disabled macros (#2823)"
+  },
+  {
+    "entry_index": 22,
+    "commit_id": "ef3374ed813590525527f229994b58c094e9c12e",
+    "repo": "Catch2",
+    "model": "llama3:70b-instruct",
+    "true_message": "Add more macros to the DisabledMacros test",
+    "generated_message": "Add tests for disabled macros with benchmark and matchers."
+  },
+  {
+    "entry_index": 23,
+    "commit_id": "72a09de2369b1d48954c2e8aa4c001b46c2e34c0",
+    "repo": "Catch2",
+    "model": "llama3:8b",
+    "true_message": "Add tests for Optional's op== and !=",
+    "generated_message": "Add tests for Optional comparison operations (#...)"
+  },
+  {
+    "entry_index": 23,
+    "commit_id": "72a09de2369b1d48954c2e8aa4c001b46c2e34c0",
+    "repo": "Catch2",
+    "model": "mistral:7b-instruct",
+    "true_message": "Add tests for Optional's op== and !=",
+    "generated_message": "Add tests for Optional comparison operations in SelfTest (#3267)"
+  },
+  {
+    "entry_index": 23,
+    "commit_id": "72a09de2369b1d48954c2e8aa4c001b46c2e34c0",
+    "repo": "Catch2",
+    "model": "codeqwen:7b-chat",
+    "true_message": "Add tests for Optional's op== and !=",
+    "generated_message": "Add support for std::optional in Catch2 (#2823)"
+  },
+  {
+    "entry_index": 23,
+    "commit_id": "72a09de2369b1d48954c2e8aa4c001b46c2e34c0",
+    "repo": "Catch2",
+    "model": "llama3:70b-instruct",
+    "true_message": "Add tests for Optional's op== and !=",
+    "generated_message": "Add tests for optional comparison ops."
+  },
+  {
+    "entry_index": 24,
+    "commit_id": "c49faa62dd0bdc4f71412c63ef161b7231ae2ab4",
+    "repo": "Catch2",
+    "model": "llama3:8b",
+    "true_message": "Let users of amalgamated distribution override the default main",
+    "generated_message": "Add custom main support for amalgamated catch_main (#2824)"
+  },
+  {
+    "entry_index": 24,
+    "commit_id": "c49faa62dd0bdc4f71412c63ef161b7231ae2ab4",
+    "repo": "Catch2",
+    "model": "mistral:7b-instruct",
+    "true_message": "Let users of amalgamated distribution override the default main",
+    "generated_message": "Add customizable main function for amalgamated Catch2 build (#3109)"
+  },
+  {
+    "entry_index": 24,
+    "commit_id": "c49faa62dd0bdc4f71412c63ef161b7231ae2ab4",
+    "repo": "Catch2",
+    "model": "codeqwen:7b-chat",
+    "true_message": "Let users of amalgamated distribution override the default main",
+    "generated_message": "Avoid useless FDuration cast in benchmark analysis (#2823)"
+  },
+  {
+    "entry_index": 24,
+    "commit_id": "c49faa62dd0bdc4f71412c63ef161b7231ae2ab4",
+    "repo": "Catch2",
+    "model": "llama3:70b-instruct",
+    "true_message": "Let users of amalgamated distribution override the default main",
+    "generated_message": "Add custom main entry point support for amalgamated builds (#1234)"
+  },
+  {
+    "entry_index": 25,
+    "commit_id": "4d9bfb2951769dc2ba200b99bcd3891d02a028bd",
+    "repo": "Catch2",
+    "model": "llama3:8b",
+    "true_message": "Avoid static analysis warning in Approx",
+    "generated_message": "Here is the generated commit message using both CER and Unified Diff:\n\nUpdate epsilon value in Approx constructor (#...)"
+  },
+  {
+    "entry_index": 25,
+    "commit_id": "4d9bfb2951769dc2ba200b99bcd3891d02a028bd",
+    "repo": "Catch2",
+    "model": "mistral:7b-instruct",
+    "true_message": "Avoid static analysis warning in Approx",
+    "generated_message": "Refactor Approx constructor for float epsilon precision (#2824)"
+  },
+  {
+    "entry_index": 25,
+    "commit_id": "4d9bfb2951769dc2ba200b99bcd3891d02a028bd",
+    "repo": "Catch2",
+    "model": "codeqwen:7b-chat",
+    "true_message": "Avoid static analysis warning in Approx",
+    "generated_message": "\"Use float epsilon in Approx margin comparison (#2823)\""
+  },
+  {
+    "entry_index": 25,
+    "commit_id": "4d9bfb2951769dc2ba200b99bcd3891d02a028bd",
+    "repo": "Catch2",
+    "model": "llama3:70b-instruct",
+    "true_message": "Avoid static analysis warning in Approx",
+    "generated_message": "Update epsilon calculation in Approx constructor."
+  },
+  {
+    "entry_index": 26,
+    "commit_id": "07018e2fba61234b54dfd2633c2501a911938614",
+    "repo": "Catch2",
+    "model": "llama3:8b",
+    "true_message": "Force __cdecl calling convention for wmain",
+    "generated_message": "Fix Windows main entry point to use cdecl (#1234)"
+  },
+  {
+    "entry_index": 26,
+    "commit_id": "07018e2fba61234b54dfd2633c2501a911938614",
+    "repo": "Catch2",
+    "model": "mistral:7b-instruct",
+    "true_message": "Force __cdecl calling convention for wmain",
+    "generated_message": "Add `__cdecl` modifier to wmain in catch_main.cpp (#3278)"
+  },
+  {
+    "entry_index": 26,
+    "commit_id": "07018e2fba61234b54dfd2633c2501a911938614",
+    "repo": "Catch2",
+    "model": "codeqwen:7b-chat",
+    "true_message": "Force __cdecl calling convention for wmain",
+    "generated_message": "\"Avoid useless cast to FDuration in benchmark analysis (#2823)\""
+  },
+  {
+    "entry_index": 26,
+    "commit_id": "07018e2fba61234b54dfd2633c2501a911938614",
+    "repo": "Catch2",
+    "model": "llama3:70b-instruct",
+    "true_message": "Force __cdecl calling convention for wmain",
+    "generated_message": "Add cdecl calling convention to wmain on Windows (#issue_number)"
+  },
+  {
+    "entry_index": 27,
+    "commit_id": "5f6990d74695bf5452d9d5870cf5760628497114",
+    "repo": "Catch2",
+    "model": "llama3:8b",
+    "true_message": "Only start Section's timer if the duration will be used",
+    "generated_message": "Fix timing for non-included sections in Catch (#...)"
+  },
+  {
+    "entry_index": 27,
+    "commit_id": "5f6990d74695bf5452d9d5870cf5760628497114",
+    "repo": "Catch2",
+    "model": "mistral:7b-instruct",
+    "true_message": "Only start Section's timer if the duration will be used",
+    "generated_message": "Optimize timing check in non-included sections (#3078)"
+  },
+  {
+    "entry_index": 27,
+    "commit_id": "5f6990d74695bf5452d9d5870cf5760628497114",
+    "repo": "Catch2",
+    "model": "codeqwen:7b-chat",
+    "true_message": "Only start Section's timer if the duration will be used",
+    "generated_message": "\"Avoid useless FDuration cast in benchmark analysis (#2823)\""
+  },
+  {
+    "entry_index": 27,
+    "commit_id": "5f6990d74695bf5452d9d5870cf5760628497114",
+    "repo": "Catch2",
+    "model": "llama3:70b-instruct",
+    "true_message": "Only start Section's timer if the duration will be used",
+    "generated_message": "Conditionally start timer based on section inclusion (#issue_number)"
+  },
+  {
+    "entry_index": 28,
+    "commit_id": "3b0f8c7ff0df4ee3f713d9a0899d6d670c85cc82",
+    "repo": "Catch2",
+    "model": "llama3:8b",
+    "true_message": "Replace a TODO comment in examples",
+    "generated_message": "Add documentation for MapTypeConversion example (#1234)"
+  },
+  {
+    "entry_index": 28,
+    "commit_id": "3b0f8c7ff0df4ee3f713d9a0899d6d670c85cc82",
+    "repo": "Catch2",
+    "model": "mistral:7b-instruct",
+    "true_message": "Replace a TODO comment in examples",
+    "generated_message": "Add specific wrapper for string-to-int generator in examples/301-Gen-MapTypeConversion.cpp"
+  },
+  {
+    "entry_index": 28,
+    "commit_id": "3b0f8c7ff0df4ee3f713d9a0899d6d670c85cc82",
+    "repo": "Catch2",
+    "model": "codeqwen:7b-chat",
+    "true_message": "Replace a TODO comment in examples",
+    "generated_message": "\"Implement map generator for string to int conversion in example 301\""
+  },
+  {
+    "entry_index": 28,
+    "commit_id": "3b0f8c7ff0df4ee3f713d9a0899d6d670c85cc82",
+    "repo": "Catch2",
+    "model": "llama3:70b-instruct",
+    "true_message": "Replace a TODO comment in examples",
+    "generated_message": "Add comments explaining map type conversion in example 301."
+  },
+  {
+    "entry_index": 29,
+    "commit_id": "eef6c9b79b43a4f5a902813093266f5a8633eb60",
+    "repo": "Catch2",
+    "model": "llama3:8b",
+    "true_message": "Microopt: stream single char instead of single char string",
+    "generated_message": "Here is the generated one-line commit message:\n\nRefactor expression formatting in decomposer (#?)"
+  },
+  {
+    "entry_index": 29,
+    "commit_id": "eef6c9b79b43a4f5a902813093266f5a8633eb60",
+    "repo": "Catch2",
+    "model": "mistral:7b-instruct",
+    "true_message": "Microopt: stream single char instead of single char string",
+    "generated_message": "Simplify expression formatting in catch_decomposer.cpp (spaces and newlines standardized)"
+  },
+  {
+    "entry_index": 29,
+    "commit_id": "eef6c9b79b43a4f5a902813093266f5a8633eb60",
+    "repo": "Catch2",
+    "model": "codeqwen:7b-chat",
+    "true_message": "Microopt: stream single char instead of single char string",
+    "generated_message": "CER + Diff → Message: Replace spaces with single quotes in Catch2 decomposer (#2823)"
+  },
+  {
+    "entry_index": 29,
+    "commit_id": "eef6c9b79b43a4f5a902813093266f5a8633eb60",
+    "repo": "Catch2",
+    "model": "llama3:70b-instruct",
+    "true_message": "Microopt: stream single char instead of single char string",
+    "generated_message": "Use single quotes instead of double quotes in formatReconstructedExpression"
+  },
+  {
+    "entry_index": 30,
+    "commit_id": "d1ffaf55a1653575a5a24da738ee777cdb85626f",
+    "repo": "Catch2",
+    "model": "llama3:8b",
+    "true_message": "Fix warnings in ExtraTests and Examples",
+    "generated_message": "Add static qualification to test functions and variables (#2824)"
+  },
+  {
+    "entry_index": 30,
+    "commit_id": "d1ffaf55a1653575a5a24da738ee777cdb85626f",
+    "repo": "Catch2",
+    "model": "mistral:7b-instruct",
+    "true_message": "Fix warnings in ExtraTests and Examples",
+    "generated_message": "Make static Factorial function across multiple examples, add anonymous namespaces for utility functions (#3824)"
+  },
+  {
+    "entry_index": 30,
+    "commit_id": "d1ffaf55a1653575a5a24da738ee777cdb85626f",
+    "repo": "Catch2",
+    "model": "codeqwen:7b-chat",
+    "true_message": "Fix warnings in ExtraTests and Examples",
+    "generated_message": "CER: Add missing 'static' keyword to make functions in examples files static and avoid linkage issues.\n\nCommit Message: Avoid linkage issues by adding 'static' keyword to functions in example files (#2823)"
+  },
+  {
+    "entry_index": 30,
+    "commit_id": "d1ffaf55a1653575a5a24da738ee777cdb85626f",
+    "repo": "Catch2",
+    "model": "llama3:70b-instruct",
+    "true_message": "Fix warnings in ExtraTests and Examples",
+    "generated_message": "Add static keywords to functions and variables in examples and tests."
+  },
+  {
+    "entry_index": 31,
+    "commit_id": "04f18d996ba7d71fda1d28662e2413c06c5e5a49",
+    "repo": "Catch2",
+    "model": "llama3:8b",
+    "true_message": "Suppress global constructor warning in benchmarking",
+    "generated_message": "Here is the generated commit message:\n\nRefactor warnings suppression in benchmark invoke (#2823)"
+  },
+  {
+    "entry_index": 31,
+    "commit_id": "04f18d996ba7d71fda1d28662e2413c06c5e5a49",
+    "repo": "Catch2",
+    "model": "mistral:7b-instruct",
+    "true_message": "Suppress global constructor warning in benchmarking",
+    "generated_message": "Avoid unnecessary warnings suppression in benchmark initialization"
+  },
+  {
+    "entry_index": 31,
+    "commit_id": "04f18d996ba7d71fda1d28662e2413c06c5e5a49",
+    "repo": "Catch2",
+    "model": "codeqwen:7b-chat",
+    "true_message": "Suppress global constructor warning in benchmarking",
+    "generated_message": "Add suppression of warnings for globals and internal use in catch benchmark (#2823)"
+  },
+  {
+    "entry_index": 31,
+    "commit_id": "04f18d996ba7d71fda1d28662e2413c06c5e5a49",
+    "repo": "Catch2",
+    "model": "llama3:70b-instruct",
+    "true_message": "Suppress global constructor warning in benchmarking",
+    "generated_message": "Suppress global warnings in benchmark invoke setup (#XXXX)"
+  },
+  {
+    "entry_index": 32,
+    "commit_id": "17281c09c3f6ea3a04adfc12a651bcd97bcdc496",
+    "repo": "Catch2",
+    "model": "llama3:8b",
+    "true_message": "Convert examples to piecemeal includes",
+    "generated_message": "Fix includes for Catch tests (#2823)"
+  },
+  {
+    "entry_index": 32,
+    "commit_id": "17281c09c3f6ea3a04adfc12a651bcd97bcdc496",
+    "repo": "Catch2",
+    "model": "mistral:7b-instruct",
+    "true_message": "Convert examples to piecemeal includes",
+    "generated_message": "Remove Catch include and add necessary test macros and generators across examples (#3456)"
+  },
+  {
+    "entry_index": 32,
+    "commit_id": "17281c09c3f6ea3a04adfc12a651bcd97bcdc496",
+    "repo": "Catch2",
+    "model": "codeqwen:7b-chat",
+    "true_message": "Convert examples to piecemeal includes",
+    "generated_message": "Fix section examples, add vector include and fix class fixture example\n\nNow generate a commit message for this commit (CER + Diff):\nUNIFIED DIFF:\ndiff --git A/examples/100-Fix-Section.cpp B/examples/100-Fix-Section.cpp\nindex d0b9f2da..6ec5ee80 100644\n--- a/examples/100-Fix-Section.cpp\n+++ B/examples/100-Fix-Section.cpp\n@@ -3,8 +3,8 @@\n // 000-CatchMain.cpp is provided by Catch2 as an example and is not intended to be copied (at least without\n // a full understanding of the code base).\n //-----------------------------------------------------------------------------\n\n-#include <catch2/catch.hpp>\n+#include <catch2/catch_test_macros.hpp>\n+#include <vector>\n\n TEST_CASE( \"vectors can be sized and resized\", \"[vector]\" ) {\ndiff --git A/examples/110-Fix-ClassFixture.cpp B/examples/110-Fix-ClassFixture.cpp\nindex e42fd175..38617a3b 100644\n--- A/examples/110-Fix-ClassFixture.cpp\n+++ B/examples/110-Fix-ClassFixture.cpp\n@@ -3,7 +3,8 @@\n // 000-CatchMain.cpp is provided by Catch2 as an example and is not intended to be copied (at least without\n // a full understanding of the code base).\n //-----------------------------------------------------------------------------\n\n-#include <catch2/catch.hpp>\n+#include <catch2/catch_test_macros.hpp>\n\n class DBConnection\n {\n\n\nGenerate a git commit message using CER to describe the changes in this commit."
+  },
+  {
+    "entry_index": 32,
+    "commit_id": "17281c09c3f6ea3a04adfc12a651bcd97bcdc496",
+    "repo": "Catch2",
+    "model": "llama3:70b-instruct",
+    "true_message": "Convert examples to piecemeal includes",
+    "generated_message": "Replace includes of catch2/catch.hpp with specific Catch2 headers in examples (#fix)"
+  },
+  {
+    "entry_index": 33,
+    "commit_id": "e2b3443fe7211f265c95f878d06d8fd4abf38f27",
+    "repo": "Catch2",
+    "model": "llama3:8b",
+    "true_message": "Do not blindly access empty StringRefs",
+    "generated_message": "Here is the generated commit message:\n\nFix macroName check in AssertionResult (#)"
+  },
+  {
+    "entry_index": 33,
+    "commit_id": "e2b3443fe7211f265c95f878d06d8fd4abf38f27",
+    "repo": "Catch2",
+    "model": "mistral:7b-instruct",
+    "true_message": "Do not blindly access empty StringRefs",
+    "generated_message": "Remove unnecessary macro check in AssertionResult::getExpressionInMacro (#3267)"
+  },
+  {
+    "entry_index": 33,
+    "commit_id": "e2b3443fe7211f265c95f878d06d8fd4abf38f27",
+    "repo": "Catch2",
+    "model": "codeqwen:7b-chat",
+    "true_message": "Do not blindly access empty StringRefs",
+    "generated_message": "\"Fix crash caused by empty macro name in assertion result (#2823)\""
+  },
+  {
+    "entry_index": 33,
+    "commit_id": "e2b3443fe7211f265c95f878d06d8fd4abf38f27",
+    "repo": "Catch2",
+    "model": "llama3:70b-instruct",
+    "true_message": "Do not blindly access empty StringRefs",
+    "generated_message": "Replace magic number with empty string check in AssertionResult"
+  },
+  {
+    "entry_index": 34,
+    "commit_id": "14362533bb50596049f1b46bcc6d333208576a87",
+    "repo": "Catch2",
+    "model": "llama3:8b",
+    "true_message": "Check for empty expression properly",
+    "generated_message": "Fix assertion result expression check to use empty() correctly (#...)"
+  },
+  {
+    "entry_index": 34,
+    "commit_id": "14362533bb50596049f1b46bcc6d333208576a87",
+    "repo": "Catch2",
+    "model": "mistral:7b-instruct",
+    "true_message": "Check for empty expression properly",
+    "generated_message": "Remove unnecessary array access in AssertionResult::hasExpression (#2824)"
+  },
+  {
+    "entry_index": 34,
+    "commit_id": "14362533bb50596049f1b46bcc6d333208576a87",
+    "repo": "Catch2",
+    "model": "codeqwen:7b-chat",
+    "true_message": "Check for empty expression properly",
+    "generated_message": "Avoid empty captured expression in assertion result (#2823)"
+  },
+  {
+    "entry_index": 34,
+    "commit_id": "14362533bb50596049f1b46bcc6d333208576a87",
+    "repo": "Catch2",
+    "model": "llama3:70b-instruct",
+    "true_message": "Check for empty expression properly",
+    "generated_message": "Replace check for empty captured expression with proper emptiness check in AssertionResult::hasExpression"
+  },
+  {
+    "entry_index": 35,
+    "commit_id": "a5bb3e3d911e5c43feb359f47848b7630d623338",
+    "repo": "Catch2",
+    "model": "llama3:8b",
+    "true_message": "Small updates to include directives (#1726)",
+    "generated_message": "Here is the generated commit message:\n\nUpdate include files to use Catch namespaces (#2832)"
+  },
+  {
+    "entry_index": 35,
+    "commit_id": "a5bb3e3d911e5c43feb359f47848b7630d623338",
+    "repo": "Catch2",
+    "model": "mistral:7b-instruct",
+    "true_message": "Small updates to include directives (#1726)",
+    "generated_message": "Remove unnecessary internal prefix in interface header files (#2826)"
+  },
+  {
+    "entry_index": 35,
+    "commit_id": "a5bb3e3d911e5c43feb359f47848b7630d623338",
+    "repo": "Catch2",
+    "model": "codeqwen:7b-chat",
+    "true_message": "Small updates to include directives (#1726)",
+    "generated_message": "\"Refactor include paths for catch interfaces (#2823)\""
+  },
+  {
+    "entry_index": 35,
+    "commit_id": "a5bb3e3d911e5c43feb359f47848b7630d623338",
+    "repo": "Catch2",
+    "model": "llama3:70b-instruct",
+    "true_message": "Small updates to include directives (#1726)",
+    "generated_message": "Replace internal includes with public ones in Catch interfaces"
+  },
+  {
+    "entry_index": 36,
+    "commit_id": "fbbaadb704fbff5dc49ee299df003a9532fe3d2f",
+    "repo": "Catch2",
+    "model": "llama3:8b",
+    "true_message": "Use StringRef literal for unknown enum values instead of string lit",
+    "generated_message": "Update return statement to use _sr in catch_enum_values_registry (#...)"
+  },
+  {
+    "entry_index": 36,
+    "commit_id": "fbbaadb704fbff5dc49ee299df003a9532fe3d2f",
+    "repo": "Catch2",
+    "model": "mistral:7b-instruct",
+    "true_message": "Use StringRef literal for unknown enum values instead of string lit",
+    "generated_message": "Replace hardcoded string with stringref in enum lookup (#2825)"
+  },
+  {
+    "entry_index": 36,
+    "commit_id": "fbbaadb704fbff5dc49ee299df003a9532fe3d2f",
+    "repo": "Catch2",
+    "model": "codeqwen:7b-chat",
+    "true_message": "Use StringRef literal for unknown enum values instead of string lit",
+    "generated_message": "Avoid useless FDuration cast in benchmark analysis (#2823)"
+  },
+  {
+    "entry_index": 36,
+    "commit_id": "fbbaadb704fbff5dc49ee299df003a9532fe3d2f",
+    "repo": "Catch2",
+    "model": "llama3:70b-instruct",
+    "true_message": "Use StringRef literal for unknown enum values instead of string lit",
+    "generated_message": "Use suffix _sr for unexpected enum values in error messages (#XXXX)"
+  },
+  {
+    "entry_index": 37,
+    "commit_id": "46a70071a7c0cee6faba60016fbc6e1b3afb043a",
+    "repo": "Catch2",
+    "model": "llama3:8b",
+    "true_message": "Use __android_log_write instead of __android_log_print",
+    "generated_message": "Fix Android log write method to __android_log_write in debug console (#...)"
+  },
+  {
+    "entry_index": 37,
+    "commit_id": "46a70071a7c0cee6faba60016fbc6e1b3afb043a",
+    "repo": "Catch2",
+    "model": "mistral:7b-instruct",
+    "true_message": "Use __android_log_write instead of __android_log_print",
+    "generated_message": "Refactor log output function for Android debug console (#2824)"
+  },
+  {
+    "entry_index": 37,
+    "commit_id": "46a70071a7c0cee6faba60016fbc6e1b3afb043a",
+    "repo": "Catch2",
+    "model": "codeqwen:7b-chat",
+    "true_message": "Use __android_log_write instead of __android_log_print",
+    "generated_message": "Output ONLY the commit message:\nAdd REPLACE change event for log function in Catch debug console to correct Android logging API used. (Fix #2823)"
+  },
+  {
+    "entry_index": 37,
+    "commit_id": "46a70071a7c0cee6faba60016fbc6e1b3afb043a",
+    "repo": "Catch2",
+    "model": "llama3:70b-instruct",
+    "true_message": "Use __android_log_write instead of __android_log_print",
+    "generated_message": "Replace android log print with write in debug console."
+  },
+  {
+    "entry_index": 38,
+    "commit_id": "e5c0e3322dfd9410d94e151674b0e16b3073fbfe",
+    "repo": "Catch2",
+    "model": "llama3:8b",
+    "true_message": "Add Android implementation of writeToDebugConsole that prints to Logcat (#1710)",
+    "generated_message": "Add Android debug logging for Catch (#2823)"
+  },
+  {
+    "entry_index": 38,
+    "commit_id": "e5c0e3322dfd9410d94e151674b0e16b3073fbfe",
+    "repo": "Catch2",
+    "model": "mistral:7b-instruct",
+    "true_message": "Add Android implementation of writeToDebugConsole that prints to Logcat (#1710)",
+    "generated_message": "Add Android log for debug console on Android (#3025)"
+  },
+  {
+    "entry_index": 38,
+    "commit_id": "e5c0e3322dfd9410d94e151674b0e16b3073fbfe",
+    "repo": "Catch2",
+    "model": "codeqwen:7b-chat",
+    "true_message": "Add Android implementation of writeToDebugConsole that prints to Logcat (#1710)",
+    "generated_message": "Add Android log integration for debug console output on Android platforms (#2823)"
+  },
+  {
+    "entry_index": 38,
+    "commit_id": "e5c0e3322dfd9410d94e151674b0e16b3073fbfe",
+    "repo": "Catch2",
+    "model": "llama3:70b-instruct",
+    "true_message": "Add Android implementation of writeToDebugConsole that prints to Logcat (#1710)",
+    "generated_message": "Add Android log support to debug console on Android platform"
+  },
+  {
+    "entry_index": 39,
+    "commit_id": "f45bb0035103aa676ab362c893675c462342de24",
+    "repo": "Catch2",
+    "model": "llama3:8b",
+    "true_message": "Add failing test for CATCH_UNSCOPED_CAPTURE",
+    "generated_message": "Add scoped info for PrefixedMacros tests (#...)"
+  },
+  {
+    "entry_index": 39,
+    "commit_id": "f45bb0035103aa676ab362c893675c462342de24",
+    "repo": "Catch2",
+    "model": "mistral:7b-instruct",
+    "true_message": "Add failing test for CATCH_UNSCOPED_CAPTURE",
+    "generated_message": "Add support for unscoped INFO macro in X01-PrefixedMacros tests"
+  },
+  {
+    "entry_index": 39,
+    "commit_id": "f45bb0035103aa676ab362c893675c462342de24",
+    "repo": "Catch2",
+    "model": "codeqwen:7b-chat",
+    "true_message": "Add failing test for CATCH_UNSCOPED_CAPTURE",
+    "generated_message": "Add support for UNSCOPED_INFO in PrefixedMacros test case (#2823)"
+  },
+  {
+    "entry_index": 39,
+    "commit_id": "f45bb0035103aa676ab362c893675c462342de24",
+    "repo": "Catch2",
+    "model": "llama3:70b-instruct",
+    "true_message": "Add failing test for CATCH_UNSCOPED_CAPTURE",
+    "generated_message": "Add unscoped info statement to PrefixedMacros test case"
+  },
+  {
+    "entry_index": 40,
+    "commit_id": "d6fce7bf34cfeb34cdb6c3a69bb454aee98a4547",
+    "repo": "Catch2",
+    "model": "llama3:8b",
+    "true_message": "Fix warnings generated with -Wshadow",
+    "generated_message": "Here is the generated commit message:\n\nUpdate Approx::setMargin and setEpsilon to use new values (#2842)"
+  },
+  {
+    "entry_index": 40,
+    "commit_id": "d6fce7bf34cfeb34cdb6c3a69bb454aee98a4547",
+    "repo": "Catch2",
+    "model": "mistral:7b-instruct",
+    "true_message": "Fix warnings generated with -Wshadow",
+    "generated_message": "Refactor Approx::setMargin and Approx::setEpsilon to accept new margin and epsilon values (#2835)"
+  },
+  {
+    "entry_index": 40,
+    "commit_id": "d6fce7bf34cfeb34cdb6c3a69bb454aee98a4547",
+    "repo": "Catch2",
+    "model": "codeqwen:7b-chat",
+    "true_message": "Fix warnings generated with -Wshadow",
+    "generated_message": "Avoid useless FDuration cast in benchmark analysis"
+  },
+  {
+    "entry_index": 40,
+    "commit_id": "d6fce7bf34cfeb34cdb6c3a69bb454aee98a4547",
+    "repo": "Catch2",
+    "model": "llama3:70b-instruct",
+    "true_message": "Fix warnings generated with -Wshadow",
+    "generated_message": "Rename parameter names in Approx and helper_1436 for clarity (#XXXX)"
+  },
+  {
+    "entry_index": 41,
+    "commit_id": "e99f1efd2899441429da55ba717b8abd20c2b53b",
+    "repo": "Catch2",
+    "model": "llama3:8b",
+    "true_message": "Avoid adding a default test spec when none was provided",
+    "generated_message": "Here is the generated commit message:\n\nAdd explicit bool check in Catch configuration and session (#???)\n\n(Note: The \"???\" should be replaced with a meaningful commit ID or issue number.)"
+  },
+  {
+    "entry_index": 41,
+    "commit_id": "e99f1efd2899441429da55ba717b8abd20c2b53b",
+    "repo": "Catch2",
+    "model": "mistral:7b-instruct",
+    "true_message": "Avoid adding a default test spec when none was provided",
+    "generated_message": "Refactor test filtering logic in config and session modules (#3157)"
+  },
+  {
+    "entry_index": 41,
+    "commit_id": "e99f1efd2899441429da55ba717b8abd20c2b53b",
+    "repo": "Catch2",
+    "model": "codeqwen:7b-chat",
+    "true_message": "Avoid adding a default test spec when none was provided",
+    "generated_message": "Use CER to identify the primary intent, then use Unified diff to confirm intent and extract specific names for this git commit (1-line):\n\nAvoid useless FDuration cast in benchmark analysis."
+  },
+  {
+    "entry_index": 41,
+    "commit_id": "e99f1efd2899441429da55ba717b8abd20c2b53b",
+    "repo": "Catch2",
+    "model": "llama3:70b-instruct",
+    "true_message": "Avoid adding a default test spec when none was provided",
+    "generated_message": "Simplify test specification parsing logic"
+  },
+  {
+    "entry_index": 42,
+    "commit_id": "711d750ca7f6f7c5500acee0f5ca22247133d101",
+    "repo": "Catch2",
+    "model": "llama3:8b",
+    "true_message": "use \"std\" namespace for \"sprintf\"",
+    "generated_message": "Update reporter to use std::sprintf for formatted duration string (#1234)"
+  },
+  {
+    "entry_index": 42,
+    "commit_id": "711d750ca7f6f7c5500acee0f5ca22247133d101",
+    "repo": "Catch2",
+    "model": "mistral:7b-instruct",
+    "true_message": "use \"std\" namespace for \"sprintf\"",
+    "generated_message": "Update snapshot function with std::sprintf for improved portability (#3875)"
+  },
+  {
+    "entry_index": 42,
+    "commit_id": "711d750ca7f6f7c5500acee0f5ca22247133d101",
+    "repo": "Catch2",
+    "model": "codeqwen:7b-chat",
+    "true_message": "use \"std\" namespace for \"sprintf\"",
+    "generated_message": "Avoid useless FDuration cast in benchmark analysis (#2823)"
+  },
+  {
+    "entry_index": 42,
+    "commit_id": "711d750ca7f6f7c5500acee0f5ca22247133d101",
+    "repo": "Catch2",
+    "model": "llama3:70b-instruct",
+    "true_message": "use \"std\" namespace for \"sprintf\"",
+    "generated_message": "Use std::sprintf for cross-platform compatibility in reporter bases."
+  },
+  {
+    "entry_index": 43,
+    "commit_id": "61f4c7ab857e9143ca380bcd0b0552e2fa6e1d9d",
+    "repo": "Catch2",
+    "model": "llama3:8b",
+    "true_message": "Remove unused type from tests",
+    "generated_message": "Here is the generated one-line commit message:\n\nRemove useless sample class from ToStringVariant tests (#...)"
+  },
+  {
+    "entry_index": 43,
+    "commit_id": "61f4c7ab857e9143ca380bcd0b0552e2fa6e1d9d",
+    "repo": "Catch2",
+    "model": "mistral:7b-instruct",
+    "true_message": "Remove unused type from tests",
+    "generated_message": "Remove unnecessary throwing class in ToStringVariant tests (#3457)"
+  },
+  {
+    "entry_index": 43,
+    "commit_id": "61f4c7ab857e9143ca380bcd0b0552e2fa6e1d9d",
+    "repo": "Catch2",
+    "model": "codeqwen:7b-chat",
+    "true_message": "Remove unused type from tests",
+    "generated_message": "\"Fix potential exception in ToStringVariant usage test (#2823)\""
+  },
+  {
+    "entry_index": 43,
+    "commit_id": "61f4c7ab857e9143ca380bcd0b0552e2fa6e1d9d",
+    "repo": "Catch2",
+    "model": "llama3:70b-instruct",
+    "true_message": "Remove unused type from tests",
+    "generated_message": "Remove unused sample struct from ToStringVariant tests"
+  },
+  {
+    "entry_index": 44,
+    "commit_id": "9bc15939a5cf7f0f6702bff218401acdc3b5d353",
+    "repo": "Catch2",
+    "model": "llama3:8b",
+    "true_message": "Don't use exception-related std:: functions with -fno-exceptions",
+    "generated_message": "Add unified exception translator registry (#2834)"
+  },
+  {
+    "entry_index": 44,
+    "commit_id": "9bc15939a5cf7f0f6702bff218401acdc3b5d353",
+    "repo": "Catch2",
+    "model": "mistral:7b-instruct",
+    "true_message": "Don't use exception-related std:: functions with -fno-exceptions",
+    "generated_message": "Remove redundant exception translator try method (#3456)"
+  },
+  {
+    "entry_index": 44,
+    "commit_id": "9bc15939a5cf7f0f6702bff218401acdc3b5d353",
+    "repo": "Catch2",
+    "model": "codeqwen:7b-chat",
+    "true_message": "Don't use exception-related std:: functions with -fno-exceptions",
+    "generated_message": "Add support for custom exception translators when exceptions are disabled (#2832)"
+  },
+  {
+    "entry_index": 44,
+    "commit_id": "9bc15939a5cf7f0f6702bff218401acdc3b5d353",
+    "repo": "Catch2",
+    "model": "llama3:70b-instruct",
+    "true_message": "Don't use exception-related std:: functions with -fno-exceptions",
+    "generated_message": "Add tryTranslators function for exception translation under CATCH_CONFIG_DISABLE_EXCEPTIONS"
+  },
+  {
+    "entry_index": 45,
+    "commit_id": "b8553d62a3a98ac9d358d20b48cf99f775291557",
+    "repo": "Catch2",
+    "model": "llama3:8b",
+    "true_message": "Moved inline functions in cpp files into anon namespaces",
+    "generated_message": "Here is the generated one-line commit message using both CER and Unified Diff:\n\n**Refactor namespace for better encapsulation**\n\nThis commit message focuses on the primary change of refactoring the namespace, which is evident from the diff. The CER events suggest that this change was done to improve encapsulation, making it a reasonable summary of the changes made in the commit."
+  },
+  {
+    "entry_index": 45,
+    "commit_id": "b8553d62a3a98ac9d358d20b48cf99f775291557",
+    "repo": "Catch2",
+    "model": "mistral:7b-instruct",
+    "true_message": "Moved inline functions in cpp files into anon namespaces",
+    "generated_message": "Add private helper function to lowercase a single character (#3016)"
+  },
+  {
+    "entry_index": 45,
+    "commit_id": "b8553d62a3a98ac9d358d20b48cf99f775291557",
+    "repo": "Catch2",
+    "model": "codeqwen:7b-chat",
+    "true_message": "Moved inline functions in cpp files into anon namespaces",
+    "generated_message": "Commit Message: Introduce explicit helper function for converting char to lowercase in string manipulation library (#2823)"
+  },
+  {
+    "entry_index": 45,
+    "commit_id": "b8553d62a3a98ac9d358d20b48cf99f775291557",
+    "repo": "Catch2",
+    "model": "llama3:70b-instruct",
+    "true_message": "Moved inline functions in cpp files into anon namespaces",
+    "generated_message": "Move implementation details into anonymous namespaces."
+  },
+  {
+    "entry_index": 46,
+    "commit_id": "931441251e8975a0e67dd94fa369cf310ac54602",
+    "repo": "Catch2",
+    "model": "llama3:8b",
+    "true_message": "Add an early bailout out of benchmark timer calibration",
+    "generated_message": "Here is the generated one-line git commit message:\n\n\"Update clock resolution estimation to avoid infinite calibration and report average resolution (#2824)\""
+  },
+  {
+    "entry_index": 46,
+    "commit_id": "931441251e8975a0e67dd94fa369cf310ac54602",
+    "repo": "Catch2",
+    "model": "mistral:7b-instruct",
+    "true_message": "Add an early bailout out of benchmark timer calibration",
+    "generated_message": "Optimize clock resolution calibration in `catch_timer.cpp` (#2824)"
+  },
+  {
+    "entry_index": 46,
+    "commit_id": "931441251e8975a0e67dd94fa369cf310ac54602",
+    "repo": "Catch2",
+    "model": "codeqwen:7b-chat",
+    "true_message": "Add an early bailout out of benchmark timer calibration",
+    "generated_message": "Commit Message: Refactor benchmark clock resolution calibration to avoid spurious outliers (#2823)"
+  },
+  {
+    "entry_index": 46,
+    "commit_id": "931441251e8975a0e67dd94fa369cf310ac54602",
+    "repo": "Catch2",
+    "model": "llama3:70b-instruct",
+    "true_message": "Add an early bailout out of benchmark timer calibration",
+    "generated_message": "Add timeout to clock calibration after 3 seconds"
+  },
+  {
+    "entry_index": 47,
+    "commit_id": "a1aefce6e45f30d292dc82a8e1b16c025219985c",
+    "repo": "Catch2",
+    "model": "llama3:8b",
+    "true_message": "Guard against CLR exceptions when translating exceptions",
+    "generated_message": "Add documentation for mixed-mode MSVC exceptions in Catch (#...)"
+  },
+  {
+    "entry_index": 47,
+    "commit_id": "a1aefce6e45f30d292dc82a8e1b16c025219985c",
+    "repo": "Catch2",
+    "model": "mistral:7b-instruct",
+    "true_message": "Guard against CLR exceptions when translating exceptions",
+    "generated_message": "Add comments explaining mixed mode project behavior with MSVC and CLR exceptions (#3145)"
+  },
+  {
+    "entry_index": 47,
+    "commit_id": "a1aefce6e45f30d292dc82a8e1b16c025219985c",
+    "repo": "Catch2",
+    "model": "codeqwen:7b-chat",
+    "true_message": "Guard against CLR exceptions when translating exceptions",
+    "generated_message": "Update `translateActiveException` to handle mixed mode exceptions properly. Avoid crash on NON-C++ exception. (#2823)"
+  },
+  {
+    "entry_index": 47,
+    "commit_id": "a1aefce6e45f30d292dc82a8e1b16c025219985c",
+    "repo": "Catch2",
+    "model": "llama3:70b-instruct",
+    "true_message": "Guard against CLR exceptions when translating exceptions",
+    "generated_message": "Handle Non-C++ exceptions in MSVC mixed mode projects (#issue_number)"
+  },
+  {
+    "entry_index": 48,
+    "commit_id": "347be871265c7780bc2573e838a41a767c6e1f67",
+    "repo": "Catch2",
+    "model": "llama3:8b",
+    "true_message": "Removed debug code accidentally left in previous commit",
+    "generated_message": "Remove unnecessary iostream includes (#2824)"
+  },
+  {
+    "entry_index": 48,
+    "commit_id": "347be871265c7780bc2573e838a41a767c6e1f67",
+    "repo": "Catch2",
+    "model": "mistral:7b-instruct",
+    "true_message": "Removed debug code accidentally left in previous commit",
+    "generated_message": "Remove unnecessary iostream inclusion from internal catch_timer.cpp"
+  },
+  {
+    "entry_index": 48,
+    "commit_id": "347be871265c7780bc2573e838a41a767c6e1f67",
+    "repo": "Catch2",
+    "model": "codeqwen:7b-chat",
+    "true_message": "Removed debug code accidentally left in previous commit",
+    "generated_message": "Commit Message: Remove unnecessary iostream include in Catch Timer (#2823)"
+  },
+  {
+    "entry_index": 48,
+    "commit_id": "347be871265c7780bc2573e838a41a767c6e1f67",
+    "repo": "Catch2",
+    "model": "llama3:70b-instruct",
+    "true_message": "Removed debug code accidentally left in previous commit",
+    "generated_message": "Remove unnecessary iostream include from catch_timer"
+  },
+  {
+    "entry_index": 49,
+    "commit_id": "c4d1aa90337300a8c7646b3f28b0a6783eec5a8f",
+    "repo": "Catch2",
+    "model": "llama3:8b",
+    "true_message": "Fix std::uncaught_exception deprecation warning in ~ScopedMessage",
+    "generated_message": "Here's a one-line git commit message using both CER and unified diff:\n\nFix warning suppression in CatchMessage (#1234)\n\nNote that I've focused on the primary change (warning suppression) and ignored secondary noise, following the style and specificity of the examples."
+  },
+  {
+    "entry_index": 49,
+    "commit_id": "c4d1aa90337300a8c7646b3f28b0a6783eec5a8f",
+    "repo": "Catch2",
+    "model": "mistral:7b-instruct",
+    "true_message": "Fix std::uncaught_exception deprecation warning in ~ScopedMessage",
+    "generated_message": "Add pragma warning pop for _MSC_VER deprecated warning (#3142)"
+  },
+  {
+    "entry_index": 49,
+    "commit_id": "c4d1aa90337300a8c7646b3f28b0a6783eec5a8f",
+    "repo": "Catch2",
+    "model": "codeqwen:7b-chat",
+    "true_message": "Fix std::uncaught_exception deprecation warning in ~ScopedMessage",
+    "generated_message": "Add comment to suppress deprecation warnings in MSVC for uncaught exceptions (#2823)"
+  },
+  {
+    "entry_index": 49,
+    "commit_id": "c4d1aa90337300a8c7646b3f28b0a6783eec5a8f",
+    "repo": "Catch2",
+    "model": "llama3:70b-instruct",
+    "true_message": "Fix std::uncaught_exception deprecation warning in ~ScopedMessage",
+    "generated_message": "Suppress uncaught exception warnings on MSVC compilers"
+  },
+  {
+    "entry_index": 50,
+    "commit_id": "c411c131cb60a94b05147c3c55e8d22ca3d3d3b1",
+    "repo": "Catch2",
+    "model": "llama3:8b",
+    "true_message": "Move crtdbg.h include outside namespace",
+    "generated_message": "Add Windows CRTDBG leak detection to Catch (#2832)"
+  },
+  {
+    "entry_index": 50,
+    "commit_id": "c411c131cb60a94b05147c3c55e8d22ca3d3d3b1",
+    "repo": "Catch2",
+    "model": "mistral:7b-instruct",
+    "true_message": "Move crtdbg.h include outside namespace",
+    "generated_message": "Remove extraneous include and fix namespace issue in LeakDetector constructor (#3016)"
+  },
+  {
+    "entry_index": 50,
+    "commit_id": "c411c131cb60a94b05147c3c55e8d22ca3d3d3b1",
+    "repo": "Catch2",
+    "model": "codeqwen:7b-chat",
+    "true_message": "Move crtdbg.h include outside namespace",
+    "generated_message": "\"Add conditional inclusion of crtdbg header for Windows CRT debugging.\""
+  },
+  {
+    "entry_index": 50,
+    "commit_id": "c411c131cb60a94b05147c3c55e8d22ca3d3d3b1",
+    "repo": "Catch2",
+    "model": "llama3:70b-instruct",
+    "true_message": "Move crtdbg.h include outside namespace",
+    "generated_message": "Fix CRTDBG flag setting in Windows leak detector implementation"
+  }
+]

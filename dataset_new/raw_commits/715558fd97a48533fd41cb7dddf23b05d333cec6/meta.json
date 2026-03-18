@@ -1,0 +1,8 @@
+{
+  "commit_id": "715558fd97a48533fd41cb7dddf23b05d333cec6",
+  "parent_id": "55b14e1b3482e1233f0fbf41dee8dceebee8db1e",
+  "message": "Use the fast path for passing assertions in RunContext::handleNonExpr",
+  "changed_files": [
+    "src/catch2/internal/catch_run_context.cpp"
+  ]
+}

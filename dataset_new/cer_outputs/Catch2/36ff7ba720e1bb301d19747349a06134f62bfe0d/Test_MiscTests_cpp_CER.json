@@ -1,0 +1,26 @@
+{
+  "events": [
+    {
+      "event_id": "e1",
+      "op": "insert",
+      "node": "expr_stmt",
+      "level": "stmt",
+      "old": "",
+      "new": "\"a should not equal b\"",
+      "enclosing": {
+        "statement": "expr_stmt"
+      },
+      "anchor": "unit[1]/block[2]/block_content[1]/block[1]/block_content[1]/expr_stmt[1]/expr[1]"
+    },
+    {
+      "event_id": "e2",
+      "op": "insert",
+      "node": "expr_stmt",
+      "level": "stmt",
+      "old": "",
+      "new": "TEST_CASE( \"mixed/Misc/Sections/loops\", \"looped SECTION tests\" ) { int a = 1; for ( int b = 0; b < 10; ++b ) { std::ostringstream oss; oss << \"b is currently: \" << b; SECTION( \"s1\", oss.str() ) { CHECK( b > a ); } } } TEST_CASE( \"mixed/Misc/loops\", \"looped tests\" ) { static const int fib[] = { 1, 1, 2, 3, 5, 8, 13, 21 } ; for ( size_t i=0; i < sizeof(fib)/sizeof(int); ++i ) { INFO( \"Testing if fib[\" << i << \"] (\" << fib[i] << \") is even\" ); CHECK( ( fib[i] % 2 ) == 0 ); } }",
+      "enclosing": {},
+      "anchor": "unit[1]"
+    }
+  ]
+}

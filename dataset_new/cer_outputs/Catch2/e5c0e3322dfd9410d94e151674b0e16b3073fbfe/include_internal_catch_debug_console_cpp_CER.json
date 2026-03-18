@@ -1,0 +1,14 @@
+{
+  "events": [
+    {
+      "event_id": "e1",
+      "op": "replace",
+      "node": "expr_stmt",
+      "level": "stmt",
+      "old": "#if def CATCH_PLATFORM_WINDOWS",
+      "new": "#if defined(__ANDROID__) #include <android/log.h> namespace Catch { void writeToDebugConsole( std::string const & text ) { __android_log_print( ANDROID_LOG_DEBUG, \"Catch\", text.c_str() ); } } #elif defined(CATCH_PLATFORM_WINDOWS)",
+      "enclosing": {},
+      "anchor": "unit[1]"
+    }
+  ]
+}

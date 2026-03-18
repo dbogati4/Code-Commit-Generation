@@ -1,0 +1,8 @@
+{
+  "commit_id": "a06b6dc3ea58167e8ebd4cb8ebaa1391d6027a4d",
+  "parent_id": "0adb04807a2591fcfc3aa5e7158d2fb136a6568c",
+  "message": "Remove pointless StringRef -> std::string conversions",
+  "changed_files": [
+    "include/internal/catch_assertionresult.cpp"
+  ]
+}

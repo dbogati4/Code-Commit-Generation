@@ -1,0 +1,8 @@
+{
+  "commit_id": "a64ff326bfa6c72e83bfec0b47cf04ad9f4a5cc0",
+  "parent_id": "ad564634770d04eac3ce1819dce49f6df3d2639b",
+  "message": "Change 'estimated' to 'est run time' in console reporter output",
+  "changed_files": [
+    "src/catch2/reporters/catch_reporter_console.cpp"
+  ]
+}

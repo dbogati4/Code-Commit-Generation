@@ -1,0 +1,8 @@
+{
+  "commit_id": "4575594bbfde89e698770333fe9e1d53ba3206ae",
+  "parent_id": "c053dca26e01d4c1cb99ba6e9003d0930117b5e9",
+  "message": "Comment why the return code is clamped",
+  "changed_files": [
+    "include/internal/catch_session.cpp"
+  ]
+}

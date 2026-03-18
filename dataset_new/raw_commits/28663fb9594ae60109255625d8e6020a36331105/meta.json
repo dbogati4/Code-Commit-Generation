@@ -1,0 +1,8 @@
+{
+  "commit_id": "28663fb9594ae60109255625d8e6020a36331105",
+  "parent_id": "d2d418a9cbda255e193c4ed6c57cdf20137fa309",
+  "message": "Use the right overload of std::nextafter in tests",
+  "changed_files": [
+    "projects/SelfTest/UsageTests/Matchers.tests.cpp"
+  ]
+}

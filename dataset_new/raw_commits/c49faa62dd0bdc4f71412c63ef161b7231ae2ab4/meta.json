@@ -1,0 +1,8 @@
+{
+  "commit_id": "c49faa62dd0bdc4f71412c63ef161b7231ae2ab4",
+  "parent_id": "c0976091151c5f31769ac991ca748021253bdba3",
+  "message": "Let users of amalgamated distribution override the default main",
+  "changed_files": [
+    "src/catch2/internal/catch_main.cpp"
+  ]
+}

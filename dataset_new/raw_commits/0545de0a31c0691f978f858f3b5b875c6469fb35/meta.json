@@ -1,0 +1,8 @@
+{
+  "commit_id": "0545de0a31c0691f978f858f3b5b875c6469fb35",
+  "parent_id": "ee75b324e7d88faa7d6b4e41bd7daf9c483b07fa",
+  "message": "Hold translated exception in local string while matching",
+  "changed_files": [
+    "include/internal/catch_capture_matchers.cpp"
+  ]
+}

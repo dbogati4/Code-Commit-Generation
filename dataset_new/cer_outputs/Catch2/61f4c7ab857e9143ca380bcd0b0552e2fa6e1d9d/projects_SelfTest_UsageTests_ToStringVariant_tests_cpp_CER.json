@@ -1,0 +1,14 @@
+{
+  "events": [
+    {
+      "event_id": "e1",
+      "op": "delete",
+      "node": "class_name",
+      "level": "class",
+      "old": "sample",
+      "new": "",
+      "enclosing": {},
+      "anchor": "unit[1]/block[6]/block_content[1]/struct[name=sample]"
+    }
+  ]
+}

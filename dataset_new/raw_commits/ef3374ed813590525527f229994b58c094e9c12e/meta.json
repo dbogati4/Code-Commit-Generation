@@ -1,0 +1,8 @@
+{
+  "commit_id": "ef3374ed813590525527f229994b58c094e9c12e",
+  "parent_id": "f2f585b4788b61ed202e78b73b105f099d9cce7b",
+  "message": "Add more macros to the DisabledMacros test",
+  "changed_files": [
+    "tests/ExtraTests/X02-DisabledMacros.cpp"
+  ]
+}

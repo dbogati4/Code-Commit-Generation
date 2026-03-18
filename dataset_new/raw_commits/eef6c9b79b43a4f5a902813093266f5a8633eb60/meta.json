@@ -1,0 +1,8 @@
+{
+  "commit_id": "eef6c9b79b43a4f5a902813093266f5a8633eb60",
+  "parent_id": "b5a287f09fd3837c4285f5b8c19302221a1885c3",
+  "message": "Microopt: stream single char instead of single char string",
+  "changed_files": [
+    "src/catch2/internal/catch_decomposer.cpp"
+  ]
+}

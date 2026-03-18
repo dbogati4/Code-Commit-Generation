@@ -1,0 +1,61 @@
+diff --git a/src/catch2/benchmark/detail/catch_stats.cpp b/src/catch2/benchmark/detail/catch_stats.cpp
+index e6de359c..2a5a2e03 100644
+--- a/src/catch2/benchmark/detail/catch_stats.cpp
++++ b/src/catch2/benchmark/detail/catch_stats.cpp
+@@ -178,7 +178,7 @@ namespace Catch {
+                                              double diff = b - m;
+                                              return a + diff * diff;
+                                          } ) /
+-                        ( last - first );
++                        static_cast<double>( last - first );
+                     return std::sqrt( variance );
+                 }
+ 
+@@ -213,7 +213,7 @@ namespace Catch {
+                                               double* first,
+                                               double* last ) {
+                 auto count = last - first;
+-                double idx = (count - 1) * k / static_cast<double>(q);
++                double idx = static_cast<double>((count - 1) * k) / static_cast<double>(q);
+                 int j = static_cast<int>(idx);
+                 double g = idx - j;
+                 std::nth_element(first, first + j, last);
+@@ -316,10 +316,10 @@ namespace Catch {
+ 
+                 double accel = sum_cubes / ( 6 * std::pow( sum_squares, 1.5 ) );
+                 long n = static_cast<long>( resample.size() );
+-                double prob_n =
++                double prob_n = static_cast<double>(
+                     std::count_if( resample.begin(),
+                                    resample.end(),
+-                                   [point]( double x ) { return x < point; } ) /
++                                   [point]( double x ) { return x < point; } )) /
+                     static_cast<double>( n );
+                 // degenerate case with uniform samples
+                 if ( Catch::Detail::directCompare( prob_n, 0. ) ) {
+diff --git a/src/catch2/catch_timer.cpp b/src/catch2/catch_timer.cpp
+index 51396654..efdd8b7d 100644
+--- a/src/catch2/catch_timer.cpp
++++ b/src/catch2/catch_timer.cpp
+@@ -30,7 +30,7 @@ namespace Catch {
+         return static_cast<unsigned int>(getElapsedMicroseconds()/1000);
+     }
+     auto Timer::getElapsedSeconds() const -> double {
+-        return getElapsedMicroseconds()/1000000.0;
++        return static_cast<double>(getElapsedMicroseconds())/1000000.0;
+     }
+ 
+ 
+diff --git a/src/catch2/internal/catch_random_number_generator.cpp b/src/catch2/internal/catch_random_number_generator.cpp
+index 6a79dff3..c88cd8f2 100644
+--- a/src/catch2/internal/catch_random_number_generator.cpp
++++ b/src/catch2/internal/catch_random_number_generator.cpp
+@@ -52,7 +52,7 @@ namespace {
+     SimplePcg32::result_type SimplePcg32::operator()() {
+         // prepare the output value
+         const uint32_t xorshifted = static_cast<uint32_t>(((m_state >> 18u) ^ m_state) >> 27u);
+-        const auto output = rotate_right(xorshifted, m_state >> 59u);
++        const auto output = rotate_right(xorshifted, static_cast<uint32_t>(m_state >> 59u));
+ 
+         // advance state
+         m_state = m_state * 6364136223846793005ULL + s_inc;

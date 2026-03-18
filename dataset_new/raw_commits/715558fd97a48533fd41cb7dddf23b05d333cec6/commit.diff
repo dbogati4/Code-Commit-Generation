@@ -1,0 +1,16 @@
+diff --git a/src/catch2/internal/catch_run_context.cpp b/src/catch2/internal/catch_run_context.cpp
+index 02fa3eb8..ae170d1f 100644
+--- a/src/catch2/internal/catch_run_context.cpp
++++ b/src/catch2/internal/catch_run_context.cpp
+@@ -720,6 +720,11 @@ namespace Catch {
+         AssertionResult assertionResult{ info, CATCH_MOVE( data ) };
+ 
+         const auto isOk = assertionResult.isOk();
++        if ( isOk && !m_includeSuccessfulResults ) {
++            assertionPassedFastPath( info.lineInfo );
++            return;
++        }
++
+         assertionEnded( CATCH_MOVE(assertionResult) );
+         if ( !isOk ) {
+             populateReaction(

@@ -1,0 +1,8 @@
+{
+  "commit_id": "7f931d6df49bc8810707084480b03259f96d6f72",
+  "parent_id": "a0ef2115f833ad5a79263d2b3634ffe3497d008c",
+  "message": "Add tests for scaled ULP distance between +/- FLT/DBL_MAX",
+  "changed_files": [
+    "tests/SelfTest/IntrospectiveTests/FloatingPoint.tests.cpp"
+  ]
+}

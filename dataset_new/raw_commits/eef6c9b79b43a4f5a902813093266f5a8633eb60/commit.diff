@@ -1,0 +1,21 @@
+diff --git a/src/catch2/internal/catch_decomposer.cpp b/src/catch2/internal/catch_decomposer.cpp
+index d227c534..e1018cd6 100644
+--- a/src/catch2/internal/catch_decomposer.cpp
++++ b/src/catch2/internal/catch_decomposer.cpp
+@@ -12,13 +12,13 @@
+ namespace Catch {
+ 
+     ITransientExpression::~ITransientExpression() = default;
+-    
++
+     void formatReconstructedExpression( std::ostream &os, std::string const& lhs, StringRef op, std::string const& rhs ) {
+         if( lhs.size() + rhs.size() < 40 &&
+                 lhs.find('\n') == std::string::npos &&
+                 rhs.find('\n') == std::string::npos )
+-            os << lhs << " " << op << " " << rhs;
++            os << lhs << ' ' << op << ' ' << rhs;
+         else
+-            os << lhs << "\n" << op << "\n" << rhs;
++            os << lhs << '\n' << op << '\n' << rhs;
+     }
+ }

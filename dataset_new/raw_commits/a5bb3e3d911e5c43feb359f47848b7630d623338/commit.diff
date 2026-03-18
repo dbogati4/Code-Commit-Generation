@@ -1,0 +1,76 @@
+diff --git a/include/internal/catch_interfaces_config.cpp b/include/internal/catch_interfaces_config.cpp
+index b6f5daa2..6617da69 100644
+--- a/include/internal/catch_interfaces_config.cpp
++++ b/include/internal/catch_interfaces_config.cpp
+@@ -1,4 +1,4 @@
+-#include "internal/catch_interfaces_config.h"
++#include "catch_interfaces_config.h"
+ 
+ namespace Catch {
+     IConfig::~IConfig() = default;
+diff --git a/include/internal/catch_interfaces_exception.cpp b/include/internal/catch_interfaces_exception.cpp
+index 8494a2cc..705d8c87 100644
+--- a/include/internal/catch_interfaces_exception.cpp
++++ b/include/internal/catch_interfaces_exception.cpp
+@@ -1,4 +1,4 @@
+-#include "internal/catch_interfaces_exception.h"
++#include "catch_interfaces_exception.h"
+ 
+ namespace Catch {
+     IExceptionTranslator::~IExceptionTranslator() = default;
+diff --git a/include/internal/catch_interfaces_registry_hub.cpp b/include/internal/catch_interfaces_registry_hub.cpp
+index bd5b8082..7a22d649 100644
+--- a/include/internal/catch_interfaces_registry_hub.cpp
++++ b/include/internal/catch_interfaces_registry_hub.cpp
+@@ -1,4 +1,4 @@
+-#include "internal/catch_interfaces_registry_hub.h"
++#include "catch_interfaces_registry_hub.h"
+ 
+ namespace Catch {
+     IRegistryHub::~IRegistryHub() = default;
+diff --git a/include/internal/catch_interfaces_runner.cpp b/include/internal/catch_interfaces_runner.cpp
+index 2b052eb8..8d419a14 100644
+--- a/include/internal/catch_interfaces_runner.cpp
++++ b/include/internal/catch_interfaces_runner.cpp
+@@ -1,4 +1,4 @@
+-#include "internal/catch_interfaces_runner.h"
++#include "catch_interfaces_runner.h"
+ 
+ namespace Catch {
+     IRunner::~IRunner() = default;
+diff --git a/include/internal/catch_interfaces_testcase.cpp b/include/internal/catch_interfaces_testcase.cpp
+index 35c3db08..9b35e034 100644
+--- a/include/internal/catch_interfaces_testcase.cpp
++++ b/include/internal/catch_interfaces_testcase.cpp
+@@ -1,4 +1,4 @@
+-#include "internal/catch_interfaces_testcase.h"
++#include "catch_interfaces_testcase.h"
+ 
+ namespace Catch {
+     ITestInvoker::~ITestInvoker() = default;
+diff --git a/include/reporters/catch_reporter_compact.cpp b/include/reporters/catch_reporter_compact.cpp
+index 6101d6c5..017f521f 100644
+--- a/include/reporters/catch_reporter_compact.cpp
++++ b/include/reporters/catch_reporter_compact.cpp
+@@ -8,7 +8,7 @@
+ #include "catch_reporter_compact.h"
+ 
+ #include "../internal/catch_reporter_registrars.hpp"
+-#include "internal/catch_console_colour.h"
++#include "../internal/catch_console_colour.h"
+ 
+ namespace {
+ 
+diff --git a/include/reporters/catch_reporter_console.cpp b/include/reporters/catch_reporter_console.cpp
+index 12092907..e38e34cf 100644
+--- a/include/reporters/catch_reporter_console.cpp
++++ b/include/reporters/catch_reporter_console.cpp
+@@ -9,7 +9,7 @@
+ #include "catch_reporter_console.h"
+ 
+ #include "../internal/catch_reporter_registrars.hpp"
+-#include "internal/catch_console_colour.h"
++#include "../internal/catch_console_colour.h"
+ #include "../internal/catch_version.h"
+ #include "../internal/catch_text.h"
+ #include "../internal/catch_stringref.h"

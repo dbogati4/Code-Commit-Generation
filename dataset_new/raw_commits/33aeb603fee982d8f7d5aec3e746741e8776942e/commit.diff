@@ -1,0 +1,37 @@
+diff --git a/src/catch2/internal/catch_reporter_registry.cpp b/src/catch2/internal/catch_reporter_registry.cpp
+index c4aef822..01b6b3a0 100644
+--- a/src/catch2/internal/catch_reporter_registry.cpp
++++ b/src/catch2/internal/catch_reporter_registry.cpp
+@@ -47,7 +47,8 @@ namespace Catch {
+     void ReporterRegistry::registerReporter( std::string const& name, IReporterFactoryPtr factory ) {
+         CATCH_ENFORCE( name.find( "::" ) == name.npos,
+                        "'::' is not allowed in reporter name: '" + name + '\'' );
+-        m_factories.emplace(name, CATCH_MOVE(factory));
++        auto ret = m_factories.emplace(name, CATCH_MOVE(factory));
++        CATCH_ENFORCE( ret.second, "reporter using '" + name + "' as name was already registered" );
+     }
+     void ReporterRegistry::registerListener(
+         Detail::unique_ptr<EventListenerFactory> factory ) {
+diff --git a/tests/SelfTest/IntrospectiveTests/Reporters.tests.cpp b/tests/SelfTest/IntrospectiveTests/Reporters.tests.cpp
+index 5dde7038..97d1ad25 100644
+--- a/tests/SelfTest/IntrospectiveTests/Reporters.tests.cpp
++++ b/tests/SelfTest/IntrospectiveTests/Reporters.tests.cpp
+@@ -312,3 +312,18 @@ TEST_CASE("Registering reporter with '::' in name fails",
+         Catch::Detail::make_unique<TestReporterFactory>() ),
+         "'::' is not allowed in reporter name: 'with::doublecolons'" );
+ }
++
++TEST_CASE("Registering multiple reporters with the same name fails",
++          "[reporters][registration][approvals]") {
++    Catch::ReporterRegistry registry;
++
++    registry.registerReporter(
++        "some-reporter-name",
++        Catch::Detail::make_unique<TestReporterFactory>() );
++
++    REQUIRE_THROWS_WITH(
++        registry.registerReporter(
++            "some-reporter-name",
++            Catch::Detail::make_unique<TestReporterFactory>() ),
++        "reporter using 'some-reporter-name' as name was already registered" );
++}

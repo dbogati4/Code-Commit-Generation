@@ -1,0 +1,8 @@
+{
+  "commit_id": "9de6eae6bbf2ccc9529cc266ceb0587b376c7e0d",
+  "parent_id": "d1ffaf55a1653575a5a24da738ee777cdb85626f",
+  "message": "ConsoleReporter no longer creates a string when writing time units",
+  "changed_files": [
+    "src/catch2/reporters/catch_reporter_console.cpp"
+  ]
+}

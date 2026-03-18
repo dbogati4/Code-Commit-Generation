@@ -1,0 +1,44 @@
+{
+  "events": [
+    {
+      "event_id": "e1",
+      "op": "insert",
+      "node": "expr_stmt",
+      "level": "stmt",
+      "old": "",
+      "new": "#include <catch2/benchmark/catch_benchmark.hpp> #include <catch2/matchers/catch_matchers.hpp> #include <catch2/matchers/catch_matchers_predicate.hpp>",
+      "enclosing": {},
+      "anchor": "unit[1]"
+    },
+    {
+      "event_id": "e2",
+      "op": "insert",
+      "node": "expr_stmt",
+      "level": "stmt",
+      "old": "",
+      "new": "CHECK( 1 == 2 );",
+      "enclosing": {},
+      "anchor": "unit[1]/block[1]/block_content[1]/expr_stmt[5]"
+    },
+    {
+      "event_id": "e3",
+      "op": "insert",
+      "node": "expr_stmt",
+      "level": "stmt",
+      "old": "",
+      "new": "REQUIRE( 1 == 2 );",
+      "enclosing": {},
+      "anchor": "unit[1]/block[1]/block_content[1]/expr_stmt[6]"
+    },
+    {
+      "event_id": "e4",
+      "op": "insert",
+      "node": "expr_stmt",
+      "level": "stmt",
+      "old": "",
+      "new": "REQUIRE_THAT( 1, Catch::Matchers::Predicate( []( int ) { return false; } ) );",
+      "enclosing": {},
+      "anchor": "unit[1]/block[1]/block_content[1]/expr_stmt[5]"
+    }
+  ]
+}

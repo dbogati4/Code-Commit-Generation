@@ -1,0 +1,133 @@
+diff --git a/src/catch2/internal/catch_jsonwriter.cpp b/src/catch2/internal/catch_jsonwriter.cpp
+index 1a96e348..6915c9c3 100644
+--- a/src/catch2/internal/catch_jsonwriter.cpp
++++ b/src/catch2/internal/catch_jsonwriter.cpp
+@@ -7,8 +7,36 @@
+ // SPDX-License-Identifier: BSL-1.0
+ #include <catch2/internal/catch_enforce.hpp>
+ #include <catch2/internal/catch_jsonwriter.hpp>
++#include <catch2/internal/catch_unreachable.hpp>
+ 
+ namespace Catch {
++
++    namespace {
++        static bool needsEscape( char c ) {
++            return c == '"' || c == '\\' || c == '\b' || c == '\f' ||
++                   c == '\n' || c == '\r' || c == '\t';
++        }
++
++        static Catch::StringRef makeEscapeStringRef( char c ) {
++            if ( c == '"' ) {
++                return "\\\""_sr;
++            } else if ( c == '\\' ) {
++                return "\\\\"_sr;
++            } else if ( c == '\b' ) {
++                return "\\b"_sr;
++            } else if ( c == '\f' ) {
++                return "\\f"_sr;
++            } else if ( c == '\n' ) {
++                return "\\n"_sr;
++            } else if ( c == '\r' ) {
++                return "\\r"_sr;
++            } else if ( c == '\t' ) {
++                return "\\t"_sr;
++            }
++            Catch::Detail::Unreachable();
++        }
++    } // namespace
++
+     void JsonUtils::indent( std::ostream& os, std::uint64_t level ) {
+         for ( std::uint64_t i = 0; i < level; ++i ) {
+             os << "  ";
+@@ -118,30 +146,19 @@ namespace Catch {
+ 
+     void JsonValueWriter::writeImpl( Catch::StringRef value, bool quote ) {
+         if ( quote ) { m_os << '"'; }
+-        for (char c : value) {
+-            // Escape list taken from https://www.json.org/json-en.html,
+-            // string definition.
+-            // Note that while forward slash _can_ be escaped, it does
+-            // not have to be, if JSON is not further embedded somewhere
+-            // where forward slash is meaningful.
+-            if ( c == '"' ) {
+-                m_os << "\\\"";
+-            } else if ( c == '\\' ) {
+-                m_os << "\\\\";
+-            } else if ( c == '\b' ) {
+-                m_os << "\\b";
+-            } else if ( c == '\f' ) {
+-                m_os << "\\f";
+-            } else if ( c == '\n' ) {
+-                m_os << "\\n";
+-            } else if ( c == '\r' ) {
+-                m_os << "\\r";
+-            } else if ( c == '\t' ) {
+-                m_os << "\\t";
+-            } else {
+-                m_os << c;
++        size_t current_start = 0;
++        for ( size_t i = 0; i < value.size(); ++i ) {
++            if ( needsEscape( value[i] ) ) {
++                if ( current_start < i ) {
++                    m_os << value.substr( current_start, i - current_start );
++                }
++                m_os << makeEscapeStringRef( value[i] );
++                current_start = i + 1;
+             }
+         }
++        if ( current_start < value.size() ) {
++            m_os << value.substr( current_start, value.size() - current_start );
++        }
+         if ( quote ) { m_os << '"'; }
+     }
+ 
+diff --git a/tests/SelfTest/IntrospectiveTests/Json.tests.cpp b/tests/SelfTest/IntrospectiveTests/Json.tests.cpp
+index bee85c99..fae1c843 100644
+--- a/tests/SelfTest/IntrospectiveTests/Json.tests.cpp
++++ b/tests/SelfTest/IntrospectiveTests/Json.tests.cpp
+@@ -7,6 +7,8 @@
+ // SPDX-License-Identifier: BSL-1.0
+ 
+ #include <catch2/catch_test_macros.hpp>
++#include <catch2/benchmark/catch_benchmark.hpp>
++#include <catch2/generators/catch_generators.hpp>
+ #include <catch2/internal/catch_jsonwriter.hpp>
+ #include <catch2/matchers/catch_matchers_string.hpp>
+ 
+@@ -17,7 +19,6 @@ namespace {
+     static std::ostream& operator<<( std::ostream& os, Custom const& ) {
+         return os << "custom";
+     }
+-} // namespace
+ 
+ TEST_CASE( "JsonWriter", "[JSON][JsonWriter]" ) {
+ 
+@@ -150,3 +151,28 @@ TEST_CASE( "JsonWriter escapes characters in strings properly", "[JsonWriter]" )
+         REQUIRE( sstream.str() == "\"\\\\/\\t\\r\\n\"" );
+     }
+ }
++
++TEST_CASE( "JsonWriter benchmarks", "[JsonWriter][!benchmark]" ) {
++    const auto input_length = GENERATE( as<size_t>{}, 10, 100, 10'000 );
++    std::string test_input( input_length, 'a' );
++    BENCHMARK_ADVANCED( "write string, no-escaping, len=" +
++                        std::to_string( input_length ) )(
++        Catch::Benchmark::Chronometer meter ) {
++        std::stringstream sstream;
++        meter.measure( [&]( int ) {
++            Catch::JsonValueWriter( sstream ).write( test_input );
++        } );
++    };
++
++    std::string escape_input( input_length, '\b' );
++    BENCHMARK_ADVANCED( "write string, all-escaped, len=" +
++                        std::to_string( input_length ) )(
++        Catch::Benchmark::Chronometer meter ) {
++        std::stringstream sstream;
++        meter.measure( [&]( int ) {
++            Catch::JsonValueWriter( sstream ).write( escape_input );
++        } );
++    };
++}
++
++} // namespace

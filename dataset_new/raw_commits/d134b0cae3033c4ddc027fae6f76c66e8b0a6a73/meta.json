@@ -1,0 +1,8 @@
+{
+  "commit_id": "d134b0cae3033c4ddc027fae6f76c66e8b0a6a73",
+  "parent_id": "ceed26842b3b3f93523998f7adb672672c7c2d8f",
+  "message": "clang: do not issue bogus warnings about integer manipulation in hash functions with fsanitize=undefined/integer (#2965)",
+  "changed_files": [
+    "src/catch2/internal/catch_random_number_generator.cpp"
+  ]
+}

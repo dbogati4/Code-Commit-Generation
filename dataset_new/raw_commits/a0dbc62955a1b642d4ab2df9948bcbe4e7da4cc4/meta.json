@@ -1,0 +1,8 @@
+{
+  "commit_id": "a0dbc62955a1b642d4ab2df9948bcbe4e7da4cc4",
+  "parent_id": "cecee3459ac4fbcb6c77c8d38ac817dd48d294b8",
+  "message": "Fix OS X compilation error",
+  "changed_files": [
+    "include/internal/catch_matchers_floating.cpp"
+  ]
+}

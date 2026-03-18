@@ -1,0 +1,13 @@
+diff --git a/include/internal/catch_run_context.cpp b/include/internal/catch_run_context.cpp
+index 7e4b689e..ffdd2ebb 100644
+--- a/include/internal/catch_run_context.cpp
++++ b/include/internal/catch_run_context.cpp
+@@ -313,7 +313,7 @@ namespace Catch {
+     }
+ 
+     bool RunContext::aborting() const {
+-        return m_totals.assertions.failed == static_cast<std::size_t>(m_config->abortAfter());
++        return m_totals.assertions.failed >= static_cast<std::size_t>(m_config->abortAfter());
+     }
+ 
+     void RunContext::runCurrentTest(std::string & redirectedCout, std::string & redirectedCerr) {

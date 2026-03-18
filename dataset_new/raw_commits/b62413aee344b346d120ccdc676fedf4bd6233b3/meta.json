@@ -1,0 +1,10 @@
+{
+  "commit_id": "b62413aee344b346d120ccdc676fedf4bd6233b3",
+  "parent_id": "3839e27f056cd975e5be2faa9adb5a8cf1f5dcf4",
+  "message": "Add stream flushes after reporters print out the test run metadata.",
+  "changed_files": [
+    "src/catch2/reporters/catch_reporter_compact.cpp",
+    "src/catch2/reporters/catch_reporter_console.cpp",
+    "src/catch2/reporters/catch_reporter_tap.cpp"
+  ]
+}

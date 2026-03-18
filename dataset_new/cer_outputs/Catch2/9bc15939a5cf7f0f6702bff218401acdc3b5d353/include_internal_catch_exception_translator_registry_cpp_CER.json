@@ -1,0 +1,34 @@
+{
+  "events": [
+    {
+      "event_id": "e1",
+      "op": "insert",
+      "node": "function_name",
+      "level": "function",
+      "old": "",
+      "new": "tryTranslators",
+      "enclosing": {},
+      "anchor": "unit[1]/namespace[name=Catch]/block[1]/function[name=tryTranslators]"
+    },
+    {
+      "event_id": "e2",
+      "op": "insert",
+      "node": "function_name",
+      "level": "function",
+      "old": "",
+      "new": "tryTranslators",
+      "enclosing": {},
+      "anchor": "unit[1]/namespace[name=Catch]/block[1]/function[name=tryTranslators]"
+    },
+    {
+      "event_id": "e3",
+      "op": "delete",
+      "node": "function_name",
+      "level": "function",
+      "old": "tryTranslators",
+      "new": "",
+      "enclosing": {},
+      "anchor": "unit[1]/namespace[name=Catch]/block[1]/function[name=tryTranslators]"
+    }
+  ]
+}

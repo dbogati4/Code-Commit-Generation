@@ -1,0 +1,24 @@
+{
+  "events": [
+    {
+      "event_id": "e1",
+      "op": "insert",
+      "node": "expr_stmt",
+      "level": "stmt",
+      "old": "",
+      "new": "#if !defined(CATCH_CONFIG_DISABLE_EXCEPTIONS)",
+      "enclosing": {},
+      "anchor": "unit[1]/namespace[name=Catch]/block[1]"
+    },
+    {
+      "event_id": "e2",
+      "op": "insert",
+      "node": "comment",
+      "level": "comment",
+      "old": "",
+      "new": "//!defined(CATCH_CONFIG_DISABLE_EXCEPTIONS)",
+      "enclosing": {},
+      "anchor": "unit[1]/namespace[name=Catch]/block[1]/comment[2]"
+    }
+  ]
+}

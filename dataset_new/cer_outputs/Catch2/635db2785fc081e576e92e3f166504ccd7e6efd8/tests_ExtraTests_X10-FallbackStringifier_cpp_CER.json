@@ -1,0 +1,54 @@
+{
+  "events": [
+    {
+      "event_id": "e1",
+      "op": "insert",
+      "node": "comment",
+      "level": "comment",
+      "old": "",
+      "new": "//              Copyright Catch2 Authors",
+      "enclosing": {},
+      "anchor": "unit[1]/comment[4]"
+    },
+    {
+      "event_id": "e2",
+      "op": "insert",
+      "node": "comment",
+      "level": "comment",
+      "old": "",
+      "new": "// Distributed under the Boost Software License, Version 1.0.",
+      "enclosing": {},
+      "anchor": "unit[1]/comment[5]"
+    },
+    {
+      "event_id": "e3",
+      "op": "insert",
+      "node": "comment",
+      "level": "comment",
+      "old": "",
+      "new": "//   (See accompanying file LICENSE_1_0.txt or copy at",
+      "enclosing": {},
+      "anchor": "unit[1]/comment[6]"
+    },
+    {
+      "event_id": "e4",
+      "op": "insert",
+      "node": "comment",
+      "level": "comment",
+      "old": "",
+      "new": "//        https://www.boost.org/LICENSE_1_0.txt)",
+      "enclosing": {},
+      "anchor": "unit[1]/comment[7]"
+    },
+    {
+      "event_id": "e5",
+      "op": "insert",
+      "node": "comment",
+      "level": "comment",
+      "old": "",
+      "new": "// SPDX-License-Identifier: BSL-1.0",
+      "enclosing": {},
+      "anchor": "unit[1]/comment[8]"
+    }
+  ]
+}

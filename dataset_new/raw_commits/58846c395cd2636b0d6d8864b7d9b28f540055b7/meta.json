@@ -1,0 +1,8 @@
+{
+  "commit_id": "58846c395cd2636b0d6d8864b7d9b28f540055b7",
+  "parent_id": "372a8b018d05e771492f6bcfeded42fae75a09de",
+  "message": "Clara: Added support for compact short opts (e.g. -peb)",
+  "changed_files": [
+    "projects/SelfTest/CmdLineTests.cpp"
+  ]
+}

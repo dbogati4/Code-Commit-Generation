@@ -1,0 +1,8 @@
+{
+  "commit_id": "2a5de4e4476b7297e2f4e37b79ef9141a1829947",
+  "parent_id": "1078e7e95b3a06d4dadc75188de48bc4afffb955",
+  "message": "Fix OOB access when computing -# tag for file without extension",
+  "changed_files": [
+    "src/catch2/catch_test_case_info.cpp"
+  ]
+}

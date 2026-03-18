@@ -1,0 +1,8 @@
+{
+  "commit_id": "8e5a4b6f706b705844665ad99bf3e59980d5b4c5",
+  "parent_id": "9b884d8107b9061fc345e02bb129ebb62febc847",
+  "message": "Remove superfluous pointer copy in AssertionStats constructor",
+  "changed_files": [
+    "src/catch2/interfaces/catch_interfaces_reporter.cpp"
+  ]
+}

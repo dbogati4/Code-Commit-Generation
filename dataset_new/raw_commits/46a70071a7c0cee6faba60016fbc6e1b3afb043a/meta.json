@@ -1,0 +1,8 @@
+{
+  "commit_id": "46a70071a7c0cee6faba60016fbc6e1b3afb043a",
+  "parent_id": "378cc1a67065850df2959cb3257ba5efd82ab303",
+  "message": "Use __android_log_write instead of __android_log_print",
+  "changed_files": [
+    "include/internal/catch_debug_console.cpp"
+  ]
+}

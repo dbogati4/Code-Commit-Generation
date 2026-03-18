@@ -1,0 +1,8 @@
+{
+  "commit_id": "3e82ef9317d4bb43d81b660404db3c3c5880aa7d",
+  "parent_id": "7cad6d75390668ad2b6bec8432a2e408a992e1bf",
+  "message": "Fix color mode detection on FreeBSD by adding platform macro",
+  "changed_files": [
+    "src/catch2/internal/catch_console_colour.cpp"
+  ]
+}

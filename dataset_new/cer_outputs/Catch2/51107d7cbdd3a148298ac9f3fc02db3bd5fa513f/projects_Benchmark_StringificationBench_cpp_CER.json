@@ -1,0 +1,14 @@
+{
+  "events": [
+    {
+      "event_id": "e1",
+      "op": "insert",
+      "node": "comment",
+      "level": "comment",
+      "old": "",
+      "new": "/*\n *  Created by Martin on 16/01/2017.\n *\n *  Distributed under the Boost Software License, Version 1.0. (See accompanying\n *  file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)\n */",
+      "enclosing": {},
+      "anchor": "unit[1]/comment[4]"
+    }
+  ]
+}

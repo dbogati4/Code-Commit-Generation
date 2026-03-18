@@ -1,0 +1,7 @@
+{
+  "source_dataset": "D:/Projects/Commit Message Generation CMG/catch2_100/dataset",
+  "target_dataset": "D:/Projects/Commit Message Generation CMG/catch2_69/dataset",
+  "entries": 69,
+  "cer_files": 116,
+  "total_events": 285
+}

@@ -1,0 +1,26 @@
+{
+  "events": [
+    {
+      "event_id": "e1",
+      "op": "delete",
+      "node": "decl_stmt",
+      "level": "stmt",
+      "old": "std::string name;",
+      "new": "",
+      "enclosing": {},
+      "anchor": "unit[1]/block[3]/block_content[1]/decl_stmt[3]"
+    },
+    {
+      "event_id": "e2",
+      "op": "replace",
+      "node": "return_expr",
+      "level": "stmt",
+      "old": "return ParserResult::ok();",
+      "new": "return ParserResult::ok( ParseResultType::Matched );",
+      "enclosing": {
+        "statement": "return"
+      },
+      "anchor": "unit[1]/block[3]/block_content[1]/decl_stmt[2]/decl[name=push_to_res]/init[1]/expr[1]/lambda[1]/block[1]/block_content[1]/return[1]"
+    }
+  ]
+}

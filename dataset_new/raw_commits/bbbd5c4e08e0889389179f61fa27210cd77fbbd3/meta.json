@@ -1,0 +1,8 @@
+{
+  "commit_id": "bbbd5c4e08e0889389179f61fa27210cd77fbbd3",
+  "parent_id": "f41051f22a2e35ef3b60139f0049f7e608f9bb28",
+  "message": "Added null-ptr check in Colour::use()",
+  "changed_files": [
+    "include/internal/catch_console_colour.cpp"
+  ]
+}

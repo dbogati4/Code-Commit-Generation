@@ -1,0 +1,35 @@
+{
+  "description": "One-shot example: Raw diff + CER combined - from 69-commit Catch2 dataset",
+  "source_commit_id": "fb51116d5b20ea3fef6c5a89267e7d91856a60cf",
+  "variant": "full",
+  "example": {
+    "diff": "diff --git a/src/catch2/benchmark/detail/catch_analyse.cpp b/src/catch2/benchmark/detail/catch_analyse.cpp\nindex 7d27daf1..14d7f450 100644\n--- a/src/catch2/benchmark/detail/catch_analyse.cpp\n+++ b/src/catch2/benchmark/detail/catch_analyse.cpp\n@@ -63,8 +63,8 @@ namespace Catch {\n                     FDuration mean = FDuration(0);\n                     int i = 0;\n                     for (auto it = first; it < last; ++it, ++i) {\n-                        samples.push_back(FDuration(*it));\n-                        mean += FDuration(*it);\n+                        samples.push_back(*it);\n+                        mean += *it;\n                     }\n                     mean /= i;\n \n",
+    "cer": {
+      "events": [
+        {
+          "event_id": "e1",
+          "op": "delete",
+          "node": "expr_stmt",
+          "level": "stmt",
+          "old": "FDuration(*it)",
+          "enclosing": {
+            "function": "analyse",
+            "statement": "expr_stmt"
+          }
+        },
+        {
+          "event_id": "e2",
+          "op": "delete",
+          "node": "expr_stmt",
+          "level": "stmt",
+          "old": "FDuration(*it)",
+          "enclosing": {
+            "function": "analyse",
+            "statement": "expr_stmt"
+          }
+        }
+      ]
+    },
+    "commit_message": "Avoid useless FDuration cast in benchmark analysis (#2823)"
+  }
+}

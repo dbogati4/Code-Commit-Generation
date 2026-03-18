@@ -1,0 +1,8 @@
+{
+  "commit_id": "800f1b1d3df22c9ff92762cb4718ce29b2260a4f",
+  "parent_id": "6f32c67ea763ff189b55eeb24980ddc2522a80fb",
+  "message": "Fix TrackerBase::close children completion check",
+  "changed_files": [
+    "include/internal/catch_test_case_tracker.cpp"
+  ]
+}

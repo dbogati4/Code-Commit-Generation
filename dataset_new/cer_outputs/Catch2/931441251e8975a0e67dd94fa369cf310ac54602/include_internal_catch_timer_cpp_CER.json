@@ -1,0 +1,78 @@
+{
+  "events": [
+    {
+      "event_id": "e1",
+      "op": "insert",
+      "node": "decl_stmt",
+      "level": "stmt",
+      "old": "",
+      "new": "static const uint64_t nanosecondsInSecond = 1000000000;",
+      "enclosing": {},
+      "anchor": "unit[1]/decl_stmt[1]"
+    },
+    {
+      "event_id": "e2",
+      "op": "insert",
+      "node": "decl_stmt",
+      "level": "stmt",
+      "old": "",
+      "new": "auto startTime = getCurrentNanosecondsSinceEpoch();",
+      "enclosing": {
+        "function": "estimateClockResolution"
+      },
+      "anchor": "unit[1]/namespace[name=Catch]/block[1]/function[name=estimateClockResolution]/block[1]/block_content[1]/decl_stmt[3]"
+    },
+    {
+      "event_id": "e3",
+      "op": "insert",
+      "node": "comment",
+      "level": "comment",
+      "old": "",
+      "new": "// If we have been calibrating for over 3 seconds -- the clock",
+      "enclosing": {
+        "function": "estimateClockResolution",
+        "statement": "for"
+      },
+      "anchor": "unit[1]/namespace[name=Catch]/block[1]/function[name=estimateClockResolution]/block[1]/block_content[1]/for[1]/block[1]/block_content[1]/comment[1]"
+    },
+    {
+      "event_id": "e4",
+      "op": "insert",
+      "node": "comment",
+      "level": "comment",
+      "old": "",
+      "new": "// is terrible and we should move on.",
+      "enclosing": {
+        "function": "estimateClockResolution",
+        "statement": "for"
+      },
+      "anchor": "unit[1]/namespace[name=Catch]/block[1]/function[name=estimateClockResolution]/block[1]/block_content[1]/for[1]/block[1]/block_content[1]/comment[2]"
+    },
+    {
+      "event_id": "e5",
+      "op": "insert",
+      "node": "comment",
+      "level": "comment",
+      "old": "",
+      "new": "// TBD: How to signal that the measured resolution is probably wrong?",
+      "enclosing": {
+        "function": "estimateClockResolution",
+        "statement": "for"
+      },
+      "anchor": "unit[1]/namespace[name=Catch]/block[1]/function[name=estimateClockResolution]/block[1]/block_content[1]/for[1]/block[1]/block_content[1]/comment[3]"
+    },
+    {
+      "event_id": "e6",
+      "op": "insert",
+      "node": "if_stmt",
+      "level": "stmt",
+      "old": "",
+      "new": "if (ticks > startTime + 3 * nanosecondsInSecond) { return sum / i; }",
+      "enclosing": {
+        "function": "estimateClockResolution",
+        "statement": "for"
+      },
+      "anchor": "unit[1]/namespace[name=Catch]/block[1]/function[name=estimateClockResolution]/block[1]/block_content[1]/for[1]/block[1]/block_content[1]/if_stmt[1]"
+    }
+  ]
+}

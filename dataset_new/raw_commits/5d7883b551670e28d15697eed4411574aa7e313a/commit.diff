@@ -1,0 +1,10 @@
+diff --git a/tests/SelfTest/IntrospectiveTests/GeneratorsImpl.tests.cpp b/tests/SelfTest/IntrospectiveTests/GeneratorsImpl.tests.cpp
+index e0e06eb0..7793e970 100644
+--- a/tests/SelfTest/IntrospectiveTests/GeneratorsImpl.tests.cpp
++++ b/tests/SelfTest/IntrospectiveTests/GeneratorsImpl.tests.cpp
+@@ -511,5 +511,3 @@ TEST_CASE( "Generator element stringification is cached",
+ 
+     REQUIRE( generator.stringificationCalls() == 1 );
+ }
+-
+-// caching?

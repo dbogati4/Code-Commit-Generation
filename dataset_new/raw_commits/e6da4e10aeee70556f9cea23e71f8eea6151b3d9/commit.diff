@@ -1,0 +1,13 @@
+diff --git a/extras/catch_amalgamated.cpp b/extras/catch_amalgamated.cpp
+index 43f3eed9..b67149f0 100644
+--- a/extras/catch_amalgamated.cpp
++++ b/extras/catch_amalgamated.cpp
+@@ -1165,7 +1165,7 @@ namespace Catch {
+         makeTestCaseInfo(std::string const& _className,
+                          NameAndTags const& nameAndTags,
+                          SourceLineInfo const& _lineInfo ) {
+-        return Detail::unique_ptr<TestCaseInfo>(new TestCaseInfo(_className, nameAndTags, _lineInfo));
++        return Detail::make_unique<TestCaseInfo>(_className, nameAndTags, _lineInfo);
+     }
+ 
+     TestCaseInfo::TestCaseInfo(std::string const& _className,

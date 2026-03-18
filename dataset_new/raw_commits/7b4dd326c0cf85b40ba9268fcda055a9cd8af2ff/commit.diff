@@ -1,0 +1,12 @@
+diff --git a/src/catch2/reporters/catch_reporter_multi.cpp b/src/catch2/reporters/catch_reporter_multi.cpp
+index ebf28b64..531902be 100644
+--- a/src/catch2/reporters/catch_reporter_multi.cpp
++++ b/src/catch2/reporters/catch_reporter_multi.cpp
+@@ -114,7 +114,6 @@ namespace Catch {
+         }
+     }
+ 
+-    // The return value indicates if the messages buffer should be cleared:
+     void MultiReporter::assertionEnded( AssertionStats const& assertionStats ) {
+         const bool reportByDefault =
+             assertionStats.assertionResult.getResultType() != ResultWas::Ok ||

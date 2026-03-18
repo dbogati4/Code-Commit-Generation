@@ -1,0 +1,34 @@
+{
+  "events": [
+    {
+      "event_id": "e1",
+      "op": "insert",
+      "node": "comment",
+      "level": "comment",
+      "old": "",
+      "new": "// Non-\"included\" sections will not use the timing information",
+      "enclosing": {},
+      "anchor": "unit[1]/namespace[name=Catch]/block[1]/constructor[name=Section]/block[1]/block_content[1]/comment[1]"
+    },
+    {
+      "event_id": "e2",
+      "op": "insert",
+      "node": "comment",
+      "level": "comment",
+      "old": "",
+      "new": "// anyway, so don't bother with the potential syscall.",
+      "enclosing": {},
+      "anchor": "unit[1]/namespace[name=Catch]/block[1]/constructor[name=Section]/block[1]/block_content[1]/comment[2]"
+    },
+    {
+      "event_id": "e3",
+      "op": "insert",
+      "node": "if_stmt",
+      "level": "stmt",
+      "old": "",
+      "new": "if (m_sectionIncluded) { m_timer.start(); }",
+      "enclosing": {},
+      "anchor": "unit[1]/namespace[name=Catch]/block[1]/constructor[name=Section]/block[1]/block_content[1]/if_stmt[1]"
+    }
+  ]
+}

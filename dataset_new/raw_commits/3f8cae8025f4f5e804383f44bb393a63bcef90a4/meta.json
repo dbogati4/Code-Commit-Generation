@@ -1,0 +1,8 @@
+{
+  "commit_id": "3f8cae8025f4f5e804383f44bb393a63bcef90a4",
+  "parent_id": "2c82f82ee211b011460f2f44647b69e0feaf3d4e",
+  "message": "Add consistency-checking event listener to SelfTest",
+  "changed_files": [
+    "tests/SelfTest/TestRegistrations.cpp"
+  ]
+}

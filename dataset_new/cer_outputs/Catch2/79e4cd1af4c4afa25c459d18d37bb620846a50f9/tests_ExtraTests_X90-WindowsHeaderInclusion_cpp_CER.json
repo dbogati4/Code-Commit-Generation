@@ -1,0 +1,14 @@
+{
+  "events": [
+    {
+      "event_id": "e1",
+      "op": "replace",
+      "node": "expr_stmt",
+      "level": "stmt",
+      "old": "// X90-WindowsHeaderInclusion.cpp // Test that the Catch2 header compiles even after including windows.h // without defining NOMINMAX first. As an FYI, if you do that, you are // wrong.",
+      "new": "/**\\file * Test that the Catch2 header compiles even after including windows.h * without defining NOMINMAX first. * * As an FYI, if you do that, you are wrong. */",
+      "enclosing": {},
+      "anchor": "unit[1]"
+    }
+  ]
+}

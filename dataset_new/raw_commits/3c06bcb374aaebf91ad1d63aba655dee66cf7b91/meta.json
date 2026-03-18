@@ -1,0 +1,9 @@
+{
+  "commit_id": "3c06bcb374aaebf91ad1d63aba655dee66cf7b91",
+  "parent_id": "a51fd07bd006101c90662317c98de0ebe9e97312",
+  "message": "Fix reporter parser spec to use the right key for colour-mode",
+  "changed_files": [
+    "src/catch2/internal/catch_reporter_spec_parser.cpp",
+    "tests/SelfTest/IntrospectiveTests/CmdLineHelpers.tests.cpp"
+  ]
+}

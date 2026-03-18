@@ -1,0 +1,8 @@
+{
+  "commit_id": "97091636d012baa87711e7dbbd4cd778b96a211b",
+  "parent_id": "f80956a43a3e276686ed59531b41617282d75a0c",
+  "message": "Fix conditional compilation for FreeBSD to exclude PlayStation platform",
+  "changed_files": [
+    "src/catch2/internal/catch_console_colour.cpp"
+  ]
+}

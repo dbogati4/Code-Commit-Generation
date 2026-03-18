@@ -1,0 +1,8 @@
+{
+  "commit_id": "4c1e896d4770711ae8de75fb02be3daa8aef4fbc",
+  "parent_id": "2c04850f88b03118ffde69f6f8a90a6fda51c130",
+  "message": "Flush less in default test listing impl",
+  "changed_files": [
+    "src/catch2/reporters/catch_reporter_combined_tu.cpp"
+  ]
+}

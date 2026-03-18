@@ -1,0 +1,16 @@
+{
+  "events": [
+    {
+      "event_id": "e1",
+      "op": "replace",
+      "node": "expr_stmt",
+      "level": "stmt",
+      "old": "",
+      "new": "CATCH_ENFORCE( ret.second, \"reporter using '\" + name + \"' as name was already registered\" );",
+      "enclosing": {
+        "function": "registerReporter"
+      },
+      "anchor": "unit[1]/namespace[name=Catch]/block[1]/function[name=registerReporter]/block[1]/block_content[1]"
+    }
+  ]
+}

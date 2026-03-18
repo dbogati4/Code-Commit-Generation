@@ -1,0 +1,24 @@
+{
+  "events": [
+    {
+      "event_id": "e1",
+      "op": "insert",
+      "node": "expr_stmt",
+      "level": "stmt",
+      "old": "",
+      "new": "#include <catch2/benchmark/catch_benchmark.hpp> #include <catch2/matchers/catch_matchers.hpp> #include <catch2/matchers/catch_matchers_predicate.hpp>",
+      "enclosing": {},
+      "anchor": "unit[1]"
+    },
+    {
+      "event_id": "e2",
+      "op": "insert",
+      "node": "expr_stmt",
+      "level": "stmt",
+      "old": "",
+      "new": "TEST_CASE( \"Misc. macros to check that they compile without exceptions\" ) { BENCHMARK( \"simple benchmark\" ) { return 1 * 2 + 3; } ; REQUIRE_THAT( 1, Catch::Matchers::Predicate<int>( []( int i ) { return i == 1; } ) ); }",
+      "enclosing": {},
+      "anchor": "unit[1]"
+    }
+  ]
+}

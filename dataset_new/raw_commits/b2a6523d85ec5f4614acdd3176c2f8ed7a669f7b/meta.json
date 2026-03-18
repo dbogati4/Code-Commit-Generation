@@ -1,0 +1,8 @@
+{
+  "commit_id": "b2a6523d85ec5f4614acdd3176c2f8ed7a669f7b",
+  "parent_id": "b009d190bf3c75754391b739c8efd80033d6e133",
+  "message": "Fix Clang-3.8 compilation of tests",
+  "changed_files": [
+    "tests/SelfTest/IntrospectiveTests/String.tests.cpp"
+  ]
+}

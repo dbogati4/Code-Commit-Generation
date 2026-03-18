@@ -1,0 +1,34 @@
+{
+  "events": [
+    {
+      "event_id": "e1",
+      "op": "insert",
+      "node": "comment",
+      "level": "comment",
+      "old": "",
+      "new": "// Specifically we wrap a std::string returning generator with a generator",
+      "enclosing": {},
+      "anchor": "unit[1]/comment[5]"
+    },
+    {
+      "event_id": "e2",
+      "op": "insert",
+      "node": "comment",
+      "level": "comment",
+      "old": "",
+      "new": "// that converts the strings using stoi, so the returned type is actually",
+      "enclosing": {},
+      "anchor": "unit[1]/comment[6]"
+    },
+    {
+      "event_id": "e3",
+      "op": "insert",
+      "node": "comment",
+      "level": "comment",
+      "old": "",
+      "new": "// an int.",
+      "enclosing": {},
+      "anchor": "unit[1]/comment[7]"
+    }
+  ]
+}

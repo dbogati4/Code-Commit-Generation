@@ -1,0 +1,17 @@
+{
+  "events": [
+    {
+      "event_id": "e1",
+      "op": "replace",
+      "node": "return_expr",
+      "level": "stmt",
+      "old": "return \"{** unexpected enum value **}\";",
+      "new": "return \"{** unexpected enum value **}\"_sr;",
+      "enclosing": {
+        "function": "lookup",
+        "statement": "return"
+      },
+      "anchor": "unit[1]/namespace[name=Catch]/block[1]/namespace[name=Detail]/block[1]/function[name=lookup]/block[1]/block_content[1]/return[1]"
+    }
+  ]
+}

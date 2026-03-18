@@ -1,0 +1,38 @@
+{
+  "events": [
+    {
+      "event_id": "e1",
+      "op": "insert",
+      "node": "expr_stmt",
+      "level": "stmt",
+      "old": "",
+      "new": "#if defined( __clang__ ) # define CATCH2_CLANG_NO_SANITIZE_INTEGER \\ __attribute__( ( no_sanitize( \"unsigned-int eger-overflow\" ) ) ) #else # define CATCH2_CLANG_NO_SANITIZE_INTEGER #endif",
+      "enclosing": {},
+      "anchor": "unit[1]"
+    },
+    {
+      "event_id": "e2",
+      "op": "insert",
+      "node": "type",
+      "level": "token",
+      "old": "",
+      "new": "CATCH2_CLANG_NO_SANITIZE_INTEGER",
+      "enclosing": {
+        "function": "rotate_right"
+      },
+      "anchor": "unit[1]/namespace[name=Catch]/block[1]/namespace[1]/block[1]/function[name=rotate_right]/type[name=uint32_t]"
+    },
+    {
+      "event_id": "e3",
+      "op": "insert",
+      "node": "type",
+      "level": "token",
+      "old": "",
+      "new": "CATCH2_CLANG_NO_SANITIZE_INTEGER",
+      "enclosing": {
+        "function": "operator()"
+      },
+      "anchor": "unit[1]/namespace[name=Catch]/block[1]/function[name=operator()]/type[name=result_type]"
+    }
+  ]
+}

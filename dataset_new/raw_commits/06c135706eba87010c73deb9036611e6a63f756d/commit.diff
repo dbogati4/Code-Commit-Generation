@@ -1,0 +1,4 @@
+diff --git a/projects/ExtraTests/X12-CustomDebugBreakMacro.cpp b/tests/ExtraTests/X12-CustomDebugBreakMacro.cpp
+similarity index 100%
+rename from projects/ExtraTests/X12-CustomDebugBreakMacro.cpp
+rename to tests/ExtraTests/X12-CustomDebugBreakMacro.cpp

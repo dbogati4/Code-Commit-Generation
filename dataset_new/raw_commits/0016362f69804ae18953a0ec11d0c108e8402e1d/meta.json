@@ -1,0 +1,8 @@
+{
+  "commit_id": "0016362f69804ae18953a0ec11d0c108e8402e1d",
+  "parent_id": "63a8017ba7dd11ab585c50d6be1c100ccd286a2c",
+  "message": "explicit conversion from size_t to size_type",
+  "changed_files": [
+    "include/internal/catch_stringref.cpp"
+  ]
+}

@@ -1,0 +1,13 @@
+diff --git a/include/internal/catch_assertionresult.cpp b/include/internal/catch_assertionresult.cpp
+index 4ce07187..8f505d04 100644
+--- a/include/internal/catch_assertionresult.cpp
++++ b/include/internal/catch_assertionresult.cpp
+@@ -45,7 +45,7 @@ namespace Catch {
+     }
+ 
+     bool AssertionResult::hasExpression() const {
+-        return m_info.capturedExpression[0] != 0;
++        return !m_info.capturedExpression.empty();
+     }
+ 
+     bool AssertionResult::hasMessage() const {

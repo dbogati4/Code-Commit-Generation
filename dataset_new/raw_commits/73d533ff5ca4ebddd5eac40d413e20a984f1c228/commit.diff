@@ -1,0 +1,24 @@
+diff --git a/examples/210-Evt-EventListeners.cpp b/examples/210-Evt-EventListeners.cpp
+index 7df93d71..fde51c7e 100644
+--- a/examples/210-Evt-EventListeners.cpp
++++ b/examples/210-Evt-EventListeners.cpp
+@@ -387,16 +387,16 @@ TEST_CASE( "2: Testcase with sections", "[tag-A][tag-B]" ) {
+     REQUIRE( i == 42 );
+ 
+     SECTION("Section 1") {
+-        INFO("Section 1")
++        INFO("Section 1");
+         i = 7;
+         SECTION("Section 1.1") {
+-            INFO("Section 1.1")
++            INFO("Section 1.1");
+             REQUIRE( i == 42 );
+         }
+     }
+ 
+     SECTION("Section 2") {
+-        INFO("Section 2")
++        INFO("Section 2");
+         REQUIRE( i == 42 );
+     }
+     WARN("At end of test case");

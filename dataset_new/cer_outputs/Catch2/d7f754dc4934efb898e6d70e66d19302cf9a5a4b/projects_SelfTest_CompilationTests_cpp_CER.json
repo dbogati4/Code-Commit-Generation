@@ -1,0 +1,30 @@
+{
+  "events": [
+    {
+      "event_id": "e1",
+      "op": "delete",
+      "node": "expr_stmt",
+      "level": "stmt",
+      "old": "const",
+      "new": "",
+      "enclosing": {
+        "function": "templated_tests",
+        "statement": "expr_stmt"
+      },
+      "anchor": "unit[1]/function[name=templated_tests]/block[1]/block_content[1]/expr_stmt[4]/expr[1]/call[name=CHECK_THROWS_AS]/argument_list[1]/argument[2]/expr[name=int]"
+    },
+    {
+      "event_id": "e2",
+      "op": "delete",
+      "node": "expr_stmt",
+      "level": "stmt",
+      "old": "&",
+      "new": "",
+      "enclosing": {
+        "function": "templated_tests",
+        "statement": "expr_stmt"
+      },
+      "anchor": "unit[1]/function[name=templated_tests]/block[1]/block_content[1]/expr_stmt[4]/expr[1]/call[name=CHECK_THROWS_AS]/argument_list[1]/argument[2]/expr[name=int]"
+    }
+  ]
+}

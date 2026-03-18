@@ -1,0 +1,8 @@
+{
+  "commit_id": "e484236825ef5c70eb05dfe50ca05907df29a5c0",
+  "parent_id": "e7c23b73da9689d393ba3249479f61fc137cdba6",
+  "message": "Don't invoke UB when nullptr is passed to StringRef constructor",
+  "changed_files": [
+    "include/internal/catch_stringref.cpp"
+  ]
+}

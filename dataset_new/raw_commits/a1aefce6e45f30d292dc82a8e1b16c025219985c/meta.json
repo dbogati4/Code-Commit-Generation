@@ -1,0 +1,8 @@
+{
+  "commit_id": "a1aefce6e45f30d292dc82a8e1b16c025219985c",
+  "parent_id": "d5959907f58f1912351d3473b11ecd1972fe247a",
+  "message": "Guard against CLR exceptions when translating exceptions",
+  "changed_files": [
+    "include/internal/catch_exception_translator_registry.cpp"
+  ]
+}
